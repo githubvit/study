@@ -1,0 +1,96 @@
+这是git的测试文件
+ctrl+` 是vs打开cmd的快捷键
+
+注意：在vscode上要记得 先保存ctrl+s 再add 
+
+1 安装git https://git-scm.com/downloads
+
+2 注册git: 设置提交代码时的用户信息
+    报上名来，以后每次提交的签名。
+    '''
+    D:\pyj\st\tt>git config --global user.name "vit"
+
+    D:\pyj\st\tt>git config --global user.email "sgq523@163.com"
+    '''
+
+3 创建版本库 仓库  
+    1 新建目录  
+        注意：目录名 不能用中文
+    2 该目录下 执行 git init  linux和windows 下一样
+        '''
+        gq@DESKTOP-RKH3D05 MINGW64 /d/pyj/st/tt
+        $ git init
+        Initialized empty Git repository in D:/pyj/st/tt/.git/
+        '''
+    3 git init命令就把这个目录变成Git可以管理的仓库
+
+
+4 git status 状态查看
+    
+    '''
+    D:\pyj\st\tt>git status
+    On branch master
+
+    No commits yet
+
+    Changes to be committed:
+      (use "git rm --cached <file>..." to unstage)
+            new file:   t1.txt
+    '''
+    修改了文件t1.txt 还没有add到暂存区
+    '''
+    D:\pyj\st\tt>git status
+    On branch master
+    Changes not staged for commit:
+      (use "git add <file>..." to update what will be committed)
+      (use "git restore <file>..." to discard changes in working directory)
+            modified:   t1.txt
+
+    no changes added to commit (use "git add" and/or "git commit -a")
+    '''
+    从工作区提交到暂存区
+    '''
+    D:\pyj\st\tt>git status
+    On branch master
+    Changes to be committed:
+      (use "git restore --staged <file>..." to unstage)
+            modified:   t1.txt
+    '''
+    从暂存区提交到仓库
+    '''
+    D:\pyj\st\tt>git status
+    On branch master
+    nothing to commit, working tree clean
+    '''
+5 git add .  所有更改 提交到暂存区
+    '''
+    '''
+6 git commit -m'第一次提交'    从暂存区提交到仓库,-m后面输入的是本次提交的说明
+    '''
+    D:\pyj\st\tt>git commit -m'第一次提交'
+    [master (root-commit) bd214b3] '第一次提交'
+     1 file changed, 1 insertion(+)
+     create mode 100644 t1.txt
+
+    D:\pyj\st\tt>git commit -m'第二次提交'
+    [master d4bf47c] '第二次提交'
+     1 file changed, 61 insertions(+), 1 deletion(-)
+     rewrite t1.txt (100%)
+    '''
+    
+
+7 git log   查看历史记录
+    '''
+    D:\pyj\st\tt>git log
+    commit bd214b383ab005e0034e82ffd2a115770b0a4e5d (HEAD -> master)
+    Author: vit <sgq523@163.com>
+    Date:   Thu Feb 20 10:55:55 2020 +0800
+
+        '第一次提交'
+    '''
+8 git log --pretty=oneline  简化查看历史记录
+    '''
+    D:\pyj\st\tt>git log --pretty=oneline
+    bd214b383ab005e0034e82ffd2a115770b0a4e5d (HEAD -> master) '第一次提交'
+    '''
+9 

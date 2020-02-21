@@ -1,0 +1,140 @@
+
+一 为什么Git比其他版本控制系统设计得优秀？
+
+    因为Git跟踪并管理的是修改，而非文件。
+
+    你会问，什么是修改？
+        比如你新增了一行，这就是一个修改；删除了一行，也是一个修改；
+        更改了某些字符，也是一个修改；删了一些又加了一些，也是一个修改；
+        甚至创建一个新文件，也算一个修改。
+
+二 HEAD 指针
+
+    Git在内部有个指向当前版本的HEAD指针，当你回退版本的时候，Git仅仅是把HEAD从当前指向前面的版本。
+    
+    从当前指向append GPL：
+    ┌────┐
+    │HEAD│
+    └────┘
+       │
+       └──> ○ append GPL
+            │
+            ○ add distributed
+            │
+            ○ wrote a readme file
+
+    改为指向add distributed：
+    ┌────┐
+    │HEAD│
+    └────┘
+       │
+       │    ○ append GPL
+       │    │
+       └──> ○ add distributed
+            │
+            ○ wrote a readme file
+    然后顺便把工作区的文件更新了。
+    所以你让HEAD指向哪个版本号，你就把当前版本定位在哪。
+    改变当前版本的定位，就是版本回退。
+
+三 关于版本回退操作
+
+1.git reset --hard HEAD  恢复上一个版本
+
+    D:\pyj\st\tt>git reset --hard HEAD
+
+2. git log 查看历史版本  上下翻页  退出: q
+
+    D:\pyj\st\tt>git log
+    commit a18a434b05542fa86dc60b7bbb54193aae7fe467 (HEAD -> master)
+    Author: vit <sgq523@163.com>
+    Date:   Thu Feb 20 15:40:05 2020 +0800
+
+        '添加数字字母'
+
+    commit 09e3a7b06ab01e3272069d48bc175fd8d5ddc09e
+    Author: vit <sgq523@163.com>
+    Date:   Thu Feb 20 15:38:07 2020 +0800
+
+        '增加文件t3'
+
+3. git reflog 查看 版本操作命令 历史 版本
+    D:\pyj\st\tt>git reflog
+    a18a434 (HEAD -> master) HEAD@{0}: reset: moving to a18a4
+    a18a434 (HEAD -> master) HEAD@{1}: reset: moving to HEAD
+    a18a434 (HEAD -> master) HEAD@{2}: commit: '添加数字字母'
+    09e3a7b HEAD@{3}: commit: '增加文件t3'
+    27cf35d HEAD@{4}: commit: '在t2总结了查看状态的用法'
+    5d735b9 HEAD@{5}: commit: '第三次提交新增t2.txt文件'
+    d4bf47c HEAD@{6}: commit: '第二次提交'
+    bd214b3 HEAD@{7}: commit (initial): '第一次提交'
+
+4. git reset --hard a18a4 恢复到指定版本 不用输入全版本号 输入一定位数 git 自己会找
+    D:\pyj\st\tt>git reset --hard a18a4
+    HEAD is now at a18a434 '添加数字字母'
+
+5. git diff HEAD -- t3.txt 查看工作区和版本库里面最新版本的t3.txt的区别
+    '''
+    D:\pyj\st\tt>git diff HEAD -- t3.txt
+    diff --git a/t3.txt b/t3.txt
+    index 86230b5..a02858d 100644
+    --- a/t3.txt
+    +++ b/t3.txt
+    @@ -1,2 +1,39 @@
+     123456789
+    -abcdefghijklmn
+    \ No newline at end of file 这一行后面是新的
+    +abcdefghijklmn
+    +
+    +关于文件恢复 
+    :
+    '''
+
+6. git checkout -- t3.txt    就是让这个文件从工作区回到最近一次git commit或git add时的状态.
+    撤销 保存到工作区的 修改，回到最近一次git commit或git add时的状态.
+
+7. git reset HEAD t3.txt 撤销掉提交到暂存区的修改
+
+    从暂存区回到最近一次git commit 的状态.
+    '''
+    1). 先和最近版本库的比较
+
+    D:\pyj\st\tt>git diff HEAD t3.txt
+    diff --git a/t3.txt b/t3.txt
+    index 390796c..31e2ee7 100644
+    --- a/t3.txt
+    +++ b/t3.txt
+    @@ -56,4 +56,4 @@ abcdefghijklmn
+         撤销 保存到工作区的 修改，回到最近一次git commit或git add时的状态.
+
+     7. 撤销掉暂存区的修改:用命令git reset HEAD t3.txt,让其回到最近一次git commit的状态
+    -    
+    \ No newline at end of file
+    +    完成暂存区的撤销
+
+    2). 查询状态  暂存区
+    D:\pyj\st\tt>git status
+    On branch master
+    Changes to be committed:
+      (use "git restore --staged <file>..." to unstage)
+            modified:   t3.txt #绿色表示
+
+    3). 撤销 暂存区 的修改
+    D:\pyj\st\tt>git reset HEAD t3.txt
+    Unstaged changes after reset: #撤销 暂存区 的修改
+    M       t3.txt
+
+    4). 查看状态  工作区
+    D:\pyj\st\tt>git status
+    On branch master
+    Changes not staged for commit:
+      (use "git add <file>..." to update what will be committed)
+      (use "git restore <file>..." to discard changes in working directory)
+            modified:   t3.txt
+
+    no changes added to commit (use "git add" and/or "git commit -a")
+
+    5). 采用 撤销 保存到工作区的 修改 即可 回到最近版本库
+    D:\pyj\st\tt>git checkout -- t3.txt
+    ''' 
+
