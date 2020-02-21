@@ -1,0 +1,19 @@
+git多个远程仓库
+
+1. 查看 当前 配置的 远程仓库
+    D:\pyj\st\study>git remote -v
+    origin  https://github.com/githubvit/study.git (fetch)
+    origin  https://github.com/githubvit/study.git (push)
+
+2. 删除 当前 远程仓库
+    D:\pyj\st\study>git remote rm origin
+
+3. 设置 新的 远程仓库 （其实还是和原来的一样，改https连接为ssh连接 更快）
+    D:\pyj\st\study>git remote add github git@github.com:githubvit/study.git
+
+4. 查看 当前 远程仓库 
+    D:\pyj\st\study>git remote -v
+    github  git@github.com:githubvit/study.git (fetch)
+    github  git@github.com:githubvit/study.git (push)
+    
+    D:\pyj\st\study>
