@@ -32,3 +32,38 @@ git多个远程仓库
 9. 如果觉得每次推送两次麻烦，就写个脚本，push.bat,每次推送就直接push.
     git push github
     git push gitee  
+
+10. 实现了一个本地库 关联 两个远程库 一次push 两个远程全都同步 的功能。
+
+    输入 push：D:\pyj\st\study>push
+
+    回显 脚本里的命令 和 命令的执行结果：
+        '''
+        D:\pyj\st\study>git push github
+        Warning: Permanently added the RSA host key for IP address '13.229.188.59' to the list of known hosts.   
+        Enumerating objects: 6, done.
+        Counting objects: 100% (6/6), done.
+        Delta compression using up to 4 threads
+        Compressing objects: 100% (3/3), done.
+        Writing objects: 100% (4/4), 719 bytes | 719.00 KiB/s, done.
+        Total 4 (delta 1), reused 0 (delta 0)
+        remote: Resolving deltas: 100% (1/1), completed with 1 local object.
+        To github.com:githubvit/study.git
+           b3f6d5d..7d1457f  master -> master
+
+        D:\pyj\st\study>git push gitee
+        Enumerating objects: 6, done.
+        Counting objects: 100% (6/6), done.
+        Delta compression using up to 4 threads
+        Compressing objects: 100% (3/3), done.
+        Writing objects: 100% (4/4), 719 bytes | 719.00 KiB/s, done.
+        Total 4 (delta 1), reused 0 (delta 0)
+        remote: Powered by GITEE.COM [GNK-3.8]
+        To gitee.com:gq123456789/study.git
+           b3f6d5d..7d1457f  master -> master
+
+        D:\pyj\st\study>
+        '''
+
+        
+        
