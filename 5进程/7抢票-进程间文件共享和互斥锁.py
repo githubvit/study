@@ -97,7 +97,7 @@ import os,json,time,random
 # 查票
 def search():
     time.sleep(random.randint(1,3)) #模拟网络延迟
-    dic=json.load(open(r'D:\pyj\st\5进程\7qp.json','r',encoding='utf-8')) #购票信息
+    dic=json.load(open(r'D:\pyj\st\study\5进程\7qp.json','r',encoding='utf-8')) #购票信息
     res=dic['count']
     print('%s 查询到剩余 %s 张票'%(os.getpid(),res))
     
@@ -105,12 +105,12 @@ def search():
 # 购票
 def get():
     # 先用load读，再用dump写。
-    dic=json.load(open(r'D:\pyj\st\5进程\7qp.json','r',encoding='utf-8'))#购票信息
+    dic=json.load(open(r'D:\pyj\st\study\5进程\7qp.json','r',encoding='utf-8'))#购票信息
     if dic['count']>0:#如果有余票
         dic['count']-=1
         # 将修改后的dic回写。
         time.sleep(random.randint(1,3)) #模拟网络延迟
-        dic=json.dump(dic,open(r'D:\pyj\st\5进程\7qp.json','w',encoding='utf-8'))
+        dic=json.dump(dic,open(r'D:\pyj\st\study\5进程\7qp.json','w',encoding='utf-8'))
         print('%s 购票成功'%(os.getpid()))
 
 def task(gp_mutex):
