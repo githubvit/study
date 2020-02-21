@@ -8,7 +8,7 @@ git多个远程仓库
 2. 删除 当前 远程仓库
     D:\pyj\st\study>git remote rm origin
 
-3. 设置 新的 远程仓库 （其实还是和原来的一样，改https连接为ssh连接 更快）
+3. 关联 新的 远程仓库 （其实还是和原来的一样，改https连接为ssh连接 更快）
     D:\pyj\st\study>git remote add github git@github.com:githubvit/study.git
 
 4. 查看 当前 远程仓库 
@@ -16,4 +16,19 @@ git多个远程仓库
     github  git@github.com:githubvit/study.git (fetch)
     github  git@github.com:githubvit/study.git (push)
     
-    D:\pyj\st\study>
+5. 推送到 新配置的 远程仓库 github
+    D:\pyj\st\study>git push -u github master
+
+6. 关联 第二个 远程仓库 码云
+    D:\pyj\st\study>git remote add gitee git@gitee.com:gq123456789/study.git
+
+7. 推送到 第二个 远程仓库 码云
+    D:\pyj\st\study>git push -u gitee master    
+
+8. 后面如果要推送，就分别推送.
+    git push github
+    git push gitee    
+
+9. 如果觉得每次推送两次麻烦，就写个脚本，push.bat,每次推送就直接push.
+    git push github
+    git push gitee  
