@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>页面加载完执行</title>
+
+
+</head>
+<body>
+
+<div id="d1">div</div>
+
+<!--<script>-->
+<!--var d1Ele = document.getElementById("d1");-->
+<!--console.log(d1Ele);-->
+<!--console.log(d1Ele.innerText);-->
+<!--</script>-->
+
+<script src="jquery-3.3.1.min.js"></script>
+<script>
+    $(document).ready(function () {
+        var d1Ele = document.getElementById("d1");
+        console.log(d1Ele);
+        console.log(d1Ele.innerText);
+    });
+
+//    $(function () {
+//        var d1Ele = document.getElementById("d1");
+//        console.log(d1Ele);
+//        console.log(d1Ele.innerText);
+//    })
+</script>
+</body>
+</html>

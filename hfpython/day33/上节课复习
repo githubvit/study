@@ -1,0 +1,35 @@
+上节课复习：
+    1、协程
+        单线程下实现并发
+
+        并发：看起来是同时运行
+        并发实现的本质=切换+保存状态
+
+        切换：
+            1、遇到IO阻塞会切换（可以提升运行效率）
+            2、占用cpu时间过长或者有一个优先级更高的
+                任务抢走了cpu
+
+    2、协程实现
+        方式一：
+            yield、greenlet
+            特点：无法检测单线程下的IO行为，
+                无法实现遇到IO自动切换到其他任务执行的操作
+
+
+        方式二：
+            from gevent import monkey;money.patch_all()
+            import gevent
+            import time
+
+            time.sleep(3)
+
+
+
+
+
+
+
+今日内容：
+    IO模型
+    socketserver=多进程+多线程+IO模型

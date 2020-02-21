@@ -1,0 +1,32 @@
+上节课复习：
+    1、项目如何从无到有？
+        1、需求分析
+        2、设计程序的架构
+            用户功能层：
+                def register():
+                    接受用户的输入，做一些简单的数据处理，逻辑判断
+
+                def transfer():
+                    pass
+
+            接口层
+                def get_userinfo_interface():
+                    pass
+
+            数据处理层
+                def select（）：
+                    pass
+
+        3、分任务实现代码
+
+        4、测试
+
+        5、上线
+今日内容：
+    configparser
+    hashlib
+    subprocess
+    面向对象编程
+        类与对象的定义与使用
+
+

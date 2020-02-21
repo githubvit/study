@@ -1,0 +1,18 @@
+ 1. $("#i1")
+ 2. $("h2")
+ 3. $("input")
+ 4. $(".c1")
+ 5. $(".btn-default")
+ 6. $(".c1, h2")
+ 7. $(".c1, #p3")
+ 8. $(".c1, .btn")
+
+ 9. $("form input")
+10. $("label>input")
+11. $("label+input")
+12. $("#p2~li")
+
+13. $("#f1 input:first") 或者 $("#f1 input").first()
+14. $("#my-checkbox input:last") 或者 $("#my-checkbox input").last()
+15. $("#my-checkbox input:not(':checked')")
+16. $("label:has(input)")

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>hover事件示例</title>
+    <style>
+        body {
+            margin: 0;
+        }
+
+        .nav {
+            height: 40px;
+            background-color: #3d3d3d;
+            width: 100%;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        .nav a {
+            color: #999;
+        }
+
+        .nav a:hover {
+            color: white;
+        }
+
+        .nav li {
+            float: left;
+            height: 40px;
+            line-height: 40px;
+            margin-right: 15px;
+            padding: 0 10px;
+        }
+
+        .nav li:hover {
+            background-color: black;
+        }
+
+        .father {
+            position: relative;
+        }
+
+        .son {
+            height: 100px;
+            width: 200px;
+            background-color: blue;
+            color: white;
+            position: absolute;
+            left: 0;
+            top: 40px;
+            margin: 0;
+            display: none;
+        }
+
+        .show {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+
+<div class="nav">
+    <ul>
+        <li><a href="">登录</a></li>
+        <li><a href="">注册</a></li>
+        <li class="father"><a href="">购物车</a>
+            <p class="son">空空如也~</p>
+        </li>
+    </ul>
+</div>
+
+
+<script src="jquery-3.3.1.min.js"></script>
+<script>
+    // 鼠标移到 .father 上时 让 .son 添加一个 .show 
+    $(".father").hover(
+            function () {
+                $(this).find(".son").addClass("show");
+            },
+            function () {
+                $(this).find(".son").removeClass("show");
+            }
+    )
+</script>
+</body>
+</html>

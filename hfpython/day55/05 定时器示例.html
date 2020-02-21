@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<input type="button" id="b1" value="开始">
+<input type="button" id="b2" value="停止">
+<input type="text" id="i1">
+
+<script>
+
+    var t;
+    function showTime() {
+        // 将当前时间填写到i1中
+        var now = new Date();
+        var i1Ele = document.getElementById("i1");
+        i1Ele.value = now.toLocaleString();
+    }
+    showTime();
+    // 点击开始按钮，每隔一秒执行一次showTime
+    // 1。找到开始按钮，给它绑定事件
+    var b1Ele = document.getElementById("b1");
+    b1Ele.onclick = function () {
+        if (!t){
+           t = setInterval(showTime, 1000);
+        }
+    };
+
+    // 给停止按钮绑定事件，点击之后就清除定时器
+    var b2Ele = document.getElementById("b2");
+    b2Ele.onclick = function () {
+        clearInterval(t);  // 清除的是定时器，t只是一个普通的变量，它保存了定时器的id值
+        console.log(t);
+        t = undefined;
+    };
+</script>
+</body>
+</html>

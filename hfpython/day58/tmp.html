@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="x-ua-compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>键盘事件示例</title>
+</head>
+<body>
+
+<table border="1">
+  <thead>
+  <tr>
+    <th>#</th>
+    <th>姓名</th>
+    <th>操作</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr>
+    <td><input type="checkbox"></td>
+    <td>Egon</td>
+    <td>
+      <select>
+        <option value="1">上线</option>
+        <option value="2">下线</option>
+        <option value="3">停职</option>
+      </select>
+    </td>
+  </tr>
+  <tr>
+    <td><input type="checkbox"></td>
+    <td>Alex</td>
+    <td>
+      <select>
+        <option value="1">上线</option>
+        <option value="2">下线</option>
+        <option value="3">停职</option>
+      </select>
+    </td>
+  </tr>
+  <tr>
+    <td><input type="checkbox"></td>
+    <td>Yuan</td>
+    <td>
+      <select>
+        <option value="1">上线</option>
+        <option value="2">下线</option>
+        <option value="3">停职</option>
+      </select>
+    </td>
+  </tr>
+  <tr>
+    <td><input type="checkbox"></td>
+    <td>EvaJ</td>
+    <td>
+      <select>
+        <option value="1">上线</option>
+        <option value="2">下线</option>
+        <option value="3">停职</option>
+      </select>
+    </td>
+  </tr>
+  <tr>
+    <td><input type="checkbox"></td>
+    <td>Gold</td>
+    <td>
+      <select>
+        <option value="1">上线</option>
+        <option value="2">下线</option>
+        <option value="3">停职</option>
+      </select>
+    </td>
+  </tr>
+  </tbody>
+</table>
+
+<input type="button" id="b1" value="全选">
+<input type="button" id="b2" value="取消">
+<input type="button" id="b3" value="反选">
+
+<script src="jquery-3.3.1.min.js"></script>
+<script>
+  // 全选
+  $("#b1").on("click", function () {
+    $(":checkbox").prop("checked", true);
+  });
+  // 取消
+  $("#b2").on("click", function () {
+    $(":checkbox").prop("checked", false);
+  });
+  // 反选
+  $("#b3").on("click", function () {
+    $(":checkbox").each(function () {
+      var flag = $(this).prop("checked");
+      $(this).prop("checked", !flag);
+    })
+  });
+  // 按住shift键，批量操作
+  // 定义全局变量
+  var flag = false;
+  // 全局事件，监听键盘shift按键是否被按下
+  $(window).on("keydown", function (e) {
+//    alert(e.keyCode);
+    if (e.keyCode === 16){
+      flag = true;
+    }
+  });
+  // 全局事件,shift按键抬起时将全局变量置为false
+  $(window).on("keyup", function (e) {
+    if (e.keyCode === 16){
+      flag = false;
+    }
+  });
+  // select绑定change事件
+  $("table select").on("change", function () {
+    // 是否为批量操作模式
+    if (flag) {
+      var selectValue = $(this).val();
+      // 找到所有被选中的那一行的select，选中指定值
+      $("input:checked").parent().parent().find("select").val(selectValue);
+    }
+  })
+</script>
+</body>
+</html>

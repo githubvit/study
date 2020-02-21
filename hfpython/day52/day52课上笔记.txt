@@ -1,0 +1,112 @@
+day52 2018-05-29
+
+1. 内容回顾
+	CSS属性
+		0. 高度和宽度
+			1. 标签的分类(标签默认是否独占一行)
+				1. 块级标签
+					div p h1~h6 hr ul>li table>tr
+				2. 行内标签
+					span a input img i...
+			2. 块级标签才能设置宽和高
+			3. max-width: 100%
+				- max-width  --> 最大的宽度
+				- 100%       --> 所有涉及到%都是指占父标签的百分比
+					
+		1. 字体相关
+			1. 字体        --> font-family： “”
+			2. 字体大小    --> font-size
+			3. 字体粗细    --> font-weight
+			4. 字体颜色    --> color
+									- red
+									- #FFFFFF
+									- rgb(255,255,255)
+									- rgba(255,255,255,0.6)
+			5. 字体装饰
+				去掉a标签默认的下划线
+				text-decoration=none
+									
+		2. 文本
+			1. 对齐方式
+				text-align:center
+			
+			2. 首行缩进
+				text-indent: 28px
+			3. line-height：父标签的高度   （实现单行文本的垂直居中）
+		3. 背景
+			1. background-color:red
+			2. background: url() no-repeat center
+			3. background-attachment: fixed  背景不动的实例
+		4. 边框
+			border: 1px solid red;
+			border-radius: 50%;    --> 画圆
+		5. CSS盒子
+			内容-->内填充(padding)-->边框(border)-->外边距(margin)
+				- 想让标签撑起来（内容和边框之间的距离变大）设置padding
+				- 想让两个标签之间的距离变大，设置margin
+			注意：
+				当两个标签之间的外边距有重叠的话，会按照最大的外边距来显示
+		6. 显示效果
+			display:
+					- none   不显示（页面上也不给它留位置）
+					- block  按照块级标签来显示
+					- inline 按照行内标签来显示
+					- inline-block 既有块级又有行内的效果
+					
+		7. 浮动与清除浮动
+			1. 多用于大块内容的布局(Blog页面的左右布局)
+			2. float
+					- none
+					- left
+					- right
+			3. 浮动的特点
+				1. 任何标签都可以浮动
+				2. 一个标签浮动之后都变成块级标签（可以设置宽和高）
+				3. 浮动的标签脱离文档流（它的位置会被下面的标签挤占）
+			4. 清除浮动的副作用
+				clear:
+					- left
+					- right
+					- both
+				定义一个用于清除浮动的工具样式类
+					.clearfix:after {
+						content: "";
+						clear: both;
+						display: "block";
+					}
+					
+		8. 定位
+			1. 相对定位
+				相对自己本来应该在的位置
+				postion: relative;
+				left: 100px;
+			2. 绝对定位
+				相对已经定位过的父标签
+				position：absolute;
+				left: 100px;
+			3. 固定定位
+				相对浏览器窗口
+					postion: fixed;
+					right: 50px;
+					bottom: 50px;
+					
+		9. 溢出
+			overflow
+					- none
+					- hidden   溢出的部分隐藏起来
+					- scroll   用滚动条
+					- auto     根据内容自行调整
+				
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+	

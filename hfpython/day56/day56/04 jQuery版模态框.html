@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>jQuery版模态框</title>
+    <style>
+        .cover {
+            position: fixed;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            background-color: rgba(0,0,0,0.4);
+            z-index: 999;
+        }
+
+        .modal {
+            background-color: white;
+            height: 300px;
+            width: 500px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            z-index:1000;
+            margin-top: -150px;
+            margin-left: -250px;
+        }
+
+        .hide {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+<div>
+    <h1>海燕</h1>
+    <p>在苍茫的大海上，狂风卷积着乌云，在乌云和大海之间，海燕像黑色的闪电，在高傲的飞翔。</p>
+</div>
+
+<button id="b1">点我登录</button>
+
+<div class="cover hide"></div>
+<div class="modal hide">
+    <form action="">
+        <p>
+            <label>用户名
+                <input type="text">
+            </label>
+        </p>
+        <p><label>密码
+            <input type="password">
+        </label></p>
+        <p>
+            <input type="submit">
+            <input type="button" id="cancel" value="取消">
+        </p>
+    </form>
+</div>
+
+<script src="jquery-3.3.1.min.js"></script>
+<script>
+    // 找到按钮，给它绑定事件
+    var b1Ele = $("#b1")[0];
+    b1Ele.onclick = function () {
+        // 事件触发后，找到那两个div,移除它们的hide 样式类
+        $(".cover,.modal").removeClass("hide");
+    };
+
+    var cancelButton = $("#cancel")[0];
+    cancelButton.onclick = ()=>{
+        // 事件触发后，找到那两个div,给它们添加hide 样式类
+        $(".cover,.modal").addClass("hide");
+    }
+</script>
+</body>
+</html>

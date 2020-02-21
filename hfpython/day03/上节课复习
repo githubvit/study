@@ -1,0 +1,137 @@
+1、应用程序，操作系统，计算机硬件
+2、CPU 内存 硬盘
+3、编程与编程语言
+4、编程语言分类
+    机器语言
+    汇编语言
+    高级语言
+        编译型
+        解释型（开发效率高，跨平台性强）
+5、安装Python解释器
+6、运行python程序的两种方式
+    1、交互式：用来调试代码
+    2、python 文件的路径
+        第一阶段：启动python解释器
+        第二阶段：将文件内的代码读入内存
+        第三阶段：解释执行（检测python语法）
+
+7、变量
+    定义变量：
+        name='egon'
+    变量名的声明方式：
+        sex_of_egon='male'
+    变量名遵循的规范：
+        组成:字母、数字、下划线的任意组合，不能以数字开头
+    常量：
+        AGE_OLDBOY=73
+    垃圾回收机制
+    变量的三个特征：
+        id
+        type
+        value
+
+8、数据类型
+    整型
+    浮点型
+    字符串
+    列表
+    字典
+
+9、input
+    #在python3中
+    name=input('name>>: ')
+    注意：input会把用户输入的值全部存储字符串类型
+
+    #在python2中
+    input()
+    raw_input()
+
+10、文件头
+#!/usr/bin/env python
+#coding:utf-8
+
+11、运算符
+    数学运算符
+        / #除法，保留小数部分
+        // #取整
+        %
+
+    逻辑运算符
+        and or not
+
+        False or False and True or False and True
+                 False and True or False and True
+
+    比较运算符
+        !=
+    赋值运算符
+        =
+        +=
+        -=
+        %=
+
+        count+=1
+    身份运算符（is比较的是id，==比较的是值）
+
+12、流程控制if
+    if 条件:
+        代码1
+        代码2
+        代码2
+        ....
+    print('====>')
+
+
+    if 条件:
+        pass
+    else:
+        pass
+
+
+    if 条件1:
+        pass
+    elif 条件2:
+        pass
+    elif 条件2:
+        pass
+    ....
+    else:
+        pass
+
+
+12、流程控制while
+    while 条件:
+        pass
+
+    while True:
+        pass
+
+
+
+    while True:
+        name=input('>>：')
+
+
+    while+break:跳出本层循环
+    while+continue：跳过本次循环，进行下一次循环
+
+
+    count=0
+    while True:
+        if count == 3:
+            break
+            count+=1
+        print('=======>')
+        count+=1
+        continue
+
+
+
+
+
+
+
+
+
+
+

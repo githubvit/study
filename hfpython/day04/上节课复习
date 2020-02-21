@@ -1,0 +1,102 @@
+1、变量赋值
+    增量赋值：+=，*=,...
+    交叉赋值：
+        x=1
+        y=2
+        x,y=y,x
+    链式赋值
+        x=y=z=1
+
+    变量的解压
+        first,sencond,*_=[1,2,3,4,5,6]
+
+2、用户交互
+    #把用户输入的任何内容都存成字符串
+    python3：input
+    python2：raw_input
+
+    int('101')
+    str([1,2,3])
+
+    #用户必须输入一个明确数据类型，输入什么类型就存成什么类型
+    python2：input
+
+
+3、while+else:else的代码块在while循环没有被break打断的情况下才会执行
+
+4、int float
+
+    #十进制转成其他进制
+    bin()
+    oct()
+    hex()
+
+    #补充(了解)
+    python3没有长整形
+    python2中
+        x=1L
+    复数
+        x=1-2j
+        x.real
+        x.imag
+
+
+5、字符串str
+    x=''
+    x='''''''
+    x="" #x=str('')
+    #常用操作
+       1、按照索引取值（只能取，不能改）
+       2、切片（顾头不顾尾）
+          msg='abcdefg'
+          msg[0:5:2]
+          msg[3:1:2]
+       3、成员运算in not in
+          msg='egon is nb'
+          'egon' in msg
+
+          'egon' not in msg
+          not 'egon' in msg
+
+       4、统计字符串的长度==>字符的个数
+          len('xxxxxxxx中')
+
+
+       5、strip
+          name=input('>>: ').strip()
+
+
+          ‘ssss**’.strip('*')
+
+       6、split切分
+          cmd='root:123:0:0'
+          l=cmd.split(':')
+
+       7、循环取字符串里包含的字符
+        依赖索引
+            msg='xxxxxxx'
+            i=0
+            while i < len(msg):
+                msg[i]
+                i+=1
+
+        不依赖索引
+            for item in msg:
+                 item
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

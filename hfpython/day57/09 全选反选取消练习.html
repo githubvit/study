@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>全选反选取消练习</title>
+</head>
+<body>
+
+<button id="b1">全选</button>
+<button id="b2">取消</button>
+<button id="b3">反选</button>
+<table border="1">
+    <thead>
+    <tr>
+        <th>#</th>
+        <th>姓名</th>
+        <th>爱好</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td><input type="checkbox"></td>
+        <td>Egon</td>
+        <td>喊麦</td>
+    </tr>
+    <tr>
+        <td><input type="checkbox"></td>
+        <td>Alex</td>
+        <td>吹牛逼</td>
+    </tr>
+    <tr>
+        <td><input type="checkbox"></td>
+        <td>Yuan</td>
+        <td>不洗头</td>
+    </tr>
+    </tbody>
+</table>
+<script src="jquery-3.3.1.min.js"></script>
+<script>
+    // 全选
+    $("#b1").click(function () {
+        // 让所有的checkbox选中
+        $("table :checkbox").prop("checked", true)
+    });
+    // 取消
+    $("#b2").click(function () {
+        // 让所有的checkbox取消选中
+        $("table :checkbox").prop("checked", false)
+    });
+    // 反选
+    $("#b3").click(function () {
+//        // 找到没有选中的让它们选中
+//        $("table input:not(:checked)").prop("checked", true);
+//        // 找到所有选中的让它们取消选中
+//        $("table input:checked").prop("checked", false);
+
+        // 方法1：循环
+        var $checkboxs = $("table input:checkbox");
+//        for (let i=0;i<$checkboxs.length;i++){
+//            var $currentCheckbox = $($checkboxs[i]);
+//            if ($currentCheckbox.prop("checked")){
+//                // 如果之前是选中的
+//                $currentCheckbox.prop("checked", false);
+//            }else {
+//                // 之前没有选中
+//                $currentCheckbox.prop("checked", true);
+//            }
+//        }
+
+        for (let i=0;i<$checkboxs.length;i++){
+            var $currentCheckbox = $($checkboxs[i]);
+            var flag = $currentCheckbox.prop("checked");
+            $currentCheckbox.prop("checked", !flag)
+        }
+
+    });
+
+</script>
+</body>
+</html>

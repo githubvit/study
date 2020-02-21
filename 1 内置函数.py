@@ -1,4 +1,4 @@
-# python 内置函数
+# 
 # import os
 # print(dir(os)) #看os有多少种方法
 # print (divmod(10,3)) #10/3的商和余数组成的元组 (3, 1)

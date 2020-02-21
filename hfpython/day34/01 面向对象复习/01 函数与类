@@ -1,0 +1,103 @@
+1、没有使用函数之前编程遇到的问题？
+    1、代码冗余
+    2、程序组织结构不清晰
+    3、可扩展性差
+
+    def func():
+        代码1
+        代码2
+        代码3
+        代码4
+
+2、从代码级别看面向对象
+
+
+def exc1(sql,host='127.0.0.1',port=3306,db='db1',charset='utf-8'):
+    conn=connect(host,port,db,charset)
+    conn.(sql)
+    return xxx
+
+
+def exc2(proc_name,host='127.0.0.1',port=3306,db='db1',charset='utf-8')
+    conn=connect(host,port,db,charset)
+    conn.call_proc(sql)
+    return xxx
+
+exc1('select * from tb1;')
+exc1('select * from tb2;')
+exc1('select * from tb3;')
+
+exc2('存储过程的名字1')
+exc2('存储过程的名字2')
+exc2('存储过程的名字3')
+
+
+
+
+
+
+3、定义函数与定义类的区别：
+    定义函数只检测语法不执行函数体代码
+    定义类会立刻执行类体代码，会产生类的名称空间，将类体代码执行过程中产生的名字都存放到类的名称空间中
+    存的目的是为了取，要想从类的名称空间中取出我们定义的名字
+
+    Foo.__dict__['host']
+
+
+4、访问属性的语法
+    Foo.属性名
+    Foo.属性名=1
+    del Foo.属性名
+
+
+#===============================================
+class Foo:
+    host='127.0.0.1'
+    port=3306
+    db='db1'
+    charset='utf-8'
+
+    def exc1(sql):
+        conn=connect(Foo.host,Foo.port,Foo.db,Foo.charset)
+        conn.execute(sql)
+        return xxx
+
+
+    def exc2(proc_name)
+        conn=connect(Foo.host,Foo.port,Foo.db,Foo.charset)
+        conn.call_proc(sql)
+        return xxx
+
+
+Foo.exc1('select * from tb1;')
+Foo.exc2('select * from tb1;')
+
+
+#===============================================
+
+
+#===============================================
+class Bar:
+    sex='male'
+
+    def register(name,age,):
+        pass
+
+    def auth(name,password,):
+        pass
+
+    def func1(x,):
+        pass
+
+    def func2(y,):
+        pass
+
+    def func3(z,):
+        pass
+#===============================================
+
+
+
+#每次调用都需要重复传入一堆参数
+exc1('select * from tb1;')
+exc2('存储过程的名字')

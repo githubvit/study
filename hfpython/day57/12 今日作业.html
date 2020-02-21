@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>今日作业</title>
+    <style>
+        .cover {
+            position: fixed;
+            top:0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            background-color: rgba(0,0,0,0.4);
+            z-index: 9;
+        }
+        .modal {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            height: 300px;
+            width: 400px;
+            background-color: white;
+            z-index: 100;
+            margin-top: -150px;
+            margin-left: -200px;
+        }
+
+        .hide {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+<button id="add">新增</button>
+
+<table border="1">
+    <thead>
+    <tr>
+        <th>#</th>
+        <th>姓名</th>
+        <th>爱好</th>
+        <th>操作</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>1</td>
+        <td>Egon</td>
+        <td>喊麦</td>
+        <td>
+            <input type="button" value="编辑" class="edit">
+            <input type="button" value="删除" class="delete">
+        </td>
+    </tr>
+    <tr>
+        <td>2</td>
+        <td>Alex</td>
+        <td>吹牛逼</td>
+        <td>
+            <input type="button" value="编辑" class="edit">
+            <input type="button" value="删除" class="delete">
+        </td>
+    </tr>
+    <tr>
+        <td>3</td>
+        <td>苑昊</td>
+        <td>不洗头</td>
+        <td>
+            <input type="button" value="编辑" class="edit">
+            <input type="button" value="删除" class="delete">
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+
+<div class="cover hide"></div>
+<div class="modal hide">
+    <p><input type="text" id="username"></p>
+    <p><input type="text" id="hobby"></p>
+    <p>
+        <button id="submit">提交</button>
+        <button id="cancel">取消</button>
+    </p>
+</div>
+
+<script src="jquery-3.3.1.min.js"></script>
+<script>
+    // 点击新增按钮要做的事儿
+    // 1. 弹出模态框
+
+    // 点击提交按钮要做的事儿
+    // 1. 取值，取模态框中用户填写的值
+    // 2. 隐藏模态框
+    // 3. 创建tr标签， 追加td， 要拼接序号和用户填写的信息
+    // 4. 追加到table标签的最后
+
+    // 点击取消
+    // 1. 把模态框隐藏
+    // 2. 把之前填写的清空掉
+
+    // 删除按钮点击要做的事儿
+    // 1. 把当前点击按钮所在的行 删掉
+
+    // 更新序号...
+</script>
+</body>
+</html>

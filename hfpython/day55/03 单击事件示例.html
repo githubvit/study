@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .c1 {
+            height: 200px;
+            width: 200px;
+            border-radius: 50%;
+        }
+        .bg-red {
+            background-color: red;
+        }
+        .bg-green {
+            background-color: green;
+        }
+    </style>
+</head>
+<body>
+
+<input type="button" id="b1" value="开关" onclick="change();">
+
+<input type="button" id="b2" value="开关">
+
+<div class="c1 bg-red"></div>
+
+
+<script>
+    function change() {
+        // 找到c1这个标签
+        var c1Ele = document.getElementsByClassName("c1")[0];
+        // 修改classList
+        c1Ele.classList.toggle("bg-green");
+    }
+
+    // 通过JS代码绑定事件
+    var b2Ele = document.getElementById("b2");
+
+    b2Ele.onclick = ()=>{
+        change();
+    }
+</script>
+</body>
+</html>

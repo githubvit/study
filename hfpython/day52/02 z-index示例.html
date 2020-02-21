@@ -1,0 +1,3413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>z-index示例</title>
+    <style>
+        body {
+            margin: 0;
+        }
+        .c1 {
+            height: 1000px;
+            width: 100%;
+        }
+        .cover {
+            background-color: rgba(0,0,0,0.35);
+            position: fixed;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            z-index: 999;
+        }
+        .modal {
+            background-color: white;
+            height: 400px;
+            width: 600px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            margin-left: -300px;
+            margin-top: -200px;
+            z-index: 1000;
+        }
+    </style>
+</head>
+<body>
+
+<div class="c1">
+    <div class="main-content">
+		<div class="content-L">
+			<!-- 最新最热按钮 -->
+			<div class="nav-top-area" style="margin-bottom: 0px;">
+				<div class="child-nav">
+					<a href="/all/hot/recent/1" hidefocus="false" class="hotbtn active icons" id="hotts-nav-btn">最热</a>
+					<a href="/all/discovery/sh/1" hidefocus="false" class="newbtn" id="newest-nav-btn">发现</a>
+					<a href="/all/man/1?sortType=time" hidefocus="false" class="personbtn" id="person-nav-btn">人类发布</a>
+
+				</div>
+
+				<div class="sort-nav">
+					<a href="/all/hot/recent/1" hidefocus="false" class="active hotbtn" id="sort-nav-btn">即时排序</a>
+					<a href="/all/hot/24hr/1" hidefocus="false" class="newbtn" id="sort24-nav-btn">24小时</a>
+					<a href="/all/hot/72hr/1" hidefocus="false" class="newbtn" id="sort3-nav-btn">3天</a>
+				</div>
+
+				<a href="javascript:;" class="publish-btn" id="publishBtn" lang="all">
+					<span class="ico n1"></span><span class="n2">发布</span>
+				</a>
+			</div>
+
+			<!-- 内容显示区域 -->
+			<div class="yellow-comment-msg-box" id="yellow-msg-box-intohot" style="position: relative; left: 0px; top: 0px;"><em></em><span>条入热榜，点击查看</span></div>
+			<div class="loading-ico" style="margin-left:250px;" id="load_hotitems">加载中，请稍候...</div>
+
+			<div class="content-list" id="content-list">
+
+
+
+
+        				<div class="item">
+
+        					<div class="timeIntoPool">1527559199606000,1527559219766000</div>
+
+								<div class="news-pic"><img lang="19875791" original="//img3.chouti.com/CHOUTI_20180529/5371E971A5E144DBB1CCC379A2CF6DA9_W447H447=C120x120.jpg?quality=80" src="//img3.chouti.com/CHOUTI_20180529/5371E971A5E144DBB1CCC379A2CF6DA9_W447H447=C120x120.jpg?quality=80" alt="抽屉新热榜" style="display: inline;"></div>
+
+
+							<div class="null-item"></div>
+
+							<div class="news-content" id="newsContent19875791">
+								<div class="part1">
+										<a href="http://www.qdaily.com/articles/53660.html?source=chouti" class="show-content color-chag" target="_blank" onmousedown="linksClickStat(19875791);">
+
+
+
+
+
+
+
+													【谷歌爱猫组被指间接害死猫头鹰】这个关于猫头鹰的故事告诉我们：努力做好事往往会造成意想不到的后果，而即使是聪明的人（也许是特别聪明的人）也不愿意对自己确信无疑的事进行反思。
+
+
+										</a>
+
+										<span class="content-source">-www.qdaily.com</span>
+
+									<!-- 段子和谣言类别不显示类别名称 -->
+
+										<a href="/r/news/hot/1" class="n2"><span class="content-kind">42区</span></a>
+
+									<!-- 来源手机客户端 -->
+
+
+
+
+									<!-- 显示话题标签 -->
+
+								</div>
+								<!-- 显示摘要 -->
+
+								<div class="part2" share-pic="http://img3.chouti.com/CHOUTI_20180529/5371E971A5E144DBB1CCC379A2CF6DA9_W447H447.jpg" share-title="【谷歌爱猫组被指间接害死猫头鹰】这个关于猫头鹰的故事告诉我们：努力做好事往往会造成意想不到的后果，而即使是聪明的人（也许是特别聪明的人）也不愿意对自己确信无疑的事进行反思。" share-summary="" share-linkid="19875791" share-subject="42区">
+
+
+
+
+										<a href="javascript:;" class="digg-a" title="推荐"><span class="hand-icon icon-digg"></span><b>3</b><i style="display:none">19875791</i></a>
+
+
+									<a href="javascript:;" class="discus-a" id="discus-a-19875791" timetopool="小于1分钟前" lang="19875791"><span class="hand-icon icon-discus"></span><b>0</b></a>
+
+
+										<a href="javascript:;" class="collect-a" id="collect-a-19875791" lang="19875791" title="加入私藏" destjid="" jid="chouti140722"><span class="hand-icon icon-collect"></span><b>私藏</b></a>
+
+
+
+
+										<a href="/user/chouti140722/submitted/1" class="user-a"><span><img src="//img3.chouti.com/CHOUTI_0B577FC6E8004C1E9C5870029F2811E2_W48H48=32x32.jpg?quality=80"></span><b>好奇心日报</b></a>
+
+									<span class="left time-into"><a class="time-a" href="/link/19875791" target="_blank"><b>小于1分钟前</b></a><i>入热榜</i></span>
+									<!-- 分享各微博的按钮 -->
+
+								<span class="share-site-to" style="visibility: visible; display: none;"><i>分享到</i><span class="share-icon"><a class="icon-sina" id="icon-sina" title="分享到新浪微博" href="javascript:;" hidefocus="true"></a><a class="icon-douban" id="icon-douban" title="分享到豆瓣" href="javascript:;" hidefocus="true"></a><a class="icon-qqzone" id="icon-qqzone" title="分享到QQ空间" href="javascript:;" hidefocus="true"></a><a class="icon-renren" id="icon-renren" title="分享到人人网" href="javascript:;" hidefocus="true"></a><a class="share-none"> </a></span></span></div>
+								<!-- 评论区域 -->
+								<div class="comment-box-area" id="comment-box-area-19875791">
+								<div class="pinglun arrow" id="comt-arrow-19875791"></div>
+								<a class="pinglun close-comt" title="关闭" href="javascript:;" lang="19875791"></a>
+								<div class="corner comment-box" id="comment-box-19875791">
+
+									<div class="loading-ico loading-ico-top" id="loading-comment-top-19875791" style="margin-left:230px;">加载中，请稍候...</div>
+									<div class="comment-box-top" id="comment-box-top-19875791">
+										<div class="tip-1">最热评论(<span id="newestCount-19875791">3</span>)</div>
+										<div class="tip-2"><a href="/link/19875791" target="_blank"><em class="pinglun em1"></em><span>去评论页面</span></a></div>
+									</div>
+									<!-- 评论树形 -->
+									<ul class="filetree comment-list-top-2" id="comment-list-top-19875791"></ul>
+
+									<!-- 谣言类别显示相信还是置疑选项 -->
+
+
+									<!-- 判断该新闻评论是否关闭 -->
+
+
+									<!-- 评论输入框和回复框 -->
+									<div class="huifu-top-box" id="huifu-top-box-19875791">
+										<div class="box-l txt-input-area-div-top corner no-corner-bottom">
+                                            <div id="lab-comment-top-19875791" class="lab-comment-top">回复  <span id="nick--19875791"></span>:</div>
+											<!-- 针对谣言文本输入框无效 -->
+
+
+
+												<textarea lang="19875791" maxlength="150" name="txt-huifu-top" id="txt-huifu-top-19875791" class="txt-huifu txt-huifu-top"></textarea>
+
+
+										</div>
+										<div class="box-r">
+											<a id="pub-btn-top-19875791" lang="19875791" href="javascript:;" class="pub-icons add-pub-btn add-pub-btn-unvalid">评论</a>
+											<a id="pub-loading-top-19875791" href="javascript:;" class="loading-ico loading-ico-top pub-loading-top">发布中...</a>
+										</div>
+									</div>
+
+
+
+
+									<div class="tip-3" id="hidden-comt-19875791">
+										<a href="javascript:;" class="hiddenCom-Btn" lang="19875791"><em class="pinglun em2"></em><span>收起</span></a>
+									</div>
+									<div class="write-error-box-top">
+										<div class="write-error-desc" id="write-error-desc-19875791"></div>
+									</div>
+								</div>
+								<input type="hidden" id="hidsubjectid-19875791" value="1">
+								</div>
+
+
+							</div>
+
+						</div>
+
+
+
+        				<div class="item">
+
+        					<div class="timeIntoPool">1527558839208000,1527559219766000</div>
+
+								<div class="news-pic"><img lang="19868561" original="//img3.chouti.com/CHOUTI_20180529/4EA2D893FB214617A899B2C6F8099B14_W600H337=C120x120.jpg?quality=80" src="//img3.chouti.com/CHOUTI_20180529/4EA2D893FB214617A899B2C6F8099B14_W600H337=C120x120.jpg?quality=80" alt="抽屉新热榜" style="display: inline;"></div>
+
+
+							<div class="null-item"></div>
+
+							<div class="news-content" id="newsContent19868561">
+								<div class="part1">
+										<a href="http://tech.ifeng.com/a/20180529/45006598_0.shtml" class="show-content color-chag" target="_blank" onmousedown="linksClickStat(19868561);">
+
+
+
+
+
+
+
+													速度再翻番达20Gbps！USB 3.2全球首演：只有Type-C
+
+
+										</a>
+
+										<span class="content-source">-tech.ifeng.com</span>
+
+									<!-- 段子和谣言类别不显示类别名称 -->
+
+										<a href="/r/news/hot/1" class="n2"><span class="content-kind">42区</span></a>
+
+									<!-- 来源手机客户端 -->
+
+
+
+
+									<!-- 显示话题标签 -->
+
+								</div>
+								<!-- 显示摘要 -->
+
+									<div class="area-summary">
+										<span class="summary">速度再翻番达20Gbps！USB 3.2全球首演：只有Type-C</span>
+									</div>
+
+								<div class="part2" share-pic="http://img3.chouti.com/CHOUTI_20180529/4EA2D893FB214617A899B2C6F8099B14_W600H337.jpg" share-title="速度再翻番达20Gbps！USB 3.2全球首演：只有Type-C" share-summary="速度再翻番达20Gbps！USB 3.2全球首演：只有Type-C" share-linkid="19868561" share-subject="42区">
+
+
+
+
+										<a href="javascript:;" class="digg-a" title="推荐"><span class="hand-icon icon-digg"></span><b>7</b><i style="display:none">19868561</i></a>
+
+
+									<a href="javascript:;" class="discus-a" id="discus-a-19868561" timetopool="6分钟前" lang="19868561"><span class="hand-icon icon-discus"></span><b>6</b></a>
+
+
+										<a href="javascript:;" class="collect-a" id="collect-a-19868561" lang="19868561" title="加入私藏" destjid="" jid="wb_td_196"><span class="hand-icon icon-collect"></span><b>私藏</b></a>
+
+
+
+
+										<a href="/user/wb_td_196/submitted/1" class="user-a"><span><img src="//img3.chouti.com/CHOUTI_20171213/65CAD2B0FD5C4A638AA0089FDECA9603_W46H48=32x32.jpg?quality=80"></span><b>智喜</b></a>
+
+									<span class="left time-into"><a class="time-a" href="/link/19868561" target="_blank"><b>6分钟前</b></a><i>入热榜</i></span>
+									<!-- 分享各微博的按钮 -->
+
+								</div>
+								<!-- 评论区域 -->
+								<div class="comment-box-area" id="comment-box-area-19868561">
+								<div class="pinglun arrow" id="comt-arrow-19868561"></div>
+								<a class="pinglun close-comt" title="关闭" href="javascript:;" lang="19868561"></a>
+								<div class="corner comment-box" id="comment-box-19868561">
+
+									<div class="loading-ico loading-ico-top" id="loading-comment-top-19868561" style="margin-left:230px;">加载中，请稍候...</div>
+									<div class="comment-box-top" id="comment-box-top-19868561">
+										<div class="tip-1">最热评论(<span id="newestCount-19868561">3</span>)</div>
+										<div class="tip-2"><a href="/link/19868561" target="_blank"><em class="pinglun em1"></em><span>去评论页面</span></a></div>
+									</div>
+									<!-- 评论树形 -->
+									<ul class="filetree comment-list-top-2" id="comment-list-top-19868561"></ul>
+
+									<!-- 谣言类别显示相信还是置疑选项 -->
+
+
+									<!-- 判断该新闻评论是否关闭 -->
+
+
+									<!-- 评论输入框和回复框 -->
+									<div class="huifu-top-box" id="huifu-top-box-19868561">
+										<div class="box-l txt-input-area-div-top corner no-corner-bottom">
+                                            <div id="lab-comment-top-19868561" class="lab-comment-top">回复  <span id="nick--19868561"></span>:</div>
+											<!-- 针对谣言文本输入框无效 -->
+
+
+
+												<textarea lang="19868561" maxlength="150" name="txt-huifu-top" id="txt-huifu-top-19868561" class="txt-huifu txt-huifu-top"></textarea>
+
+
+										</div>
+										<div class="box-r">
+											<a id="pub-btn-top-19868561" lang="19868561" href="javascript:;" class="pub-icons add-pub-btn add-pub-btn-unvalid">评论</a>
+											<a id="pub-loading-top-19868561" href="javascript:;" class="loading-ico loading-ico-top pub-loading-top">发布中...</a>
+										</div>
+									</div>
+
+
+
+
+									<div class="tip-3" id="hidden-comt-19868561">
+										<a href="javascript:;" class="hiddenCom-Btn" lang="19868561"><em class="pinglun em2"></em><span>收起</span></a>
+									</div>
+									<div class="write-error-box-top">
+										<div class="write-error-desc" id="write-error-desc-19868561"></div>
+									</div>
+								</div>
+								<input type="hidden" id="hidsubjectid-19868561" value="1">
+								</div>
+
+
+							</div>
+
+						</div>
+
+
+
+        				<div class="item">
+
+        					<div class="timeIntoPool">1527558479189000,1527559219766000</div>
+
+								<div class="news-pic"><img lang="19874096" original="//img3.chouti.com/CHOUTI_20180529/2D4A76C8CDCA45B59B53A80BEB6EF35B_W480H480=C120x120.jpg?quality=80" src="//img3.chouti.com/CHOUTI_20180529/2D4A76C8CDCA45B59B53A80BEB6EF35B_W480H480=C120x120.jpg?quality=80" alt="抽屉新热榜" style="display: inline;"></div>
+
+
+							<div class="null-item"></div>
+
+							<div class="news-content" id="newsContent19874096">
+								<div class="part1">
+										<a href="https://www.jiemian.com/article/2180189.html" class="show-content color-chag" target="_blank" onmousedown="linksClickStat(19874096);">
+
+
+
+
+
+
+
+													【解码腾讯互娱现金奶牛】“泛娱乐”现在已经成为了一个业内的通用概念，这个名词最早2011年由现任腾讯集团副总裁程武提出的。未来的一段时间，腾讯互娱将进入一个攻坚期。
+
+
+										</a>
+
+										<span class="content-source">-www.jiemian.com</span>
+
+									<!-- 段子和谣言类别不显示类别名称 -->
+
+										<a href="/r/news/hot/1" class="n2"><span class="content-kind">42区</span></a>
+
+									<!-- 来源手机客户端 -->
+
+
+
+
+									<!-- 显示话题标签 -->
+
+								</div>
+								<!-- 显示摘要 -->
+
+								<div class="part2" share-pic="http://img3.chouti.com/CHOUTI_20180529/2D4A76C8CDCA45B59B53A80BEB6EF35B_W480H480.jpg" share-title="【解码腾讯互娱现金奶牛】“泛娱乐”现在已经成为了一个业内的通用概念，这个名词最早2011年由现任腾讯集团副总裁程武提出的。未来的一段时间，腾讯互娱将进入一个攻坚期。" share-summary="" share-linkid="19874096" share-subject="42区">
+
+
+
+
+										<a href="javascript:;" class="digg-a" title="推荐"><span class="hand-icon icon-digg"></span><b>5</b><i style="display:none">19874096</i></a>
+
+
+									<a href="javascript:;" class="discus-a" id="discus-a-19874096" timetopool="12分钟前" lang="19874096"><span class="hand-icon icon-discus"></span><b>0</b></a>
+
+
+										<a href="javascript:;" class="collect-a" id="collect-a-19874096" lang="19874096" title="加入私藏" destjid="" jid="chouti150512"><span class="hand-icon icon-collect"></span><b>私藏</b></a>
+
+
+
+
+										<a href="/user/chouti150512/submitted/1" class="user-a"><span><img src="//img3.chouti.com/group11/M00/B3/5B/wKgCPVVR2TrqPjtOAAAZZ-UF7pU255=32x32.jpg?quality=80"></span><b>界面新闻</b></a>
+
+									<span class="left time-into"><a class="time-a" href="/link/19874096" target="_blank"><b>12分钟前</b></a><i>入热榜</i></span>
+									<!-- 分享各微博的按钮 -->
+
+								<span class="share-site-to" style="visibility: visible; display: none;"><i>分享到</i><span class="share-icon"><a class="icon-sina" id="icon-sina" title="分享到新浪微博" href="javascript:;" hidefocus="true"></a><a class="icon-douban" id="icon-douban" title="分享到豆瓣" href="javascript:;" hidefocus="true"></a><a class="icon-qqzone" id="icon-qqzone" title="分享到QQ空间" href="javascript:;" hidefocus="true"></a><a class="icon-renren" id="icon-renren" title="分享到人人网" href="javascript:;" hidefocus="true"></a><a class="share-none"> </a></span></span></div>
+								<!-- 评论区域 -->
+								<div class="comment-box-area" id="comment-box-area-19874096">
+								<div class="pinglun arrow" id="comt-arrow-19874096"></div>
+								<a class="pinglun close-comt" title="关闭" href="javascript:;" lang="19874096"></a>
+								<div class="corner comment-box" id="comment-box-19874096">
+
+									<div class="loading-ico loading-ico-top" id="loading-comment-top-19874096" style="margin-left:230px;">加载中，请稍候...</div>
+									<div class="comment-box-top" id="comment-box-top-19874096">
+										<div class="tip-1">最热评论(<span id="newestCount-19874096">3</span>)</div>
+										<div class="tip-2"><a href="/link/19874096" target="_blank"><em class="pinglun em1"></em><span>去评论页面</span></a></div>
+									</div>
+									<!-- 评论树形 -->
+									<ul class="filetree comment-list-top-2" id="comment-list-top-19874096"></ul>
+
+									<!-- 谣言类别显示相信还是置疑选项 -->
+
+
+									<!-- 判断该新闻评论是否关闭 -->
+
+
+									<!-- 评论输入框和回复框 -->
+									<div class="huifu-top-box" id="huifu-top-box-19874096">
+										<div class="box-l txt-input-area-div-top corner no-corner-bottom">
+                                            <div id="lab-comment-top-19874096" class="lab-comment-top">回复  <span id="nick--19874096"></span>:</div>
+											<!-- 针对谣言文本输入框无效 -->
+
+
+
+												<textarea lang="19874096" maxlength="150" name="txt-huifu-top" id="txt-huifu-top-19874096" class="txt-huifu txt-huifu-top"></textarea>
+
+
+										</div>
+										<div class="box-r">
+											<a id="pub-btn-top-19874096" lang="19874096" href="javascript:;" class="pub-icons add-pub-btn add-pub-btn-unvalid">评论</a>
+											<a id="pub-loading-top-19874096" href="javascript:;" class="loading-ico loading-ico-top pub-loading-top">发布中...</a>
+										</div>
+									</div>
+
+
+
+
+									<div class="tip-3" id="hidden-comt-19874096">
+										<a href="javascript:;" class="hiddenCom-Btn" lang="19874096"><em class="pinglun em2"></em><span>收起</span></a>
+									</div>
+									<div class="write-error-box-top">
+										<div class="write-error-desc" id="write-error-desc-19874096"></div>
+									</div>
+								</div>
+								<input type="hidden" id="hidsubjectid-19874096" value="1">
+								</div>
+
+
+							</div>
+
+						</div>
+
+
+
+        				<div class="item">
+
+        					<div class="timeIntoPool">1527558120352000,1527559219766000</div>
+
+								<div class="news-pic"><img lang="19874446" original="//img3.chouti.com/CHOUTI_20180529/806814B21D2C430E98FF0D01C8F2B39B_W392H392=C120x120.jpg?quality=80" src="//img3.chouti.com/CHOUTI_20180529/806814B21D2C430E98FF0D01C8F2B39B_W392H392=C120x120.jpg?quality=80" alt="抽屉新热榜" style="display: inline;"></div>
+
+
+							<div class="null-item"></div>
+
+							<div class="news-content" id="newsContent19874446">
+								<div class="part1">
+										<a href="http://tech.qq.com/a/20180529/007792.htm" class="show-content color-chag" target="_blank" onmousedown="linksClickStat(19874446);">
+
+
+
+
+
+
+
+													危机频出，在线旅行老大携程怎么了
+
+
+										</a>
+
+										<span class="content-source">-tech.qq.com</span>
+
+									<!-- 段子和谣言类别不显示类别名称 -->
+
+										<a href="/r/tec/hot/1" class="n2"><span class="content-kind">挨踢1024</span></a>
+
+									<!-- 来源手机客户端 -->
+
+
+
+
+									<!-- 显示话题标签 -->
+
+								</div>
+								<!-- 显示摘要 -->
+
+									<div class="area-summary">
+										<span class="summary">作者韩依民编辑高宇雷作为携程的创始人，梁建章另外的一个身份是人口学家，2016年卸任CEO之后，他见诸报章的言论也更多是关于人口与社会发展。但2018年5月开始，他却罕见的就携程价值观话题连续发声。在一封携程CEO孙洁与董事长梁建章联...</span>
+									</div>
+
+								<div class="part2" share-pic="http://img3.chouti.com/CHOUTI_20180529/806814B21D2C430E98FF0D01C8F2B39B_W392H392.jpg" share-title="危机频出，在线旅行老大携程怎么了" share-summary="作者韩依民编辑高宇雷作为携程的创始人，梁建章另外的一个身份是人口学家，2016年卸任CEO之后，他见诸报章的言论也更多是关于人口与社会发展。但2018年5月开始，他却罕见的就携程价值观话题连续发声。在一封携程CEO孙洁与董事长梁建章联..." share-linkid="19874446" share-subject="挨踢1024">
+
+
+
+
+										<a href="javascript:;" class="digg-a" title="推荐"><span class="hand-icon icon-digg"></span><b>5</b><i style="display:none">19874446</i></a>
+
+
+									<a href="javascript:;" class="discus-a" id="discus-a-19874446" timetopool="18分钟前" lang="19874446"><span class="hand-icon icon-discus"></span><b>7</b></a>
+
+
+										<a href="javascript:;" class="collect-a" id="collect-a-19874446" lang="19874446" title="加入私藏" destjid="" jid="qqtech"><span class="hand-icon icon-collect"></span><b>私藏</b></a>
+
+
+
+
+										<a href="/user/qqtech/submitted/1" class="user-a"><span><img src="//img3.chouti.com/group4/M03/99/32/wKgCDFF-KSKXKqRFAAAdo0o5kI8717=32x32.jpg?quality=80"></span><b>腾讯科技</b></a>
+
+									<span class="left time-into"><a class="time-a" href="/link/19874446" target="_blank"><b>18分钟前</b></a><i>入热榜</i></span>
+									<!-- 分享各微博的按钮 -->
+
+								</div>
+								<!-- 评论区域 -->
+								<div class="comment-box-area" id="comment-box-area-19874446">
+								<div class="pinglun arrow" id="comt-arrow-19874446"></div>
+								<a class="pinglun close-comt" title="关闭" href="javascript:;" lang="19874446"></a>
+								<div class="corner comment-box" id="comment-box-19874446">
+
+									<div class="loading-ico loading-ico-top" id="loading-comment-top-19874446" style="margin-left:230px;">加载中，请稍候...</div>
+									<div class="comment-box-top" id="comment-box-top-19874446">
+										<div class="tip-1">最热评论(<span id="newestCount-19874446">3</span>)</div>
+										<div class="tip-2"><a href="/link/19874446" target="_blank"><em class="pinglun em1"></em><span>去评论页面</span></a></div>
+									</div>
+									<!-- 评论树形 -->
+									<ul class="filetree comment-list-top-2" id="comment-list-top-19874446"></ul>
+
+									<!-- 谣言类别显示相信还是置疑选项 -->
+
+
+									<!-- 判断该新闻评论是否关闭 -->
+
+
+									<!-- 评论输入框和回复框 -->
+									<div class="huifu-top-box" id="huifu-top-box-19874446">
+										<div class="box-l txt-input-area-div-top corner no-corner-bottom">
+                                            <div id="lab-comment-top-19874446" class="lab-comment-top">回复  <span id="nick--19874446"></span>:</div>
+											<!-- 针对谣言文本输入框无效 -->
+
+
+
+												<textarea lang="19874446" maxlength="150" name="txt-huifu-top" id="txt-huifu-top-19874446" class="txt-huifu txt-huifu-top"></textarea>
+
+
+										</div>
+										<div class="box-r">
+											<a id="pub-btn-top-19874446" lang="19874446" href="javascript:;" class="pub-icons add-pub-btn add-pub-btn-unvalid">评论</a>
+											<a id="pub-loading-top-19874446" href="javascript:;" class="loading-ico loading-ico-top pub-loading-top">发布中...</a>
+										</div>
+									</div>
+
+
+
+
+									<div class="tip-3" id="hidden-comt-19874446">
+										<a href="javascript:;" class="hiddenCom-Btn" lang="19874446"><em class="pinglun em2"></em><span>收起</span></a>
+									</div>
+									<div class="write-error-box-top">
+										<div class="write-error-desc" id="write-error-desc-19874446"></div>
+									</div>
+								</div>
+								<input type="hidden" id="hidsubjectid-19874446" value="100">
+								</div>
+
+
+							</div>
+
+						</div>
+
+
+
+        				<div class="item">
+
+        					<div class="timeIntoPool">1527557759624000,1527559219766000</div>
+
+								<div class="news-pic"><img lang="19874466" original="//img3.chouti.com/CHOUTI_20180529/1F520931B10A409BAAF47BED3D252750_W454H454=C120x120.png?quality=80" src="//img3.chouti.com/CHOUTI_20180529/1F520931B10A409BAAF47BED3D252750_W454H454=C120x120.png?quality=80" alt="抽屉新热榜" style="display: inline;"></div>
+
+
+							<div class="null-item"></div>
+
+							<div class="news-content" id="newsContent19874466">
+								<div class="part1">
+										<a href="http://www.pearvideo.com/video_1354732" class="show-content color-chag" target="_blank" onmousedown="linksClickStat(19874466);">
+
+
+
+
+
+
+
+													5月28日11时许，日本神奈川县发生一起交通事故。90岁高龄女司机开车强闯红灯，撞倒4名行人，致1人死亡3人受伤。
+
+
+										</a>
+
+										<span class="content-source">-www.pearvideo.com</span>
+
+									<!-- 段子和谣言类别不显示类别名称 -->
+
+										<a href="/r/news/hot/1" class="n2"><span class="content-kind">42区</span></a>
+
+									<!-- 来源手机客户端 -->
+
+
+
+
+									<!-- 显示话题标签 -->
+
+								</div>
+								<!-- 显示摘要 -->
+
+								<div class="part2" share-pic="http://img3.chouti.com/CHOUTI_20180529/1F520931B10A409BAAF47BED3D252750_W454H454.png" share-title="5月28日11时许，日本神奈川县发生一起交通事故。90岁高龄女司机开车强闯红灯，撞倒4名行人，致1人死亡3人受伤。" share-summary="" share-linkid="19874466" share-subject="42区">
+
+
+
+
+										<a href="javascript:;" class="digg-a" title="推荐"><span class="hand-icon icon-digg"></span><b>10</b><i style="display:none">19874466</i></a>
+
+
+									<a href="javascript:;" class="discus-a" id="discus-a-19874466" timetopool="24分钟前" lang="19874466"><span class="hand-icon icon-discus"></span><b>15</b></a>
+
+
+										<a href="javascript:;" class="collect-a" id="collect-a-19874466" lang="19874466" title="加入私藏" destjid="" jid="ccavvv"><span class="hand-icon icon-collect"></span><b>私藏</b></a>
+
+
+
+
+										<a href="/user/ccavvv/submitted/1" class="user-a"><span><img src="//img3.chouti.com/group12/M02/C2/55/wKgCD1W_IC6xGhqzAAAtE3cOolI463=32x32.jpg?quality=80"></span><b>院长</b></a>
+
+									<span class="left time-into"><a class="time-a" href="/link/19874466" target="_blank"><b>24分钟前</b></a><i>入热榜</i></span>
+									<!-- 分享各微博的按钮 -->
+
+								</div>
+								<!-- 评论区域 -->
+								<div class="comment-box-area" id="comment-box-area-19874466">
+								<div class="pinglun arrow" id="comt-arrow-19874466"></div>
+								<a class="pinglun close-comt" title="关闭" href="javascript:;" lang="19874466"></a>
+								<div class="corner comment-box" id="comment-box-19874466">
+
+									<div class="loading-ico loading-ico-top" id="loading-comment-top-19874466" style="margin-left:230px;">加载中，请稍候...</div>
+									<div class="comment-box-top" id="comment-box-top-19874466">
+										<div class="tip-1">最热评论(<span id="newestCount-19874466">3</span>)</div>
+										<div class="tip-2"><a href="/link/19874466" target="_blank"><em class="pinglun em1"></em><span>去评论页面</span></a></div>
+									</div>
+									<!-- 评论树形 -->
+									<ul class="filetree comment-list-top-2" id="comment-list-top-19874466"></ul>
+
+									<!-- 谣言类别显示相信还是置疑选项 -->
+
+
+									<!-- 判断该新闻评论是否关闭 -->
+
+
+									<!-- 评论输入框和回复框 -->
+									<div class="huifu-top-box" id="huifu-top-box-19874466">
+										<div class="box-l txt-input-area-div-top corner no-corner-bottom">
+                                            <div id="lab-comment-top-19874466" class="lab-comment-top">回复  <span id="nick--19874466"></span>:</div>
+											<!-- 针对谣言文本输入框无效 -->
+
+
+
+												<textarea lang="19874466" maxlength="150" name="txt-huifu-top" id="txt-huifu-top-19874466" class="txt-huifu txt-huifu-top"></textarea>
+
+
+										</div>
+										<div class="box-r">
+											<a id="pub-btn-top-19874466" lang="19874466" href="javascript:;" class="pub-icons add-pub-btn add-pub-btn-unvalid">评论</a>
+											<a id="pub-loading-top-19874466" href="javascript:;" class="loading-ico loading-ico-top pub-loading-top">发布中...</a>
+										</div>
+									</div>
+
+
+
+
+									<div class="tip-3" id="hidden-comt-19874466">
+										<a href="javascript:;" class="hiddenCom-Btn" lang="19874466"><em class="pinglun em2"></em><span>收起</span></a>
+									</div>
+									<div class="write-error-box-top">
+										<div class="write-error-desc" id="write-error-desc-19874466"></div>
+									</div>
+								</div>
+								<input type="hidden" id="hidsubjectid-19874466" value="1">
+								</div>
+
+
+							</div>
+
+						</div>
+
+
+
+        				<div class="item">
+
+        					<div class="timeIntoPool">1527557400443000,1527559219766000</div>
+
+								<div class="news-pic"><img lang="19873451" original="//img3.chouti.com/CHOUTI_20180529/AFED63D1DFE24A2A8FB97B02E6A58C50_W460H215=C120x120.jpg?quality=80" src="//img3.chouti.com/CHOUTI_20180529/AFED63D1DFE24A2A8FB97B02E6A58C50_W460H215=C120x120.jpg?quality=80" alt="抽屉新热榜" style="display: inline;"></div>
+
+
+							<div class="null-item"></div>
+
+							<div class="news-content" id="newsContent19873451">
+								<div class="part1">
+										<a href="http://dig.chouti.com/pic/show?nid=a0183777b9a1a0239105b401d42a1dd9&amp;lid=19873451" class="show-content color-chag" target="_blank" onmousedown="linksClickStat(19873451);">
+
+
+
+
+
+
+
+													在斗鱼、熊猫、虎牙等直播平台搜索“彩虹六号”或者“R6”，页面没有显示任何结果。 ​(@游研社)
+
+
+										</a>
+
+									<!-- 段子和谣言类别不显示类别名称 -->
+
+										<a href="/r/tec/hot/1" class="n2"><span class="content-kind">挨踢1024</span></a>
+
+									<!-- 来源手机客户端 -->
+
+
+
+
+									<!-- 显示话题标签 -->
+
+								</div>
+								<!-- 显示摘要 -->
+
+								<div class="part2" share-pic="http://img3.chouti.com/CHOUTI_20180529/AFED63D1DFE24A2A8FB97B02E6A58C50_W460H215.jpg" share-title="在斗鱼、熊猫、虎牙等直播平台搜索“彩虹六号”或者“R6”，页面没有显示任何结果。 ​(@游研社)" share-summary="" share-linkid="19873451" share-subject="挨踢1024">
+
+
+
+
+										<a href="javascript:;" class="digg-a" title="推荐"><span class="hand-icon icon-digg"></span><b>8</b><i style="display:none">19873451</i></a>
+
+
+									<a href="javascript:;" class="discus-a" id="discus-a-19873451" timetopool="30分钟前" lang="19873451" onmousedown="linksClickStat(19873451);"><span class="hand-icon icon-discus"></span><b>12</b></a>
+
+
+										<a href="javascript:;" class="collect-a" id="collect-a-19873451" lang="19873451" title="加入私藏" destjid="" jid="wb_2634877355"><span class="hand-icon icon-collect"></span><b>私藏</b></a>
+
+
+
+
+										<a href="/user/wb_2634877355/submitted/1" class="user-a"><span><img src="//img3.chouti.com/CHOUTI_20180529/EAFE25C56DB848949F6BA24856A2DB9C_W180H180=32x32.jpg?quality=80"></span><b>游研社</b></a>
+
+									<span class="left time-into"><a class="time-a" href="/link/19873451" target="_blank"><b>30分钟前</b></a><i>入热榜</i></span>
+									<!-- 分享各微博的按钮 -->
+
+								</div>
+								<!-- 评论区域 -->
+								<div class="comment-box-area" id="comment-box-area-19873451">
+								<div class="pinglun arrow" id="comt-arrow-19873451"></div>
+								<a class="pinglun close-comt" title="关闭" href="javascript:;" lang="19873451"></a>
+								<div class="corner comment-box" id="comment-box-19873451">
+
+									<div class="loading-ico loading-ico-top" id="loading-comment-top-19873451" style="margin-left:230px;">加载中，请稍候...</div>
+									<div class="comment-box-top" id="comment-box-top-19873451">
+										<div class="tip-1">最热评论(<span id="newestCount-19873451">3</span>)</div>
+										<div class="tip-2"><a href="/link/19873451" target="_blank"><em class="pinglun em1"></em><span>去评论页面</span></a></div>
+									</div>
+									<!-- 评论树形 -->
+									<ul class="filetree comment-list-top-2" id="comment-list-top-19873451"></ul>
+
+									<!-- 谣言类别显示相信还是置疑选项 -->
+
+
+									<!-- 判断该新闻评论是否关闭 -->
+
+
+									<!-- 评论输入框和回复框 -->
+									<div class="huifu-top-box" id="huifu-top-box-19873451">
+										<div class="box-l txt-input-area-div-top corner no-corner-bottom">
+                                            <div id="lab-comment-top-19873451" class="lab-comment-top">回复  <span id="nick--19873451"></span>:</div>
+											<!-- 针对谣言文本输入框无效 -->
+
+
+
+												<textarea lang="19873451" maxlength="150" name="txt-huifu-top" id="txt-huifu-top-19873451" class="txt-huifu txt-huifu-top"></textarea>
+
+
+										</div>
+										<div class="box-r">
+											<a id="pub-btn-top-19873451" lang="19873451" href="javascript:;" class="pub-icons add-pub-btn add-pub-btn-unvalid">评论</a>
+											<a id="pub-loading-top-19873451" href="javascript:;" class="loading-ico loading-ico-top pub-loading-top">发布中...</a>
+										</div>
+									</div>
+
+
+
+
+									<div class="tip-3" id="hidden-comt-19873451">
+										<a href="javascript:;" class="hiddenCom-Btn" lang="19873451"><em class="pinglun em2"></em><span>收起</span></a>
+									</div>
+									<div class="write-error-box-top">
+										<div class="write-error-desc" id="write-error-desc-19873451"></div>
+									</div>
+								</div>
+								<input type="hidden" id="hidsubjectid-19873451" value="100">
+								</div>
+
+
+							</div>
+
+						</div>
+
+
+
+        				<div class="item">
+
+        					<div class="timeIntoPool">1527557039246000,1527559219766000</div>
+
+								<div class="news-pic"><img lang="19873866" original="//img3.chouti.com/CHOUTI_20180529/A6DB45B2A49A46979774175D8AB966A8_W449H449=C120x120.jpg?quality=80" src="/images/bai.png" alt="抽屉新热榜"></div>
+
+
+							<div class="null-item"></div>
+
+							<div class="news-content" id="newsContent19873866">
+								<div class="part1">
+										<a href="http://dig.chouti.com/pic/show?nid=82ae633c2c9fe0e6466fad6428f1b69f&amp;lid=19873866" class="show-content color-chag" target="_blank" onmousedown="linksClickStat(19873866);">
+
+
+
+
+
+
+														<span class="kind-name">【段子】</span>
+
+
+													梦想的变迁
+
+
+										</a>
+
+									<!-- 段子和谣言类别不显示类别名称 -->
+
+									<!-- 来源手机客户端 -->
+
+
+
+
+									<!-- 显示话题标签 -->
+
+								</div>
+								<!-- 显示摘要 -->
+
+								<div class="part2" share-pic="http://img3.chouti.com/CHOUTI_20180529/A6DB45B2A49A46979774175D8AB966A8_W449H449.jpg" share-title="梦想的变迁" share-summary="" share-linkid="19873866" share-subject="段子" style="padding-top: 17px;">
+
+
+
+
+										<a href="javascript:;" class="digg-a" title="推荐"><span class="hand-icon icon-digg"></span><b>18</b><i style="display:none">19873866</i></a>
+
+
+									<a href="javascript:;" class="discus-a" id="discus-a-19873866" timetopool="36分钟前" lang="19873866" onmousedown="linksClickStat(19873866);"><span class="hand-icon icon-discus"></span><b>13</b></a>
+
+
+										<a href="javascript:;" class="collect-a" id="collect-a-19873866" lang="19873866" title="加入私藏" destjid="" jid="wb_3220647951"><span class="hand-icon icon-collect"></span><b>私藏</b></a>
+
+
+
+
+										<a href="/user/wb_3220647951/submitted/1" class="user-a"><span><img src="//img3.chouti.com/CHOUTI_20180322/954802BD61D54D9FA6151D69A974AF8A_W179H179=32x32.jpg?quality=80"></span><b>一个阿呆仔</b></a>
+
+									<span class="left time-into"><a class="time-a" href="/link/19873866" target="_blank"><b>36分钟前</b></a><i>入热榜</i></span>
+									<!-- 分享各微博的按钮 -->
+
+								</div>
+								<!-- 评论区域 -->
+								<div class="comment-box-area" id="comment-box-area-19873866">
+								<div class="pinglun arrow" id="comt-arrow-19873866"></div>
+								<a class="pinglun close-comt" title="关闭" href="javascript:;" lang="19873866"></a>
+								<div class="corner comment-box" id="comment-box-19873866">
+
+									<div class="loading-ico loading-ico-top" id="loading-comment-top-19873866" style="margin-left:230px;">加载中，请稍候...</div>
+									<div class="comment-box-top" id="comment-box-top-19873866">
+										<div class="tip-1">最热评论(<span id="newestCount-19873866">3</span>)</div>
+										<div class="tip-2"><a href="/link/19873866" target="_blank"><em class="pinglun em1"></em><span>去评论页面</span></a></div>
+									</div>
+									<!-- 评论树形 -->
+									<ul class="filetree comment-list-top-2" id="comment-list-top-19873866"></ul>
+
+									<!-- 谣言类别显示相信还是置疑选项 -->
+
+
+									<!-- 判断该新闻评论是否关闭 -->
+
+
+									<!-- 评论输入框和回复框 -->
+									<div class="huifu-top-box" id="huifu-top-box-19873866">
+										<div class="box-l txt-input-area-div-top corner no-corner-bottom">
+                                            <div id="lab-comment-top-19873866" class="lab-comment-top">回复  <span id="nick--19873866"></span>:</div>
+											<!-- 针对谣言文本输入框无效 -->
+
+
+
+												<textarea lang="19873866" maxlength="150" name="txt-huifu-top" id="txt-huifu-top-19873866" class="txt-huifu txt-huifu-top"></textarea>
+
+
+										</div>
+										<div class="box-r">
+											<a id="pub-btn-top-19873866" lang="19873866" href="javascript:;" class="pub-icons add-pub-btn add-pub-btn-unvalid">评论</a>
+											<a id="pub-loading-top-19873866" href="javascript:;" class="loading-ico loading-ico-top pub-loading-top">发布中...</a>
+										</div>
+									</div>
+
+
+
+
+									<div class="tip-3" id="hidden-comt-19873866">
+										<a href="javascript:;" class="hiddenCom-Btn" lang="19873866"><em class="pinglun em2"></em><span>收起</span></a>
+									</div>
+									<div class="write-error-box-top">
+										<div class="write-error-desc" id="write-error-desc-19873866"></div>
+									</div>
+								</div>
+								<input type="hidden" id="hidsubjectid-19873866" value="2">
+								</div>
+
+
+							</div>
+
+						</div>
+
+
+
+        				<div class="item">
+
+        					<div class="timeIntoPool">1527556680014000,1527559219766000</div>
+
+								<div class="news-pic"><img lang="19868586" original="//img3.chouti.com/CHOUTI_20180529/0BC774E044604A4BAB881D17CB0F01FA_W469H469=C120x120.jpg?quality=80" src="/images/bai.png" alt="抽屉新热榜"></div>
+
+
+							<div class="null-item"></div>
+
+							<div class="news-content" id="newsContent19868586">
+								<div class="part1">
+										<a href="http://world.huanqiu.com/exclusive/2018-05/12111500.html" class="show-content color-chag" target="_blank" onmousedown="linksClickStat(19868586);">
+
+
+
+
+
+
+
+													【在中国受到震撼，默克尔回国急开AI峰会】“电动车、人工智能、高铁、5G技术…德国在许多领域落后于中国。”默克尔访华归国后，德国媒体和专家纷纷就中国在科技领域的进步提出警告，呼吁德国政府迅速制定新的战略。默克尔本周二将在总理府举行“人工智能（AI）峰会”，亲自与德国科技和企业领域的顶尖专家商讨对策。
+
+
+										</a>
+
+										<span class="content-source">-world.huanqiu.com</span>
+
+									<!-- 段子和谣言类别不显示类别名称 -->
+
+										<a href="/r/news/hot/1" class="n2"><span class="content-kind">42区</span></a>
+
+									<!-- 来源手机客户端 -->
+
+
+
+
+									<!-- 显示话题标签 -->
+
+								</div>
+								<!-- 显示摘要 -->
+
+									<div class="area-summary">
+										<span class="summary">默克尔本周二将在总理府举行“人工智能(AI)峰会”，亲自与德国科技和企业领域的顶尖专家商讨对策。</span>
+									</div>
+
+								<div class="part2" share-pic="http://img3.chouti.com/CHOUTI_20180529/0BC774E044604A4BAB881D17CB0F01FA_W469H469.jpg" share-title="【在中国受到震撼，默克尔回国急开AI峰会】“电动车、人工智能、高铁、5G技术…德国在许多领域落后于中国。”默克尔访华归国后，德国媒体和专家纷纷就中国在科技领域的进步提出警告，呼吁德国政府迅速制定新的战略。默克尔本周二将在总理府举行“人工智能（AI）峰会”，亲自与德国科技和企业领域的顶尖专家商讨对策。" share-summary="默克尔本周二将在总理府举行“人工智能(AI)峰会”，亲自与德国科技和企业领域的顶尖专家商讨对策。" share-linkid="19868586" share-subject="42区">
+
+
+
+
+										<a href="javascript:;" class="digg-a" title="推荐"><span class="hand-icon icon-digg"></span><b>13</b><i style="display:none">19868586</i></a>
+
+
+									<a href="javascript:;" class="discus-a" id="discus-a-19868586" timetopool="42分钟前" lang="19868586"><span class="hand-icon icon-discus"></span><b>30</b></a>
+
+
+										<a href="javascript:;" class="collect-a" id="collect-a-19868586" lang="19868586" title="加入私藏" destjid="" jid="chouti1506038"><span class="hand-icon icon-collect"></span><b>私藏</b></a>
+
+
+
+
+										<a href="/user/chouti1506038/submitted/1" class="user-a"><span><img src="//img3.chouti.com/CHOUTI_20171213/988AFF43BE314C73BEEBC715ABCACC26_W1066H1066=32x32.jpg?quality=80"></span><b>杀大索</b></a>
+
+									<span class="left time-into"><a class="time-a" href="/link/19868586" target="_blank"><b>42分钟前</b></a><i>入热榜</i></span>
+									<!-- 分享各微博的按钮 -->
+
+								</div>
+								<!-- 评论区域 -->
+								<div class="comment-box-area" id="comment-box-area-19868586">
+								<div class="pinglun arrow" id="comt-arrow-19868586"></div>
+								<a class="pinglun close-comt" title="关闭" href="javascript:;" lang="19868586"></a>
+								<div class="corner comment-box" id="comment-box-19868586">
+
+									<div class="loading-ico loading-ico-top" id="loading-comment-top-19868586" style="margin-left:230px;">加载中，请稍候...</div>
+									<div class="comment-box-top" id="comment-box-top-19868586">
+										<div class="tip-1">最热评论(<span id="newestCount-19868586">3</span>)</div>
+										<div class="tip-2"><a href="/link/19868586" target="_blank"><em class="pinglun em1"></em><span>去评论页面</span></a></div>
+									</div>
+									<!-- 评论树形 -->
+									<ul class="filetree comment-list-top-2" id="comment-list-top-19868586"></ul>
+
+									<!-- 谣言类别显示相信还是置疑选项 -->
+
+
+									<!-- 判断该新闻评论是否关闭 -->
+
+
+									<!-- 评论输入框和回复框 -->
+									<div class="huifu-top-box" id="huifu-top-box-19868586">
+										<div class="box-l txt-input-area-div-top corner no-corner-bottom">
+                                            <div id="lab-comment-top-19868586" class="lab-comment-top">回复  <span id="nick--19868586"></span>:</div>
+											<!-- 针对谣言文本输入框无效 -->
+
+
+
+												<textarea lang="19868586" maxlength="150" name="txt-huifu-top" id="txt-huifu-top-19868586" class="txt-huifu txt-huifu-top"></textarea>
+
+
+										</div>
+										<div class="box-r">
+											<a id="pub-btn-top-19868586" lang="19868586" href="javascript:;" class="pub-icons add-pub-btn add-pub-btn-unvalid">评论</a>
+											<a id="pub-loading-top-19868586" href="javascript:;" class="loading-ico loading-ico-top pub-loading-top">发布中...</a>
+										</div>
+									</div>
+
+
+
+
+									<div class="tip-3" id="hidden-comt-19868586">
+										<a href="javascript:;" class="hiddenCom-Btn" lang="19868586"><em class="pinglun em2"></em><span>收起</span></a>
+									</div>
+									<div class="write-error-box-top">
+										<div class="write-error-desc" id="write-error-desc-19868586"></div>
+									</div>
+								</div>
+								<input type="hidden" id="hidsubjectid-19868586" value="1">
+								</div>
+
+
+							</div>
+
+						</div>
+
+
+
+        				<div class="item">
+
+        					<div class="timeIntoPool">1527556320012000,1527559219766000</div>
+
+								<div class="news-pic"><img lang="19868951" original="//img3.chouti.com/CHOUTI_20180529/CE4681294124439E853F3598CF840A3E_W449H449=C120x120.jpg?quality=80" src="/images/bai.png" alt="抽屉新热榜"></div>
+
+
+							<div class="null-item"></div>
+
+							<div class="news-content" id="newsContent19868951">
+								<div class="part1">
+										<a href="http://www.stcn.com/2018/0529/14279600.shtml" class="show-content color-chag" target="_blank" onmousedown="linksClickStat(19868951);">
+
+
+
+
+
+
+
+													已有15家上市银行修订公司章程，收紧股东准入门槛
+
+
+										</a>
+
+										<span class="content-source">-www.stcn.com</span>
+
+									<!-- 段子和谣言类别不显示类别名称 -->
+
+										<a href="/r/news/hot/1" class="n2"><span class="content-kind">42区</span></a>
+
+									<!-- 来源手机客户端 -->
+
+
+
+
+									<!-- 显示话题标签 -->
+
+								</div>
+								<!-- 显示摘要 -->
+
+									<div class="area-summary">
+										<span class="summary">已有15家上市银行修订公司章程 收紧股东准入门槛</span>
+									</div>
+
+								<div class="part2" share-pic="http://img3.chouti.com/CHOUTI_20180529/CE4681294124439E853F3598CF840A3E_W449H449.jpg" share-title="已有15家上市银行修订公司章程，收紧股东准入门槛" share-summary="已有15家上市银行修订公司章程 收紧股东准入门槛" share-linkid="19868951" share-subject="42区">
+
+
+
+
+										<a href="javascript:;" class="digg-a" title="推荐"><span class="hand-icon icon-digg"></span><b>10</b><i style="display:none">19868951</i></a>
+
+
+									<a href="javascript:;" class="discus-a" id="discus-a-19868951" timetopool="48分钟前" lang="19868951"><span class="hand-icon icon-discus"></span><b>0</b></a>
+
+
+										<a href="javascript:;" class="collect-a" id="collect-a-19868951" lang="19868951" title="加入私藏" destjid="" jid="wb_td_95"><span class="hand-icon icon-collect"></span><b>私藏</b></a>
+
+
+
+
+										<a href="/user/wb_td_95/submitted/1" class="user-a"><span><img src="//img3.chouti.com/CHOUTI_C52A8EB745CE42C3B544517010CE0318_W48H48=32x32.jpg?quality=80"></span><b>证劵时报网</b></a>
+
+									<span class="left time-into"><a class="time-a" href="/link/19868951" target="_blank"><b>48分钟前</b></a><i>入热榜</i></span>
+									<!-- 分享各微博的按钮 -->
+
+								</div>
+								<!-- 评论区域 -->
+								<div class="comment-box-area" id="comment-box-area-19868951">
+								<div class="pinglun arrow" id="comt-arrow-19868951"></div>
+								<a class="pinglun close-comt" title="关闭" href="javascript:;" lang="19868951"></a>
+								<div class="corner comment-box" id="comment-box-19868951">
+
+									<div class="loading-ico loading-ico-top" id="loading-comment-top-19868951" style="margin-left:230px;">加载中，请稍候...</div>
+									<div class="comment-box-top" id="comment-box-top-19868951">
+										<div class="tip-1">最热评论(<span id="newestCount-19868951">3</span>)</div>
+										<div class="tip-2"><a href="/link/19868951" target="_blank"><em class="pinglun em1"></em><span>去评论页面</span></a></div>
+									</div>
+									<!-- 评论树形 -->
+									<ul class="filetree comment-list-top-2" id="comment-list-top-19868951"></ul>
+
+									<!-- 谣言类别显示相信还是置疑选项 -->
+
+
+									<!-- 判断该新闻评论是否关闭 -->
+
+
+									<!-- 评论输入框和回复框 -->
+									<div class="huifu-top-box" id="huifu-top-box-19868951">
+										<div class="box-l txt-input-area-div-top corner no-corner-bottom">
+                                            <div id="lab-comment-top-19868951" class="lab-comment-top">回复  <span id="nick--19868951"></span>:</div>
+											<!-- 针对谣言文本输入框无效 -->
+
+
+
+												<textarea lang="19868951" maxlength="150" name="txt-huifu-top" id="txt-huifu-top-19868951" class="txt-huifu txt-huifu-top"></textarea>
+
+
+										</div>
+										<div class="box-r">
+											<a id="pub-btn-top-19868951" lang="19868951" href="javascript:;" class="pub-icons add-pub-btn add-pub-btn-unvalid">评论</a>
+											<a id="pub-loading-top-19868951" href="javascript:;" class="loading-ico loading-ico-top pub-loading-top">发布中...</a>
+										</div>
+									</div>
+
+
+
+
+									<div class="tip-3" id="hidden-comt-19868951">
+										<a href="javascript:;" class="hiddenCom-Btn" lang="19868951"><em class="pinglun em2"></em><span>收起</span></a>
+									</div>
+									<div class="write-error-box-top">
+										<div class="write-error-desc" id="write-error-desc-19868951"></div>
+									</div>
+								</div>
+								<input type="hidden" id="hidsubjectid-19868951" value="1">
+								</div>
+
+
+							</div>
+
+						</div>
+
+
+
+        				<div class="item">
+
+        					<div class="timeIntoPool">1527555959635000,1527559219766000</div>
+
+								<div class="news-pic"><img lang="19867531" original="//img3.chouti.com/CHOUTI_20180529/F3B3BA7DC6D64D438D8FC4DB43096AA8_W828H1104=C120x120.jpg?quality=80" src="/images/bai.png" alt="抽屉新热榜"></div>
+
+
+							<div class="null-item"></div>
+
+							<div class="news-content" id="newsContent19867531">
+								<div class="part1">
+										<a href="http://dig.chouti.com/pic/show?nid=43bb275ac63bee8a1cfc0acda7dd1023&amp;lid=19867531" class="show-content color-chag" target="_blank" onmousedown="linksClickStat(19867531);">
+
+
+
+
+
+
+
+													这种电影大家有多久没看过了？
+
+
+										</a>
+
+										<span class="content-source">-img3.chouti.com</span>
+
+									<!-- 段子和谣言类别不显示类别名称 -->
+
+										<a href="/r/ask/hot/1" class="n2"><span class="content-kind">你问我答</span></a>
+
+									<!-- 来源手机客户端 -->
+
+										<span class="s-source">来自<a href="http://dig.chouti.com/download/model/iphone" target="_blank" class="s-phone">iPhone</a></span>
+
+
+
+
+									<!-- 显示话题标签 -->
+
+								</div>
+								<!-- 显示摘要 -->
+
+								<div class="part2" share-pic="http://img3.chouti.com/CHOUTI_20180529/F3B3BA7DC6D64D438D8FC4DB43096AA8_W828H1104.jpg" share-title="这种电影大家有多久没看过了？" share-summary="" share-linkid="19867531" share-subject="你问我答" style="padding-top: 16px;">
+
+
+
+
+										<a href="javascript:;" class="digg-a" title="推荐"><span class="hand-icon icon-digg"></span><b>16</b><i style="display:none">19867531</i></a>
+
+
+									<a href="javascript:;" class="discus-a" id="discus-a-19867531" timetopool="54分钟前" lang="19867531" onmousedown="linksClickStat(19867531);"><span class="hand-icon icon-discus"></span><b>33</b></a>
+
+
+										<a href="javascript:;" class="collect-a" id="collect-a-19867531" lang="19867531" title="加入私藏" destjid="" jid="dwannnn"><span class="hand-icon icon-collect"></span><b>私藏</b></a>
+
+
+
+
+										<a href="/user/dwannnn/submitted/1" class="user-a"><span><img src="//img3.chouti.com/CHOUTI_20180529/49E707A51C5F4927A29A622DFD53CAE5_W321H354=32x32.jpg?quality=80"></span><b>安安稳稳</b></a>
+
+									<span class="left time-into"><a class="time-a" href="/link/19867531" target="_blank"><b>54分钟前</b></a><i>入热榜</i></span>
+									<!-- 分享各微博的按钮 -->
+
+								</div>
+								<!-- 评论区域 -->
+								<div class="comment-box-area" id="comment-box-area-19867531">
+								<div class="pinglun arrow" id="comt-arrow-19867531"></div>
+								<a class="pinglun close-comt" title="关闭" href="javascript:;" lang="19867531"></a>
+								<div class="corner comment-box" id="comment-box-19867531">
+
+									<div class="loading-ico loading-ico-top" id="loading-comment-top-19867531" style="margin-left:230px;">加载中，请稍候...</div>
+									<div class="comment-box-top" id="comment-box-top-19867531">
+										<div class="tip-1">最热评论(<span id="newestCount-19867531">3</span>)</div>
+										<div class="tip-2"><a href="/link/19867531" target="_blank"><em class="pinglun em1"></em><span>去评论页面</span></a></div>
+									</div>
+									<!-- 评论树形 -->
+									<ul class="filetree comment-list-top-2" id="comment-list-top-19867531"></ul>
+
+									<!-- 谣言类别显示相信还是置疑选项 -->
+
+
+									<!-- 判断该新闻评论是否关闭 -->
+
+
+									<!-- 评论输入框和回复框 -->
+									<div class="huifu-top-box" id="huifu-top-box-19867531">
+										<div class="box-l txt-input-area-div-top corner no-corner-bottom">
+                                            <div id="lab-comment-top-19867531" class="lab-comment-top">回复  <span id="nick--19867531"></span>:</div>
+											<!-- 针对谣言文本输入框无效 -->
+
+
+
+												<textarea lang="19867531" maxlength="150" name="txt-huifu-top" id="txt-huifu-top-19867531" class="txt-huifu txt-huifu-top"></textarea>
+
+
+										</div>
+										<div class="box-r">
+											<a id="pub-btn-top-19867531" lang="19867531" href="javascript:;" class="pub-icons add-pub-btn add-pub-btn-unvalid">评论</a>
+											<a id="pub-loading-top-19867531" href="javascript:;" class="loading-ico loading-ico-top pub-loading-top">发布中...</a>
+										</div>
+									</div>
+
+
+
+
+									<div class="tip-3" id="hidden-comt-19867531">
+										<a href="javascript:;" class="hiddenCom-Btn" lang="19867531"><em class="pinglun em2"></em><span>收起</span></a>
+									</div>
+									<div class="write-error-box-top">
+										<div class="write-error-desc" id="write-error-desc-19867531"></div>
+									</div>
+								</div>
+								<input type="hidden" id="hidsubjectid-19867531" value="151">
+								</div>
+
+
+							</div>
+
+						</div>
+
+
+
+        				<div class="item">
+
+        					<div class="timeIntoPool">1527555600341000,1527559219766000</div>
+
+								<div class="news-pic"><img lang="19870916" original="//img3.chouti.com/CHOUTI_20180529/67612F930FA947D2A63282EF7C032F85_W130H130=C120x120.jpg?quality=80" src="/images/bai.png" alt="抽屉新热榜"></div>
+
+
+							<div class="null-item"></div>
+
+							<div class="news-content" id="newsContent19870916">
+								<div class="part1">
+										<a href="http://fx.weico.cc/share/24830340.html?weibo_id=4244721557776988" class="show-content color-chag" target="_blank" onmousedown="linksClickStat(19870916);">
+
+
+
+
+
+
+
+													原来我们才是灭霸
+
+
+										</a>
+
+										<span class="content-source">-fx.weico.cc</span>
+
+									<!-- 段子和谣言类别不显示类别名称 -->
+
+										<a href="/r/news/hot/1" class="n2"><span class="content-kind">42区</span></a>
+
+									<!-- 来源手机客户端 -->
+
+										<span class="s-source">来自<a href="http://dig.chouti.com/download/model/iphone" target="_blank" class="s-phone">iPhone</a></span>
+
+
+
+
+									<!-- 显示话题标签 -->
+
+								</div>
+								<!-- 显示摘要 -->
+
+								<div class="part2" share-pic="http://img3.chouti.com/CHOUTI_20180529/67612F930FA947D2A63282EF7C032F85_W130H130.jpg" share-title="原来我们才是灭霸" share-summary="" share-linkid="19870916" share-subject="42区" style="padding-top: 16px;">
+
+
+
+
+										<a href="javascript:;" class="digg-a" title="推荐"><span class="hand-icon icon-digg"></span><b>25</b><i style="display:none">19870916</i></a>
+
+
+									<a href="javascript:;" class="discus-a" id="discus-a-19870916" timetopool="1小时1分钟前" lang="19870916"><span class="hand-icon icon-discus"></span><b>17</b></a>
+
+
+										<a href="javascript:;" class="collect-a" id="collect-a-19870916" lang="19870916" title="加入私藏" destjid="" jid="ctu_44901773853"><span class="hand-icon icon-collect"></span><b>私藏</b></a>
+
+
+
+
+										<a href="/user/ctu_44901773853/submitted/1" class="user-a"><span><img src="//img3.chouti.com/CHOUTI_FFECD04E7D85461F8DFAC1B335A744B1_W300H300=32x32.png?quality=80"></span><b>Vim</b></a>
+
+									<span class="left time-into"><a class="time-a" href="/link/19870916" target="_blank"><b>1小时1分钟前</b></a><i>入热榜</i></span>
+									<!-- 分享各微博的按钮 -->
+
+								</div>
+								<!-- 评论区域 -->
+								<div class="comment-box-area" id="comment-box-area-19870916">
+								<div class="pinglun arrow" id="comt-arrow-19870916"></div>
+								<a class="pinglun close-comt" title="关闭" href="javascript:;" lang="19870916"></a>
+								<div class="corner comment-box" id="comment-box-19870916">
+
+									<div class="loading-ico loading-ico-top" id="loading-comment-top-19870916" style="margin-left:230px;">加载中，请稍候...</div>
+									<div class="comment-box-top" id="comment-box-top-19870916">
+										<div class="tip-1">最热评论(<span id="newestCount-19870916">3</span>)</div>
+										<div class="tip-2"><a href="/link/19870916" target="_blank"><em class="pinglun em1"></em><span>去评论页面</span></a></div>
+									</div>
+									<!-- 评论树形 -->
+									<ul class="filetree comment-list-top-2" id="comment-list-top-19870916"></ul>
+
+									<!-- 谣言类别显示相信还是置疑选项 -->
+
+
+									<!-- 判断该新闻评论是否关闭 -->
+
+
+									<!-- 评论输入框和回复框 -->
+									<div class="huifu-top-box" id="huifu-top-box-19870916">
+										<div class="box-l txt-input-area-div-top corner no-corner-bottom">
+                                            <div id="lab-comment-top-19870916" class="lab-comment-top">回复  <span id="nick--19870916"></span>:</div>
+											<!-- 针对谣言文本输入框无效 -->
+
+
+
+												<textarea lang="19870916" maxlength="150" name="txt-huifu-top" id="txt-huifu-top-19870916" class="txt-huifu txt-huifu-top"></textarea>
+
+
+										</div>
+										<div class="box-r">
+											<a id="pub-btn-top-19870916" lang="19870916" href="javascript:;" class="pub-icons add-pub-btn add-pub-btn-unvalid">评论</a>
+											<a id="pub-loading-top-19870916" href="javascript:;" class="loading-ico loading-ico-top pub-loading-top">发布中...</a>
+										</div>
+									</div>
+
+
+
+
+									<div class="tip-3" id="hidden-comt-19870916">
+										<a href="javascript:;" class="hiddenCom-Btn" lang="19870916"><em class="pinglun em2"></em><span>收起</span></a>
+									</div>
+									<div class="write-error-box-top">
+										<div class="write-error-desc" id="write-error-desc-19870916"></div>
+									</div>
+								</div>
+								<input type="hidden" id="hidsubjectid-19870916" value="1">
+								</div>
+
+
+							</div>
+
+						</div>
+
+
+
+        				<div class="item">
+
+        					<div class="timeIntoPool">1527555239678000,1527559219766000</div>
+
+								<div class="news-pic"><img lang="19872416" original="//img3.chouti.com/CHOUTI_20180529/20B5F2D8B2AE449CB2B1C764C92E0A8B_W380H380=C120x120.jpg?quality=80" src="/images/bai.png" alt="抽屉新热榜"></div>
+
+
+							<div class="null-item"></div>
+
+							<div class="news-content" id="newsContent19872416">
+								<div class="part1">
+										<a href="http://www.qdaily.com/articles/53446.html?source=chouti" class="show-content color-chag" target="_blank" onmousedown="linksClickStat(19872416);">
+
+
+
+
+
+
+
+													【地产商、酒店、中介公司都做起长租公寓生意，但它们看上的并不是租金】不管是 ABS 还是 REITs，本质上都是发行人将房屋未来可能带来的收益抵押出去融资。这样建一个公寓就不用指望五六十年甚至更长时间回本，而是可以用金融产品提前把投资收回来做新的投资。
+
+
+										</a>
+
+										<span class="content-source">-www.qdaily.com</span>
+
+									<!-- 段子和谣言类别不显示类别名称 -->
+
+										<a href="/r/news/hot/1" class="n2"><span class="content-kind">42区</span></a>
+
+									<!-- 来源手机客户端 -->
+
+
+
+
+									<!-- 显示话题标签 -->
+
+								</div>
+								<!-- 显示摘要 -->
+
+								<div class="part2" share-pic="http://img3.chouti.com/CHOUTI_20180529/20B5F2D8B2AE449CB2B1C764C92E0A8B_W380H380.jpg" share-title="【地产商、酒店、中介公司都做起长租公寓生意，但它们看上的并不是租金】不管是 ABS 还是 REITs，本质上都是发行人将房屋未来可能带来的收益抵押出去融资。这样建一个公寓就不用指望五六十年甚至更长时间回本，而是可以用金融产品提前把投资收回来做新的投资。" share-summary="" share-linkid="19872416" share-subject="42区">
+
+
+
+
+										<a href="javascript:;" class="digg-a" title="推荐"><span class="hand-icon icon-digg"></span><b>17</b><i style="display:none">19872416</i></a>
+
+
+									<a href="javascript:;" class="discus-a" id="discus-a-19872416" timetopool="1小时7分钟前" lang="19872416"><span class="hand-icon icon-discus"></span><b>7</b></a>
+
+
+										<a href="javascript:;" class="collect-a" id="collect-a-19872416" lang="19872416" title="加入私藏" destjid="" jid="chouti140722"><span class="hand-icon icon-collect"></span><b>私藏</b></a>
+
+
+
+
+										<a href="/user/chouti140722/submitted/1" class="user-a"><span><img src="//img3.chouti.com/CHOUTI_0B577FC6E8004C1E9C5870029F2811E2_W48H48=32x32.jpg?quality=80"></span><b>好奇心日报</b></a>
+
+									<span class="left time-into"><a class="time-a" href="/link/19872416" target="_blank"><b>1小时7分钟前</b></a><i>入热榜</i></span>
+									<!-- 分享各微博的按钮 -->
+
+								</div>
+								<!-- 评论区域 -->
+								<div class="comment-box-area" id="comment-box-area-19872416">
+								<div class="pinglun arrow" id="comt-arrow-19872416"></div>
+								<a class="pinglun close-comt" title="关闭" href="javascript:;" lang="19872416"></a>
+								<div class="corner comment-box" id="comment-box-19872416">
+
+									<div class="loading-ico loading-ico-top" id="loading-comment-top-19872416" style="margin-left:230px;">加载中，请稍候...</div>
+									<div class="comment-box-top" id="comment-box-top-19872416">
+										<div class="tip-1">最热评论(<span id="newestCount-19872416">3</span>)</div>
+										<div class="tip-2"><a href="/link/19872416" target="_blank"><em class="pinglun em1"></em><span>去评论页面</span></a></div>
+									</div>
+									<!-- 评论树形 -->
+									<ul class="filetree comment-list-top-2" id="comment-list-top-19872416"></ul>
+
+									<!-- 谣言类别显示相信还是置疑选项 -->
+
+
+									<!-- 判断该新闻评论是否关闭 -->
+
+
+									<!-- 评论输入框和回复框 -->
+									<div class="huifu-top-box" id="huifu-top-box-19872416">
+										<div class="box-l txt-input-area-div-top corner no-corner-bottom">
+                                            <div id="lab-comment-top-19872416" class="lab-comment-top">回复  <span id="nick--19872416"></span>:</div>
+											<!-- 针对谣言文本输入框无效 -->
+
+
+
+												<textarea lang="19872416" maxlength="150" name="txt-huifu-top" id="txt-huifu-top-19872416" class="txt-huifu txt-huifu-top"></textarea>
+
+
+										</div>
+										<div class="box-r">
+											<a id="pub-btn-top-19872416" lang="19872416" href="javascript:;" class="pub-icons add-pub-btn add-pub-btn-unvalid">评论</a>
+											<a id="pub-loading-top-19872416" href="javascript:;" class="loading-ico loading-ico-top pub-loading-top">发布中...</a>
+										</div>
+									</div>
+
+
+
+
+									<div class="tip-3" id="hidden-comt-19872416">
+										<a href="javascript:;" class="hiddenCom-Btn" lang="19872416"><em class="pinglun em2"></em><span>收起</span></a>
+									</div>
+									<div class="write-error-box-top">
+										<div class="write-error-desc" id="write-error-desc-19872416"></div>
+									</div>
+								</div>
+								<input type="hidden" id="hidsubjectid-19872416" value="1">
+								</div>
+
+
+							</div>
+
+						</div>
+
+
+
+        				<div class="item">
+
+        					<div class="timeIntoPool">1527554879286000,1527559219766000</div>
+
+								<div class="news-pic"><img lang="19871666" original="//img3.chouti.com/CHOUTI_20180529/905B2430B4744A3AAB8E13D8094699D9_W332H332=C120x120.jpg?quality=80" src="/images/bai.png" alt="抽屉新热榜"></div>
+
+
+							<div class="null-item"></div>
+
+							<div class="news-content" id="newsContent19871666">
+								<div class="part1">
+										<a href="https://www.thepaper.cn/newsDetail_forward_2152625" class="show-content color-chag" target="_blank" onmousedown="linksClickStat(19871666);">
+
+
+
+
+
+
+
+													为什么年纪越大，时间过得越快？有六种理论可以解释
+
+
+										</a>
+
+										<span class="content-source">-www.thepaper.cn</span>
+
+									<!-- 段子和谣言类别不显示类别名称 -->
+
+										<a href="/r/news/hot/1" class="n2"><span class="content-kind">42区</span></a>
+
+									<!-- 来源手机客户端 -->
+
+
+										<span class="s-source">来自<a href="http://dig.chouti.com/download/model/andorid" target="_blank" class="s-phone">Android</a></span>
+
+
+
+									<!-- 显示话题标签 -->
+
+								</div>
+								<!-- 显示摘要 -->
+
+								<div class="part2" share-pic="http://img3.chouti.com/CHOUTI_20180529/905B2430B4744A3AAB8E13D8094699D9_W332H332.jpg" share-title="为什么年纪越大，时间过得越快？有六种理论可以解释" share-summary="" share-linkid="19871666" share-subject="42区">
+
+
+
+
+										<a href="javascript:;" class="digg-a" title="推荐"><span class="hand-icon icon-digg"></span><b>19</b><i style="display:none">19871666</i></a>
+
+
+									<a href="javascript:;" class="discus-a" id="discus-a-19871666" timetopool="1小时13分钟前" lang="19871666"><span class="hand-icon icon-discus"></span><b>13</b></a>
+
+
+										<a href="javascript:;" class="collect-a" id="collect-a-19871666" lang="19871666" title="加入私藏" destjid="" jid="o7z__"><span class="hand-icon icon-collect"></span><b>私藏</b></a>
+
+
+
+
+										<a href="/user/o7z__/submitted/1" class="user-a"><span><img src="/images/image15.png?quality=80"></span><b>苏黎世</b></a>
+
+									<span class="left time-into"><a class="time-a" href="/link/19871666" target="_blank"><b>1小时13分钟前</b></a><i>入热榜</i></span>
+									<!-- 分享各微博的按钮 -->
+
+								</div>
+								<!-- 评论区域 -->
+								<div class="comment-box-area" id="comment-box-area-19871666">
+								<div class="pinglun arrow" id="comt-arrow-19871666"></div>
+								<a class="pinglun close-comt" title="关闭" href="javascript:;" lang="19871666"></a>
+								<div class="corner comment-box" id="comment-box-19871666">
+
+									<div class="loading-ico loading-ico-top" id="loading-comment-top-19871666" style="margin-left:230px;">加载中，请稍候...</div>
+									<div class="comment-box-top" id="comment-box-top-19871666">
+										<div class="tip-1">最热评论(<span id="newestCount-19871666">3</span>)</div>
+										<div class="tip-2"><a href="/link/19871666" target="_blank"><em class="pinglun em1"></em><span>去评论页面</span></a></div>
+									</div>
+									<!-- 评论树形 -->
+									<ul class="filetree comment-list-top-2" id="comment-list-top-19871666"></ul>
+
+									<!-- 谣言类别显示相信还是置疑选项 -->
+
+
+									<!-- 判断该新闻评论是否关闭 -->
+
+
+									<!-- 评论输入框和回复框 -->
+									<div class="huifu-top-box" id="huifu-top-box-19871666">
+										<div class="box-l txt-input-area-div-top corner no-corner-bottom">
+                                            <div id="lab-comment-top-19871666" class="lab-comment-top">回复  <span id="nick--19871666"></span>:</div>
+											<!-- 针对谣言文本输入框无效 -->
+
+
+
+												<textarea lang="19871666" maxlength="150" name="txt-huifu-top" id="txt-huifu-top-19871666" class="txt-huifu txt-huifu-top"></textarea>
+
+
+										</div>
+										<div class="box-r">
+											<a id="pub-btn-top-19871666" lang="19871666" href="javascript:;" class="pub-icons add-pub-btn add-pub-btn-unvalid">评论</a>
+											<a id="pub-loading-top-19871666" href="javascript:;" class="loading-ico loading-ico-top pub-loading-top">发布中...</a>
+										</div>
+									</div>
+
+
+
+
+									<div class="tip-3" id="hidden-comt-19871666">
+										<a href="javascript:;" class="hiddenCom-Btn" lang="19871666"><em class="pinglun em2"></em><span>收起</span></a>
+									</div>
+									<div class="write-error-box-top">
+										<div class="write-error-desc" id="write-error-desc-19871666"></div>
+									</div>
+								</div>
+								<input type="hidden" id="hidsubjectid-19871666" value="1">
+								</div>
+
+
+							</div>
+
+						</div>
+
+
+
+        				<div class="item">
+
+        					<div class="timeIntoPool">1527554520326000,1527559219766000</div>
+
+								<div class="news-pic"><img lang="19871806" original="//img3.chouti.com/CHOUTI_20180529/9663A82CB189464AA5E3D26D38ABF28A_W816H816=C120x120.jpg?quality=80" src="/images/bai.png" alt="抽屉新热榜"></div>
+
+
+							<div class="null-item"></div>
+
+							<div class="news-content" id="newsContent19871806">
+								<div class="part1">
+										<a href="https://mp.weixin.qq.com/s/S4mz3ukjXTyuaWWUcZb_Og" class="show-content color-chag" target="_blank" onmousedown="linksClickStat(19871806);">
+
+
+
+
+
+
+
+													【“鬼子”又来了】5月27日，天津。一列婚礼车队中一男子身穿日军军服，背着三八式步枪，驾驶旧式摩托车对着镜头竖大拇指。男子随后发视频道歉，称自己不是“精日”分子，10多年前服过两年兵役，现在是爱国中年，军服系剧组拿来。
+
+
+										</a>
+
+										<span class="content-source">-mp.weixin.qq.com</span>
+
+									<!-- 段子和谣言类别不显示类别名称 -->
+
+										<a href="/r/news/hot/1" class="n2"><span class="content-kind">42区</span></a>
+
+									<!-- 来源手机客户端 -->
+
+
+
+
+									<!-- 显示话题标签 -->
+
+										<a class="tag-huati-box" href="/topic/36" target="_blank"><span class="htTag-ico ht-box"><b class="htTag-ico htT1"></b><b class="htT3">没品XW</b></span><b class="htTag-ico  htT2"></b></a>
+
+								</div>
+								<!-- 显示摘要 -->
+
+								<div class="part2" share-pic="http://img3.chouti.com/CHOUTI_20180529/9663A82CB189464AA5E3D26D38ABF28A_W816H816.jpg" share-title="【“鬼子”又来了】5月27日，天津。一列婚礼车队中一男子身穿日军军服，背着三八式步枪，驾驶旧式摩托车对着镜头竖大拇指。男子随后发视频道歉，称自己不是“精日”分子，10多年前服过两年兵役，现在是爱国中年，军服系剧组拿来。" share-summary="" share-linkid="19871806" share-subject="42区">
+
+
+
+
+										<a href="javascript:;" class="digg-a" title="推荐"><span class="hand-icon icon-digg"></span><b>21</b><i style="display:none">19871806</i></a>
+
+
+									<a href="javascript:;" class="discus-a" id="discus-a-19871806" timetopool="1小时19分钟前" lang="19871806"><span class="hand-icon icon-discus"></span><b>49</b></a>
+
+
+										<a href="javascript:;" class="collect-a" id="collect-a-19871806" lang="19871806" title="加入私藏" destjid="" jid="ccavvv"><span class="hand-icon icon-collect"></span><b>私藏</b></a>
+
+
+
+
+										<a href="/user/ccavvv/submitted/1" class="user-a"><span><img src="//img3.chouti.com/group12/M02/C2/55/wKgCD1W_IC6xGhqzAAAtE3cOolI463=32x32.jpg?quality=80"></span><b>院长</b></a>
+
+									<span class="left time-into"><a class="time-a" href="/link/19871806" target="_blank"><b>1小时19分钟前</b></a><i>入热榜</i></span>
+									<!-- 分享各微博的按钮 -->
+
+								</div>
+								<!-- 评论区域 -->
+								<div class="comment-box-area" id="comment-box-area-19871806">
+								<div class="pinglun arrow" id="comt-arrow-19871806"></div>
+								<a class="pinglun close-comt" title="关闭" href="javascript:;" lang="19871806"></a>
+								<div class="corner comment-box" id="comment-box-19871806">
+
+									<div class="loading-ico loading-ico-top" id="loading-comment-top-19871806" style="margin-left:230px;">加载中，请稍候...</div>
+									<div class="comment-box-top" id="comment-box-top-19871806">
+										<div class="tip-1">最热评论(<span id="newestCount-19871806">3</span>)</div>
+										<div class="tip-2"><a href="/link/19871806" target="_blank"><em class="pinglun em1"></em><span>去评论页面</span></a></div>
+									</div>
+									<!-- 评论树形 -->
+									<ul class="filetree comment-list-top-2" id="comment-list-top-19871806"></ul>
+
+									<!-- 谣言类别显示相信还是置疑选项 -->
+
+
+									<!-- 判断该新闻评论是否关闭 -->
+
+
+									<!-- 评论输入框和回复框 -->
+									<div class="huifu-top-box" id="huifu-top-box-19871806">
+										<div class="box-l txt-input-area-div-top corner no-corner-bottom">
+                                            <div id="lab-comment-top-19871806" class="lab-comment-top">回复  <span id="nick--19871806"></span>:</div>
+											<!-- 针对谣言文本输入框无效 -->
+
+
+
+												<textarea lang="19871806" maxlength="150" name="txt-huifu-top" id="txt-huifu-top-19871806" class="txt-huifu txt-huifu-top"></textarea>
+
+
+										</div>
+										<div class="box-r">
+											<a id="pub-btn-top-19871806" lang="19871806" href="javascript:;" class="pub-icons add-pub-btn add-pub-btn-unvalid">评论</a>
+											<a id="pub-loading-top-19871806" href="javascript:;" class="loading-ico loading-ico-top pub-loading-top">发布中...</a>
+										</div>
+									</div>
+
+
+
+
+									<div class="tip-3" id="hidden-comt-19871806">
+										<a href="javascript:;" class="hiddenCom-Btn" lang="19871806"><em class="pinglun em2"></em><span>收起</span></a>
+									</div>
+									<div class="write-error-box-top">
+										<div class="write-error-desc" id="write-error-desc-19871806"></div>
+									</div>
+								</div>
+								<input type="hidden" id="hidsubjectid-19871806" value="1">
+								</div>
+
+
+							</div>
+
+						</div>
+
+
+
+        				<div class="item">
+
+        					<div class="timeIntoPool">1527554160028000,1527559219766000</div>
+
+								<div class="news-pic"><img lang="19870946" original="//img3.chouti.com/CHOUTI_20180529/3A0B4E0E17D7419FBFD225BF66D648B5_W481H358=C120x120.jpg?quality=80" src="/images/bai.png" alt="抽屉新热榜"></div>
+
+
+							<div class="null-item"></div>
+
+							<div class="news-content" id="newsContent19870946">
+								<div class="part1">
+										<a href="https://wallstreetcn.com/articles/3323480" class="show-content color-chag" target="_blank" onmousedown="linksClickStat(19870946);">
+
+
+
+
+
+
+
+													地王杭州造！107亿成交，5.5万楼面价，未来售价10万起
+
+
+										</a>
+
+										<span class="content-source">-wallstreetcn.com</span>
+
+									<!-- 段子和谣言类别不显示类别名称 -->
+
+										<a href="/r/news/hot/1" class="n2"><span class="content-kind">42区</span></a>
+
+									<!-- 来源手机客户端 -->
+
+
+
+
+									<!-- 显示话题标签 -->
+
+								</div>
+								<!-- 显示摘要 -->
+
+								<div class="part2" share-pic="http://img3.chouti.com/CHOUTI_20180529/3A0B4E0E17D7419FBFD225BF66D648B5_W481H358.jpg" share-title="地王杭州造！107亿成交，5.5万楼面价，未来售价10万起" share-summary="" share-linkid="19870946" share-subject="42区" style="padding-top: 16px;">
+
+
+
+
+										<a href="javascript:;" class="digg-a" title="推荐"><span class="hand-icon icon-digg"></span><b>26</b><i style="display:none">19870946</i></a>
+
+
+									<a href="javascript:;" class="discus-a" id="discus-a-19870946" timetopool="1小时25分钟前" lang="19870946"><span class="hand-icon icon-discus"></span><b>21</b></a>
+
+
+										<a href="javascript:;" class="collect-a" id="collect-a-19870946" lang="19870946" title="加入私藏" destjid="" jid="chouti140917"><span class="hand-icon icon-collect"></span><b>私藏</b></a>
+
+
+
+
+										<a href="/user/chouti140917/submitted/1" class="user-a"><span><img src="//img3.chouti.com/CHOUTI_DD4F319156744B28899220A20B4F435A_W140H140=32x32.jpg?quality=80"></span><b>华尔街见闻</b></a>
+
+									<span class="left time-into"><a class="time-a" href="/link/19870946" target="_blank"><b>1小时25分钟前</b></a><i>入热榜</i></span>
+									<!-- 分享各微博的按钮 -->
+
+								</div>
+								<!-- 评论区域 -->
+								<div class="comment-box-area" id="comment-box-area-19870946">
+								<div class="pinglun arrow" id="comt-arrow-19870946"></div>
+								<a class="pinglun close-comt" title="关闭" href="javascript:;" lang="19870946"></a>
+								<div class="corner comment-box" id="comment-box-19870946">
+
+									<div class="loading-ico loading-ico-top" id="loading-comment-top-19870946" style="margin-left:230px;">加载中，请稍候...</div>
+									<div class="comment-box-top" id="comment-box-top-19870946">
+										<div class="tip-1">最热评论(<span id="newestCount-19870946">3</span>)</div>
+										<div class="tip-2"><a href="/link/19870946" target="_blank"><em class="pinglun em1"></em><span>去评论页面</span></a></div>
+									</div>
+									<!-- 评论树形 -->
+									<ul class="filetree comment-list-top-2" id="comment-list-top-19870946"></ul>
+
+									<!-- 谣言类别显示相信还是置疑选项 -->
+
+
+									<!-- 判断该新闻评论是否关闭 -->
+
+
+									<!-- 评论输入框和回复框 -->
+									<div class="huifu-top-box" id="huifu-top-box-19870946">
+										<div class="box-l txt-input-area-div-top corner no-corner-bottom">
+                                            <div id="lab-comment-top-19870946" class="lab-comment-top">回复  <span id="nick--19870946"></span>:</div>
+											<!-- 针对谣言文本输入框无效 -->
+
+
+
+												<textarea lang="19870946" maxlength="150" name="txt-huifu-top" id="txt-huifu-top-19870946" class="txt-huifu txt-huifu-top"></textarea>
+
+
+										</div>
+										<div class="box-r">
+											<a id="pub-btn-top-19870946" lang="19870946" href="javascript:;" class="pub-icons add-pub-btn add-pub-btn-unvalid">评论</a>
+											<a id="pub-loading-top-19870946" href="javascript:;" class="loading-ico loading-ico-top pub-loading-top">发布中...</a>
+										</div>
+									</div>
+
+
+
+
+									<div class="tip-3" id="hidden-comt-19870946">
+										<a href="javascript:;" class="hiddenCom-Btn" lang="19870946"><em class="pinglun em2"></em><span>收起</span></a>
+									</div>
+									<div class="write-error-box-top">
+										<div class="write-error-desc" id="write-error-desc-19870946"></div>
+									</div>
+								</div>
+								<input type="hidden" id="hidsubjectid-19870946" value="1">
+								</div>
+
+
+							</div>
+
+						</div>
+
+
+
+        				<div class="item">
+
+        					<div class="timeIntoPool">1527553800015000,1527559219766000</div>
+
+								<div class="news-pic"><img lang="19869586" original="//img3.chouti.com/CHOUTI_20180529/C68CF11CEFFA4909BFCA701A0A8BE5DC_W282H282=C120x120.jpg?quality=80" src="/images/bai.png" alt="抽屉新热榜"></div>
+
+
+							<div class="null-item"></div>
+
+							<div class="news-content" id="newsContent19869586">
+								<div class="part1">
+										<a href="http://video.weibo.com/show?fid=1034:687df700ef7a8f5d0935beb213498c8c" class="show-content color-chag" target="_blank" onmousedown="linksClickStat(19869586);">
+
+
+
+
+
+
+
+													男子上网买了一件3XL号的黑豹T恤，结果卖家寄成M号给男子，于是男子哽咽地在吐槽 (中文字幕)  ​
+
+
+										</a>
+
+										<span class="content-source">-video.weibo.com</span>
+
+									<!-- 段子和谣言类别不显示类别名称 -->
+
+										<a href="/r/news/hot/1" class="n2"><span class="content-kind">42区</span></a>
+
+									<!-- 来源手机客户端 -->
+
+
+
+
+									<!-- 显示话题标签 -->
+
+								</div>
+								<!-- 显示摘要 -->
+
+								<div class="part2" share-pic="http://img3.chouti.com/CHOUTI_20180529/C68CF11CEFFA4909BFCA701A0A8BE5DC_W282H282.jpg" share-title="男子上网买了一件3XL号的黑豹T恤，结果卖家寄成M号给男子，于是男子哽咽地在吐槽 (中文字幕)  ​" share-summary="" share-linkid="19869586" share-subject="42区">
+
+
+
+
+										<a href="javascript:;" class="digg-a" title="推荐"><span class="hand-icon icon-digg"></span><b>52</b><i style="display:none">19869586</i></a>
+
+
+									<a href="javascript:;" class="discus-a" id="discus-a-19869586" timetopool="1小时31分钟前" lang="19869586"><span class="hand-icon icon-discus"></span><b>43</b></a>
+
+
+										<a href="javascript:;" class="collect-a" id="collect-a-19869586" lang="19869586" title="加入私藏" destjid="" jid="wb_1762098324"><span class="hand-icon icon-collect"></span><b>私藏</b></a>
+
+
+
+
+										<a href="/user/wb_1762098324/submitted/1" class="user-a"><span><img src="//img3.chouti.com/CHOUTI_9D496A5C56814626A88FD7F26A8CA9E4_W180H180=32x32.jpg?quality=80"></span><b>音娱风向牌</b></a>
+
+									<span class="left time-into"><a class="time-a" href="/link/19869586" target="_blank"><b>1小时31分钟前</b></a><i>入热榜</i></span>
+									<!-- 分享各微博的按钮 -->
+
+								</div>
+								<!-- 评论区域 -->
+								<div class="comment-box-area" id="comment-box-area-19869586">
+								<div class="pinglun arrow" id="comt-arrow-19869586"></div>
+								<a class="pinglun close-comt" title="关闭" href="javascript:;" lang="19869586"></a>
+								<div class="corner comment-box" id="comment-box-19869586">
+
+									<div class="loading-ico loading-ico-top" id="loading-comment-top-19869586" style="margin-left:230px;">加载中，请稍候...</div>
+									<div class="comment-box-top" id="comment-box-top-19869586">
+										<div class="tip-1">最热评论(<span id="newestCount-19869586">3</span>)</div>
+										<div class="tip-2"><a href="/link/19869586" target="_blank"><em class="pinglun em1"></em><span>去评论页面</span></a></div>
+									</div>
+									<!-- 评论树形 -->
+									<ul class="filetree comment-list-top-2" id="comment-list-top-19869586"></ul>
+
+									<!-- 谣言类别显示相信还是置疑选项 -->
+
+
+									<!-- 判断该新闻评论是否关闭 -->
+
+
+									<!-- 评论输入框和回复框 -->
+									<div class="huifu-top-box" id="huifu-top-box-19869586">
+										<div class="box-l txt-input-area-div-top corner no-corner-bottom">
+                                            <div id="lab-comment-top-19869586" class="lab-comment-top">回复  <span id="nick--19869586"></span>:</div>
+											<!-- 针对谣言文本输入框无效 -->
+
+
+
+												<textarea lang="19869586" maxlength="150" name="txt-huifu-top" id="txt-huifu-top-19869586" class="txt-huifu txt-huifu-top"></textarea>
+
+
+										</div>
+										<div class="box-r">
+											<a id="pub-btn-top-19869586" lang="19869586" href="javascript:;" class="pub-icons add-pub-btn add-pub-btn-unvalid">评论</a>
+											<a id="pub-loading-top-19869586" href="javascript:;" class="loading-ico loading-ico-top pub-loading-top">发布中...</a>
+										</div>
+									</div>
+
+
+
+
+									<div class="tip-3" id="hidden-comt-19869586">
+										<a href="javascript:;" class="hiddenCom-Btn" lang="19869586"><em class="pinglun em2"></em><span>收起</span></a>
+									</div>
+									<div class="write-error-box-top">
+										<div class="write-error-desc" id="write-error-desc-19869586"></div>
+									</div>
+								</div>
+								<input type="hidden" id="hidsubjectid-19869586" value="1">
+								</div>
+
+
+							</div>
+
+						</div>
+
+
+
+        				<div class="item">
+
+        					<div class="timeIntoPool">1527553439308000,1527559219766000</div>
+
+								<div class="news-pic"><img lang="19871036" original="//img3.chouti.com/CHOUTI_20180529/550541AD854046C3BD8FC0EF56AECC69_W496H496=C120x120.jpg?quality=80" src="/images/bai.png" alt="抽屉新热榜"></div>
+
+
+							<div class="null-item"></div>
+
+							<div class="news-content" id="newsContent19871036">
+								<div class="part1">
+										<a href="https://mp.weixin.qq.com/s/CT2eX03Nkahu_5nUzxGUMQ" class="show-content color-chag" target="_blank" onmousedown="linksClickStat(19871036);">
+
+
+
+
+
+
+
+													起底三聚环保 | 500亿市值锦袍下，A股最错综复杂的关联交易
+
+
+										</a>
+
+										<span class="content-source">-mp.weixin.qq.com</span>
+
+									<!-- 段子和谣言类别不显示类别名称 -->
+
+										<a href="/r/news/hot/1" class="n2"><span class="content-kind">42区</span></a>
+
+									<!-- 来源手机客户端 -->
+
+
+
+
+									<!-- 显示话题标签 -->
+
+								</div>
+								<!-- 显示摘要 -->
+
+								<div class="part2" share-pic="http://img3.chouti.com/CHOUTI_20180529/550541AD854046C3BD8FC0EF56AECC69_W496H496.jpg" share-title="起底三聚环保 | 500亿市值锦袍下，A股最错综复杂的关联交易" share-summary="" share-linkid="19871036" share-subject="42区" style="padding-top: 16px;">
+
+
+
+
+										<a href="javascript:;" class="digg-a" title="推荐"><span class="hand-icon icon-digg"></span><b>10</b><i style="display:none">19871036</i></a>
+
+
+									<a href="javascript:;" class="discus-a" id="discus-a-19871036" timetopool="1小时37分钟前" lang="19871036"><span class="hand-icon icon-discus"></span><b>7</b></a>
+
+
+										<a href="javascript:;" class="collect-a" id="collect-a-19871036" lang="19871036" title="加入私藏" destjid="" jid="kumokumaaa"><span class="hand-icon icon-collect"></span><b>私藏</b></a>
+
+
+
+
+										<a href="/user/kumokumaaa/submitted/1" class="user-a"><span><img src="//img3.chouti.com/group8/M02/CC/C9/wKgCHFP9iiyMUgZ9AAAihP7IpIE262=32x32.jpg?quality=80"></span><b>Cog</b></a>
+
+									<span class="left time-into"><a class="time-a" href="/link/19871036" target="_blank"><b>1小时37分钟前</b></a><i>入热榜</i></span>
+									<!-- 分享各微博的按钮 -->
+
+								</div>
+								<!-- 评论区域 -->
+								<div class="comment-box-area" id="comment-box-area-19871036">
+								<div class="pinglun arrow" id="comt-arrow-19871036"></div>
+								<a class="pinglun close-comt" title="关闭" href="javascript:;" lang="19871036"></a>
+								<div class="corner comment-box" id="comment-box-19871036">
+
+									<div class="loading-ico loading-ico-top" id="loading-comment-top-19871036" style="margin-left:230px;">加载中，请稍候...</div>
+									<div class="comment-box-top" id="comment-box-top-19871036">
+										<div class="tip-1">最热评论(<span id="newestCount-19871036">3</span>)</div>
+										<div class="tip-2"><a href="/link/19871036" target="_blank"><em class="pinglun em1"></em><span>去评论页面</span></a></div>
+									</div>
+									<!-- 评论树形 -->
+									<ul class="filetree comment-list-top-2" id="comment-list-top-19871036"></ul>
+
+									<!-- 谣言类别显示相信还是置疑选项 -->
+
+
+									<!-- 判断该新闻评论是否关闭 -->
+
+
+									<!-- 评论输入框和回复框 -->
+									<div class="huifu-top-box" id="huifu-top-box-19871036">
+										<div class="box-l txt-input-area-div-top corner no-corner-bottom">
+                                            <div id="lab-comment-top-19871036" class="lab-comment-top">回复  <span id="nick--19871036"></span>:</div>
+											<!-- 针对谣言文本输入框无效 -->
+
+
+
+												<textarea lang="19871036" maxlength="150" name="txt-huifu-top" id="txt-huifu-top-19871036" class="txt-huifu txt-huifu-top"></textarea>
+
+
+										</div>
+										<div class="box-r">
+											<a id="pub-btn-top-19871036" lang="19871036" href="javascript:;" class="pub-icons add-pub-btn add-pub-btn-unvalid">评论</a>
+											<a id="pub-loading-top-19871036" href="javascript:;" class="loading-ico loading-ico-top pub-loading-top">发布中...</a>
+										</div>
+									</div>
+
+
+
+
+									<div class="tip-3" id="hidden-comt-19871036">
+										<a href="javascript:;" class="hiddenCom-Btn" lang="19871036"><em class="pinglun em2"></em><span>收起</span></a>
+									</div>
+									<div class="write-error-box-top">
+										<div class="write-error-desc" id="write-error-desc-19871036"></div>
+									</div>
+								</div>
+								<input type="hidden" id="hidsubjectid-19871036" value="1">
+								</div>
+
+
+							</div>
+
+						</div>
+
+
+
+        				<div class="item">
+
+        					<div class="timeIntoPool">1527553080320000,1527559219766000</div>
+
+								<div class="news-pic"><img lang="19870791" original="//img3.chouti.com/CHOUTI_20180529/B2E2E0045F004D1CA123D2BAA11B4721_W483H483=C120x120.jpg?quality=80" src="/images/bai.png" alt="抽屉新热榜"></div>
+
+
+							<div class="null-item"></div>
+
+							<div class="news-content" id="newsContent19870791">
+								<div class="part1">
+										<a href="http://dig.chouti.com/pic/show?nid=773ea2c00dd2409cc31a70cf2702f126&amp;lid=19870791" class="show-content color-chag" target="_blank" onmousedown="linksClickStat(19870791);">
+
+
+
+
+
+
+
+													【《哈利·波特》纳威·隆巴顿结婚】在《哈利·波特》中饰演纳威·隆巴顿的马修·路易斯今晨在社交媒体上宣布，自己近日已经与安吉拉·琼斯在意大利完婚，并晒出了婚礼的照片！恭喜！据悉，两人于2016年1月相识相爱，如今终于走进了婚姻的殿堂。纳威还是跟在霍格沃茨的时候一样，闷声做大事啊。
+
+
+										</a>
+
+									<!-- 段子和谣言类别不显示类别名称 -->
+
+										<a href="/r/news/hot/1" class="n2"><span class="content-kind">42区</span></a>
+
+									<!-- 来源手机客户端 -->
+
+
+
+
+									<!-- 显示话题标签 -->
+
+								</div>
+								<!-- 显示摘要 -->
+
+								<div class="part2" share-pic="http://img3.chouti.com/CHOUTI_20180529/B2E2E0045F004D1CA123D2BAA11B4721_W483H483.jpg" share-title="【《哈利·波特》纳威·隆巴顿结婚】在《哈利·波特》中饰演纳威·隆巴顿的马修·路易斯今晨在社交媒体上宣布，自己近日已经与安吉拉·琼斯在意大利完婚，并晒出了婚礼的照片！恭喜！据悉，两人于2016年1月相识相爱，如今终于走进了婚姻的殿堂。纳威还是跟在霍格沃茨的时候一样，闷声做大事啊。" share-summary="" share-linkid="19870791" share-subject="42区">
+
+
+
+
+										<a href="javascript:;" class="digg-a" title="推荐"><span class="hand-icon icon-digg"></span><b>40</b><i style="display:none">19870791</i></a>
+
+
+									<a href="javascript:;" class="discus-a" id="discus-a-19870791" timetopool="1小时43分钟前" lang="19870791" onmousedown="linksClickStat(19870791);"><span class="hand-icon icon-discus"></span><b>26</b></a>
+
+
+										<a href="javascript:;" class="collect-a" id="collect-a-19870791" lang="19870791" title="加入私藏" destjid="" jid="wb_1642591402"><span class="hand-icon icon-collect"></span><b>私藏</b></a>
+
+
+
+
+										<a href="/user/wb_1642591402/submitted/1" class="user-a"><span><img src="//img3.chouti.com/CHOUTI_20180529/0EEBFE2058A2418AB6644FB8F5A08E36_W180H180=32x32.jpg?quality=80"></span><b>新浪娱乐</b></a>
+
+									<span class="left time-into"><a class="time-a" href="/link/19870791" target="_blank"><b>1小时43分钟前</b></a><i>入热榜</i></span>
+									<!-- 分享各微博的按钮 -->
+
+								</div>
+								<!-- 评论区域 -->
+								<div class="comment-box-area" id="comment-box-area-19870791">
+								<div class="pinglun arrow" id="comt-arrow-19870791"></div>
+								<a class="pinglun close-comt" title="关闭" href="javascript:;" lang="19870791"></a>
+								<div class="corner comment-box" id="comment-box-19870791">
+
+									<div class="loading-ico loading-ico-top" id="loading-comment-top-19870791" style="margin-left:230px;">加载中，请稍候...</div>
+									<div class="comment-box-top" id="comment-box-top-19870791">
+										<div class="tip-1">最热评论(<span id="newestCount-19870791">3</span>)</div>
+										<div class="tip-2"><a href="/link/19870791" target="_blank"><em class="pinglun em1"></em><span>去评论页面</span></a></div>
+									</div>
+									<!-- 评论树形 -->
+									<ul class="filetree comment-list-top-2" id="comment-list-top-19870791"></ul>
+
+									<!-- 谣言类别显示相信还是置疑选项 -->
+
+
+									<!-- 判断该新闻评论是否关闭 -->
+
+
+									<!-- 评论输入框和回复框 -->
+									<div class="huifu-top-box" id="huifu-top-box-19870791">
+										<div class="box-l txt-input-area-div-top corner no-corner-bottom">
+                                            <div id="lab-comment-top-19870791" class="lab-comment-top">回复  <span id="nick--19870791"></span>:</div>
+											<!-- 针对谣言文本输入框无效 -->
+
+
+
+												<textarea lang="19870791" maxlength="150" name="txt-huifu-top" id="txt-huifu-top-19870791" class="txt-huifu txt-huifu-top"></textarea>
+
+
+										</div>
+										<div class="box-r">
+											<a id="pub-btn-top-19870791" lang="19870791" href="javascript:;" class="pub-icons add-pub-btn add-pub-btn-unvalid">评论</a>
+											<a id="pub-loading-top-19870791" href="javascript:;" class="loading-ico loading-ico-top pub-loading-top">发布中...</a>
+										</div>
+									</div>
+
+
+
+
+									<div class="tip-3" id="hidden-comt-19870791">
+										<a href="javascript:;" class="hiddenCom-Btn" lang="19870791"><em class="pinglun em2"></em><span>收起</span></a>
+									</div>
+									<div class="write-error-box-top">
+										<div class="write-error-desc" id="write-error-desc-19870791"></div>
+									</div>
+								</div>
+								<input type="hidden" id="hidsubjectid-19870791" value="1">
+								</div>
+
+
+							</div>
+
+						</div>
+
+
+
+        				<div class="item">
+
+        					<div class="timeIntoPool">1527552813134000,1527559219766000</div>
+
+								<div class="news-pic"><img lang="19843526" original="//img3.chouti.com/f63bef2e229d3ef3af343a2de1cb0450=C120x120.jpg?quality=80" src="/images/bai.png" alt="抽屉新热榜"></div>
+
+
+							<div class="null-item"></div>
+
+							<div class="news-content" id="newsContent19843526">
+								<div class="part1">
+										<a href="https://weibo.com/tv/v/GiHfZ6Oa9?fid=1034:bf27a1275162b0ce412cd834035aa4c9" class="show-content color-chag" target="_blank" onmousedown="linksClickStat(19843526);">
+
+
+
+
+
+
+
+													狗子夜不归宿，主人担心得整晚没睡，天还没亮就拿着棍子在门口候着了！这场景感觉有点眼熟啊，可怜天下父母心……
+
+
+										</a>
+
+										<span class="content-source">-weibo.com</span>
+
+									<!-- 段子和谣言类别不显示类别名称 -->
+
+										<a href="/r/news/hot/1" class="n2"><span class="content-kind">42区</span></a>
+
+									<!-- 来源手机客户端 -->
+
+
+
+
+									<!-- 显示话题标签 -->
+
+										<a class="tag-huati-box" href="/topic/18" target="_blank"><span class="htTag-ico ht-box"><b class="htTag-ico htT1"></b><b class="htT3">喵了个汪</b></span><b class="htTag-ico  htT2"></b></a>
+
+								</div>
+								<!-- 显示摘要 -->
+
+								<div class="part2" share-pic="http://img3.chouti.com/f63bef2e229d3ef3af343a2de1cb0450.jpg" share-title="狗子夜不归宿，主人担心得整晚没睡，天还没亮就拿着棍子在门口候着了！这场景感觉有点眼熟啊，可怜天下父母心……" share-summary="" share-linkid="19843526" share-subject="42区">
+
+
+
+
+										<a href="javascript:;" class="digg-a" title="推荐"><span class="hand-icon icon-digg"></span><b>151</b><i style="display:none">19843526</i></a>
+
+
+									<a href="javascript:;" class="discus-a" id="discus-a-19843526" timetopool="1小时47分钟前" lang="19843526"><span class="hand-icon icon-discus"></span><b>27</b></a>
+
+
+										<a href="javascript:;" class="collect-a" id="collect-a-19843526" lang="19843526" title="加入私藏" destjid="" jid="wb_1134796120"><span class="hand-icon icon-collect"></span><b>私藏</b></a>
+
+
+
+
+										<a href="/user/wb_1134796120/submitted/1" class="user-a"><span><img src="//img3.chouti.com/CHOUTI_20180419/899CCB3847C74FAE86505F62F74F1055_W87H87=32x32.jpg?quality=80"></span><b>史上第一最最搞</b></a>
+
+									<span class="left time-into"><a class="time-a" href="/link/19843526" target="_blank"><b>1小时47分钟前</b></a><i>入热榜</i></span>
+									<!-- 分享各微博的按钮 -->
+
+								</div>
+								<!-- 评论区域 -->
+								<div class="comment-box-area" id="comment-box-area-19843526">
+								<div class="pinglun arrow" id="comt-arrow-19843526"></div>
+								<a class="pinglun close-comt" title="关闭" href="javascript:;" lang="19843526"></a>
+								<div class="corner comment-box" id="comment-box-19843526">
+
+									<div class="loading-ico loading-ico-top" id="loading-comment-top-19843526" style="margin-left:230px;">加载中，请稍候...</div>
+									<div class="comment-box-top" id="comment-box-top-19843526">
+										<div class="tip-1">最热评论(<span id="newestCount-19843526">3</span>)</div>
+										<div class="tip-2"><a href="/link/19843526" target="_blank"><em class="pinglun em1"></em><span>去评论页面</span></a></div>
+									</div>
+									<!-- 评论树形 -->
+									<ul class="filetree comment-list-top-2" id="comment-list-top-19843526"></ul>
+
+									<!-- 谣言类别显示相信还是置疑选项 -->
+
+
+									<!-- 判断该新闻评论是否关闭 -->
+
+
+									<!-- 评论输入框和回复框 -->
+									<div class="huifu-top-box" id="huifu-top-box-19843526">
+										<div class="box-l txt-input-area-div-top corner no-corner-bottom">
+                                            <div id="lab-comment-top-19843526" class="lab-comment-top">回复  <span id="nick--19843526"></span>:</div>
+											<!-- 针对谣言文本输入框无效 -->
+
+
+
+												<textarea lang="19843526" maxlength="150" name="txt-huifu-top" id="txt-huifu-top-19843526" class="txt-huifu txt-huifu-top"></textarea>
+
+
+										</div>
+										<div class="box-r">
+											<a id="pub-btn-top-19843526" lang="19843526" href="javascript:;" class="pub-icons add-pub-btn add-pub-btn-unvalid">评论</a>
+											<a id="pub-loading-top-19843526" href="javascript:;" class="loading-ico loading-ico-top pub-loading-top">发布中...</a>
+										</div>
+									</div>
+
+
+
+
+									<div class="tip-3" id="hidden-comt-19843526">
+										<a href="javascript:;" class="hiddenCom-Btn" lang="19843526"><em class="pinglun em2"></em><span>收起</span></a>
+									</div>
+									<div class="write-error-box-top">
+										<div class="write-error-desc" id="write-error-desc-19843526"></div>
+									</div>
+								</div>
+								<input type="hidden" id="hidsubjectid-19843526" value="1">
+								</div>
+
+
+							</div>
+
+						</div>
+
+
+
+        				<div class="item">
+
+        					<div class="timeIntoPool">1527552719347000,1527559219766000</div>
+
+								<div class="news-pic"><img lang="19870006" original="//img3.chouti.com/CHOUTI_20180529/EB1EE8FE422545F8B57728AB966AAD00_W536H536=C120x120.jpg?quality=80" src="/images/bai.png" alt="抽屉新热榜"></div>
+
+
+							<div class="null-item"></div>
+
+							<div class="news-content" id="newsContent19870006">
+								<div class="part1">
+										<a href="http://go.rss.sina.com.cn/redirect.php?url=http://news.sina.com.cn/w/2018-05-29/doc-ihcffhsu6877161.shtml" class="show-content color-chag" target="_blank" onmousedown="linksClickStat(19870006);">
+
+
+
+
+
+
+
+													【“秋田犬外交”难奏效 安倍第21次见普京无功而返】普京在会见来访的安倍晋三时迟到了48分钟，并在首脑会谈后的共同记者会上取消了提问环节。有日本网友留言称：“北方领土完全没有返还的迹象，对俄罗斯的经济合作也取得不了成果。安倍总理得意的外交更像是海外旅行，请别这么浪费我们的税款。”
+
+
+										</a>
+
+										<span class="content-source">-go.rss.sina.com.cn</span>
+
+									<!-- 段子和谣言类别不显示类别名称 -->
+
+										<a href="/r/news/hot/1" class="n2"><span class="content-kind">42区</span></a>
+
+									<!-- 来源手机客户端 -->
+
+
+
+
+									<!-- 显示话题标签 -->
+
+								</div>
+								<!-- 显示摘要 -->
+
+								<div class="part2" share-pic="http://img3.chouti.com/CHOUTI_20180529/EB1EE8FE422545F8B57728AB966AAD00_W536H536.jpg" share-title="【“秋田犬外交”难奏效 安倍第21次见普京无功而返】普京在会见来访的安倍晋三时迟到了48分钟，并在首脑会谈后的共同记者会上取消了提问环节。有日本网友留言称：“北方领土完全没有返还的迹象，对俄罗斯的经济合作也取得不了成果。安倍总理得意的外交更像是海外旅行，请别这么浪费我们的税款。”" share-summary="" share-linkid="19870006" share-subject="42区">
+
+
+
+
+										<a href="javascript:;" class="digg-a" title="推荐"><span class="hand-icon icon-digg"></span><b>21</b><i style="display:none">19870006</i></a>
+
+
+									<a href="javascript:;" class="discus-a" id="discus-a-19870006" timetopool="1小时49分钟前" lang="19870006"><span class="hand-icon icon-discus"></span><b>27</b></a>
+
+
+										<a href="javascript:;" class="collect-a" id="collect-a-19870006" lang="19870006" title="加入私藏" destjid="" jid="chouti0002"><span class="hand-icon icon-collect"></span><b>私藏</b></a>
+
+
+
+
+										<a href="/user/chouti0002/submitted/1" class="user-a"><span><img src="//img3.chouti.com/group11/M00/70/69/wKgCPFUk4v2iMxvGAAAY5aY6Cd8745=32x32.jpg?quality=80"></span><b>新浪国际焦点</b></a>
+
+									<span class="left time-into"><a class="time-a" href="/link/19870006" target="_blank"><b>1小时49分钟前</b></a><i>入热榜</i></span>
+									<!-- 分享各微博的按钮 -->
+
+								</div>
+								<!-- 评论区域 -->
+								<div class="comment-box-area" id="comment-box-area-19870006">
+								<div class="pinglun arrow" id="comt-arrow-19870006"></div>
+								<a class="pinglun close-comt" title="关闭" href="javascript:;" lang="19870006"></a>
+								<div class="corner comment-box" id="comment-box-19870006">
+
+									<div class="loading-ico loading-ico-top" id="loading-comment-top-19870006" style="margin-left:230px;">加载中，请稍候...</div>
+									<div class="comment-box-top" id="comment-box-top-19870006">
+										<div class="tip-1">最热评论(<span id="newestCount-19870006">3</span>)</div>
+										<div class="tip-2"><a href="/link/19870006" target="_blank"><em class="pinglun em1"></em><span>去评论页面</span></a></div>
+									</div>
+									<!-- 评论树形 -->
+									<ul class="filetree comment-list-top-2" id="comment-list-top-19870006"></ul>
+
+									<!-- 谣言类别显示相信还是置疑选项 -->
+
+
+									<!-- 判断该新闻评论是否关闭 -->
+
+
+									<!-- 评论输入框和回复框 -->
+									<div class="huifu-top-box" id="huifu-top-box-19870006">
+										<div class="box-l txt-input-area-div-top corner no-corner-bottom">
+                                            <div id="lab-comment-top-19870006" class="lab-comment-top">回复  <span id="nick--19870006"></span>:</div>
+											<!-- 针对谣言文本输入框无效 -->
+
+
+
+												<textarea lang="19870006" maxlength="150" name="txt-huifu-top" id="txt-huifu-top-19870006" class="txt-huifu txt-huifu-top"></textarea>
+
+
+										</div>
+										<div class="box-r">
+											<a id="pub-btn-top-19870006" lang="19870006" href="javascript:;" class="pub-icons add-pub-btn add-pub-btn-unvalid">评论</a>
+											<a id="pub-loading-top-19870006" href="javascript:;" class="loading-ico loading-ico-top pub-loading-top">发布中...</a>
+										</div>
+									</div>
+
+
+
+
+									<div class="tip-3" id="hidden-comt-19870006">
+										<a href="javascript:;" class="hiddenCom-Btn" lang="19870006"><em class="pinglun em2"></em><span>收起</span></a>
+									</div>
+									<div class="write-error-box-top">
+										<div class="write-error-desc" id="write-error-desc-19870006"></div>
+									</div>
+								</div>
+								<input type="hidden" id="hidsubjectid-19870006" value="1">
+								</div>
+
+
+							</div>
+
+						</div>
+
+
+
+        				<div class="item">
+
+        					<div class="timeIntoPool">1527552360317000,1527559219766000</div>
+
+								<div class="news-pic"><img lang="19869121" original="//img3.chouti.com/CHOUTI_20180529/6CD4FE8E6A76428A99E980592D132BEA_W760H760=C120x120.jpg?quality=80" src="/images/bai.png" alt="抽屉新热榜"></div>
+
+
+							<div class="null-item"></div>
+
+							<div class="news-content" id="newsContent19869121">
+								<div class="part1">
+										<a href="https://weibo.com/tv/v/GiM35vAHo?fid=1034:6bc25384180d4d7a938a73583a5c4a22" class="show-content color-chag" target="_blank" onmousedown="linksClickStat(19869121);">
+
+
+
+
+
+
+
+													朋友拍的香港劏房（极小的分割出租屋，个人长租或短租），6平米，400元以上一天，还不是很好的地段。还是托关系定的。感受下原汁原味的资本主义是什么样吧。
+
+
+										</a>
+
+										<span class="content-source">-weibo.com</span>
+
+									<!-- 段子和谣言类别不显示类别名称 -->
+
+										<a href="/r/news/hot/1" class="n2"><span class="content-kind">42区</span></a>
+
+									<!-- 来源手机客户端 -->
+
+
+
+
+									<!-- 显示话题标签 -->
+
+								</div>
+								<!-- 显示摘要 -->
+
+								<div class="part2" share-pic="http://img3.chouti.com/CHOUTI_20180529/6CD4FE8E6A76428A99E980592D132BEA_W760H760.jpg" share-title="朋友拍的香港劏房（极小的分割出租屋，个人长租或短租），6平米，400元以上一天，还不是很好的地段。还是托关系定的。感受下原汁原味的资本主义是什么样吧。" share-summary="" share-linkid="19869121" share-subject="42区">
+
+
+
+
+										<a href="javascript:;" class="digg-a" title="推荐"><span class="hand-icon icon-digg"></span><b>31</b><i style="display:none">19869121</i></a>
+
+
+									<a href="javascript:;" class="discus-a" id="discus-a-19869121" timetopool="1小时55分钟前" lang="19869121"><span class="hand-icon icon-discus"></span><b>68</b></a>
+
+
+										<a href="javascript:;" class="collect-a" id="collect-a-19869121" lang="19869121" title="加入私藏" destjid="" jid="wb_1902737731"><span class="hand-icon icon-collect"></span><b>私藏</b></a>
+
+
+
+
+										<a href="/user/wb_1902737731/submitted/1" class="user-a"><span><img src="//img3.chouti.com/CHOUTI_20180528/0F40A81A13E7448097D2DAB1FE5A3593_W179H179=32x32.jpg?quality=80"></span><b>子修在此</b></a>
+
+									<span class="left time-into"><a class="time-a" href="/link/19869121" target="_blank"><b>1小时55分钟前</b></a><i>入热榜</i></span>
+									<!-- 分享各微博的按钮 -->
+
+								</div>
+								<!-- 评论区域 -->
+								<div class="comment-box-area" id="comment-box-area-19869121">
+								<div class="pinglun arrow" id="comt-arrow-19869121"></div>
+								<a class="pinglun close-comt" title="关闭" href="javascript:;" lang="19869121"></a>
+								<div class="corner comment-box" id="comment-box-19869121">
+
+									<div class="loading-ico loading-ico-top" id="loading-comment-top-19869121" style="margin-left:230px;">加载中，请稍候...</div>
+									<div class="comment-box-top" id="comment-box-top-19869121">
+										<div class="tip-1">最热评论(<span id="newestCount-19869121">3</span>)</div>
+										<div class="tip-2"><a href="/link/19869121" target="_blank"><em class="pinglun em1"></em><span>去评论页面</span></a></div>
+									</div>
+									<!-- 评论树形 -->
+									<ul class="filetree comment-list-top-2" id="comment-list-top-19869121"></ul>
+
+									<!-- 谣言类别显示相信还是置疑选项 -->
+
+
+									<!-- 判断该新闻评论是否关闭 -->
+
+
+									<!-- 评论输入框和回复框 -->
+									<div class="huifu-top-box" id="huifu-top-box-19869121">
+										<div class="box-l txt-input-area-div-top corner no-corner-bottom">
+                                            <div id="lab-comment-top-19869121" class="lab-comment-top">回复  <span id="nick--19869121"></span>:</div>
+											<!-- 针对谣言文本输入框无效 -->
+
+
+
+												<textarea lang="19869121" maxlength="150" name="txt-huifu-top" id="txt-huifu-top-19869121" class="txt-huifu txt-huifu-top"></textarea>
+
+
+										</div>
+										<div class="box-r">
+											<a id="pub-btn-top-19869121" lang="19869121" href="javascript:;" class="pub-icons add-pub-btn add-pub-btn-unvalid">评论</a>
+											<a id="pub-loading-top-19869121" href="javascript:;" class="loading-ico loading-ico-top pub-loading-top">发布中...</a>
+										</div>
+									</div>
+
+
+
+
+									<div class="tip-3" id="hidden-comt-19869121">
+										<a href="javascript:;" class="hiddenCom-Btn" lang="19869121"><em class="pinglun em2"></em><span>收起</span></a>
+									</div>
+									<div class="write-error-box-top">
+										<div class="write-error-desc" id="write-error-desc-19869121"></div>
+									</div>
+								</div>
+								<input type="hidden" id="hidsubjectid-19869121" value="1">
+								</div>
+
+
+							</div>
+
+						</div>
+
+
+
+        				<div class="item">
+
+        					<div class="timeIntoPool">1527551999365000,1527559219766000</div>
+
+								<div class="news-pic"><img lang="19870286" original="//img3.chouti.com/CHOUTI_20180529/05BF831B3AC34BED95C3D4127AD4DCFD_W336H336=C120x120.png?quality=80" src="/images/bai.png" alt="抽屉新热榜"></div>
+
+
+							<div class="null-item"></div>
+
+							<div class="news-content" id="newsContent19870286">
+								<div class="part1">
+										<a href="https://weibo.com/tv/v/GiMfCER2f?fid=1034:124d60dafb00c463f93c4517e14014fa" class="show-content color-chag" target="_blank" onmousedown="linksClickStat(19870286);">
+
+
+
+
+
+
+
+													如何成为清纯系女网红
+
+
+										</a>
+
+										<span class="content-source">-weibo.com</span>
+
+									<!-- 段子和谣言类别不显示类别名称 -->
+
+										<a href="/r/news/hot/1" class="n2"><span class="content-kind">42区</span></a>
+
+									<!-- 来源手机客户端 -->
+
+
+
+
+									<!-- 显示话题标签 -->
+
+								</div>
+								<!-- 显示摘要 -->
+
+								<div class="part2" share-pic="http://img3.chouti.com/CHOUTI_20180529/05BF831B3AC34BED95C3D4127AD4DCFD_W336H336.png" share-title="如何成为清纯系女网红" share-summary="" share-linkid="19870286" share-subject="42区" style="padding-top: 16px;">
+
+
+
+
+										<a href="javascript:;" class="digg-a" title="推荐"><span class="hand-icon icon-digg"></span><b>83</b><i style="display:none">19870286</i></a>
+
+
+									<a href="javascript:;" class="discus-a" id="discus-a-19870286" timetopool="2小时1分钟前" lang="19870286"><span class="hand-icon icon-discus"></span><b>43</b></a>
+
+
+										<a href="javascript:;" class="collect-a" id="collect-a-19870286" lang="19870286" title="加入私藏" destjid="" jid="wb_6384756646"><span class="hand-icon icon-collect"></span><b>私藏</b></a>
+
+
+
+
+										<a href="/user/wb_6384756646/submitted/1" class="user-a"><span><img src="//img3.chouti.com/CHOUTI_20171210/D2576F1D73574E2693FE34419A54CFB4_W180H180=32x32.jpg?quality=80"></span><b>抖音酱</b></a>
+
+									<span class="left time-into"><a class="time-a" href="/link/19870286" target="_blank"><b>2小时1分钟前</b></a><i>入热榜</i></span>
+									<!-- 分享各微博的按钮 -->
+
+								</div>
+								<!-- 评论区域 -->
+								<div class="comment-box-area" id="comment-box-area-19870286">
+								<div class="pinglun arrow" id="comt-arrow-19870286"></div>
+								<a class="pinglun close-comt" title="关闭" href="javascript:;" lang="19870286"></a>
+								<div class="corner comment-box" id="comment-box-19870286">
+
+									<div class="loading-ico loading-ico-top" id="loading-comment-top-19870286" style="margin-left:230px;">加载中，请稍候...</div>
+									<div class="comment-box-top" id="comment-box-top-19870286">
+										<div class="tip-1">最热评论(<span id="newestCount-19870286">3</span>)</div>
+										<div class="tip-2"><a href="/link/19870286" target="_blank"><em class="pinglun em1"></em><span>去评论页面</span></a></div>
+									</div>
+									<!-- 评论树形 -->
+									<ul class="filetree comment-list-top-2" id="comment-list-top-19870286"></ul>
+
+									<!-- 谣言类别显示相信还是置疑选项 -->
+
+
+									<!-- 判断该新闻评论是否关闭 -->
+
+
+									<!-- 评论输入框和回复框 -->
+									<div class="huifu-top-box" id="huifu-top-box-19870286">
+										<div class="box-l txt-input-area-div-top corner no-corner-bottom">
+                                            <div id="lab-comment-top-19870286" class="lab-comment-top">回复  <span id="nick--19870286"></span>:</div>
+											<!-- 针对谣言文本输入框无效 -->
+
+
+
+												<textarea lang="19870286" maxlength="150" name="txt-huifu-top" id="txt-huifu-top-19870286" class="txt-huifu txt-huifu-top"></textarea>
+
+
+										</div>
+										<div class="box-r">
+											<a id="pub-btn-top-19870286" lang="19870286" href="javascript:;" class="pub-icons add-pub-btn add-pub-btn-unvalid">评论</a>
+											<a id="pub-loading-top-19870286" href="javascript:;" class="loading-ico loading-ico-top pub-loading-top">发布中...</a>
+										</div>
+									</div>
+
+
+
+
+									<div class="tip-3" id="hidden-comt-19870286">
+										<a href="javascript:;" class="hiddenCom-Btn" lang="19870286"><em class="pinglun em2"></em><span>收起</span></a>
+									</div>
+									<div class="write-error-box-top">
+										<div class="write-error-desc" id="write-error-desc-19870286"></div>
+									</div>
+								</div>
+								<input type="hidden" id="hidsubjectid-19870286" value="1">
+								</div>
+
+
+							</div>
+
+						</div>
+
+
+
+        				<div class="item">
+
+        					<div class="timeIntoPool">1527551400020000,1527559219766000</div>
+
+								<div class="news-pic"><img lang="19867701" original="//img3.chouti.com/CHOUTI_20180529/C82077562B8146B8BFCFF3292FF37E6F_W960H540=C120x120.jpg?quality=80" src="/images/bai.png" alt="抽屉新热榜"></div>
+
+
+							<div class="null-item"></div>
+
+							<div class="news-content" id="newsContent19867701">
+								<div class="part1">
+										<a href="http://dig.chouti.com/pic/show?nid=765dc26a8f9762eadd3e846a02426d3b&amp;lid=19867701" class="show-content color-chag" target="_blank" onmousedown="linksClickStat(19867701);">
+
+
+
+
+
+
+
+													肥宅快乐床 ​
+
+
+										</a>
+
+									<!-- 段子和谣言类别不显示类别名称 -->
+
+										<a href="/r/pic/hot/1" class="n2"><span class="content-kind">图片</span></a>
+
+									<!-- 来源手机客户端 -->
+
+
+
+
+									<!-- 显示话题标签 -->
+
+								</div>
+								<!-- 显示摘要 -->
+
+								<div class="part2" share-pic="http://img3.chouti.com/CHOUTI_20180529/C82077562B8146B8BFCFF3292FF37E6F_W960H540.jpg" share-title="肥宅快乐床 ​" share-summary="" share-linkid="19867701" share-subject="图片" style="padding-top: 16px;">
+
+
+
+
+										<a href="javascript:;" class="digg-a" title="推荐"><span class="hand-icon icon-digg"></span><b>25</b><i style="display:none">19867701</i></a>
+
+
+									<a href="javascript:;" class="discus-a" id="discus-a-19867701" timetopool="2小时11分钟前" lang="19867701" onmousedown="linksClickStat(19867701);"><span class="hand-icon icon-discus"></span><b>40</b></a>
+
+
+										<a href="javascript:;" class="collect-a" id="collect-a-19867701" lang="19867701" title="加入私藏" destjid="" jid="wb_2115566404"><span class="hand-icon icon-collect"></span><b>私藏</b></a>
+
+
+
+
+										<a href="/user/wb_2115566404/submitted/1" class="user-a"><span><img src="//img3.chouti.com/CHOUTI_20180526/E36C7FC7D9C94CC5B75285256386C714_W180H180=32x32.jpg?quality=80"></span><b>游戏圈资讯君</b></a>
+
+									<span class="left time-into"><a class="time-a" href="/link/19867701" target="_blank"><b>2小时11分钟前</b></a><i>入热榜</i></span>
+									<!-- 分享各微博的按钮 -->
+
+								</div>
+								<!-- 评论区域 -->
+								<div class="comment-box-area" id="comment-box-area-19867701">
+								<div class="pinglun arrow" id="comt-arrow-19867701"></div>
+								<a class="pinglun close-comt" title="关闭" href="javascript:;" lang="19867701"></a>
+								<div class="corner comment-box" id="comment-box-19867701">
+
+									<div class="loading-ico loading-ico-top" id="loading-comment-top-19867701" style="margin-left:230px;">加载中，请稍候...</div>
+									<div class="comment-box-top" id="comment-box-top-19867701">
+										<div class="tip-1">最热评论(<span id="newestCount-19867701">3</span>)</div>
+										<div class="tip-2"><a href="/link/19867701" target="_blank"><em class="pinglun em1"></em><span>去评论页面</span></a></div>
+									</div>
+									<!-- 评论树形 -->
+									<ul class="filetree comment-list-top-2" id="comment-list-top-19867701"></ul>
+
+									<!-- 谣言类别显示相信还是置疑选项 -->
+
+
+									<!-- 判断该新闻评论是否关闭 -->
+
+
+									<!-- 评论输入框和回复框 -->
+									<div class="huifu-top-box" id="huifu-top-box-19867701">
+										<div class="box-l txt-input-area-div-top corner no-corner-bottom">
+                                            <div id="lab-comment-top-19867701" class="lab-comment-top">回复  <span id="nick--19867701"></span>:</div>
+											<!-- 针对谣言文本输入框无效 -->
+
+
+
+												<textarea lang="19867701" maxlength="150" name="txt-huifu-top" id="txt-huifu-top-19867701" class="txt-huifu txt-huifu-top"></textarea>
+
+
+										</div>
+										<div class="box-r">
+											<a id="pub-btn-top-19867701" lang="19867701" href="javascript:;" class="pub-icons add-pub-btn add-pub-btn-unvalid">评论</a>
+											<a id="pub-loading-top-19867701" href="javascript:;" class="loading-ico loading-ico-top pub-loading-top">发布中...</a>
+										</div>
+									</div>
+
+
+
+
+									<div class="tip-3" id="hidden-comt-19867701">
+										<a href="javascript:;" class="hiddenCom-Btn" lang="19867701"><em class="pinglun em2"></em><span>收起</span></a>
+									</div>
+									<div class="write-error-box-top">
+										<div class="write-error-desc" id="write-error-desc-19867701"></div>
+									</div>
+								</div>
+								<input type="hidden" id="hidsubjectid-19867701" value="4">
+								</div>
+
+
+							</div>
+
+						</div>
+
+
+
+        				<div class="item">
+
+        					<div class="timeIntoPool">1527550800021000,1527559219766000</div>
+
+								<div class="news-pic"><img lang="19869701" original="//img3.chouti.com/CHOUTI_20180529/6CBB29598F994660BE52F11F832036B4_W418H418=C120x120.jpeg?quality=80" src="/images/bai.png" alt="抽屉新热榜"></div>
+
+
+							<div class="null-item"></div>
+
+							<div class="news-content" id="newsContent19869701">
+								<div class="part1">
+										<a href="http://tech.qq.com/a/20180529/002344.htm" class="show-content color-chag" target="_blank" onmousedown="linksClickStat(19869701);">
+
+
+
+
+
+
+
+													万达网科裁员进入尾声：业务全停，豪华高管团队已解散
+
+
+										</a>
+
+										<span class="content-source">-tech.qq.com</span>
+
+									<!-- 段子和谣言类别不显示类别名称 -->
+
+										<a href="/r/tec/hot/1" class="n2"><span class="content-kind">挨踢1024</span></a>
+
+									<!-- 来源手机客户端 -->
+
+
+
+
+									<!-- 显示话题标签 -->
+
+								</div>
+								<!-- 显示摘要 -->
+
+									<div class="area-summary">
+										<span class="summary">澎湃新闻记者|李晓青王健林的万达网络集团裁员进入了尾声阶段。澎湃新闻获悉，此前大量裁员的万达网络科技集团最后一批裁员已快要完成，裁员完成后，留下的原万达网科员工约300人将会去万达网科和腾讯系高朋科技成立的新公司。王健林开完万达201...</span>
+									</div>
+
+								<div class="part2" share-pic="http://img3.chouti.com/CHOUTI_20180529/6CBB29598F994660BE52F11F832036B4_W418H418.jpeg" share-title="万达网科裁员进入尾声：业务全停，豪华高管团队已解散" share-summary="澎湃新闻记者|李晓青王健林的万达网络集团裁员进入了尾声阶段。澎湃新闻获悉，此前大量裁员的万达网络科技集团最后一批裁员已快要完成，裁员完成后，留下的原万达网科员工约300人将会去万达网科和腾讯系高朋科技成立的新公司。王健林开完万达201..." share-linkid="19869701" share-subject="挨踢1024">
+
+
+
+
+										<a href="javascript:;" class="digg-a" title="推荐"><span class="hand-icon icon-digg"></span><b>19</b><i style="display:none">19869701</i></a>
+
+
+									<a href="javascript:;" class="discus-a" id="discus-a-19869701" timetopool="2小时21分钟前" lang="19869701"><span class="hand-icon icon-discus"></span><b>24</b></a>
+
+
+										<a href="javascript:;" class="collect-a" id="collect-a-19869701" lang="19869701" title="加入私藏" destjid="" jid="qqtech"><span class="hand-icon icon-collect"></span><b>私藏</b></a>
+
+
+
+
+										<a href="/user/qqtech/submitted/1" class="user-a"><span><img src="//img3.chouti.com/group4/M03/99/32/wKgCDFF-KSKXKqRFAAAdo0o5kI8717=32x32.jpg?quality=80"></span><b>腾讯科技</b></a>
+
+									<span class="left time-into"><a class="time-a" href="/link/19869701" target="_blank"><b>2小时21分钟前</b></a><i>入热榜</i></span>
+									<!-- 分享各微博的按钮 -->
+
+								</div>
+								<!-- 评论区域 -->
+								<div class="comment-box-area" id="comment-box-area-19869701">
+								<div class="pinglun arrow" id="comt-arrow-19869701"></div>
+								<a class="pinglun close-comt" title="关闭" href="javascript:;" lang="19869701"></a>
+								<div class="corner comment-box" id="comment-box-19869701">
+
+									<div class="loading-ico loading-ico-top" id="loading-comment-top-19869701" style="margin-left:230px;">加载中，请稍候...</div>
+									<div class="comment-box-top" id="comment-box-top-19869701">
+										<div class="tip-1">最热评论(<span id="newestCount-19869701">3</span>)</div>
+										<div class="tip-2"><a href="/link/19869701" target="_blank"><em class="pinglun em1"></em><span>去评论页面</span></a></div>
+									</div>
+									<!-- 评论树形 -->
+									<ul class="filetree comment-list-top-2" id="comment-list-top-19869701"></ul>
+
+									<!-- 谣言类别显示相信还是置疑选项 -->
+
+
+									<!-- 判断该新闻评论是否关闭 -->
+
+
+									<!-- 评论输入框和回复框 -->
+									<div class="huifu-top-box" id="huifu-top-box-19869701">
+										<div class="box-l txt-input-area-div-top corner no-corner-bottom">
+                                            <div id="lab-comment-top-19869701" class="lab-comment-top">回复  <span id="nick--19869701"></span>:</div>
+											<!-- 针对谣言文本输入框无效 -->
+
+
+
+												<textarea lang="19869701" maxlength="150" name="txt-huifu-top" id="txt-huifu-top-19869701" class="txt-huifu txt-huifu-top"></textarea>
+
+
+										</div>
+										<div class="box-r">
+											<a id="pub-btn-top-19869701" lang="19869701" href="javascript:;" class="pub-icons add-pub-btn add-pub-btn-unvalid">评论</a>
+											<a id="pub-loading-top-19869701" href="javascript:;" class="loading-ico loading-ico-top pub-loading-top">发布中...</a>
+										</div>
+									</div>
+
+
+
+
+									<div class="tip-3" id="hidden-comt-19869701">
+										<a href="javascript:;" class="hiddenCom-Btn" lang="19869701"><em class="pinglun em2"></em><span>收起</span></a>
+									</div>
+									<div class="write-error-box-top">
+										<div class="write-error-desc" id="write-error-desc-19869701"></div>
+									</div>
+								</div>
+								<input type="hidden" id="hidsubjectid-19869701" value="100">
+								</div>
+
+
+							</div>
+
+						</div>
+
+
+
+        				<div class="item">
+
+        					<div class="timeIntoPool">1527550200023000,1527559219766000</div>
+
+								<div class="news-pic"><img lang="19869076" original="//img3.chouti.com/CHOUTI_20180529/92B70BCBC232496E9405EC7472485A85_W235H235=C120x120.gif?quality=80" src="/images/bai.png" alt="抽屉新热榜"></div>
+
+
+							<div class="null-item"></div>
+
+							<div class="news-content" id="newsContent19869076">
+								<div class="part1">
+										<a href="http://dig.chouti.com/pic/show?nid=cdcce777001a459d81c5b361bfb3ef24&amp;lid=19869076" class="show-content color-chag" target="_blank" onmousedown="linksClickStat(19869076);">
+
+
+
+
+
+
+
+													大家还记得那只被喜提的手基吗？这次他们全家去溶洞里玩了，平地的时候当然是自己走，然而遇到楼梯还是被粑粑喜提了
+
+
+										</a>
+
+									<!-- 段子和谣言类别不显示类别名称 -->
+
+										<a href="/r/pic/hot/1" class="n2"><span class="content-kind">图片</span></a>
+
+									<!-- 来源手机客户端 -->
+
+
+
+
+									<!-- 显示话题标签 -->
+
+										<a class="tag-huati-box" href="/topic/18" target="_blank"><span class="htTag-ico ht-box"><b class="htTag-ico htT1"></b><b class="htT3">喵了个汪</b></span><b class="htTag-ico  htT2"></b></a>
+
+								</div>
+								<!-- 显示摘要 -->
+
+								<div class="part2" share-pic="http://img3.chouti.com/CHOUTI_20180529/92B70BCBC232496E9405EC7472485A85_W235H235.gif" share-title="大家还记得那只被喜提的手基吗？这次他们全家去溶洞里玩了，平地的时候当然是自己走，然而遇到楼梯还是被粑粑喜提了" share-summary="" share-linkid="19869076" share-subject="图片">
+
+
+
+
+										<a href="javascript:;" class="digg-a" title="推荐"><span class="hand-icon icon-digg"></span><b>57</b><i style="display:none">19869076</i></a>
+
+
+									<a href="javascript:;" class="discus-a" id="discus-a-19869076" timetopool="2小时31分钟前" lang="19869076" onmousedown="linksClickStat(19869076);"><span class="hand-icon icon-discus"></span><b>14</b></a>
+
+
+										<a href="javascript:;" class="collect-a" id="collect-a-19869076" lang="19869076" title="加入私藏" destjid="" jid="wb_3167305545"><span class="hand-icon icon-collect"></span><b>私藏</b></a>
+
+
+
+
+										<a href="/user/wb_3167305545/submitted/1" class="user-a"><span><img src="//img3.chouti.com/CHOUTI_20180525/4426BECF87924AD398C38D6F6695C49E_W179H179=32x32.jpg?quality=80"></span><b>秋田六千</b></a>
+
+									<span class="left time-into"><a class="time-a" href="/link/19869076" target="_blank"><b>2小时31分钟前</b></a><i>入热榜</i></span>
+									<!-- 分享各微博的按钮 -->
+
+								</div>
+								<!-- 评论区域 -->
+								<div class="comment-box-area" id="comment-box-area-19869076">
+								<div class="pinglun arrow" id="comt-arrow-19869076"></div>
+								<a class="pinglun close-comt" title="关闭" href="javascript:;" lang="19869076"></a>
+								<div class="corner comment-box" id="comment-box-19869076">
+
+									<div class="loading-ico loading-ico-top" id="loading-comment-top-19869076" style="margin-left:230px;">加载中，请稍候...</div>
+									<div class="comment-box-top" id="comment-box-top-19869076">
+										<div class="tip-1">最热评论(<span id="newestCount-19869076">3</span>)</div>
+										<div class="tip-2"><a href="/link/19869076" target="_blank"><em class="pinglun em1"></em><span>去评论页面</span></a></div>
+									</div>
+									<!-- 评论树形 -->
+									<ul class="filetree comment-list-top-2" id="comment-list-top-19869076"></ul>
+
+									<!-- 谣言类别显示相信还是置疑选项 -->
+
+
+									<!-- 判断该新闻评论是否关闭 -->
+
+
+									<!-- 评论输入框和回复框 -->
+									<div class="huifu-top-box" id="huifu-top-box-19869076">
+										<div class="box-l txt-input-area-div-top corner no-corner-bottom">
+                                            <div id="lab-comment-top-19869076" class="lab-comment-top">回复  <span id="nick--19869076"></span>:</div>
+											<!-- 针对谣言文本输入框无效 -->
+
+
+
+												<textarea lang="19869076" maxlength="150" name="txt-huifu-top" id="txt-huifu-top-19869076" class="txt-huifu txt-huifu-top"></textarea>
+
+
+										</div>
+										<div class="box-r">
+											<a id="pub-btn-top-19869076" lang="19869076" href="javascript:;" class="pub-icons add-pub-btn add-pub-btn-unvalid">评论</a>
+											<a id="pub-loading-top-19869076" href="javascript:;" class="loading-ico loading-ico-top pub-loading-top">发布中...</a>
+										</div>
+									</div>
+
+
+
+
+									<div class="tip-3" id="hidden-comt-19869076">
+										<a href="javascript:;" class="hiddenCom-Btn" lang="19869076"><em class="pinglun em2"></em><span>收起</span></a>
+									</div>
+									<div class="write-error-box-top">
+										<div class="write-error-desc" id="write-error-desc-19869076"></div>
+									</div>
+								</div>
+								<input type="hidden" id="hidsubjectid-19869076" value="4">
+								</div>
+
+
+							</div>
+
+						</div>
+
+
+			</div>
+			<div class="no-bottom"></div>
+			<div id="page-area" class="page-area">
+					 <div id="dig_lcpage"><ul><li><span class="ct_pagepw">1</span></li><li><a href="/all/hot/recent/2" class="ct_pagepa">2</a></li><li><a href="/all/hot/recent/3" class="ct_pagepa">3</a></li><li><a href="/all/hot/recent/4" class="ct_pagepa">4</a></li><li><a href="/all/hot/recent/5" class="ct_pagepa">5</a></li><li><a href="/all/hot/recent/6" class="ct_pagepa">6</a></li><li><a href="/all/hot/recent/7" class="ct_pagepa">7</a></li><li><a href="/all/hot/recent/8" class="ct_pagepa">8</a></li><li><a href="/all/hot/recent/9" class="ct_pagepa">9</a></li><li><a href="/all/hot/recent/10" class="ct_pagepa">10</a></li><li><a href="/all/hot/recent/2" class="ct_page_edge">下一页</a></li></ul></div>
+			</div>
+
+		</div>
+
+		<div class="content-R">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="chat-area" id="chat-area" style="display:none">
+    <input class="islogin" value="" type="hidden">
+    <input class="slogan" value="性盛致灾，割以永治。" type="hidden">
+    <div class="chat" data-pswp-uid="1"><div class="chat-box"><div class="chat-mask"><div style="display:inline-block;width:30px;height:100%;background:white;"></div><div style="display:inline-block;width:30px;height:100%;background:#ededed;"></div><div style="position:absolute;width:300px;height:20px;background:white;left:-300px;top:-21px;"></div></div><div class="chat-main-box"><div class="chat-main-header"><div class="tab-public active" style="width:100%;border-top-radius:4px;">公共聊天</div></div><div class="chat-public-box"><div class="chat-public-content mCustomScrollbar _mCS_1 mCS-autoHide mCS_no_scrollbar" style="position: relative; overflow: visible;"><div id="mCSB_1" class="mCustomScrollBox mCS-minimal-dark mCSB_vertical mCSB_outside" style="max-height: 369px;" tabindex="0"><div id="mCSB_1_container" class="mCSB_container mCS_y_hidden mCS_no_scrollbar_y" style="position:relative; top:0; left:0;" dir="ltr"><ul></ul></div></div><div id="mCSB_1_scrollbar_vertical" class="mCSB_scrollTools mCSB_1_scrollbar mCS-minimal-dark mCSB_scrollTools_vertical" style="display: none;"><div class="mCSB_draggerContainer"><div id="mCSB_1_dragger_vertical" class="mCSB_dragger" style="position: absolute; min-height: 50px; top: 0px;" oncontextmenu="return false;"><div class="mCSB_dragger_bar" style="line-height: 50px;"></div></div><div class="mCSB_draggerRail"></div></div></div></div><div class="chat-sender"><div class="funcbar"><div class="btn btn-face"></div></div><div class="inputer"><textarea name="text"></textarea><div style="text-align:right;"><div class="btn btn-send" tar="chat-public-content" nick="undefined" jid="" img="undefined">发送</div></div></div></div></div><div class="chat-private-box" style="display:none;"><div class="func"><div class="btn btn-clearall">全部置为已读</div><div class="btn btn-setcoin">设置聊天门槛</div></div><div class="chat-private-content mCustomScrollbar _mCS_2 mCS-autoHide mCS_no_scrollbar" style="position: relative; overflow: visible;"><div id="mCSB_2" class="mCustomScrollBox mCS-minimal-dark mCSB_vertical mCSB_outside" style="max-height: 427px;" tabindex="0"><div id="mCSB_2_container" class="mCSB_container mCS_y_hidden mCS_no_scrollbar_y" style="position:relative; top:0; left:0;" dir="ltr"><ul><img style="display:block;margin:50% auto;" src="/images/wallet/chatlist_empty.png" class="mCS_img_loaded"></ul></div></div><div id="mCSB_2_scrollbar_vertical" class="mCSB_scrollTools mCSB_2_scrollbar mCS-minimal-dark mCSB_scrollTools_vertical" style="display: none;"><div class="mCSB_draggerContainer"><div id="mCSB_2_dragger_vertical" class="mCSB_dragger" style="position: absolute; min-height: 50px; top: 0px;" oncontextmenu="return false;"><div class="mCSB_dragger_bar" style="line-height: 50px;"></div></div><div class="mCSB_draggerRail"></div></div></div></div></div></div></div></div>
+</div>
+    <style>
+        .btn-notice:hover{
+            text-decoration:underline;
+        }
+
+
+    </style>
+
+    <div>
+        <a style="width:142px; height: 66px;" href="http://www.12377.cn/" target="_blank"><img src="/images/report.png"></a>
+        <a style="width:142px; height: 66px;margin-left: 10px;" href="/feedback?type=children" target="_blank"><img src="/images/report_children.png"></a>
+    </div>
+
+    <div style="margin-top:10px;"><a target="_blank" href="/help/notice" class="btn-notice" style="font-size:14px;font-weight:bold;color:#369;cursor:pointer;padding-left:30px;background:url(/images/view.png) no-repeat left center;height:20px;display:inline-block;">如何避免自己被封号</a></div>
+
+    <style>
+    .btn-newcate{
+        display: block;
+        color: white;
+        background-color: #015e98;
+        padding: 10px 0;
+        text-align: center;
+        margin-top: 10px;
+        cursor: pointer;
+    }
+    .btn-newcate:hover{
+        background-color: #087bb5;
+        text-decoration: underline;
+    }
+
+    .chat-message-notice{
+        position: absolute;
+        bottom: 0px;
+        left: 0px;
+        width: 282px;
+        height: 28px;
+        line-height: 28px;
+        padding: 0 8px;
+        background-color: rgba(197,223,254,.95);
+        cursor: pointer;
+    }
+    .chat-message-notice .headimg{
+        display: inline-block;
+        height: 18px;
+        width: 18px;
+        float: left;
+        background-image: url(/images/image48.png);
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+        border-radius: 50%;
+        position: relative;
+        top: 5px;
+        margin-right: 6px;
+    }
+    .chat-message-notice .nickname{
+        display: inline-block;
+        float: left;
+        color: #275ba0;
+        font-size: 12px;
+        margin-right: 8px;
+    }
+    .chat-message-notice .content{
+        display: inline-block;
+        width: auto;
+        height: 28px;
+        color: #515860;
+        font-size: 12px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+    .chat-message-notice .btn-close{
+        position: absolute;
+        right: 8px;
+        top: 11px;
+        height: 6px;
+        width: 6px;
+        background-image: url(/images/wallet/window_close.png);
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+    }
+    </style>
+    <!--<a onclick="newcate('');" class="btn-newcate">申请新分类</a>-->
+
+<a target="_blank" href="/download/model" id="download_bg">
+    <img src="/images/homepage_download.png">
+</a>
+<div class="top-band" id="top-band">
+    <em class="top-band-type" style="display: block;">24小时<em>全部</em><span> TOP 10</span></em>
+    <div class="top-band-title" style="display: block;">
+
+
+
+        <a class="no-comment-title">最热榜</a>
+        <em id="top-bandArrow" style="left: 145px;"></em>
+    </div>
+    <div id="top-content-news">
+
+    <div class="top-item">
+        <div class="top-points">
+            <a href="/link/19844246" class="points-a">255</a>
+        </div>
+        <a class="top-content" href="/link/19844246" target="_blank">【姜文：不被父母肯定的人，都不自信】最近一期“十三邀”姜文做嘉宾。许知远问他，你的人生有什么失败吗，姜文说有啊，我跟我妈的关系。在采访里，姜文说了件小事。他考上中戏，兴冲冲地告诉母亲，母亲把通知书往旁边一扔，说你看你衣服还没洗呢。姜文就去洗衣服了……</a>
+    </div>
+
+    <div class="top-item">
+        <div class="top-points">
+            <a href="/link/19865611" class="points-a">243</a>
+        </div>
+        <a class="top-content" href="/link/19865611" target="_blank">跟着昨天的视频学会的，五分钟教，我花了两天才做好。明天交去儿子学校，当手工作业。嘻嘻。</a>
+    </div>
+
+    <div class="top-item">
+        <div class="top-points">
+            <a href="/link/19839141" class="points-a">242</a>
+        </div>
+        <a class="top-content" href="/link/19839141" target="_blank">连解说员都忍不住笑了</a>
+    </div>
+
+    <div class="top-item">
+        <div class="top-points">
+            <a href="/link/19848881" class="points-a">219</a>
+        </div>
+        <a class="top-content" href="/link/19848881" target="_blank">现在的我？</a>
+    </div>
+
+    <div class="top-item">
+        <div class="top-points">
+            <a href="/link/19859271" class="points-a">199</a>
+        </div>
+        <a class="top-content" href="/link/19859271" target="_blank">在巴黎徒手爬4层楼解救遇险小孩的见义勇为者来自非洲国家马里，现年22岁，目前是无证移民。巴黎市长向他表示感谢，并支持他未来在法国定居的努力。马克龙在当面感谢了他后宣布，他将获得法国公民身份并且加入法国消防队。</a>
+    </div>
+
+    <div class="top-item">
+        <div class="top-points">
+            <a href="/link/19840071" class="points-a">194</a>
+        </div>
+        <a class="top-content" href="/link/19840071" target="_blank">关于堕胎，路易C.K.这样讲。 ​</a>
+    </div>
+
+    <div class="top-item">
+        <div class="top-points">
+            <a href="/link/19866676" class="points-a">184</a>
+        </div>
+        <a class="top-content" href="/link/19866676" target="_blank">祝你今晚睡得这样香 ​</a>
+    </div>
+
+    <div class="top-item">
+        <div class="top-points">
+            <a href="/link/19843526" class="points-a">151</a>
+        </div>
+        <a class="top-content" href="/link/19843526" target="_blank">狗子夜不归宿，主人担心得整晚没睡，天还没亮就拿着棍子在门口候着了！这场景感觉有点眼熟啊，可怜天下父母心……</a>
+    </div>
+
+    <div class="top-item">
+        <div class="top-points">
+            <a href="/link/19863186" class="points-a">122</a>
+        </div>
+        <a class="top-content" href="/link/19863186" target="_blank">小姐姐经过一群火鸡的时候打了声招呼，结果收到了火鸡们的热烈回应。这魔性的一波声浪~</a>
+    </div>
+
+    <div class="top-item">
+        <div class="top-points">
+            <a href="/link/19850941" class="points-a">117</a>
+        </div>
+        <a class="top-content" href="/link/19850941" target="_blank">匡扶摇：生活的小幅颠沛（流量+广告预警）</a>
+    </div>
+
+</div>
+    <div id="top-content-comments" style="display: none;">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </div>
+</div>
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="pswp__bg"></div>
+
+    <div class="pswp__scroll-wrap">
+
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- 条件判断,如果用户登录，则广告显示在最下面 -->
+<div style="height:200px;">
+    <iframe id="advertIframe" name="advertIframe" scrolling="no" height="200px" width="300px" frameborder="0" src="/advert">
+    </iframe>
+</div>
+<!-- 搞趣网精品推荐 -->
+<!--
+<div class="top-band" id="gao7-band">
+</div>
+-->
+
+		</div>
+
+	</div>
+</div>
+
+
+<div class="cover"></div>
+<div class="modal">
+    <form action="">
+        <p>姓名<input type="text"></p>
+        <p>密码<input type="text"></p>
+        <p><input type="submit" value="登录"></p>
+    </form>
+</div>
+</body>
+</html>

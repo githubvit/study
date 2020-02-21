@@ -1,0 +1,66 @@
+day59 2018-06-07
+
+1. 内容回顾
+	1. 今日面试题
+	
+	2. 昨日内容
+		1. 事件
+			1. 常用事件
+				1. hover(两个匿名函数)   --> 鼠标移上去 购物车显示出来
+				2. keydown和keyup        --> 批量编辑
+				3. change                --> select框值发生变化 
+				4. focus和blur           --> input框获取焦点和失去焦点
+				5. input                 --> input框的值发生变化
+			2. 绑定事件方式
+				详见 day59/02 绑定事件的方式.html
+				
+			3. 解除绑定事件(了解即可)
+				.off()
+			4. 文档准备就绪后再执行
+				$(document).ready(function(){...})
+			5. each和data
+				1. each()
+					1. $.each()
+					
+					2. jQuery对象.each()
+					
+					3. 退出当前循环
+						return
+					4. 退出整个each循环
+						return false
+				2. data
+					作业讲解		
+
+2. 今日内容
+	Bootstrap
+		1 下载文件
+		2. 栅格系统
+			1. container
+			2. row      --> 行
+			3. col-xx-**
+				xx: xs/sm/md/lg
+				**: 1~12
+			4. 列偏移
+			5. 列嵌套
+				在某一列中继续定义row,分成12份
+			6. 列排序
+		3. 常用样式
+		4. 图标
+			1. 自带
+			2. font awesome:http://www.fontawesome.com.cn/
+	
+
+3. 今日作业
+	1. 信息收集卡页面
+	2. 基于data()的编辑功能实现
+	
+	3. collections 模块里面的内容要看一下
+	   文件操作
+	   函数
+	   sorted()
+	   
+	4. MySQL基础语句
+	
+	
+永远不要高估自己！！！
+	   

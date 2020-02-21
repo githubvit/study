@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>批量操作</title>
+</head>
+<body>
+<table border="1">
+  <thead>
+  <tr>
+    <th>#</th>
+    <th>姓名</th>
+    <th>操作</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr>
+    <td><input type="checkbox"></td>
+    <td>Egon</td>
+    <td>
+      <select>
+        <option value="1">上线</option>
+        <option value="2">下线</option>
+        <option value="3">停职</option>
+      </select>
+    </td>
+  </tr>
+  <tr>
+    <td><input type="checkbox"></td>
+    <td>Alex</td>
+    <td>
+      <select>
+        <option value="1">上线</option>
+        <option value="2">下线</option>
+        <option value="3">停职</option>
+      </select>
+    </td>
+  </tr>
+  <tr>
+    <td><input type="checkbox"></td>
+    <td>Yuan</td>
+    <td>
+      <select>
+        <option value="1">上线</option>
+        <option value="2">下线</option>
+        <option value="3">停职</option>
+      </select>
+    </td>
+  </tr>
+  <tr>
+    <td><input type="checkbox"></td>
+    <td>EvaJ</td>
+    <td>
+      <select>
+        <option value="1">上线</option>
+        <option value="2">下线</option>
+        <option value="3">停职</option>
+      </select>
+    </td>
+  </tr>
+  <tr>
+    <td><input type="checkbox"></td>
+    <td>Gold</td>
+    <td>
+      <select>
+        <option value="1">上线</option>
+        <option value="2">下线</option>
+        <option value="3">停职</option>
+      </select>
+    </td>
+  </tr>
+  </tbody>
+</table>
+
+<input type="button" id="b1" value="全选">
+<input type="button" id="b2" value="取消">
+<input type="button" id="b3" value="反选">
+
+<script src="jquery-3.3.1.min.js"></script>
+
+
+<script>
+
+    let flag = false;
+    // 如何获取用户按下那个按键
+    $(window).on("keydown", function (e) {
+        console.log(e.keyCode);
+        if (e.keyCode === 16){
+            flag = true;
+        }
+    });
+
+    // 绑定一个按键抬起的事件
+    $(window).on("keyup", function (e) {
+        console.log(e.keyCode);
+        if (e.keyCode === 16){
+            flag = false;
+        }
+    });
+
+    // 找到 select标签 绑定 change事件
+    $("select").on("change", function () {
+        // 拿到当前select标签的值
+        let v = $(this).val();
+        // 判断一下当前行是否被选中
+        let isCheck = $(this).parent().parent().find("input:checkbox").prop("checked");
+        // 如果是批量编辑模式，就要找到所有被选中的行，然后将其select置为和我一样的值
+        if (flag && isCheck){
+            // 找到所有被选中的行
+//            let $allChecked = $("input:checked");
+//            for (let i=0;i<$allChecked.length;i++){
+//                $($allChecked[i]).parent().parent().find("select").val(v);
+//            }
+
+            // 使用each循环
+            $("input:checked").each(function () {
+              $(this).parent().parent().find("select").val(v);
+            })
+        }
+        // 如果不是批量编辑模式，什么都不干
+    });
+
+</script>
+</body>
+</html>

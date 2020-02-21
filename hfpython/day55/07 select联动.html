@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+
+<select id="province">
+    <option>请选择省:</option>
+</select>
+
+<select id="city">
+    <option>请选择市:</option>
+</select>
+
+<script>
+    var s1Ele = document.getElementById("province");
+    var s2Ele = document.getElementById("city");
+
+    var data = {"上海": ["黄浦区", "静安区"], "北京": ["朝阳区", "海淀区"], "山东": ["威海市", "烟台市"]};
+    // 将省直辖市数据填充到第一个select中
+    for (let k in data) {
+        console.log(k);
+        // 创建option标签
+        let tmp = document.createElement("option");
+        tmp.innerText = k;
+        // 将创建的tmp添加到 第一个select中
+
+        s1Ele.appendChild(tmp);
+    }
+
+    // 当第一个select框的值发生变化之后才去更新第二个select框
+    s1Ele.onchange = function () {
+        // 清空第二个select框的option选项
+        s2Ele.innerHTML = "";
+        let p = document.createElement("option");
+        p.innerText = "请选择市";
+        s2Ele.appendChild(p);
+        // 拿到第一个select框的值是什么
+        console.log(this.value);
+        let provine = this.value;
+
+        // 将北京对应的区信息 填充到第二个select中
+        for (let i = 0; i < data[provine].length; i++) {
+            let tmp = document.createElement("option");
+            tmp.innerText = data[provine][i];
+            s2Ele.appendChild(tmp);
+        }
+    }
+
+
+</script>
+</body>
+</html>

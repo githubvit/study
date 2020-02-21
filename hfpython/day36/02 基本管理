@@ -1,0 +1,85 @@
+1、安装
+
+2、加环境变量
+
+3、把mysqld软件做成系统服务
+    注意：制作之前先把mysqld关掉
+    C:\Windows\system32>tasklist |findstr mysqld
+    mysqld.exe                    8372 Console                    2    454,916 K
+
+    C:\Windows\system32>taskkill /F /PID 8372
+    成功: 已终止 PID 为 8372 的进程。
+
+
+    制作：
+        mysqld --install
+
+        查看：
+            windows+r
+            输入services.msc
+
+4、启动：
+    未制作系统服务的启动方式：
+        1、启动服务端
+            mysqld
+
+        2、启动客户端
+            mysql -uroot -p -h127.0.0.1 -P 3306
+            如果是在本机登录mysqld服务端可以简写：
+                mysql -uroot -p
+
+    制作完系统服务后就可以鼠标点击启动或关闭mysql：
+        windows+r
+        输入services.msc
+        找到mysql，启动或关闭
+
+
+
+5、破解管理员密码
+    1、先关闭mysqld服务端
+    2、以跳过授权表的方式在命令行中启动mysqld服务端
+        mysqld --skip-grant-tables
+
+    3、客户端直接以无密码的方式登录root用户,修改密码
+        mysql -uroot -p
+
+
+
+        mysql> update mysql.user set password=password("123") where user="root" and host="localhost";
+        Query OK, 0 rows affected (0.00 sec)
+        Rows matched: 1  Changed: 0  Warnings: 0
+
+        mysql> flush privileges;
+        Query OK, 0 rows affected (0.00 sec)
+
+    4、在命令行中用taskkill杀死mysqld服务，然后正常启动mysqld
+        taskkill /F /PID 131312
+
+
+
+
+
+
+        def password(mingwen):
+            import hashlib
+            m=hashlib.md5()
+            m.update(mimgwen)
+            return m.hexdigest()
+
+
+
+6、统一字符编码
+    1、在mysql安装目录下新建my.ini文件
+    2、修改my.ini
+        [mysqld]
+        character-set-server=utf8
+        collation-server=utf8_general_ci
+
+        [client]
+        default-character-set=utf8
+
+        [mysql]
+        default-character-set=utf8
+
+    3、重启mysqld
+    4、客户端登录，输入\s查看结果

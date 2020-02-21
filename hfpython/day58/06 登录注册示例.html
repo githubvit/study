@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>登录注册示例</title>
+    <style>
+        .error {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+
+
+<form action="">
+    <p>
+        <label for="username">用户名</label>
+        <input type="text" id="username" name="username">
+        <span class="error"></span>
+    </p>
+    <p>
+        <label for="pwd">密码</label>
+        <input type="password" id="pwd" name="pwd">
+        <span class="error"></span>
+    </p>
+
+    <p>
+        <input type="submit" id="b1" value="登录">
+    </p>
+</form>
+<script src="jquery-3.3.1.min.js"></script>
+<script>
+    $("#b1").click(function () {
+        var flag = true;
+        $(".error").text("");
+
+        var $username = $("#username");
+        var $pwd = $("#pwd");
+        // 取input框的值判断长度是否为0
+        if ($username.val().length === 0){
+            // 用户名没有输入, 提示
+            $username.next().text("用户名不能为空！");
+            flag = false;
+        }
+        if ($pwd.val().length === 0){
+            // 用户名没有输入, 提示
+            $pwd.next().text("密码不能为空！");
+            flag = false;
+        }
+        return flag;  // 阻止后续事件的执行
+    })
+</script>
+</body>
+</html>

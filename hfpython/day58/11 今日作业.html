@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>今日作业</title>
+    <style>
+        .cover {
+            position: fixed;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            background-color: rgba(0, 0, 0, 0.4);
+            z-index: 9;
+        }
+
+        .modal {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            height: 300px;
+            width: 400px;
+            background-color: white;
+            z-index: 100;
+            margin-top: -150px;
+            margin-left: -200px;
+        }
+
+        .hide {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+<button id="add">新增</button>
+
+<table border="1">
+    <thead>
+    <tr>
+        <th>#</th>
+        <th>姓名</th>
+        <th>爱好</th>
+        <th>操作</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>1</td>
+        <td>Egon</td>
+        <td>喊麦</td>
+        <td>
+            <input type="button" value="编辑" class="edit">
+            <input type="button" value="删除" class="delete">
+        </td>
+    </tr>
+    <tr>
+        <td>2</td>
+        <td>Alex</td>
+        <td>吹牛逼</td>
+        <td>
+            <input type="button" value="编辑" class="edit">
+            <input type="button" value="删除" class="delete">
+        </td>
+    </tr>
+    <tr>
+        <td>3</td>
+        <td>苑昊</td>
+        <td>不洗头</td>
+        <td>
+            <input type="button" value="编辑" class="edit">
+            <input type="button" value="删除" class="delete">
+        </td>
+    </tr>
+
+    </tbody>
+</table>
+
+
+<div class="cover hide"></div>
+<div class="modal hide">
+    <p><input type="text" id="username"></p>
+    <p><input type="text" id="hobby"></p>
+    <p>
+        <button id="submit">提交</button>
+        <button id="cancel">取消</button>
+    </p>
+</div>
+
+<script src="jquery-3.3.1.min.js"></script>
+<script>
+
+    // 定义一个隐藏模态框的函数
+    function hideModal() {
+        $(".cover, .modal").addClass("hide");
+    }
+
+    function showModal() {
+        $(".cover, .modal").removeClass("hide");
+    }
+
+    $("#add").click(function () {
+        // 点击新增按钮要做的事儿
+        // 1. 弹出模态框
+        showModal();
+    });
+
+
+    $("#submit").click(function () {
+        // 点击提交按钮要做的事儿
+        // 1. 取值，取模态框中用户填写的值
+        let username = $("#username").val();
+        let hobby = $("#hobby").val();
+
+        // 2. 隐藏模态框
+        hideModal();
+
+        // 需要作判断
+        // 如果是新增操作
+        // $().data("tr") 返回值如果是undefined就表示 不是编辑操作
+
+            // 3. 创建tr标签， 追加td， 要拼接序号和用户填写的信息
+            let trEle = document.createElement("tr");
+            let td1 = document.createElement("td");
+            td1.innerText = $("table tr").length;
+            $(trEle).append(td1);
+            let td2 = document.createElement("td");
+            td2.innerText = username;
+            $(trEle).append(td2);
+            let td3 = document.createElement("td");
+            td3.innerText = hobby;
+            $(trEle).append(td3);
+            // clone
+    //        $("table td").last().clone().appendTo(trEle);
+            let td4 = document.createElement("td");
+            td4.innerHTML = `
+               <input type="button" value="编辑" class="edit">
+               <input type="button" value="删除" class="delete">
+    `;
+            $(trEle).append(td4);
+            // 4. 追加到table tbody标签的最后
+            $("tbody").append(trEle);
+
+        // 如果是编辑操作
+            // 拿到用户编辑之后的值 ，要将编辑的当前行指定位置的数据更新一下
+            // 从 .data()中取出之前保存的 那一行
+
+
+    });
+
+
+//    $("#cancel").click(function () {
+//        // 点击取消
+//        // 1. 把模态框隐藏
+//        hideModal();
+//        // 2. 把之前填写的清空掉
+//        $("#username, #hobby").val("");
+//    });
+
+    $("#cancel").on("click", function () {
+        // 点击取消
+        // 1. 把模态框隐藏
+        hideModal();
+        // 2. 把之前填写的清空掉
+        $("#username, #hobby").val("");
+    });
+
+
+//    $(".delete").click(function () {
+//        // 删除按钮点击要做的事儿
+//        // 1.更新序号...
+//        // 把当前行后面的所有tr的第一个td的值-1
+//        let $currentTr = $(this).parent().parent();
+//        let $nextAllTr = $currentTr.nextAll();
+//        for (let i = 0; i < $nextAllTr.length; i++) {
+//            let n = $($nextAllTr[i]).children().first().text();
+//            $($nextAllTr[i]).children().first().text(n - 1);
+//        }
+//        // 2. 把当前点击按钮所在的行 删掉
+//        $currentTr.remove();
+//    });
+
+    // 事件委托
+    $("table").on("click", ".delete", function () {
+        // 删除按钮点击要做的事儿
+        // 1.更新序号...
+        // 把当前行后面的所有tr的第一个td的值-1
+        let $currentTr = $(this).parent().parent();
+        let $nextAllTr = $currentTr.nextAll();
+        for (let i = 0; i < $nextAllTr.length; i++) {
+            let n = $($nextAllTr[i]).children().first().text();
+            $($nextAllTr[i]).children().first().text(n - 1);
+        }
+        // 2. 把当前点击按钮所在的行 删掉
+        $currentTr.remove();
+    });
+
+
+    // 点击编辑按钮要做的事儿
+    $("table").on("click", ".edit", function () {
+        // 弹出模态框
+        showModal();
+        // 取到 点击的编辑按钮 那一行的值 填充到模态框的input中
+        // this  --> 当前点击的编辑按钮
+
+        // 把当前编辑的这一行 jQuery对象 保存到.data("tr", $())里面
+    })
+
+</script>
+</body>
+</html>

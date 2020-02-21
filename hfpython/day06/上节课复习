@@ -1,0 +1,73 @@
+上节课复习
+    元组：相当于不可变的列表
+        定义：
+            t=(1,2,'a')
+
+        补充：
+            t=(1,'a',[1,2,])
+
+        用途：当存放的多个值，只有读的需求，没有改的需求时，可以用元组
+
+        常用操作：
+            依赖索引
+                t=(1,2,'a')
+                i=0
+                while i < len(t):
+                    print(t[i])
+                    i+=1
+
+                for i in range(len(t)):
+                    print(t[i])
+
+
+
+            不依赖索引
+                for item in t:
+                    print(item)
+
+                list('hello')
+                tuple()
+                set()
+
+    字典：
+        定义：
+            d={'x':1} #key：必须为不可变类型,value:任意类型
+        用途：
+            存多个值，每一个都有一个映射关系
+            egon={
+                'name':'egon',
+                'age':18,
+                'hobbies':['read','music','play']
+            }
+        常用操作：
+            'name' in egon
+             for k in egon:
+                print(k,egon[k])
+             for k in egon.keys():
+                print(k)
+             for v in egon.values():
+                print(v)
+             for k,v in egon.items():
+                 print(k,v)
+    集合：
+        定义：
+            s={1，1，1}
+        注意：
+            集合无序
+            集合内元素不能重复
+            集合内的元素必须为不可变类型，但set集合是可变
+        用途：
+            集合使用来进行关系元素，单独取集合的某一个元素是没有意义，也没有相应的方法
+            交集：s1 & s2取两个集合的共同部分
+            差集：s1-s2，结果存于s1而不存于s2的元素集合
+            补集：s1 ^ s2，扣掉s1与s2共同部分，剩下的部分合到一起
+            并集：s1 | s2把两个合到一起，去掉重复
+
+
+
+今日内容
+    字符编码
+
+
+
+    文件处理

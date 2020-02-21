@@ -1,0 +1,39 @@
+#字符串
+x='abcdef字' #x=str('abc')
+
+x[0:3:2]
+len(x)
+'bc' in x
+x.strip()
+l='get|a.txt|333'.split('|') #['get', 'a.txt', '333']
+l_new='|'.join(l) #'get'+'|'+'a.txt'+'|'+ '333'
+
+#依赖索引
+for i in range(0,len(x)):
+    print(x[i])
+
+i=0
+while i < len(x):
+    print(x[i])
+    i+=1
+
+
+#不依赖索引
+for item in x:
+    print(item)
+
+#格式化字符串
+'my name is %s' %('egon',)
+'my name is {} {} {}'.format('a','b','c')
+'my name is {0} {1} {1}'.format('a','b','c')
+'my name is {x} {y} {z}'.format(z='aaaa',y='bbb',x='ccccc')
+
+
+#列表
+
+goods=['mac','apple','iphone','tesla']
+
+'mac' in goods
+goods.remove('apple')
+goods.pop(-1)
+goods.pop(-1)

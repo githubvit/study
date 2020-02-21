@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form action="https://www.baidu.com" method="get">
+   <fieldset>
+       <legend>注册页面</legend>
+        <p>
+            用户名：
+            <input type="text" name="username">
+            密码：
+            <input type="password" name="password">
+        </p>
+        <p>
+            性别：
+            <input type="radio" name="gender" value="male" id="ml"><label for="ml">男</label>
+            <input type="radio" name="gender" value="female" id="fl"><label for="fl">女</label>
+        </p>
+        <p>
+            爱好:
+            <input type="checkbox" name="hobbies" value="basketball" id="bb"><label for="bb">篮球</label>
+            <input type="checkbox" name="hobbies" value="football" checked id="fb"><label for="fb">足球</label>
+            <input type="checkbox" name="hobbies" value="pingpang" checked id="pp"><label for="pp">乒乓球</label>
+        </p>
+        <p>
+            <!--
+            城市：
+            <select name="city" id="" size="2" multiple="multiple">
+                <option value="BJ">北京</option>
+                <option value="SH">上海</option>
+                <option value="SZ" selected="selected">深圳</option>
+                <option value="GZ">广州</option>
+            </select>
+            -->
+            城市：
+            <select name="city" id="" style="width: 200px">
+                <optgroup label="一线城市">
+                    <option value="BJ">北京</option>
+                    <option value="SH">上海</option>
+                    <option value="SZ" selected="selected">深圳</option>
+                    <option value="GZ">广州</option>
+                </optgroup>
+                <optgroup label="二线城市">
+                    <option value="BJ">济南</option>
+                    <option value="SH">苏州</option>
+                    <option value="SZ" selected="selected">南京</option>
+                    <option value="GZ">成都</option>
+                </optgroup>
+
+            </select>
+        </p>
+
+
+        <p>
+            <input type="submit" value="注册">
+            <!--<input type="button" value="注册" onclick="alert(123)">-->
+            <!--<input type="image" src="images/1.jpg" onclick="alert(111111)">-->
+            <!--<input type="reset" value="重置" >-->
+        </p>
+   </fieldset>
+
+
+</form>
+
+</body>
+</html>

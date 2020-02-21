@@ -1,0 +1,76 @@
+上节课复习
+    1、hashlib
+        什么是hash：hash是一种算法，该算法用来校验一段内容，得到一串hash值，hash具有以下特点
+        1、只要传入的内容一样，得到的hash值必然一样---------》校验文件的完整性
+        2、不能反解--------》可以对明文密码进行hash校验，用得到的hash值进行传输
+        3、只要hash算法一定，无论校验内容有多大，hash值的长度不变-----》hash值的大小并不会影响到网络传输
+
+        import hashlib
+
+        m=hashlib.md5()
+        m.update(b'hello')
+        m.update(b'1')
+        m.update(b'2')
+        m.hexdigest() #b'hello12'
+        m.update(b'3')
+        m.update(b'4')
+        m.hexdigest() # b'hello1234'
+
+
+    2、subprocess
+        用来执行系统命令
+        obj=subprocess.Popen(
+            'dir',
+            shell=True,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+        )
+
+        obj.stdout.read().decode('gbk')
+        obj.stderr.read()
+
+
+    3、面向对象
+        面向对象核心是对象二字，对象是特征与技能的结合体，基于面向对象编写程序
+        就好比在创造 一个世界，你就是这个世界上帝，也就说，上帝需要创造出一个个的具体
+        存在的对象，程序的执行就是由对象直接交互完成
+
+        优点：可扩展性强
+        缺点：编程的复杂度远高于面向过程
+
+
+
+        对象是特征与技能的结合体，在程序中
+        特征：变量
+        技能：函数
+
+        类是一系列对象相似的特征与技能的结合体
+
+    4、定义类
+        1、在现实生活中：现实中对象-----总结归纳------》现象中类
+        2、在程序中：必须先定义类------》调用类------》对象
+        class OldboyStudent:
+            # 对象们相似的特征
+            school="oldboy"
+            # 对象们相似的技能
+            def learn(self):
+                print('is learning')
+
+        在类定义阶段就会立刻执行类体代码，会产生类的名称空间，将执行类体代码过程中产生的名字
+        存放于类的名称空间，如何查看
+        OldboyStudent.__dict__
+        OldboyStudent.__dict__['school']
+        OldboyStudent.school # OldboyStudent.__dict__['school']
+        OldboyStudent.learn
+        OldboyStudent.learn(123)
+
+
+
+
+今日内容：
+    1、实例化产生对象
+    2、对象属性的查找
+    3、绑定方法
+    4、一切皆对象
+
+    5、继承

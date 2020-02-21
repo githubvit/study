@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="bootstrap-3.3.7/css/bootstrap.min.css">
+    <style>
+        .red {
+            background-color: red;
+            height: 100px;
+            border: 1px solid green;
+        }
+
+        .red2 {
+            height: 200px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="row">
+        <div class="col-xs-6 col-sm-3 red red2">.col-xs-6 .col-sm-3</div>
+        <div class="col-xs-6 col-sm-3 red">.col-xs-6 .col-sm-3</div>
+
+        <!-- Add the extra clearfix for only the required viewport -->
+        <div class="clearfix visible-xs-block"></div>
+
+        <div class="col-xs-6 col-sm-3 red">.col-xs-6 .col-sm-3</div>
+        <div class="col-xs-6 col-sm-3 red">.col-xs-6 .col-sm-3</div>
+
+    </div>
+
+
+    <div class="row">
+        <div class="col-md-6 red col-md-offset-6"></div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-8 red col-md-push-4"></div>
+        <div class="col-md-4 red col-md-pull-8"></div>
+    </div>
+</div>
+
+
+</body>
+</html>

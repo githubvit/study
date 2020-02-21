@@ -1,0 +1,45 @@
+# 今日面试题
+
+设计 图书管理系统 表结构：
+        - 书
+            - pk
+            - 书名
+        - 作者
+            - pk
+            - 姓名
+        - 出版社
+            - pk
+            - 出版社名称
+            - 地址
+
+    一本书只能由一家出版社出版                  --> 多对一（书对出版社）
+    一本书可以有多个作者，一个作者也可以写多本书  --> 多对多
+
+
+CREATE TABLE book (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    title VARCHAR(64),
+    publisher_id INT,
+    FOREIGN KEY(publisher_id) REFERENCES publisher(id)
+    );
+
+
+CREATE TABLE author (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(32)
+    );
+
+
+CREATE TABLE book2author (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    book_id INT,
+    author_id INT,
+    FOREIGN KEY(book_id) REFERENCES book(id),
+    FOREIGN KEY(author_id) REFERENCES author(id)
+    );
+
+CREATE TABLE publisher (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(64),
+    addr VARCHAR(255)
+    );

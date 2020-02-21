@@ -1,0 +1,150 @@
+day54 2018-05-31
+
+1. 内容回顾
+	1. 今日面试题
+		1. Python中字符串的格式化（%、format），你一般用哪种？为什么？
+		Blog: https://www.cnblogs.com/liwenzhou/p/8570701.html
+			1. 简单的用%,超过两个值一般都用format
+		
+	2. 昨日内容回顾
+		1. JS
+			1. JS引用方式
+				1. 直接写在HTML中的script标签中
+				2. 写在单独的JS文件中，在HTML中通过script标签的src属性导入
+				
+			2. 语法规范
+				1. 注释
+				2. 语句结束要加;  对缩进无要求
+			3. 变量
+				1. 变量名： 字母、数字、下划线、$
+				2. 声明变量: var 、let
+				3. 声明常用：const
+				
+			4. 数据类型
+				ES5中有6种数据类型：
+				1. string
+					字符串的常用属性和方法
+						.length
+						。。。
+					字符串转换为数值 
+						1. parseInt("123")     --> 123
+						2. parseFloat("11.22") --> 11.22
+						3. parstInt("张曌")    --> NaN
+				2. number
+					NaN    --> Not a Number
+				3. 布尔值
+				4. null
+				5. undefined
+				6. object
+					数组
+						数组的常用属性和方法
+						.length
+						。。。
+						.sort()
+				
+				判断类型
+					typeof 变量名
+					
+					typeof NaN       ---> number
+					typeof null      ---> object
+					typeof undefined ---> undefined
+					
+					typeof [11,22]   ---> object
+			
+			
+			5. 流程控制
+				1. 条件判断
+					1. if ... else ...
+					2. if ... else if ... else ...
+					3. switch (需要判断的值){
+						case "A"：
+							...;
+							break;
+						case 2:
+					}
+				2. 循环
+					1. for (var i=0;i<5;i++){
+						...
+					}
+					2. for (1===1;;){
+						...
+					}
+					3. while (条件){
+					  ...
+					}
+				3. 三元运算
+					1. 一个条件的
+						a > b ? 100:10   --> a>b的话，冒号前面的值，否则冒号后面的值
+					2. 两个条件的
+						a > b ？100:(c===1)? 200:10
+				
+			6. 运算符
+				1. 算数运算符
+				2. 逻辑运算符   && || ！
+				3. 赋值运算符   = += -= *= /=
+				4. 比较运算符   > < >= <= == != === !==
+				
+			7. 函数
+				1. 函数定义
+					1. function f1(){...}
+					2. var f1 = function(){...}
+					3. function f1(a,b){...}
+					4. function f1(a,b){
+						return a+b;
+						return a, b  只能返回一个值
+						return [a,b]  
+					}
+					5. (function(a,b){
+						return a+b
+						})(10,20)
+						
+					6. 箭头函数
+						var f = a=>a+10;
+						
+						function f(a){
+						 return a+10
+						}
+						
+2. 今日内容
+	1. 自定义对象（类似Python的字典）
+	2. Date对象
+	3. JSON对象
+		1. JSON.parse()     字符串 -> JS对象
+		2. JSON.stringify() JS对象 -> 字符串
+	4. RegExp对象
+		Python正则表达式相关：https://q1mi.github.io/PythonBlog/post/about_re/
+		1. 两种方式
+			1. var reg1 = new RegExp('[a-zA-Z][a-zA-Z0-9]{5,11}')
+			2. var reg2 = /[a-zA-Z][a-zA-Z0-9]{5,11}/
+		2. 三个坑
+			1. 不要加空格
+			2. 全局模式g不要乱用
+			3. test()不传值相当于传undefined,会按照'undefined'处理
+	5. Math
+		数学计算相关
+
+BOM  Browser Object Model	
+
+	1. location 
+		location.href   			  --> 获取当前访问的URL
+		location.href = "具体的URL"   --> JS代码控制浏览器跳转到具体的URL
+		location.reload()             --> 重新加载当前页面
+		
+	2.  var t = setTimeout(要做的事儿, 毫秒数)     --> 多少毫秒之后做什么事儿
+		clearTimeout(t)
+		
+		
+		var t = setInterval(要做的事儿, 毫秒数)    --> 每隔多少毫秒就做什么事儿
+		clearInterval(t)
+		
+3. 作业
+	1. 上课讲的JS对象整理好博客
+	2. BOM课上的内容自己敲一下
+	3. 继续写小米商城
+	4. 预习DOM https://www.cnblogs.com/liwenzhou/p/8011504.html
+	
+		
+				
+				
+			
+		

@@ -1,0 +1,4 @@
+#name,age,height,sex,beutiful
+egon,18,180,male,True
+alex,73,150,male,False
+wxx,83,160,male,False

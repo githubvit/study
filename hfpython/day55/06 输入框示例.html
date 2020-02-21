@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<input type="text" id="i1" value="海飞丝" onfocus="f(this);">
+
+<input type="text" id="i2" value="辣条" onfocus="f(this);">
+
+
+<script>
+
+    function f(ths) {
+        ths.value = "";
+    }
+
+//    // 给i1设置获取光标的事件，
+//    var i1Ele = document.getElementById("i1");
+//    i1Ele.onfocus = function () {
+//        // 将自己的value值置为""
+//        this.value = "";
+//    };
+//    // 给i1绑定一个失去光标焦点的事件
+//    i1Ele.onblur = function () {
+//        this.value = "海飞丝";
+//    }
+</script>
+</body>
+</html>

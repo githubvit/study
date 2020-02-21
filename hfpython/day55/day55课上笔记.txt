@@ -1,0 +1,166 @@
+day55 2018-06-01
+
+1. 内容回顾
+	1. 今日面试题
+		列表推导式  可以双层！！！
+	2. 内容回顾
+		1. 了解JS的词法分析
+		2. JS中的对象
+			1. 自定义对象 --> 有点类似Python中的字典
+				1. key只能是字符串
+				2. 根据key取值有两种方式
+					var a = {"name": "Egon", "age": 18}
+					- a.name
+					- a["name"]
+				3. 自定义对象的遍历
+					for (let key in a):
+						console.log(key, a[key])
+			2. 内置对象    类比记忆 Python中的内置模块
+				1. Date
+					var d1 = new Date();
+					1. 获取星期: d1.getDay()
+					2. 获取月份：d1.getMonth()  取值范围：0~11
+
+					var d1 = new Date();
+					d1.toLocaleString()
+					"2018/6/1 上午9:10:34"
+					d1.toUTCString()
+					"Fri, 01 Jun 2018 01:10:34 GMT
+				2. JSON
+					1. JS对象转换成JSON字符串
+						var a = {"name": "Egon", "age": 18}
+						var ret = JSON.stringify(a)
+						
+					2. JSON字符串  --> JS对象
+						var s = '{"name": "Egon", "age": 18}'
+						var ret = JSON.parse(s)
+				3. RegExp 
+					1. 两种创建方式 
+						1. var reg1 = new RegExp('[a-zA-Z]{5,11}');
+						2. var reg2 = /[a-zA-Z]{5,11}/;
+					2. 几种常见用法
+						reg2.test("字符串")  --> true/false
+						"Egon dsb e".replace("e", "哈哈")
+							"Egon dsb 哈哈"
+						"Egon dsb e".replace(/e/, "哈哈")
+							"Egon dsb 哈哈"
+						"Egon dsb e".replace(/e/i, "哈哈")
+							"哈哈gon dsb e"
+						"Egon dsb e".replace(/e/gi, "哈哈")
+							"哈哈gon dsb 哈哈"
+					3. 三个坑
+						1. 正则表达式中间不要加空格！！！
+						2. 谨慎使用全局匹配模式
+							var reg3 = /[a-zA-Z]{5,11}/g;
+							reg3.test("egondsb")
+								true
+							reg3.lastIndex
+								7
+							reg3.test("111111egondsb")
+								true
+						3. test()不传参数的时候会默认传undefined,内部将undefined当成"undefined"去处理
+							var reg3 = /[a-zA-Z]{5,11}/;
+							reg3.test()
+								true
+							reg3.test(undefined)
+								true
+							reg3.test("undefined")
+								true
+				4. Math
+					1. Math.random()    --> 返回0到1的随机数
+					2. Math.floor()     --> 向下取整
+					3. Math.round()     --> 四舍五入
+					4. Math.pow(2,10)
+					
+		3. BOM （Browser Object Model）	
+			通过BOM，我们的JS就能够操作浏览器
+			
+			1. location对象
+				location.href            --> 获取当前访问的URL
+				location.href="具体的URL"--> 通过JS实现跳转
+				location.reload()        --> 重新加载当前页面
+				
+			2. alert()
+			
+			3. 计时相关
+				1. var t = setTimeout("要做的事儿", 毫秒数)
+					在指定的毫秒数之后做什么事儿！
+					clearTimeout(t)    --> 清除
+				2. var t = setInterval("要做的事儿", 毫秒数)
+					每隔指定的毫秒数就做一次指定的事儿
+					clearInterval(t)   --> 清除
+							
+				
+2. 今日内容
+	1. DOM  (Document Object Model)
+	
+	 JS通过 DOM 就可以操作我的html页面（标签、标签css样式、页面上的事件）
+	 
+	2. 分两步
+		1. JS找标签
+			1. 直接查找
+			
+			2. 间接查找
+			
+		
+		2. JS操作
+			1. 创建一个标签
+				document.createElement("div")
+			
+			2. 设置标签的属性
+				两种方式：
+					1. d1Ele.setAttribute("id", "i1")
+					2. imgEle.src = "hlw.png"
+				2. 获取属性
+					divEle.getAttribute("age") 
+				3. 删除属性
+					divEle.removeAttribute("age")
+			
+			3. 将创建的标签追加到文档中
+				1. 在父标签内部追加新的标签
+					父标签.appendChild(新的标签)
+				2. 在父标签内部在某个子标签的前面插入新标签
+					父标签.insertBefore(新标签, 某个子标签)
+					
+				3. 删除节点
+				
+				3. 替换节点
+			
+			4. 获取文档内容和设置文档内容
+				innerText            --> 获取文本内容
+				innerText = "内容"   --> 不认识HTML标签
+				
+				innerHTML            --> 获取所有内部文档内容
+				innerHTML = "内容"   --> 可以认识HTML标签
+				
+			5. 修改HTML样式
+				1. 直接修改样式
+				
+				2. 通过class修改样式
+				
+			6. 事件
+			
+				1. 两种绑定事件的方式
+				
+				2. 涉及到DOM操作的JS代码都应该放在body标签的最下面！！！
+				
+				
+				3. this指的是出发当前事件的标签对象
+				
+				4. 常用事件示例
+					1. onclick
+					2. onfocus和onblur
+					3. onchange
+		
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+			

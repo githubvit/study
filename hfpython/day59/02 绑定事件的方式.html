@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>绑定事件的方式</title>
+</head>
+<body>
+
+<button id="b1" onclick="foo();">b1按钮</button>
+
+<input type="button" id="b2" value="b2按钮">
+<input type="button" id="b3" value="b3按钮">
+<input type="button" id="b4" value="b4按钮">
+<input type="button" id="b5" value="b5按钮">
+
+<script src="jquery-3.3.1.min.js"></script>
+<script>
+    function foo() {
+        console.log(123);
+    }
+
+    // 使用JS绑定事件
+    document.getElementById("b2").onclick = function () {
+        foo();
+    };
+
+    // jQuery绑定事件的方式1
+    $("#b3").click(function () {
+        foo();
+    });
+
+    // jQuery绑定事件的方式2
+    $("#b4").on("click", function () {
+        foo();
+    });
+
+
+    // jQuery绑定事件的方式3 事件委托
+    $("body").on("click", "#b5", function () {
+        foo();
+    });
+
+</script>
+
+</body>
+</html>

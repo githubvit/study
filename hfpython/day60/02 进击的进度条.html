@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>进度条</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="bootstrap-3.3.7/css/bootstrap.min.css">
+</head>
+<body>
+
+
+<div class="container">
+
+    <button id="b1" class="btn btn-success">绿色的按钮</button>
+    <div class="progress">
+        <div id="progress-bar" class="progress-bar progress-bar-striped progress-bar-success active" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"
+             style="width: 0%;">
+            0%
+        </div>
+    </div>
+</div>
+
+<script src="jquery-3.3.1.min.js"></script>
+<script>
+    let width = 0;
+    let t;
+
+    $("#b1").on("click", ()=>{
+        t = setInterval(foo, 200)
+    });
+
+    function foo() {
+        if (width < 100){
+            width++;
+            $("#progress-bar").css("width", width+'%').text(width+'%')
+        }else {
+            clearInterval(t);
+        }
+    }
+
+
+
+</script>
+
+</body>
+</html>

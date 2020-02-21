@@ -1,0 +1,67 @@
+上节课复习
+    一、字符编码
+        人类的字符---------》翻译---------》数字
+        翻译的过程遵循的标准即字符编码（就是一个字符与数字一一对应关系的表）
+        ascii
+        gbk：中文：2bytes   英文：1bytes
+        unicode：任意字符：2bytes
+        utf-8：中文：3bytes，英文1bytes
+
+        掌握：
+            1、以什么编码存的，就应该以该编码取
+                #coding:utf-8 :用于python解释器读取python文件，
+                        所以文件头指定的编码必须跟python文件存储时用的编码一致
+
+            2、 编码解码
+                unicode---编码encode---》utf-8
+                utf-8---解码decode---》unicode
+                python3中str是以unicode编码形式存放的
+                x='你好'
+                x.encode('utf-8') ----> bytes
+                bytes.decode('utf-8')------------->str（unicode）
+
+            3、bytes类型的用途：
+                1、存放到文件中
+                2、基于网络传输
+
+    二、文件处理
+
+
+        f=open(r'C:\a\b\c\d.txt',mode='r',encoding='utf-8')
+        f.read()
+        f.close()
+
+        with open('a.txt', encoding='utf-8') as f1,\
+                open('b.txt', encoding='utf-8') as f2,\
+                open('c.txt', encoding='utf-8') as f3:
+            pass
+
+
+        文件的打开模式：
+            默认是t模式，t不能单独使用，必须是rt，wt，at
+
+            r:只读模式
+            w:只写默写
+            a：只追加写模式
+
+        操作方法
+            f.read()
+            f.readline()
+            f.readlines()
+
+
+            f.write('1111111\n222222\n')
+            f.writelines(['1111\n','2222\n'])
+
+        循环读取文件每一行内容：
+            for line in f:
+                print(line)
+
+今日内容
+    文件处理打开模式之b
+    文件修改
+    文件内光标移动
+
+    函数介绍
+    定义函数
+    调用函数

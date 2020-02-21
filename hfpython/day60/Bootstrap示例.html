@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="x-ua-compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>BootStrap示例二</title>
+  <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+
+    .my-center {
+      float: none;
+      display: inline-block;
+      vertical-align: middle;
+      margin-right: -4px;
+    }
+
+    .my-nav {
+      border-radius: 0;
+      margin-bottom: 0;
+    }
+
+    .navbar-inverse .navbar-brand {
+      color: #ffffff;
+      background-color: transparent;
+    }
+
+    .my-banner-title {
+      font-size: 36px;
+    }
+
+    @media screen and (max-width: 768px) {
+      .my-banner-title {
+        font-size: 24px;
+      }
+    }
+
+    .my-space {
+      height: 10px;
+      width: 100%;
+    }
+
+    @media screen and (min-width: 768px) {
+      .my-space {
+        height: 40px;
+        width: 100%;
+      }
+    }
+
+    .my-line {
+      display: inline-block;
+      width: 70px;
+      height: 1px;
+      border-top: 1px solid #bbb;
+      margin: auto;
+    }
+
+    .my-padding {
+      padding: 10px 0;
+    }
+
+    @media screen and (min-width: 768px) {
+      .my-padding {
+        padding: 40px 0;
+      }
+    }
+
+    .my-dark {
+      background-color: #f5f5f5;
+    }
+
+    .center-heading {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .footer {
+      background: #111;
+      font-size: 0.9em;
+      position: relative;
+      clear: both;
+    }
+  </style>
+</head>
+<body>
+
+<nav class="navbar navbar-inverse my-nav">
+  <div class="container">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+              data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#"><strong>OldBoy Edu</strong></a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li><a href="#">Python学院<span class="sr-only">(current)</span></a></li>
+        <li><a href="#">Linux学院</a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="#">好好学习</a></li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+             aria-expanded="false">联系我们<span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="#">Rain</a></li>
+            <li><a href="#">Egon</a></li>
+            <li><a href="#">Yuan</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="#">Q1mi</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+<header class="header-index">
+  <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+    <!-- Indicators -->
+    <ol class="carousel-indicators">
+      <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+      <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+      <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+    </ol>
+
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner" role="listbox">
+      <div class="item active">
+        <img src="./banner_1.jpg" alt="...">
+        <div class="carousel-caption">
+          <div class="h1 my-banner-title"><strong>Bootstrap一学就会用</strong></div>
+        </div>
+      </div>
+      <div class="item">
+        <img src="./banner_2.jpg" alt="...">
+        <div class="carousel-caption">
+          <div class="h1 my-banner-title">Bootstrap一点都不难</div>
+        </div>
+      </div>
+      <div class="item">
+        <img src="./banner_3.jpg" alt="...">
+        <div class="carousel-caption">
+          <div class="h1 my-banner-title">Bootstrap一试就崩溃</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Controls -->
+    <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+      <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+      <span class="sr-only">Previous</span>
+    </a>
+    <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+      <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+      <span class="sr-only">Next</span>
+    </a>
+  </div>
+</header>
+
+<div class="my-dark">
+  <div class="container my-padding">
+    <div class="row">
+      <div class="col-md-12 text-center">
+        <h1><strong>Bootstrap能做什么？</strong></h1>
+        <span class="my-line"></span>
+        <p>网站首页、网站后台、手机页面。。。</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="my-space"></div>
+
+<div>
+  <div class="container my-padding">
+    <div class="row">
+      <div class="col-md-6 col-sm-6">
+        <div class="thumbnail"><img src="./Bootstrap_d1.png" alt=""></div>
+      </div>
+      <div class="col-md-6 col-sm-6 text-center">
+        <h2>使用<strong>Bootstrap</strong>搭建的</h2>
+        <h2>登陆页面</h2>
+        <span class="my-line"></span>
+        <p class="lead">
+          使用表单、按钮组件搭建
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="my-dark">
+  <div class="container my-padding">
+    <div class="row">
+      <div class="col-md-6 col-sm-6 text-center">
+        <h2>使用Bootstrap搭建的</h2>
+        <h2>信息采集单</h2>
+        <span class="my-line"></span>
+        <p class="lead">
+          使用表单、页头、面板组件、进度条等组件搭建
+        </p>
+      </div>
+      <div class="col-md-6 col-sm-6">
+        <div class="thumbnail"><img src="./Bootstrap_d2.png" alt=""></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div>
+  <div class="container my-padding">
+    <div class="row">
+      <div class="col-md-6 col-sm-6">
+        <div class="thumbnail"><img src="./Bootstrap_d3.png" alt=""></div>
+      </div>
+      <div class="col-md-6 col-sm-6 text-center">
+        <h2>使用<strong>Bootstrap</strong>搭建的</h2>
+        <h2>管理后台</h2>
+        <span class="my-line"></span>
+        <p class="lead">
+          使用导航条、表格、面板、分页等组件搭建
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="my-dark">
+  <div class="container my-padding">
+    <div class="row">
+      <div class="col-md-6 col-sm-6 text-center">
+        <h2>使用<strong>Bootstrap</strong>搭建的</h2>
+        <h2>博客页面</h2>
+        <span class="my-line"></span>
+        <p class="lead">
+          使用自定义导航、自定义分栏和分页等组件搭建
+        </p>
+      </div>
+      <div class="col-md-6 col-sm-6">
+        <div class="thumbnail"><img src="./Bootstrap_d4.png" alt=""></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div>
+  <div class="container my-padding">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="center-heading">
+          <h2>心路历程</h2>
+          <span class="my-line"></span>
+          <p>备课真的累，一下午就写了一个页面</p>
+          <p>时间都去哪儿了？时间都浪费在找我前女友的照片了。。。</p>
+        </div>
+      </div>
+    </div>
+    <hr>
+    <div class="row">
+      <div class="col-xs-6 col-md-3">
+        <a href="#" class="thumbnail">
+          <img src="./Bootstrap_i1.png" alt="...">
+        </a>
+      </div>
+      <div class="col-xs-6 col-md-3">
+        <a href="#" class="thumbnail">
+          <img src="./Bootstrap_i2.png" alt="...">
+        </a>
+      </div>
+      <div class="col-xs-6 col-md-3">
+        <a href="#" class="thumbnail">
+          <img src="./Bootstrap_i3.png" alt="...">
+        </a>
+      </div>
+      <div class="col-xs-6 col-md-3">
+        <a href="#" class="thumbnail">
+          <img src="./Bootstrap_i4.png" alt="...">
+        </a>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12 text-center">对，这些都是我前女友</div>
+    </div>
+  </div>
+</div>
+<div class="my-space"></div>
+
+<div class="my-dark my-padding">
+  <div class="container">
+    <div class="col-sm-8 my-center">
+      <h4>所以说</h4>
+      <p>学好Bootstrap真的很重要，学好Bootstrap真的很重要，学好Bootstrap真的很重要</p>
+    </div>
+    <div class="col-sm-4 my-center">
+      <a class="btn-success btn-lg btn-success-outline" href="http://v3.bootcss.com/">我知道了</a>
+    </div>
+  </div>
+</div>
+
+<div class="footer">
+  <div class="row">
+    <div class="col-md-12 text-center">
+      <span style="color:#fff">©2018 沙河前端小王子</span>
+    </div>
+  </div>
+</div>
+
+
+<script src="https://cdn.bootcss.com/jquery/3.2.0/jquery.min.js"></script>
+<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</body>
+</html>

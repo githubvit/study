@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>左侧菜单作业</title>
+  <style>
+    .hide {
+      display: none;
+    }
+
+    .title {
+      height: 40px;
+      width: 100px;
+      background-color: #336699;
+      color: white;
+      border-bottom: 1px solid black;
+      line-height: 40px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+
+<div class="menu">
+  <div class="item">
+    <div class="title">菜单一</div>
+    <div class="body hide">
+      <div>内容一</div>
+      <div>内容一</div>
+      <div>内容一</div>
+      <div>内容一</div>
+    </div>
+  </div>
+  <div class="item">
+    <div class="title">菜单二</div>
+    <div class="body hide">
+      <div>内容二</div>
+      <div>内容二</div>
+      <div>内容二</div>
+      <div>内容二</div>
+    </div>
+  </div>
+  <div class="item">
+    <div class="title">菜单三</div>
+    <div class="body hide">
+      <div>内容三</div>
+      <div>内容三</div>
+      <div>内容三</div>
+      <div>内容三</div>
+    </div>
+  </div>
+</div>
+
+<script src="jquery-3.3.1.min.js"></script>
+<script>
+    var $titleEles = $(".title");
+    $titleEles.click(function () {
+//      console.log(this);
+//      $(".body").addClass("hide");
+//      $(this).next().removeClass("hide");
+
+
+      $(this).next().removeClass("hide").parent().siblings().find(".body").addClass("hide");
+    });
+
+//  $titleEles.on("click", function () {
+//
+//  })
+</script>
+</body>
+</html>

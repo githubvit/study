@@ -1,0 +1,76 @@
+day60  2018-06-08
+
+1. 内容回顾
+	1. 今日面试题
+		设计表结构（外键约束怎么建？）
+		http://www.cnblogs.com/linhaifeng/articles/7238814.html#_label6
+	2. 昨天内容
+		1. 昨天下午
+			组件
+				图标 (字体图标)
+					优点：
+						size小
+						放大不失真
+						可以随字体颜色变化而变化
+						
+					1. Bootstrap自带的 
+						<span class='glyphicon glyphicon-heart'></span>
+					2. font Awesome
+						<i class="fa fa-heart"></i>
+				进度条
+					复制粘贴
+					补充：滚动的进度条
+				面板
+				页头	
+
+2. 今日内容
+	1. Bootstrap常用组件
+		
+	
+	2. Bootstrap常用插件
+		1. 模态框
+		2. 轮播图
+	
+	3. 其他插件
+		1. SweetAlert for bootstrap
+			https://lipis.github.io/bootstrap-sweetalert/
+		
+3， 作业安排
+	0. 把Bootstrap常用组件自己顺一遍
+	1. 把课上修改dashboard的压面自己写完
+	2. 尝试写一下 起飞前的准备 页面
+	3. 复习 HTML/CSS/JS/jQuery/Bootstrap
+	4. 15:00 -17:00 考试
+
+4. 周末的安排
+复习MySQL:
+	1. 把MySQL数据库装好，能记住密码能进去敲MySQL命令
+	2. 复习SQL语句：
+		增删改
+		
+		查
+			单表查询  *****
+			连表查询  *****
+	3. MySQL理论系列
+		01. 列举常见的关系型数据库和非关系型都有那些？
+		02. MySQL常见数据库引擎及比较？
+		03. 简述数据三大范式？
+		04. 什么是事务？MySQL如何支持事务？
+		05. 简述数据库设计中一对多和多对多的应用场景？
+		06. 如何基于数据库实现商城商品计数器？
+		07. 简述触发器、函数、视图、存储过程？
+		08. MySQL索引种类
+		09. 索引在什么情况下遵循最左前缀的规则？
+		10. 主键和外键的区别？
+		11. MySQL常见的函数？
+		12. 列举 创建索引但是无法命中索引的8种情况。
+		13. 如何开启慢日志查询？
+		14. 数据库导入导出命令（结构+数据）？
+		15. 数据库优化方案？
+		16. char和varchar的区别？
+		17. 简述MySQL的执行计划？
+		18. 在对name做了唯一索引前提下，简述以下区别：
+				select * from tb where name = ‘Oldboy’ 
+				select * from tb where name = ‘Oldboy’ limit 1
+	
+	
