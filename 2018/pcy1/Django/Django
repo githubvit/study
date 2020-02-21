@@ -1,0 +1,1414 @@
+Django
+===================================0=================================
+dj1实例
+一，下载安装
+1，下载源码
+    https://www.djangoproject.com/m/releases/1.11/Django-1.11.8.tar.gz
+2，在cmd终端执行安装命令
+    在 D:\django\Django-1.11.8 这个文件夹下
+    python setup.py install
+3，验证安装是否成功
+    终端上输入 python ,点击 Enter，进入 python 环境
+    >>> import django
+    >>> django.VERSION
+    (1, 11, 8, 'final', 0)
+    >>>
+    >>> django.get_version()
+    '1.11.8'
+
+二，django命令
+1，创建项目：django-admin startproject 【工程名称】
+
+    D:\>django-admin startproject mysite
+
+    1.1，上面的命令在d:目录下生成了mysite项目文件夹
+
+         D:\mysite 的目录
+
+        2017/12/25  21:05    <DIR>          .
+        2017/12/25  21:05    <DIR>          ..
+        2017/12/25  21:05               826 manage.py
+        2017/12/25  21:05    <DIR>          mysite
+                       1 个文件            826 字节
+                       3 个目录 129,056,849,920 可用字节
+
+    1.2，在项目目录下有同名目录mysite，结构如下
+         D:\mysite\mysite 的目录
+
+        2017/12/25  21:05    <DIR>          .
+        2017/12/25  21:05    <DIR>          ..
+        2017/12/25  21:05             3,216 settings.py
+        2017/12/25  21:05               784 urls.py
+        2017/12/25  21:05               406 wsgi.py
+        2017/12/25  21:05                 0 __init__.py
+                       4 个文件          4,406 字节
+                       2 个目录 129,056,845,824 可用字节
+       项目目录结构：
+            mysite
+                -mysite             # 对整个程序进行配置
+                    -init.py
+                    -settings.py    # 配置文件
+                    -url.py         # url对应关系 相当于路径字典
+                    -wsgi.py        # 遵循WSGI规范，uwsgi+nginx
+                -manage.py          # 管理django程序：
+                                        -python manage.py
+                                        -python manage.py startapp xx 创建app
+                                        -python manage.py makemigrations ORM
+                                        -python manage.py migrate ORM
+
+
+
+
+2，运行项目命令python manage.py runserver，启动服务，在runserver后，可以加127.0.0.1:8001，指定接口。
+
+    D:\mysite>python manage.py runserver
+    Performing system checks...
+
+    System check identified no issues (0 silenced).
+
+    You have 13 unapplied migration(s). Your project may not work properly until you apply the migrations for app(s): admin, auth, contenttypes, sessions.
+    Run 'python manage.py migrate' to apply them.
+    December 25, 2017 - 21:22:44
+    Django version 1.11.8, using settings 'mysite.settings'
+    Starting development server at http://127.0.0.1:8000/
+    Quit the server with CTRL-BREAK.
+    退出服务：CTRL-BREAK(中断键)
+
+3，访问http://127.0.0.1:8000/
+    It worked! 服务启动
+    Congratulations on your first Django-powered page.
+    Next, start your first app by running python manage.py startapp [app_label].
+    You're seeing this message because you have DEBUG = True in your Django settings file and you haven't configured any URLs. Get to work!
+
+三，PyCharm建立django项目
+    1，在pycharm File下选择New project，选择django，填写路径和项目名称，
+       选择合适的python解释器interpret。
+
+    2，建立的项目通过点击Run菜单下的Edit configuration，可以改变项目服务的IP地址和端口。
+
+四，创建app
+1，在pycharm的Terminal上输入如下命令：
+    python manage.py startapp app应用程序名称 -- 创建app
+
+2，得到app名称目录，目录结构如下：
+    app目录：
+        migrations目录   存放数据库表结构修改记录（以前学的ORM-sqlalchemy是不能修改表结构的）
+        admin.py        django创建的功能强大的后台管理，编辑数据表内容（增删改查）。
+        apps.py         配置app的
+        models.py       ORM--创建数据库中的表结构的，通过-
+                        -python manage.py makemigrations 和
+                         python manage.py migrate 两个命令就可以在数据库创建和修改数据库表。
+        tests.py   单元测试
+        views.py   app业务代码
+
+3，模板配置
+    在settings.py中添加
+    TEMPLATES = [
+        {
+            'BACKEND': 'django.template.backends.django.DjangoTemplates',
+            'DIRS': [os.path.join(BASE_DIR, 'templates')]模板路径
+            ,
+            'APP_DIRS': True,
+            'OPTIONS': {
+                'context_processors': [
+                    'django.template.context_processors.debug',
+                    'django.template.context_processors.request',
+                    'django.contrib.auth.context_processors.auth',
+                    'django.contrib.messages.context_processors.messages',
+                ],
+            },
+        },
+    ]
+    在views.py中，请求返回函数的return中，用render获取模板即可。
+    return render(request,'login.html')#模板获取
+
+4，静态文件目录static配置：css和JavaScript放在这里
+    在settings.py中添加
+
+    STATIC_URL = '/static/' #这一行本来就有的，在该行下添加如下内容：
+
+    STATICFILES_DIRS=(
+        os.path.join(BASE_DIR, 'static'), #注意：这个','，少了就没用。
+    )
+5，在url.py中，路径字典的写法
+    url(r'^login', views.login),
+    这里的login不要写成login/，否则模板的form中也要一样。
+    因为当你用get方式的时候，你没有/，浏览器会帮你加，即使form中有/，也不会报错。
+    否则，这里有/，而form没有，就会报错。
+
+6，跳转
+    CSRF 跨站请求伪造错误，在settings的中间件中注释掉，否则在学习过程中，不能实现跳转。
+    # 'django.middleware.csrf.CsrfViewMiddleware',
+    根据请求方法实现跳转：
+    在views.py中，每个处理函数的request参数会获取客户端发过来的所有参数。
+    获取用户名和密码，采用request.POST.get('key',None),这样即使没有这个key，也不会报错。
+    redirect 跳转。
+    return redirect('http://..')这里也可以用('/home')获取路径对应关系
+
+7，django特有替换{{}}
+    html中定义：
+        <span style="color: red;">{{msg}}</span>
+
+    view.py:
+        # 模板获取时定义第三个字典参数
+            render(request,'login.html',{'msg':msg})
+
+        # 开始用get方式的时候置该变量应该为空，看不见
+            msg = ''
+
+        # 用户名密码错误时 让其显示。
+            msg='用户名或密码错误'
+
+8，添加和显示数据
+    模板语言：
+        输入html：
+            form表单
+        显示html：for循环
+            {% for i in USER_LIST %}
+            <tr>
+                <td>{{i.username}}</td>
+                <td>{{i.gender}}</td>
+                <td>{{i.email}}</td>
+            </tr>
+            {% endfor %}
+
+            单值替换{{}}
+
+
+    在view.py中:
+        USER_LIST=[]
+        通过POST方式获取
+        u=request.POST.get('username')
+        e=request.POST.get('email')
+        g=request.POST.get('gender')
+        组成字典
+        temp={'username':u,'email':e,'gender':g}
+        添加到列表中
+        USER_list.append(temp)
+        return  render(request,'home.html',{'USER_LIST':USER_LIST})
+
+9，模板语言
+
+    view.py中第三个字典参数传值，key要和html模板中一一对应，
+        return render(request,'home.html',{
+            'msg':'123',
+            'age':18,
+            'user_list':['alex','eric']
+            'user_dict':{'k1':'v1','k2':'v2'}
+        } )
+
+
+    html模板中
+
+        单值替换：
+            {{msg}}
+
+        循环：
+            {% for i in user_list%}
+                ...
+            {% endfor %}
+
+        条件判断：
+            {%if age%}
+                <a> 有年龄</a>
+                {%if age>16%}
+                    <a>老男人</a>
+                {%else%}
+                    <a>小鲜肉</a>
+                {% endif %}
+            {%else%}
+                <a>没年龄</a>
+            {% endif %}
+
+
+        列表和字典取值：
+            user_list=['alex','eric']
+            user_dict={'k1':'v1','k2':'v2'}
+
+            {{user_list.0}}='alex'
+            {{user_dict.k1}}='v1'
+
+==================1==================================
+dj2实例
+一、Django的生命周期
+    客户端通过浏览器向服务器发起http请求requests
+    ，服务器路由系统根据请求的url找到对应的视图函数，
+    视图函数找到相应的模板文件和数据库数据，渲染成字符串，
+    再返回给客户端浏览器response。
+
+
+  客户端                         服务器(UVTM)
+|-------|     |------------------------------------------|
+  浏览器        路由系统   视图函数             模板文件
+ http请求 --->   url ---> view    <-------> template
+|-------|     |------|-----------|  |     |----------|
+   <------- 返回字符串-------|        |       数据库
+|--------------------------|        |---->  model
+                                          |----------|
+
+
+二、Django项目的建立
+    1.创建django工程
+        命令：
+            django-addmin startproject 【工程名】
+        或直接用pycharm的方式建立工程
+
+    2.在工程目录下，创建django app应用程序
+        命令：
+            python manage.py startapp 【app应用名】
+
+    3.建立templates模板文件目录和static静态文件目录
+
+    4.配置 settings.py
+
+        4.1 注释CSRF 跨站请求伪造错误
+        # 'django.middleware.csrf.CsrfViewMiddleware',
+
+        4.2 配置templates模板文件目录
+            TEMPLATES = [
+                {
+                    'BACKEND': 'django.template.backends.django.DjangoTemplates',
+                    'DIRS': [os.path.join(BASE_DIR, 'templates')]模板路径
+                    ,
+                    'APP_DIRS': True,
+                    'OPTIONS': {
+                        'context_processors': [
+                            'django.template.context_processors.debug',
+                            'django.template.context_processors.request',
+                            'django.contrib.auth.context_processors.auth',
+                            'django.contrib.messages.context_processors.messages',
+                        ],
+                    },
+                },
+            ]
+
+        4.3 配置static静态文件目录
+
+            STATIC_URL = '/static/'
+
+            STATICFILES_DIRS=(
+                os.path.join(BASE_DIR, 'static'), 注意：这个','，少了就没用。
+            )
+
+
+
+    5.开始编写代码
+        a. url.py
+
+			/index/    ->   func
+
+		b. views.py
+
+			def func(request):
+				# request包含所有的请求数据
+				...
+				return HttpResponse('字符串')  直接返回字符串
+				return render(request, 'index.html', {''}) 返回模板引擎渲染后的字符串
+				retrun redirect('URL') 跳转到URL。
+
+		c. 模板语言
+			return render(request, 'index.html', {'li': [11,22,33]})
+
+			{% for item in li %}
+				<h1>{{item}}</h1>
+			{% endfor %}
+
+
+			***********  索引用点 **********
+			<h2> {{li.0 }} </h2>
+
+三、路由系统
+    请求的url被看做是一个普通的python字符串，进行匹配时不包括get或post请求的参数及域名和端口
+        http://www.itcast.cn/python/1/?i=1&p=new，只匹配“python/1/”部分
+
+    正则表达式非命名组，通过位置参数传递给视图
+        url(r'^([0-9]+)/$', views.detail, name='detail'),
+
+    正则表达式命名组，通过关键字参数传递给视图，本例中关键字参数为id
+        url(r'^(?P<id>[0-9]+)/$', views.detail, name='detail'),
+
+    参数匹配规则：优先使用命名参数，如果没有命名参数则使用位置参数
+    每个捕获的参数都作为一个普通的python字符串传递给视图
+    性能：urlpatterns中的每个正则表达式在第一次访问它们时被编译，这使得系统相当快
+
+    1.分级路由：可以规避多个app有相同url和视图函数的问题。
+        在项目生成时，根目录下有默认的urls.py，在app中也可添加该文件。
+        在根目录的urls.py中定义一级路由（关键字include）：路由分发
+            project/urls.py:
+                urlpatterns = [
+                    url(r'^cmdb/', include("app01.urls")),
+                    url(r'^monitor/', include("app02.urls")),
+                ]
+
+        在app中创建urls.py定义二级路由：
+            app01/urls.pu:
+                from app01 import views
+
+                urlpatterns = [
+                    url(r'^login/', views.login),
+                ]
+            app02/urls.pu:
+                from app02 import views
+
+                urlpatterns = [
+                    url(r'^login/', views.login),
+                ]
+        在app中的views.py中redirect跳转的url写法要注意：*****
+            要加前级路由：
+            if u=='alex' and p=='111':
+                return redirect('/cmdb/index')#跳转到index
+                '/'表示根路由
+        在html中form的路径：*****
+            要加前级路由;
+            <form action="/cmdb/login" method="post">
+
+    2.路由定义方法
+        2.1 url(r'^index/', views.index),    FBV方式
+	    2.2 url(r'^home/', views.Home.as_view()), CBV方式
+	    2.3 url(r'^detail-(\d+).html', views.detail), 正则匹配实现动态url
+	        def details(request,nid):#nid是正则匹配的正则参数，不需要用get或post方法去提取，写在形参位置即可。
+                details_info=USER_DICT[int(nid)]
+                return render(request,'details.html',{'nid':nid,'details_info':details_info})
+
+        2.4 url(r'^detail-(\d+)-(\d+).html', views.detail),分组正则，view.detail参数顺序相关。
+
+	        views函数1    def func(request, nid, uid):
+					        pass
+
+			views函数2   def func(request, *args):
+				        	args = (2,9)
+
+			views函数3   def func(request, *args, **kwargs):
+				        	args = (2,9)
+
+
+        2.5 url(r'^details-(?P<nid>\d+)-(?P<uid>\d+).html', views.details) 命名分组正则匹配，规避顺序，P是大写
+                def func(request, nid, uid):
+                    pass
+
+				def func(request, **kwargs):
+					kwargs = {'nid': 1, 'uid': 3}
+
+				def func(request, *args, **kwargs):
+					kwargs = {'nid': 1, 'uid': 3}
+
+    3.name 对URL路由关系进行命名
+
+		 ***** 以后可以根据此名称生成自己想要的URL *****
+
+		url(r'^asdfasdfasdf/', views.index, name='i1'),
+		url(r'^yug/(\d+)/(\d+)/', views.index, name='i2'),
+		url(r'^buy/(?P<pid>\d+)/(?P<nid>\d+)/', views.index, name='i3'),
+
+
+        在函数里生成url  #根据名字反转生成url，args是元组，kwargs是字典
+		def func(request, *args, **kwargs):
+			from django.urls import reverse #根据名字反转生成url，args是元组，kwargs是字典
+
+			url1 = reverse('i1')                              # asdfasdfasdf/
+			url2 = reverse('i2', args=(1,2,))                 # yug/1/2/
+			url3 = reverse('i3', kwargs={'pid': 1, "nid": 9}) # buy/1/9/
+
+        在模板里生成url
+		xxx.html
+
+			{% url "i1" %}               # asdfasdfasdf/
+			{% url "i2" 1 2 %}           # yug/1/2/
+			{% url "i3" pid=1 nid=9 %}   # buy/1/9/
+
+
+        模板语言;
+            {% url 'indexx' %}
+            {% url 'indexx' 3 %}
+
+		注：
+
+			# 当前的URL
+			request.path_info
+			#获取当前URL中的所有信息-->可以获取url中的参数 url？a=sss&b=sfa
+			request.get_full_path
+    4、默认值
+        欠着
+    5、命名空间
+        欠着
+
+四、视图
+    1、获取用户请求数据
+		request.GET     获取数据
+        request.POST    提交数据
+		request.FILES   上传文件
+        单值获取
+        v=request.POST.get('key',None)
+
+	2、获取checkbox等多选的内容getlist
+		val=request.POST.getlist('key',None)
+		for i in val:
+		    print i
+	3、获取文件上传request.FILES.get
+		# 文件上传 依赖form表单的属性 enctype="multipart/form-data" 否则上传不了
+		obj = request.FILES.get('fafafa')
+		obj.name
+		f = open(obj.name, mode='wb')#用获得的文件对象的文件名在当前目录下新建文件，模式为二进制覆盖。
+		for item in obj.chunks():#文件是一块块上传的，obj.chunks()是生成器迭代对象，里面有yield，每上传一块就写入文件。
+			f.write(item)
+		f.close()
+
+	4、FBV & CBV
+	   function base view 基于函数的视图
+       class base view 基于类的视图
+		url.py
+			index -> 函数名
+			url(r'^index/', views.index),    FBV方式
+	        url(r'^home/', views.Home.as_view()), CBV方式
+	        注意.as_view()后的'()'
+
+		view.py
+			def 函数(request): FBV方式
+				...
+			-----------------------------------
+			#CBV方式
+            from django.views import View
+            class Home(View):#CBV方式 根据method的不同就触发不同的方法.
+                def dispatch(self,request,*args,**kwargs): #分发器，通过getattr反射找到get或post方法，在get和post前执行
+                    #调用父类中的dispatch
+                    print 'before' 类似装饰器
+                    result=super(Home,self).dispatch(self.request,*args,**kwargs)
+                    print 'after'
+                    return result
+                def get(self,request):
+                ...
+                def post(self,request):
+                ...
+		====》
+		/index/ -> 函数名
+
+		/index/ -> 类
+
+		====》
+
+
+		建议：两者都用
+
+	5、装饰器
+		欠
+
+
+五、模板文件
+  模板语言：
+    字典循环.keys\.values\.items
+    {%for k,v in user_dict.items%}
+        <li>{{k}}-{{v}}</li>
+    {%endfor%}
+
+六、数据库ORM
+    select * from tb where id > 1
+	# 对应关系
+	models.tb.objects.filter(id__gt=1)
+	models.tb.objects.filter(id=1)
+	models.tb.objects.filter(id__lt=1)
+
+    1. 根据类自动创建数据库表，但是数据库要自己建立。
+		# app下的models.py
+        创建类
+
+        a. 先写类
+        	from django.db import models
+
+        	# app01_userinfo
+        	class UserInfo(models.Model):
+        		# id列，自增，主键
+        		# 用户名列，字符串类型，指定长度
+        		username = models.CharField(max_length=32)
+        		password = models.CharField(max_length=64)
+
+        b. 注册APP
+
+        	INSTALLED_APPS = [
+        		'django.contrib.admin',
+        		'django.contrib.auth',
+        		'django.contrib.contenttypes',
+        		'django.contrib.sessions',
+        		'django.contrib.messages',
+        		'django.contrib.staticfiles',
+        		'app01',
+        	]
+        c. 执行命令 生成数据库表
+        	python manage.py  makemigrations
+        	    这一步的意思是把创建的数据表类，在migrations目录下生成.py文件，该文件里面是生成了数据类和数据库操作的模型，还没有操作数据库；
+        	python manage.py  migrate
+                这一步是把app01下的migrations目录生成的.py文件和数据库建立同步，意即操作数据库，在数据库中执行.py中要求对应的数据库操作。
+
+            也就是说models和数据库并没有直接联系，是通过先在migrations目录建立模型文件，
+            再用migrate和数据库建立同步，才和数据库建立了联系。
+
+            c.1 当手动models和数据库同步时（比如在models中手动删除了某个类，又在数据库中手动删除了对应的表）：
+            这时执行python manage.py  makemigrations同步目录命令，和python manage.py  migrate同步数据库命令。
+            同步目录命令会正常执行，同步数据库命令会报错。原因如下：
+            由于已经手动在数据库执行了操作（手动删除了对应的表，同步数据库时数据库中已经没有表了），这时执行python manage.py  migrate命令会报错。
+            按以下方法操作即可：
+                python manage.py migrate --fake 意即我已手动删除数据库的表，可以同步。
+
+            c.2 当对开始建的表不满意，在数据库中手动删除了表，然后清除了migrations目录下对应操作的文件（.py）,
+            修改了表，满意后，重新makemigrations，生成新的.py文件，再migrate，这时发现，migrate报：
+                No migrations to apply.
+            也就是它会认为没有要更新的py操作。这是因为在数据库中有一个django_migrations这个表，它记录了你的上一次操作，
+            所以会认为已操作了，没有什么要操作。用以下方法解决：
+
+            ******Django 清理migrations无障碍版 ********
+                清理migrations需要清理两个标记。
+                a、将app内migrations文件夹里除了__init__.py这个文件外的所有文件删除。
+                b、登录数据库，找到django_migrations这个表，然后将表内对应的应用app下的migrations记录删除即可。
+
+
+
+        d. ********** 注意 ***********
+            Django默认的数据库为SQLit，要改变为mysql，需改变settings.py中的db配置;
+            DATABASES = {
+                'default': {
+                'ENGINE': 'django.db.backends.mysql',
+                'NAME':'dbname',
+                'USER': 'root',
+                'PASSWORD': 'xxx',
+                'HOST': '',#ip地址
+                'PORT': '',
+                }
+            }
+        	Django默认使用MySQLdb模块链接MySQL
+        	主动修改为pymysql，在project同名文件夹下的__init__文件中添加如下代码即可：
+        		import pymysql
+        		pymysql.install_as_MySQLdb()
+
+    2. 修改表结构
+     		修改类即可，每次修改后，都必须使用makemigrations和migrate两个命令，完成表结构的修改。
+     		增加的字段必须提供默认值default=xx或将null=True加上，表示可以为空，不然增加不了。
+
+
+	3. 常用字段类型：
+			字符串类型
+
+
+			数字
+
+
+			时间
+
+
+			二进制
+
+			Autofield 自增（primary_key=True）必须有
+
+	4. django admin 后台管理用的字段类型
+	 #在admin.py 中注册类
+	    from app02_monitor import models
+	    admin.site.register(models.UserInfo)
+	 #这样写完后，userinfo这个表就有了django提供的后台管理
+	 #当然在总目录中的url.py中后台管理的路径必须要有，就是原来默认的url(r'^admin/', admin.site.urls)
+     #创建admin超级用户进行管理
+        #创建 Django 用户：python manage.py createsuperuser 用户名必填 邮箱可忽略 密码必填 还要确认一遍
+        user=root password=another333
+
+		    EmailField(CharField)：
+               - 字符串类型，Django Admin以及ModelForm中提供验证机制
+
+            enericIPAddressField(Field)
+               - 字符串类型，Django Admin以及ModelForm中提供验证 Ipv4和Ipv6
+               - 参数：
+                   protocol，用于指定Ipv4或Ipv6， 'both',"ipv4","ipv6"
+                   unpack_ipv4， 如果指定为True，则输入::ffff:192.0.2.1时候，可解析为192.0.2.1，开启刺功能，需要protocol="both"
+
+            RLField(CharField)
+               - 字符串类型，Django Admin以及ModelForm中提供验证 URL
+
+            lugField(CharField)
+               - 字符串类型，Django Admin以及ModelForm中提供验证支持 字母、数字、下划线、连接符（减号）
+
+            ommaSeparatedIntegerField(CharField)
+               - 字符串类型，格式必须为逗号分割的数字
+
+            UIDField(Field)
+               - 字符串类型，Django Admin以及ModelForm中提供对UUID格式的验证
+
+            ilePathField(Field)
+               - 字符串，Django Admin以及ModelForm中提供读取文件夹下文件的功能
+               - 参数：
+                       path,                      文件夹路径
+                       match=None,                正则匹配
+                       recursive=False,           递归下面的文件夹
+                       allow_files=True,          允许文件
+                       allow_folders=False,       允许文件夹
+
+	5. 字段的参数：
+			null               -> db是否可以为空 null=true或false，默认是不能为空（不写null）
+			default            -> 默认值
+			primary_key        -> 主键
+			db_column          -> 数据库表列名
+			db_index           -> 普通索引
+			unique			   -> 唯一索引
+			unique_for_date    -> 只把时间做为唯一索引
+			unique_for_month   -> 只把月做为唯一索引
+			unique_for_year
+
+			auto_now_add       -> 创建时，自动生成为当前时间ctime
+			auto_now           -> 更新时，自动更新时间uptime
+
+				# obj = UserGroup.objects.filter(id=1).update(caption='CEO')
+				uptime只对以下起作用对上面的写法不起作用
+				# obj = UserGroup.objects.filter(id=1).first()
+				# obj.caption = "CEO"
+				# obj.save()
+
+    6.django admin用的参数：
+			choices			  -> django admin中显示下拉框，避免连表查询（因为连表查询很费资源）
+			    user_type_choice=(
+                    (1,'普通用户'),
+                    (2,'部门用户'),
+                    (3,'超级用户'),
+                )
+            user_type_id=models.IntegerField(choices=user_type_choice,default=1)
+
+			blank             -> django admin是否可以为空 blank=True可为空
+			verbose_name      -> django admin显示字段中文
+			editable          -> django admin是否可以被编辑
+			error_messages    -> 错误信息欠
+			help_text         -> django admin提示
+			validators		  -> django form ,自定义错误信息（欠）
+
+
+
+
+
+
+
+
+	7. 根据类对数据库表中的数据进行各种操作
+
+		一对多：
+
+			a. 外键
+			    user_group=models.ForeignKey('UserGroup',to_field='uid',default=1)
+
+			b.
+				user表中的相应字段为user_group_id，会增加_id字样。
+				外键字段_id
+
+			c. 创建外键时，直接用user_group_id
+				models.tb.object.create(name='root', user_group_id=1)
+
+			d. 取值
+
+				userlist = models.tb.object.all()
+				for row in userlist:
+					row.id
+					row.user_group_id
+					row.user_group.caption#跨表查询
+
+
+	=================== 作业：用户管理 ====================
+	1、用户组的增删改查
+	2、用户增删该查
+		- 添加必须是对话框
+		- 删除必须是对话框
+		- 修改，必须显示默认值
+		这里面要注意select怎么显示默认值，即selected="selected"
+		其中的条件判断：{% if i.uid is eu.user_group_id %}不能写成{% if i.uid = eu.user_group_id %}
+
+		 <p>
+             <span class="span_block">用户组:</span>
+             <select name="user_group">
+                 {% for i in user_group %}
+                     {% if i.uid is eu.user_group_id %}
+                     <option value="{{ i.uid }}" selected="selected">{{ i.group }}</option>
+                     {% else %}
+                     <option value="{{ i.uid }}">{{ i.group }}</option>
+                     {% endif %}
+                 {% endfor %}
+            </select>
+         </p>
+
+
+	3、比较好看的页面
+
+	4、预习：
+		http://www.cnblogs.com/wupeiqi/articles/5246483.html
+
+================================2=======================================
+smartNode实例
+1、Django请求的生命周期
+
+		路由系统 -> 试图函数(获取模板+数据=》渲染) -> 字符串返回给用户
+
+2、路由系统
+
+		/index/                ->  函数或类.as_view()
+		/detail/(\d+)          ->  函数(参数) 或 类.as_view()（参数）
+		/detail/(?P<nid>\d+)   ->  函数(参数) 或 类.as_view()（参数）
+		/detail/			   ->  include("app01.urls")
+		/detail/    name='a1'  ->  include("app01.urls")
+							   - 视图中：reverse
+							   - 模板中：{% url "a1" %}
+
+3、视图
+
+	FBV：函数
+		def index(request,*args,**kwargs):
+			..
+
+	CBV：类
+		class Home(views.View):
+
+			def get(self,reqeust,*args,**kwargs):
+				..
+
+	获取用户请求中的数据：
+		request.POST.get
+		request.GET.get
+		reqeust.FILES.get()
+
+		# checkbox,
+		........getlist()
+
+		request.path_info
+
+
+
+		文件对象 = reqeust.FILES.get()
+		文件对象.name
+		文件对象.size
+		文件对象.chunks()
+
+		# <form 特殊的设置></form>
+
+
+	给用户返回数据：
+		render(request, "模板的文件的路径", {'k1': [1,2,3,4],"k2": {'name': '张扬','age': 73}})
+		redirect("URL")
+		HttpResponse(字符串)
+
+
+4、模板语言
+
+	render(request, "模板的文件的路径", {'obj': 1234, 'k1': [1,2,3,4],"k2": {'name': '张扬','age': 73}})
+
+	<html>
+
+	<body>
+		<h1> {{ obj }} </h1>
+		<h1> {{ k1.3 }} </h1>
+		<h1> {{ k2.name }} </h1>
+		{% for i in k1 %}
+			<p> {{ i }} </p>
+		{% endfor %}
+
+		{% for row in k2.keys %}
+			{{ row }}
+		{% endfor %}
+
+		{% for row in k2.values %}
+			{{ row }}
+		{% endfor %}
+
+		{% for k,v in k2.items %}
+			{{ k }} - {{v}}
+		{% endfor %}
+
+	</body>
+	</html>
+
+5、ORM
+
+	a. 创建类和字段
+		class User(models.Model):
+			age = models.IntergerFiled()
+			name = models.CharField(max_length=10)#字符长度
+
+		Python manage.py makemigrations
+		python manage.py migrate
+
+		# settings.py 注册APP
+
+	b. 操作
+
+
+		增
+			models.User.objects.create(name='qianxiaohu',age=18)
+			dic = {'name': 'xx', 'age': 19}
+			models.User.objects.create(**dic)
+
+
+			obj = models.User(name='qianxiaohu',age=18)
+			obj.save()
+		删
+			models.User.objects.filter(id=1).delete()
+		改
+			models.User.objects.filter(id__gt=1).update(name='alex',age=84)
+			dic = {'name': 'xx', 'age': 19}
+			models.User.objects.filter(id__gt=1).update(**dic)
+		查
+			models.User.objects.filter(id=1,name='root')
+			models.User.objects.filter(id__gt=1,name='root')
+			models.User.objects.filter(id__lt=1)
+			models.User.objects.filter(id__gte=1)
+			models.User.objects.filter(id__lte=1)
+
+			models.User.objects.filter(id=1,name='root')
+			dic = {'name': 'xx', 'age__gt': 19}
+			models.User.objects.filter(**dic)
+
+
+新内容：smartNode实例
+        #路由系统中加'$'符，表示结束，不然遇到下面这种情况第二个url就永远执行不了被1截胡。
+            url(r'^business$',views.business)
+            url(r'^business_add',views.business_add)
+
+        #模板语言
+            forloop.counter forloop.counter0(序号从0开始)
+            forloop.revcounter  forloop.revcounter0倒序
+            forloop.last是否是最后一个（true、false） forloop.first
+            forloop.parentloop 上一层循环，后面同样加counter、revcounter等参数
+            forloop.parentloop.counter等
+
+            列表中的序号：
+                {% for i in list%}
+                <td>{{forloop.counter}}</td>#循环几次就是几
+                {% endfor%}
+
+        获取元素的三种方式：都是queryset对象(结果集，类似列表)，内部元素不同
+
+            对象取法：# QuerySet ,内部元素都是对象,用点‘.’取
+            v1 = models.Business.objects.all()
+            [obj(id,caption,code),obj(id,caption,code),obj(id,caption,code),]
+
+            values字典取法：# QuerySet ,内部元素都是字典 获取个别字段,用['字段']取
+            v2 = models.Business.objects.all().values('id','caption')
+            [{'id':1,'caption':'运维部'},{'id':2,'caption':'开发部'},{'id':3,'caption':'市场'},]
+
+            values_list元组取法：# QuerySet ,内部元素都是元组 用[下标]取
+            v3 = models.Business.objects.all().values_list('id','caption')
+            [(1,'运维部'),(2,'开发部'),(3,'市场'),]
+            {%for row in v3%}
+                <li>{{row.0}}-{{row.1}}</li>
+            {%endfor%}
+
+        获取单个对象的两种方式：
+            # 获取到一个对象，如果不存在就报错
+            models.Business.objects.get(id=1)
+            #获取到一个对象，不存在不报错，报None
+            对象或者None = models.Business.objects.filter(id=1).first()
+
+
+        跨表点和双下划线的应用：
+            v1 = models.Host.objects.filter(nid__gt=0)
+            v1[0].b.caption  ---->  对象通过.进行跨表
+
+            v2 = models.Host.objects.filter(nid__gt=0).values(
+                    'nid','hostname','b_id','b__caption')
+              ---->  字典通过'__'双下划线进行跨表'b__caption'
+            for row in v2:
+                print row['nid'],..,row['b__caption']
+            前端：
+                {%for row in v2%}
+                <td> {{row.nid}}</td>
+                ...
+                <td> {{row.b__caption}}</td>#注意这里不是row.b.caption
+                {%endfor%}
+
+            v3 = models.Host.objects.filter(nid__gt=0).values_list(
+                    'nid','hostname','b_id','b__caption')
+              ---->  元组也是通过'__'双下划线进行跨表'b__caption'
+            for row in v3:#上面怎么写的元组下标就怎么排序。
+                print row[0],..,row[3]
+            前端：
+                {%for row in v3%}
+                <td> {{row.0}}</td>
+                ...
+                <td> {{row.3}}</td>
+                {%endfor%}
+
+
+
+		外键：
+			class UserType(models.Model):
+				caption = models.CharField(max_length=32)
+		      id  caption
+			# 1，普通用户
+			# 2，VIP用户
+			# 3， 游客
+
+			class User(models.Model):
+				age = models.IntergerFiled()
+				name = models.CharField(max_length=10)#字符长度
+				# user_type_id = models.IntergerFiled() # 约束，
+				user_type = models.ForeignKey("UserType",to_field='id') # 约束，
+
+			  name age  user_type_id
+			# 张扬  18     3
+			# 张A扬 18     2
+			# 张B扬 18     2
+            PS:
+                间隔符 sep='\t'
+
+
+	    Ajax：
+
+	    	$.ajax({
+	    		url: '/host', 发到哪里
+	    		type: "POST",发送方式
+	    		data: {'k1': 123,'k2': "root"},发到后端的数据
+	    		success: function(data){
+	    			// 这个data是服务器端返回的字符串，函数收到后自动触发
+	    			if (data=='ok'){
+	    			    location.reload()#刷新页面
+	    			}
+	    			else{
+	    			    alert(data) #弹出数据
+	    			}
+
+	    		}
+	    	})
+	    	$.ajax({
+	    		url: '/host',
+	    		type: "POST",
+	    		data: $('#add_from').serialize(),#获取id='add_from'的form表单的全部数据
+
+	    		dataType:'JSON',
+	    		#这个dataType与上面的data无关，这是从后端接收过来的数据类型，
+	    		上面是从前端的form表单往后端发送的数据。
+	    		#这就把后端发过来的json字符串自动转换为json对象。这样success函数的参数就是obj对象了。
+	    		不用再写var obj = JSON.parse(data);
+
+	    		traditional:true,
+	    		#如果前端发给后端的字典里的key=[1,2,3]这样的列表，就要用的这个参数，不然view.py取到是None。
+	    		view.py要用get_list取。
+
+	    		success: function(obj){
+
+	    		},
+	    		error:function(data){
+	    		#发生未连通后台，或后台数据没发过来这类的未知错误，才执行。
+	    		    console.log(arguments)#这里会输出列表信息[object,"error","Internal Server Error"]
+	    		}
+
+	    	})
+
+
+	    	建议：永远让服务器端返回一个字典
+	    	ret={'status':True,'error':None,'data':None}
+	    	    如果有异常错误：
+	    	    ret['status']=False
+	    	    ret['error']='错误消息'
+
+                这样让前端根据status来判断，做什么
+	    	return HttpResponse(json.dumps(ret))
+
+
+
+
+        多对多：
+
+            创建方式一：自定义关系表
+                class Host(models.Model):
+                    nid = models.AutoField(primary_key=True)
+                    hostname = models.CharField(max_length=32,db_index=True)
+                    ip = models.GenericIPAddressField(protocol="ipv4",db_index=True)
+                    port = models.IntegerField()
+                    b = models.ForeignKey(to="Business", to_field='id')
+                # 10
+                class Application(models.Model):
+                    name = models.CharField(max_length=32)
+                # 2
+
+                class HostToApp(models.Model):#自定义关系表
+                    hobj = models.ForeignKey(to='Host',to_field='nid')
+                    aobj = models.ForeignKey(to='Application',to_field='id')
+
+                # models.HostToApp.objects.create(hobj_id=1,aobj_id=2)
+
+
+
+		    创建方式二：自动创建关系表
+		    	class Host(models.Model):
+		    		nid = models.AutoField(primary_key=True)
+		    		hostname = models.CharField(max_length=32,db_index=True)
+		    		ip = models.GenericIPAddressField(protocol="ipv4",db_index=True)
+		    		port = models.IntegerField()
+		    		b = models.ForeignKey(to="Business", to_field='id')
+		    	# 10
+		    	class Application(models.Model):
+		    		name = models.CharField(max_length=32)
+		    		r = models.ManyToManyField("Host")#自动创建关系表
+
+		    	无法直接对第三张表进行操作
+
+		    	obj = Application.objects.get(id=1)
+		    	obj.name
+
+		    	# 第三张表操作
+		    	obj.r.add(1)
+		    	obj.r.add(2)
+		    	obj.r.add(2,3,4)
+		    	obj.r.add(*[1,2,3,4])
+
+		    	obj.r.remove(1)#删除单个节点
+		    	obj.r.remove(2,4)
+		    	obj.r.remove(*[1,2,3])
+
+		    	obj.r.clear()#清空该对象下的所有节点
+
+		    	obj.r.set([3,5,7])#删除原来的obj关系，设置新的obj关系，注意这里列表不加*。
+
+		    	# 所有相关的主机对象“列表” QuerySet
+		    	obj.r.all()
+                模板语言row.r.all**********
+                {% for i in row.r.all %}
+                    <span style="display: inline-block;background-color: #dddddd">{{ i.host_name }}</span>
+                {% endfor %}
+
+
+==========================3==========================================
+#ajax中
+		$.ajax({
+            url: '/index/',
+            data: {'k': 'v',
+                    'list': [1,2,3,4],
+
+                    'k3': JSON.stringfy({'k1': 'v'})},
+                    #对于嵌套字典的处理，把嵌套字典用JSON.stringfy转成字符串，
+                    在后台处理时，取出k3的值，再用json的loads转成字典。
+
+                  $(form对象).serilize() #form表单打包
+
+            type: 'POST',
+            dataType: 'JSON':
+            traditional: true,
+            success：function(d){
+                location.reload()              # 刷新
+                location.href = "某个地址"     # 跳转
+            }
+		})
+
+#视图中对orm的表字段的查询排序：
+    models.Users.objects.all().ord_by('字段名')正序
+    ord_by('-字段名')倒序
+
+
+一，路由系统URL
+    f. 默认值 是用字典进行设置
+			url(r'^index/', views.index, {'name': 'root'}),
+            在视图中可用key取值
+			def index(request,name):
+				print(name)
+				return HttpResponse('OK')
+
+
+    g. 命名空间
+        路由分发时定义命名空间
+        /admin/    include('app01.urls',namespace='m1')
+        /crm/      include('app01.urls',namespace='m1')
+        二级路由定义路由映射关系
+        app01.urls
+        /index/    name = 'n1'
+
+        那么在视图中，反转url时要写成：
+            reverser('m1:n1')
+
+二，模板Templates
+    1，母版：省去大量重复代码，可以使用模板语言，及函数
+       1.1 块定义：
+                {% block 块名 %}
+                {% endblock %}
+
+       1.2 定义母版
+            写母版文件master.html时注意位置顺序，公共部分和自定义部分（即块部分）
+            <!DOCTYPE html>
+            <html lang="en">
+            <head>
+                <meta charset="UTF-8">
+
+                1，自定义标题
+                <title>{% block title %} {% endblock %}</title>
+
+                <link rel="stylesheet" href="/static/commons.css" />
+		    </head>
+		    <style>
+                .pg-header{
+                    height: 50px;
+                    background-color: seashell;
+                    color: green;
+                }
+            </style>
+
+                2，自定义css
+                {% block css %} {% endblock %}
+
+            <body>
+                <div class="pg-header">小男孩管理</div>
+
+                3，自定义内容
+                {% block content1 %} {% endblock %}
+                {% block content2 %} {% endblock %}
+                {% block content3 %} {% endblock %}
+
+                <script src="jquery-1.12.4.js"></script>
+                <script src="bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+
+                4，自定义js
+                {% block js %} {% endblock %}
+
+            </body>
+            </html>
+
+	   1.3母版继承--tpl1.HTML 只能继承1个母版 ，可以继承多个include。
+		    extends 模板引入
+		    include 组件引入
+
+			{% extends 'master.html' %} #引入母版一定要在顶部
+
+            {% block title %}用户管理{% endblock %}
+
+            {% block content %}
+                <h1>用户管理</h1>
+                <ul>
+                    {% for i in u %}
+                        <li>{{ i }}</li>
+                    {% endfor %}
+                </ul>
+
+                {% for i in u %}
+
+                    {% include 'tag.html' %}#引入组件
+
+                {% endfor %}
+
+            {% endblock %}
+
+            {% block css %}
+                <style>
+                    body{
+                        background-color: red;
+                    }
+                </style>
+            {% endblock %}
+
+            {% block js %}
+                <script>
+                    ...
+                </script>
+            {% endblock %}
+
+    2，自定义函数，将python写的函数引入模板文件
+       在app01目录下，建立templatetags目录，建立xxoo.py文件
+        from django import template
+        from django.utils.safestring import mark_safe
+
+        register = template.Library()
+
+        @register.simple_tag
+        def houyafan(a1,a2,a3):
+            return a1 + a2
+
+        @register.filter
+        def jiajingze(a1,a2):
+            print(a2,type(a2))
+            return a1 + str(a2)
+        *****************************************
+        2.1 simple_tag
+				a. app下创建templatetags目录
+				b. 任意xxoo.py文件
+				c. 创建template对象 register
+				d.
+					@register.simple_tag
+					def func(a1,a2,a3....)
+						return "asdfasd"
+				e. settings中注册APP
+				f. 使用函数的模板文件顶部引入函数文件 {% load xxoo %}
+				g. 模板时候函数使用格式：{% 函数名 arg1 arg2 %}
+				缺点：
+					不能作为if条件
+				优点：
+					参数任意
+		2.2 filter
+				a. app下创建templatetags目录
+				b. 任意xxoo.py文件
+				c. 创建template对象 register
+				d.
+					@register.filter
+					def func(a1,a2)
+						return "asdfasd"
+				e. settings中注册APP
+				f. 顶部 {% load xxoo %}
+				g. {{ 参数1|函数名:"参数二，参数三" }} {{ 参数1|函数名:数字 }}
+				缺点：
+					最多两个参数，不能加空格
+				优点：
+					能作为if条件
+
+
+
+三，分页
+
+    一步步做分页类: 通用
+
+    原始参数：总条数(len(查询的结果))、每页条数、每页页码数、前端url。
+
+    1，先用函数方式做出简单ul li分页
+        def user_list(request):
+            page_str='''
+                <a class="page active" href="/user_list/?p=1">1</a>
+                <a class="page active" href="/user_list/?p=2">2</a>
+                <a class="page active" href="/user_list/?p=3">3</a>
+                <a class="page active" href="/user_list/?p=4">4</a>
+
+            '''
+            ·return render(request, 'user_list.html', {'li': data,'page_str': page_str})
+        ps：解析page_str中a标签 xss攻击
+            方式1：前端模板语言中
+                这样写{{ page_str }}达不到解析a标签的目的，要指明安全才可解析。
+                {{ page_str|safe }}
+
+            方式2,：或在后端view中
+                引入django的mark_safe
+                from django.utils.safestring import mark_safe
+                page_str = mark_safe(page_str)
+                这样前端就写成{{ page_str }}即可。
+
+    2，整理出分页通用类
+
+
+
+四，cookie
+    1，什么是cookie
+        a， 客户端浏览器上的一个文件，访问服务器时客户端请求头数据的一部分，本质是键值对。
+            {"user": 'dachengzi'}
+        b， 服务器返回客户端数据时（response）可以设置cookie给客户端，
+            当然也可以在获取数据时获取客户端发过来的cookie。
+
+    2，设置cookie
+        三种后台返回方式均可设置（字符串HttpResponse、模板render、跳转redirect）
+        rep = HttpResponse(...) 或 rep ＝ render(request, ...)
+
+        rep.set_cookie(key,value,...)
+
+        参数：
+            key,              键
+            value='',         值
+            max_age=None,     过多长时间 超时时间
+            expires=None,     到什么时间 超时时间
+            path='/',         Cookie生效的路径，/ 表示根路径，特殊的：根路径的cookie可以被任何url的页面访问
+            domain=None,      Cookie生效的域名
+            secure=False,     https传输
+            httponly=False    只能http协议传输，无法被JavaScript获取（不是绝对，底层抓包可以获取到也可以被覆盖）
+
+        例1：
+            if dic['pwd'] == p:
+                res = redirect('/index/')#跳转页面对象
+                res.set_cookie('username111',u)
+                return res
+
+        例2：
+            response = render(request,'index.html')
+            # 设置cookie，关闭浏览器失效
+            response.set_cookie('key',"value")
+            # 设置cookie, 10秒后失效
+            response.set_cookie('username111',"value",max_age=10)
+            # 设置cookie, 截止时间失效
+            import datetime
+            current_date = datetime.datetime.utcnow()
+            current_date = current_date + datetime.timedelta(seconds=5)
+            response.set_cookie('username111',"value",expires=current_date)
+
+            return response
+
+
+    3，获取cookie
+        request.COOKIES['key']
+
+        # request.COOKIES['username111']
+        request.COOKIES.get('username111')
+
+    4，加密cookie
+        设置：
+            response.set_signed_cookie(key,value,salt='加密盐',...)
+        获取：
+            request.get_signed_cookie(key, default=RAISE_ERROR, salt='加密盐')
+        参数：
+            default: 默认值
+               salt: 加密盐
+        设置例1：
+            obj = HttpResponse('s')
+            obj.set_signed_cookie('username',"kangbazi",salt="asdfasdf")
+        获取例1：盐要一样
+            request.get_signed_cookie('username',salt="asdfasdf")
+
+    5，应用实例：
+        a，用cookie做用户认证
+
+        b，前台设置和获取cookie--改变分页的显示行数 select绑定onchange事件
+
+五，view装饰器
+    def auth(func):
+         def inner(reqeust,*args,**kwargs):
+             v = reqeust.COOKIES.get('username111')
+             if not v:
+                 return redirect('/login/')
+             return func(reqeust, *args,**kwargs)
+         return inner
+
+    1，FBV方式
+
+        @auth
+        def index(reqeust):
+            # 获取当前已经登录的用户
+            v = reqeust.COOKIES.get('username111')
+            return render(reqeust,'index.html',{'current_user': v})
+
+    2，CBV方式
+        #引入django装饰器类
+        from django.utils.decorators import method_decorator
+
+        @method_decorator(auth,name='dispatch')#给该类中所有方法加上装饰器方式1
+        class Order(views.View):
+            # @method_decorator(auth)#给该类中所有方法加上装饰器的方式2
+            # def dispatch(self, request, *args, **kwargs):
+            #     return super(Order,self).dispatch(request, *args, **kwargs)
+
+            # @method_decorator(auth)#只对该方法加装饰器
+            def get(self,reqeust):
+                v = reqeust.COOKIES.get('username111')
+                return render(reqeust,'index.html',{'current_user': v})
+
+            def post(self,reqeust):
+                v = reqeust.COOKIES.get('username111')
+                return render(reqeust,'index.html',{'current_user': v})
+---------------------小结-----------
+后台管理菜单 + 母板
+    <a id=...>
+
+    ...
+
+向后台提交数据：
+
+    模态对话框(数据少操作)：
+        form表单 ： 缺点，无法显示错误信息
+        Ajax提交 :
+            - 有错误，显示错误；无错误，通过js的 location.relad() 刷新页面
+            - 有错误，显示错误；无错误，自己局部添加，局部刷新
+
+    单独页面（数据多，数据大操作）：
+        form表单： ..
+
+实例：用户管理，usermangment  D:\django\usermangement
+
+作业：
+	主机管理：
+		1、单表操作
+		2、一对多
+		3、多对多
+		要求：
+			a. 删除对话框
+			b. 修改，添加新URL
+			c. 基于cookie进行用户认证
+			d. 定制显示个数
+			e. 分页
+	预习：
+		Form： http://www.cnblogs.com/wupeiqi/articles/6144178.html
+		Model：http://www.cnblogs.com/wupeiqi/articles/6216618.html

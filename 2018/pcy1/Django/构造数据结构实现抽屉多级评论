@@ -1,0 +1,283 @@
+构造数据结构实现抽屉多级评论
+
+实现某个用户对某条新闻的评论，和实现对评论的评论
+
+一、数据库表结构
+
+
+class Comment(models.Model):#评论表
+    news_id = models.ForeignKey('News')#新闻表
+    user_id = models.ForeignKey('UserInfo')#用户表
+    content = models.CharField(max_length=150)#评论内容
+    device=models.CharField(max_length=16,null=True)#评论设备，可以为空（不认识的设备）
+    ctime = models.DateTimeField(auto_now_add=True)
+    #评论表中添加对评论的评论，自相关
+    '''
+    自增id 用户名 content        news_id  parent_id
+    1     高基金 发发发顺丰速递       1       null
+    2     小胡   发发发顺丰速递       1       null
+    3     金星   发发发顺丰速递       1       null
+    4     展销会 发发发顺丰速递       1       1       #都是对新闻id为1的新闻进行评论，该条评论展销会是对评论id为1的高基金评论的评论
+    5     高基金 发发发顺丰速递       1       4       #都是对新闻id为1的新闻进行评论，该条评论高基金是对评论id为4的展销会评论的评论（相当于回复了上面一条对自己的评论）
+    '''
+    parent_id  = models.ForeignKey("self",related_name='cp',null=True)#自相关，对评论的评论，可以为空
+    #自相关字段可用self，因为表名相同，相当于两张相同的表，id互指。
+    #反向查询：由于自相关表名相同，因此要指明一下方向查询的名称，这里是'cp'取代'表名_set'反向查询（即谁评论了我的评论）
+
+二、构造如下数据结构
+    原数据结构：从评论表中读取的数据
+    comment_list = models.Comment.objects.filter(news_id=news_id)
+    for row in comment_list:
+    #     print(row.id,row.content,row.user_info.name,row.parent_id)
+    '''
+    原结构具体如下
+    comment_list = [
+        {'id': 1, 'content': 'Python最牛逼', 'user': '搞基建', 'parent_id': None},
+        {'id': 2, 'content': 'Java最牛逼', 'user': '搞基建', 'parent_id': None},
+        {'id': 3, 'content': 'PHP最牛逼', 'user': '搞基建', 'parent_id': None},
+        {'id': 4, 'content': '你最牛逼', 'user': '小比虎', 'parent_id': 1},
+        {'id': 5, 'content': '老师最你比', 'user': '李欢', 'parent_id': 1},
+        {'id': 6, 'content': '郭永昌是...', 'user': '郭永昌', 'parent_id': 4},
+        {'id': 7, 'content': '哈哈我是流氓...', 'user': '崔月圆', 'parent_id': 2},
+        {'id': 8, 'content': '我女朋友好漂亮...', 'user': '崔月圆', 'parent_id': 3},
+        {'id': 9, 'content': '见到你女友，交定你朋友...', 'user': '搞基建', 'parent_id': 8},
+        {'id': 10, 'content': '见到你女友，交定你朋友...', 'user': '鼻环', 'parent_id': None},
+    ]
+    '''
+    新数据结构：实现评论树 comment_tree  用key=children value=[]嵌入多级评论子结构
+        一级评论(根评论)：
+            'parent_id': None
+        二级、三级..等子评论(即评论的评论)：
+            'parent_id': 某个评论的id
+        根据parent_id的情况，将评论的评论嵌套在上一级(父)评论的children里，嵌套对评论的评论
+        具体结构如下：
+    """
+    [
+        {一级：
+            'id': 1,
+            'content': 'Python最牛逼',
+            'user': '搞基建',
+            'parent_id': None,
+            'children': [
+                {二级
+                    'id': 4, 'content': '你最牛逼', 'user': '小比虎', 'parent_id': 1, 'children': [
+                    {三级
+                        'id': 6, 'content': '郭永昌是...', 'user': '郭永昌', 'parent_id': 4, 'children': []
+                    },
+                    ]
+                },
+                {二级
+                    'id': 5, 'content': '老师最你比', 'user': '李欢', 'parent_id': 1, 'children': []
+                },
+            ]
+        },
+        {一级
+            'id': 2,
+            'content': 'Python最牛逼',
+            'user': '搞基建',
+            'parent_id': None,
+            'children': []
+        },
+        {一级
+            'id': 3,
+            'content': 'Python最牛逼',
+            'user': '搞基建',
+            'parent_id': None,
+            'children': []
+        },
+    ]
+    """
+
+三、构建方法
+1，low版 递归方式
+from django.shortcuts import render,HttpResponse
+from app01 import models
+
+class Node:#创建评论树
+    @staticmethod
+    def digui(ret, row):#处理子评论
+        # ret: {'id': 4, 'content': '你最牛逼', 'user': '小比虎', 'parent_id': 1, 'children': []},{'id': 5, 'content': '老师最你比', 'user': '李欢', 'parent_id': 1},]
+        # row {'id': 6, 'content': '郭永昌是...', 'user': '郭永昌', 'parent_id': 4},
+        for rt in ret:
+            if rt['id'] == row['parent_id']:
+                row['children'] = []#创建子结构的子结构
+                rt['children'].append(row)
+                return
+            else:
+                Node.digui(rt['children'],row)#递归，如果在本级中没有找到，在下级中继续找
+
+    @staticmethod
+    def create_tree(comment_list):
+        ret = []#评论树结构
+        """
+        {'user': '搞基建', 'parent_id': None, 'id': 1, 'children': [{'id': 4, 'content': '你最牛逼', 'user': '小比虎', 'parent_id': 1, 'children': []},{'id': 5, 'content': '老师最你比', 'user': '李欢', 'parent_id': 1},], 'content': 'Python最牛逼'}
+        {'user': '搞基建', 'parent_id': None, 'id': 2, 'children': [], 'content': 'Java最牛逼'}
+        {'user': '搞基建', 'parent_id': None, 'id': 3, 'children': [], 'content': 'PHP最牛逼'}
+        """
+        for row in comment_list:
+            # row {'id': 6, 'content': '郭永昌是...', 'user': '郭永昌', 'parent_id': 4},
+            if not row['parent_id']: # 'parent_id'=None 就是根评论
+                row['children'] = []#创建根结构的子结构
+                ret.append(row)#加入结果集列表
+            else:#'parent_id'不为None就是子评论，用递归处理方法
+                Node.digui(ret,row)
+        return ret
+
+def comment(request):#view函数
+    news_id = 1
+
+    #comment_list = models.Comment.objects.filter(news_id=news_id)
+    #for row in comment_list:
+    #    print(row.id,row.content,row.user_info.name,row.parent_id)
+
+    comment_list = [#用该结构来模拟上面得到的数据结构
+        {'id': 1, 'content': 'Python最牛逼', 'user': '搞基建', 'parent_id': None},
+        {'id': 2, 'content': 'Java最牛逼', 'user': '搞基建', 'parent_id': None},
+        {'id': 3, 'content': 'PHP最牛逼', 'user': '搞基建', 'parent_id': None},
+        {'id': 4, 'content': '你最牛逼', 'user': '小比虎', 'parent_id': 1},
+        {'id': 5, 'content': '老师最你比', 'user': '李欢', 'parent_id': 1},
+        {'id': 6, 'content': '郭永昌是...', 'user': '郭永昌', 'parent_id': 4},
+        {'id': 7, 'content': '哈哈我是流氓...', 'user': '崔月圆', 'parent_id': 2},
+        {'id': 8, 'content': '我女朋友好漂亮...', 'user': '崔月圆', 'parent_id': 3},
+        {'id': 9, 'content': '见到你女友，交定你朋友...', 'user': '搞基建', 'parent_id': 8},
+        {'id': 10, 'content': '见到你女友，交定你朋友...', 'user': '鼻环', 'parent_id': None},
+    ]
+    #调用构造方法，接收构建结果ret，得到树形结构
+    comment_tree = Node.create_tree(comment_list)
+    for i in comment_tree:
+        print(i)
+
+    return HttpResponse('comment')
+
+json在线解析帮助理清嵌套层级结构
+    www.bejson.com
+    粘贴，选择校验
+
+
+
+2，高级版本
+不用递归实现多级评论数据结构的构造ret：效率远远高于递归的方式，因为字典的get方法非常快
+第一个循环列表构建comment_list_dict字典数据结构，用row[‘id’]做为key，row做为值
+第二个循环列表通过上面构造的字典使用get方法快速找到当前行的parent_id为key的值（即父亲是否存在）是否存在，如果不存在即None，就是第一级评论，加入ret列表，如果存在，将当前行加入key为当前行的parent_id的值（即父亲）的children列表
+Comment_list是列表
+comment_list_dict是字典：是通过Comment_list列表构造的，
+*****列表和字典都是引用类型，即指向内存地址，
+当comment_list_dict引用的内存地址的值改变时，Comment_list列表指向同一内存地址的值也会改变。*****
+
+def comment(request):
+    comment_list = [
+            {'id': 1, 'content': 'Python最牛逼', 'user': '搞基建', 'parent_id': None},
+            {'id': 2, 'content': 'Java最牛逼', 'user': '搞基建', 'parent_id': None},
+            {'id': 3, 'content': 'PHP最牛逼', 'user': '搞基建', 'parent_id': None},
+            {'id': 4, 'content': '你最牛逼1232', 'user': '小比虎', 'parent_id': 1},
+            {'id': 5, 'content': '老师最你比', 'user': '李欢', 'parent_id': 1},
+            {'id': 6, 'content': '郭永昌是...', 'user': '郭永昌', 'parent_id': 4},
+            {'id': 7, 'content': '哈哈我是流氓...', 'user': '崔月圆', 'parent_id': 2},
+            {'id': 8, 'content': '我女朋友好漂亮...', 'user': '崔月圆', 'parent_id': 3},
+            {'id': 9, 'content': '见到你女友，交定你朋友...', 'user': '搞基建', 'parent_id': 6},
+            {'id': 10, 'content': '见到你女友，交定你朋友...', 'user': '鼻环', 'parent_id': None},
+        ]
+
+    comment_tree = []#想要的数据结构评论树
+    comment_list_dict = {}#字典可以使用get(key)方式快速得到相应的value
+    for row in comment_list:
+            row.update({'children': []})#构建子评论结构
+            comment_list_dict[row['id']] = row#构建评论数的字典结构，目的是可以用get方法快速找到，而不用像列表需要遍历才可以。
+    #第一个循环列表加入子评论树，构建comment_list_dict字典数据结构，用row['id']做为key，row做为值
+    """
+    comment_list_dict=
+    {
+            1:{'id': 1, 'content': 'Python最牛逼', 'user': '搞基建', 'parent_id': None},
+            2:{'id': 2, 'content': 'Java最牛逼', 'user': '搞基建', 'parent_id': None},
+            3:{'id': 3, 'content': 'PHP最牛逼', 'user': '搞基建', 'parent_id': None},
+            4:{'id': 4, 'content': '你最牛逼1232', 'user': '小比虎', 'parent_id': 1},
+            5:{'id': 5, 'content': '老师最你比', 'user': '李欢', 'parent_id': 1},
+            6:{'id': 6, 'content': '郭永昌是...', 'user': '郭永昌', 'parent_id': 4},
+            7:{'id': 7, 'content': '哈哈我是流氓...', 'user': '崔月圆', 'parent_id': 2},
+            8:{'id': 8, 'content': '我女朋友好漂亮...', 'user': '崔月圆', 'parent_id': 3},
+            9:{'id': 9, 'content': '见到你女友，交定你朋友...', 'user': '搞基建', 'parent_id': 6},
+            10:{'id': 10, 'content': '见到你女友，交定你朋友...', 'user': '鼻环', 'parent_id': None},
+    }
+    """
+    for item in comment_list:
+            parent_row = comment_list_dict.get(item['parent_id'])#通过字典得到父评论
+            if not parent_row:#即'parent_id'=None，根评论
+                    comment_tree.append(item)
+            else:#即子评论，将子评论嵌入上一级（父）评论的数据结构children列表里
+                 parent_row['children'].append(item)#快,
+    print(comment_tree)
+    '''
+    第二个循环列表通过上面构造的字典使用get方法快速找到当前行的parent_id为key的值（即父亲是否存在）是否存在，
+    如果不存在即None（根评论），就是第一级评论，加入ret列表，
+    如果存在（即子评论），将当前行加入key为当前行的parent_id的值（即父亲）的children列表
+    Comment_list是列表
+    comment_list_dict是字典：是通过Comment_list列表构造的，
+    *****
+        列表和字典都是引用类型，即指向内存地址，
+        当comment_list_dict引用的内存地址的值改变时，
+        Comment_list列表指向同一内存地址的值也会改变。
+        想要的数据结构comment_tree嵌套列表也是通过Comment_list构造的，
+    *****
+    '''
+    #方式一前端解析
+    import json
+
+    return Httpresponse(json.dumps(coment_tree))
+
+    #方式二后端直接用simple_tag方式
+    return render(request, 'comment.html', {'comment_tree': comment_tree})#不推荐-->后端直接用simple_tag方式，消耗服务器资源
+
+四、前端实现
+1，方式一
+
+
+$(function () {
+            bindCommentEvent();
+        });
+function bindCommentEvent() {
+           $('.com').click(function () {
+               var news_id = $(this).attr('news_id');
+               var _this = $(this);
+
+               $.ajax({
+                   url: '/comment/',
+                   type: 'GET',
+                   data: {news_id: news_id},
+                   dataType: "JSON",
+                   success:function (arg) {
+                       create_tree(arg, _this);
+                       console.log(arg);
+                       _this.after(arg);
+                   }
+               })
+
+           })
+        }
+
+function diGui(children_list){
+                var html = "";
+                $.each(children_list,function (ck,cv) {
+                       var b = '<div class="comment-box"><span>';
+                       b+= cv.content + "</span>";
+                       b += diGui(cv.children);
+                       b += "</div>";
+                       html += b;
+                 });
+                return html;
+            }
+
+
+function create_tree(data,$this) {
+                 var html = '<div class="comment-list">';
+                 $.each(data,function (k,v) {
+                    var a = '<div class="comment-box"><span>';
+                     a+= v.content + "</span>";
+                     // 创建自评论
+                     a += diGui(v.children);
+                     a+= "</div>";
+                     html += a;
+                 });
+
+                 html += "</div>";
+                $this.after(html);
+            }

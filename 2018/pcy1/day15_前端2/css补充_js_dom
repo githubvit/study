@@ -1,0 +1,35 @@
+css补充
+ 1，position：
+
+    1.1，fixed：固定在浏览器窗口的某个位置。
+        对窗口定位：top bottom left right
+        position将页面分层，进行层叠，
+        用来做返回顶部
+        用来做顶部菜单栏
+    1.2，父relative+子absolute:相对父级定位
+        单写position:relative;是没有用的，必须和position:absolute;配合才能发挥作用。
+        <div style='position:relative;'>
+
+            <div style='position:absolute;top:0;left:0;></div>
+
+        </div>
+ 2，opacity：0.5 透明度(css3)
+ 3，z-index：层级顺序，大的在外(css3)
+        三层页面
+ 4，overflow：hidden隐藏没有滚动条，auto滚动条(css3、css4)
+
+ 5，:hover:鼠标在该标签上的时候
+
+        顶部菜单，变色;
+        .header-menu:hover{/*当鼠标移动到当前标签的时候该样式生效*/
+            background-color: blue;
+        }
+        (css5)
+ 6，background-image：
+    写法：url（图片地址）
+    <div style="height: 800px; background: url('马20170924.png') no-repeat;"></div>
+    默认是repeat，就是当div比图片大时，图片会重复放。
+    还有repeat-x、repeat-y。
+    应用：渐变色，设置一张小图片，让该图片repeat。
+    小图标（移动背景图片background-position: 0 19px;0是x，19是y）、输入框图标
+    (css6、css7、css8)

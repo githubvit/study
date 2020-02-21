@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<input id="i1" type="text">
+<input id="i2" type="button" value="添加">
+<ul id="u1">
+    <li>1</li>
+    <li>2</li>
+</ul>
+<script src="jquery-1.12.4.js"></script>
+<script>
+    //添加li标签
+    $('#i2').click(function () {
+        var v=$('#i1').val();
+        var tag=document.createElement('li');
+        $(tag).text(v);
+        $('#u1').append(tag);
+    });
+    //测试绑定方式1
+//    $('#u1 li').click(function () {
+//        alert($(this).text())
+//    })
+    //测试绑定方式2
+//    $('#u1 li').bind('click',function () {
+//        alert($(this).text())
+//    })
+    //测试绑定方式3
+//    $('#u1 li').on('click',function () {
+//        alert($(this).text())
+//    })
+    //测试绑定方式4 实现了添加后的标签可以alert
+    $('#u1').delegate('li','click',function () {
+        alert($(this).text())
+    })
+
+
+</script>
+</body>
+</html>

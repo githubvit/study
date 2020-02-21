@@ -1,0 +1,23 @@
+python操作mysql
+
+import pymysql
+
+1， 连接数据库
+            通过创建socket对象连接
+
+2， 创建光标
+            用socket对象的course方法创建
+
+3， 执行SQL语句
+            用光标对象的execute或executemany方法执行
+
+4， 提交
+    默认是事务性操作，因此需要提交commit。用socket对象的commit方法提交
+    增、删、改需要提交
+    查不需要提交
+
+5， 获取结果
+        用光标的fetchone()、fetchmany(n)、fetchall()方法获取一条或n条以及全部结果
+
+6， 关闭连接
+        用socket对象的close方法

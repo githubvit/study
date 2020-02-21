@@ -1,0 +1,20 @@
+管理静态文件
+
+项目中的CSS、图片、js都是静态文件
+配置静态文件
+
+在settings 文件中定义静态内容
+STATIC_URL = '/static/'#逻辑地址，在网页模板中显示，可以用来隐藏真实的静态文件物理地址，进行静态地址伪造
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static'),#物理地址
+]
+
+在项目根目录下创建static目录，再创建当前应用名称的目录
+mysite/static/myapp/
+
+在模板中可以使用硬编码
+/static/my_app/myexample.jpg
+
+在模板中可以使用static编码
+{ % load static from staticfiles %}#导入static模块，在HTML第一行
+<img src="{ % static "my_app/myexample.jpg" %}" alt="My image"/>

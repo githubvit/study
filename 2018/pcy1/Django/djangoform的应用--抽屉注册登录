@@ -1,0 +1,477 @@
+抽屉注册登录
+实例部分：2017年老男孩最新全栈python第2期视频教程 全套完整版\day64-python 全栈开发-web框架篇
+
+1、基本表结构
+    class UserInfo(models.Model):#用户表
+        username = models.CharField(max_lenght=32,db_index=True)
+        email = models.CharField(max_lenght=32,unique=True)
+        pwd = models.CharField(max_length=64)
+        ctime = models.DateTimeField(auto_add=True)
+
+        """
+        class Meta:
+            index_together = [
+                ('username', 'pwd'),
+            ]
+
+            unique_together = [
+                ('username', 'pwd'),
+            ]
+        """
+
+    class SendMsg(models.Model):#验证码临时表
+        email = models.EmailField(max_lenght=32,unique=True)
+        code = models.CharField(max_length=6)
+        ################ 最后一次发的时间 ################
+        ptime = models.DateTimeField()
+        times = models.IntergarField(default=1)
+
+    SendMsg.objects.create(email='11111111',code='123',stime=datetime.now())
+    # 特殊语句
+    obj = SendMsg(email='11111111',code='123',stime=datetime.now())
+    obj.clean()
+    obj.save()
+    # django Admin也是可以的
+
+    ？django的Models字段怎么验证？
+
+
+
+2、登录和注册
+    - ORM操作
+    - F 和 Q
+        filter(id__gt=1,name='root')
+        filter(**{"id__gt": 1,...})
+        filter(Q(Q(id__gt=1)&Q(name="root"))|)
+        （邮箱&密码）| （用户名&密码）
+    - 简单倒计时效果
+    - 验证码
+    - *** 逻辑性处理 ***
+    - 注册成功后，自动登录
+
+
+---------注册-----------------
+    a. 获取注册表单中的所有信息，Ajax发送
+                $.ajax({
+                    url: ...
+                    data: {.....},
+
+                })
+    b. 写Form用于验证用户请求
+       合法：
+            ..
+       不合法：
+            错误信息返回给用户
+        form = registerForm(request.POSt)
+        if form.is_valid():
+            # 随机验证码进行检查，1分钟内的做的操作
+            【随机验证码的临时表，邮箱，code,code生成的时间】
+            # 获取当前时间 - 1分钟
+    c. 错误信息的展示：
+        -- 详细错误信息
+
+
+    --- 1，发送随机验证码（注册时，发送邮箱验证码）
+    前端
+        - 获取邮箱框中的内容，并发到后台（Ajax）
+        - Form验证，只验证一个邮箱
+                class Foo(forms.Form):
+                    email ...
+            ret = {'stauts':.., 'summary': ..}
+            不合法：
+                ..
+            合法
+                ..
+        - success回调函数：
+            合法：
+                跑秒
+            不合法：
+                显示错误
+
+    后端：
+        class BaseResponse:#建立的字典类取代字典方便使用
+            def __init__(self):
+                self.status = True#状态
+                self.summary = None#整体错误
+                self.error = None#详细错误
+                self.data = None#数据
+
+        class SendMsgForm(forms.Form):#form模板
+            email = EmailField(error_messages={'invalid': '邮箱格式错误'})
+
+
+        def send_msg(request):
+            #ret = {'stauts': True, 'summary': None, 'error': None, 'data': None}
+            # return HttpResponse(json.dumps(ret))
+
+            obj = BaseResponse()#用字典类，不用字典
+
+            form = SendMsgForm(request.POST)#实例form模板对象，把请求交给form对象
+
+            if form.is_valid():#如果用户邮箱格式正确
+
+
+                # 【用户表】中是否已经存在当前邮箱
+                obj.status = False
+                obj.summary = "邮箱已被注册"#错误信息
+                return return HttpResponse(json.dumps(obj.__dict__))
+
+
+                【验证码临时表】
+                获取当前时间
+                # 11:11
+                current_date = datetime.datetime.now()
+                code = # 生成随机验证码 用random模块
+
+
+                如果【验证码临时表】有当前邮箱：
+                    ====== 1小时，10个数 ======
+                    # 10: 11时间倒回1小时前
+                    limit_date = current_date - datetime.datedela(hours=1)
+                    # 时间是合理的，次数不合理
+                    a = SendMsg.objects.filter(email=email,utime__gt=limit_date, times__gt=10).count()
+                    if a:
+                        # 1小时内次数太多了 报错
+                        return
+
+                    # 10年后，就是已经过了1小时
+                    b = SendMsg.objects.filter(email=email,utime__lte=limit_date).count()
+                    if b:
+                        SendMsg.objects.filter(email=email).update(code=code,stime=current_date,times=1)
+                        # 刷新随机码、时间和次数
+                        return
+
+                    #没有a和b的情况发生，就更新随机码和次数
+                    from django.db.models import F #用到F查询，给当前次数+1
+                    SendMsg.objects.filter(email=email).update(code=code,times=F('times') + 1)
+
+                else：
+
+                    # 数据库的SendMsg创建一条信息   SendMsg.objects.create(... current_date,times=1)
+                    # 发送邮件
+                    obj.status = True
+            else:#没通过验证，报错
+                obj.summary = form.errors['email'][0]
+                obj.status = False
+                # obj.__dict__ # {'stauts': True, 'summary': None, 'error': None, 'data': None}
+
+            return HttpResponse(json.dumps(obj.__dict__))
+
+        发送注册码难点：发送邮件和生成随机码
+        ----------------------
+        64-06-09:30
+        发送邮件（放在utils工具文件夹下message.py）
+            #!/usr/bin/env python
+            # -*- coding:utf-8 -*-
+
+
+            import smtplib
+            from email.mime.text import MIMEText
+            from email.utils import formataddr
+
+
+            def email(email_list, content, subject="抽屉新热榜-用户注册"):
+                '''
+                email_list:发给谁, content发送的内容, subject邮件标题
+                '''
+                msg = MIMEText(content, 'plain', 'utf-8')
+                msg['From'] = formataddr(["抽屉新热榜",'wptawy@126.com'])
+                msg['Subject'] = subject
+                # SMTP服务 要在发送邮箱中开启smtp服务，smtp服务器域名 端口
+                server = smtplib.SMTP("smtp.126.com", 25)
+                #发送邮箱名和密码
+                server.login("wptawy@126.com", "JUEmimima")
+                server.sendmail('wptawy@126.com', email_list, msg.as_string())
+                server.quit()
+
+
+            # email(['xiaohu@live.com','jinxin@live.com'], 'xiaohuzuishuai')
+
+        发送短信及微信：
+            服务商提供url、秘钥，把要发给谁的号码填上和发送的代码就可以了
+            http://www.fasongduanxin.com?key=dsafdafaafgerg&phone=18999998888&code=123uj
+            服务商会按次数或包月费用收费
+            使用方法：
+                import requests
+                rep=requests.get('http://www.fasongduanxin.com?key=dsafdafaafgerg&phone=18999998888&code=123uj')
+                '''
+                服务商一般会返回json格式的内容
+                 {'status':True,'error':'发送失败'...}
+                '''
+                result=rep.text
+
+
+        生成随机码
+            import random
+            def random_code():
+                code = ''
+                for i in range(4):
+                    current = random.randrange(0,4)
+                    if current != i:
+                        temp = chr(random.randint(65,90))
+                    else:
+                        temp = random.randint(0,9)
+                    code += str(temp)
+                return code
+
+    ---2，注册,自动登录(session)
+    def register(request):
+        """
+        注册
+        :param request:
+        :return:
+        """
+        rep = BaseResponse()#实例化字典对象
+        form = RegisterForm(request.POST)#用Form对象获取请求
+        if form.is_valid():#通过验证
+            current_date = datetime.datetime.now()
+            limit_day = current_date - datetime.timedelta(minutes=1)
+            _value_dict = form.clean()#从请求中获取所有正确信息
+
+            is_valid_code = models.SendMsg.objects.filter(email=_value_dict['email'],
+                                                          code=_value_dict['email_code'],
+                                                          ctime__gt=limit_day).count()
+            if not is_valid_code:
+                rep.message['email_code'] = '邮箱验证码不正确或过期'
+                return HttpResponse(json.dumps(rep.__dict__))
+
+            has_exists_email = models.UserInfo.objects.filter(email=_value_dict['email']).count()
+
+            if has_exists_email:
+                rep.message['email'] = '邮箱已经存在'
+                return HttpResponse(json.dumps(rep.__dict__))
+
+            has_exists_username = models.UserInfo.objects.filter(username=_value_dict['username']).count()
+            if has_exists_username:
+                rep.message['email'] = '用户名已经存在'
+                return HttpResponse(json.dumps(rep.__dict__))
+
+            _value_dict['ctime'] = current_date
+            _value_dict.pop('email_code')#通过后可以删除验证码
+            # 通过验证后，在用户表中创建用户，并获取当前用户的所有信息
+            obj = models.UserInfo.objects.create(**_value_dict)
+
+            user_info_dict = {'nid': obj.nid, 'email': obj.email, 'username': obj.username}
+
+            models.SendMsg.objects.filter(email=_value_dict['email']).delete()#在验证临时表中删除该条已通过的信息
+            #将当前用户信息加入session,使其登录
+            request.session['is_login'] = True
+            request.session['user_info'] = user_info_dict
+            rep.status = True
+
+        else:
+            error_msg = form.errors.as_json()
+            rep.message = json.loads(error_msg)
+        return HttpResponse(json.dumps(rep.__dict__))
+
+
+---------登录-----------------
+1，当用户访问登录页面时，Python自动生成一张图片输入到页面（即：验证码），
+   并且将图片上的文字内容保存在 Session中（即：request.session["CheckCode"] = '验证码的文字内容'）
+
+2，用户输入用户名密码验证码，点击登陆时：
+
+    首先，检查用户输入的 验证码 是否和Session中保存的验证码是否相同
+    然后，检查用户输入的 用户名 和 密码是否正确
+Python自动生成一张图片输入到页面 py3.x
+import io
+import check_code as CheckCode
+
+def check_code(request):
+    """
+    获取验证码
+    :param request:
+    :return:
+    """
+    stream = io.BytesIO()#这是生成一块内存，是Bytes类型的，这是py3.x才有的，2.7没有。
+    # 创建随机字符 code
+    # 创建一张图片格式的字符串，将随机字符串写到图片上
+    img, code = CheckCode.create_validate_cod
+    #create_validate_code是自己要动手创建的工具，每次实例化会产生图片和随机码，要使用pillow模块
+    img.save(stream, "PNG")#将图片以PNG格式保存在上面创建的内
+    # 将字符串形式的验证码放在Session中
+    request.session["CheckCode"] = c
+    return HttpResponse(stream.getvalue())
+
+Python自动生成一张图片输入到页面 py2.7
+import StringIO
+import check_code as CheckCode
+def CheckCode(request):
+    mstream = StringIO.StringIO()
+    validate_code = Checkcode.create_validate_code()
+    img = validate_code[0]
+    img.save(mstream, "GIF")
+
+    #将验证码保存到session
+    request.session["CheckCode"] = validate_code[1]
+
+    return HttpResponse(mstream.getvalue())
+
+
+def login(request):
+    """
+    用户登陆
+
+    """
+    rep = BaseResponse()
+    form = LoginForm(request.POST)
+    if form.is_valid():
+        _value_dict = form.clean()
+
+        #检查用户输入的 验证码 是否和Session中保存的验证码是否相同
+        if _value_dict['code'].lower() != request.session["CheckCode"].lower():
+            rep.message = {'code': [{'message': '验证码错误'}]}
+            return HttpResponse(json.dumps(rep.__dict__))
+
+
+        # 验证码正确，使用Q查询来验证（这里的验证码是页面上的图片验证码，不是注册时的验证码）
+        from django.db.models import Q
+
+        con = Q()
+        q1 = Q()
+        q1.connector = 'AND'
+        q1.children.append(('email', _value_dict['user']))
+        q1.children.append(('password', _value_dict['pwd']))
+
+        q2 = Q()
+        q2.connector = 'AND'
+        q2.children.append(('username', _value_dict['user']))
+        q2.children.append(('password', _value_dict['pwd']))
+
+        con.add(q1, 'OR')
+        con.add(q2, 'OR')
+
+        obj = models.UserInfo.objects.filter(con).first()
+        if not obj:
+            rep.message = {'user': [{'message': '用户名邮箱或密码错误'}]}
+            return HttpResponse(json.dumps(rep.__dict__))
+
+        request.session['is_login'] = True
+        request.session['user_info'] = {'nid': obj.nid, 'email': obj.email, 'username': obj.username}
+        rep.status = True
+    else:
+        error_msg = form.errors.as_json()
+        rep.message = json.loads(error_msg)
+
+    return HttpResponse(json.dumps(rep.__dict__))
+
+
+def logout(request):
+    """
+    用户注销，就是清空session
+    :param request:
+    :return:
+    """
+    request.session.clear()
+    return redirect('/index/')
+
+
+    登录难点：图片验证码
+    ----------------------
+    1，创建图片验证码 check_code.py
+    #!/usr/bin/env python
+    #coding:utf-8
+
+    import random
+    from PIL import Image, ImageDraw, ImageFont, ImageFilter
+    # pip3 install Pillow
+    _letter_cases = "abcdefghjkmnpqrstuvwxy"  # 小写字母，去除可能干扰的i，l，o，z
+    _upper_cases = _letter_cases.upper()  # 大写字母
+    _numbers = ''.join(map(str, range(3, 10)))  # 数字
+    init_chars = ''.join((_letter_cases, _upper_cases, _numbers))
+
+    def create_validate_code(size=(120, 30),
+                             chars=init_chars,
+                             img_type="GIF",
+                             mode="RGB",
+                             bg_color=(255, 255, 255),
+                             fg_color=(0, 0, 255),
+                             font_size=18,
+                             font_type="Monaco.ttf",
+                             length=4,
+                             draw_lines=True,
+                             n_line=(1, 2),
+                             draw_points=True,
+                             point_chance = 2):
+        '''
+        @todo: 生成验证码图片
+        @param size: 图片的大小，格式（宽，高），默认为(120, 30)
+        @param chars: 允许的字符集合，格式字符串
+        @param img_type: 图片保存的格式，默认为GIF，可选的为GIF，JPEG，TIFF，PNG
+        @param mode: 图片模式，默认为RGB
+        @param bg_color: 背景颜色，默认为白色
+        @param fg_color: 前景色，验证码字符颜色，默认为蓝色#0000FF
+        @param font_size: 验证码字体大小
+        @param font_type: 验证码字体，默认为 ae_AlArabiya.ttf
+        @param length: 验证码字符个数
+        @param draw_lines: 是否划干扰线
+        @param n_lines: 干扰线的条数范围，格式元组，默认为(1, 2)，只有draw_lines为True时有效
+        @param draw_points: 是否画干扰点
+        @param point_chance: 干扰点出现的概率，大小范围[0, 100]
+        @return: [0]: PIL Image实例
+        @return: [1]: 验证码图片中的字符串
+        '''
+
+        width, height = size # 宽， 高
+        img = Image.new(mode, size, bg_color) # 创建图形
+        draw = ImageDraw.Draw(img) # 创建画笔
+
+        def get_chars():
+            '''生成给定长度的字符串，返回列表格式'''
+            return random.sample(chars, length)
+
+        def create_lines():
+            '''绘制干扰线'''
+            line_num = random.randint(*n_line) # 干扰线条数
+
+            for i in range(line_num):
+                # 起始点
+                begin = (random.randint(0, size[0]), random.randint(0, size[1]))
+                #结束点
+                end = (random.randint(0, size[0]), random.randint(0, size[1]))
+                draw.line([begin, end], fill=(0, 0, 0))
+
+        def create_points():
+            '''绘制干扰点'''
+            chance = min(100, max(0, int(point_chance))) # 大小限制在[0, 100]
+
+            for w in range(width):
+                for h in range(height):
+                    tmp = random.randint(0, 100)
+                    if tmp > 100 - chance:
+                        draw.point((w, h), fill=(0, 0, 0))
+
+        def create_strs():
+            '''绘制验证码字符'''
+            c_chars = get_chars()
+            strs = ' %s ' % ' '.join(c_chars) # 每个字符前后以空格隔开
+
+            font = ImageFont.truetype(font_type, font_size)
+            font_width, font_height = font.getsize(strs)
+
+            draw.text(((width - font_width) / 3, (height - font_height) / 3),
+                        strs, font=font, fill=fg_color)
+
+            return ''.join(c_chars)
+
+        if draw_lines:
+            create_lines()
+        if draw_points:
+            create_points()
+        strs = create_strs()
+
+        # 图形扭曲参数
+        params = [1 - float(random.randint(1, 2)) / 100,
+                  0,
+                  0,
+                  0,
+                  1 - float(random.randint(1, 10)) / 100,
+                  float(random.randint(1, 2)) / 500,
+                  0.001,
+                  float(random.randint(1, 2)) / 500
+                  ]
+        img = img.transform(size, Image.PERSPECTIVE, params) # 创建扭曲
+
+        img = img.filter(ImageFilter.EDGE_ENHANCE_MORE) # 滤镜，边界加强（阈值更大）
+
+        return img, strs

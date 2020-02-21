@@ -1,0 +1,22 @@
+Thu, 02 Nov 2017 00:12:29 -server_authenticate.py[line:28]—— access - INFO - ip:127.0.0.1   port:57301 connected
+Thu, 02 Nov 2017 00:12:32 -server_authenticate.py[line:28]—— access - INFO - ip:127.0.0.1   port:57302 connected
+Thu, 02 Nov 2017 00:12:34 -server_authenticate.py[line:28]—— access - INFO - ip:127.0.0.1   port:57303 connected
+Thu, 02 Nov 2017 00:12:36 -server_authenticate.py[line:28]—— access - INFO - ip:127.0.0.1   port:57304 connected
+Thu, 02 Nov 2017 00:13:15 -server_authenticate.py[line:63]—— access - INFO - ip:127.0.0.1   port:57301     user:m_111 res:登陆成功 
+Thu, 02 Nov 2017 00:13:44 -server_authenticate.py[line:63]—— access - INFO - ip:127.0.0.1   port:57302     user:m_123 res:登陆成功 
+Thu, 02 Nov 2017 00:14:12 -server_authenticate.py[line:63]—— access - INFO - ip:127.0.0.1   port:57303     user:test res:密码错误 
+Thu, 02 Nov 2017 00:14:48 -server_authenticate.py[line:63]—— access - INFO - ip:127.0.0.1   port:57303     user:m_test res:登陆成功 
+Thu, 02 Nov 2017 00:15:30 -server_authenticate.py[line:63]—— access - INFO - ip:127.0.0.1   port:57304     user:m_abc_test res:密码错误 
+Thu, 02 Nov 2017 00:15:55 -server_authenticate.py[line:63]—— access - INFO - ip:127.0.0.1   port:57304     user:m_abc_test res:登陆成功 
+Thu, 02 Nov 2017 00:16:05 -server_authenticate.py[line:41]—— access - INFO - ip:127.0.0.1   port:57304 break
+Thu, 02 Nov 2017 00:16:08 -server_authenticate.py[line:41]—— access - INFO - ip:127.0.0.1   port:57303 break
+Thu, 02 Nov 2017 00:16:12 -server_authenticate.py[line:41]—— access - INFO - ip:127.0.0.1   port:57302 break
+Thu, 02 Nov 2017 00:16:16 -server_authenticate.py[line:41]—— access - INFO - ip:127.0.0.1   port:57301 break
+Thu, 02 Nov 2017 00:48:21 -server_authenticate.py[line:24]—— access - INFO - ip:127.0.0.1   port:57720 connected
+Thu, 02 Nov 2017 00:48:26 -server_authenticate.py[line:24]—— access - INFO - ip:127.0.0.1   port:57722 connected
+Thu, 02 Nov 2017 00:48:33 -server_authenticate.py[line:59]—— access - INFO - ip:127.0.0.1   port:57720     user:111 res:用户不存在 
+Thu, 02 Nov 2017 00:48:47 -server_authenticate.py[line:59]—— access - INFO - ip:127.0.0.1   port:57720     user:m_111 res:登陆成功 
+Thu, 02 Nov 2017 00:49:03 -server_authenticate.py[line:54]—— access - ERROR - ip:127.0.0.1   port:57722   user_id:m_111 已经在线,请换个账号 
+Thu, 02 Nov 2017 00:49:14 -server_authenticate.py[line:59]—— access - INFO - ip:127.0.0.1   port:57722     user:m1234 res:用户不存在 
+Thu, 02 Nov 2017 00:49:38 -server_authenticate.py[line:47]—— access - ERROR - ip:127.0.0.1   port:57722    repeat_log:次数太多
+Thu, 02 Nov 2017 00:53:50 -server_authenticate.py[line:37]—— access - INFO - ip:127.0.0.1   port:57720 break

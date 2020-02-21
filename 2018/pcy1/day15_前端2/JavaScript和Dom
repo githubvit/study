@@ -1,0 +1,255 @@
+JavaScript
+  独立的一种编程语言，浏览器具有JavaScript的解释器
+
+    1，位置：
+        1.1 写在html里，用<script></script>框住，可以放在html的head里，也可以放在body里。
+                如果要写类型，一定要写成<script type="text/javascript">，或者就不写，默认就是。
+
+        1.2 写在JavaScript文件里。
+            在HTML的head里用<script src='文件名'></script>引入
+        1.3 推荐写在或引入在html的body的最底部。
+            这样写的目的，是为了避免网页被JavaScript卡住或拖慢，避免风险，增加用户友好度。
+
+    2，注释：
+        单行注释：//
+        多行注释：/* ...  */
+
+    3，全局变量与局部变量;
+        name='alex'     -->全局变量
+        var name='alex' -->局部变量
+        尽量不写全局变量，先写成局部变量，全部写完，斟酌后再改成全局变量。
+
+    4，写js代码：
+        在html里写，
+        临时写，可以在浏览器终端的console里写。
+
+    5，基本数据类型:
+        数字：number
+            age=18；就创建了数字
+            age='18'；是字符串
+            i=parseInt(age)；是将字符串转成了数字
+            i=parseFloat(age);是将字符串转成了小数
+
+            ps:
+               -var p1=$(':radio[name="ch-qx"]:checked').val();
+                undefined
+               -p1
+                "5"
+               -parseFloat(p1) //将字符串转为小数
+                5
+               -var f1=parseFloat(p1)*10.2
+                undefined
+               -f1
+                51
+               -var f1=parseFloat(p1)*10.3
+                undefined
+               -f1
+                51.5
+
+               -f1.toFixed(2)      //(保留两位小数，会自动补零)
+                "51.50"
+
+        字符串
+            a='alex' 定义
+            "alex"
+            a.charAt(1) 根据索引取字符
+            "l"
+            a.charAt(0)
+            "a"
+            a.length 获取当前长度
+            4
+            a.substring(1,3) 子串
+            "le"
+
+        列表
+            -obj.length          数组的大小
+            -obj.push(ele)       尾部追加元素
+            -obj.pop()           尾部获取一个元素
+            -obj.unshift(ele)    头部插入元素
+            -obj.shift()         头部移除元素
+            -obj.splice(start, deleteCount, value, ...)  插入、删除或替换数组的元素
+                                 obj.splice(n,0,val) 指定位置插入元素
+                                 obj.splice(n,1,val) 指定位置替换元素
+                                 obj.splice(n,1)     指定位置删除元素
+            -obj.slice( )        切片
+            -obj.reverse( )      反转
+            -obj.join(sep)       将数组元素连接起来以构建一个字符串
+            -obj.concat(val,..)  连接数组
+            -obj.sort( )         对数组元素进行排序
+            a
+            [11, 22, 33, 44, 55]
+            a.splice(1,0,99) 在位置1前插入99
+            []
+            a
+            [11, 99, 22, 33, 44, 55]
+
+            a.splice(1,2) 从位置1开始删除，数量2个
+            [99, 22]
+            a
+            [11, 33, 44, 55]
+
+            a.splice(2,1,88) 从位置2开始，删除1个元素，插入元素88
+            [44]
+            a
+            [11, 33, 88, 55]
+
+            a.splice(2,2,99) 从位置2开始，删除2个元素，插入元素99
+            [88, 55]
+            a
+            [11, 33, 99]
+
+            a.splice(2,0,56,78) 在位置2之前，插入56和78
+            []
+            a
+            [11, 33, 56, 78, 99]
+
+        字典：js实际上没有字典类型，在js上是叫对象，
+            js对象每个属性名都必须用双引号，否则会抛出异常。--引号双引！。
+            b={k1:'v1',k2:'v2'}
+            Object {k1: "v1", k2: "v2"}
+            b['k1']
+            "v1"
+            b['k2']
+            "v2"
+
+        布尔
+            布尔类型仅包含真假，与Python不同的是其首字母小写，true、false。
+
+                ==      比较值相等
+                !=       不等于
+                ===   比较值和类型相等
+                !===  不等于
+
+                1=='1'
+                true
+                1==='1'
+                false
+                1!='1'
+                false
+                1!=='1'
+                true
+
+        定时器
+            setInterval('alert(123)',5000) 每隔五秒弹出123。
+
+        console.log()在浏览器的console里输出。相当于print
+
+            console.log(1) 在浏览器的console里输出1.
+
+            function f1(){
+                 console.log(1)
+            }
+        ps：python与json对象的对应：
+             python         -->        json
+             dict                      object
+             list,tuple                array
+             str,unicode               string
+             int,long,float            number
+             True                      true
+             False                     false
+             None                      null
+
+    6，条件语句
+        与Java相同
+        ||      或
+        &&      且
+        if（条件）{
+        }else{
+        }
+        if（条件）{
+        }else if（条件）{
+        }else{
+        }
+    7，for循环语句
+        1，  var names = ["alex", "tony", "rain"];
+
+            for(var index in names){
+                console.log(index);
+                console.log(names[index]);
+            }
+            数组循环，取得的是下标，要取值要names[index]
+            var dict={'k1':'v1','k2':'v2'}
+              for(var i in dict){
+                console.log(i);
+                console.log(dict[i])
+               }
+            字典循环，取得的是key，取值要dict[i]。
+
+        2，for(var i=0;i<names.length;i++){
+                    console.log(i);
+                    console.log(names[i]);
+            }
+            这种循环不支持字典。
+
+    8，函数
+        function 函数名(a,b,c){
+            ...
+        }
+        onclick(函数名(1,2,3))
+
+Dom
+    文档对象模型（Document Object Model，DOM）是一种用于HTML和XML文档的编程接口。
+    DOM把网页和脚本以及其他的编程语言联系了起来。
+    DOM属于浏览器，而不是JavaScript语言规范里的规定的核心内容。
+    提供了一种结构化的表示方法，可以改变文档的内容和呈现方式。
+    把标签变成了对象，提供了操作的途径。
+
+一，查找标签
+    1，直接找
+        document.getElementById('i1')             根据ID获取一个标签
+        document.getElementsByName()          根据name属性获取标签列表
+        document.getElementsByClassName('c1')     根据class属性获取标签列表
+        document.getElementsByTagName('div')       根据标签名获取标签列表
+
+    2，间接找
+        parentElement           // 父节点标签元素
+        children                // 所有子标签
+        firstElementChild       // 第一个子标签元素
+        lastElementChild        // 最后一个子标签元素
+        nextElementtSibling     // 下一个兄弟标签元素
+        previousElementSibling  // 上一个兄弟标签元素
+
+
+二，操作标签
+    a.innerText
+        获取标签中的文本内容
+          标签.innerText
+
+        对标签内部文本进行重新赋值
+            标签.innerText='..'
+
+    b.className 添加样式
+        tag
+        <div id=​"i2">​c2​</div>​
+
+        tag.className='c1' //添加class属性
+        "c1"
+        tag
+        <div id=​"i2" class=​"c1">​c2​</div>​
+
+        tag.className='c2' //改变class属性
+        "c2"
+        tag
+        <div id=​"i2" class=​"c2">​c2​</div>​
+
+    c.classList 添加或删除多个样式(dom3)
+        tag.classList
+        ["c2", value: "c2"]
+
+        tag.classList.add('c3') 添加多个class属性 add
+        undefined
+        tag
+        <div id=​"i2" class=​"c2 c3">​c2​</div>​
+
+        tag.classList.remove('c2')移除多个class属性 remove
+        undefined
+        tag
+        <div id=​"i2" class=​"c3">​c2​</div>​
+
+    d.checkbox对象.checked(dom3,dom4)
+        获取checkbox对象是true还是false
+            checkbox对象.checked
+        对checkbox对象赋值’true‘或’false‘
+            checkbox对象.checked='true'
+
+        (dom3,dom4)

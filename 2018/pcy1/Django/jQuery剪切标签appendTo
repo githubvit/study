@@ -1,0 +1,27 @@
+jQuery剪切标签appendTo
+实例：
+2017年老男孩最新全栈python第2期视频教程 全套完整版\day61-python 全栈开发-web框架篇
+61-04 python 全栈开发-web框架篇-day61 用户管理之左右移动老师信息
+
+两个select标签中左右移动老师信息
+>>>|<<<
+把id=sel的select里已选中的标签移动到id=none的select标签里。
+    通过dom取得id=sel的select里已选中的标签
+        把jQuery转换成dom：
+        加[0]完成转换
+        $('#sel')[0]
+        用dom的selectedoptions取得已选中的标签
+        var options=$('#sel')[0].selectedoptions
+
+    通过jQuery的appendTo完成移动
+        把dom转换成jquery
+        加$()完成转换
+        $(options).appendTo('#none')
+        注意：
+            由于取得的已选中的标签是个列表，因此要用循环加到另一个select里，
+            但是不能用each和for循环，因为使用的是剪切，会导致列表里的个数不断在变，
+            因此，只能用while循环进行个数判断，并且始终只移动列表里的第1个，直到移完。
+
+            while (options.length>0){
+                $(options[0]).appendTo('#none');
+            }

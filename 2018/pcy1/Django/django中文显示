@@ -1,0 +1,8 @@
+检查  ...\Lib\site-packages\Django-1.10.2-py2.7.egg\django\conf\locale下无zh-cn文件夹，有zh-Hans和zh-Hant两个文件，
+
+其中 zh-Hans是简体中文    zh-Hant是繁体中文
+
+
+所以更改setttings.py 下
+
+LANGUAGE_CODE = 'zh-Hans'即可

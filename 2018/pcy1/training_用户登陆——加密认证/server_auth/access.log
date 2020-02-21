@@ -1,0 +1,182 @@
+Sat, 21 Oct 2017 10:51:45 -server_authenticate.py[line:21]—— access - INFO - ip:127.0.0.1   port:51090   connected
+Sat, 21 Oct 2017 10:52:59 -server_authenticate.py[line:21]—— access - INFO - ip:127.0.0.1   port:51104   connected
+Sat, 21 Oct 2017 10:53:07 -server_authenticate.py[line:37]—— access - INFO - user:1234  res:登陆成功 
+Sat, 21 Oct 2017 10:54:00 -server_authenticate.py[line:37]—— access - INFO - user:12345  res:用户不存在 
+Sat, 21 Oct 2017 10:54:36 -server_authenticate.py[line:21]—— access - INFO - ip:127.0.0.1   port:51138   connected
+Sat, 21 Oct 2017 10:54:40 -server_authenticate.py[line:29]—— access - INFO - ip:127.0.0.1   port:51138   break
+Sat, 21 Oct 2017 11:04:28 -server_authenticate.py[line:21]—— access - INFO - ip:127.0.0.1   port:51261 connected
+Sat, 21 Oct 2017 11:04:42 -server_authenticate.py[line:37]—— access - INFO - user:111 res:登陆成功 
+Sat, 21 Oct 2017 11:04:49 -server_authenticate.py[line:29]—— access - INFO - ip:127.0.0.1   port:51261 break
+Sat, 21 Oct 2017 11:04:54 -server_authenticate.py[line:21]—— access - INFO - ip:127.0.0.1   port:51268 connected
+Sat, 21 Oct 2017 11:05:10 -server_authenticate.py[line:37]—— access - INFO - user:test res:登陆成功 
+Sat, 21 Oct 2017 11:05:34 -server_authenticate.py[line:21]—— access - INFO - ip:127.0.0.1   port:51275 connected
+Sat, 21 Oct 2017 11:05:49 -server_authenticate.py[line:37]—— access - INFO - user:abc_test res:登陆成功 
+Sat, 21 Oct 2017 11:05:55 -server_authenticate.py[line:21]—— access - INFO - ip:127.0.0.1   port:51279 connected
+Sat, 21 Oct 2017 11:06:06 -server_authenticate.py[line:37]—— access - INFO - user:123 res:登陆成功 
+Sat, 21 Oct 2017 11:06:21 -server_authenticate.py[line:29]—— access - INFO - ip:127.0.0.1   port:51279 break
+Sat, 21 Oct 2017 11:06:24 -server_authenticate.py[line:29]—— access - INFO - ip:127.0.0.1   port:51275 break
+Sat, 21 Oct 2017 11:06:27 -server_authenticate.py[line:29]—— access - INFO - ip:127.0.0.1   port:51268 break
+Mon, 23 Oct 2017 15:33:16 -server_authenticate.py[line:25]—— access - INFO - ip:127.0.0.1   port:62635 connected
+Mon, 23 Oct 2017 15:33:20 -server_authenticate.py[line:51]—— access - INFO - user:111 res:登陆成功 
+Mon, 23 Oct 2017 15:35:45 -server_authenticate.py[line:25]—— access - INFO - ip:127.0.0.1   port:62655 connected
+Mon, 23 Oct 2017 15:35:48 -server_authenticate.py[line:51]—— access - INFO - user:111 res:登陆成功 
+Mon, 23 Oct 2017 15:36:05 -server_authenticate.py[line:51]—— access - INFO - user:123 res:登陆成功 
+Mon, 23 Oct 2017 15:36:15 -server_authenticate.py[line:25]—— access - INFO - ip:127.0.0.1   port:62659 connected
+Mon, 23 Oct 2017 15:37:40 -server_authenticate.py[line:25]—— access - INFO - ip:127.0.0.1   port:62668 connected
+Mon, 23 Oct 2017 15:37:44 -server_authenticate.py[line:51]—— access - INFO - user:111 res:登陆成功 
+Mon, 23 Oct 2017 15:37:48 -server_authenticate.py[line:25]—— access - INFO - ip:127.0.0.1   port:62669 connected
+Mon, 23 Oct 2017 15:37:53 -server_authenticate.py[line:51]—— access - INFO - user:12 res:用户不存在 
+Mon, 23 Oct 2017 15:37:58 -server_authenticate.py[line:51]—— access - INFO - user:123 res:登陆成功 
+Mon, 23 Oct 2017 15:38:06 -server_authenticate.py[line:25]—— access - INFO - ip:127.0.0.1   port:62672 connected
+Mon, 23 Oct 2017 15:38:10 -server_authenticate.py[line:46]—— access - ERROR - repeat_log:111 已经在线 
+Mon, 23 Oct 2017 15:41:11 -server_authenticate.py[line:25]—— access - INFO - ip:127.0.0.1   port:62702 connected
+Mon, 23 Oct 2017 15:41:15 -server_authenticate.py[line:46]—— access - ERROR - repeat_log:111 已经在线 
+Mon, 23 Oct 2017 15:41:55 -server_authenticate.py[line:46]—— access - ERROR - repeat_log:111 已经在线 
+Mon, 23 Oct 2017 15:47:14 -server_authenticate.py[line:25]—— access - INFO - ip:127.0.0.1   port:62741 connected
+Mon, 23 Oct 2017 15:47:17 -server_authenticate.py[line:51]—— access - INFO - user:111 res:登陆成功 
+Mon, 23 Oct 2017 15:47:23 -server_authenticate.py[line:46]—— access - ERROR - repeat_log:111 已经在线 
+Mon, 23 Oct 2017 15:48:22 -server_authenticate.py[line:25]—— access - INFO - ip:127.0.0.1   port:62746 connected
+Mon, 23 Oct 2017 15:48:25 -server_authenticate.py[line:46]—— access - ERROR - repeat_log:111 已经在线 
+Mon, 23 Oct 2017 15:48:31 -server_authenticate.py[line:25]—— access - INFO - ip:127.0.0.1   port:62755 connected
+Mon, 23 Oct 2017 15:48:37 -server_authenticate.py[line:51]—— access - INFO - user:1 res:用户不存在 
+Mon, 23 Oct 2017 15:50:55 -server_authenticate.py[line:25]—— access - INFO - ip:127.0.0.1   port:62769 connected
+Mon, 23 Oct 2017 15:50:57 -server_authenticate.py[line:51]—— access - INFO - user:111 res:登陆成功 
+Mon, 23 Oct 2017 15:51:02 -server_authenticate.py[line:46]—— access - ERROR - repeat_log:111 已经在线 
+Mon, 23 Oct 2017 15:52:46 -server_authenticate.py[line:25]—— access - INFO - ip:127.0.0.1   port:62780 connected
+Mon, 23 Oct 2017 15:52:49 -server_authenticate.py[line:51]—— access - INFO - user:111 res:登陆成功 
+Mon, 23 Oct 2017 15:52:52 -server_authenticate.py[line:46]—— access - ERROR - repeat_log:111 已经在线 
+Mon, 23 Oct 2017 15:56:15 -server_authenticate.py[line:25]—— access - INFO - ip:127.0.0.1   port:62831 connected
+Mon, 23 Oct 2017 15:56:19 -server_authenticate.py[line:51]—— access - INFO - user:111 res:登陆成功 
+Mon, 23 Oct 2017 15:56:25 -server_authenticate.py[line:35]—— access - INFO - ip:127.0.0.1   port:62831 break
+Mon, 23 Oct 2017 15:56:31 -server_authenticate.py[line:25]—— access - INFO - ip:127.0.0.1   port:62832 connected
+Mon, 23 Oct 2017 15:56:35 -server_authenticate.py[line:51]—— access - INFO - user:1111 res:用户不存在 
+Mon, 23 Oct 2017 15:56:40 -server_authenticate.py[line:46]—— access - ERROR - repeat_log:111 已经在线 
+Mon, 23 Oct 2017 15:57:51 -server_authenticate.py[line:25]—— access - INFO - ip:127.0.0.1   port:62841 connected
+Mon, 23 Oct 2017 15:57:54 -server_authenticate.py[line:51]—— access - INFO - user:111 res:登陆成功 
+Mon, 23 Oct 2017 15:58:04 -server_authenticate.py[line:35]—— access - INFO - ip:127.0.0.1   port:62841 break
+Mon, 23 Oct 2017 15:58:11 -server_authenticate.py[line:25]—— access - INFO - ip:127.0.0.1   port:62845 connected
+Mon, 23 Oct 2017 15:58:14 -server_authenticate.py[line:51]—— access - INFO - user:111 res:登陆成功 
+Mon, 23 Oct 2017 15:58:33 -server_authenticate.py[line:35]—— access - INFO - ip:127.0.0.1   port:62845 break
+Mon, 23 Oct 2017 16:03:39 -server_authenticate.py[line:25]—— access - INFO - ip:127.0.0.1   port:62888 connected
+Mon, 23 Oct 2017 16:03:47 -server_authenticate.py[line:51]—— access - INFO - user:111 res:登陆成功 
+Mon, 23 Oct 2017 16:03:51 -server_authenticate.py[line:25]—— access - INFO - ip:127.0.0.1   port:62889 connected
+Mon, 23 Oct 2017 16:03:54 -server_authenticate.py[line:46]—— access - ERROR - repeat_log:111 已经在线 
+Mon, 23 Oct 2017 16:04:44 -server_authenticate.py[line:25]—— access - INFO - ip:127.0.0.1   port:62894 connected
+Mon, 23 Oct 2017 16:04:46 -server_authenticate.py[line:25]—— access - INFO - ip:127.0.0.1   port:62895 connected
+Mon, 23 Oct 2017 16:04:49 -server_authenticate.py[line:51]—— access - INFO - user:111 res:登陆成功 
+Mon, 23 Oct 2017 16:04:54 -server_authenticate.py[line:46]—— access - ERROR - repeat_log:111 已经在线 
+Mon, 23 Oct 2017 16:05:00 -server_authenticate.py[line:51]—— access - INFO - user:123 res:登陆成功 
+Mon, 23 Oct 2017 16:07:39 -server_authenticate.py[line:35]—— access - INFO - ip:127.0.0.1   port:62895 break
+Mon, 23 Oct 2017 16:07:52 -server_authenticate.py[line:25]—— access - INFO - ip:127.0.0.1   port:62910 connected
+Mon, 23 Oct 2017 16:08:12 -server_authenticate.py[line:51]—— access - INFO - user:1234 res:登陆成功 
+Mon, 23 Oct 2017 16:08:42 -server_authenticate.py[line:25]—— access - INFO - ip:127.0.0.1   port:62930 connected
+Mon, 23 Oct 2017 16:08:54 -server_authenticate.py[line:51]—— access - INFO - user:test res:密码错误 
+Mon, 23 Oct 2017 16:09:09 -server_authenticate.py[line:51]—— access - INFO - user:test res:密码错误 
+Mon, 23 Oct 2017 16:09:23 -server_authenticate.py[line:51]—— access - INFO - user:test res:登陆成功 
+Mon, 23 Oct 2017 16:22:09 -server_authenticate.py[line:25]—— access - INFO - ip:127.0.0.1   port:63007 connected
+Mon, 23 Oct 2017 16:22:16 -server_authenticate.py[line:56]—— access - INFO - user:111 res:登陆成功 
+Mon, 23 Oct 2017 16:22:19 -server_authenticate.py[line:47]—— access - ERROR - repeat_log:111 已经在线,请换个账号 
+Mon, 23 Oct 2017 16:22:24 -server_authenticate.py[line:47]—— access - ERROR - repeat_log:111 已经在线,请换个账号 
+Mon, 23 Oct 2017 16:22:30 -server_authenticate.py[line:47]—— access - ERROR - repeat_log:111 已经在线,请换个账号 
+Mon, 23 Oct 2017 16:22:34 -server_authenticate.py[line:47]—— access - ERROR - repeat_log:111 已经在线,请换个账号 
+Mon, 23 Oct 2017 16:22:36 -server_authenticate.py[line:47]—— access - ERROR - repeat_log:111 已经在线,请换个账号 
+Mon, 23 Oct 2017 16:22:41 -server_authenticate.py[line:47]—— access - ERROR - repeat_log:111 已经在线,请换个账号 
+Mon, 23 Oct 2017 16:23:54 -server_authenticate.py[line:25]—— access - INFO - ip:127.0.0.1   port:63043 connected
+Mon, 23 Oct 2017 16:23:56 -server_authenticate.py[line:56]—— access - INFO - user:111 res:登陆成功 
+Mon, 23 Oct 2017 16:23:59 -server_authenticate.py[line:47]—— access - ERROR - repeat_log:111 已经在线,请换个账号 
+Mon, 23 Oct 2017 16:24:01 -server_authenticate.py[line:47]—— access - ERROR - repeat_log:111 已经在线,请换个账号 
+Mon, 23 Oct 2017 16:24:03 -server_authenticate.py[line:47]—— access - ERROR - repeat_log:111 已经在线,请换个账号 
+Mon, 23 Oct 2017 16:24:05 -server_authenticate.py[line:47]—— access - ERROR - repeat_log:111 已经在线,请换个账号 
+Mon, 23 Oct 2017 16:24:07 -server_authenticate.py[line:47]—— access - ERROR - repeat_log:111 已经在线,请换个账号 
+Mon, 23 Oct 2017 16:24:47 -server_authenticate.py[line:25]—— access - INFO - ip:127.0.0.1   port:63048 connected
+Mon, 23 Oct 2017 16:25:44 -server_authenticate.py[line:25]—— access - INFO - ip:127.0.0.1   port:63053 connected
+Mon, 23 Oct 2017 16:25:48 -server_authenticate.py[line:56]—— access - INFO - user:111 res:登陆成功 
+Mon, 23 Oct 2017 16:25:50 -server_authenticate.py[line:47]—— access - ERROR - repeat_log:111 已经在线,请换个账号 
+Mon, 23 Oct 2017 16:25:52 -server_authenticate.py[line:47]—— access - ERROR - repeat_log:111 已经在线,请换个账号 
+Mon, 23 Oct 2017 16:25:54 -server_authenticate.py[line:47]—— access - ERROR - repeat_log:111 已经在线,请换个账号 
+Mon, 23 Oct 2017 16:25:57 -server_authenticate.py[line:47]—— access - ERROR - repeat_log:111 已经在线,请换个账号 
+Mon, 23 Oct 2017 16:26:01 -server_authenticate.py[line:47]—— access - ERROR - repeat_log:111 已经在线,请换个账号 
+Mon, 23 Oct 2017 16:26:31 -server_authenticate.py[line:35]—— access - INFO - ip:127.0.0.1   port:63053 break
+Mon, 23 Oct 2017 16:27:59 -server_authenticate.py[line:25]—— access - INFO - ip:127.0.0.1   port:63065 connected
+Mon, 23 Oct 2017 16:28:01 -server_authenticate.py[line:57]—— access - INFO - user:111 res:登陆成功 
+Mon, 23 Oct 2017 16:28:03 -server_authenticate.py[line:48]—— access - ERROR - repeat_log:111 已经在线,请换个账号 
+Mon, 23 Oct 2017 16:28:05 -server_authenticate.py[line:48]—— access - ERROR - repeat_log:111 已经在线,请换个账号 
+Mon, 23 Oct 2017 16:28:07 -server_authenticate.py[line:48]—— access - ERROR - repeat_log:111 已经在线,请换个账号 
+Mon, 23 Oct 2017 16:29:25 -server_authenticate.py[line:25]—— access - INFO - ip:127.0.0.1   port:63082 connected
+Mon, 23 Oct 2017 16:29:32 -server_authenticate.py[line:57]—— access - INFO - user:123 res:登陆成功 
+Mon, 23 Oct 2017 16:31:32 -server_authenticate.py[line:25]—— access - INFO - ip:127.0.0.1   port:63093 connected
+Mon, 23 Oct 2017 16:32:11 -server_authenticate.py[line:57]—— access - INFO - user:111 res:登陆成功 
+Mon, 23 Oct 2017 16:32:15 -server_authenticate.py[line:25]—— access - INFO - ip:127.0.0.1   port:63098 connected
+Mon, 23 Oct 2017 16:32:19 -server_authenticate.py[line:48]—— access - ERROR - repeat_log:111 已经在线,请换个账号 
+Mon, 23 Oct 2017 16:32:22 -server_authenticate.py[line:48]—— access - ERROR - repeat_log:111 已经在线,请换个账号 
+Mon, 23 Oct 2017 16:32:25 -server_authenticate.py[line:48]—— access - ERROR - repeat_log:111 已经在线,请换个账号 
+Mon, 23 Oct 2017 16:41:46 -server_authenticate.py[line:25]—— access - INFO - ip:127.0.0.1   port:63163 connected
+Mon, 23 Oct 2017 16:41:59 -server_authenticate.py[line:56]—— access - INFO - user:111 res:密码错误 
+Mon, 23 Oct 2017 16:42:06 -server_authenticate.py[line:56]—— access - INFO - user:456 res:用户不存在 
+Mon, 23 Oct 2017 16:42:12 -server_authenticate.py[line:56]—— access - INFO - user:111 res:密码错误 
+Mon, 23 Oct 2017 16:42:16 -server_authenticate.py[line:44]—— access - ERROR - repeat_log:次数太多
+Mon, 23 Oct 2017 16:44:57 -server_authenticate.py[line:25]—— access - INFO - ip:127.0.0.1   port:63188 connected
+Mon, 23 Oct 2017 16:45:00 -server_authenticate.py[line:56]—— access - INFO - user:111 res:登陆成功 
+Mon, 23 Oct 2017 16:45:03 -server_authenticate.py[line:25]—— access - INFO - ip:127.0.0.1   port:63189 connected
+Mon, 23 Oct 2017 16:45:08 -server_authenticate.py[line:51]—— access - ERROR - repeat_log:111 已经在线,请换个账号 
+Mon, 23 Oct 2017 16:45:15 -server_authenticate.py[line:56]—— access - INFO - user:123 res:密码错误 
+Mon, 23 Oct 2017 16:45:18 -server_authenticate.py[line:51]—— access - ERROR - repeat_log:111 已经在线,请换个账号 
+Mon, 23 Oct 2017 16:45:21 -server_authenticate.py[line:51]—— access - ERROR - repeat_log:111 已经在线,请换个账号 
+Mon, 23 Oct 2017 16:45:26 -server_authenticate.py[line:51]—— access - ERROR - repeat_log:111 已经在线,请换个账号 
+Mon, 23 Oct 2017 16:45:31 -server_authenticate.py[line:51]—— access - ERROR - repeat_log:111 已经在线,请换个账号 
+Mon, 23 Oct 2017 16:47:41 -server_authenticate.py[line:25]—— access - INFO - ip:127.0.0.1   port:63202 connected
+Mon, 23 Oct 2017 16:47:45 -server_authenticate.py[line:58]—— access - INFO - user:111 res:登陆成功 
+Mon, 23 Oct 2017 16:47:47 -server_authenticate.py[line:25]—— access - INFO - ip:127.0.0.1   port:63205 connected
+Mon, 23 Oct 2017 16:47:50 -server_authenticate.py[line:53]—— access - ERROR - repeat_log:111 已经在线,请换个账号 
+Mon, 23 Oct 2017 16:47:53 -server_authenticate.py[line:53]—— access - ERROR - repeat_log:111 已经在线,请换个账号 
+Mon, 23 Oct 2017 16:47:56 -server_authenticate.py[line:46]—— access - ERROR - repeat_log:次数太多
+Mon, 23 Oct 2017 17:05:48 -server_authenticate.py[line:25]—— access - INFO - ip:127.0.0.1   port:63351 connected
+Mon, 23 Oct 2017 17:05:50 -server_authenticate.py[line:25]—— access - INFO - ip:127.0.0.1   port:63352 connected
+Mon, 23 Oct 2017 17:05:55 -server_authenticate.py[line:58]—— access - INFO - user:111 res:密码错误 
+Mon, 23 Oct 2017 17:05:58 -server_authenticate.py[line:58]—— access - INFO - user:111 res:登陆成功 
+Mon, 23 Oct 2017 17:06:06 -server_authenticate.py[line:53]—— access - ERROR - repeat_log:111 已经在线,请换个账号 
+Mon, 23 Oct 2017 17:06:11 -server_authenticate.py[line:58]—— access - INFO - user:112 res:用户不存在 
+Mon, 23 Oct 2017 17:06:21 -server_authenticate.py[line:46]—— access - ERROR - repeat_log:次数太多
+Mon, 23 Oct 2017 17:39:36 -server_authenticate.py[line:25]—— access - INFO - ip:127.0.0.1   port:57578 connected
+Mon, 23 Oct 2017 17:39:47 -server_authenticate.py[line:60]—— access - INFO - ip:127.0.0.1   port:57578     user:111 res:登陆成功 
+Mon, 23 Oct 2017 17:39:50 -server_authenticate.py[line:25]—— access - INFO - ip:127.0.0.1   port:57581 connected
+Mon, 23 Oct 2017 17:39:55 -server_authenticate.py[line:55]—— access - ERROR - ip:127.0.0.1   port:57581   user_id:111111 已经在线,请换个账号 
+Mon, 23 Oct 2017 17:40:02 -server_authenticate.py[line:60]—— access - INFO - ip:127.0.0.1   port:57581     user:23 res:用户不存在 
+Mon, 23 Oct 2017 17:40:07 -server_authenticate.py[line:48]—— access - ERROR - ip:127.0.0.1   port:57581    repeat_log:次数太多
+Mon, 23 Oct 2017 17:45:08 -server_authenticate.py[line:25]—— access - INFO - ip:127.0.0.1   port:57615 connected
+Mon, 23 Oct 2017 17:45:09 -server_authenticate.py[line:25]—— access - INFO - ip:127.0.0.1   port:57616 connected
+Mon, 23 Oct 2017 17:45:16 -server_authenticate.py[line:60]—— access - INFO - ip:127.0.0.1   port:57615     user:111 res:登陆成功 
+Mon, 23 Oct 2017 17:48:31 -server_authenticate.py[line:25]—— access - INFO - ip:127.0.0.1   port:57640 connected
+Mon, 23 Oct 2017 17:48:33 -server_authenticate.py[line:25]—— access - INFO - ip:127.0.0.1   port:57641 connected
+Mon, 23 Oct 2017 17:48:38 -server_authenticate.py[line:60]—— access - INFO - ip:127.0.0.1   port:57640     user:111 res:登陆成功 
+Mon, 23 Oct 2017 17:48:42 -server_authenticate.py[line:55]—— access - ERROR - ip:127.0.0.1   port:57641   user_id:111 已经在线,请换个账号 
+Mon, 23 Oct 2017 17:49:19 -server_authenticate.py[line:60]—— access - INFO - ip:127.0.0.1   port:57641     user:123111 res:用户不存在 
+Mon, 23 Oct 2017 17:49:41 -server_authenticate.py[line:48]—— access - ERROR - ip:127.0.0.1   port:57641    repeat_log:次数太多
+Mon, 23 Oct 2017 18:52:36 -server_authenticate.py[line:25]—— access - INFO - ip:127.0.0.1   port:58370 connected
+Mon, 23 Oct 2017 18:52:38 -server_authenticate.py[line:25]—— access - INFO - ip:127.0.0.1   port:58371 connected
+Mon, 23 Oct 2017 18:52:42 -server_authenticate.py[line:60]—— access - INFO - ip:127.0.0.1   port:58370     user:111 res:登陆成功 
+Mon, 23 Oct 2017 18:52:49 -server_authenticate.py[line:55]—— access - ERROR - ip:127.0.0.1   port:58371   user_id:111 已经在线,请换个账号 
+Mon, 23 Oct 2017 18:52:53 -server_authenticate.py[line:60]—— access - INFO - ip:127.0.0.1   port:58371     user:123 res:密码错误 
+Mon, 23 Oct 2017 18:53:04 -server_authenticate.py[line:48]—— access - ERROR - ip:127.0.0.1   port:58371    repeat_log:次数太多
+Mon, 23 Oct 2017 18:53:28 -server_authenticate.py[line:38]—— access - INFO - ip:127.0.0.1   port:58370 break
+Mon, 23 Oct 2017 19:51:18 -server_authenticate.py[line:28]—— access - INFO - ip:127.0.0.1   port:55261 connected
+Mon, 23 Oct 2017 19:51:29 -server_authenticate.py[line:63]—— access - INFO - ip:127.0.0.1   port:55261     user:m_111 res:登陆成功 
+Mon, 23 Oct 2017 19:53:21 -server_authenticate.py[line:28]—— access - INFO - ip:127.0.0.1   port:55286 connected
+Mon, 23 Oct 2017 19:53:29 -server_authenticate.py[line:63]—— access - INFO - ip:127.0.0.1   port:55286     user:m_test res:密码错误 
+Mon, 23 Oct 2017 19:53:42 -server_authenticate.py[line:63]—— access - INFO - ip:127.0.0.1   port:55286     user:m_test res:登陆成功 
+Mon, 23 Oct 2017 19:55:03 -server_authenticate.py[line:28]—— access - INFO - ip:127.0.0.1   port:55314 connected
+Mon, 23 Oct 2017 19:55:13 -server_authenticate.py[line:58]—— access - ERROR - ip:127.0.0.1   port:55314   user_id:m_test 已经在线,请换个账号 
+Mon, 23 Oct 2017 19:55:50 -server_authenticate.py[line:63]—— access - INFO - ip:127.0.0.1   port:55314     user:m_123 res:登陆成功 
+Wed, 01 Nov 2017 23:53:59 -server_authenticate.py[line:28]—— access - INFO - ip:127.0.0.1   port:57088 connected
+Wed, 01 Nov 2017 23:54:15 -server_authenticate.py[line:63]—— access - INFO - ip:127.0.0.1   port:57088     user:m_111 res:登陆成功 
+Wed, 01 Nov 2017 23:54:47 -server_authenticate.py[line:28]—— access - INFO - ip:127.0.0.1   port:57092 connected
+Wed, 01 Nov 2017 23:54:50 -server_authenticate.py[line:28]—— access - INFO - ip:127.0.0.1   port:57094 connected
+Wed, 01 Nov 2017 23:55:16 -server_authenticate.py[line:63]—— access - INFO - ip:127.0.0.1   port:57092     user:m_111" res:用户不存在 
+Wed, 01 Nov 2017 23:55:31 -server_authenticate.py[line:58]—— access - ERROR - ip:127.0.0.1   port:57092   user_id:m_111 已经在线,请换个账号 
+Wed, 01 Nov 2017 23:56:33 -server_authenticate.py[line:63]—— access - INFO - ip:127.0.0.1   port:57094     user:m_123 res:登陆成功 
+Wed, 01 Nov 2017 23:57:31 -server_authenticate.py[line:28]—— access - INFO - ip:127.0.0.1   port:57123 connected
+Wed, 01 Nov 2017 23:58:35 -server_authenticate.py[line:58]—— access - ERROR - ip:127.0.0.1   port:57123   user_id:m_111 已经在线,请换个账号 
+Wed, 01 Nov 2017 23:58:44 -server_authenticate.py[line:58]—— access - ERROR - ip:127.0.0.1   port:57123   user_id:m_111 已经在线,请换个账号 
+Wed, 01 Nov 2017 23:58:55 -server_authenticate.py[line:51]—— access - ERROR - ip:127.0.0.1   port:57123    repeat_log:次数太多
+Thu, 02 Nov 2017 00:11:49 -server_authenticate.py[line:41]—— access - INFO - ip:127.0.0.1   port:57092 break
+Thu, 02 Nov 2017 00:12:05 -server_authenticate.py[line:41]—— access - INFO - ip:127.0.0.1   port:57094 break

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .pg-header{
+            position:fixed;
+            right:0;
+            left: 0;
+            top: 0;
+            /*上面用position的写法，就可以避免在body标签里写style="margin: 0 auto"
+            但是这种分层，就导致内层网页被挡住，因此在pg-bodyer里要下移margin-top: 50px;*/
+            height: 48px;
+            background-color: #2459a2;
+            line-height: 48px;
+        }
+        .pg-bodyer{
+            margin-top: 50px;
+            height: 600px;
+        }
+        .pg-floater{
+
+        }
+        .w{
+            width: 980px;
+            margin: 0 auto
+        }
+        .header-logo{
+            display: inline-block;
+            padding:0 30px;
+        }
+        .header-menu{
+            display: inline-block;
+            padding:0 10px;/*用内边距比用外边距好，鼠标在的时候变色范围大*/
+            color: white;
+        }
+
+        .header-menu:hover{/*当鼠标移动到当前标签的时候该样式生效*/
+            background-color: blue;
+        }
+        .header-logo:hover{/*当鼠标移动到当前标签的时候该样式生效*/
+            background-color: red;
+        }
+    </style>
+</head>
+<body >
+<!--
+1，先将网页分块。
+    这里是分成pg-header、pg-bodyer、pg-floater三块。
+    定义每块的样式。
+2，在每块里框住,在这个框里写。
+    这样，改变浏览器大小网页就不会变形，只会出现滚动条。
+        <div style="width: 980px;margin: 0 auto">
+
+        </div>
+3，在style标签里把pg-header、pg-bodyer、pg-floater大块的写在前面，清晰。
+    每个块里的样式加前缀header-logo、header-menu
+4，把公共通用的样式写在前面
+    比如把每块框住的样式.w
+-->
+<div class="pg-header">
+    <div class="w">
+        <a class="header-logo">LOGO</a>
+        <a class="header-menu">全部</a>
+        <a class="header-menu">42区</a>
+        <a class="header-menu">段子</a>
+        <a class="header-menu">1024</a>
+
+
+    </div>
+</div>
+<div class="pg-bodyer">
+    <div class="w">
+        bodyer
+    </div>
+</div>
+<div class="pg-floater">
+    <div class="w">
+        floater
+    </div>
+</div>
+</body>
+</html>

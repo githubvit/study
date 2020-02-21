@@ -1,0 +1,105 @@
+{% extends 'ch_goods/dz-base2.html' %}
+
+{% block dz-dz-js %}
+<script>
+    $(function () {
+        //   字数控制
+//    *1,当name=ch-font的input单选框的值为value=2时，去掉‘编辑画面文字’按钮(id='font-btn')的隐藏，去掉文本框和确定按钮的'disabled'；
+//    * 2，使得‘编辑画面文字’按钮(id='font-btn')隐藏，增加文本框和确定按钮的'disabled'；
+
+        $(':radio[name="ch-font"]').change(function () {
+            font_world();
+        });
+//    * 3，当‘编辑画面文字’按钮被点击，去掉文本框和确定按钮的'disabled'，可以输入画面文字，
+        $('#font-btn').click(function () {
+            $('#font-context').removeAttr('disabled');
+            $('#font-submit').removeAttr('disabled');
+        });
+
+        //    * 3.2，点击确定按钮，同时，又使该编辑框和该按钮不可编辑；
+        $('#font-submit').click(function () {
+            $('#font-context').attr('disabled','disabled');
+            $('#font-submit').attr('disabled','disabled');
+        });
+        //对于数量输入框中下限min大于1的要添加失焦事件，因为在输入的时候无法判断其是否输入完成，只有失焦后才可以判断
+        //数量输入框
+        $('#ch-num').blur(function () {
+            var numv=$(this).val();
+            var min=$(this).attr('min');
+            if (parseInt(numv)<parseInt(min)){ //一定要进行整数类型的装换，不然导致输入1,2,3可以实现，但输入4,5,...9都无法判断
+                alert('该商品'+min+'个起定');
+                $('#ch-num').val(min);//置其为下限数量
+            }
+            //加载数量输入框控制函数
+            num_cn();
+            price();
+        });
+    });
+    //    价格函数
+    function price () {
+//        器型 :radio[name="ch-qx"] 作者：:radio[name="ch-zz"] 颜色：:radio[name="ch-color"]
+//        尺寸 select[name="size"] 外框：select[name="ch-wk"] 类型：select[name="ch-type"]
+//        人数 select[name="ch-rs"] 人和动物数 select[name="ch-rds"] 动物数：select[name="ch-ds"]
+        var p1=$(':radio[name="ch-qx"]:checked').val();// 器型
+        var p2=$('select[name="size"] option:selected').val();//尺寸
+        var p6=$(':radio[name="ch-color"]:checked').val();//颜色
+
+//        对于数量的获取
+        /*
+        * 1,如果数量输入框有，取值，否则让p11=false。
+        *
+        * */
+        if($('#ch-num').val()){
+            var p11=$('#ch-num').val();
+        }else{
+            var p11=false;
+        }
+
+        console.log('p1:'+p1);
+        console.log('p2:'+p2);
+        console.log('p6:'+p6);
+
+        console.log('p11:'+p11);
+
+        if(p1 && p2  && p6  && p11){
+            var price1=p2*10+p6*15;
+        }else{
+            $('#ch-djia').html('');
+            $('#ch-djin').html('');
+            $('#scwj').attr('disabled','disabled');
+            $('#jrgwc').attr('disabled','disabled');
+            $('#ch-xj').html('');
+            $('#ch-zj').html('');
+            return
+        }
+
+        var djin=price1*0.4;
+        $('#ch-djia').html(price1.toFixed(2));
+        $('#ch-djin').html(djin.toFixed(2));
+        $('#scwj').removeAttr('disabled');
+        $('#jrgwc').removeAttr('disabled');
+
+        //当外框被选时，小计单价和外框，这个外框的价格不能选$(':radio[name="kxwk"]:checked')的价格，要选加入清单的价格，因为即使在可选外框选了，也不见得会加入清单
+        var wk_price=$('#wk-dj').text();//将text字符串转为数字
+        var ch_xj=parseFloat(price1)+parseFloat(wk_price);//保持类型一致，不然会报NaN；
+        //把小计后的价格ch-xj放入
+        $('#ch-xj').html(ch_xj.toFixed(2));
+
+        //  总价
+        /*
+        * 当有小计时，
+        * 1,总价=小计*数量
+        * 否则
+        * 2，总价=单价*数量
+        * */
+        if($('#ch-xj').text()!=='NaN'){
+            var price_zj=parseFloat($('#ch-xj').text())*parseInt($('#ch-num').val());
+        }else{
+            console.log('小计为空');
+            var price_zj=parseFloat($('#ch-djia').text())*parseInt($('#ch-num').val());
+        }
+        $('#ch-zj').html(price_zj.toFixed(2))
+    }
+</script>
+
+{% endblock dz-dz-js %}

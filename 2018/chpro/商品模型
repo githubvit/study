@@ -1,0 +1,193 @@
+电子商务(电销)平台中商品模块(Product)数据库设计明细
+
+商品表 (product)
+|-- 自动编号 (product_id)
+|-- 商品名称 (product_name)
+|-- 商品型号 (marque)
+|-- 仓库条码 (barcode)
+|-- 类型编号 (type_id)
+|-- 类别编号 (category_id)
+|-- 品牌编号 (brand_id)
+|-- 商品价格 (price)
+|-- 市场价格 (market_price)
+|-- 成本价格 (cost_price, 进货价格)
+|-- 库存量 (stock)
+|-- 告警库存 (warning_stock)
+|-- 商品积分 (integral)
+|-- 商品图片url (picture_url)
+|-- 状态 (status, 下架,上架,预售)
+|-- 创建时间
+商品描述内容表 (product_description)
+|-- 自动编号
+|-- 商品编号
+|-- 标题 (title, 商品描述、商品规格、售后保障等)
+|-- 代码 (code, 如:description, specification, aftersale)
+|-- 内容 (content)
+商品统计表 (product_statistics)
+|-- 商品编号 (product_id)
+|-- 浏览次数 (visit_count)
+|-- 评论次数 (reply_count)
+|-- 销售总量 (sale_quantity)
+|-- 销售总额 (sale_amount)
+|-- 进货总量 (purchase_quantity)
+|-- 进货总额 (purchase_amount)
+|-- 成本均价 (cost_price)
+|-- 毛利润金额 (gross_profit)
+商品进销存表 (product_specification)
+|-- 自动编号
+|-- 商品编号
+|-- 出入库数量 (quantity)
+|-- 单价 (price)
+|-- 小计金额 (subtotal)
+|-- 旧库存 (stock_old)
+|-- 新库存 (stock_new)
+|-- 出入库方向 (direction, 1:出库;2:入库)
+|-- 出入库类型 (operate_type, SELL-RETURN=销售退货(入库),PURCHASE=采购入库,SALE=销售出库,PURCHASE-RETURN=采购退货(出库),INTERNAL=内部出库,INVENTORY=盘点调仓)
+|-- 订单编号 (order_id)
+|-- 供应商编号 (provider_id)
+|-- 备注信息
+|-- 经手人用户编号 (user_id, 内部出库经手人、销售卖家、退货入库仓管员、进货入库采购员或仓管员、盘点调仓财务员或仓管员)
+|-- 审批人员用户编号 (auditor_uid)
+|-- 出入库结果
+|-- 出入库日期
+|-- 出入库时间
+
+
+商品类别表 (product_cagegory)
+|-- 自动编号
+|-- 类别名称 (title)
+|-- 类别代码 (code)
+|-- 父1级编号
+|-- 父2级编号
+|-- 父3级编号
+|-- 父4级编号
+|-- 父5级编号
+|-- 包含商品数量 (product_count)
+|-- meta关键词
+|-- meta描述
+|-- 是否锁定 (is_lock, 防止误删除,锁定需要解锁才能删除)
+|-- 封面图片url (image_url)
+|-- 排列次序
+|-- 状态
+|-- 创建时间
+
+
+商品属性表 (product_attribute)
+|-- 自动编号
+|-- 商品类别编号 (product_category_id, 商品属性归属于商品类别)
+|-- 属性标题 (title)
+|-- 属性全称 (name)
+|-- 属性代码 (code)
+|-- 属性描述 (description)
+|-- 属性预设内容 (content)
+|-- 属性默认值 (value)
+|-- 排列次序
+|-- 状态
+|-- 创建时间
+
+
+商品与属性关联表 (product_and_attribute)
+|-- 自动编号
+|-- 商品编号
+|-- 属性编号
+|-- 属性值
+
+
+商品品牌表 (product_brand)
+|-- 自动编号
+|-- 商品类别编号 (product_category_id, 商品品牌归属于商品类别)
+|-- 品牌名称 (name)
+|-- 图片url (image_url)
+|-- 排列次序
+|-- 状态
+|-- 创建时间
+
+
+商品与商品规格关联表 (product_and_specification)
+|-- 自动编号
+|-- 商品编号
+|-- 商品规格编号
+|-- 商品库存 (stock)
+|-- 商品价格 (price)
+|-- 商品简介 (intro)
+
+
+商品规格表 (product_specification)
+|-- 自动编号
+|-- 商品类别编号 (product_category_id, 商品规格归属于商品类别)
+|-- 规格类型 (颜色、尺码、包装等)
+|-- 规格值
+
+
+商品评论表 (product_comment)
+|-- 自动编号
+|-- 商品编号
+|-- 用户编号 (user_id)
+|-- 审核员编号 (auditor_id)
+|-- 父级评论编号 (pid)
+|-- 评论内容 (content)
+|-- 状态 (status, 待审核,显示,隐藏)
+|-- 创建时间
+|-- 审核时间
+|-- 审核备注
+|-- 支持数量 (support_count)
+|-- 反对数量 (oppose_count)
+|-- 举报 (report_count)
+
+
+商品日志表 (product_log)
+|-- 自动编号
+|-- 商品编号
+|-- 用户编号
+|-- 操作描述
+|-- 用户IP
+|-- 操作状态 (status,成功,失败)
+|-- 创建时间
+商品相册表 (product_album)
+|-- 自动编号
+|-- 商品编号
+|-- 图片名称 (name)
+|-- 图片url (image_url)
+|-- 图片大小 (image_size)
+|-- 图片宽度 (width)
+|-- 图片高度 (height)
+|-- 图片介绍 (intro)
+|-- 排列次序 (sort)
+|-- 状态
+|-- 创建时间
+商品促销活动关联表 (product_and_promotion)
+|-- 自动编号
+|-- 商品编号
+|-- 促销活动编号 (window_id,关联商品促销活动表)
+|-- 开始时间 (start_time)
+|-- 结束时间 (end_time)
+|-- 活动价格 (price)
+|-- 商品图片 (image_url)
+|-- 商品简介 (intro)
+|-- 排列次序
+|-- 创建时间
+商品促销活动表 (product_promotion_event)
+|-- 自动编号
+|-- 活动名称 (name, 橱窗名称, 最新,热门,推荐,清仓,换季等)
+|-- 活动代码 (code, 英文唯一)
+|-- 封面图片url (image_url)
+|-- 商品数量统计 (product_count)
+|-- 备注
+|-- 开始时间
+|-- 结束时间
+|-- 排列次序
+|-- 状态
+|-- 创建时间
+商品优惠券表 (product_coupon)
+|-- 自动编号
+|-- 序列号 (serial_no)
+|-- 优惠券名称 (name)
+|-- 优惠券面值 (face_value)
+|-- 优惠券数量 (quantity)
+|-- 使用条件 (condition_value)
+|-- 使用条件说明 (condition_desc)
+|-- 生效时间
+|-- 失效时间
+|-- 排列次序
+|-- 状态
+|-- 创建时间

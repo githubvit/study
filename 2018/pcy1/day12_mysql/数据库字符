@@ -1,0 +1,71 @@
+数据库中特殊字符的存取
+2007年12月01日 20:54:00
+阅读数：8210
+
+特殊字符数据库的存取问题
+
+第一种方法就是replace   例如在入库的时候可以把(" ")换成(&nbsp:) 把(/r/n)换成(<br>)
+这样的话在自动帮定的时候就可以在数据控件中显示换行和空格了，但是要注意的是如果是自己写代码进行，
+要把数据显示在textbox lable等上面，就要注意了，要把它们替换过来即在用replace把数据库中的(&nbsp:) 换成(" ") 把(<br>)换成(/r/n).
+第二种方法就是Server.HtmlEncode("")处理了
+入库用HtmlEncode(string)  例如Server.HTMLEncode("The paragraph tag: <P>")注意这个把空格都去掉了，在存入数据库的时候。
+在入库的时候用一下这个方法，在数据库中存储的就是The paragraph tag: &lt;P&gt;  和上面相同。
+如果自动帮定的话它自动解码，显示为The paragraph tag: <P>。但是自己写代码也要转换了，这个可以用Server.HtmlDecode(string)来实现逆转。
+感觉第二种方法好一点，但扩展性不好，第一种方法，自己可以把很多需要的写成一个方法，然后在调用！
+我留言板就只把空格和换行处理了，其他特殊字符都没处理，别人要是输入特殊字符的话，肯定要出问题的。
+看来还得改！总算找到个比较齐全的HTML常用特殊字符（http://writeblog.csdn.net/PostEdit.aspx）
+
+HTML常用特殊字符
+HTML 原代码	显示结果	描述
+&lt;	<	小于号或显示标记
+&gt;	>	大于号或显示标记
+&amp;	&	可用于显示其它特殊字符
+&quot;	"	引号
+&reg;	®	已注册
+&copy;	©	版权
+&trade;	™	商标
+&ensp;	 	半个空白位
+&emsp;	 	一个空白位
+&nbsp;	 	不断行的空白
+
+■ HTML特殊字符编码大全：往网页中输入特殊字符，需在html代码中加入以&开头的字母组合或以&#开头的数字。下面就是以字母或数字表示的特殊符号大全。
+
+
+´	&acute;	©	&copy;	>	&gt;	µ	&micro;	®	&reg;
+&	&amp;	°	&deg;	¡	&iexcl;	 	&nbsp;	»	&raquo;
+¦	&brvbar;	÷	&divide;	¿	&iquest;	¬	&not;	§	&sect;
+•	&bull;	½	&frac12;	«	&laquo;	¶	&para;	¨	&uml;
+¸	&cedil;	¼	&frac14;	<	&lt;	±	&plusmn;	×	&times;
+¢	&cent;	¾	&frac34;	¯	&macr;	"	&quot;	™	&trade;
+€	&euro;	£	&pound;	¥	&yen;
+„	&bdquo;	…	&hellip;	·	&middot;	›	&rsaquo;	ª	&ordf;
+ˆ	&circ;	“	&ldquo;	—	&mdash;	’	&rsquo;	º	&ordm;
+†	&dagger;	‹	&lsaquo;	–	&ndash;	‚	&sbquo;	”	&rdquo;
+‡	&Dagger;	‘	&lsquo;	‰	&permil;		&shy;	˜	&tilde;
+≈	&asymp;	⁄	&frasl;	←	&larr;	∂	&part;	♠	&spades;
+∩	&cap;	≥	&ge;	≤	&le;	″	&Prime;	∑	&sum;
+♣	&clubs;	↔	&harr;	◊	&loz;	′	&prime;	↑	&uarr;
+↓	&darr;	♥	&hearts;	−	&minus;	∏	&prod;	‍	&zwj;
+♦	&diams;	∞	&infin;	≠	&ne;	√	&radic;	‌	&zwnj;
+≡	&equiv;	∫	&int;	‾	&oline;	→	&rarr;
+α	&alpha;	η	&eta;	μ	&mu;	π	&pi;	θ	&theta;
+β	&beta;	γ	&gamma;	ν	&nu;	ψ	&psi;	υ	&upsilon;
+χ	&chi;	ι	&iota;	ω	&omega;	ρ	&rho;	ξ	&xi;
+δ	&delta;	κ	&kappa;	ο	&omicron;	σ	&sigma;	ζ	&zeta;
+ε	&epsilon;	λ	&lambda;	φ	&phi;	τ	&tau;
+Α	&Alpha;	Η	&Eta;	Μ	&Mu;	Π	&Pi;	Θ	&Theta;
+Β	&Beta;	Γ	&Gamma;	Ν	&Nu;	Ψ	&Psi;	Υ	&Upsilon;
+Χ	&Chi;	Ι	&Iota;	Ω	&Omega;	Ρ	&Rho;	Ξ	&Xi;
+Δ	&Delta;	Κ	&Kappa;	Ο	&Omicron;	Σ	&Sigma;	Ζ	&Zeta;
+Ε	&Epsilon;	Λ	&Lambda;	Φ	&Phi;	Τ	&Tau;	ς	&sigmaf;
+
+要替换好多特殊字符了！
+
+            txt_content.Text = Server.HtmlEncode(txt_content.Text.Trim());这样替换的话，内容中的空格，换行都不见了，
+            但是可以存~！·##%%……——*（（））——》《？·@!#等字符了
+
+txt_content.Text = txt_content.Text.Replace(" ", "&nbsp");
+            txt_content.Text = txt_content.Text.Replace("/r/n", "<br>");
+            txt_content.Text = Server.HtmlEncode(txt_content.Text.Trim());
+
+这样也不行 因为它又会变会去直接用REPLACE算了，还是用REPLACE 慢慢替换吧

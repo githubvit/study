@@ -1,0 +1,146 @@
+模版语言
+
+　模板中也有自己的语言，该语言可以实现数据展示
+一，常用
+    1，变量：{{ item }}
+    2，标签
+        2.1，循环：
+            {% for item in item_list %}  <a>{{ item }}</a>  {% endfor %}
+        　　  forloop.counter
+        　　  forloop.first
+        　　  forloop.last
+        2.2，条件
+            {% if ordered_warranty %}  {% else %} {% endif %}
+
+        2，3，comment标签 多行注释
+            { % comment % }
+                多行注释
+            { % endcomment % }
+
+        2.4，include：加载模板并以标签内的参数渲染 不太用的到
+            { %include "foo/bar.html" % }
+
+        2.5，url：反向解析
+            格式：{ % url 'namespace:name' '参数1' '参数2' ... %}
+
+            { % url 'name' p1 p2 %}
+
+        2.6，csrf_token：这个标签用于跨站请求伪造保护
+            { % csrf_token %}
+
+
+        2.7，父版和子板
+            base.html父板中定义：{% block title %}{% endblock %}挖坑
+            子板引入：{% extends "base.html" %}
+            　　　     {% block title %}填充父版的坑
+                        ...{% block chirden }继续挖坑
+                            {% endblock %}
+                        {% endblock %}
+            子板填坑的同时可以继续挖坑，孙版继承；
+            孙版可以继承子板和爷版，子版没填过的坑，孙版可以继续填。比如head中的title
+
+        2.8，其余标签
+            布尔标签：and、or，and比or的优先级高
+            autoescape：详见“HTML转义”
+            帮助方法：
+
+    3，过滤器
+        格式：
+            变量|过滤器:参数
+        示例：
+            可以在if标签中使用过滤器结合运算符
+                if list1|length > 1
+
+            过滤器能够被“串联”，构成过滤器链
+                name|lower|upper
+
+            过滤器可以传递参数，参数使用引号包起来
+                list|join:", "
+
+            default：如果一个变量没有被提供，或者值为false或空，则使用默认值，否则使用变量的值
+                value|default:"什么也没有"
+
+            日期date，用于对日期类型的值进行字符串格式化，常用的格式化字符如下
+                Y表示年，格式为4位，y表示两位的年
+                m表示月，格式为01,02,12等
+                j表示日，格式为1,2等
+                H表示时，24进制，h表示12进制的时
+                i表示分，为0-59
+                s表示秒，为0-59
+                value|date:"Y年m月j日  H时i分s秒"
+
+            {{ item.event_start|date:"Y-m-d H:i:s"}}
+            {{ bio|truncatewords:"30" }}
+            {{ my_list|first|upper }}
+            {{ name|lower }}
+
+二、自定义simple_tag
+
+    a、在app中创建templatetags模块
+
+    b、创建任意 .py 文件，如：xx.py
+        #!/usr/bin/env python
+        #coding:utf-8
+        from django import template
+        from django.utils.safestring import mark_safe
+
+        register = template.Library()#不能变
+
+        @register.simple_tag#装饰
+        def my_simple_time(v1,v2,v3):
+            return  v1 + v2 + v3
+
+        @register.simple_tag
+        def my_input(id,arg):
+            result = "<input type='text' id='%s' class='%s' />" %(id,arg,)
+            return mark_safe(result)
+
+    c、在使用自定义simple_tag的html文件中导入之前创建的 xx.py 文件名
+        {% load xx %}#必须在html的最顶部
+
+    d、使用simple_tag
+        {% my_simple_time 1 2 3%}
+        {% my_input 'id_username' 'hide'%}
+
+    e、在settings中配置当前app，不然django无法找到自定义的simple_tag　　
+        INSTALLED_APPS = (
+            'django.contrib.admin',
+            'django.contrib.auth',
+            'django.contrib.contenttypes',
+            'django.contrib.sessions',
+            'django.contrib.messages',
+            'django.contrib.staticfiles',
+            'app01',
+        )
+
+三，自定义filter
+    用来进行过滤，与simple_tag的差别就是在b和d：
+        b、创建任意 .py 文件，如：xx.py
+            。。。。
+            区别就在装饰器符号和传参
+
+            @register.filter#装饰器变成filter
+            def my_filter(v1,arg):  #参数只能是两个,传多个参数时，把多个参数组成字符串，用','分开。
+                v2,v3=arg.split(',')#把多个参数用split解开
+                v2=int(v2)
+                v3=int(v3)
+                return  v1 + v2 + v3
+        d、使用filter
+            {{参数1|过滤器:参数2}}
+
+            {{}}
+
+           过滤器还可以用来加入模板语言的条件判断语句中(simple_tag不可以这样用)：
+                比如过滤器中if...：return false和else：return true，
+                那么在模板语言中：
+                {%if v1|my_filter:'v2,v3' %}
+                ...
+                {% endif %}
+
+
+    更多见文档：https://docs.djangoproject.com/en/1.10/ref/templates/language/
+
+实例部分参见python全栈工程师 4
+0027-django官网项目之图片瀑布流实现（simple_tag）-VIP课程
+0028-django官网项目之图片瀑布流实现（filter）-VIP课程
+0029-django官网项目之图片瀑布流实现（模板方法总结）-VIP课程

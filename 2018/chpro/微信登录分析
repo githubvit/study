@@ -1,0 +1,62 @@
+WEB微信
+    猜想：
+        a. 访问页面出现二维码
+        b. 长轮训监听是否已经扫码并且点击确认
+        c. 如何进行会话保持
+        d. 如何获取用户列表
+        e. 如何发送消息（接收消息）
+
+    分析微信网页版：
+        获取二维码：
+            二维码图片的标签
+            <img class="img" mm-error="qrcodeException()"
+            ng-class="{'qrcode_expired': isNeedRefresh}"
+            mm-src="https://login.weixin.qq.com/qrcode/Yez-6ba5og=="
+            mm-src-load="qrcodeLoad" mm-src-parallel=""
+            mm-src-timeout="10" mm-src-retry-count="2"
+            src="https://login.weixin.qq.com/qrcode/Yez-6ba5og==">
+
+            我们要的是src="https://login.weixin.qq.com/qrcode/Yez-6ba5og=="
+            Yez-6ba5og==这是二维码的随机字符串，是经常变动的
+            定义img的src格式为:
+                https://login.weixin.qq.com/qrcode/{0}
+                设置占位符{0}
+
+            在生成二维码之前，应该生成二维码字符串，找到如下
+            #Request URL:https://login.wx.qq.com/jslogin?
+            # appid=wx782c26e4c19acffb&
+            # redirect_uri=https%3A%2F%2Fwx.qq.com%2Fcgi-bin%2Fmmwebwx-bin%2Fwebwxnewloginpage&
+            # fun=new&lang=zh_CN&
+            # _=1525003112434
+            # 上面的请求返回的Response:window.QRLogin.code = 200; window.QRLogin.uuid = "YfyEQeipPA==";
+            # 我们需要的二维码随机字符串就是YfyEQeipPA==
+            # 通过上面多次请求，可以看到请求的_=1525003112434是变化的，就是时间戳生成的，因此可以用time.time()搞定
+
+
+
+
+
+            # 201： 扫码，未确认
+            # 200： 扫码，确认
+            # 408
+
+        获取一个票据：
+            <error>
+                <ret>0</ret>
+                <message></message>
+                <skey>@crypt_317889ae_68dfe71ead4387706d86b05e68a8c467</skey>
+                <wxsid>/QEleZmXf4vzAkHb</wxsid>
+                <wxuin>1466456560</wxuin>
+                <pass_ticket>cDQDsvEHk0sACmEdeIea8d1XtY5ASBXu95tT%2BjRPC%2FL3jm3UHav2A4teE%2FDaGywz</pass_ticket>
+                <isgrayscale>1</isgrayscale>
+             </error>
+
+        用户初始化：
+            登录并且获取最近联系人以及公众号
+
+
+        获取联系人列表：
+            每个人的用户唯一ID，用户名
+
+
+        发送或接受消息

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="sign.css"/>
+</head>
+<style>
+    .top1{
+        position: fixed;
+        left: 0;
+        right: 0;
+        top:0;
+        background-color: #dddddd;
+
+    }
+    .top1-1{
+        width: 850px;
+        height: 30px;
+        margin: 0 auto;
+        text-align: center;
+        line-height: 30px;
+        font-size: 13px;
+    }
+    .left{
+        float: left;
+    }
+    .right{
+        float:right;
+    }
+    .close{
+        clear: both;
+    }
+    .span-block{
+        display: inline-block;
+        padding: 0 10px;
+        /*cursor: pointer;*/
+    }
+    .span-block:hover{
+        background-color: #888888;
+        cursor: pointer;
+    }
+    .left-1{
+        margin-bottom: 20px;
+        font-size: 13px
+    }
+
+
+</style>
+<body>
+    <div class="top1">
+        <div class="top1-1">
+            <div class="left">
+                <span class="span-block">*收藏本站</span>
+            </div>
+            <div class="right">
+                <span class="span-block">客户服务</span>
+                <span class="span-block">VIP会员俱乐部</span>
+                <span class="span-block">我的订单</span>
+                <span class="span-block">免费注册</span>
+                <span class="span-block">登录</span>
+
+            </div>
+            <div class="close"></div>
+        </div>
+    </div>
+    <div class="pg-header" style="height:100px;margin-top: 35px;">
+        <div>
+            <a href="http://jquery.cuishifeng.cn/">
+                <img class="img1" src="..\马20170924.png"/>
+            </a>
+        </div>
+    </div>
+    <div class="pg-bodyer">
+        <div class="left" style="margin-top:20px;margin-left:40px;width:500px; border-right: 1px solid #dddddd">
+            <p>注册新用户</p>
+            <form action="#" method="post">
+                    <div class="left-1" >
+                        <span class="right-text"><span style="color: red;">*</span>用户名：</span>
+                        <div class="text-bord">
+                            <input class="text-input" type="text"/>
+                        </div>
+                    </div>
+                    <div class="left-1" >
+                        <span class="right-text"><span style="color: red;">*</span>手机号：</span>
+                        <div class="text-bord">
+                            <input class="text-input" type="text"/>
+                        </div>
+                    </div>
+                    <div class="left-1" >
+                        <span class="right-text"><span style="color: red;">*</span>登录密码：</span>
+                        <div class="text-bord">
+                            <input class="text-input" type="text"/>
+                        </div>
+                    </div>
+                    <div class="left-1" >
+                        <span class="right-text"><span style="color: red;">*</span>确认密码：</span>
+                        <div class="text-bord">
+                            <input class="text-input" type="text"/>
+                        </div>
+                    </div>
+
+                    <div class="left-1" >
+                        <span class="right-text"><span style="color: red;">*</span>验证码：</span>
+                        <div class="text-bord" >
+                            <input class="text-input" style="width:100px" type="text"/>
+                        </div>
+                    </div>
+                    <div class="left-1">
+                        <span class="right-text"></span>
+                        <div class="right-2-1">
+                            <input type="checkbox" name="autosignin" value="1" checked="checked">
+                            <span>我已阅读并同意</span>
+                            <a href="#">《用户注册协议》</a>
+                        </div>
+
+                    </div>
+                    <div class="left-1">
+                        <span class="right-text"></span>
+                        <input class="sub1" type="submit" value="同意以上协议并注册"/>
+
+                    </div>
+
+
+
+            </form>
+        </div>
+        <div class="right ">
+            <div style="margin-top: 50px;font-size: 12px">我已经注册，现在就<a href="#">登录</a></div>
+            <div>
+               <a href="#"><img src="../马20170924.png" style="width: 250px;border: 0px;margin-right: 40px"/></a>
+            </div>
+
+        </div>
+        <div class="close"></div>
+    </div>
+
+</body>
+</html>

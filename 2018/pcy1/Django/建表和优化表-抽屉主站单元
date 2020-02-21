@@ -1,0 +1,86 @@
+建表和表优化-抽屉主站单元
+
+实例：\2017年老男孩最新全栈python第2期视频教程 全套完整版\day65-python 全栈开发-web框架篇
+65-01~06
+
+五张表优化成三张表
+
+from django.db import models
+
+# Create your models here.
+1，五张表
+class UserInfo(models.Model):#用户表
+    nid=models.AutoField(primary_key=True)#主键
+    username = models.CharField(max_length=32,unique=True)#用户名 唯一索引
+    password = models.CharField(max_length=32)
+    email=models.CharField(max_length=32,unique=True)#邮箱 唯一索引
+    ctime = models.DateField(auto_now_add=True)#时间 自动添加
+
+class NewsType(models.Model):#新闻类型表
+    caption = models.CharField(max_length=16)
+
+
+
+class News(models.Model):#新闻表
+    title = models.CharField(max_length=64)#标题
+    summary = models.CharField(max_length=128,null=True)#简介 可以为空
+    url = models.URLField(null=True)#链接 可以为空 本站原创就没有链接，只有引用了外部链接才有
+    ctime = models.DateField(auto_now_add=True)#发布时间 自动添加
+    user=models.ForeignKey(to='UserInfo',to_field='nid',related_name='n')#谁发布的，外键关联，'n'取代'表名_set'反向查询（即某个用户发布了哪些新闻）
+    nt=models.ForeignKey(to='NewsType',to_field='id',related_name='tn')#该新闻属于什么类型，外键关联，'tn'取代'表名_set'反向查询（即某个类型有哪些新闻）
+
+
+class Favor(models.Model):#手动创建点赞表，多对多
+    news_id=models.ForeignKey(to='News',to_field='id')#新闻id
+    user_id=models.ForeignKey(to='UserInfo',to_field='id')#用户id
+
+class Comment(models.Model):#评论表
+    news_id = models.ForeignKey('News')
+    user_id = models.ForeignKey('UserInfo')
+    content = models.CharField(max_length=150)#评论内容
+    device=models.CharField(max_length=16,null=True)#评论设备，可以为空（不认识的设备）
+    ctime = models.DateTimeField(auto_now_add=True)
+
+
+2，三张表
+class UserInfo(models.Model):#用户表
+    nid=models.AutoField(primary_key=True)#主键
+    username = models.CharField(max_length=32,unique=True)#用户名 唯一索引
+    password = models.CharField(max_length=32)
+    email=models.CharField(max_length=32,unique=True)#邮箱 唯一索引
+    ctime = models.DateField(auto_now_add=True)#时间 自动添加
+
+class News(models.Model):#新闻表
+    title = models.CharField(max_length=64)#标题
+    summary = models.CharField(max_length=128,null=True)#简介 可以为空
+    url = models.URLField(null=True)#链接 可以为空 本站原创就没有链接，只有引用了外部链接才有
+    ctime = models.DateField(auto_now_add=True)#发布时间 自动添加
+    user=models.ForeignKey(to='UserInfo',to_field='nid',related_name='n')#谁发布的，外键关联，'n'取代'表名_set'反向查询（即某个用户发布了哪些新闻）
+    news_type_choices=[
+        (1,'42区'),
+        (2,'段子'),
+        (3,'图片'),
+        (4,'挨踢1024'),
+        (5,'你问我答'),
+    ]
+    nt=models.IntegerField(choices=news_type_choices)#该新闻属于什么类型，内存表，'tn'取代'表名_set'反向查询（即某个类型有哪些新闻）
+    favor=models.ManyToManyField(to='UserInfo')#点赞，自动创建多对多表，一条新闻有哪些用户点赞，一个用户为哪些新闻点赞。
+
+class Comment(models.Model):#评论表
+    news_id = models.ForeignKey('News')
+    user_id = models.ForeignKey('UserInfo')
+    content = models.CharField(max_length=150)#评论内容
+    device=models.CharField(max_length=16,null=True)#评论设备，可以为空（不认识的设备）
+    ctime = models.DateTimeField(auto_now_add=True)
+    #评论表中添加对评论的评论，自相关自动
+    '''
+    自增id 用户名 content        news_id  parent_id
+    1     高基金 发发发顺丰速递       1       null
+    2     小胡   发发发顺丰速递       1       null
+    3     金星   发发发顺丰速递       1       null
+    4     展销会 发发发顺丰速递       1       1       #都是对新闻id为1的新闻进行评论，该条评论展销会是对评论id为1的高基金评论的评论
+    5     高基金 发发发顺丰速递       1       4       #都是对新闻id为1的新闻进行评论，该条评论高基金是对评论id为4的展销会评论的评论（相当于回复了上面一条对自己的评论）
+    '''
+    parent_id  = models.ForeignKey("self",related_name='cp',null=True)#自相关，对评论的评论，可以为空
+    #自相关字段可用self，因为表名相同，相当于两张相同的表，id互指。
+    #反向查询：由于自相关表名相同，因此要指明一下方向查询的名称，这里是'cp'取代'表名_set'反向查询（即谁评论了我的评论）

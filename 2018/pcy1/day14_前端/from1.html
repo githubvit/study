@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--输入框和按钮-->
+<form action="http://localhost:8888/index" method="get">
+    <!--get方法把表单数据放在在请求头提交，不写method，默认就是get方法-->
+    <input type="text" name="user" value="alex"/><!--文本输入框 name属性是字典的key value属性是name默认值-->
+    <input type="text" name="email"/>
+    <input type="password" name="pwd"/><!--密码输入框-->
+    <!--表单提交的形式是以字典提交{'user':'用户输入','email':xxx,'pwd':xxxx}-->
+    <input type="button" value="登录1"/><!--普通按钮 value属性是按钮显示的文字-->
+    <input type="submit" value="登录2"/><!--表单提交按钮，只提交input标签的里面的内容-->
+
+</form>
+<form action="http://localhost:8888/index" method="post">
+    <!--post方法把表单数据放在在请求体提交-->
+    <input type="text" name="user"/>
+    <input type="text" name="email"/>
+    <input type="password" name="pwd"/>
+    <input type="button" value="登录1"/>
+    <input type="submit" value="登录2"/>
+
+</form>
+<!--使用别人的搜索器，找到method ，找到name的key-->
+<form action="https://www.baidu.com/s?" >
+    <input type="text" name="wd"/>
+    <input type="submit" value="百度搜"/>
+</form>
+<form action="https://www.sogou.com/web?" >
+    <input type="text" name="query"/>
+    <input type="submit" value="搜狗搜"/>
+</form>
+<!--单选、多选、文件上传、多行输入、重置-->
+<form enctype="multipart/form-data">
+
+    <div>
+        <!--单选radio name都必须一致，才能互斥,提交的key就是name的内容，提交的值为value的内容-->
+        <div>请选择性别：</div>
+        男：<input type="radio" name="gender" value="1" checked="checked"/><!--checked="checked"默认值-->
+        女：<input type="radio" name="gender" value="2"/>
+        中：<input type="radio" name="gender" value="3"/>
+        <!--jquery获取radio的值 $("input[name='radio']:checked").val();或$(":radio:checked").val();-->
+        <!--jquery设置radio的值 至第二项被选中$(':radio[value="2"]').prop('checked',true)-->
+        <!--多选checkbox name都必须一致，才能在该key下实现多选,提交的key就是name的内容，提交的值为value的内容-->
+        <div>请选择爱好：</div>
+        篮球：<input type="checkbox" name="favor" value="1" checked="checked"/>
+        足球：<input type="checkbox" name="favor" value="2"/>
+        网球：<input type="checkbox" name="favor" value="3"/>
+       <!-- 提交到后台,后台可以写上favor_list=self.get_arguments('favor')，接收这个checkbox，[1,2,3]。-->
+        <div>技能：</div>
+        撩妹：<input type="checkbox" name="skill" value="1"/>
+        写代码：<input type="checkbox" name="skill" value="2"/>
+        <!--文件上传 依赖form表单的属性 enctype="multipart/form-data" 否则上传不了-->
+        <div>上传文件：</div>
+        <input type="file" name="fname" />
+    </div>
+    <!--多行输入-->
+    <textarea name="meno" >写了就是默认值</textarea>
+    <!--下拉框 size="2"表示可以显示2个，multiple="multiple"表示可以多选（要按住ctrl）-->
+    <select name="city" size="2" multiple="multiple">
+        <optgroup label="北"></optgroup> <!--optgroup表示分组-->
+        <option value="1">北京</option>
+        <optgroup label="中"></optgroup>
+        <option value="2" selected="selected">上海</option><!--selected="selected"默认值-->
+        <optgroup label="南"></optgroup>
+        <option value="3">广州</option>
+    </select>
+    <input type="submit" value="提交"/>
+    <input type="reset" value="重置"/><!--重置，清空该表单-->
+</form>
+<script src="jquery-1.12.4.js"></script>
+<!--</div><div class="m-addressModal" data-reactid=".5">
+    <div class="w-tit-addr" data-reactid=".5.0">新建地址</div>
+    <form class="m-form-addr j-form " novalidate="" data-overseas="false" data-reactid=".5.1">
+        <div class="w-row-addr addrFirst" data-reactid=".5.1.0">
+            <div class="w-col-4" data-reactid=".5.1.0.0">
+                <span class="w-label" data-reactid=".5.1.0.0.0">
+                    <span class="required" data-reactid=".5.1.0.0.0.0">*</span>
+                    <span data-reactid=".5.1.0.0.0.1">所在地区</span>
+                    <span data-reactid=".5.1.0.0.0.2">:</span>
+                </span>
+                <div style="display:inline-block;" data-reactid=".5.1.0.0.1">
+                    <div style="display:inline-block;" data-reactid=".5.1.0.0.1.0">
+                    <div class="w-error-warp j-error-wrap mgr10" data-reactid=".5.1.0.0.1.0.0">
+                        <select name="provinceId" id="" class="w-select j-provicne" tabindex="3" data-reactid=".5.1.0.0.1.0.0.0">
+                            <option selected="" value="" data-reactid=".5.1.0.0.1.0.0.0.0">请选择</option>
+                            <option value="110000" data-reactid=".5.1.0.0.1.0.0.0.1:$0">北京</option>
+                            <option value="120000" data-reactid=".5.1.0.0.1.0.0.0.1:$1">天津</option>
+                            <option value="130000" data-reactid=".5.1.0.0.1.0.0.0.1:$2">河北省</option>
+                            <option value="140000" data-reactid=".5.1.0.0.1.0.0.0.1:$3">山西省</option>
+                            <option value="150000" data-reactid=".5.1.0.0.1.0.0.0.1:$4">内蒙古自治区</option>
+                            <option value="210000" data-reactid=".5.1.0.0.1.0.0.0.1:$5">辽宁省</option>
+                            <option value="220000" data-reactid=".5.1.0.0.1.0.0.0.1:$6">吉林省</option>
+                            <option value="230000" data-reactid=".5.1.0.0.1.0.0.0.1:$7">黑龙江省</option>
+                            <option value="310000" data-reactid=".5.1.0.0.1.0.0.0.1:$8">上海</option>
+                            <option value="320000" data-reactid=".5.1.0.0.1.0.0.0.1:$9">江苏省</option>
+                            <option value="330000" data-reactid=".5.1.0.0.1.0.0.0.1:$10">浙江省</option>
+                            <option value="340000" data-reactid=".5.1.0.0.1.0.0.0.1:$11">安徽省</option>
+                            <option value="350000" data-reactid=".5.1.0.0.1.0.0.0.1:$12">福建省</option>
+                            <option value="360000" data-reactid=".5.1.0.0.1.0.0.0.1:$13">江西省</option>
+                            <option value="370000" data-reactid=".5.1.0.0.1.0.0.0.1:$14">山东省</option>
+                            <option value="410000" data-reactid=".5.1.0.0.1.0.0.0.1:$15">河南省</option>
+                            <option value="420000" data-reactid=".5.1.0.0.1.0.0.0.1:$16">湖北省</option>
+                            <option value="430000" data-reactid=".5.1.0.0.1.0.0.0.1:$17">湖南省</option>
+                            <option value="440000" data-reactid=".5.1.0.0.1.0.0.0.1:$18">广东省</option>
+                            <option value="450000" data-reactid=".5.1.0.0.1.0.0.0.1:$19">广西壮族自治区</option>
+                            <option value="460000" data-reactid=".5.1.0.0.1.0.0.0.1:$20">海南省</option>
+                            <option value="500000" data-reactid=".5.1.0.0.1.0.0.0.1:$21">重庆</option>
+                            <option value="510000" data-reactid=".5.1.0.0.1.0.0.0.1:$22">四川省</option>
+                            <option value="520000" data-reactid=".5.1.0.0.1.0.0.0.1:$23">贵州省</option>
+                            <option value="530000" data-reactid=".5.1.0.0.1.0.0.0.1:$24">云南省</option>
+                            <option value="540000" data-reactid=".5.1.0.0.1.0.0.0.1:$25">西藏自治区</option>
+                            <option value="610000" data-reactid=".5.1.0.0.1.0.0.0.1:$26">陕西省</option>
+                            <option value="620000" data-reactid=".5.1.0.0.1.0.0.0.1:$27">甘肃省</option>
+                            <option value="630000" data-reactid=".5.1.0.0.1.0.0.0.1:$28">青海省</option>
+                            <option value="640000" data-reactid=".5.1.0.0.1.0.0.0.1:$29">宁夏回族自治区</option>
+                            <option value="650000" data-reactid=".5.1.0.0.1.0.0.0.1:$30">新疆维吾尔自治区</option>
+                            <option value="710000" data-reactid=".5.1.0.0.1.0.0.0.1:$31">台湾省</option>
+                            <option value="810000" data-reactid=".5.1.0.0.1.0.0.0.1:$32">香港特别行政区</option>
+                            <option value="820000" data-reactid=".5.1.0.0.1.0.0.0.1:$33">澳门特别行政区</option>
+                            <option value="1040000" data-reactid=".5.1.0.0.1.0.0.0.1:$34">日本</option>
+                            <option value="1240000" data-reactid=".5.1.0.0.1.0.0.0.1:$35">韩国</option>
+                            <option value="1330000" data-reactid=".5.1.0.0.1.0.0.0.1:$36">新加坡</option>
+                            <option value="1320000" data-reactid=".5.1.0.0.1.0.0.0.1:$37">泰国</option>
+                            <option value="1310000" data-reactid=".5.1.0.0.1.0.0.0.1:$38">马来西亚</option>
+                            <option value="1300000" data-reactid=".5.1.0.0.1.0.0.0.1:$39">菲律宾</option>
+                            <option value="1280000" data-reactid=".5.1.0.0.1.0.0.0.1:$40">美国</option>
+                            <option value="1290000" data-reactid=".5.1.0.0.1.0.0.0.1:$41">加拿大</option>
+                            <option value="1250000" data-reactid=".5.1.0.0.1.0.0.0.1:$42">英国</option>
+                            <option value="1170000" data-reactid=".5.1.0.0.1.0.0.0.1:$43">法国</option>
+                            <option value="1200000" data-reactid=".5.1.0.0.1.0.0.0.1:$44">德国</option>
+                            <option value="1120000" data-reactid=".5.1.0.0.1.0.0.0.1:$45">意大利</option>
+                            <option value="1100000" data-reactid=".5.1.0.0.1.0.0.0.1:$46">西班牙</option>
+                            <option value="1220000" data-reactid=".5.1.0.0.1.0.0.0.1:$47">瑞典</option>
+                            <option value="1030000" data-reactid=".5.1.0.0.1.0.0.0.1:$48">瑞士</option>
+                            <option value="1270000" data-reactid=".5.1.0.0.1.0.0.0.1:$49">荷兰</option>
+                            <option value="1080000" data-reactid=".5.1.0.0.1.0.0.0.1:$50">希腊</option>
+                            <option value="1110000" data-reactid=".5.1.0.0.1.0.0.0.1:$51">葡萄牙</option>
+                            <option value="1050000" data-reactid=".5.1.0.0.1.0.0.0.1:$52">爱尔兰</option>
+                            <option value="1260000" data-reactid=".5.1.0.0.1.0.0.0.1:$53">爱沙尼亚</option>
+                            <option value="1190000" data-reactid=".5.1.0.0.1.0.0.0.1:$54">奥地利</option>
+                            <option value="1070000" data-reactid=".5.1.0.0.1.0.0.0.1:$55">比利时</option>
+                            <option value="1150000" data-reactid=".5.1.0.0.1.0.0.0.1:$56">波兰</option>
+                            <option value="1230000" data-reactid=".5.1.0.0.1.0.0.0.1:$57">丹麦</option>
+                            <option value="1160000" data-reactid=".5.1.0.0.1.0.0.0.1:$58">芬兰</option>
+                            <option value="1020000" data-reactid=".5.1.0.0.1.0.0.0.1:$59">克罗地亚</option>
+                            <option value="1130000" data-reactid=".5.1.0.0.1.0.0.0.1:$60">拉脱维亚</option>
+                            <option value="1000000" data-reactid=".5.1.0.0.1.0.0.0.1:$61">立陶宛</option>
+                            <option value="1210000" data-reactid=".5.1.0.0.1.0.0.0.1:$62">卢森堡</option>
+                            <option value="1060000" data-reactid=".5.1.0.0.1.0.0.0.1:$63">罗马尼亚</option>
+                            <option value="1010000" data-reactid=".5.1.0.0.1.0.0.0.1:$64">塞浦路斯</option>
+                            <option value="1180000" data-reactid=".5.1.0.0.1.0.0.0.1:$65">斯洛伐克</option>
+                            <option value="1090000" data-reactid=".5.1.0.0.1.0.0.0.1:$66">斯洛文尼亚</option>
+                            <option value="1140000" data-reactid=".5.1.0.0.1.0.0.0.1:$67">匈牙利</option>
+                        </select>
+                        <div style="clear:both;" data-reactid=".5.1.0.0.1.0.0.1"></div>
+                    </div>
+                    <div class="w-error-warp j-error-wrap mgr10" data-reactid=".5.1.0.0.1.0.1">
+                        <select name="cityId" id="" class="w-select j-city" tabindex="4" data-reactid=".5.1.0.0.1.0.1.0">
+                            <option selected="" value="" data-reactid=".5.1.0.0.1.0.1.0.0">请选择</option>
+                        </select>
+                        <div style="clear:both;" data-reactid=".5.1.0.0.1.0.1.1"></div>
+                    </div>
+                    <div class="w-error-warp j-error-wrap" data-reactid=".5.1.0.0.1.0.2">
+                        <select name="districtId" id="" class="w-select j-district" tabindex="5" data-reactid=".5.1.0.0.1.0.2.0">
+                            <option selected="" value="" data-reactid=".5.1.0.0.1.0.2.0.0">请选择</option>
+                        </select><div style="clear:both;" data-reactid=".5.1.0.0.1.0.2.1">
+
+                    </div>
+                    </div>
+                </div>
+                    <div style="clear:both;" data-reactid=".5.1.0.0.1.1"></div>
+                </div>
+            </div>
+            <div style="clear:both;" data-reactid=".5.1.0.1"></div>
+        </div><div class="w-row-addr" data-reactid=".5.1.1">
+        <div class="w-col-4" data-reactid=".5.1.1.0">
+            <span class="w-label" style="margin-top:6px;vertical-align:top;" data-reactid=".5.1.1.0.0">
+                <span class="required" data-reactid=".5.1.1.0.0.0">*</span>
+                <span data-reactid=".5.1.1.0.0.1">详细地址</span>
+                <span data-reactid=".5.1.1.0.0.2">:</span>
+            </span>
+            <div class="w-error-warp j-error-wrap w-textarea" data-reactid=".5.1.1.0.1">
+                <textarea placeholder="详细地址，街道、门牌号等" name="address" id="" cols="30" rows="10" tabindex="6" class="w-textarea" data-reactid=".5.1.1.0.1.0">
+
+                </textarea>
+            </div>
+        </div>
+        <div style="clear:both;" data-reactid=".5.1.1.1"></div>
+    </div><div class="w-row-addr" data-reactid=".5.1.2">
+        <div class="w-col-2 errorTip mgr43" data-reactid=".5.1.2.0">
+            <span class="w-label" data-reactid=".5.1.2.0.0">
+                <span class="required" data-reactid=".5.1.2.0.0.0">*</span>
+                <span data-reactid=".5.1.2.0.0.1">收货人</span>
+                <span data-reactid=".5.1.2.0.0.2">:</span>
+            </span>
+            <div class="w-error-warp j-error-wrap undefined" data-reactid=".5.1.2.0.1">
+                <input type="text" class="w-ipt" name="name" value="" tabindex="1" data-reactid=".5.1.2.0.1.0">
+            </div>
+        </div>
+        <div class="w-col-2 zoneTipsInner errorTip" data-reactid=".5.1.2.1">
+            <span class="w-label" data-reactid=".5.1.2.1.0">
+                <span class="required" data-reactid=".5.1.2.1.0.0">*</span>
+                <span data-reactid=".5.1.2.1.0.1">手机号码</span>
+                <span data-reactid=".5.1.2.1.0.2">:</span>
+            </span>
+            <div class="w-error-warp j-error-wrap undefined" data-reactid=".5.1.2.1.1">
+                <input type="text" class="w-ipt" name="mobile" value="" tabindex="2" data-reactid=".5.1.2.1.1.0">
+            </div>
+        </div>
+        <div style="clear:both;" data-reactid=".5.1.2.2"></div>
+    </div>
+    </form>
+    <div class="w-row-addr" style="margin-top:30px;" data-reactid=".5.2">
+        <div class="w-col-1" data-reactid=".5.2.0">
+            <div class="w-chkbox" data-reactid=".5.2.0.0">
+                <input type="checkbox" name="dft" class="j-checkbox" checked="" data-reactid=".5.2.0.0.0">
+                <span data-reactid=".5.2.0.0.1">设为默认</span>
+            </div>
+        </div>
+        <div class="w-col-3" data-reactid=".5.2.1">
+            <button type="button" class="w-button w-button-primary w-button-l j-submit" style="margin-left:155px;" data-reactid=".5.2.1.0">
+                确定
+            </button>
+            <button type="button" class="w-button w-button-l w-button-ghost j-cancel" style="margin-left:10px;" data-reactid=".5.2.1.1">
+                取消
+            </button>
+        </div>
+    </div>
+</div>-->
+<!--<form action="http://apis.map.qq.com/ws/district/v1/list?key=OB4BZ-D4W3U-B7VVO-4PJWW-6TKDJ-WPB77" method="get">-->
+
+    <!--<select name="prov">-->
+        <!--{%for %}-->
+    <!--</select>-->
+<!--</form>-->
+</body>
+</html>

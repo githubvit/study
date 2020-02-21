@@ -1,0 +1,28 @@
+zip取得id列表
+实例：
+2017年老男孩最新全栈python第2期视频教程 全套完整版\day61-python 全栈开发-web框架篇
+61-04 python 全栈开发-web框架篇-day61 用户管理之左右移动老师信息
+
+
+取得数据库表中的id和name列
+obj_list=models.User.object.all().values_list('id','name')
+#obj_list:(
+            (1,'root1'),(2,'root2'),(3,'root3'),...
+        )
+#取得的是元组套多个小元组形式的数据结构
+
+这时用zip方法：
+
+obj_list=zip(*obj_list)
+#obj_list:(
+            (1,2,3,...),('root1','root2','root3'...)
+        )
+#取得的是元组套1个id元组和1个name元组形式的数据结构：把id和name进行了分离。
+注意*号，把上面的数据结构变成下面的数据结构，把id和name两边分开，俗称解拉链。
+如果是把下面的变成上面的，是把id和name两边合拢，俗称合拉链，就不要加*。
+
+
+
+取得id列表--先转成列表，然后取第0个元素，即可。
+id_list=list(obj_list)[0]
+#id_list=(1,2,3,...)

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <input type="button" value="+方式1" onclick="addEle1()"/>
+    <input type="button" value="+方式2" onclick="addEle2()"/>
+    <div id="i1">
+        <input type="text"/>
+        <hr/><!--分割线-->
+    </div>
+    <script>
+        function addEle1() {//方式1
+            //创建一个标签
+            var tag='<p><input type="text"/></p>';
+
+            //将标签添加到i1里面insertAdjacentHTML('位置',标签)
+            //注意：第一个参数只能是'beforeBegin'i1开始前、 'afterBegin'i1开始后、 'beforeEnd'i1结束前、 'afterEnd'i1结束后
+            document.getElementById('i1').insertAdjacentHTML('beforeEnd',tag)
+
+        }
+        function addEle2() {//方式2
+            //创建一个input标签
+            var tag=document.createElement('input');
+            tag.setAttribute('type','text');//设置属性
+            tag.style.fontSize='16px';//添加样式
+            tag.style.color='red';
+            //创建一个p标签
+            var p=document.createElement('p')
+            //将input放到p标签里面
+            p.appendChild(tag)
+
+            //将标签添加到i1里面appendChild(标签)
+            document.getElementById('i1').appendChild(p)
+
+
+        }
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,1001 @@
+mysql基础及单表操作
+一，基本概念：
+    关系型数据库，RDBMS （relational database management system）。
+    保证数据的一致性。
+    冗余字段：减少了跨表查询，加快查询速度；但增加了存储（数据量），修改时涉及到重复数据。
+    主键：唯一，一个数据表中只能包含一个主键，用于标识这一行，是不可能重复的。
+    外键：用于关联两个表。
+    索引：使用索引可以快速访问数据表中的特定信息。
+        索引是对数据表中的一列或多列的值进行排序的一种结构，类似于书籍目录。
+        哈希-索引。
+    复合键（组合索引）：将多个列做为索引键。
+    自增列（一张表只能有一个，数字，必须是索引-主键）
+    主键索引：
+
+             一张表只能有一个主键，唯一不能重复，不能为null，可以多列组成主键- 一般情况下，自增列设置主键
+             1，2，3，4，5，6
+           唯一索引：
+                可以为null，一张表可以有多个唯一列
+                1，2，3，4，5，6，null
+
+            -- 约束
+            -- 索引，加速查找
+
+    参照完整性：不允许引用不存在的实体。
+
+    Mysql安装成功后，默认的root用户密码为空，你可以使用以下命令来创建root用户的密码：
+    [root@host]# mysqladmin -u root password "new_password";
+
+
+二，命令 命令结束符‘；’
+    1，登录 mysql -u 用户名 -p
+        C:\Users\hp>mysql -u root -p
+        Enter password: ********** #another333
+        Welcome to the MySQL monitor.
+
+    2，查看 数据库 show databases；
+        mysql> show databases;
+        +--------------------+
+        | Database           |
+        +--------------------+
+        | cloud_study        |
+        | information_schema |
+        | mysql              |
+        | performance_schema |
+        | sys                |
+        +--------------------+
+
+    3，使用数据库 use 数据库名
+        mysql> use mysql;
+        Database changed
+
+
+    4，查看当前数据库有哪些表 show tables；
+        mysql> show tables;
+        +---------------------------+
+        | Tables_in_mysql           |
+        +---------------------------+
+            ...
+        | user                      |
+        +---------------------------+
+        33 rows in set (0.00 sec)
+
+    5，查看表结构 desc 表名；等于命令SHOW COLUMNS FROM 数据表: #显示数据表的属性，属性类型，主键信息 ，是否为 NULL，默认值等其他信息
+
+        mysql> desc user;   field列名| type数据类型（字节长度）| null 该字段能否为空 |key 主键（这里是复合键）|default默认值| Extra 其他|
+        +------------------------+-----------------------------------+------+-----+-----------------------+-------+
+        | Field                  | Type  （数据类型 长度）              | Null | Key | Default               | Extra |
+        +------------------------+-----------------------------------+------+-----+-----------------------+-------+
+        | Host                   | char(60)        字符()             | NO   | PRI |                       |       |
+        | User                   | char(32)                          | NO   | PRI |                       |       |
+        | Select_priv            | enum('N','Y')    枚举              | NO   |     | N                     |       |
+        | Insert_priv            | enum('N','Y')                     | NO   |     | N                     |       |
+        | Update_priv            | enum('N','Y')                     | NO   |     | N                     |       |
+        ...
+        | ssl_cipher             | blob                              | NO   |     | NULL                  |       |
+        | x509_issuer            | blob                              | NO   |     | NULL                  |       |
+        | x509_subject           | blob                              | NO   |     | NULL                  |       |
+        | max_questions          | int(11) unsigned                  | NO   |     | 0                     |       |
+        | max_updates            | int(11) unsigned                  | NO   |     | 0                     |       |
+        | max_connections        | int(11) unsigned                  | NO   |     | 0                     |       |
+        | max_user_connections   | int(11) unsigned                  | NO   |     | 0                     |       |
+        | plugin                 | char(64)                          | NO   |     | mysql_native_password |       |
+        | authentication_string  | text                              | YES  |     | NULL                  |       |
+        | password_expired       | enum('N','Y')                     | NO   |     | N                     |       |
+        | password_last_changed  | timestamp                         | YES  |     | NULL                  |       |
+        | password_lifetime      | smallint(5) unsigned              | YES  |     | NULL                  |       |
+        ...
+        | Drop_role_priv         | enum('N','Y')                     | NO   |     | N                     |       |
+        +------------------------+-----------------------------------+------+-----+-----------------------+-------+
+        47 rows in set (0.00 sec)
+
+    6，退出数据库 exit和quit，不能加’；‘号。
+        mysql> exit
+        Bye
+        mysql> quit
+        Bye
+    7，关闭数据库服务shutdown
+        root@host# cd /usr/bin
+        ./mysqladmin -u root -p shutdown
+        Enter password: ******
+    8，如果你需要添加 MySQL 用户，你只需要在 mysql 数据库中的 user 表添加新用户即可。
+
+        8.1 添加用户
+            授予所有权限（grant all）对cloud_study数据库（on cloud_study.* ），给用户alex（to 'alex'）从任何地方登录@'%'
+            密码为alex3714（identified by 'alex3714'）
+            mysql> grant all on cloud_study.* to 'alex'@'%' identified by 'alex3714';
+            Query OK, 0 rows affected, 1 warning (0.10 sec)
+            8.1.1添加完成后，刷新授权 flush privileges；
+
+
+        8.2 查看用户
+            mysql> select User from user;
+            +-----------+
+            | User      |
+            +-----------+
+            | alex      |
+            | mysql.sys |
+            | root      |
+            +-----------+
+            3 rows in set (0.00 sec)
+        8.3 查看user表中的详细资料，发现授予的权限都为N，这是因为仅仅是对cloud_study数据库授权了。
+            太长了，看不下命令尾部加”\G”，把列数据逐行显示。横向的表结构会转为使用纵向表结构输出,利于阅读。
+            mysql> select * from user\G 该命令不要用;结尾。
+            *************************** 1. row ***************************
+                              Host: %
+                              User: alex
+                       Select_priv: N
+                       Insert_priv: N
+                       Update_priv: N
+                       Delete_priv: N
+                       Create_priv: N
+                         Drop_priv: N
+               ......
+
+                  password_expired: N
+             password_last_changed: 2017-11-28 20:29:34
+                 password_lifetime: NULL
+                    account_locked: N
+                  Create_role_priv: N
+                    Drop_role_priv: N
+            3 rows in set (0.00 sec)
+
+
+        8.4 查看alex用户的权限
+            mysql> show grants for alex;
+            +-------------------------------------------------------+
+            | Grants for alex@%                                     |
+            +-------------------------------------------------------+
+            | GRANT USAGE ON *.* TO `alex`@`%`                      |
+            | GRANT ALL PRIVILEGES ON `cloud_study`.* TO `alex`@`%` |
+            +-------------------------------------------------------+
+            2 rows in set (0.01 sec)
+            可以看到，GRANT ALL PRIVILEGES ON `cloud_study`.* TO `alex`@`%`
+            对数据库cloud_study，用户alex可以从任何地方登录，授予了全部权限GRANT ALL PRIVILEGES
+        8.5 用alex登录，看到的数据库就比root要少了。
+            C:\Users\hp>mysql -ualex -palex3714
+            mysql: [Warning] Using a password on the command line interface can be insecure. 警告这样输入会泄密。
+            Welcome to the MySQL monitor.
+            mysql> show databases;
+            +--------------------+
+            | Database           |
+            +--------------------+
+            | cloud_study        |
+            | information_schema |
+            +--------------------+
+
+    9，创建数据库 删除数据库
+        create database testdb charset "utf8"; #创建一个叫testdb的数据库，且让其支持中文，如果不写charset，则使用默认字符集是拉丁文。
+        mysql> create database test charset "utf8";
+        ERROR 1044 (42000): Access denied for user 'alex'@'%' to database 'test'
+        被拒绝，alex没有权限。
+        换成root登录后，创建test数据库ok。
+        mysql> create database test charset 'utf8';
+        Query OK, 1 row affected (0.20 sec)
+
+        mysql> show databases;
+        +--------------------+
+        | Database           |
+        +--------------------+
+        | cloud_study        |
+        | information_schema |
+        | mysql              |
+        | performance_schema |
+        | sys                |
+        | test               |
+        +--------------------+
+        6 rows in set (0.00 sec)
+
+        查看创建的数据库
+        mysql> show create database test;
+        +----------+---------------------------------------------------------------+
+        | Database | Create Database                                               |
+        +----------+---------------------------------------------------------------+
+        | test     | CREATE DATABASE `test` /*!40100 DEFAULT CHARACTER SET utf8 */ |
+        +----------+---------------------------------------------------------------+
+        1 row in set (0.00 sec)
+
+        删除数据库 drop database test;
+
+
+三，数据类型
+    1.数值：
+        整数：
+            bit[(M)]
+                二进制位（101001），m表示二进制位的长度（1-64），默认m＝1
+                超过m位就报错
+
+            tinyint[(m)] [unsigned] [zerofill]
+
+                小整数，数据类型用于保存一些范围的整数数值范围：
+                有符号：
+                    -128 ～ 127.
+                无符号：[unsigned]
+                    0 ～ 255
+
+                特别的： MySQL中无布尔值，使用tinyint(1)构造。
+
+            int[(m)][unsigned][zerofill]
+
+                整数，数据类型用于保存一些范围的整数数值范围：
+                    有符号：
+                        -2147483648 ～ 2147483647
+                    无符号：
+                        0 ～ 4294967295
+
+                特别的：整数类型中的m仅用于显示，对存储范围无限制。例如： int(5),当插入数据2时，select 时数据显示为： 00002
+
+            bigint[(m)][unsigned][zerofill]
+                大整数，数据类型用于保存一些范围的整数数值范围：
+                    有符号：
+                        -9223372036854775808 ～ 9223372036854775807
+                    无符号：
+                        0  ～  18446744073709551615
+        浮点数：
+            decimal[(m[,d])] [unsigned] [zerofill]
+                准确的小数值，m是数字总个数（负号不算），d是小数点后个数。 m最大值为65，d最大值为30。
+
+                特别的：对于精确数值计算时需要用此类型
+                       decaimal能够存储精确值的原因在于其内部按照字符串存储。
+
+            FLOAT[(M,D)] [UNSIGNED] [ZEROFILL]
+                单精度浮点数（非准确小数值），m是数字总个数，d是小数点后个数。
+                    无符号：
+                        -3.402823466E+38 to -1.175494351E-38,
+                        0
+                        1.175494351E-38 to 3.402823466E+38
+                    有符号：
+                        0
+                        1.175494351E-38 to 3.402823466E+38
+
+                **** 数值越大，越不准确 ****
+
+            DOUBLE[(M,D)] [UNSIGNED] [ZEROFILL]
+                双精度浮点数（非准确小数值），m是数字总个数，d是小数点后个数。
+
+                    无符号：
+                        -1.7976931348623157E+308 to -2.2250738585072014E-308
+                        0
+                        2.2250738585072014E-308 to 1.7976931348623157E+308
+                    有符号：
+                        0
+                        2.2250738585072014E-308 to 1.7976931348623157E+308
+                **** 数值越大，越不准确 ****
+
+    2.字符串：
+        char (m)
+            char数据类型用于表示固定长度的字符串，可以包含最多达255个字符。其中m代表字符串的长度。
+            PS: 即使数据小于m长度，也会占用m长度
+        varchar(m)
+            varchars数据类型用于变长的字符串，可以包含最多达255个字符。其中m代表该数据类型所允许保存的字符串的最大长度，
+            只要长度小于该最大值的字符串都可以被保存在该数据类型中。
+
+            注：虽然varchar使用起来较为灵活，但是从整个系统的性能角度来说，char数据类型的处理速度更快，有时甚至可以超出varchar处理速度的50%。因此，用户在设计数据库时应当综合考虑各方面的因素，以求达到最佳的平衡
+
+        text
+            text数据类型用于保存变长的大字符串，可以最多到65535 (2**16 − 1)个字符。
+
+        mediumtext
+            A TEXT column with a maximum length of 16,777,215 (2**24 − 1) characters.
+
+        longtext
+            A TEXT column with a maximum length of 4,294,967,295 or 4GB (2**32 − 1) characters.
+
+
+
+    3.时间：
+        DATE
+            YYYY-MM-DD（1000-01-01/9999-12-31）
+
+        TIME
+            HH:MM:SS（'-838:59:59'/'838:59:59'）
+
+        YEAR
+            YYYY（1901/2155）
+
+        DATETIME
+
+            YYYY-MM-DD HH:MM:SS（1000-01-01 00:00:00/9999-12-31 23:59:59    Y）
+
+        TIMESTAMP
+
+            YYYYMMDD HHMMSS（1970-01-01 00:00:00/2037 年某时）
+
+
+
+    4.集合
+        enum
+        枚举类型，
+        An ENUM column can have a maximum of 65,535 distinct elements. (The practical limit is less than 3000.)
+        示例：衣服尺寸
+            CREATE TABLE shirts (
+                name VARCHAR(40),
+                size ENUM('x-small', 'small', 'medium', 'large', 'x-large')
+            );
+            INSERT INTO shirts (name, size) VALUES ('dress shirt','large'), ('t-shirt','medium'),('polo shirt','small');
+            只能选一个，
+        set
+            集合类型
+            A SET column can have a maximum of 64 distinct members.
+            示例：
+                CREATE TABLE myset (col SET('a', 'b', 'c', 'd'));
+                INSERT INTO myset (col) VALUES ('a,d'), ('d,a'), ('a,d,a'), ('a,d,d'), ('d,a,d');
+            可以选多个，没在set里就报错。
+
+    对于大型数据的保存一般不是在数据库，数据库只是保存该数据的路径，也就是把大数据存成单独的文件，然后数据库中保存该文件的路径和文件名
+    数据库保存varchar(65),"d:\av.avi"这条数据，取数据，先从数据库取出该路径，然后在该路径open read该文件。
+
+   ++++++++++++++下面是alex的博客内容++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    MySQL中定义数据字段的类型对你数据库的优化是非常重要的。
+
+    MySQL支持多种类型，大致可以分为三类：数值、日期/时间和字符串(字符)类型。
+
+    1，数值类型
+
+        MySQL支持所有标准SQL数值数据类型。
+
+        这些类型包括严格数值数据类型(INTEGER、SMALLINT、DECIMAL和NUMERIC)，
+        以及近似数值数据类型(FLOAT、REAL和DOUBLE PRECISION)。
+
+        关键字INT是INTEGER的同义词，关键字DEC是DECIMAL的同义词。
+
+        BIT数据类型保存位字段值，并且支持MyISAM、MEMORY、InnoDB和BDB表。
+
+        作为SQL标准的扩展，MySQL也支持整数类型TINYINT、MEDIUMINT和BIGINT。
+        下面的表显示了需要的每个整数类型的存储和范围。
+
+
+
+        类型	        大小	    范围（有符号） 	    范围（无符号）	             用途
+        TINYINT	    1 字节	(-128，127)	        (0，255)	                小整数值
+        SMALLINT	2 字节	(-32768，32767)	    (0，65535)	            大整数值
+        MEDIUMINT	3 字节	(-8388608，8388607)	(0，16777215)	        大整数值
+        INT或INTEGER	4 字节		                (0，4294967295)	        大整数值
+        BIGINT	    8 字节		                (0，1846744073709551615)	极大整数值
+        FLOAT	    4 字节			                                    单精度
+        浮点数值
+        DOUBLE	    8 字节		                                        双精度
+        浮点数值
+        DECIMAL	对DECIMAL(M,D) ，如果M>D，为M+2否则为D+2	依赖于M和D的值	依赖于M和D的值	小数值
+
+
+    2，日期和时间类型
+
+        表示时间值的日期和时间类型为DATETIME、DATE、TIMESTAMP、TIME和YEAR。
+
+        每个时间类型有一个有效值范围和一个"零"值，当指定不合法的MySQL不能表示的值时使用"零"值。
+
+        TIMESTAMP类型有专有的自动更新特性，将在后面描述。
+
+
+        类型	    大小(字节)	    范围	                            格式	                 用途
+        DATE	3	    1000-01-01/9999-12-31	                YYYY-MM-DD	         日期值
+        TIME	3	    '-838:59:59'/'838:59:59'	            HH:MM:SS	         时间值或持续时间
+        YEAR	1	    1901/2155	                            YYYY	             年份值
+        DATETIME	8	1000-01-01 00:00:00/9999-12-31 23:59:59	YYYY-MM-DD HH:MM:SS	 混合日期和时间值
+        TIMESTAMP	4	1970-01-01 00:00:00/2037 年某时	        YYYYMMDD HHMMSS	     混合日期和时间值
+    　　
+
+    3，字符串类型
+
+        字符串类型指CHAR、VARCHAR、BINARY、VARBINARY、BLOB、TEXT、ENUM和SET。
+        该节描述了这些类型如何工作以及如何在查询中使用这些类型。
+
+        类型	        大小	            用途
+        CHAR	    0-255字节	    定长字符串
+        VARCHAR	    0-65535字节	    变长字符串
+        TINYBLOB	0-255字节	    不超过 255 个字符的二进制字符串
+        TINYTEXT	0-255字节	    短文本字符串
+        BLOB	    0-65535字节	    二进制形式的长文本数据
+        TEXT	    0-65535字节	    长文本数据
+        MEDIUMBLOB	0-16777215字节	二进制形式的中等长度文本数据
+        MEDIUMTEXT	0-16777215字节	中等长度文本数据
+        LONGBLOB	0-4294967295字节	二进制形式的极大文本数据
+        LONGTEXT	0-4294967295字节	极大文本数据
+
+        CHAR和VARCHAR类型类似，但它们保存和检索的方式不同。
+        它们的最大长度和是否尾部空格被保留等方面也不同。在存储或检索过程中不进行大小写转换。
+
+        BINARY和VARBINARY类类似于CHAR和VARCHAR，不同的是它们包含二进制字符串而不要非二进制字符串。
+        也就是说，它们包含字节字符串而不是字符字符串。这说明它们没有字符集，并且排序和比较基于列值字节的数值值。
+
+        BLOB是一个二进制大对象，可以容纳可变数量的数据。有4种BLOB类型：TINYBLOB、BLOB、MEDIUMBLOB和LONGBLOB。
+        它们只是可容纳值的最大长度不同。
+
+        有4种TEXT类型：TINYTEXT、TEXT、MEDIUMTEXT和LONGTEXT。这些对应4种BLOB类型，有相同的最大长度和存储需求。
+
+
+四，表操作
+    1，创建表create table
+        create table 表名(
+            列名  类型  是否可以为空，
+            列名  类型  是否可以为空 #注意结尾不能加‘，’。
+        )ENGINE=InnoDB DEFAULT CHARSET=utf8 可以小写
+        ENGINE=InnoDB支持事务：原子操作、回滚。
+        mysql> use test
+        Database changed
+        mysql> create table student(
+            -> id int auto_increment,
+            -> name char(32) not null,
+            -> age int not null,
+            -> register_date date not null,
+            -> primary key (id));
+        Query OK, 0 rows affected (0.73 sec)
+
+        mysql> desc student;
+        +---------------+----------+------+-----+---------+----------------+
+        | Field         | Type     | Null | Key | Default | Extra          |
+        +---------------+----------+------+-----+---------+----------------+
+        | id            | int(11)  | NO   | PRI | NULL    | auto_increment |
+        | name          | char(32) | NO   |     | NULL    |                |
+        | age           | int(11)  | NO   |     | NULL    |                |
+        | register_date | date     | NO   |     | NULL    |                |
+        +---------------+----------+------+-----+---------+----------------+
+        4 rows in set (0.00 sec)
+
+    2，插入数据INSERT INTO
+        INSERT INTO table_name ( field1, field2,...fieldN )
+                       VALUES
+                       ( value1, value2,...valueN );
+
+        mysql> insert into student (name,age,register_date) values('zhangyang',3,'2016-06-12' );
+        Query OK, 1 row affected (0.07 sec)
+
+
+        mysql> insert into student (name,age,register_date) values('zhangyang',3,'2016-06-12' ),('zhangyang',3,'2016-06-12' );
+        Query OK, 2 row affected (0.06 sec) 多条插入，用逗号
+
+        mysql> select * from student;
+        +----+-----------+-----+---------------+
+        | id | name      | age | register_date |
+        +----+-----------+-----+---------------+
+        |  1 | zhangyang |   3 | 2016-06-12    |
+        |  2 | zhangyang |   3 | 2016-06-12    |
+        |  3 | zhangyang |   3 | 2016-06-12    |
+        +----+-----------+-----+---------------+
+        对于重复插入的数据，数据库会报错，保证数据的唯一性。
+        mysql> insert into student (id,name,age,register_date) values(2,'zhangyang',3,'2016-06-12' );
+        ERROR 1062 (23000): Duplicate entry '2' for key 'PRIMARY'
+
+        *********从一张表中导入数据到另一张表**********
+        insert into 表 (列名,列名...) select 列名,列名... from 表1 where nid>2; 将表1中nid>2行相应字段插入得到表相应字段。类型必须一致,select后列名中没有括号
+    3，查询select
+
+        SELECT column_name,column_name
+        FROM table_name
+        [WHERE Clause]
+        [OFFSET M ][LIMIT N]
+
+        查询语句中你可以使用一个或者多个表，表之间使用逗号(,)分割，并使用WHERE语句来设定查询条件。
+        你可以使用星号（*）来代替其他字段，SELECT语句会返回表的所有字段数据
+        你可以使用 WHERE 语句来包含任何条件。
+        你可以使用 LIMIT 属性来设定返回的记录数。
+        你可以通过OFFSET指定SELECT语句开始查询的数据偏移量。默认情况下偏移量为0。
+
+        mysql> select * from student limit 2;不偏移。
+        +----+-----------+-----+---------------+
+        | id | name      | age | register_date |
+        +----+-----------+-----+---------------+
+        |  1 | zhangyang |   3 | 2016-06-12    |
+        |  2 | zhangyang |   3 | 2016-06-12    |
+        +----+-----------+-----+---------------+
+        2 rows in set (0.00 sec)
+
+        mysql> select * from student limit 2 offset 1;偏移量1.
+        +----+-----------+-----+---------------+
+        | id | name      | age | register_date |
+        +----+-----------+-----+---------------+
+        |  2 | zhangyang |   3 | 2016-06-12    |
+        |  3 | zhangyang |   3 | 2016-06-12    |
+        +----+-----------+-----+---------------+
+        2 rows in set (0.00 sec)
+
+        mysql> select * from student where id>1;
+        +----+-----------+-----+---------------+
+        | id | name      | age | register_date |
+        +----+-----------+-----+---------------+
+        |  2 | zhangyang |   3 | 2016-06-12    |
+        |  3 | zhangyang |   3 | 2016-06-12    |
+        +----+-----------+-----+---------------+
+        2 rows in set (0.00 sec)
+        ************select * from table效率低，如果要查询该表全部字段就把该字段重写一遍，select a1,a2,a3....from table;***********
+    4，模糊查询like
+        先插几条
+        mysql> insert into student (name,age,register_date) values('zhangyang',3,'2016-04-12' );
+        Query OK, 1 row affected (0.06 sec)
+
+        mysql> insert into student (name,age,register_date) values('wangqang',28,'2016-03-12' );
+        Query OK, 1 row affected (0.05 sec)
+
+        mysql> insert into student (name,age,register_date) values('wangsen',8,'2016-02-12' );
+        Query OK, 1 row affected (0.07 sec)
+
+        mysql> select * from student;
+        +----+-----------+-----+---------------+
+        | id | name      | age | register_date |
+        +----+-----------+-----+---------------+
+        |  1 | zhangyang |   3 | 2016-06-12    |
+        |  2 | zhangyang |   3 | 2016-06-12    |
+        |  3 | zhangyang |   3 | 2016-06-12    |
+        |  4 | zhangyang |   3 | 2016-04-12    |
+        |  5 | wangqang  |  28 | 2016-03-12    |
+        |  6 | wangsen   |   8 | 2016-02-12    |
+        +----+-----------+-----+---------------+
+
+        使用like模糊查询
+        mysql> select * from student where register_date like'2016-06%';
+        +----+-----------+-----+---------------+
+        | id | name      | age | register_date |
+        +----+-----------+-----+---------------+
+        |  1 | zhangyang |   3 | 2016-06-12    |
+        |  2 | zhangyang |   3 | 2016-06-12    |
+        |  3 | zhangyang |   3 | 2016-06-12    |
+        +----+-----------+-----+---------------+
+        3 rows in set, 1 warning (0.15 sec)
+
+        mysql> select * from student where name like'wang%';
+        +----+----------+-----+---------------+
+        | id | name     | age | register_date |
+        +----+----------+-----+---------------+
+        |  5 | wangqang |  28 | 2016-03-12    |
+        |  6 | wangsen  |   8 | 2016-02-12    |
+        +----+----------+-----+---------------+
+        2 rows in set (0.00 sec)
+
+        mysql> select * from student where age like'%8';
+        +----+----------+-----+---------------+
+        | id | name     | age | register_date |
+        +----+----------+-----+---------------+
+        |  5 | wangqang |  28 | 2016-03-12    |
+        |  6 | wangsen  |   8 | 2016-02-12    |
+        +----+----------+-----+---------------+
+        2 rows in set (0.00 sec)
+
+    5，改update
+        UPDATE table_name SET field1=new-value1, field2=new-value2
+        [WHERE Clause]
+
+        mysql> update student set name='zhouyi',age=4 where id>1 and id<4;
+        Query OK, 2 rows affected (0.07 sec)
+        Rows matched: 2  Changed: 2  Warnings: 0
+
+        mysql> select * from student;
+        +----+-----------+-----+---------------+
+        | id | name      | age | register_date |
+        +----+-----------+-----+---------------+
+        |  1 | zhangyang |   3 | 2016-06-12    |
+        |  2 | zhouyi    |   4 | 2016-06-12    |
+        |  3 | zhouyi    |   4 | 2016-06-12    |
+        |  4 | zhangyang |   3 | 2016-04-12    |
+        |  5 | wangqang  |  28 | 2016-03-12    |
+        |  6 | wangsen   |   8 | 2016-02-12    |
+        +----+-----------+-----+---------------+
+        6 rows in set (0.00 sec)
+
+    6，删delete
+        DELETE FROM table_name [WHERE Clause]
+
+        mysql> delete from student where name like'wang%';
+        Query OK, 2 rows affected (0.07 sec)
+
+        mysql> select * from student;
+        +----+-----------+-----+---------------+
+        | id | name      | age | register_date |
+        +----+-----------+-----+---------------+
+        |  1 | zhangyang |   3 | 2016-06-12    |
+        |  2 | zhouyi    |   4 | 2016-06-12    |
+        |  3 | zhouyi    |   4 | 2016-06-12    |
+        |  4 | zhangyang |   3 | 2016-04-12    |
+        +----+-----------+-----+---------------+
+        4 rows in set (0.00 sec)
+
+        *****
+        drop table tb1;     #直接删除表
+        delete from tb1;    #清空表内容
+        truncate table tb1; #清空表内容、自增回到原点、速度快。
+
+    7，排序order by
+        SELECT field1, field2,...fieldN FROM table_name1, table_name2...
+        ORDER BY field1, [field2...] [ASC [DESC]]
+        使用 ASC 或 DESC 关键字来设置查询结果是按升序或降序排列。 默认情况下，它是按升序排列
+        mysql> select * from student order by age;
+        +----+-----------+-----+---------------+
+        | id | name      | age | register_date |
+        +----+-----------+-----+---------------+
+        |  1 | zhangyang |   3 | 2016-06-12    |
+        |  4 | zhangyang |   3 | 2016-04-12    |
+        |  2 | zhouyi    |   4 | 2016-06-12    |
+        |  3 | zhouyi    |   4 | 2016-06-12    |
+        +----+-----------+-----+---------------+
+        4 rows in set (0.00 sec)
+
+        mysql> select * from student order by age desc;
+        +----+-----------+-----+---------------+
+        | id | name      | age | register_date |
+        +----+-----------+-----+---------------+
+        |  2 | zhouyi    |   4 | 2016-06-12    |
+        |  3 | zhouyi    |   4 | 2016-06-12    |
+        |  1 | zhangyang |   3 | 2016-06-12    |
+        |  4 | zhangyang |   3 | 2016-04-12    |
+        +----+-----------+-----+---------------+
+        4 rows in set (0.00 sec)
+
+        mysql>
+
+    8，分组统计group by
+        SELECT column_name, function(column_name)
+        FROM table_name
+        WHERE column_name operator value
+        GROUP BY column_name;
+        按name 分组统计名字个数
+        mysql> select name, count(*) from student group by name;
+        +-----------+----------+
+        | name      | count(*) |
+        +-----------+----------+
+        | zhangyang |        2 |
+        | zhouyi    |        2 |
+        | wangqang  |        1 |
+        | wangsen   |        1 |
+        +-----------+----------+
+        4 rows in set (0.05 sec)
+        将统计列改名为num
+        mysql> select name, count(*) as num from student group by name;
+        +-----------+-----+
+        | name      | num |
+        +-----------+-----+
+        | zhangyang |   2 |
+        | zhouyi    |   2 |
+        | wangqang  |   1 |
+        | wangsen   |   1 |
+        +-----------+-----+
+        4 rows in set (0.00 sec)
+        按name分组统计总的年龄
+        mysql> select name, sum(age) as num from student group by name;
+        +-----------+------+
+        | name      | num  |
+        +-----------+------+
+        | zhangyang |    6 |
+        | zhouyi    |    8 |
+        | wangqang  |   28 |
+        | wangsen   |    8 |
+        +-----------+------+
+        4 rows in set (0.01 sec)
+
+        把所有人的年龄加总rollup。
+        mysql> select name, sum(age) as num from student group by name with rollup;
+        +-----------+------+
+        | name      | num  |
+        +-----------+------+
+        | wangqang  |   28 |
+        | wangsen   |    8 |
+        | zhangyang |    6 |
+        | zhouyi    |    8 |
+        | NULL      |   50 |
+        +-----------+------+
+        5 rows in set (0.02 sec)
+
+        给Null改名，合计/小计/总计,Total/Sub-total/Grand Total
+        mysql> select coalesce(name,'Total age') name, sum(age) as sub_total from student group by name with rollup;
+        +-----------+-----------+
+        | name      | sub_total |
+        +-----------+-----------+
+        | wangqang  |        28 |
+        | wangsen   |         8 |
+        | zhangyang |         6 |
+        | zhouyi    |         8 |
+        | Total age |        50 |
+        +-----------+-----------+
+        5 rows in set, 1 warning (0.00 sec)
+
+    +++++++++++++++++++++++++++++++++++++++++++++  wupeiqi资料+++++++++++++++++++++++++
+    a、条件
+        select * from 表 where id > 1 and name != 'alex' and num = 12;
+
+        select * from 表 where id between 5 and 16;
+
+        select * from 表 where id in (11,22,33)
+        select * from 表 where id not in (11,22,33)
+        select * from 表 where id in (select nid from 表)
+
+    b、通配符（'%'多个字符串）（'_'一个字符）
+        select * from 表 where name like 'ale%'  - ale开头的所有
+        select * from 表 where name like 'ale_'  - ale开头的
+
+    c、限制 分页
+        select * from 表 limit 5;            - 前5行
+        select * from 表 limit 4,5;          - 从第4行开始的5行
+        select * from 表 limit 5 offset 4    - 从第4行开始的5行
+
+    d、排序
+        select * from 表 order by 列 asc              - 根据 “列” 从小到大排列
+        select * from 表 order by 列 desc             - 根据 “列” 从大到小排列
+        select * from 表 order by 列1 desc,列2 asc    - 先根据 “列1” 从大到小排列，然后局部如果相同则按列2从小到大排序
+
+    e、分组
+        select num from 表 group by num
+        select num,nid from 表 group by num,nid
+        select num,nid from 表  where nid > 10 group by num,nid order nid desc
+        select num,nid,count(*),sum(score),max(score),min(score) from 表 group by num,nid
+
+        select part_id,count(nid) from userinfo group by part_id having count(nid)) > 10#注意顺序
+        先按part_id分组统计出count(nid)，并且按part_id,count(nid)列表，然后筛选出统计数count(nid)) > 10的行， having就是where。
+        count()是聚合函数（还有max()\min()\avg()\sum()...）,对聚合函数进行筛选必须用having。
+
+        特别的：group by 必须在where之后，order by之前
+
+    f、连表
+        无对应关系则不显示
+        select A.num, A.name, B.name
+        from A,B
+        Where A.nid = B.nid
+
+        无对应关系则不显示
+        select A.num, A.name, B.name
+        from A inner join B
+        on A.nid = B.nid
+
+        A表所有显示，如果B中无对应关系，则值为null
+        select A.num, A.name, B.name
+        from A left join B
+        on A.nid = B.nid
+
+        B表所有显示，如果B中无对应关系，则值为null
+        select A.num, A.name, B.name
+        from A right join B
+        on A.nid = B.nid
+
+        连表操作：
+                # 连表
+                select * form a,b where a.x = b.o
+
+                # join,ON
+                    a. left join 效率最高推荐
+                        select * from a LEFT JOIN b ON a.x = b.o
+
+                    b. inner join ,永远不会出现Null
+                        select * from a INNER JOIN b ON a.x = b.
+
+    g、联合union
+        联合，自动处理重合union，结果集列名nickname
+        select nickname
+        from A
+        union
+        select name
+        from B
+
+        组合，不处理重合union all
+        select nickname
+        from A
+        union all
+        select name
+        from B
+
+
+
+五，表属性操作，对列的操作，alter table
+
+        我们需要修改数据表名或者修改数据表字段--列时，就需要使用到MySQL ALTER命令。
+
+    1.添加字段add
+        添加性别字段，数据类型为枚举类型。
+
+        mysql> alter table student add sex enum('M','F');
+        Query OK, 0 rows affected (0.71 sec)
+        Records: 0  Duplicates: 0  Warnings: 0
+
+        mysql> select * from student;
+        +----+-----------+-----+---------------+------+
+        | id | name      | age | register_date | sex  |
+        +----+-----------+-----+---------------+------+
+        |  1 | zhangyang |   3 | 2016-06-12    | NULL |
+        |  2 | zhouyi    |   4 | 2016-06-12    | NULL |
+        |  3 | zhouyi    |   4 | 2016-06-12    | NULL |
+        |  4 | zhangyang |   3 | 2016-04-12    | NULL |
+        |  7 | wangqang  |  28 | 2016-03-12    | NULL |
+        |  8 | wangsen   |   8 | 2016-02-12    | NULL |
+        +----+-----------+-----+---------------+------+
+        6 rows in set (0.00 sec)
+
+    2.删除字段drop
+        从student表删除age字段
+        mysql> alter table student drop age;
+        Query OK, 0 rows affected (0.42 sec)
+        Records: 0  Duplicates: 0  Warnings: 0
+
+        mysql> select * from student;
+        +----+-----------+---------------+------+
+        | id | name      | register_date | sex  |
+        +----+-----------+---------------+------+
+        |  1 | zhangyang | 2016-06-12    | NULL |
+        |  2 | zhouyi    | 2016-06-12    | NULL |
+        |  3 | zhouyi    | 2016-06-12    | NULL |
+        |  4 | zhangyang | 2016-04-12    | NULL |
+        |  7 | wangqang  | 2016-03-12    | NULL |
+        |  8 | wangsen   | 2016-02-12    | NULL |
+        +----+-----------+---------------+------+
+        6 rows in set (0.00 sec)
+
+    3.修改字段modify 要写全
+        修改sex字段不能为空
+        mysql> desc student;
+        +---------------+---------------+------+-----+---------+----------------+
+        | Field         | Type          | Null | Key | Default | Extra          |
+        +---------------+---------------+------+-----+---------+----------------+
+        | id            | int(11)       | NO   | PRI | NULL    | auto_increment |
+        | name          | char(32)      | NO   |     | NULL    |                |
+        | register_date | date          | NO   |     | NULL    |                |
+        | sex           | enum('M','F') | YES  |     | NULL    |                |
+        +---------------+---------------+------+-----+---------+----------------+
+        4 rows in set (0.05 sec)
+        直接改，会报null冲突错1138
+        mysql> alter table student modify sex enum('m','f') not null;
+        ERROR 1138 (22004): Invalid use of NULL value
+
+        把null改为‘’，但报数据错误1265，因为enum里没有‘’。
+        mysql> UPDATE student SET sex = '' WHERE sex IS NULL;
+        ERROR 1265 (01000): Data truncated for column 'sex' at row 1
+
+        第一步，要将原来的null全部改为合法的数据，比如‘M’，
+        mysql> UPDATE student SET sex ='M' WHERE sex IS NULL; 注意过滤条件为sex IS NULL不能写成sex = NULL。不报错，也没用。
+        Query OK, 9 rows affected (0.22 sec)
+        Rows matched: 9  Changed: 9  Warnings: 0
+
+        mysql> select * from student;
+        +----+-----------+---------------+------+
+        | id | name      | register_date | sex  |
+        +----+-----------+---------------+------+
+        |  1 | zhangyang | 2016-06-12    | M    |
+        |  2 | zhouyi    | 2016-06-12    | M    |
+        |  3 | zhouyi    | 2016-06-12    | M    |
+        |  4 | zhangyang | 2016-04-12    | M    |
+        |  7 | wangqang  | 2016-03-12    | M    |
+        |  8 | wangsen   | 2016-02-12    | M    |
+        |  9 | alex      | 2013-04-13    | M    |
+        | 10 | alex      | 2013-04-13    | M    |
+        | 11 | alex      | 2013-04-13    | M    |
+        +----+-----------+---------------+------+
+        9 rows in set (0.00 sec)
+
+        第二步，修改数据类型，设置不能为空
+        mysql> alter table student modify sex char(32)  not null;
+        Query OK, 9 rows affected (1.06 sec)
+        Records: 9  Duplicates: 0  Warnings: 0
+
+        mysql> desc student;
+        +---------------+----------+------+-----+---------+----------------+
+        | Field         | Type     | Null | Key | Default | Extra          |
+        +---------------+----------+------+-----+---------+----------------+
+        | id            | int(11)  | NO   | PRI | NULL    | auto_increment |
+        | name          | char(32) | NO   |     | NULL    |                |
+        | register_date | date     | NO   |     | NULL    |                |
+        | sex           | char(32) | NO   |     | NULL    |                |
+        +---------------+----------+------+-----+---------+----------------+
+        4 rows in set (0.09 sec)
+
+    4. 修改字段名称 change 要写全，不写全会报语法错误1064
+        将sex字段名称改为gender
+        mysql> alter table student change sex gender char(32) not null default "x";
+        Query OK, 0 rows affected (0.09 sec)
+        Records: 0  Duplicates: 0  Warnings: 0
+
+        mysql> select * from student;
+        +----+-----------+---------------+--------+
+        | id | name      | register_date | gender |
+        +----+-----------+---------------+--------+
+        |  1 | zhangyang | 2016-06-12    | M      |
+        |  2 | zhouyi    | 2016-06-12    | M      |
+        |  3 | zhouyi    | 2016-06-12    | M      |
+        |  4 | zhangyang | 2016-04-12    | M      |
+        |  7 | wangqang  | 2016-03-12    | M      |
+        |  8 | wangsen   | 2016-02-12    | M      |
+        |  9 | alex      | 2013-04-13    | M      |
+        | 10 | alex      | 2013-04-13    | M      |
+        | 11 | alex      | 2013-04-13    | M      |
+        +----+-----------+---------------+--------+
+        9 rows in set (0.00 sec)
+        mysql> desc student;
+        +---------------+----------+------+-----+---------+----------------+
+        | Field         | Type     | Null | Key | Default | Extra          |
+        +---------------+----------+------+-----+---------+----------------+
+        | id            | int(11)  | NO   | PRI | NULL    | auto_increment |
+        | name          | char(32) | NO   |     | NULL    |                |
+        | register_date | date     | NO   |     | NULL    |                |
+        | gender        | char(32) | NO   |     | x       |                |
+        +---------------+----------+------+-----+---------+----------------+
+        4 rows in set (0.00 sec)
+
+    5，重命名表名rename
+        mysql> ALTER TABLE 老表名 RENAME TO 新表名;
+
+        mysql> alter table student rename to student1;
+        Query OK, 0 rows affected (0.15 sec)
+
+        mysql> select * from student;
+        ERROR 1146 (42S02): Table 'test.student' doesn't exist
+        mysql> select * from student1;
+        +----+-----------+---------------+--------+
+        | id | name      | register_date | gender |
+        +----+-----------+---------------+--------+
+        |  1 | zhangyang | 2016-06-12    | M      |
+        |  2 | zhouyi    | 2016-06-12    | M      |
+        |  3 | zhouyi    | 2016-06-12    | M      |
+        |  4 | zhangyang | 2016-04-12    | M      |
+        |  7 | wangqang  | 2016-03-12    | M      |
+        |  8 | wangsen   | 2016-02-12    | M      |
+        |  9 | alex      | 2013-04-13    | M      |
+        | 10 | alex      | 2013-04-13    | M      |
+        | 11 | alex      | 2013-04-13    | M      |
+        | 12 | zhangyang | 2016-04-12    |        |
+        +----+-----------+---------------+--------+
+        10 rows in set (0.00 sec)
+
+    6，使用alter table命令添加和删除主键
+        6.1 添加主键
+            ALTER TABLE tbl_name ADD PRIMARY KEY (column_list)；
+             该语句添加一个主键，这意味着该主键的索引值必须是唯一的，且不能为NULL。
+
+        6.2 删除主键
+            ALTER TABLE testalter_tbl DROP PRIMARY KEY;
+            删除指定时只需指定PRIMARY KEY，但在删除索引时，你必须知道索引名。
+    ==================================================================
+    添加列：alter table 表名 add 列名 类型
+    删除列：alter table 表名 drop column 列名
+    修改列：
+            alter table 表名 modify column 列名 类型;  -- 只改类型
+            alter table 表名 change 原列名 新列名 类型; -- 即可改列名，又可以改类型
+
+    添加主键：
+            alter table 表名 add primary key(列名);
+    删除主键：
+            alter table 表名 drop primary key;
+            alter table 表名  modify  列名 int, drop primary key;
+
+    添加外键：alter table 从表 add constraint 外键名称（形如：FK_从表_主表） foreign key 从表(外键字段) references 主表(主键字段);
+    删除外键：alter table 表名 drop foreign key 外键名称
+
+    修改默认值：ALTER TABLE testalter_tbl ALTER i SET DEFAULT 1000;
+    删除默认值：ALTER TABLE testalter_tbl ALTER i DROP DEFAULT;
+
+六， NULL 值处理
+
+  当提供的查询条件字段为 NULL 时，命令可能无法正常工作。
+
+        为了处理这种情况，MySQL提供了三大运算符:
+
+        1，IS NULL: 当列的值是NULL,此运算符返回true。
+
+        2，IS NOT NULL: 当列的值不为NULL, 运算符返回true。
+
+        3，<=>: 比较操作符（不同于=运算符），当比较的的两个值为NULL时返回true。
+
+        关于 NULL 的条件比较运算是比较特殊的。你不能使用 = NULL 或 != NULL 在列中查找 NULL 值 。
+
+        在MySQL中，NULL值与任何其它值的比较（即使是NULL）永远返回false，即 NULL = NULL 返回false 。
+
+        MySQL中处理NULL使用IS NULL和IS NOT NULL运算符。
+
+
+
+===========今日内容整理 ================
+1、数据库概念，很多
+2、数据库，表，行
+3、启动服务器端，启动客户端连接服务端
+    - 用户管理
+    - 权限管理
+4、SQL语句
+    数据库操作 *
+    表操作**
+        - 是否可以为空
+        - 默认值
+        - 主键
+        - 外键
+        - 自增
+        - 数据类型（char,varchar）
+    数据行 ******：
+        增删改查
+        其他：
+            limit offset
+            left join
+            order by
+            group by ,having      max,min,sum,count
+            # 条件，模糊，.....

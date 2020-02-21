@@ -1,0 +1,219 @@
+一，视图 相当于临时表
+视图是一个虚拟表（非真实存在），
+其本质是【根据SQL语句获取动态的数据集，并为其命名】，
+用户使用时只需使用【名称】即可获取结果集，并可以将其当作表来使用。
+
+1，创建视图
+    --格式：CREATE VIEW 视图名称 AS  SQL语句
+    CREATE VIEW v1 AS
+    SELET nid,
+        name
+    FROM
+        A
+    WHERE
+        nid > 4
+2，删除视图
+    --格式：DROP VIEW 视图名称
+
+    DROP VIEW v1
+3，修改视图
+    -- 格式：ALTER VIEW 视图名称 AS SQL语句
+
+    ALTER VIEW v1 AS
+    SELET A.nid,
+        B. NAME
+    FROM
+        A
+    LEFT JOIN B ON A.id = B.nid
+    LEFT JOIN C ON A.id = C.nid
+    WHERE
+        A.id > 2
+    AND C.nid < 5
+4，使用视图
+    使用视图时，将其当作表进行操作即可，
+    由于视图是虚拟表，
+    所以无法使用其对真实表进行创建、更新和删除操作，
+    仅能做查询用。
+    select * from v1
+
+二，存储过程 是一段逻辑，相当于函数
+存储过程是一个SQL语句集合，当主动去调用存储过程时，
+其内部的SQL语句会按照逻辑执行。
+1，创建存储过程
+    delimiter //
+    #delimiter命令是用来改变sql的终止符，先改为//，
+    这样遇到;就不会终止。
+    create procedure p1()
+    BEGIN
+        select * from t1;
+    END//
+    delimiter ;#创建完成后改回sql的终止符为;。
+
+2，执行存储过程
+    call p1()
+
+
+3，传参
+    对于存储过程，可以接收参数，其参数有三类：
+
+    in      仅用于传入参数用
+    out     仅用于返回值用
+    inout     既可以传入又可以当作返回值
+
+    -- 创建存储过程
+    delimiter \\
+    create procedure p1(
+        in i1 int,
+        in i2 int,
+        inout i3 int,
+        out r1 int
+    )
+    BEGIN
+        DECLARE temp1 int; 关键字 DECLARE在存储过程中声明变量
+        DECLARE temp2 int default 0;
+
+        set temp1 = 1; 关键字set变量赋值
+        set i3 = i3 + 100;
+        set r1 = r1+i1 + i2 + temp1 + temp2;
+        update table set name='alex' where nid=1;
+        insert in tb2(...) values(...)
+        select * from tb1;获取结果集，只能获取1个结果集，不能下面
+        select * from tb2;
+        select * from tb3;
+        多个结果集可以用连表。
+    end\\
+    delimiter ;
+
+    -- 执行存储过程 MySQL变量必须有@
+    set @t1 =4; 就是i3，4可以用来传参
+    set @t2 = 2; 就是r1,2没有用，可以不写
+    CALL p1 (1, 2 ,@t1, @t2);
+    执行完后：
+    @t1=104
+    @t2=4
+    SELECT @t1,@t2;
+    既获取结果集又可以获取普通值
+    应用，比如可以用普通值判断执行到哪里，比如r1=1，完成了更新，
+    比如r1=2，完成了插入，那么结果集和普通值就可以建立对应关系。
+4，python使用存储过程
+    import pymysql
+
+    conn = pymysql.connect(host='127.0.0.1', port=3306, user='root', passwd='666', db='sqlexample', charset='utf8')
+    cursor = conn.cursor(cursor=pymysql.cursors.DictCursor)
+    # 执行存储过程,获取存储过程的结果集，
+    #将返回值设置给了  @_存储过程名_序号 =
+    r1 = cursor.callproc('p11', args=(1, 22, 3, 4))
+    # set @_p11_0 = 1
+    # set @_p11_1 = 22
+    # set @_p11_2 = 3
+    # set @_p11_3 = 4
+    # call p11(1, 22, 3, 4)
+    print(r1)
+    result1 = cursor.fetchall()#读取获取的结果集
+    print(result1)
+
+    # 获取执行完存储的参数
+    r2 = cursor.execute("select @_p11_0,@_p11_1,@_p11_2,@_p11_3")
+    print(r2)
+    result2 = cursor.fetchall()
+    print(result2)
+    conn.commit()
+    cursor.close()
+    conn.close()
+
+
+
+5，删除
+    drop procedure proc_name;
+
+6，使用逻辑
+    6.1条件语句
+        delimiter \\
+        CREATE PROCEDURE proc_if ()
+        BEGIN
+
+            declare i int default 0;
+            if i = 1 THEN
+                SELECT 1;
+            ELSEIF i = 2 THEN
+                SELECT 2;
+            ELSE
+                SELECT 7;
+            END IF;
+
+        END\\
+        delimiter ;
+    6.2循环语句1 while
+        delimiter \\
+        CREATE PROCEDURE proc_while ()
+        BEGIN
+
+            DECLARE num INT ;
+            SET num = 0 ;
+            WHILE num < 10 DO
+                SELECT
+                    num ;
+                SET num = num + 1 ;
+            END WHILE ;
+
+        END\\
+        delimiter ;
+    6.3循环语句2 repeat
+        delimiter \\
+        CREATE PROCEDURE proc_repeat ()
+        BEGIN
+
+            DECLARE i INT ;
+            SET i = 0 ;
+            repeat
+                select i;
+                set i = i + 1;
+                until i >= 5
+            end repeat;
+
+        END\\
+        delimiter ;
+    6.4循环语句3 loop
+        delimiter \\
+        CREATE PROCEDURE proc_loop()
+        BEGIN
+            DECLARE i int default 0;
+            LOOP_LABEL: loop
+
+                set i=i+1;
+                if i<8 then
+                    iterate loop_label;
+                end if;
+                if i>=10 then
+                    leave loop_label;
+                end if;
+                select i;
+            END loop LOOP_LABEL;
+        END\\
+        delimiter ;
+
+7，动态执行sql语句，可以防止sql注入。
+    mysql中？就是占位符，相当于python中的%s。
+
+    delimiter \\
+    DROP PROCEDURE IF EXISTS proc_sql \\
+    CREATE PROCEDURE proc_sql (
+        in p1 int,
+    )
+
+    BEGIN
+        declare p1 int;
+
+        set @p1 = p1;
+
+        PREPARE prod FROM 'select * from tb2 where nid = ?';
+        EXECUTE prod USING @p1;
+        DEALLOCATE prepare prod;
+
+    END\\
+    delimiter ;
+
+    执行时：CALL proc_sql  (11); 查询tb2表中第11行的数据
+    等于select * from tb2 where nid = 11;
+
+8，存储过程不区分大小写。

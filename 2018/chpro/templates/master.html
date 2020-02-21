@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- 便于多种设备 快捷写法meta:vp 加tab键sublime一样-->
+{#    <meta name="viewport"#}
+{#          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">#}
+    <title>{{title}}</title>
+    <link rel="stylesheet" href="/static/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/Font-Awesome-3.2.1/css/font-awesome.css">
+    <!-- 引入自定义的css-->
+    <link rel="stylesheet" href="/static/css/master.css">
+
+</head>
+
+{% block css %}
+{% endblock %}
+
+
+<body >
+<!-- 导航条-->
+    <nav class="navtop " id="navtop" style="box-shadow: 0 2px 16px 0 #c9c9c9;">
+        <div  style="width: 1238px;margin-top: 0;margin-bottom: 0;margin-left: 98px">
+    <!-- Brand and toggle get grouped for better mobile display -->
+            <div style="float: left" >
+                <a class="nav-log" href="#">
+                    <img  src="/static/images/icon.png" >
+                </a>
+            </div>
+            <div id="nav-li">
+                <ul class="nav-right clearfix" >
+                    <li class="dropdown li-block" >
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                            作品分类<span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">方形</a></li>
+                            <li><a href="#">圆形</a></li>
+                            <li><a href="#">扇形</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="#">其他</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="#">大师作品</a></li>
+                        </ul>
+                    </li>
+                    <form class="navbar-form1 clearfix">
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="搜索瓷画">
+                            <span class="input-group-btn">
+                                <button class="btn btn-default">
+                                  <span class="glyphicon glyphicon-search"></span>
+                                </button>
+                            </span>
+                        </div>
+                    </form>
+
+                        {% if request.session.user_name|default:'' != '' %}
+                        <li class="li-block dropdown">
+                            <a id="nav-uname" ids="{{ request.session.user_id }}" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" >
+                                {{ request.session.user_name }}<span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a href="{% url 'user:user'%}">用户中心</a></li>
+                                <li role="separator" class="divider"></li>
+                                <li><a href="#">其他</a></li>
+                                <li role="separator" class="divider"></li>
+                                <li><a href="{%url 'user:logout' %}" id='nav-cancel' >退出</a></li>
+                            </ul>
+                        </li>
+                        <li class="li-block"><a href="{% url 'user:user'%}" >用户中心</a></li>
+                        {% else %}
+                        <li class="li-block">
+                            <a id='nav-login' data-toggle="modal" data-target="#login-1" href="#" style="outline: 0" >
+                                登录
+                            </a>
+                        </li>
+                        <li class="li-block"><a id='nav-regist' data-toggle="modal" data-target="#login-1" href="#" style="outline: 0">注册</a></li>
+                        {% endif %}
+
+                    <li class="li-block"><a href="#" >购物车</a></li>
+                    <li class="li-block"><a href="#" >订单</a></li>
+                    <li class="li-block"><a href="#" >众筹</a></li>
+                    <li class="li-block"><a href="#" >企业采购</a></li>
+                    <li class="li-block"><a href="#" >我要入驻</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+<!-- 增加的内容-->
+{% block cont %}
+{% endblock %}
+<!-- 增加的内容结束-->
+
+<!--<div style="height: 1500px;width: 600px;border: 1px solid black"></div>-->
+<!-- 注册登录模态框-->
+    <div class="modal fade" id="login-1" tabindex="-1" role="dialog" aria-labelledby="login-1" >
+      <div class="modal-dialog modea-dialog-with" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+              <!--标签页-->
+            <ul class="nav nav-tabs">
+            	<li id="login-btn" class="active"><a id="login-a" href="#" style="font-size: 22px">登录</a></li>
+            	<li id="regist-btn"><a id="reg-a" href="#" style="font-size: 22px">注册</a></li>
+            </ul>
+          </div>
+          <div class="modal-body">
+              <!--登录-->
+            <form id="login-form" class="form-horizontal " role="form" style="font-size: 16px;">
+              <div class="form-group">
+                <label for="username" class="col-sm-2 control-label">用户名</label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" id="username" placeholder="请输入用户名" name="username">
+                  <div class="user-error"></div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="pwd" class="col-sm-2 control-label">密码</label>
+                <div class="col-sm-10">
+                  <input type="password" class="form-control " id="upwd" placeholder="请输入密码" name="upwd">
+                  <div class="pwd-error"></div>
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                  <div class="checkbox">
+                    <label>
+                      <input type="checkbox" checked="checked" value="1" name="jizhu">
+                        <span>请记住我</span>
+                    </label>
+                    <a class="pull-right clearfix" href="#">忘记密码？</a>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="pull-right clearfix" style="position: relative;right: 15px">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                    <button id="login-sub" type="button" class="btn btn-default">登录</button>
+                    <input type="submit" style="display: none">
+                </div>
+              </div>
+              <div class="form-tip" class="hidden">
+                    <span style="color: red"></span>
+              </div>
+            </form>
+             <!--注册-->
+            <form id='reg-form'  class="form-horizontal hide" role="form" style="font-size: 13px;" >
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="username" class="col-sm-2 control-label">用户名</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="r_uname" placeholder="用户名必须以字母开头，后面由字母、数字组成，长度5到16位。" name="r_uname">
+                        <span class="error_tip">提示信息</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="rpwd" class="col-sm-2 control-label">密码</label>
+                    <div class="col-sm-10">
+                        <input type="password" class="form-control " id="rpwd" placeholder="密码最少6位，最长20位。" name="rpwd">
+                        <span class="error_tip">提示信息</span>
+                    </div>
+                </div>
+                    <div class="form-group">
+                    <label for="cpwd" class="col-sm-2 control-label">确认密码</label>
+                    <div class="col-sm-10">
+                        <input type="password" class="form-control" id="cpwd" placeholder="请重复输入密码" name="cpwd">
+                        <span class="error_tip">提示信息</span>
+                    </div>
+                    </div>
+                <div class="form-group">
+                    <label for="remail" class="col-sm-2 control-label">邮箱</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="remail" placeholder="请输入邮箱" name="remail">
+                        <span class="error_tip">提示信息</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="checkcode" class="col-sm-2 control-label">验证码</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="checkcode" placeholder="请输入验证码" name="checkcode">
+                        <img  id='imgCode' src='{% url "user:checkcode" %}' title='点击更新' /><a id="check_code" style="padding-left:10px;list-style: decimal;cursor: pointer;line-height: 30px;">看不清？</a>
+                        <span class="error_tip">提示信息</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" checked="checked" name="allow" id="allow">
+                                <span class="error_tip2 ">提示信息</span>
+                                <span>同意</span><a  href="#">瓷画网用户使用协议</a>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="pull-right clearfix" style="position: relative;right: 15px">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                        <input id="reg-sub"  type="button" class="btn btn-default" value="注册" >
+                    </div>
+                </div>
+                <div class="form-tip" class="hidden">
+                    <span style="color: red"></span>
+                </div>
+            </form>
+          </div>
+          <div class="modal-footer" style="text-align: left">
+            <!--模态框底部-->
+              <a  id='wxlogin' style="cursor: pointer">使用微信登录</a>
+
+          </div>
+        </div>
+      </div>
+    </div>
+<!-- 侧边栏-->
+    <div class="fixed-btn">
+        <a class="right-until" href="#" title="返回顶部" style="display: inline-block;">
+            <i class="icon-double-angle-up"></i>
+        </a>
+        <a class="qrcode right-until" href="javascript:void(0)" title="在线客服">
+            <i class="icon-comment-alt"></i>
+        </a>
+        <a class="writer" target="_blank" href="javascript:void(0)"  title="反馈建议">
+            <i class="icon-edit"></i>
+        </a>
+        <!-- 微信弹出框 -->
+        <!--<div id="bottom-qrcode" class="modal panel-modal hide fade in" style="display: inline-block;">
+          <h4>微信关注</h4>
+          <div class="panel-body"><img alt="微信关注" width="128" height="128" src="/wp-content/themes/runoob/assets/images/qrcode.png"></div>
+        </div>-->
+    </div>
+<!-- 底部版权-->
+    <hr style='background-color:#42ad46;height:1px;border:none;min-width: 1238px'><!--直线也有border，如果不清除border:none，会有灰色边框-->
+    <div class="container">
+        <footer>
+            <div style="text-align: center">
+                <a href="#">关于我们</a>
+                <span>|</span>
+                <a href="#">联系我们</a>
+                <span>|</span>
+                <a href="#">招聘人才</a>
+                <span>|</span>
+                <a href="#">友情链接</a>
+            </div>
+            <div style="text-align: center">CopyRight © 2018 <a href="#">瓷画网</a>All Rights Reserved</div>
+            <div style="text-align: center">电话：0798-****888    赣ICP备*******8号</div>
+
+        </footer>
+    </div>
+</body>
+<script src="/static/js/jquery-1.12.4.js"></script>
+<script src="/static/js/jquery.cookie.js"></script>
+<script src="/static/js/bootstrap.min.js"></script>
+<script src="/static/js/master.js"></script>
+
+{% block js %}
+
+{% endblock %}
+
+</html>

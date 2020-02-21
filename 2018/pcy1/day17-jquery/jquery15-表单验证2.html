@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form action="jquery2-多选反选取消.html" >
+    <div><input type="text"></div>
+    <div><input type="password"></div>
+    <div><input type="text"></div>
+    <div><input type="text"></div>
+    <div><input type="text"></div>
+    <div><input type="submit" value="提交"></div>
+
+</form>
+<script src="jquery-1.12.4.js"></script>
+<script>
+    //每一个input输入都不能为空，才能提交
+    $(':submit').click(function () {
+        flg=true;//先定义返回变量，根据变量的值，来决定是否阻断
+        //对每个input输入进行验证，要用each循环进行判断
+        $(this).parent().siblings().find('input[type="text"],input[type="password"]').each(function () {
+
+            if($(this).val().trim().length==0){
+                console.log(1);
+                alert('不能为空');
+                flg=false;
+                return false;//这个return只是阻断了循环相当于break。
+            }
+
+        });
+        return flg;
+    })
+
+
+</script>
+
+</body>
+</html>

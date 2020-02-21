@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div id="i1"></div>
+    <input type="button" value="删除" onclick="delFive()"/>
+<script>
+    function delFive() {
+        document.getElementById('i1').innerText='已删除';
+        setTimeout(function(){
+            document.getElementById('i1').innerText='';
+            },3000)
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,82 @@
+图片上传和数据库，不刷新就看到图片
+实例：
+2017年老男孩最新全栈python第2期视频教程 全套完整版\day61-python 全栈开发-web框架篇
+61-06 python 全栈开发-web框架篇-day61 基于FormData实现文件上传（XMLHttpRequest和jQuery）
+
+1，图片、视频等一些大文件并不是直接放在数据库里的，上传的文件保存在指定的文件夹中，
+   数据库中保存的只是这些文件的路径，然后通过src标签在页面中呈现。
+
+2，Form表单上传文件 submit提交，刷新页面
+
+3，ajax上传文件，不刷新文件，看到上传的图片
+
+4,FormData对象
+        dict=new FormData(); 生成FormData对象
+        dict.append('k1','v1');
+        dict.append('fafafa',文件对象);
+        FormData对象可以装任何对象，直接把dict发给服务端就可以了，它里面是
+        key，value字典形式的数据结构
+
+        代码：
+            <div id="imgs">
+                {% for item in img_list %}
+                <img src="/{{ item.path }}" >
+                <!--注意src里有个'/' -->
+                {% endfor %}
+            </div>
+            <input type="file" name="fafafa">
+            <input id="up" type="button" value="aj上传">
+
+
+            $('#up').click(function () {
+                var dic=new FormData();
+                dic.append('user','v1');
+                dic.append('fafafa',$('input[name="fafafa"]')[0].files[0]);
+                //取得该标签里个文件，通常可以有多个文件files，是个列表，只取第1个
+
+5,用ajax上传到后台时，对这种非字符串数据不要处理。
+        代码：
+            $.ajax({
+                url:'/upload.html/',
+                type:'POST',
+                data:dic,//直接把dic这个FormData发送到后端
+                processData:false,//告诉jquery不要去处理dic这个数据了
+                contentType:false,//告诉jquery不要去设置类型了，让dic保持原样
+                dataType:'JSON',
+                success:function (arg) {
+                    if (arg.status){
+                        console.log(arg);
+                        var img=document.createElement('img');
+                        img.src='/'+arg.path;//添加src属性注意'/'
+                        $('#imgs').append(img);
+                    }
+
+                }
+
+            })
+
+6，服务器端  request.FILES.get()方法-->>获取前端文件
+    6.1 urls
+        url(r'^upload.html/$',views.upload),
+
+    6.2 models
+        class Img(models.Model):
+            path=models.CharField(max_length=128)
+
+    6.3 views
+        def upload(request):
+            if request.method=='GET':
+                img_list=models.Img.objects.all()
+                return render(request,'upload.html',{'img_list':img_list})
+            elif request.method=="POST":
+                obj=request.FILES.get('fafafa',None)#取得前端文件
+                file_path=os.path.join('static','upload',obj.name)#os路径拼接
+                models.Img.objects.create(path=file_path)#把路径计入数据表
+                f=open(file_path,'wb')#创建同名文件
+                for chunk in obj.chunks():
+                    f.write(chunk)#把前端数据写入文件
+                f.close()#关闭文件
+                ret = {'status': True, 'path': file_path}
+                return HttpResponse(json.dumps(ret))#把路径通过字典方式传到前端
+
+自己完成的： D:\django\usermangement

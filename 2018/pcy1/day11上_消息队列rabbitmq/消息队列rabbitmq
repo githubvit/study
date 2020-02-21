@@ -1,0 +1,305 @@
+消息队列RabbitMQ
+
+应用:Openstack 项目是一个支持所有云环境的开源云计算平台。
+
+我们知道，线程队列是线程实现生产-消费模型的中介，但不能跨越进程；进程队列是进程实现生产-消费模型中介，但只能在父子进程或同父进程之间实现put和get。
+那么，不相干的进程如何实现生产-消费模型put和get呢?
+可以在两个进程之间建立socket，用socket实现数据收发，那么如果多个进程之间呢？
+就要建立一个socket中介，实现多进程之间的数据收发，这就用到了消息队列。
+消息队列是不相干的进程之间实现生产-消费模型的中介。
+其中rabbitmq是典型的多线程中介-----消息中转服务器。
+
+使用socket，在本机就可以用localhost地址实现本地程序之间的数据收发。
+如果地址改成网络地址，就可以在不同的网络应用程序之间实现数据收发。
+正因为如此，现在有很多网络应用都利用该模块实现消息传递、RPC远程调用等功能。
+
+
+
+rabbitmq安装：先要安装erlang语言环境，再安装rabbitmq，启动rabbitmq服务。消息队列服务启动，多进程的收发中介就建立了-----消息中转服务器。
+python使用rabbitmq，要安装python的rabbitmq模块，名字叫pika，pip install pika。
+
+使用方式：
+
+
+    首先，要    import pika
+    建立发送端 p端
+        # send、p端：
+        # 1，建立socket，和rabbitmq服务器建立连接
+        connection = pika.BlockingConnection(pika.ConnectionParameters('localhost'))
+        # 2，在socket上建立管道 在管道里发消息
+        channel = connection.channel()
+        # 3，在管道里，声明queuq队列
+        channel.queue_declare(queue='hello')
+        # 4，通过管道发消息： routing_key=queue名字，body=消息。
+        channel.basic_publish(exchange='',#没有使用exchange，也必须写为空。
+                              routing_key='hello',#把routing_key设为管道名,routing线路选择，这是个动作。
+                              body='Hello World!')
+        print(" [x] Sent 'Hello World!'")
+        # 5，关闭socket
+        connection.close()
+    建立接收端 c端
+        # recv、c端：
+        # 1，建立socket
+        connection = pika.BlockingConnection(pika.ConnectionParameters('localhost'))
+        # 2. 声明管道
+        channel = connection.channel()
+        # 3，在管道里，声明queue队列，必须和服务端queue名字一样。#确保声明了管道，有可能是消费端先启动，这样保证管道被声明。否则可能报错。
+        channel.queue_declare(queue='hello')
+        # 4，回调函数callback：，回调函数处理完了就代表确认收到了消息。
+        def callback(ch, method, properties, body):
+                    print 'ch:', ch                 #接收的管道
+                    print 'method:', method         #接收的方法
+                    print 'properties:', properties #接收的属性
+                    print 'body:', body             #接收的消息
+            print(" [x] Received %r" % body)
+            ch.basic_ack(delivery_tag=method.delivery_tag)#通过管道channel向服务器确认手动确认消息处理已完成，可以删除消息了。
+            #ch就是channel对象。
+        # 5，声明语法：通过管道消费消息（就是收消息），回调函数callback（意思是如果收到消息就调用callback），管道名、noack=True无须确认。
+        channel.basic_consume(callback,
+                              queue='hello',
+                              #no_ack=True#当把这句注释，就没有对服务器的确认了，在回调函数中必须手动确认消息处理完成，这样消息才会被删除。
+        print(' [*] Waiting for messages. To exit press CTRL+C')
+        # 6，开始收消息。一旦启动，就一直收，没有就阻塞-等待。收到的消息是bytes类型的。
+        channel.start_consuming()
+
+
+
+命令行：
+    1，查看服务器管道数量 进到服务器sbin目录下，执行rabbitmqctl.bat list_queues
+        命令：f:\Program Files\RabbitMQ Server\rabbitmq_server-3.6.14\sbin>rabbitmqctl.bat list_queues
+        结果： Listing queues
+              hello   0
+
+
+消息持久化：
+    如果不持久化，队列和消息是在内存中，为了防止服务器done机后，不丢失消息。就必须进行消息持久化。
+    消息持久化分为两步：
+        第一，要在声明队列时，发端和收端进行队列持久化durable=True，如果收端声明时与发端声明队列不一致，收不到。
+        channel.queue_declare(queue='hello',durable=True)
+        第二，要在发送端，进行消息持久化，持久化在propert字段加入投递模式=2。
+        channel.basic_publish(
+                        exchange='',#没有使用exchange，也必须写为空。
+                        routing_key='hello',#把routing_key设为管道名,routing线路选择，这是个动作。
+                        properties=pika.BasicProperties(
+                            delivery_mode=2 #投递模式=2表示消息持久化
+                        ),
+                        body=msg.decode('utf-8').encode('utf-8'))
+
+rabbitmq服务器收发模式：
+    1，基本模式（公平模式）：在基本的情况下，服务器一对多连接是公平-依次分发，轮询机制，负载均衡。
+            不使用exchange交换器，直接通过队列收发，但在发端exchange=''必须写空。
+    2，速度模式：消息处理快的就多收。不使用exchange交换器，直接通过队列收发，但在发端exchange=''必须写空。
+            在接收端的接收语法定义之前加入：
+                channel.basic_qos(prefetch_count=1)#如果还剩1条消息没处理，就不收。
+                服务器会选择已处理完消息的接收端发送。（你不收，我就发给别人）
+
+    3，广播模式（fanout）：一条消息发给所有接收端，实时接收。
+            这就要用到exchange，exchange是服务器中一端接收发送端消息，另一端把消息推送到相关队列的交换器。
+            exchange是有类型的，不同类型的exchange实现不同的推送功能，一个rabbitmq服务器中有多个exchange。
+            exchange的类型：fanout广播模式、direct选择模式、topic表达式选择模式、headers消息头选择模式。
+
+            fanout: 所有bind到此exchange的queue都可以接收消息，这就是广播模式。
+
+            广播模式收发端:
+            发端；
+
+                import pika
+                import sys
+
+                connection = pika.BlockingConnection(pika.ConnectionParameters(
+                    host='localhost'))
+                channel = connection.channel()
+                # 在管道里声明exchange
+                channel.exchange_declare(exchange='logs',exchange_type='fanout')#fanout: 所有bind到此exchange的queue都可以接收消息，这就是广播模式。
+                message = ' '.join(sys.argv[1:]) or "info: Hello World!"
+                #通过命令行调用sys.argv[1:]参数1，作为消息。如果没有就发or后面的消息
+                # 定义发送消息的语法及发送消息
+                channel.basic_publish(exchange='logs',
+                                      routing_key='',#尽管没有声明queue队列，这个routing_key 也要这么写，写个空。
+                                      body=message)
+                print(" [x] Sent %r" % message)
+                connection.close()
+            收端；
+                # _*_coding:utf-8_*_
+                '''
+                广播模式接收端：实时接收，发的时候没有收，就收不到了，因为服务器不存广播消息。
+                必须声明queue，因为接收端是通过queue绑定exchange收消息
+                '''
+                import pika
+
+                connection = pika.BlockingConnection(pika.ConnectionParameters(
+                    host='localhost'))
+                channel = connection.channel()
+                # 声明exchang
+                channel.exchange_declare(exchange='logs',
+                                         exchange_type='fanout'
+                                         routing_key='')
+                # 声明随机队列
+                result = channel.queue_declare(exclusive=True)  # 不指定queue名字,rabbit会随机分配一个名字,
+                # exclusive=True会在使用此queue的消费者断开后,自动将queue删除
+
+                # 获取随机队列的名字
+                queue_name = result.method.queue
+                # 队列绑定exchange
+                channel.queue_bind(exchange='logs',
+                                   queue=queue_name)
+
+                print(' [*] Waiting for logs. To exit press CTRL+C')
+
+
+                def callback(ch, method, properties, body):
+                    print 'ch:', ch                 #接收的管道
+                    print 'method:', method         #接收的方法
+                    print 'properties:', properties #接收的属性
+                    print 'body:', body             #接收的消息
+                    print(" [x] %r" % body)
+
+
+                channel.basic_consume(callback,
+                                      queue=queue_name,#队列名
+                                      # no_ack=True
+                                      )
+
+                channel.start_consuming()
+    4，选择接收模式（direct）：
+                    direct: 通过routingKey和exchange决定的那个唯一的queue可以接收消息，这是选择模式。
+                    在发端声明exchange为direct类型，进行线路选择（设定routing_key ）,然后用routing_key发送。
+                    在接收端同样声明exchange为direct类型，绑定管道的exchange、queue、routing_key，然后定义接收语法，进行接收。
+            发端：
+                import pika
+                import sys
+
+                connection = pika.BlockingConnection(pika.ConnectionParameters(
+                    host='localhost'))
+                channel = connection.channel()
+                # 声明exchange，设定类型为direct
+                channel.exchange_declare(exchange='direct_logs',
+                                         exchange_type='direct')
+                # 用三元表达式来定义一个变量，从命令参数位置1获取变量，没有参数就定义变量为info
+                severity = sys.argv[1] if len(sys.argv) > 1 else 'info'#severity重要程度
+                # 从命令参数位置2获取消息，如果没有该参数就设定消息为hello world。
+                message = ' '.join(sys.argv[2:]) or 'Hello World!'
+                channel.basic_publish(exchange='direct_logs',#交换器名
+                                      routing_key=severity,#定义routing_key为三元表达式的变量
+                                      body=message)
+                print(" [x] Sent %r:%r" % (severity, message))
+                connection.close()
+
+            收端：
+                import pika
+                import sys
+
+                connection = pika.BlockingConnection(pika.ConnectionParameters(
+                    host='localhost'))
+                channel = connection.channel()
+                # 声明exchange，定义类型为direct
+                channel.exchange_declare(exchange='direct_logs',
+                                         exchange_type='direct')
+                #声明queue为随机queue，用完就删除该queue。
+                result = channel.queue_declare(exclusive=True)
+                # 获取随机queue的名字
+                queue_name = result.method.queue
+                # 从命令参数位置1开始一直到最后，获取变量severities的值，是一个参数列表。
+                severities = sys.argv[1:]
+                if not severities:#如果命令参数位置没输入就通过 标准错误 报错提示必须输入的内容，然后退出。
+                    sys.stderr.write("Usage: %s [info] [warning] [error]\n" % sys.argv[0])
+                    sys.exit(1)
+                # 循环命令参数列表，获取routing_key的值，管道绑定exchange、queue、routing_key实现选择接收。
+                for severity in severities:
+                    channel.queue_bind(exchange='direct_logs',#从哪个exchange接收
+                                       queue=queue_name,#用哪个queue接收
+                                       routing_key=severity#选择哪个routing_key接收
+                                       )
+
+                print(' [*] Waiting for logs. To exit press CTRL+C')
+
+
+                def callback(ch, method, properties, body):
+                    print(" [x] %r:%r" % (method.routing_key, body))
+
+                #声明接收的语法
+                channel.basic_consume(callback,
+                                      queue=queue_name,
+                                      # no_ack=True
+                                      )
+                #开始接收
+                channel.start_consuming()
+            命令行：
+                发端
+                    C:\Users\hp>python D:\wksp1\pcy1\day11_消息队列rabbitmq\rabbitmq3_选择模式direct发端.py info
+                     [x] Sent 'info':'Hello World!'
+
+                    C:\Users\hp>python D:\wksp1\pcy1\day11_消息队列rabbitmq\rabbitmq3_选择模式direct发端.py erro from erro
+                     [x] Sent 'erro':'from erro'
+
+                    C:\Users\hp>python D:\wksp1\pcy1\day11_消息队列rabbitmq\rabbitmq3_选择模式direct发端.py warning  from warning
+                     [x] Sent 'warning':'from warning'
+                收端（拿一个全收的举例）
+                    D:\wksp1\pcy1>python D:\wksp1\pcy1\day11_消息队列rabbitmq\rabbitmq3_选择模式direct收端.py info warning erro
+                     [*] Waiting for logs. To exit press CTRL+C
+                     [x] 'info':'Hello World!'
+                     [x] 'erro':'from erro'
+                     [x] 'warning':'from warning'
+
+    5，表达式选择模式topic：跟选择模式几乎一样，只是exchange类型定义为topic。
+                    topic:  所有符合routingKey(此时可以是一个表达式)的routingKey所bind的queue可以接收消息
+                　　
+                 命令行表达式通配符：
+                    #代表一个或多个字符，*代表任何字符
+                      例：#.a会匹配a.a，aa.a，aaa.a等
+                          *.a会匹配a.a，b.a，c.a等
+                     注：使用RoutingKey为#，Exchange Type为topic的时候相当于使用fanout广播模式　
+                     也就是topic可以实现fanout模式。
+
+
+                 命令行：
+                    发：
+                        C:\Users\hp>python D:\wksp1\pcy1\day11_消息队列rabbitmq\rabbitmq4_表达式选择模式topic发端.py
+                         [x] Sent 'info':'Hello World!'
+
+                        C:\Users\hp>python D:\wksp1\pcy1\day11_消息队列rabbitmq\rabbitmq4_表达式选择模式topic发端.py abc.123 from abc.123
+                         [x] Sent 'abc.123':'from abc.123'
+                    收（只拿RoutingKey为#举例，实现fanout广播模式）：
+                        D:\wksp1\pcy1>python D:\wksp1\pcy1\day11_消息队列rabbitmq\rabbitmq4_表达式选择模式topic收端.py #
+                         [*] Waiting for logs. To exit press CTRL+C
+                         [x] 'info':'Hello World!'
+                         [x] 'abc.123':'from abc.123'
+
+
+
+    6，消息头选择模式headers：
+            headers: 通过headers 来决定把消息发给哪些queue
+
+
+
+
+    注意3，4，5，6，都是发布订阅模式。
+
+    7，RPC(remote procedure call)远程过程调用：ssh是典型的。
+          双向收发。互为收发端，既是p端也是c端。
+          采用基本模式和速度模式，与exchange无关，但是在发端必须写exchange=''。
+          client端提出问题，等结果。要后启动，是先发再收。p-c
+            client提问题的同时，通过properties又携带reply_to=queue随机队列名和correlation_id=UUID字符串（更细的粒度）发送给server。
+            client在初始化时就生成了随机queue名，再在每次call（提问）时都生成不同的UUID，因此保证了问题的精确返回。
+          server端解决问题，发结果。要先启动，是先收再发（返）。c-p
+            server端接收到client端问题的同时，也接收到了要返回时的queue名和UUID，因此在回调函数中处理完问题时可以精确的返回结果。
+
+
+总结：
+    要使用rabbitmq ，要分别建立p端和c端。
+        p端- 也叫生产produce 或 发送端 往中介发消息
+        c端- 也叫消费consume 或 接收端 从中介收消息
+        在两端都要1，先建立socket对象（实现了和rabbitmq服务器的连接），2，在socket对象上建立管道。
+        这就说明，消息的收发都是通过管道进行的。
+
+        当然，管理里实际有交换器exchange、有队列queue，还可以进行线路选择routing等。
+        不同的模式，对这些管道里的东西，有不同的处理。
+
+        比如基本模式和速度模式下：
+            在发端要声明队列，通过队列发消息，不用声明exchange，但语法上必须有exchange=''这一句，线路选择为管道名。
+            在收端当然也要声明队列，就不用管exchange和线路选择。
+
+        在发布订阅模式下：
+            在发端就不用声明队列，因为是通过exchange交换器（要声明exchange），进行线路选择routing_key，然后发消息，广播模式下routing_key
+            为空，选择模式下，就要设定routing_key，然后进行线路选择，发送。
+            在接收端，也要在管道上声明exchange交换器，要进行channel.queue_bind绑定，并进行相关设定exchange和queue以及routing_key。

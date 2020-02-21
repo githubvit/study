@@ -1,0 +1,1392 @@
+<!DOCTYPE html>
+<!-- saved from url=(0060)https://m.w3cschool.cn/bootstrap/bootstrap-css-overview.html -->
+<html mip="" class="mip-i-android-scroll"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><style mip-extension="mip-sidebar">mip-sidebar{position:fixed !important;top:0;max-height:100% !important;height:100%;max-width:80% !important;background-color:#efefef;min-width:45px !important;overflow-x:hidden !important;overflow-y:auto !important;z-index:9999 !important;-webkit-overflow-scrolling:touch;will-change:transform;display:none}mip-sidebar[side=left]{left:0 !important;-webkit-transform:translateX(-100%) !important;transform:translateX(-100%) !important}mip-sidebar[side=right]{right:0 !important;-webkit-transform:translateX(100%) !important;transform:translateX(100%) !important}mip-sidebar[side]{-webkit-transition:-webkit-transform 233ms cubic-bezier(0, 0, .21, 1);transition:-webkit-transform 233ms cubic-bezier(0, 0, .21, 1);transition:transform 233ms cubic-bezier(0, 0, .21, 1);transition:transform 233ms cubic-bezier(0, 0, .21, 1),-webkit-transform 233ms cubic-bezier(0, 0, .21, 1)}mip-sidebar[side][open]{-webkit-transform:translateX(0) !important;transform:translateX(0) !important}.MIP-SIDEBAR-MASK{position:fixed !important;top:0 !important;left:0 !important;width:100% !important;height:100% !important;opacity:0;background-image:none !important;background-color:#000;z-index:9998 !important;display:none}</style>
+
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+<meta name="keywords" content="Bootstrap CSS 概览">
+<meta name="description" content="Bootstrap CSS 概览  在这一章中，我们将讲解 Bootstrap 底层结构的关键部分，包括我们让 web 开发变得更好、更快、更强壮的最佳实践。  HTML 5 文档类型（Doctype） Bootstrap 使用了一些 HTML5 元素和 CSS 属性。为了让这些正常工作，您需要使用">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+<title>Bootstrap CSS 概览_bootstrap教程_w3cschool</title>
+<link rel="shortcut icon" href="https://m.w3cschool.cn/favicon.ico">
+<link rel="canonical" href="http://www.w3cschool.cn/bootstrap/bootstrap-css-overview.html">
+<link rel="stylesheet" type="text/css" href="./Bootstrap CSS 概览_bootstrap教程_w3cschool_files/mip.css">
+<style mip-custom="">
+#hamburger{
+color: #333;
+}
+body{
+font-size: 1.2rem;
+line-height: 2.5;
+}
+mip-link {
+color: #900b09;
+}
+mip-link:active {
+color: #ff0000;
+}
+p {
+margin: 1em 0;
+}
+img{
+width: auto !important;
+}
+.button{
+border: 1px solid #cc0000;
+color: #b85858;
+text-decoration: none;
+text-align: center;
+display: block;
+border-radius: .25rem;
+line-height: 1.25rem;
+box-sizing: border-box;
+-webkit-appearance: none;
+-moz-appearance: none;
+-ms-appearance: none;
+appearance: none;
+background: 0 0;
+padding: 0 .5rem;
+margin: 0;
+height: 1.35rem;
+white-space: nowrap;
+position: relative;
+text-overflow: ellipsis;
+font-size: .7rem;
+font-family: inherit;
+cursor: pointer
+}
+.page {
+position: absolute;
+top: 0;
+right: 0;
+bottom: 0;
+left: 0;
+background: #eee;
+z-index: 2000
+}
+.project-page {
+background: #fff;
+}
+.bar {
+position: absolute;
+right: 0;
+left: 0;
+z-index: 10;
+height: 48px;
+padding-right: .5rem;
+padding-left: .5rem;
+background-color: #f7f7f8;
+-webkit-backface-visibility: hidden;
+backface-visibility: hidden;
+}
+.bar h1{
+color: #333;
+}
+.bar mip-link{
+color: #333;
+}
+.bar-nav {
+top: 3.0rem !important;
+border-bottom: 1px solid #e7e7e7;
+}
+.bar-tab {
+bottom: 0;
+height: 48px;
+padding: 0 20px;
+table-layout: fixed;
+border-top: 1px solid #e7e7e7;
+}
+.bar .button {
+position: relative;
+top: .35rem;
+z-index: 20;
+margin-top: 0;
+font-weight: 400
+}
+.bar .button-link {
+top: 0;
+padding: 0;
+font-size: 18px !important;
+line-height: 48px;
+height: 48px;
+border: 0;
+color: #333 !important;
+}
+.bar-nav~.content {
+top: 88px !important;
+}
+.pull-left {
+float: left
+}
+.pull-right {
+float: right
+}
+.bar-tab .tab-item .icon {
+top: .15rem;
+width: 1.2rem;
+height: 1.2rem;
+font-size: 1.2rem;
+line-height: 1.2rem;
+padding-top: 0;
+padding-bottom: 0
+}
+.title {
+position: absolute;
+display: block;
+width: 100%;
+padding: 0;
+margin: 0 -.5rem;
+font-size: 18px;
+font-weight: 600;
+line-height: 48px;
+color: #3d4145;
+text-align: center;
+white-space: nowrap
+}
+.content {
+position: absolute;
+top: 0;
+right: 0;
+bottom: 48px;
+left: 0;
+overflow: auto;
+-webkit-overflow-scrolling: touch
+}
+.content-title {
+padding: 10px 20px;
+font-size: 18px;
+color: #333;
+}
+.row {
+overflow: hidden;
+margin-left: -4%
+}
+.prenext {
+padding-bottom: 20px;
+margin: 0 20px 20px;
+border-bottom: 1px solid #aaa;
+}
+.prenext:last-of-type {
+border-bottom: none;
+}
+.prenext .beingpage:last-of-type {
+margin: 0;
+}
+.content-block {
+margin: 25px 0;
+padding: 0 20px !important;
+color: #333
+}
+.content-intro a {
+text-decoration: underline;
+}
+.content-intro ul {
+padding-left: 40px;
+}
+.content-intro p {
+margin: 0.5em 0;
+line-height: 1.7;
+}
+.beingpage{
+width: 49%;
+margin: 0 2% 0 0;
+border-color: #ae4141;
+color: #ae4141;
+float: left;
+height: 30px;
+line-height: 30px;
+font-size: 15px;
+}
+.nopage{
+width: 49%;
+margin: 0 2% 0 0;
+border-color:#ccc;
+color:#ccc;
+float: left;
+height: 30px;
+line-height: 30px;
+font-size: 15px;
+}
+pre,.code,.example_code {
+background: #f5f5f5;
+padding: 0.5em;
+line-height: 1.7;
+border: 1px solid #e6e6e6
+}
+.pro-card {
+position: relative;
+font-size: .7rem;
+}
+.card-header{
+margin: 0 auto;
+border-radius: .1rem .1rem 0 0;
+font-size: .85rem;
+padding: 0;
+border-radius: 0.1rem 0.1rem 0 0;
+font-size: 0.85rem;
+}
+.card-footer {
+border-radius: 0 0 .1rem .1rem;
+color: #5f646e;
+}
+.readbtn {
+display: block;
+line-height: 30px;
+background-color: #F0AD4E;
+border-color: #EEA236;
+color: #FFF;
+border-radius: .1rem;
+padding: 0.2rem 0.8rem;
+text-align: center;
+}
+#content img{
+max-width: 98%;
+}
+.card-content {
+position: relative;
+}
+.color-gray {
+color: #999
+}
+.content-block-title {
+position: relative;
+overflow: hidden;
+margin: 0.75rem 0.75rem 0.5rem;
+white-space: nowrap;
+text-overflow: ellipsis;
+font-size: .7rem;
+text-transform: uppercase;
+line-height: 1;
+color: #6d6d72;
+margin: 1.75rem .75rem .5rem
+}
+.list-block {
+font-size: 0.85rem;
+margin-top: 0.5rem;
+}
+.list-block ul{
+background: #fff none repeat scroll 0 0;
+list-style: outside none none;
+margin: 0;
+padding: 0;
+position: relative;
+}
+.list-block li {
+box-sizing: border-box;
+position: relative;
+}
+.item-content .update-name {
+color: #3D4145;
+}
+.item-content .update-time,.item-content .log-info {
+font-size: .7rem;
+}
+.list-block .item-content {
+box-sizing: border-box;
+padding-left: .75rem;
+min-height: 2.2rem;
+display: -webkit-box;
+display: -webkit-flex;
+display: flex;
+-webkit-box-pack: justify;
+-webkit-justify-content: space-between;
+justify-content: space-between;
+-webkit-box-align: center;
+-webkit-align-items: center;
+align-items: center
+}
+.list-block .item-inner {
+padding-right: .75rem;
+position: relative;
+width: 100%;
+padding-top: .4rem;
+padding-bottom: .35rem;
+min-height: 2.2rem;
+overflow: hidden;
+box-sizing: border-box;
+display: -webkit-box;
+display: -webkit-flex;
+display: flex;
+-webkit-box-flex: 1;
+-ms-flex: 1;
+-webkit-box-pack: justify;
+-webkit-justify-content: space-between;
+justify-content: space-between;
+-webkit-box-align: center;
+-webkit-align-items: center;
+align-items: center
+}
+.list-block .item-inner:after {
+content: '';
+position: absolute;
+left: 0;
+bottom: 0;
+right: auto;
+top: auto;
+height: 1px;
+width: 100%;
+background-color: #e7e7e7;
+display: block;
+z-index: 15;
+-webkit-transform-origin: 50% 100%;
+transform-origin: 50% 100%
+}
+.list-block .item-title-row{
+width: 100%;
+}
+.list-block .item-title{
+width: 75%;
+display: block;
+float: left;
+overflow: hidden;
+text-overflow: ellipsis;
+white-space: nowrap;
+}
+.list-block .item-after{
+width: 25%;
+display: block;
+float: right;
+overflow: hidden;
+text-overflow: ellipsis;
+white-space: nowrap;
+}
+#contentBox {
+position: absolute;
+top: 0;
+margin-top: 60px;
+padding-top: 15px; 
+margin-bottom: 48px; 
+right: 0;
+bottom: 0;
+left: 0;
+overflow: auto;
+-webkit-overflow-scrolling: touch
+}
+/* 左边目录 */
+.project-block  {
+margin: 0;
+padding: 0 15px !important;
+}
+.project-box {
+text-align: center;
+font-size: 18px;
+}
+.project-menu1 {
+font-size: 16px;
+color: #333;
+}
+.project-menu2 {
+font-size: 16px;
+color: #666;
+padding: 0 10px;
+}
+.close-box {
+padding: 0 15px;
+font-size: 18px;
+margin: 5px 0 0;
+}
+/* 封面页  */
+.project-cover mip-i-space {
+padding-top: 0 !important;
+}
+.project-cover .mip-fill-content {
+min-width: auto !important;
+height: auto !important;
+}
+.project-cover .mip-layout-size-defined .mip-fill-content {
+position: relative;
+}
+.project-cover .card-footer {
+text-align: center;
+}
+.project-cover .card-footer span {
+font-size: 15px;
+color: #333;
+margin-left: 10px;
+}
+.project-cover .readbtn a {
+font-size: 15px !important;
+}
+.project-cover .card-content {
+margin: 20px 0;
+font-size: 15px;
+color: #333;
+line-height: 1.8;
+}
+.project-cover .card-content h2 {
+font-size: 16px;
+}
+.project-cover .card-content ul {
+list-style: disc outside none;
+padding: 0 0 0 30px;
+line-height: 1.8;
+}
+.project-cover .card-content p.color-gray,.project-cover .card-content h3,.project-cover .content-block-title {
+font-weight: 600;
+font-size: 16px;
+color: #333;
+}
+.project-cover .card-content p {
+font-size: 15px;
+color: #666;
+margin: 10px 0;
+line-height: 1.8;
+}
+.project-cover .content-block-title {
+font-size: 15px;
+color: #333;
+}
+.project-cover {
+margin: 5px 0 20px;
+}
+.project-cover .list-block a {
+font-size: 15px !important;
+color: #333 !important;
+}
+.project-cover .list-block .update-time {
+font-size: 14px !important;
+color: #666;
+}
+
+/* content-intro style */
+.content-intro {padding: 0 0 10px 0;font: 15px Verdana, Arial, Helvetica, sans-serif;line-height: 1.7;color: #000;outline: none;word-wrap: break-word;}
+.content-intro:first-child {margin-top: 0 !important;}
+.content-intro p {word-wrap: break-word;margin: 0 0 5px;color: #000;line-height: 1.7;}
+.content-intro b,.content-intro strong {font-weight: bold;}
+.content-intro i,.content-intro em {font-style: italic;}
+.content-intro strike,.content-intro del{text-decoration: line-through;}
+.content-intro table {width: 100%;table-layout: fixed;border-collapse: collapse;border-spacing: 0;margin: 15px 0;}
+.content-intro table thead {background-color: #f9f9f9;}
+.content-intro table th{background-color: #fff;border: 1px solid #ccc;padding: 2px 4px;}
+.content-intro table td{min-width: 40px;height: 30px;border: 1px solid #ccc;vertical-align: top;padding: 2px 4px;box-sizing: border-box;}
+.content-intro table th.active,.content-intro table td.active {background-color: #ffffee;}
+.content-intro input[type=text],.content-intro input[type=password],.content-intro input[type=image],.content-intro textarea{font:99% helvetica,arial,freesans,sans-serif;}
+.content-intro select,.content-intro option{padding:0 .25em;}
+.content-intro optgroup{margin-top:.5em;}
+.content-intro img{border:0;max-width:100%;}
+.content-intro abbr{border-bottom:none;}
+.content-intro a{color: #900b09;text-decoration: underline;word-break: break-all;}
+.content-intro a:hover{color: #ff0000;}
+.content-intro a code,.content-intro a:link code,.content-intro a:visited code{color:#4183c4;}
+.content-intro h1,.content-intro h2,.content-intro h3,.content-intro h4,.content-intro h5,.content-intro h6{font-family: "微软雅黑";margin: 20px 0 10px;font-weight: 600;color: #000000;line-height: 1.7;}
+.content-intro h1{font-size: 20px;}
+.content-intro h1:first-child{margin-top:0;padding-top:.25em;border-top:none;}
+.content-intro h2{font-size: 16px;}
+.content-intro h3{font-size: 14px;}
+.content-intro h4{font-size: 12px;}
+.content-intro hr {display: block;height: 0px;border: 0;border-top: 1px solid #aaa;margin: 15px 0;padding: 0;}
+.content-intro ul{list-style: disc outside none;margin: 10px 0;padding: 0 0 0 30px;line-height: 1.7;}
+.content-intro ol{margin: 10px 0;padding: 0 0 0 40px;line-height: 1.7;}
+.content-intro ul li,.content-intro ol li{}
+.content-intro li {list-style-type: inherit;}
+.content-intro ul ul,.content-intro ul ol,.content-intro ol ol,.content-intro ol ul{margin-top:0;margin-bottom:0;}
+.content-intro li p {margin: 0 0 5px;line-height: 1.7;}
+.content-intro blockquote{border-left: 5px solid #DDD;padding: 10px 5px 10px 15px;margin: 15px 0;font-size: 13px;color:#555;background-color: #F5F5F5;}
+.content-intro blockquote:first-child {margin-top: 0;}
+.content-intro dt{font-weight:bold;margin-left:1em;}
+.content-intro dd{margin-left:2em;margin-bottom:1em;}
+.content-intro code {
+  display: inline-block;
+  padding: 0 4px;
+  margin: 0 5px;
+  background-color: #f9f2f4;
+  border-radius: 3px;
+  font-size: 13px;
+  color: #c7254e;
+  font-family: Consolas, "Courier New", Courier, monospace;
+}
+.content-intro pre,.content-intro .code {
+/*        width: auto;
+max-width: 700px;*/
+  width: 98%;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  word-wrap: break-word !important;
+  white-space: pre-wrap !important;
+  padding: 10px 5px;
+  margin: 15px 0;
+  display: block;
+  line-height: 1.7;
+  background: #efefef;
+  border-radius: 3px;
+  font-size: 13px;
+  font-family: Consolas, "Courier New", Courier, monospace;
+  white-space: pre;
+  word-wrap: normal;
+  overflow-x: auto;
+  border: 1px solid #DDD;
+}
+.content-intro pre code {
+  display: block;
+  padding: 0;
+  margin: 0;
+  background: none;
+  border-radius: 0;
+  color: #333;
+}
+.content-intro .tasklist {
+  margin: 15px 0;
+  padding: 0 0 0 40px;
+  line-height: 1.7;
+  list-style-type: none;
+}
+.content-intro .tasklist > li {
+  margin: 0;
+  pointer-events: none;
+}
+.content-intro .tasklist > li::before {
+  content: '';
+  pointer-events: all;
+  display: inline-block;
+  margin: 0 5px 0 -25px;
+  width: 16px;
+  height: 16px;
+  cursor: default;
+  vertical-align: middle;
+  background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAQAAAC1+jfqAAAAj0lEQVR4AY2RBQ7EIBBFVy/P1TptbOUSdfePZFI3Xhh9MbhdOPS2BHmEBZ6avo1giX9WoEen7kiJf2YJIzh+gW6gNVeTw/GNQGh3ILBQKxpzGe5GYYdBqHYYhHKHQSgUpb4cC2YQ8h1mQqbvAhZsP0CKTF+OqYkByOOn/mY+kgUBvuqph8+yfcIc2x8+6/hIzptvjIrKkGEAAAAASUVORK5CYII=');
+}
+.content-intro .tasklist > li[checked]::before {
+  background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABSklEQVR4Aa2TxVajURCEGXvUUdzWuA3OGn8B3N0h7u7uu6yLv5Ab99xzvtN9u6sqf6ylKUehUPyQy+X/ZTJZUupRDmqopUcEfAzSKpUKGo0GarWatSjcUUtP9hOktFotdDpdVVBLT3YAjEZjUQwGg6jZPT05ASaTicBsNouaBd87hocHcXp6wnthgM1mI7BaraJ+8vBwj/7+Hvz9+wtLSwucFQY4HA4CmeyFVXB5eYHOznaasbm5jlAwyHlhgNPpxOrqClpb/2B/fw+8s/JO8+7ONkKhEOekeMDh4YEwzM/PgrWt7S9urq8RDASpKR8Q8Afw/PyMzs420Nzd3QmltPP5fNxXDiAUG/R6jI+NwGwywev1cl4+QKlUpux2u1h6PB7EY3G43e6iZmqlX2Iy56cs/UTTIqQM1FBLT8GfiU9S6c9EjfgzNeO8AvGFikbDq+3PAAAAAElFTkSuQmCC');
+}
+
+/* supplement style */
+.content-intro .btn {
+display: inline-block;
+margin-bottom: 0px;
+font-weight: 400;
+text-align: center;
+vertical-align: middle;
+cursor: pointer;
+background-image: none;
+border: 1px solid transparent;
+white-space: nowrap;
+padding: 6px 12px;
+font-size: 14px;
+line-height: 1.42857;
+border-radius: 4px;
+-moz-user-select: none;
+}
+.content-intro .btn-info {
+color: #FFF;
+background-color: #AE4141;
+border-color: #AE4141;
+}
+.content-intro .btn-info:hover {
+background-color: #ff0000;
+border-color: #ff0000;
+}
+.content-intro table.lamp {
+width: 100%;
+padding: 0px;
+border: 1px solid #DDD;
+}
+.content-intro table.lamp th {
+color: #666;
+background-color: #FFF;
+padding: 10px 5px 10px 10px;
+}
+.content-intro table.lamp th img {
+height: auto;
+}
+.content-intro table.lamp td {
+padding: 4px 10px;
+background-color: #FFF;
+border: none;
+vertical-align: middle;
+}
+.content-intro table.tecspec th,.content-intro table.tecspec td {
+border: 1px solid #D4D4D4;
+padding: 7px 5px;
+vertical-align: top;
+text-align: left;
+}
+.content-intro .example {
+background-color: #EFEFEF;
+font-size: 14px;
+color: #333;
+border: 1px solid #DDD;
+margin: 10px 0;
+padding: 10px 15px;
+/*max-width: 700px;*/
+width: 98%;
+}
+.content-intro h2.example,.content-intro h2.example_head {
+display: inline-block;
+margin: 0;
+padding: 0;
+font-size: 14px;
+color: #900b09;
+margin-bottom: 10px;
+border: none;
+}
+.content-intro .example_code,.content-intro .example_result {
+background-color: #FFF;
+border: 1px solid #DDD;
+padding: 10px;
+font-size: 14px;
+font-family: Consolas, "Courier New", Courier, monospace;
+line-height: 1.7;
+}
+.content-intro .example_code span.marked {
+color: #333;
+}
+.content-intro .example-btn {
+color: #FFF;
+background-color: #428BCA;
+display: inline-block;
+padding: 6px 10px;
+cursor: pointer;
+border: 1px solid #428BCA;
+border-radius: 4px;
+display: none;
+}
+.content-intro a.tryitbtn,.content-intro a.showbtn,.content-intro a.playitbtn {
+display: inline-block;
+padding: 5px;
+font-size: 13px;
+background-color: #AE4141;
+color: #FFF;
+border-radius: 2px;
+text-decoration: none;
+}
+.content-intro a.tryitbtnsyntax {
+float: right;
+padding: 2px;
+}
+.content-intro a.tryitbtn:hover,.content-intro a.showbtn:hover,.content-intro a.playitbtn:hover {
+background-color: #ff0000;
+}
+.content-intro table.reference, table.tecspec {
+border-collapse: collapse;
+width: 100%;
+margin-bottom: 4px;
+margin-top: 4px;
+}
+.content-intro table.reference tr:nth-child(2n) {
+background-color: #FFF;
+}
+.content-intro table.reference tr:nth-child(2n+1) {
+background-color: #EFEFEF;
+}
+.content-intro table.reference th {
+background-color: #bdbdbd;
+border: 1px solid #bdbdbd;
+border-bottom: none;
+color: #FFF;
+font-size: 14px;
+padding: 3px;
+vertical-align: top;
+text-align: left;
+}
+.content-intro table.reference td {
+border: 1px solid #DDD;
+padding: 7px 5px;
+vertical-align: top;
+font-size: 14px;
+}
+.content-intro table a {
+color: #900b09;
+text-decoration: underline;
+}
+.content-intro .tutintro {
+width: auto;
+min-height: 45px;
+}
+.content-intro .tutintro img {
+float: left;
+margin-right: 20px;
+margin-bottom: 10px;
+}
+.content-intro .tutintro p {
+margin-top: 0;
+font-size: 14px;
+}
+.content-intro .tryit_ex {
+clear: both;
+width: 98%;
+height: 48px;
+margin-bottom: 5px;
+}
+.content-intro .tryit_ex img {
+border: 0px none;
+float: left;
+margin-right: 10px;
+}
+.content-intro .tryit_ex h2 {
+padding-top: 5px;
+}
+.content-intro a.example {
+background-color: #FFF;
+color: #900b09;
+border: none;
+margin: 0;
+padding: 0;
+}
+.content-intro .background {
+position: relative;
+}
+.content-intro .cover {
+height: auto;
+line-height: normal;
+text-align: left;
+}
+.content-intro .tutintro img {
+float: left;
+margin-right: 20px;
+margin-bottom: 10px;
+}
+.content-intro table.browsersupport {
+border: 1px solid #C3C3C3;
+border-collapse: collapse;
+}
+.content-intro table.browsersupport th {
+background-color: #4298BA;
+border: 1px solid #C3C3C3;
+padding: 3px;
+vertical-align: middle;
+}
+.content-intro table.browsersupport td {
+padding: 3px;
+vertical-align: middle;
+width: 60px;
+height: 32px;
+background-position: center center;
+background-repeat: no-repeat;
+border: 1px solid #DADADA;
+text-align: center;
+}
+.content-intro table.browsersupport td.bsProperty {
+font-family: courier new;
+white-space: nowrap;
+text-align: left;
+}
+.content-intro table.browsersupport .bsIE,.content-intro table.browserref .bsIE {
+background-image: url("../yimages/compatible_ie.gif");
+}
+.content-intro table.browsersupport .bsFirefox,.content-intro table.browserref .bsFirefox {
+background-image: url("../yimages/compatible_firefox.gif");
+}
+.content-intro table.browsersupport .bsChrome,.content-intro table.browserref .bsChrome {
+background-image: url("../yimages/compatible_chrome.gif");
+}
+.content-intro table.browsersupport .bsSafari,.content-intro table.browserref .bsSafari {
+background-image: url("../yimages/compatible_safari.gif");
+}
+.content-intro table.browsersupport .bsOpera,.content-intro table.browserref .bsOpera {
+background-image: url("../yimages/compatible_opera.gif");
+}
+.content-intro table.browserref {
+border-collapse: collapse;
+width: 100%;
+}
+.content-intro table.browserref tr:nth-child(2n) {
+background-color: #f6f4f0;
+}
+.content-intro table.browserref tr:nth-child(2n+1) {
+background-color: #FFF;
+}
+.content-intro table.browserref th {
+height: 32px;
+background-repeat: no-repeat;
+background-position: center center;
+border: 1px solid #D4D4D4;
+background-color: #FFF;
+font-weight: normal;
+color: #555;
+padding: 5px;
+vertical-align: middle;
+text-align: center;
+}
+.content-intro table.browserref td {
+border: 1px solid #D4D4D4;
+text-align: center;
+padding: 7px 5px;
+vertical-align: top;
+}
+.content-intro table.bsReference td {
+padding: 3px;
+vertical-align: middle;
+background-position: center center;
+background-repeat: no-repeat;
+border: 1px solid #DADADA;
+text-align: right;
+font-size: 10px;
+}
+.content-intro table.bsReference td.bsProperty {
+white-space: nowrap;
+text-align: left;
+font-size: 12px;
+}
+.content-intro table.bsReference .bsIE {
+width: 80px;
+background-image: url("../yimages/compatible_ie2020.gif");
+}
+.content-intro table.bsReference .bsPreIE {
+width: 80px;
+background-image: url("../yimages/precompatible_ie5920.gif");
+}
+.content-intro table.bsReference .bsFirefox {
+width: 80px;
+background-image: url("../yimages/compatible_firefox2020.gif");
+}
+.content-intro table.bsReference .bsPreFirefox {
+width: 80px;
+background-image: url("../yimages/precompatible_firefox5920.gif");
+}
+.content-intro table.bsReference .bsChrome {
+width: 80px;
+background-image: url("../yimages/compatible_chrome2020.gif");
+}
+.content-intro table.bsReference .bsPreChrome {
+width: 80px;
+background-image: url("../yimages/precompatible_chrome5920.gif");
+}
+.content-intro table.bsReference .bsSafari {
+width: 80px;
+background-image: url("../yimages/compatible_safari2020.gif");
+}
+.content-intro table.bsReference .bsPreSafari {
+width: 80px;
+background-image: url("../yimages/precompatible_safari5920.gif");
+}
+.content-intro table.bsReference .bsOpera {
+width: 80px;
+background-image: url("../yimages/compatible_opera2020.gif");
+}
+.content-intro table.bsReference .bsPreOpera {
+width: 80px;
+background-image: url("../yimages/precompatible_opera5920.gif");
+}
+.content-intro #animated_div {
+width: 76px;
+height: 47px;
+background: #92B901 none repeat scroll 0% 0%;
+color: #FFF;
+position: relative;
+font-weight: bold;
+font-size: 20px;
+padding: 10px;
+animation: 5s ease 0s normal none 1 running animated_div;
+border-radius: 5px;
+}
+.content-intro li.dd-item {
+margin-left: 20px;
+}
+.content-intro .text-muted,.content-intro .text-primary,.content-intro .text-success,.content-intro .text-info,.content-intro .text-warning,.content-intro .text-danger,.content-intro .bg-primary,.content-intro .bg-success,.content-intro .bg-info,.content-intro .bg-warning,.content-intro .bg-danger {
+color: inherit;
+background: inherit;
+}
+.content-intro .highCOM {
+color: #a50;
+}
+.content-intro .highELE,.content-intro .highLT,.content-intro .highGT {
+color: #170;
+}
+.content-intro .highATT {
+color: #00c;
+}
+.content-intro .highVAL {
+color: #a11;
+}
+.content-intro span.new {
+float: right;
+color: #fff;
+background-color: #AE4141;
+padding-left: 1px;
+padding-right: 1px;
+border: 1px solid #fff;
+outline: 1px solid #AE4141;
+line-height: 16px;
+}
+.content-intro span.deprecated {
+color: #ff0000;
+background-color: transparent;
+}
+#aui-footer{
+  background-color: #f0f0f0;
+}
+#homeTpl #btn-read{
+  background-color: #AE4141!important;
+}
+/* 头部app下载显示模块 */
+.appdownload-nav {
+height: 40px !important;
+line-height: 1.7;
+}
+.appdownload-nav .app-logo {
+width: 34px !important;
+height: 34px !important;
+}
+.appdownload-nav .intro {
+font-size: 15px !important;
+}
+.appdownload-nav .button {
+height: 30px;
+line-height: 30px;
+margin-top: 3px !important;
+}
+</style>
+</head>
+<body class="mip-i-android-scroll" style="opacity: 1; animation: none;">
+<div class="page project-page">
+<style>
+/* 头部下载APP显示模块 */
+.bar-nav {
+top: 2.2rem;
+}
+.bar-header-secondary,.bar-nav ~ .content {
+   top: 4.4rem;
+}
+.bar-header-secondary ~ .content {
+top: 6.6rem;
+} 
+.appdownload-nav {
+position: relative;
+height: 2.2rem;
+padding: .35rem .6rem;
+background: rgba(0,0,0,.7);
+}
+.appdownload-nav > * {
+display: inline-block;
+vertical-align: middle; 
+}
+.appdownload-nav .button {
+float: right;
+padding: 0 .5rem;
+border: 1px solid #fff;
+font-size: 14px;
+color: #fff;
+border-radius: 4px;
+margin-top: 2px;
+}
+.appdownload-nav .app-logo {
+width: 1.4rem;
+height: 1.4rem;
+background: url("//statics.w3cschool.cn/images/w3c/app-logo.png") no-repeat;
+background-size: contain;
+border-radius: 5px;
+}
+.appdownload-nav .intro {
+font-size: .7rem;
+color: #fff;
+margin-left: .2rem;
+}
+</style>
+<div class="appdownload-nav">
+<a class="button" href="https://m.w3cschool.cn/appDownload" external="">下载APP</a>        
+<a class="app-logo" href="https://m.w3cschool.cn/appDownload" external=""></a>        
+<span class="intro">把W3Cschool装进口袋</span> 
+</div>
+<header class="bar bar-nav header-item">
+<mip-link class="button button-link button-nav pull-left mip-element mip-layout-container" href="https://m.w3cschool.cn/bootstrap/bootstrap-environment-setup.html" title="返回" pagetype="1" style="display: block; font-size: 18px; color: rgb(51, 51, 51);"><a href="https://m.w3cschool.cn/bootstrap/bootstrap-environment-setup.html" mip-link="" style="margin: 0px; padding: 0px; width: 100%; display: block; font-size: 18px; color: rgb(51, 51, 51);">
+<span class="icon"></span>返回
+</a></mip-link>
+<mip-link class="button button-link button-nav pull-right mip-element mip-layout-container" href="https://m.w3cschool.cn" pagetype="1" style="display: block; font-size: 18px; color: rgb(51, 51, 51);"><a href="https://m.w3cschool.cn/" mip-link="" style="margin: 0px; padding: 0px; width: 100%; display: block; font-size: 18px; color: rgb(51, 51, 51);">首页</a></mip-link>
+<h1 class="title">bootstrap教程</h1>
+</header>
+<nav class="bar bar-tab">
+<span class="mip-button button button-link button-nav pull-right" id="hamburger" on="tap:sidebar.open">
+<span class="icon"></span>目录
+</span>
+</nav>
+<div class="content" id="content">
+   <h1 class="content-title">Bootstrap CSS 概览</h1>
+   <div class="row prenext">
+<mip-link href="https://m.w3cschool.cn/bootstrap/m471bf21.html" class="button beingpage mip-element mip-layout-container" pagetype="1" style="display: block; font-size: 15px; color: rgb(174, 65, 65);"><a href="https://m.w3cschool.cn/bootstrap/m471bf21.html" mip-link="" style="margin: 0px; padding: 0px; width: 100%; display: block; font-size: 15px; color: rgb(174, 65, 65);">上一篇</a></mip-link>    
+<mip-link href="https://m.w3cschool.cn/bootstrap/bootstrap-v2-grid-system.html" class="button beingpage mip-element mip-layout-container" pagetype="1" style="display: block; font-size: 15px; color: rgb(174, 65, 65);"><a href="https://m.w3cschool.cn/bootstrap/bootstrap-v2-grid-system.html" mip-link="" style="margin: 0px; padding: 0px; width: 100%; display: block; font-size: 15px; color: rgb(174, 65, 65);">下一篇</a></mip-link>
+   </div>
+   <div class="content-block content-intro"><h2>Bootstrap <span class="color_h1">CSS 概览</span></h2> <div class="tutintro"> <p>在这一章中，我们将讲解 Bootstrap 底层结构的关键部分，包括我们让 web 开发变得更好、更快、更强壮的最佳实践。</p> </div> <h2 class="tutheader">HTML 5 文档类型（Doctype）</h2> <p>Bootstrap 使用了一些 HTML5 元素和 CSS 属性。为了让这些正常工作，您需要使用 HTML5 文档类型（Doctype）。 因此，请在使用 Bootstrap 项目的开头包含下面的代码段。</p> <pre>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+....
+&lt;/html&gt;
+</pre> <p>如果在 Bootstrap 创建的网页开头不使用 HTML5 的文档类型（Doctype），您可能会面临一些浏览器显示不一致的问题，甚至可能面临一些特定情境下的不一致，以致于您的代码不能通过 W3C 标准的验证。</p> <h2 class="tutheader">移动设备优先</h2> <p>移动设备优先是 Bootstrap 3 的最显著的变化。</p> <p>在之前的 Bootstrap 版本中（直到 2.x），您需要手动引用另一个 CSS，才能让整个项目友好的支持移动设备。 </p><p>现在不一样了，Bootstrap 3 默认的 CSS 本身就对移动设备友好支持。</p> <p>Bootstrap 3 的设计目标是移动设备优先，然后才是桌面设备。这实际上是一个非常及时的转变，因为现在越来越多的用户使用移动设备。</p> <p>为了让 Bootstrap 开发的网站对移动设备友好，确保适当的绘制和触屏缩放，需要在网页的 head 之中添加 <strong>viewport meta</strong> 标签，如下所示：</p> <pre>&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+</pre> <p><em>width</em> 属性控制设备的宽度。假设您的网站将被带有不同屏幕分辨率的设备浏览，那么将它设置为 <em>device-width</em> 可以确保它能正确呈现在不同设备上。</p> <p><em>initial-scale=1.0</em> 确保网页加载时，以 1:1 的比例呈现，不会有任何的缩放。</p> <p>在移动设备浏览器上，通过为 <strong>viewport meta</strong> 标签添加 <em>user-scalable=no</em> 可以禁用其缩放（zooming）功能。 </p><p>通常情况下，<em>maximum-scale=1.0</em> 与 user-scalable=no 一起使用。这样禁用缩放功能后，用户只能滚动屏幕，就能让您的网站看上去更像原生应用的感觉。</p> <p>注意，这种方式我们并不推荐所有网站使用，还是要看您自己的情况而定！</p> <pre>&lt;meta name="viewport" content="width=device-width,                                                           initial-scale=1.0,                                       
+maximum-scale=1.0,                                       
+user-scalable=no"&gt;
+</pre> <h2 class="tutheader">响应式图像</h2> <pre>&lt;img src="..." class="img-responsive" alt="响应式图像"&gt;
+</pre> <p>通过添加 <em>img-responsive</em> class 可以让 Bootstrap 3 中的图像对响应式布局的支持更友好。</p> <p>接下来让我们看下这个 class 包含了哪些 css 属性。</p><p>在下面的代码中，可以看到<em>img-responsive</em> class 为图像赋予了 max-width: 100%; 和 height: auto; 属性，可以让图像按比例缩放，不超过其父元素的尺寸。</p> <pre>.img-responsive {
+  display: inline-block;
+  height: auto;
+  max-width: 100%;
+}
+</pre> <p>这表明相关的图像呈现为 <em>inline-block</em>。当您把元素的 display 属性设置为 inline-block，元素相对于它周围的内容以内联形式呈现，但与内联不同的是，这种情况下我们可以设置宽度和高度。</p> <p>设置 <em>height:auto</em>，相关元素的高度取决于浏览器。</p> <p>设置 <em>max-width</em> 为 100% 会重写任何通过 width 属性指定的宽度。这让图片对响应式布局的支持更友好。</p><p>Bootstrap编程实战：<a href="https://www.w3cschool.cn/codecamp/make-images-mobile-responsive.html" target="_blank">使图片适配手机显示</a>！</p> <h2 class="tutheader">全局显示、排版和链接</h2> <h3>基本的全局显示</h3> <p>Bootstrap 3 使用 <em>body {margin: 0;}</em> 来移除 body 的边距。</p> <p>请看下面有关 body 的设置：</p> <pre class="css">body {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  line-height: 1.428571429;
+  color: #333333;
+  background-color: #ffffff;
+}
+</pre> <p>第一条规则设置 body 的默认字体样式为 <em>"Helvetica Neue", Helvetica, Arial, sans-serif</em>。</p> <p>第二条规则设置文本的默认字体大小为 14 像素。</p> <p>第三条规则设置默认的行高度为 1.428571429。</p> <p>第四条规则设置默认的文本颜色为 #333333。</p> <p>最后一条规则设置默认的背景颜色为白色。</p> <h3>排版</h3> <p>使用 @font-family-base、 @font-size-base 和 @line-height-base 属性作为排版样式。</p> <h3>链接样式</h3> <p>通过属性 @link-color 设置全局链接的颜色。</p> <p>对于链接的默认样式，如下设置：</p> <pre class="css">a:hover,
+a:focus {
+  color: #2a6496;
+  text-decoration: underline;
+}
+
+a:focus {
+  outline: thin dotted #333;
+  outline: 5px auto -webkit-focus-ring-color;
+  outline-offset: -2px;
+}
+</pre> <p>所以，当鼠标悬停在链接上，或者点击过的链接，颜色会被设置为 #2a6496。同时，会呈现一条下划线。</p> <p>除此之外，点击过的链接，会呈现一个颜色码为 #333 的细的虚线轮廓。另一条规则是设置轮廓为 5 像素宽，且对于基于 webkit 浏览器有一个 <em>-webkit-focus-ring-color</em> 的浏览器扩展。轮廓偏移设置为 -2 像素。</p> <p>以上所有这些样式都可以在 scaffolding.less 中找到。</p> <h2 class="tutheader">避免跨浏览器的不一致</h2> <p>Bootstrap 使用 <a target="_blank" rel="nofollow" href="https://necolas.github.io/normalize.css/">Normalize</a> 来建立跨浏览器的一致性。</p> <p>Normalize.css 是一个很小的 CSS 文件，在 HTML 元素的默认样式中提供了更好的跨浏览器一致性。</p> <h2 class="tutheader">容器（Container）</h2> <pre>&lt;div class="container"&gt;
+  ...
+&lt;/div&gt;
+</pre> <p>Bootstrap 3 的 <em>container</em> class 用于包裹页面上的内容。让我们一起来看看 bootstrap.css 文件中的这个 <em>.container</em> class。</p> <pre class="css">.container {
+   padding-right: 15px;
+   padding-left: 15px;
+   margin-right: auto;
+   margin-left: auto;
+}
+</pre> <p>通过上面的代码，把 container 的左右外边距（margin-right、margin-left）交由浏览器决定。</p><p>请注意，由于内边距（padding）是固定宽度，默认情况下容器是不可嵌套的。</p> <pre class="css">.container:before,
+.container:after {
+  display: table;
+  content: " ";
+}
+</pre> <p>这会产生伪元素。设置 <em>display</em> 为 <em>table</em>，会创建一个匿名的 table-cell 和一个新的块格式化上下文。<em>:before</em> 伪元素防止上边距崩塌，<em>:after</em> 伪元素清除浮动。</p> <p>如果 <em>conteneditable</em> 属性出现在 HTML 中，由于一些 Opera bug，围绕上述元素创建一个空格。这可以通过使用 <em>content: " "</em> 来修复。</p> <pre class="css">.container:after {
+  clear: both;
+}
+</pre> <p>它创建了一个伪元素，并确保了所有的容器包含所有的浮动元素。</p> <p>Bootstrap 3 CSS 有一个申请响应的媒体查询，在不同的媒体查询阈值范围内都为 container 设置了max-width，用以匹配网格系统。</p> <pre class="css">@media (min-width: 768px) {
+   .container {
+      width: 750px;
+}
+</pre> <hr> <h2>Bootstrap 浏览器/设备支持</h2> <p>Bootstrap 可以在最新的桌面系统和移动端浏览器中很好的工作。</p> <p>旧的浏览器可能无法很好的支持。</p> <p>下表为 Bootstrap 支持最新版本的浏览器和平台：</p> <table class="reference   "> <tbody><tr> <th style="width:20%">&nbsp;</th> <th style="width:16%">Chrome</th> <th style="width:16%">Firefox</th> <th style="width:16%">IE</th> <th style="width:16%">Opera</th> <th style="width:16%">Safari</th> </tr> <tr> <td><strong>Android</strong></td> <td>YES</td> <td>YES</td> <td>不适用</td> <td>NO</td> <td>不适用</td> </tr> <tr> <td><strong>iOS</strong></td> <td>YES</td> <td>不适用</td> <td>不适用</td> <td>NO</td> <td>YES</td> </tr> <tr> <td><strong>Mac OS X</strong></td> <td>YES</td> <td>YES</td> <td>不适用</td> <td>YES</td> <td>YES</td> </tr> <tr> <td><strong>Windows</strong></td> <td>YES</td> <td>YES</td> <td>YES*</td> <td>YES</td> <td>NO</td> </tr> </tbody></table> <p>* Bootstrap 支持 Internet Explorer 8 及更高版本的 IE 浏览器。</p></div>
+<div class="row prenext">
+<mip-link href="https://m.w3cschool.cn/bootstrap/m471bf21.html" class="button beingpage mip-element mip-layout-container" pagetype="1" style="display: block; font-size: 15px; color: rgb(174, 65, 65);"><a href="https://m.w3cschool.cn/bootstrap/m471bf21.html" mip-link="" style="margin: 0px; padding: 0px; width: 100%; display: block; font-size: 15px; color: rgb(174, 65, 65);">上一篇</a></mip-link>    
+<mip-link href="https://m.w3cschool.cn/bootstrap/bootstrap-v2-grid-system.html" class="button beingpage mip-element mip-layout-container" pagetype="1" style="display: block; font-size: 15px; color: rgb(174, 65, 65);"><a href="https://m.w3cschool.cn/bootstrap/bootstrap-v2-grid-system.html" mip-link="" style="margin: 0px; padding: 0px; width: 100%; display: block; font-size: 15px; color: rgb(174, 65, 65);">下一篇</a></mip-link>
+   </div>
+</div>
+</div>
+<mip-sidebar id="sidebar" layout="nodisplay" class="mip-layout-nodisplay mip-element" side="left" aria-hidden="true" style="display: none;">
+<div class="project-box">目录</div>
+<div class="content-block project-block">
+<div data-id="jqxmwf21" class="project-item">
+<div>
+<h2 class="project-menu1">Bootstrap 教程</h2>
+</div>
+<div>
+<div data-id="bootstrap-tutorial" class="project-item">
+<div>
+<mip-link class="project-menu2 mip-element mip-layout-container" href="https://m.w3cschool.cn/bootstrap/bootstrap-tutorial.html" title="Bootstrap 教程导读" pagetype="1" style="display: block; font-size: 16px; color: rgb(102, 102, 102);"><a href="https://m.w3cschool.cn/bootstrap/bootstrap-tutorial.html" mip-link="" style="margin: 0px; padding: 0px; width: 100%; display: block; font-size: 16px; color: rgb(102, 102, 102);">Bootstrap 教程导读</a></mip-link>
+</div>
+</div> 
+<div data-id="bootstrap-v2-intro" class="project-item">
+<div>
+<mip-link class="project-menu2 mip-element mip-layout-container" href="https://m.w3cschool.cn/bootstrap/bootstrap-v2-intro.html" title="Bootstrap 简介" pagetype="1" style="display: block; font-size: 16px; color: rgb(102, 102, 102);"><a href="https://m.w3cschool.cn/bootstrap/bootstrap-v2-intro.html" mip-link="" style="margin: 0px; padding: 0px; width: 100%; display: block; font-size: 16px; color: rgb(102, 102, 102);">Bootstrap 简介</a></mip-link>
+</div>
+</div> 
+<div data-id="bootstrap-environment-setup" class="project-item">
+<div>
+<mip-link class="project-menu2 mip-element mip-layout-container" href="https://m.w3cschool.cn/bootstrap/bootstrap-environment-setup.html" title="Bootstrap 环境安装" pagetype="1" style="display: block; font-size: 16px; color: rgb(102, 102, 102);"><a href="https://m.w3cschool.cn/bootstrap/bootstrap-environment-setup.html" mip-link="" style="margin: 0px; padding: 0px; width: 100%; display: block; font-size: 16px; color: rgb(102, 102, 102);">Bootstrap 环境安装</a></mip-link>
+</div>
+</div> 
+<div data-id="bootstrap-codecamp" class="project-item">
+<div>
+<mip-link class="project-menu2 mip-element mip-layout-container" href="https://m.w3cschool.cn/bootstrap/bootstrap-codecamp.html" title="Bootstrap 编程实战闯关" pagetype="1" style="display: block; font-size: 16px; color: rgb(102, 102, 102);"><a href="https://m.w3cschool.cn/bootstrap/bootstrap-codecamp.html" mip-link="" style="margin: 0px; padding: 0px; width: 100%; display: block; font-size: 16px; color: rgb(102, 102, 102);">Bootstrap 编程实战闯关</a></mip-link>
+</div>
+</div> 
+ 
+</div></div>  
+<div data-id="m471bf21" class="project-item">
+<div>
+<h2 class="project-menu1">Bootstrap CSS</h2>
+</div>
+<div>
+<div data-id="bootstrap-css-overview" class="project-item">
+<div>
+<mip-link class="project-menu2 mip-element mip-layout-container" href="https://m.w3cschool.cn/bootstrap/bootstrap-css-overview.html" title="Bootstrap CSS 概览" pagetype="1" style="display: block; font-size: 16px; color: rgb(102, 102, 102);"><a href="https://m.w3cschool.cn/bootstrap/bootstrap-css-overview.html" mip-link="" style="margin: 0px; padding: 0px; width: 100%; display: block; font-size: 16px; color: rgb(102, 102, 102);">Bootstrap CSS 概览</a></mip-link>
+</div>
+</div> 
+<div data-id="bootstrap-v2-grid-system" class="project-item">
+<div>
+<mip-link class="project-menu2 mip-element mip-layout-container" href="https://m.w3cschool.cn/bootstrap/bootstrap-v2-grid-system.html" title="Bootstrap 网格系统" pagetype="1" style="display: block; font-size: 16px; color: rgb(102, 102, 102);"><a href="https://m.w3cschool.cn/bootstrap/bootstrap-v2-grid-system.html" mip-link="" style="margin: 0px; padding: 0px; width: 100%; display: block; font-size: 16px; color: rgb(102, 102, 102);">Bootstrap 网格系统</a></mip-link>
+</div>
+</div> 
+<div data-id="bootstrap-v2-typography" class="project-item">
+<div>
+<mip-link class="project-menu2 mip-element mip-layout-container" href="https://m.w3cschool.cn/bootstrap/bootstrap-v2-typography.html" title="Bootstrap 排版" pagetype="1" style="display: block; font-size: 16px; color: rgb(102, 102, 102);"><a href="https://m.w3cschool.cn/bootstrap/bootstrap-v2-typography.html" mip-link="" style="margin: 0px; padding: 0px; width: 100%; display: block; font-size: 16px; color: rgb(102, 102, 102);">Bootstrap 排版</a></mip-link>
+</div>
+</div> 
+<div data-id="bootstrap-code" class="project-item">
+<div>
+<mip-link class="project-menu2 mip-element mip-layout-container" href="https://m.w3cschool.cn/bootstrap/bootstrap-code.html" title="Bootstrap 代码" pagetype="1" style="display: block; font-size: 16px; color: rgb(102, 102, 102);"><a href="https://m.w3cschool.cn/bootstrap/bootstrap-code.html" mip-link="" style="margin: 0px; padding: 0px; width: 100%; display: block; font-size: 16px; color: rgb(102, 102, 102);">Bootstrap 代码</a></mip-link>
+</div>
+</div> 
+<div data-id="bootstrap-v2-tables" class="project-item">
+<div>
+<mip-link class="project-menu2 mip-element mip-layout-container" href="https://m.w3cschool.cn/bootstrap/bootstrap-v2-tables.html" title="Bootstrap 表格" pagetype="1" style="display: block; font-size: 16px; color: rgb(102, 102, 102);"><a href="https://m.w3cschool.cn/bootstrap/bootstrap-v2-tables.html" mip-link="" style="margin: 0px; padding: 0px; width: 100%; display: block; font-size: 16px; color: rgb(102, 102, 102);">Bootstrap 表格</a></mip-link>
+</div>
+</div> 
+<div data-id="bootstrap-v2-forms" class="project-item">
+<div>
+<mip-link class="project-menu2 mip-element mip-layout-container" href="https://m.w3cschool.cn/bootstrap/bootstrap-v2-forms.html" title="Bootstrap 表单" pagetype="1" style="display: block; font-size: 16px; color: rgb(102, 102, 102);"><a href="https://m.w3cschool.cn/bootstrap/bootstrap-v2-forms.html" mip-link="" style="margin: 0px; padding: 0px; width: 100%; display: block; font-size: 16px; color: rgb(102, 102, 102);">Bootstrap 表单</a></mip-link>
+</div>
+</div> 
+<div data-id="bootstrap-v2-button-plugin" class="project-item">
+<div>
+<mip-link class="project-menu2 mip-element mip-layout-container" href="https://m.w3cschool.cn/bootstrap/bootstrap-v2-button-plugin.html" title="Bootstrap 按钮" pagetype="1" style="display: block; font-size: 16px; color: rgb(102, 102, 102);"><a href="https://m.w3cschool.cn/bootstrap/bootstrap-v2-button-plugin.html" mip-link="" style="margin: 0px; padding: 0px; width: 100%; display: block; font-size: 16px; color: rgb(102, 102, 102);">Bootstrap 按钮</a></mip-link>
+</div>
+</div> 
+<div data-id="bootstrap-images" class="project-item">
+<div>
+<mip-link class="project-menu2 mip-element mip-layout-container" href="https://m.w3cschool.cn/bootstrap/bootstrap-images.html" title="Bootstrap 图片" pagetype="1" style="display: block; font-size: 16px; color: rgb(102, 102, 102);"><a href="https://m.w3cschool.cn/bootstrap/bootstrap-images.html" mip-link="" style="margin: 0px; padding: 0px; width: 100%; display: block; font-size: 16px; color: rgb(102, 102, 102);">Bootstrap 图片</a></mip-link>
+</div>
+</div> 
+<div data-id="bootstrap-helper-classes" class="project-item">
+<div>
+<mip-link class="project-menu2 mip-element mip-layout-container" href="https://m.w3cschool.cn/bootstrap/bootstrap-helper-classes.html" title="Bootstrap 辅助类" pagetype="1" style="display: block; font-size: 16px; color: rgb(102, 102, 102);"><a href="https://m.w3cschool.cn/bootstrap/bootstrap-helper-classes.html" mip-link="" style="margin: 0px; padding: 0px; width: 100%; display: block; font-size: 16px; color: rgb(102, 102, 102);">Bootstrap 辅助类</a></mip-link>
+</div>
+</div> 
+<div data-id="bootstrap-responsive-utilities" class="project-item">
+<div>
+<mip-link class="project-menu2 mip-element mip-layout-container" href="https://m.w3cschool.cn/bootstrap/bootstrap-responsive-utilities.html" title="Bootstrap 响应式实用工具" pagetype="1" style="display: block; font-size: 16px; color: rgb(102, 102, 102);"><a href="https://m.w3cschool.cn/bootstrap/bootstrap-responsive-utilities.html" mip-link="" style="margin: 0px; padding: 0px; width: 100%; display: block; font-size: 16px; color: rgb(102, 102, 102);">Bootstrap 响应式实用工具</a></mip-link>
+</div>
+</div> 
+ 
+</div></div>  
+<div data-id="sknxvf21" class="project-item">
+<div>
+<h2 class="project-menu1">Bootstrap 布局组件</h2>
+</div>
+<div>
+<div data-id="2emf1fn9" class="project-item">
+<div>
+<mip-link class="project-menu2 mip-element mip-layout-container" href="https://m.w3cschool.cn/bootstrap/2emf1fn9.html" title="Bootstrap 字体图标" pagetype="1" style="display: block; font-size: 16px; color: rgb(102, 102, 102);"><a href="https://m.w3cschool.cn/bootstrap/2emf1fn9.html" mip-link="" style="margin: 0px; padding: 0px; width: 100%; display: block; font-size: 16px; color: rgb(102, 102, 102);">Bootstrap 字体图标</a></mip-link>
+</div>
+</div> 
+<div data-id="bootstrap-v2-dropdown-plugin" class="project-item">
+<div>
+<mip-link class="project-menu2 mip-element mip-layout-container" href="https://m.w3cschool.cn/bootstrap/bootstrap-v2-dropdown-plugin.html" title="Bootstrap 下拉菜单" pagetype="1" style="display: block; font-size: 16px; color: rgb(102, 102, 102);"><a href="https://m.w3cschool.cn/bootstrap/bootstrap-v2-dropdown-plugin.html" mip-link="" style="margin: 0px; padding: 0px; width: 100%; display: block; font-size: 16px; color: rgb(102, 102, 102);">Bootstrap 下拉菜单</a></mip-link>
+</div>
+</div> 
+<div data-id="bootstrap-button-groups" class="project-item">
+<div>
+<mip-link class="project-menu2 mip-element mip-layout-container" href="https://m.w3cschool.cn/bootstrap/bootstrap-button-groups.html" title="Bootstrap 按钮组" pagetype="1" style="display: block; font-size: 16px; color: rgb(102, 102, 102);"><a href="https://m.w3cschool.cn/bootstrap/bootstrap-button-groups.html" mip-link="" style="margin: 0px; padding: 0px; width: 100%; display: block; font-size: 16px; color: rgb(102, 102, 102);">Bootstrap 按钮组</a></mip-link>
+</div>
+</div> 
+<div data-id="bootstrap-button-dropdowns" class="project-item">
+<div>
+<mip-link class="project-menu2 mip-element mip-layout-container" href="https://m.w3cschool.cn/bootstrap/bootstrap-button-dropdowns.html" title="Bootstrap 按钮下拉菜单" pagetype="1" style="display: block; font-size: 16px; color: rgb(102, 102, 102);"><a href="https://m.w3cschool.cn/bootstrap/bootstrap-button-dropdowns.html" mip-link="" style="margin: 0px; padding: 0px; width: 100%; display: block; font-size: 16px; color: rgb(102, 102, 102);">Bootstrap 按钮下拉菜单</a></mip-link>
+</div>
+</div> 
+<div data-id="bootstrap-input-groups" class="project-item">
+<div>
+<mip-link class="project-menu2 mip-element mip-layout-container" href="https://m.w3cschool.cn/bootstrap/bootstrap-input-groups.html" title="Bootstrap 输入框组" pagetype="1" style="display: block; font-size: 16px; color: rgb(102, 102, 102);"><a href="https://m.w3cschool.cn/bootstrap/bootstrap-input-groups.html" mip-link="" style="margin: 0px; padding: 0px; width: 100%; display: block; font-size: 16px; color: rgb(102, 102, 102);">Bootstrap 输入框组</a></mip-link>
+</div>
+</div> 
+<div data-id="bootstrap-navigation-elements" class="project-item">
+<div>
+<mip-link class="project-menu2 mip-element mip-layout-container" href="https://m.w3cschool.cn/bootstrap/bootstrap-navigation-elements.html" title="Bootstrap 导航元素" pagetype="1" style="display: block; font-size: 16px; color: rgb(102, 102, 102);"><a href="https://m.w3cschool.cn/bootstrap/bootstrap-navigation-elements.html" mip-link="" style="margin: 0px; padding: 0px; width: 100%; display: block; font-size: 16px; color: rgb(102, 102, 102);">Bootstrap 导航元素</a></mip-link>
+</div>
+</div> 
+<div data-id="cqye4fnh" class="project-item">
+<div>
+<mip-link class="project-menu2 mip-element mip-layout-container" href="https://m.w3cschool.cn/bootstrap/cqye4fnh.html" title="Bootstrap 导航栏" pagetype="1" style="display: block; font-size: 16px; color: rgb(102, 102, 102);"><a href="https://m.w3cschool.cn/bootstrap/cqye4fnh.html" mip-link="" style="margin: 0px; padding: 0px; width: 100%; display: block; font-size: 16px; color: rgb(102, 102, 102);">Bootstrap 导航栏</a></mip-link>
+</div>
+</div> 
+<div data-id="bootstrap-v2-breadcrumbs" class="project-item">
+<div>
+<mip-link class="project-menu2 mip-element mip-layout-container" href="https://m.w3cschool.cn/bootstrap/bootstrap-v2-breadcrumbs.html" title="Bootstrap 面包屑导航" pagetype="1" style="display: block; font-size: 16px; color: rgb(102, 102, 102);"><a href="https://m.w3cschool.cn/bootstrap/bootstrap-v2-breadcrumbs.html" mip-link="" style="margin: 0px; padding: 0px; width: 100%; display: block; font-size: 16px; color: rgb(102, 102, 102);">Bootstrap 面包屑导航</a></mip-link>
+</div>
+</div> 
+<div data-id="bootstrap-pagination" class="project-item">
+<div>
+<mip-link class="project-menu2 mip-element mip-layout-container" href="https://m.w3cschool.cn/bootstrap/bootstrap-pagination.html" title="Bootstrap 分页" pagetype="1" style="display: block; font-size: 16px; color: rgb(102, 102, 102);"><a href="https://m.w3cschool.cn/bootstrap/bootstrap-pagination.html" mip-link="" style="margin: 0px; padding: 0px; width: 100%; display: block; font-size: 16px; color: rgb(102, 102, 102);">Bootstrap 分页</a></mip-link>
+</div>
+</div> 
+<div data-id="bootstrap-labels" class="project-item">
+<div>
+<mip-link class="project-menu2 mip-element mip-layout-container" href="https://m.w3cschool.cn/bootstrap/bootstrap-labels.html" title="Bootstrap 标签" pagetype="1" style="display: block; font-size: 16px; color: rgb(102, 102, 102);"><a href="https://m.w3cschool.cn/bootstrap/bootstrap-labels.html" mip-link="" style="margin: 0px; padding: 0px; width: 100%; display: block; font-size: 16px; color: rgb(102, 102, 102);">Bootstrap 标签</a></mip-link>
+</div>
+</div> 
+<div data-id="bootstrap-badges" class="project-item">
+<div>
+<mip-link class="project-menu2 mip-element mip-layout-container" href="https://m.w3cschool.cn/bootstrap/bootstrap-badges.html" title="Bootstrap 徽章" pagetype="1" style="display: block; font-size: 16px; color: rgb(102, 102, 102);"><a href="https://m.w3cschool.cn/bootstrap/bootstrap-badges.html" mip-link="" style="margin: 0px; padding: 0px; width: 100%; display: block; font-size: 16px; color: rgb(102, 102, 102);">Bootstrap 徽章</a></mip-link>
+</div>
+</div> 
+<div data-id="bootstrap-jumbotron" class="project-item">
+<div>
+<mip-link class="project-menu2 mip-element mip-layout-container" href="https://m.w3cschool.cn/bootstrap/bootstrap-jumbotron.html" title="Bootstrap 超大屏幕" pagetype="1" style="display: block; font-size: 16px; color: rgb(102, 102, 102);"><a href="https://m.w3cschool.cn/bootstrap/bootstrap-jumbotron.html" mip-link="" style="margin: 0px; padding: 0px; width: 100%; display: block; font-size: 16px; color: rgb(102, 102, 102);">Bootstrap 超大屏幕</a></mip-link>
+</div>
+</div> 
+<div data-id="bootstrap-page-header" class="project-item">
+<div>
+<mip-link class="project-menu2 mip-element mip-layout-container" href="https://m.w3cschool.cn/bootstrap/bootstrap-page-header.html" title="Bootstrap 页面标题" pagetype="1" style="display: block; font-size: 16px; color: rgb(102, 102, 102);"><a href="https://m.w3cschool.cn/bootstrap/bootstrap-page-header.html" mip-link="" style="margin: 0px; padding: 0px; width: 100%; display: block; font-size: 16px; color: rgb(102, 102, 102);">Bootstrap 页面标题</a></mip-link>
+</div>
+</div> 
+<div data-id="bootstrap-v2-thumbnails" class="project-item">
+<div>
+<mip-link class="project-menu2 mip-element mip-layout-container" href="https://m.w3cschool.cn/bootstrap/bootstrap-v2-thumbnails.html" title="Bootstrap 缩略图" pagetype="1" style="display: block; font-size: 16px; color: rgb(102, 102, 102);"><a href="https://m.w3cschool.cn/bootstrap/bootstrap-v2-thumbnails.html" mip-link="" style="margin: 0px; padding: 0px; width: 100%; display: block; font-size: 16px; color: rgb(102, 102, 102);">Bootstrap 缩略图</a></mip-link>
+</div>
+</div> 
+<div data-id="bootstrap-alerts" class="project-item">
+<div>
+<mip-link class="project-menu2 mip-element mip-layout-container" href="https://m.w3cschool.cn/bootstrap/bootstrap-alerts.html" title="Bootstrap 警告" pagetype="1" style="display: block; font-size: 16px; color: rgb(102, 102, 102);"><a href="https://m.w3cschool.cn/bootstrap/bootstrap-alerts.html" mip-link="" style="margin: 0px; padding: 0px; width: 100%; display: block; font-size: 16px; color: rgb(102, 102, 102);">Bootstrap 警告</a></mip-link>
+</div>
+</div> 
+<div data-id="bootstrap-v2-progress-bars" class="project-item">
+<div>
+<mip-link class="project-menu2 mip-element mip-layout-container" href="https://m.w3cschool.cn/bootstrap/bootstrap-v2-progress-bars.html" title="Bootstrap 进度条" pagetype="1" style="display: block; font-size: 16px; color: rgb(102, 102, 102);"><a href="https://m.w3cschool.cn/bootstrap/bootstrap-v2-progress-bars.html" mip-link="" style="margin: 0px; padding: 0px; width: 100%; display: block; font-size: 16px; color: rgb(102, 102, 102);">Bootstrap 进度条</a></mip-link>
+</div>
+</div> 
+<div data-id="bootstrap-media-object" class="project-item">
+<div>
+<mip-link class="project-menu2 mip-element mip-layout-container" href="https://m.w3cschool.cn/bootstrap/bootstrap-media-object.html" title="Bootstrap 多媒体对象" pagetype="1" style="display: block; font-size: 16px; color: rgb(102, 102, 102);"><a href="https://m.w3cschool.cn/bootstrap/bootstrap-media-object.html" mip-link="" style="margin: 0px; padding: 0px; width: 100%; display: block; font-size: 16px; color: rgb(102, 102, 102);">Bootstrap 多媒体对象</a></mip-link>
+</div>
+</div> 
+<div data-id="bootstrap-list-group" class="project-item">
+<div>
+<mip-link class="project-menu2 mip-element mip-layout-container" href="https://m.w3cschool.cn/bootstrap/bootstrap-list-group.html" title="Bootstrap 列表组" pagetype="1" style="display: block; font-size: 16px; color: rgb(102, 102, 102);"><a href="https://m.w3cschool.cn/bootstrap/bootstrap-list-group.html" mip-link="" style="margin: 0px; padding: 0px; width: 100%; display: block; font-size: 16px; color: rgb(102, 102, 102);">Bootstrap 列表组</a></mip-link>
+</div>
+</div> 
+<div data-id="bootstrap-panels" class="project-item">
+<div>
+<mip-link class="project-menu2 mip-element mip-layout-container" href="https://m.w3cschool.cn/bootstrap/bootstrap-panels.html" title="Bootstrap 面板" pagetype="1" style="display: block; font-size: 16px; color: rgb(102, 102, 102);"><a href="https://m.w3cschool.cn/bootstrap/bootstrap-panels.html" mip-link="" style="margin: 0px; padding: 0px; width: 100%; display: block; font-size: 16px; color: rgb(102, 102, 102);">Bootstrap 面板</a></mip-link>
+</div>
+</div> 
+<div data-id="9jto5fni" class="project-item">
+<div>
+<mip-link class="project-menu2 mip-element mip-layout-container" href="https://m.w3cschool.cn/bootstrap/9jto5fni.html" title="Bootstrap Well" pagetype="1" style="display: block; font-size: 16px; color: rgb(102, 102, 102);"><a href="https://m.w3cschool.cn/bootstrap/9jto5fni.html" mip-link="" style="margin: 0px; padding: 0px; width: 100%; display: block; font-size: 16px; color: rgb(102, 102, 102);">Bootstrap Well</a></mip-link>
+</div>
+</div> 
+ 
+</div></div>  
+<div data-id="evsruf21" class="project-item">
+<div>
+<h2 class="project-menu1">Bootstrap 插件</h2>
+</div>
+<div>
+<div data-id="bootstrap-plugins-overview" class="project-item">
+<div>
+<mip-link class="project-menu2 mip-element mip-layout-container" href="https://m.w3cschool.cn/bootstrap/bootstrap-plugins-overview.html" title="Bootstrap 插件概览" pagetype="1" style="display: block; font-size: 16px; color: rgb(102, 102, 102);"><a href="https://m.w3cschool.cn/bootstrap/bootstrap-plugins-overview.html" mip-link="" style="margin: 0px; padding: 0px; width: 100%; display: block; font-size: 16px; color: rgb(102, 102, 102);">Bootstrap 插件概览</a></mip-link>
+</div>
+</div> 
+<div data-id="bootstrap-transition-plugin" class="project-item">
+<div>
+<mip-link class="project-menu2 mip-element mip-layout-container" href="https://m.w3cschool.cn/bootstrap/bootstrap-transition-plugin.html" title="Bootstrap 过渡效果（Transition）插件" pagetype="1" style="display: block; font-size: 16px; color: rgb(102, 102, 102);"><a href="https://m.w3cschool.cn/bootstrap/bootstrap-transition-plugin.html" mip-link="" style="margin: 0px; padding: 0px; width: 100%; display: block; font-size: 16px; color: rgb(102, 102, 102);">Bootstrap 过渡效果（Transition）插件</a></mip-link>
+</div>
+</div> 
+<div data-id="bootstrap-modal-plugin" class="project-item">
+<div>
+<mip-link class="project-menu2 mip-element mip-layout-container" href="https://m.w3cschool.cn/bootstrap/bootstrap-modal-plugin.html" title="Bootstrap 模态框（Modal）插件" pagetype="1" style="display: block; font-size: 16px; color: rgb(102, 102, 102);"><a href="https://m.w3cschool.cn/bootstrap/bootstrap-modal-plugin.html" mip-link="" style="margin: 0px; padding: 0px; width: 100%; display: block; font-size: 16px; color: rgb(102, 102, 102);">Bootstrap 模态框（Modal）插件</a></mip-link>
+</div>
+</div> 
+<div data-id="bootstrap-dropdown-plugin" class="project-item">
+<div>
+<mip-link class="project-menu2 mip-element mip-layout-container" href="https://m.w3cschool.cn/bootstrap/bootstrap-dropdown-plugin.html" title="Bootstrap 下拉菜单（Dropdown）插件" pagetype="1" style="display: block; font-size: 16px; color: rgb(102, 102, 102);"><a href="https://m.w3cschool.cn/bootstrap/bootstrap-dropdown-plugin.html" mip-link="" style="margin: 0px; padding: 0px; width: 100%; display: block; font-size: 16px; color: rgb(102, 102, 102);">Bootstrap 下拉菜单（Dropdown）插件</a></mip-link>
+</div>
+</div> 
+<div data-id="bootstrap-scrollspy-plugin" class="project-item">
+<div>
+<mip-link class="project-menu2 mip-element mip-layout-container" href="https://m.w3cschool.cn/bootstrap/bootstrap-scrollspy-plugin.html" title="Bootstrap 滚动监听（Scrollspy）插件" pagetype="1" style="display: block; font-size: 16px; color: rgb(102, 102, 102);"><a href="https://m.w3cschool.cn/bootstrap/bootstrap-scrollspy-plugin.html" mip-link="" style="margin: 0px; padding: 0px; width: 100%; display: block; font-size: 16px; color: rgb(102, 102, 102);">Bootstrap 滚动监听（Scrollspy）插件</a></mip-link>
+</div>
+</div> 
+<div data-id="bootstrap-tab-plugin" class="project-item">
+<div>
+<mip-link class="project-menu2 mip-element mip-layout-container" href="https://m.w3cschool.cn/bootstrap/bootstrap-tab-plugin.html" title="Bootstrap 标签页（Tab）插件" pagetype="1" style="display: block; font-size: 16px; color: rgb(102, 102, 102);"><a href="https://m.w3cschool.cn/bootstrap/bootstrap-tab-plugin.html" mip-link="" style="margin: 0px; padding: 0px; width: 100%; display: block; font-size: 16px; color: rgb(102, 102, 102);">Bootstrap 标签页（Tab）插件</a></mip-link>
+</div>
+</div> 
+<div data-id="5pj86fnj" class="project-item">
+<div>
+<mip-link class="project-menu2 mip-element mip-layout-container" href="https://m.w3cschool.cn/bootstrap/5pj86fnj.html" title="Bootstrap 提示工具（Tooltip）插件" pagetype="1" style="display: block; font-size: 16px; color: rgb(102, 102, 102);"><a href="https://m.w3cschool.cn/bootstrap/5pj86fnj.html" mip-link="" style="margin: 0px; padding: 0px; width: 100%; display: block; font-size: 16px; color: rgb(102, 102, 102);">Bootstrap 提示工具（Tooltip）插件</a></mip-link>
+</div>
+</div> 
+<div data-id="bootstrap-popover-plugin" class="project-item">
+<div>
+<mip-link class="project-menu2 mip-element mip-layout-container" href="https://m.w3cschool.cn/bootstrap/bootstrap-popover-plugin.html" title="Bootstrap 弹出框（Popover）插件" pagetype="1" style="display: block; font-size: 16px; color: rgb(102, 102, 102);"><a href="https://m.w3cschool.cn/bootstrap/bootstrap-popover-plugin.html" mip-link="" style="margin: 0px; padding: 0px; width: 100%; display: block; font-size: 16px; color: rgb(102, 102, 102);">Bootstrap 弹出框（Popover）插件</a></mip-link>
+</div>
+</div> 
+<div data-id="bootstrap-alert-plugin" class="project-item">
+<div>
+<mip-link class="project-menu2 mip-element mip-layout-container" href="https://m.w3cschool.cn/bootstrap/bootstrap-alert-plugin.html" title="Bootstrap 警告框" pagetype="1" style="display: block; font-size: 16px; color: rgb(102, 102, 102);"><a href="https://m.w3cschool.cn/bootstrap/bootstrap-alert-plugin.html" mip-link="" style="margin: 0px; padding: 0px; width: 100%; display: block; font-size: 16px; color: rgb(102, 102, 102);">Bootstrap 警告框</a></mip-link>
+</div>
+</div> 
+<div data-id="bootstrap-button-plugin" class="project-item">
+<div>
+<mip-link class="project-menu2 mip-element mip-layout-container" href="https://m.w3cschool.cn/bootstrap/bootstrap-button-plugin.html" title="Bootstrap 按钮（Button）插件" pagetype="1" style="display: block; font-size: 16px; color: rgb(102, 102, 102);"><a href="https://m.w3cschool.cn/bootstrap/bootstrap-button-plugin.html" mip-link="" style="margin: 0px; padding: 0px; width: 100%; display: block; font-size: 16px; color: rgb(102, 102, 102);">Bootstrap 按钮（Button）插件</a></mip-link>
+</div>
+</div> 
+<div data-id="bootstrap-collapse-plugin" class="project-item">
+<div>
+<mip-link class="project-menu2 mip-element mip-layout-container" href="https://m.w3cschool.cn/bootstrap/bootstrap-collapse-plugin.html" title="Bootstrap 折叠（Collapse）插件" pagetype="1" style="display: block; font-size: 16px; color: rgb(102, 102, 102);"><a href="https://m.w3cschool.cn/bootstrap/bootstrap-collapse-plugin.html" mip-link="" style="margin: 0px; padding: 0px; width: 100%; display: block; font-size: 16px; color: rgb(102, 102, 102);">Bootstrap 折叠（Collapse）插件</a></mip-link>
+</div>
+</div> 
+<div data-id="bootstrap-carousel-plugin" class="project-item">
+<div>
+<mip-link class="project-menu2 mip-element mip-layout-container" href="https://m.w3cschool.cn/bootstrap/bootstrap-carousel-plugin.html" title="Bootstrap 轮播（Carousel）插件" pagetype="1" style="display: block; font-size: 16px; color: rgb(102, 102, 102);"><a href="https://m.w3cschool.cn/bootstrap/bootstrap-carousel-plugin.html" mip-link="" style="margin: 0px; padding: 0px; width: 100%; display: block; font-size: 16px; color: rgb(102, 102, 102);">Bootstrap 轮播（Carousel）插件</a></mip-link>
+</div>
+</div> 
+<div data-id="bootstrap-affix-plugin" class="project-item">
+<div>
+<mip-link class="project-menu2 mip-element mip-layout-container" href="https://m.w3cschool.cn/bootstrap/bootstrap-affix-plugin.html" title="Bootstrap 附加导航（Affix）插件" pagetype="1" style="display: block; font-size: 16px; color: rgb(102, 102, 102);"><a href="https://m.w3cschool.cn/bootstrap/bootstrap-affix-plugin.html" mip-link="" style="margin: 0px; padding: 0px; width: 100%; display: block; font-size: 16px; color: rgb(102, 102, 102);">Bootstrap 附加导航（Affix）插件</a></mip-link>
+</div>
+</div> 
+ 
+</div></div>  
+<div data-id="89qvef21" class="project-item">
+<div>
+<h2 class="project-menu1">Bootstrap 其他</h2>
+</div>
+<div>
+<div data-id="bootstrap-ui-editor" class="project-item">
+<div>
+<mip-link class="project-menu2 mip-element mip-layout-container" href="https://m.w3cschool.cn/bootstrap/bootstrap-ui-editor.html" title="Bootstrap UI 编辑器" pagetype="1" style="display: block; font-size: 16px; color: rgb(102, 102, 102);"><a href="https://m.w3cschool.cn/bootstrap/bootstrap-ui-editor.html" mip-link="" style="margin: 0px; padding: 0px; width: 100%; display: block; font-size: 16px; color: rgb(102, 102, 102);">Bootstrap UI 编辑器</a></mip-link>
+</div>
+</div> 
+<div data-id="bootstrap-v2-tutorial" class="project-item">
+<div>
+<mip-link class="project-menu2 mip-element mip-layout-container" href="https://m.w3cschool.cn/bootstrap/bootstrap-v2-tutorial.html" title="Bootstrap v2 教程" pagetype="1" style="display: block; font-size: 16px; color: rgb(102, 102, 102);"><a href="https://m.w3cschool.cn/bootstrap/bootstrap-v2-tutorial.html" mip-link="" style="margin: 0px; padding: 0px; width: 100%; display: block; font-size: 16px; color: rgb(102, 102, 102);">Bootstrap v2 教程</a></mip-link>
+</div>
+</div> 
+<div data-id="bootstrap-html-codeguide" class="project-item">
+<div>
+<mip-link class="project-menu2 mip-element mip-layout-container" href="https://m.w3cschool.cn/bootstrap/bootstrap-html-codeguide.html" title="Bootstrap HTML编码规范" pagetype="1" style="display: block; font-size: 16px; color: rgb(102, 102, 102);"><a href="https://m.w3cschool.cn/bootstrap/bootstrap-html-codeguide.html" mip-link="" style="margin: 0px; padding: 0px; width: 100%; display: block; font-size: 16px; color: rgb(102, 102, 102);">Bootstrap HTML编码规范</a></mip-link>
+</div>
+</div> 
+<div data-id="bootstrap-css-codeguide-html" class="project-item">
+<div>
+<mip-link class="project-menu2 mip-element mip-layout-container" href="https://m.w3cschool.cn/bootstrap/bootstrap-css-codeguide-html.html" title="Bootstrap CSS编码规范" pagetype="1" style="display: block; font-size: 16px; color: rgb(102, 102, 102);"><a href="https://m.w3cschool.cn/bootstrap/bootstrap-css-codeguide-html.html" mip-link="" style="margin: 0px; padding: 0px; width: 100%; display: block; font-size: 16px; color: rgb(102, 102, 102);">Bootstrap CSS编码规范</a></mip-link>
+</div>
+</div> 
+ 
+</div></div>  
+<div data-id="bootstrap-b4v222x8" class="project-item">
+<div>
+<h2 class="project-menu1">Bootstrap 相关教程</h2>
+</div>
+<div>
+<div data-id="bootstrap-eg6822xa" class="project-item">
+<div>
+<mip-link class="project-menu2 mip-element mip-layout-container" href="https://m.w3cschool.cn/bootstrap/bootstrap-eg6822xa.html" title="Bootstrap 入门教程" pagetype="1" style="display: block; font-size: 16px; color: rgb(102, 102, 102);"><a href="https://m.w3cschool.cn/bootstrap/bootstrap-eg6822xa.html" mip-link="" style="margin: 0px; padding: 0px; width: 100%; display: block; font-size: 16px; color: rgb(102, 102, 102);">Bootstrap 入门教程</a></mip-link>
+</div>
+</div> 
+ 
+</div></div>  
+<div data-id="bootstrap-o38d28im" class="project-item">
+<div>
+<h2 class="project-menu1">Bootstrap 版本更新</h2>
+</div>
+<div>
+<div data-id="bootstrap-raxz28in" class="project-item">
+<div>
+<mip-link class="project-menu2 mip-element mip-layout-container" href="https://m.w3cschool.cn/bootstrap/bootstrap-raxz28in.html" title="Bootstrap4 首个Beta版发布：距上次发布已7月之久！" pagetype="1" style="display: block; font-size: 16px; color: rgb(102, 102, 102);"><a href="https://m.w3cschool.cn/bootstrap/bootstrap-raxz28in.html" mip-link="" style="margin: 0px; padding: 0px; width: 100%; display: block; font-size: 16px; color: rgb(102, 102, 102);">Bootstrap4 首个Beta版发布：距上次发布已7月之久！</a></mip-link>
+</div>
+</div> 
+<div data-id="bootstrap-uow62fyg" class="project-item">
+<div>
+<mip-link class="project-menu2 mip-element mip-layout-container" href="https://m.w3cschool.cn/bootstrap/bootstrap-uow62fyg.html" title="Bootstrap v4.0.0-beta.2 发布，Web 前端 UI 框架" pagetype="1" style="display: block; font-size: 16px; color: rgb(102, 102, 102);"><a href="https://m.w3cschool.cn/bootstrap/bootstrap-uow62fyg.html" mip-link="" style="margin: 0px; padding: 0px; width: 100%; display: block; font-size: 16px; color: rgb(102, 102, 102);">Bootstrap v4.0.0-beta.2 发布，Web 前端 UI 框架</a></mip-link>
+</div>
+</div> 
+ 
+</div></div>  
+</div>
+<!-- 关闭左边侧栏 -->
+<p class="close-box"><span class="mip-button" on="tap:sidebar.close">关闭</span></p>
+
+</mip-sidebar>
+<script src="./Bootstrap CSS 概览_bootstrap教程_w3cschool_files/mip.js" type="text/javascript"></script>
+<script src="./Bootstrap CSS 概览_bootstrap教程_w3cschool_files/mip-link.js" type="text/javascript"></script>
+<script src="./Bootstrap CSS 概览_bootstrap教程_w3cschool_files/mip-sidebar.js" type="text/javascript"></script>
+
+</body></html>

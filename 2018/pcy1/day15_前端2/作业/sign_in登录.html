@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<style>
+    .pg-header{
+        position: relative;
+        margin: 0 auto;
+        width: 850px;
+        height: 120px;
+
+    }
+
+    .pg-header .img1{
+        width: 120px;
+        height: 90px;
+        position: absolute;
+        left: 5px;
+
+    }
+    .pg-bodyer{
+        position: relative;
+        margin: 0 auto;
+        width: 850px;
+        height: 400px;
+        border: 1px solid #888888;
+        /*background-color: #f2f2f2;*/
+
+    }
+    .pg-bodyer .bodyer-left{
+        float: left;
+    }
+    .pg-bodyer .bodyer-left .img2{
+        width: 300px;
+        height: 250px;
+        margin-left: 10px;
+        margin-top: 50px;
+    }
+
+    .pg-bodyer .bodyer-right{
+        float:right;
+        margin: 0 auto;
+
+    }
+    .pg-bodyer .bodyer-right .right-top{
+        margin-top: 40px;
+        margin-right: 10px;
+        /*border: 1px solid #dddddd;*/
+        width: 500px;
+        height: 300px;
+
+    }
+    .pg-bodyer .bodyer-right .right-bottom{
+        position: absolute;
+        right:30px;
+        bottom: 30px;
+        width: 200px;
+        height: 30px;
+    }
+    .pg-bodyer .bodyer-right .right-top .right-1{
+        margin-top: 30px;
+        margin-left: 30px;
+    }
+    .pg-bodyer .bodyer-right .right-top .right-1 .right-text{
+        display: inline-block;
+        text-align: right;
+        width: 80px;
+    }
+    .pg-bodyer .bodyer-right .right-top .right-1 .text-bord{
+        display: inline-block;
+        width: 350px;
+        height: 35px;
+        position: relative;
+    }
+    .pg-bodyer .bodyer-right .right-top .right-1 .text-bord .text-input{
+        width:315px;
+        height:35px;
+        padding-right: 35px;
+    }
+    .pg-bodyer .bodyer-right .right-top .right-1 .text-bord .backgroud-img{
+        display: inline-block;
+        width: 19px;
+        height: 19px;
+
+        position: absolute;
+        right: 10px;
+        bottom: 3px;
+    }
+    .b1{
+        background: url("../i_name.jpg") no-repeat;
+    }
+    .b2{
+        background: url("../i_pwd.jpg") no-repeat;
+    }
+
+    .pg-bodyer .bodyer-right .right-top .right-1 .text-bord .text-input1{
+
+        width:150px;
+        height:35px;
+    }
+
+    .pg-bodyer .bodyer-right .right-top .right-2{
+        margin-top: 50px;
+        margin-left: 111px;
+
+    }
+
+    .sub1{
+        display: inline-block;
+        width: 150px;
+        height: 30px;
+        border: 0;
+        font-weight: bold;
+        background-color: rgb(199, 41, 41);/*#d2322d*/
+        color: #ffffff;
+
+
+    }
+    .right-2-1{
+        display: inline-block;
+        font-size: 13px;
+     }
+    .signup{
+        width: 200px;
+        height: 30px;
+        border: 0;/*去掉按钮原有的边框*/
+        border-radius: 50%;/*长方形变椭圆，方形变圆*/
+        text-align: center;
+        line-height: 30px;
+        background-color: #2459a2;
+        color: white;
+        cursor: pointer;/*鼠标变小手*/
+    }
+
+    .pg-footer{
+        margin: 30px auto;
+        text-align: center;
+        font-size: 13px;
+
+    }
+</style>
+<body>
+
+
+    <div class="pg-header">
+        <div>
+            <a href="http://jquery.cuishifeng.cn/">
+                <img class="img1" src="..\马20170924.png"/>
+            </a>
+        </div>
+    </div>
+    <div class="pg-bodyer">
+
+        <div class="bodyer-left">
+            <a href="http://jquery.cuishifeng.cn/">
+                <img  class="img2" src="..\马20170924.png"/>
+            </a>
+        </div>
+        <div class="bodyer-right">
+            <div class="right-top">
+                <form action="sign_up注册.html" method="post">
+                    <div class="right-1">
+                        <span class="right-text">用户名：</span>
+                        <div class="text-bord">
+                            <input class="text-input" type="text"/>
+                            <span class="backgroud-img b1"></span>
+                        </div>
+                    </div>
+
+                    <div class="right-1">
+                        <span class="right-text">密码：</span>
+                        <div class="text-bord">
+                            <input class="text-input" type="password"/>
+                            <span class="backgroud-img b2"></span>
+
+                        </div>
+                    </div>
+                    <div class="right-1">
+                        <span class="right-text">验证码：</span>
+                        <div class="text-bord">
+                            <input class="text-input1" type="text"/>
+                            <span>xxx</span>
+                            <a href="#">看不清？</a>
+
+                        </div>
+
+                    </div>
+                    <div class="right-2">
+                        <input class="sub1" type="submit" value="登&nbsp;&nbsp;&nbsp;录">
+                        <div class="right-2-1">
+                            <input type="checkbox" name="autosignin" value="1" checked="checked">
+
+                            <span>自动登录</span>
+                            <a href="#">忘记密码？</a>
+                        </div>
+
+                    </div>
+                </form>
+            </div>
+            <div class="right-bottom">
+                <input  class='signup' type="button" value="免费注册">
+            </div>
+        </div>
+        <div style="clear: both"></div>
+
+    </div>
+    <div class="pg-footer">&copy;2004-2015 www.autohome.com.cn All Rights Reserved. 博骞 版权所有</div>
+
+    <script src="jquery-1.12.4.js"></script>
+    <script>
+
+    </script>
+</body>
+</html>

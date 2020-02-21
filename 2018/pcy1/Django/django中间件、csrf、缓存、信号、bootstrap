@@ -1,0 +1,430 @@
+django中间件、csrf、缓存、信号、bootstrap
+学习笔记：Python之路【第十七篇】：Django【进阶篇 】 - 武沛齐 - 博客园.html
+参考博客：http://www.cnblogs.com/wupeiqi/articles/5246483.html
+视频：\2017年老男孩最新全栈python第2期视频教程 全套完整版\day69-python 全栈开发-web框架篇
+
+一、中间件
+视频：\day69-python 全栈开发-web框架篇\02-07
+
+    1，django的整个生命周期
+        中间件是影响全局的，是对客户端在到达url之前进行请求处理，和返回给客户端时进行返回处理的管道
+    2，建立md目录，写中间件py文件：\md\hxl.py
+        2.1 复制django的中间件类，改名为自己名的中间件类，防止改版后的python没有了该中间件
+            class MyMiddlewareMixin(object):
+                def __init__(self, get_response=None):
+                    self.get_response = get_response
+                    super(MyMiddlewareMixin, self).__init__()
+
+                def __call__(self, request):
+                    response = None
+                    if hasattr(self, 'process_request'):
+                        # 执行当前中间的process_request
+                        response = self.process_request(request)
+                    if not response:
+                        # 执行下一个中间的 __call__
+                        response = self.get_response(request)
+                    if hasattr(self, 'process_response'):
+                        # 执行当前中间的process_response
+                        response = self.process_response(request, response)
+                    return response
+        2.2继承自己的中间件类，编写自己的中间件
+            共有5个方法，最常用的方法就是：
+                请求处理方法def process_request(self, request):
+                返回处理方法def process_response(self, request, response):
+                其余：视频07 02:00-34:00
+                查看视图函数名和参数def process_view(self, request, view_func, view_args, view_kwargs):
+                只对视图函数异常处理的函数def process_exception(self, request, exception):
+                返回对象中有render方法的处理函数def process_template_response(self,request,response):
+            class HXL(MyMiddlewareMixin):
+                def process_request(self, request):
+                    print('hxl-->process_request')
+                def process_view(self, request, view_func, view_args, view_kwargs):
+                    print('hxl-->process_view')
+
+                def process_response(self, request, response):
+                    print('hxl-->process_response')
+                    return response
+
+                def process_exception(self, request, exception):
+                    print('hxl-->process_exception')
+
+                def process_template_response(self,request,response):
+                    print('hxl--> process_template_response')
+                    return response
+
+            class LBS(MyMiddlewareMixin):
+
+                def process_request(self, request):
+                    print('lbs-->process_request')
+
+                def process_view(self, request, view_func, view_args, view_kwargs):
+                    print('lbs-->process_view')
+
+                def process_response(self, request, response):
+                    print('lbs-->process_response')
+                    return response
+
+                def process_exception(self, request, exception):
+                    print('lbs-->process_exception')
+                    return HttpResponse('OK')
+
+                def process_template_response(self,request,response):
+                    print('lbs--> process_template_response')
+                    return response
+
+            class GYC(MyMiddlewareMixin):
+                def process_request(self, request):
+                    print('gyc-->process_request')
+
+                def process_view(self, request, view_func, view_args, view_kwargs):
+                    print('gyc-->process_view')
+
+                def process_response(self, request, response):
+                    print('gyc-->process_response')
+                    return response
+
+                def process_exception(self, request, exception):
+                    print('gyc-->process_exception')
+                    # return HttpResponse('OK')
+                    # print('gyc-->process_exception')
+                def process_template_response(self,request,response):
+                    # print(request,type(request))
+                    # print(response,type(response))
+                    print('gyc--> process_template_response')
+                    return response
+
+
+    3，在settings.py中注册中间件
+        MIDDLEWARE = [
+            'django.middleware.security.SecurityMiddleware',
+            'django.contrib.sessions.middleware.SessionMiddleware',
+            'django.middleware.common.CommonMiddleware',
+            'django.middleware.csrf.CsrfViewMiddleware',
+            'django.contrib.auth.middleware.AuthenticationMiddleware',
+            'django.contrib.messages.middleware.MessageMiddleware',
+            'django.middleware.clickjacking.XFrameOptionsMiddleware',
+            #下面是新增的中间件，按顺序执行，
+            "md.hxl.HXL",
+            "md.hxl.LBS",
+            "md.hxl.GYC",
+        ]
+
+
+二、csrf
+视频：\day69-python 全栈开发-web框架篇\08-09
+
+    全站都使用csrf：中间件 django.middleware.csrf.CsrfViewMiddleware
+        Form:
+            render
+            {% csrf_token %}
+        Ajax:
+            cookie中提取随机字符串csrftoken对象的值
+            设置请求头：
+                X-CSTRToken：cookie中取到的值
+                headers:{'X-CSRFtoken':$.cookie('csrftoken')},
+
+    局部：对视图函数使用下列装饰器
+        from django.views.decorators.csrf import csrf_exempt,csrf_protect
+        @csrf_protect，为当前函数强制设置防跨站请求伪造功能，即便settings中没有设置全局中间件。
+        @csrf_exempt，取消当前函数防跨站请求伪造功能，即便settings中设置了全局中间件。
+
+三、缓存
+视频：\day69-python 全栈开发-web框架篇\10-12  -13 0:58秒
+
+由于Django是动态网站，所有每次请求均会去数据库进行相应的操作，当程序访问量大时，耗时必然会更加明显，
+最简单解决方式是使用：缓存，缓存将一个某个views的返回值保存至内存或者memcache中，默认5分钟内再有人来访问时，则不再去执行view中的操作，
+而是直接从内存或者Redis中之前缓存的内容拿到，并返回。
+
+Django中提供了6种缓存方式：
+        开发调试
+        内存
+        文件
+        数据库
+        Memcache缓存（python-memcached模块）
+        Memcache缓存（pylibmc模块）
+   Memcache缓存是指存在别的机器上。
+   缓存是一个大字典，有key、value键值对，value就是大字符串
+
+    1、配置 在settings.py中
+
+        a、开发调试
+
+            # 此为开始调试用，实际内部不做任何操作
+            # 配置：
+                CACHES = {
+                    'default': {
+                        'BACKEND': 'django.core.cache.backends.dummy.DummyCache',     # 引擎
+                        'TIMEOUT': 300,                                               # 缓存超时时间（默认300，None表示永不过期，0表示立即过期）
+                        'OPTIONS':{
+                            'MAX_ENTRIES': 300,                                       # 最大缓存个数（默认300）
+                            'CULL_FREQUENCY': 3,                                      # 缓存到达最大个数之后，剔除缓存个数的比例，即：1/CULL_FREQUENCY（默认3），剔除三分之一
+                        },
+                        'KEY_PREFIX': '',                                             # 缓存key的前缀（默认空）
+                        'VERSION': 1,                                                 # 缓存key的版本（默认1）
+                        'KEY_FUNCTION' 函数名                                          # 生成key的函数（默认函数会生成为：【前缀:版本:key】）
+                    }
+                }
+            'KEY_FUNCTION' 函数名 不写的时候就用默认的key函数
+
+            # 源码key生成函数
+            def default_key_func(key, key_prefix, version):
+                """
+                Default function to generate keys.
+
+                Constructs the key used by all other methods. By default it prepends
+                the `key_prefix'. KEY_FUNCTION can be used to specify an alternate
+                function with custom key making behavior.
+                """
+                return '%s:%s:%s' % (key_prefix, version, key)
+
+            def get_key_func(key_func):
+                """
+                Function to decide which key function to use.
+
+                Defaults to ``default_key_func``.
+                """
+                if key_func is not None:
+                    if callable(key_func):
+                        return key_func
+                    else:
+                        return import_string(key_func)
+                return default_key_func
+
+        b、内存
+
+            # 此缓存将内容保存至内存的变量中
+            # 配置：
+                CACHES = {
+                    'default': {
+                        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+                        'LOCATION': 'unique-snowflake',#内存中地址指向的名字，就是缓存变量名
+                    }
+                }
+
+            # 注：其他配置同开发调试版本
+
+        c、文件
+
+            # 此缓存将内容保存至文件
+            # 配置：
+
+                CACHES = {
+                    'default': {
+                        'BACKEND': 'django.core.cache.backends.filebased.FileBasedCache',
+                        'LOCATION': '/var/tmp/django_cache',#缓存文件的目录
+                    }
+                }
+            # 注：其他配置同开发调试版本
+
+        d、数据库（不推荐，是个鸡肋）
+
+            # 此缓存将内容保存至数据库
+
+            # 配置：
+                CACHES = {
+                    'default': {
+                        'BACKEND': 'django.core.cache.backends.db.DatabaseCache',
+                        'LOCATION': 'my_cache_table', # 数据库
+                    }
+                }
+
+            # 注：执行创建表命令 python manage.py createcachetable
+
+        e、Memcache缓存（python-memcached模块）
+
+            # 此缓存使用python-memcached模块连接memcache
+
+            CACHES = {
+                'default': {
+                    'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
+                    'LOCATION': '127.0.0.1:11211',#机器ip，端口
+                }
+            }
+
+            CACHES = {
+                'default': {
+                    'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
+                    'LOCATION': 'unix:/tmp/memcached.sock',#同上，只能用于本机，不推荐
+                }
+            }
+
+            CACHES = {
+                'default': {
+                    'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
+                    'LOCATION': [       #机器集群
+                        '172.19.26.240:11211',
+                        '172.19.26.242:11211',
+                    ]
+                }
+            }
+            这种集群方式就是分布式缓存，Memcache天生支持集群，并且可以分配权重（如下，采用元组，数字越大权重越高），以保证缓存均衡。
+            'LOCATION': [
+                        ('172.19.26.240:11211',1),
+                        ('172.19.26.242:11211',2),
+                        ('172.19.26.244:11211',1),
+                    ]
+            权重越高，缓存命中的概率越高，相当于：
+                   'LOCATION': [
+                        '172.19.26.240:11211',
+                        '172.19.26.242:11211',
+                        '172.19.26.242:11211',
+                        '172.19.26.244:11211',
+                    ]
+
+            缓存的某台机器宕机，Memcache并不知道，需要后台进行监测，一旦发现，可以用Memcache的
+            delete命令删掉该机器，这样缓存就不会有坏机器。
+
+        f、Memcache缓存（pylibmc模块）  和e除了名字不一样其余都一样
+
+            # 此缓存使用pylibmc模块连接memcache
+
+            CACHES = {
+                'default': {
+                    'BACKEND': 'django.core.cache.backends.memcached.PyLibMCCache',
+                    'LOCATION': '127.0.0.1:11211',
+                }
+            }
+
+            CACHES = {
+                'default': {
+                    'BACKEND': 'django.core.cache.backends.memcached.PyLibMCCache',
+                    'LOCATION': '/tmp/memcached.sock',
+                }
+            }
+
+            CACHES = {
+                'default': {
+                    'BACKEND': 'django.core.cache.backends.memcached.PyLibMCCache',
+                    'LOCATION': [
+                        '172.19.26.240:11211',
+                        '172.19.26.242:11211',
+                    ]
+                }
+            }
+
+    2、应用
+
+        a. 全站使用
+
+           使用中间件，经过一系列的认证等操作，如果内容在缓存中存在，则使用FetchFromCacheMiddleware获取内容并返回给用户，
+           当返回给用户之前，判断缓存中是否已经存在，如果不存在则UpdateCacheMiddleware会将缓存保存至缓存，从而实现全站缓存
+
+            MIDDLEWARE = [
+                'django.middleware.cache.UpdateCacheMiddleware',
+                # 其他中间件...
+                'django.middleware.cache.FetchFromCacheMiddleware',
+            ]
+
+            CACHE_MIDDLEWARE_ALIAS = ""
+            CACHE_MIDDLEWARE_SECONDS = ""
+            CACHE_MIDDLEWARE_KEY_PREFIX = ""
+
+        b. 单独视图缓存
+
+            方式一：
+                from django.views.decorators.cache import cache_page
+
+                @cache_page(60) #超时时间60秒
+                def my_view(request):
+                    ...
+
+            方式二：
+                from django.views.decorators.cache import cache_page
+
+                urlpatterns = [
+                    url(r'^foo/([0-9]{1,2})/$', cache_page(60 * 15)(my_view)),
+                ]
+
+        c、局部视图缓存：在前端使用
+
+            a. 引入TemplateTag
+
+                {% load cache %}
+
+            b. 使用缓存
+
+                {% cache 5000 缓存key %}
+                    缓存内容
+                {% endcache %}
+
+
+
+四、信号
+视频：\day69-python 全栈开发-web框架篇\13 0:58秒-15
+
+   *** 写在工程名同名文件夹的__init__.py文件中，或在该文件中引入import***
+
+    -内置信号 一步操作
+        a.指定信号中注入函数
+
+        Model signals
+            pre_init                    # django的modal执行其构造方法前，自动触发
+            post_init                   # django的modal执行其构造方法后，自动触发
+            pre_save                    # django的modal对象保存前，自动触发
+            post_save                   # django的modal对象保存后，自动触发
+            pre_delete                  # django的modal对象删除前，自动触发
+            post_delete                 # django的modal对象删除后，自动触发
+            m2m_changed                 # django的modal中使用m2m字段操作第三张表（add,remove,clear）前后，自动触发
+            class_prepared              # 程序启动时，检测已注册的app中modal类，对于每一个类，自动触发
+        Management signals
+            pre_migrate                 # 执行migrate命令前，自动触发
+            post_migrate                # 执行migrate命令后，自动触发
+        Request/response signals
+            request_started             # 请求到来前，自动触发
+            request_finished            # 请求结束后，自动触发
+            got_request_exception       # 请求异常后，自动触发
+        Test signals
+            setting_changed             # 使用test测试修改配置文件时，自动触发
+            template_rendered           # 使用test测试渲染模板时，自动触发
+        Database Wrappers
+            connection_created          # 创建数据库连接时，自动触发
+
+    -自定义信号 预先留着动态可扩展的钩子 三步操作
+        a.定义信号--创建
+            import django.dispatch
+            pizza_done = django.dispatch.Signal(providing_args=["toppings", "size"])
+
+        b.注册信号--在指定信号中注入函数
+            def callback(sender, **kwargs): sender表示对哪个对象触发的信号，**kwargs表示操作的参数。
+                print("callback")
+                print(sender,kwargs)
+
+            pizza_done.connect(callback)
+
+        c.触发信号 在视图函数中
+            from 路径 import pizza_done
+
+            pizza_done.send(sender='seven',toppings=123, size=456)
+
+
+五、bootstrap(模板) --响应式+模板
+视频：\day69-python 全栈开发-web框架篇\16-18
+
+    集成css、js的一个文件夹
+        css
+            -响应式 @media
+
+                -bootstrap的container样式
+                    宽度随屏幕的变化而变化
+                -bootstrap的栅格样式 把一行宽度分成12份
+                    <div class='col-md-6' style='background-color:red'>md1</div>
+                    <div class='col-md-6' style='background-color:green'>md2</div>
+                    当宽度小于多少的时候是块级标签，也就是2行；当宽度大于多少的时候变成内联标签，也就是在一行
+        js
+            -引入jquery.js
+            -引入bootatrap.js
+            -事件：
+                a.bootstrap根据自定义属性进行绑定事件
+                b.js形式调用
+
+    模板 -->看bootstrap官方文档，看懂一个后台模板和一个主站模板，多看模板。
+    https://v3.bootcss.com/
+    bootstrap点滴：
+        <html lang="zh-CN">
+        <head>
+            <meta charset="utf-8">
+            <meta http-equiv="X-UA-Compatible" content="IE=edge"><!--使用最新的IE渲染-->
+
+            <meta name="viewport" content="width=device-width, initial-scale=1"><!--触屏放大或缩小-->
+
+            <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->

@@ -1,0 +1,86 @@
+
+
+一（班级）对多（学生）下的删除，当删除“一”时，默认情况下该“一”对应的“多”都会被删除
+因此要在设置ForeignKey时对on_delete参数进行设置：
+
+    user = models.ForeignKey(User, blank=True, null=True, on_delete=models.CASCADE)
+
+    当一个model对象的ForeignKey关联的对象被删除时，默认情况下此对象也会一起被级联删除的。
+    CASCADE:默认值，model对象会和ForeignKey关联对象一起被删除
+
+    SET_NULL:将model对象的ForeignKey字段设为null。当然需要将null设为True。
+
+    SET_DEFAULT:将model对象的ForeignKey字段设为默认值。
+
+    Protect:删除ForeignKey关联对象时会生成一个ProtectedError，这样ForeignKey关联对象就不会被删除了。
+
+    SET():将model对象的ForeignKey字段设为传递给SET()的值。
+
+        def get_sentinel_user():
+            return User.objects.get_or_create(username='deleted')[0]
+
+        class MyModel(models.Model):
+            user = models.ForeignKey(User, on_delete=models.SET(get_sentinel_user))
+    DO_NOTHING:啥也不做。
+
+ForeignKey(ForeignObject) # ForeignObject(RelatedField)
+        to,                         # 要进行关联的表名
+        to_field=None,              # 要关联的表中的字段名称
+
+        on_delete=None,             # 当删除关联表中的数据时，当前表与其关联的行的行为
+                                        - models.CASCADE，删除关联数据，与之关联也删除
+                                        - models.DO_NOTHING，删除关联数据，引发错误IntegrityError
+                                        - models.PROTECT，删除关联数据，引发错误ProtectedError
+                                        - models.SET_NULL，删除关联数据，与之关联的值设置为null（前提FK字段需要设置为可空）
+                                        - models.SET_DEFAULT，删除关联数据，与之关联的值设置为默认值（前提FK字段需要设置默认值）
+                                        - models.SET，删除关联数据，
+                                                      a. 与之关联的值设置为指定值，设置：models.SET(值)
+                                                      b. 与之关联的值设置为可执行对象的返回值，设置：models.SET(可执行对象)
+
+                                                        def func():
+                                                            return 10
+
+                                                        class MyModel(models.Model):
+                                                            user = models.ForeignKey(
+                                                                to="User",
+                                                                to_field="id"
+                                                                on_delete=models.SET(func),)
+
+
+
+        related_name=None,
+               # 反向操作时，使用的字段名，用于代替 【表名_set】
+              如： obj.表名_set.all()
+
+        related_query_name=None,
+                # 反向操作时，使用的连接前缀，用于替换【表名】
+                如： models.UserGroup.objects.filter(表名__字段名=1).values('表名__字段名')
+        limit_choices_to=None,      # 在Admin或ModelForm中显示关联数据时，提供的条件：
+                                    # 如：
+                                            - limit_choices_to={'nid__gt': 5}
+                                            - limit_choices_to=lambda : {'nid__gt': 5}
+
+                                            from django.db.models import Q
+                                            - limit_choices_to=Q(nid__gt=10)
+                                            - limit_choices_to=Q(nid=8) | Q(nid__gt=10)
+                                            - limit_choices_to=lambda : Q(Q(nid=8) | Q(nid__gt=10)) & Q(caption='root')
+        db_constraint=True          # 是否在数据库中创建外键约束
+        parent_link=False           # 在Admin中是否显示关联数据
+
+
+    OneToOneField(ForeignKey)
+        to,                         # 要进行关联的表名
+        to_field=None               # 要关联的表中的字段名称
+        on_delete=None,             # 当删除关联表中的数据时，当前表与其关联的行的行为
+
+                                    ###### 对于一对一 ######
+                                    # 1. 一对一其实就是 一对多 + 唯一索引
+                                    # 2.当两个类之间有继承关系时，默认会创建一个一对一字段
+                                    # 如下会在A表中额外增加一个c_ptr_id列且唯一：
+                                            class C(models.Model):
+                                                nid = models.AutoField(primary_key=True)
+                                                part = models.CharField(max_length=12)
+
+                                            class A(C):
+                                                id = models.AutoField(primary_key=True)
+                                                code = models.CharField(max_length=1)

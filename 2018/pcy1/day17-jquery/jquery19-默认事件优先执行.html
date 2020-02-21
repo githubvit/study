@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<input type="checkbox">
+<script src="jquery-1.12.4.js"></script>
+<script>
+    $(':checkbox').click(function () {
+//        获取该标签的checked属性的值
+        console.log($(this).prop('checked'))
+        //我们加的事件是点击输出，标签默认事件是点击打勾
+        //如果我们加的事件优先执行，那么输出在先，应该输出false。
+        //如果输出true，就是先打勾，后才输出，表示标签默认的优先执行，
+    })
+</script>
+</body>
+</html>

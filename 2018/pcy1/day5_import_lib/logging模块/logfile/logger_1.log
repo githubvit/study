@@ -1,0 +1,30 @@
+2017-10-07 11:34:13,950 - logger_1 - DEBUG - debug message
+2017-10-07 11:34:13,950 - logger_1 - INFO - info message
+2017-10-07 11:34:13,950 - logger_1 - WARNING - warn message
+2017-10-07 11:34:13,950 - logger_1 - ERROR - error message
+2017-10-07 11:34:13,950 - logger_1 - CRITICAL - critical message
+2017-10-07 12:09:20,946 -logging_2¼ÇÂ¼Æ÷_´¦ÀíÆ÷_¸ñÊ½»¯Æ÷.py[line:21]â€”â€” logger_1 - DEBUG - debug message
+2017-10-07 12:09:20,946 -logging_2¼ÇÂ¼Æ÷_´¦ÀíÆ÷_¸ñÊ½»¯Æ÷.py[line:22]â€”â€” logger_1 - INFO - info message
+2017-10-07 12:09:20,946 -logging_2¼ÇÂ¼Æ÷_´¦ÀíÆ÷_¸ñÊ½»¯Æ÷.py[line:23]â€”â€” logger_1 - WARNING - warn message
+2017-10-07 12:09:20,946 -logging_2¼ÇÂ¼Æ÷_´¦ÀíÆ÷_¸ñÊ½»¯Æ÷.py[line:24]â€”â€” logger_1 - ERROR - error message
+2017-10-07 12:09:20,947 -logging_2¼ÇÂ¼Æ÷_´¦ÀíÆ÷_¸ñÊ½»¯Æ÷.py[line:25]â€”â€” logger_1 - CRITICAL - critical message
+2017-10-07 12:21:35,671 -logging_2¼ÇÂ¼Æ÷_´¦ÀíÆ÷_¸ñÊ½»¯Æ÷.py[line:22]â€”â€” logger_1 - DEBUG - debug message
+2017-10-07 12:21:35,671 -logging_2¼ÇÂ¼Æ÷_´¦ÀíÆ÷_¸ñÊ½»¯Æ÷.py[line:23]â€”â€” logger_1 - INFO - info message
+2017-10-07 12:21:35,671 -logging_2¼ÇÂ¼Æ÷_´¦ÀíÆ÷_¸ñÊ½»¯Æ÷.py[line:24]â€”â€” logger_1 - WARNING - warn message
+2017-10-07 12:21:35,671 -logging_2¼ÇÂ¼Æ÷_´¦ÀíÆ÷_¸ñÊ½»¯Æ÷.py[line:25]â€”â€” logger_1 - ERROR - error message
+2017-10-07 12:21:35,671 -logging_2¼ÇÂ¼Æ÷_´¦ÀíÆ÷_¸ñÊ½»¯Æ÷.py[line:26]â€”â€” logger_1 - CRITICAL - critical message
+Sat, 07 Oct 2017 18:27:55 -logging_2¼ÇÂ¼Æ÷_´¦ÀíÆ÷_¸ñÊ½»¯Æ÷.py[line:24]â€”â€” logger_1 - DEBUG - debug message
+Sat, 07 Oct 2017 18:27:55 -logging_2¼ÇÂ¼Æ÷_´¦ÀíÆ÷_¸ñÊ½»¯Æ÷.py[line:25]â€”â€” logger_1 - INFO - info message
+Sat, 07 Oct 2017 18:27:55 -logging_2¼ÇÂ¼Æ÷_´¦ÀíÆ÷_¸ñÊ½»¯Æ÷.py[line:26]â€”â€” logger_1 - WARNING - warn message
+Sat, 07 Oct 2017 18:27:55 -logging_2¼ÇÂ¼Æ÷_´¦ÀíÆ÷_¸ñÊ½»¯Æ÷.py[line:27]â€”â€” logger_1 - ERROR - error message
+Sat, 07 Oct 2017 18:27:55 -logging_2¼ÇÂ¼Æ÷_´¦ÀíÆ÷_¸ñÊ½»¯Æ÷.py[line:28]â€”â€” logger_1 - CRITICAL - critical message
+Sat, 07 Oct 2017 18:46:27 -logging_2¼ÇÂ¼Æ÷_´¦ÀíÆ÷_¸ñÊ½»¯Æ÷.py[line:31]â€”â€” logger_1 - DEBUG - debug message
+Sat, 07 Oct 2017 18:46:27 -logging_2¼ÇÂ¼Æ÷_´¦ÀíÆ÷_¸ñÊ½»¯Æ÷.py[line:32]â€”â€” logger_1 - INFO - info message
+Sat, 07 Oct 2017 18:46:27 -logging_2¼ÇÂ¼Æ÷_´¦ÀíÆ÷_¸ñÊ½»¯Æ÷.py[line:33]â€”â€” logger_1 - WARNING - warn message
+Sat, 07 Oct 2017 18:46:27 -logging_2¼ÇÂ¼Æ÷_´¦ÀíÆ÷_¸ñÊ½»¯Æ÷.py[line:34]â€”â€” logger_1 - ERROR - error message
+Sat, 07 Oct 2017 18:46:27 -logging_2¼ÇÂ¼Æ÷_´¦ÀíÆ÷_¸ñÊ½»¯Æ÷.py[line:35]â€”â€” logger_1 - CRITICAL - critical message
+Sat, 07 Oct 2017 18:54:04 -logging_2¼ÇÂ¼Æ÷_´¦ÀíÆ÷_¸ñÊ½»¯Æ÷.py[line:31]â€”â€” logger_1 - DEBUG - debug message
+Sat, 07 Oct 2017 18:54:04 -logging_2¼ÇÂ¼Æ÷_´¦ÀíÆ÷_¸ñÊ½»¯Æ÷.py[line:32]â€”â€” logger_1 - INFO - info message
+Sat, 07 Oct 2017 18:54:04 -logging_2¼ÇÂ¼Æ÷_´¦ÀíÆ÷_¸ñÊ½»¯Æ÷.py[line:33]â€”â€” logger_1 - WARNING - warn message
+Sat, 07 Oct 2017 18:54:04 -logging_2¼ÇÂ¼Æ÷_´¦ÀíÆ÷_¸ñÊ½»¯Æ÷.py[line:34]â€”â€” logger_1 - ERROR - error message
+Sat, 07 Oct 2017 18:54:04 -logging_2¼ÇÂ¼Æ÷_´¦ÀíÆ÷_¸ñÊ½»¯Æ÷.py[line:35]â€”â€” logger_1 - CRITICAL - critical message

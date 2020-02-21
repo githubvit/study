@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <a onclick="return clickon()" href="http://www.baidu.com">走你1</a>
+    <a id="a1" href="http://www.baidu.com">走你2</a>
+
+<script src="jquery-1.12.4.js"></script>
+<script>
+    //dom阻断 注意在标签里要有return
+    function clickon() {
+        alert(123);
+        return false;
+    }
+    //jquery阻断
+    $('#a1').click(function () {
+        v=confirm('真的要吗')
+        return v;
+    })
+</script>
+
+
+</body>
+</html>

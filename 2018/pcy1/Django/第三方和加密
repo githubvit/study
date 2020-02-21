@@ -1,0 +1,75 @@
+F:\BaiduNetdiskDownload\python学习资料\python全栈工程师\老男孩Python高级全栈开发工程师-4
+0088第三方API的使用-VIP课程  到  0092RestfulAPI-VIP课程
+
+一，以使用者身份调用第三方服务
+ 1，获取pid（合法身份，非常重要，要加密）
+ 2，获取url（入口）
+ 3，
+    方式1：获取规则（参数，加密）按规则编写代码：进行md5加密和字符串拼接
+           url？pid=xxxxxxx。。。
+    方式2：服务商会提供一个模块，SDK，使用者下载该模块，该模块大致如下
+            import hashlib
+            import time
+            def get_url(pid,url):
+                PID=pid
+                #获取当前时间
+                current_time=time.time()
+                #与当前时间进行字符串拼接，生成动态字符串
+                random_str="%s|%s"%(PID,current_time)
+                #对动态字符串进行md5加密
+                h=hashlib.md5()
+                h.update(random_str)#py3.0要将random_str转换成bytes类型h.update(bytes(random_str,encoding='utf-8'))
+                UID=h.hexdigest()
+                #用加密后的字符串UID与当前时间进行字符串拼接
+                q='%s|%s'(UID,current_time)
+                #最终return字符串拼接的动态API。
+                return "%s?pid=%s"%(url,q)
+            以上这段代码是服务商提供的SDK，使用者下载该模块后
+            直接导入该函数，调用该函数 get_url(pid,url)就会直接生成动态api接口，不用自己再去编写。
+
+
+
+二，以服务商身份提供第三方服务
+1，提供pid 服务商应该有pid列表pid_list=['pid1','pid2',...]
+    实际提供的pid包含pid和当前在列表中的下标，中间可以用'|'隔开，pid|下标
+2，提供url 入口
+3，安全认证;解决安全问题
+    3.1，获取客户端pid 客户端发过来的请求-->url？pid=加密的pid|下标|客户端发送时间
+            要求客户端是动态的（客户端：用时间拼接pid解决动态要求-->random_str="%s|%s"%(PID,current_time)，参见上述SDK）
+            ，实际客户端发过来的是加密后的动态pid、下标、客户端发送时间
+            PID=request.get('pid',None)
+
+    3.2，拆解pid，获取各部分参数，pid、下标、客户端时间
+            pid,i,client_time=PID.split('|')
+
+    3.3，获取服务器当前时间
+            server_time=time.time()
+
+    3.4 用服务器时间和客户端时间进行比较，超时如果是10秒，就拒绝
+            if server_time>float(client_time)+10:
+                return HttpRespons('滚')
+
+    3.5 对第一次访问成功的动态api计入访问过的列表access_pid，然后访问过的动态api直接拒绝
+            if PID in access_pid:
+                return HttpRespons('滚')
+
+    3.6 如果3.4和3.5都过来了，就进行反解
+                server_pid=pid_list[i]
+                server_random_str='%s|%s'%(server_pid,client_time)
+                对server_random_str进行md5加密，方法同上述SDK，得到加密后的server_random_str字符串S_PID
+                if S_PID==PID:
+                    #将PID 加入 访问成功列表，下次该PID将不能访问。
+                    access_pid.append(PID)
+                    return HttpRespons('欢迎')
+                else：
+                    return HttpRespons('滚')
+
+    3.7 删除已访问列表中，与服务器当前时间大于10秒的PID，避免已访问列表过大。
+        也可以把已访问PID加入缓存，设置缓存过期时间，时间一到自动删除。
+
+
+    这种加密可以防止窥探和劫持，即使该动态api被别人复制，也可以保证安全。但是，要注意自己申请的合法的pid必须严格保密。
+
+
+
+

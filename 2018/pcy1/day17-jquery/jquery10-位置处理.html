@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body style="position: relative">
+<div id="i1" style="width: 100px;height: 100px;overflow: auto;position: absolute;top: 0;left: 0;">
+    <p>12345adfs</p><p>12345adfs</p><p>12345adfs</p><p>12345adfs</p>
+    <p>12345adfs</p><p>12345adfs</p><p>12345adfs</p><p>12345adfs</p>
+    <p>12345adfs</p><p>12345adfs</p><p>12345adfs</p><p>12345adfs</p>
+    <p>12345adfs</p><p>12345adfs</p><p>12345adfs</p><p>12345adfs</p>
+    <p>12345adfs</p><p>12345adfs</p><p>12345adfs</p><p>12345adfs</p>
+    <p>12345adfs</p><p>12345adfs</p><p>12345adfs</p><p>12345adfs</p>
+    <p>12345adfs</p><p>12345adfs</p><p>12345adfs</p><p>12345adfs</p>
+    <div id="i2"></div>
+</div>
+<div style="height: 1000px"></div>
+<script src="jquery-1.12.4.js"></script>
+<script>
+    $("#i1").click(function () {
+        //1,每次点击，往右同时往下移动100
+        var x=100+$(this).offset().left;
+        var y=100+$(this).offset().top;
+//        console.log(x,y)
+        $(this).css('left',x+'px');
+        $(this).css('top',y+'px');
+        //2,获取i2的相对位置position，
+        console.log($("#i2").position())
+
+
+        //3,输出浏览器窗体和i1的滚轮高度和i1
+//        console.log($(window).scrollTop(),$(this).scrollTop())
+
+    })
+</script>
+</body>
+</html>

@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+</head>
+<style>
+    .pg-header{
+        position: relative;
+        margin: 0 auto;
+        width: 850px;
+        height: 120px;
+
+    }
+    .pg-bodyer{
+    position: relative;
+    margin: 0 auto;
+    width: 950px;
+    height: 400px;
+    border: 1px solid #888888;
+    /*background-color: #f2f2f2;*/
+
+}
+    .top1{
+        position: fixed;
+        left: 0;
+        right: 0;
+        top:0;
+        background-color: #dddddd;
+        z-index: 10;
+
+    }
+    .top1-1{
+        width: 850px;
+        height: 30px;
+        margin: 0 auto;
+        text-align: center;
+        line-height: 30px;
+        font-size: 13px;
+    }
+    .left{
+        float: left;
+    }
+    .right{
+        float:right;
+    }
+    .close{
+        clear: both;
+    }
+    .span-block{
+        display: inline-block;
+        padding: 0 10px;
+        /*cursor: pointer;*/
+    }
+    .span-block:hover{
+        background-color: #888888;
+        cursor: pointer;
+    }
+    .left-1{
+        margin-bottom: 20px;
+        font-size: 13px
+    }
+    .right-text{
+        display: inline-block;
+        text-align: right;
+        width: 80px;
+    }
+    .text-bord{
+        display: inline-block;
+        position: relative;
+    }
+    .sub1{
+         display: inline-block;
+         width: 200px;
+         height: 30px;
+         border: 0;
+         font-weight: bold;
+         background-color: rgb(199, 41, 41);/*#d2322d*/
+         color: #ffffff;
+
+
+    }
+
+    .right-2-1{
+        display: inline-block;
+        font-size: 12px;
+     }
+    .img1{
+        width: 120px;
+        height: 90px;
+        position: absolute;
+        left: 5px;
+
+    }
+    .error{
+        font-size: 10px;
+        color: red;
+    }
+</style>
+<body>
+    <div class="top1">
+        <div class="top1-1">
+            <div class="left">
+                <span class="span-block">*收藏本站</span>
+            </div>
+            <div class="right">
+                <span class="span-block">客户服务</span>
+                <span class="span-block">VIP会员俱乐部</span>
+                <span class="span-block">我的订单</span>
+                <span class="span-block">免费注册</span>
+                <span class="span-block">登录</span>
+
+            </div>
+            <div class="close"></div>
+        </div>
+    </div>
+    <div class="pg-header" style="height:100px;margin-top: 35px;">
+        <div>
+            <a href="http://jquery.cuishifeng.cn/" target="_blank">
+                <img class="img1" src="马20170924.png"/>
+            </a>
+        </div>
+    </div>
+    <div class="pg-bodyer">
+        <div class="left" style="margin-top:20px;margin-left:40px;width:600px; border-right: 1px solid #dddddd">
+            <p>注册新用户</p>
+            <form action="#" method="post">
+                    <div class="left-1" >
+                        <span class="right-text"><span style="color: red;">*</span>用户名：</span>
+                        <div class="text-bord">
+                            <input class="text-input" type="text" required="true" range="6-20" name="true"/>
+                        </div>
+                    </div>
+                    <div class="left-1" >
+                        <span class="right-text"><span style="color: red;">*</span>手机号：</span>
+                        <div class="text-bord">
+                            <input class="text-input" type="text" required="true" moblie="true"/>
+                        </div>
+                    </div>
+                    <div class="left-1" >
+                        <span class="right-text"><span style="color: red;">*</span>登录密码：</span>
+                        <div class="text-bord">
+                            <input class="text-input" type="text" required="true" range="6-20" name="true"/>
+                        </div>
+                    </div>
+                    <div class="left-1" >
+                        <span class="right-text"><span style="color: red;">*</span>确认密码：</span>
+                        <div class="text-bord">
+                            <input class="text-input" type="text" required="true" confirmto="true"/>
+                        </div>
+                    </div>
+
+                    <div class="left-1" >
+                        <span class="right-text"><span style="color: red;">*</span>验证码：</span>
+                        <div class="text-bord" >
+                            <input class="text-input" style="width:100px" type="text" />
+                        </div>
+                    </div>
+                    <div class="left-1">
+                        <span class="right-text"></span>
+                        <div class="right-2-1">
+                            <input type="checkbox" name="autosignin" value="1" checked="checked">
+                            <span>我已阅读并同意</span>
+                            <a href="#">《用户注册协议》</a>
+                        </div>
+
+                    </div>
+                    <div class="left-1">
+                        <span class="right-text"></span>
+                        <input class="sub1" type="submit" value="同意以上协议并注册"/>
+
+                    </div>
+
+
+
+            </form>
+        </div>
+        <div class="right ">
+            <div style="margin-top: 50px;font-size: 12px">我已经注册，现在就<a href="#">登录</a></div>
+            <div>
+               <a href="#"><img src="马20170924.png" style="width: 250px;border: 0px;margin-right: 40px"/></a>
+            </div>
+
+        </div>
+        <div class="close"></div>
+    </div>
+    <script src="jquery-1.12.4.js"></script>
+    <script>
+
+        $(':submit').click(function () {
+            flg=true;
+            $('.error').remove();//清除上次遗留的提示标签
+            $('form').find(':text,:password').each(function () {
+                var required=$(this).attr('required');//不能为空
+                var name=$(this).attr('name');//验证名字格式
+                var moblie=$(this).attr('moblie');//验证手机格式
+                var range=$(this).attr('range');//验证长度
+                var confirmto=$(this).attr('confirmto');//确认密码
+                if(required){
+                    if($(this).val().trim().length==0){
+//                    console.log(1);
+                    //调用addTag()添加span提示标签
+                    addTag(this,'不能为空');
+                    flg=false;
+                    return false;
+                }
+                };
+                if(name){
+                    var v=$(this).val();//取值
+                    var req=/^[_|a-z|A-Z]\w{5,8}$/;//正则
+                    if(!req.test(v)){
+                        addTag(this,'只能用字符或下划线开头，由数字、字符、下划线结尾,6-9位');
+                        flg=false;
+                        return false;
+                    }
+                }
+                if(moblie){
+                    var v=$(this).val();//取值
+                    var v=parseInt(v);//转成数字
+                    var req=/^[1][3|5|8]\d{9}$/;//正则
+                    if(!req.test(v)){
+                        addTag(this,'格式不对');
+                        flg=false;
+                        return false;
+                    }
+                }
+
+
+            });
+            return flg;
+        });
+         //添加span标签函数
+        function addTag(self,str) {
+            var tag=document.createElement('span');
+                //给标签添加样式error，为了在开始没填后来填了，再点击时清空该标签，再重新开始判断。
+                $(tag).addClass('error');
+                $(tag).text(str);
+                $(self).after(tag);
+
+        }
+    </script>
+</body>
+</html>

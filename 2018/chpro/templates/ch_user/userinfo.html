@@ -1,0 +1,1156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- 便于多种设备 快捷写法meta:vp 加tab键sublime一样-->
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>瓷画-个人中心</title>
+    <link rel="stylesheet" href="static/css/bootstrap.min.css">
+    <link rel="stylesheet" href="static/Font-Awesome-3.2.1/css/font-awesome.css">
+    <!-- 引入自定义的css-->
+    <link rel="stylesheet" href="static/css/master.css">
+
+    <script src="static/js/jquery-1.12.4.js"></script>
+    <script src="static/js/bootstrap.min.js"></script>
+    <script src="static/js/master.js"></script>
+</head>
+<style>
+    /*瓷画网广告栏和背景*/
+    .wbg{
+        background-color: white;
+        margin-bottom: 0;
+    }
+    .jumbotron  h3 {
+        margin-top: 5px;
+    }
+    .label-cs {/* 自定义label：去掉字体加重和颜色，让字体自适应 */
+        display: inline;
+        padding: .2em .6em .3em;
+        font-size: 75%;
+        /* font-weight:bold;*/
+        line-height: 1;
+        /* color: #fff; */
+        text-align: center;
+        white-space: nowrap;
+        vertical-align: baseline;
+        border-radius: .25em;
+    }
+    /*订单表各行高度方向居中*/
+    .table tbody tr td{
+        vertical-align: inherit;
+    }
+    /*订单中作品信息栏标签内嵌表中的表头位置下移*/
+    th .table{
+        margin-bottom: -12px;
+    }
+    /*订单中作品信息栏标签内嵌表中去掉下划线*/
+    th .table>thead>tr>th {
+        vertical-align: bottom;
+        border-bottom: 0;
+    }
+
+    /*订单中作品信息栏内嵌表去掉上划线，加上下划线*/
+    td .table tbody tr td{
+        border-top: 0;
+        border-bottom: 1px solid #ddd;
+    }
+</style>
+<body>
+<!-- 导航条-有改动--用户登录后登录和注册没有了-->
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">
+                    <img class="" src="static/images/icon.png" >
+                </a>
+            </div>
+
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <form class="navbar-form navbar-left">
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="搜索瓷画">
+                            <span class="input-group-btn">
+                                <button class="btn btn-default">
+                                  <span class="glyphicon glyphicon-search"></span>
+                                </button>
+                            </span>
+                        </div>
+                    </form>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">作品分类<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">方形</a></li>
+                            <li><a href="#">圆形</a></li>
+                            <li><a href="#">扇形</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="#">其他</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="#">大师作品</a></li>
+                        </ul>
+                    </li>
+
+                    <li><a href="#">消息</a></li>
+
+                    <li><a href="#">购物车</a></li>
+                    <li><a href="#">订单</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">sgq123<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">个人信息</a></li>
+                            <li><a href="#">全部订单</a></li>
+                            <li><a href="#">收货信息</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="#">安全设置</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="#">待确认消息</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+<!-- 增加的内容-->
+<!--1，瓷画网广告-->
+    <div class="jumbotron wbg">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-offset-2 col-lg-2 col-md-3 col-sm-3">
+                    <a href="index.html">
+                        <img src="static/images/yhzx_logo.jpg">
+                    </a>
+                </div>
+                <div class="col-lg-2 col-md-3 col-sm-3">
+                    <h3><span>瓷画网</span></h3>
+                    <h4 class="text-center">| 个人中心</h4>
+                </div>
+                <div class="col-lg-5 col-md-5 col-sm-5">
+                    <h2 style="font-size: 28px"><span>网天下瓷画 惠四海宾朋</span></h2>
+                </div>
+            </div>
+        </div>
+
+    </div>
+<!--2，标签页-->
+    <div class="container">
+        <ul id="us-tabs" class="nav nav-tabs">
+            <li class="active" ><a href="#" name="sit_userinfo">个人信息</a></li>
+            <li><a href="#" name="order">全部订单</a></li>
+            <li><a href="#" name="address">收货信息</a></li>
+            <li><a href="#" name="safe">安全设置</a></li>
+            <li><a href="#" name="message">待确认消息</a></li>
+        </ul>
+        <!--3，用户中心-->
+    <!--用户中心 详细内容-->
+        <div>
+            <!--个人信息-->
+            <div class="sit-item" name="sit_userinfo">
+                <div class="panel panel-default" style="margin-top: 10px">
+                  <div class="panel-heading">基本信息</div>
+                  <div class="panel-body">
+                    <p>账号：sgq123</p>
+                    <p>手机：还未设置<button id="btn-phone" type="button" class="btn  btn-link">设置手机</button></p>
+                    <p>邮箱：af***fa@afsa.com</p>
+                    <p>默认收货地址：还未设置<button id="btn-address" type="button" class="btn  btn-link">编辑收货地址</button></p>
+                    <!--如果数据库有所需信息，就呈现所需信息的值，不用呈现form表单，如果没有，就呈现-->
+                    <form class="form-inline">
+                        <p>您还可以完善以下个人信息，以便更好的为您服务，选择性别和出生日期后，点击
+                            <button type="button" class="btn btn-default" >保存</button>
+                        </p>
+                        <p>
+                            性别：
+                            <label class="radio-inline"><input type="radio" value="0" name="gender">男</label>
+                            <label class="radio-inline"><input type="radio" value="1" name="gender">女</label>
+                        </p>
+                        <p>
+                            出生日期：
+
+                            <select class="form-control input-sm">
+                                <option>--</option>
+                                <option value="1979">1979</option>
+                                <option value="1980">1980</option>
+                                <option value="1981">1981</option>
+                            </select>年
+
+                            <select class="form-control input-sm">
+                                <option>--</option>
+                                <option  value="12">12</option>
+                                <option  value="11">11</option>
+                                <option  value="10">10</option>
+                            </select>月
+
+                            <select class="form-control input-sm">
+                                <option>--</option>
+                                <option value="31">31</option>
+                                <option value="30">30</option>
+                                <option value="29">29</option>
+
+                            </select>日
+
+                        </p>
+                    </form>
+                      <!--前端实现:
+                            点击年标签，就开始为年下拉框生成下拉框数据从1900到2018
+                            点击月标签，就开始为月下拉框生成下拉框数据从01到12
+                            点击日标签，就开始为年下拉框生成下拉框数据从01到31
+                            点击保存后，校验数据，通过后，将获取的值在前端呈现（删除form表单），同时传到后台数据库，
+
+                      -->
+                  </div>
+                </div>
+                <div class="panel panel-default" style="margin-top: 10px">
+                  <div class="panel-heading">最近浏览瓷画</div>
+                  <div class="panel-body">
+                    <div class="row">
+                        <div class="col-sm-6 col-md-3">
+                            <div class="thumbnail">
+                                <img src="static/images/g1.jpg" alt="通用的占位符缩略图">
+                                <div class="caption">
+                                    <h3>缩略图标签</h3>
+                                    <p>一些示例文本。一些示例文本。</p>
+                                    <div class="pull-right">
+                                        <a href="#" class="btn btn-default" role="button">
+                                           开始定制
+                                        </a>
+                                    </div>
+	                    			<div class="clearfix"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-md-3">
+                            <div class="thumbnail">
+                                <img src="static/images/g1.jpg" alt="通用的占位符缩略图">
+                                <div class="caption">
+                                    <h3>缩略图标签</h3>
+                                    <p>一些示例文本。一些示例文本。</p>
+                                    <div class="pull-right">
+                                        <a href="#" class="btn btn-default" role="button">
+                                           开始定制
+                                        </a>
+                                    </div>
+	                    			<div class="clearfix"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-md-3">
+                            <div class="thumbnail">
+                                <img src="static/images/g1.jpg" alt="通用的占位符缩略图">
+                                <div class="caption">
+                                    <h3>缩略图标签</h3>
+                                    <p>一些示例文本。一些示例文本。</p>
+                                    <div class="pull-right">
+                                        <a href="#" class="btn btn-default" role="button">
+                                           开始定制
+                                        </a>
+                                    </div>
+	                    			<div class="clearfix"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-md-3">
+                            <div class="thumbnail">
+                                <img src="static/images/g1.jpg" alt="通用的占位符缩略图">
+                                <div class="caption">
+                                    <h3>缩略图标签</h3>
+                                    <p>一些示例文本。一些示例文本。</p>
+                                    <div class="pull-right">
+                                        <a href="#" class="btn btn-default" role="button">
+                                           开始定制
+                                        </a>
+                                    </div>
+	                    			<div class="clearfix"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                  </div>
+                </div>
+            </div>
+            <!--全部订单-->
+            <div class="sit-item hidden" name="order">
+                <!--未支付-->
+                <div class="panel panel-default" style="margin-top: 10px">
+                    <div class="panel-heading">
+                        <div class="row">
+                            <div class="col-sm-3"><span class="label-cs">创建时间:2018-3-15 17:36:26</span></div>
+                            <div class="col-sm-2"><span class="label-cs">订单号:12345645</span></div>
+                        </div>
+                    </div>
+                         <!-- 对于订单Table处理，每一笔订单要根据状态分类呈现 -->
+                    <div class="table-responsive">
+                        <table class="table table-bordered">
+                            <thead >
+                                <tr >
+                                    <th class="text-center" style="width: 55%;">作品信息<!--表头里的列写成th不是td-->
+                                        <table  class="table">
+                                         <thead>
+                                            <tr>
+                                                <th style="width: 20%">作品图片</th>
+                                                <th style="width: 30%">规格尺寸</th>
+                                                <th style="width: 20%">单价</th>
+                                                <th style="width: 10%">数量</th>
+                                                <th style="width: 20%">小计</th>
+                                            </tr>
+                                          </thead>
+                                        </table>
+                                    </th>
+                                    <th class="text-center">总计</th>
+                                    <th class="text-center">状态</th>
+                                    <th class="text-center">操作和信息</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                  <td style="width: 55%">
+                                      <table class="table">
+
+                                          <tbody>
+                                            <tr>
+                                                <td style="width: 20%"><img class="img-responsive"  src="static/images/slide3.png"></td>
+                                                <td style="width: 30%">8寸 头像1 作者sgq</td>
+                                                <td style="width: 20%">500</td>
+                                                <td style="width: 10%">1</td>
+                                                <td style="width: 20%">500</td>
+                                            </tr>
+
+                                          </tbody>
+                                      </table>
+                                  </td>
+                                  <td class="text-center">500</td>
+                                  <td class="text-center">未支付</td>
+                                  <td class="text-center">
+                                      <button class="btn btn-default ">去支付</button>
+                                  </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <!--已付定金-->
+                <div class="panel panel-default" style="margin-top: 10px">
+                    <div class="panel-heading">
+                        <div class="row">
+                            <div class="col-sm-3"><span class="label-cs">创建时间:2018-3-15 17:36:26</span></div>
+                            <div class="col-sm-2"><span class="label-cs">订单号:12345645</span></div>
+                        </div>
+                    </div>
+                         <!-- 对于订单Table处理，每一笔订单要根据状态分类呈现 -->
+                    <div class="table-responsive">
+                        <table class="table table-bordered">
+                            <thead >
+                                <tr >
+                                    <th class="text-center" style="width: 55%;">作品信息<!--表头里的列写成th不是td-->
+                                        <table  class="table">
+                                         <thead>
+                                            <tr>
+                                                <th style="width: 20%">作品图片</th>
+                                                <th style="width: 30%">规格尺寸</th>
+                                                <th style="width: 20%">单价</th>
+                                                <th style="width: 10%">数量</th>
+                                                <th style="width: 20%">小计</th>
+                                            </tr>
+                                          </thead>
+                                        </table>
+                                    </th>
+                                    <th class="text-center">总计</th>
+                                    <th class="text-center">状态</th>
+                                    <th class="text-center">操作和信息</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                  <td style="width: 55%">
+                                      <table class="table">
+                                          <tbody>
+                                            <tr>
+                                                <td style="width: 20%"><img class="img-responsive"  src="static/images/slide3.png"></td>
+                                                <td style="width: 30%">8寸 头像1 作者sgq</td>
+                                                <td style="width: 20%">500</td>
+                                                <td style="width: 10%">1</td>
+                                                <td style="width: 20%">500</td>
+                                            </tr>
+                                          </tbody>
+                                      </table>
+                                  </td>
+                                  <td class="text-center">500</td>
+                                  <td class="text-center">已付定金</td>
+                                  <td class="text-center">
+                                      等待图样确认
+                                  </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <!--图样待确认-->
+                <div class="panel panel-default" style="margin-top: 10px">
+                    <div class="panel-heading">
+                        <div class="row">
+                            <div class="col-sm-3"><span class="label-cs">创建时间:2018-3-15 17:36:26</span></div>
+                            <div class="col-sm-2"><span class="label-cs">订单号:12345645</span></div>
+                        </div>
+                    </div>
+                         <!-- 对于订单Table处理，每一笔订单要根据状态分类呈现 -->
+                    <div class="table-responsive">
+                        <table class="table table-bordered">
+                            <thead >
+                                <tr >
+                                    <th class="text-center" style="width: 55%;">作品信息<!--表头里的列写成th不是td-->
+                                        <table  class="table">
+                                         <thead>
+                                            <tr>
+                                                <th style="width: 20%">作品图片</th>
+                                                <th style="width: 30%">规格尺寸</th>
+                                                <th style="width: 20%">单价</th>
+                                                <th style="width: 10%">数量</th>
+                                                <th style="width: 20%">小计</th>
+                                            </tr>
+                                          </thead>
+                                        </table>
+                                    </th>
+                                    <th class="text-center">总计</th>
+                                    <th class="text-center">状态</th>
+                                    <th class="text-center">操作和信息</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                  <td style="width: 55%">
+                                      <table class="table">
+                                          <tbody>
+                                            <tr>
+                                                <td style="width: 20%"><img class="img-responsive"  src="static/images/slide3.png"></td>
+                                                <td style="width: 30%">8寸 头像1 作者sgq</td>
+                                                <td style="width: 20%">500</td>
+                                                <td style="width: 10%">1</td>
+                                                <td style="width: 20%">500</td>
+                                            </tr>
+                                          </tbody>
+                                      </table>
+                                  </td>
+                                  <td class="text-center">500</td>
+                                  <td class="text-center">待确认</td>
+                                  <td class="text-center">
+                                      <button class="btn btn-default check-pt">查看图样</button>
+                                      <button class="btn btn-default">确认图样</button>
+                                  </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <!--修改图样-->
+                <div class="panel panel-default" style="margin-top: 10px">
+                    <div class="panel-heading">
+                        <div class="row">
+                            <div class="col-sm-3"><span class="label-cs">创建时间:2018-3-15 17:36:26</span></div>
+                            <div class="col-sm-2"><span class="label-cs">订单号:12345645</span></div>
+                        </div>
+                    </div>
+                         <!-- 对于订单Table处理，每一笔订单要根据状态分类呈现 -->
+                    <div class="table-responsive">
+                        <table class="table table-bordered">
+                            <thead >
+                                <tr >
+                                    <th class="text-center" style="width: 55%;">作品信息<!--表头里的列写成th不是td-->
+                                        <table  class="table">
+                                         <thead>
+                                            <tr>
+                                                <th style="width: 20%">作品图片</th>
+                                                <th style="width: 30%">规格尺寸</th>
+                                                <th style="width: 20%">单价</th>
+                                                <th style="width: 10%">数量</th>
+                                                <th style="width: 20%">小计</th>
+                                            </tr>
+                                          </thead>
+                                        </table>
+                                    </th>
+                                    <th class="text-center">总计</th>
+                                    <th class="text-center">状态</th>
+                                    <th class="text-center">操作和信息</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                  <td style="width: 55%">
+                                      <table class="table">
+                                          <tbody>
+                                            <tr>
+                                                <td style="width: 20%"><img class="img-responsive"  src="static/images/slide3.png"></td>
+                                                <td style="width: 30%">8寸 头像1 作者sgq</td>
+                                                <td style="width: 20%">500</td>
+                                                <td style="width: 10%">1</td>
+                                                <td style="width: 20%">500</td>
+                                            </tr>
+                                          </tbody>
+                                      </table>
+                                  </td>
+                                  <td class="text-center">500</td>
+                                  <td class="text-center">修改图样</td>
+                                  <td class="text-center">
+                                      等待图样确认
+                                  </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <!--已支付-->
+                <div class="panel panel-default" style="margin-top: 10px">
+                    <div class="panel-heading">
+                        <div class="row">
+                            <div class="col-sm-3"><span class="label-cs">创建时间:2018-3-15 17:36:26</span></div>
+                            <div class="col-sm-2"><span class="label-cs">订单号:12345645</span></div>
+
+                        </div>
+
+
+
+                    </div>
+
+                         <!-- 对于订单Table处理，每一笔订单要根据状态分类呈现 -->
+                    <div class="table-responsive">
+                        <table class="table table-bordered">
+                            <thead >
+                                <tr >
+                                    <th class="text-center" style="width: 55%;">作品信息<!--表头里的列写成th不是td-->
+                                        <table  class="table">
+                                         <thead>
+                                            <tr>
+                                                <th style="width: 20%">作品图片</th>
+                                                <th style="width: 30%">规格尺寸</th>
+                                                <th style="width: 20%">单价</th>
+                                                <th style="width: 10%">数量</th>
+                                                <th style="width: 20%">小计</th>
+                                            </tr>
+                                          </thead>
+                                        </table>
+                                    </th>
+                                    <th class="text-center">总计</th>
+                                    <th class="text-center">状态</th>
+                                    <th class="text-center">操作和信息</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+
+                                <tr>
+                                  <td style="width: 55%">
+                                      <table class="table">
+
+                                          <tbody>
+                                            <tr>
+                                                <td style="width: 20%"><img class="img-responsive"  src="static/images/slide3.png"></td>
+                                                <td style="width: 30%">8寸 头像1 作者sgq</td>
+                                                <td style="width: 20%">500</td>
+                                                <td style="width: 10%">1</td>
+                                                <td style="width: 20%">500</td>
+                                            </tr>
+
+                                          </tbody>
+                                      </table>
+
+
+                                  </td>
+                                  <td class="text-center">500</td>
+                                  <td class="text-center">已支付</td>
+                                  <td class="text-center">
+                                      等待发货
+                                  </td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <!--已发货-->
+                <div class="panel panel-default" style="margin-top: 10px">
+                    <div class="panel-heading">
+                        <div class="row">
+                            <div class="col-sm-3"><span class="label-cs">创建时间:2018-3-15 17:36:26</span></div>
+                            <div class="col-sm-2"><span class="label-cs">订单号:12345645</span></div>
+                        </div>
+                    </div>
+                         <!-- 对于订单Table处理，每一笔订单要根据状态分类呈现 -->
+                    <div class="table-responsive">
+                        <table class="table table-bordered">
+                            <thead >
+                                <tr >
+                                    <th class="text-center" style="width: 55%;">作品信息<!--表头里的列写成th不是td-->
+                                        <table  class="table">
+                                         <thead>
+                                            <tr>
+                                                <th style="width: 20%">作品图片</th>
+                                                <th style="width: 30%">规格尺寸</th>
+                                                <th style="width: 20%">单价</th>
+                                                <th style="width: 10%">数量</th>
+                                                <th style="width: 20%">小计</th>
+                                            </tr>
+                                          </thead>
+                                        </table>
+                                    </th>
+                                    <th class="text-center">总计</th>
+                                    <th class="text-center">状态</th>
+                                    <th class="text-center">操作和信息</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                  <td style="width: 55%">
+                                      <table class="table">
+                                          <tbody>
+                                            <tr>
+                                                <td style="width: 20%"><img class="img-responsive"  src="static/images/slide3.png"></td>
+                                                <td style="width: 30%">8寸 头像1 作者sgq</td>
+                                                <td style="width: 20%">500</td>
+                                                <td style="width: 10%">1</td>
+                                                <td style="width: 20%">500</td>
+                                            </tr>
+                                          </tbody>
+                                      </table>
+                                  </td>
+                                  <td class="text-center">500</td>
+                                  <td class="text-center">已发货</td>
+                                  <td class="text-center">
+                                      <button class="btn btn-default ">查看物流</button>
+                                  </td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <!--复杂订单-->
+                <div class="panel panel-default" style="margin-top: 10px">
+                    <div class="panel-heading">
+                        <div class="row">
+                            <div class="col-sm-3"><span class="label-cs">创建时间:2018-3-15 17:36:26</span></div>
+                            <div class="col-sm-2"><span class="label-cs">订单号:12345645</span></div>
+                        </div>
+                    </div>
+                         <!-- 对于订单Table处理，每一笔订单要根据状态分类呈现 -->
+                    <div class="table-responsive">
+                        <table class="table table-bordered">
+                            <thead >
+                                <tr >
+                                    <th class="text-center" style="width: 55%;">作品信息<!--表头里的列写成th不是td-->
+                                        <table  class="table">
+                                         <thead>
+                                            <tr>
+                                                <th style="width: 20%">作品图片</th>
+                                                <th style="width: 30%">规格尺寸</th>
+                                                <th style="width: 20%">单价</th>
+                                                <th style="width: 10%">数量</th>
+                                                <th style="width: 20%">小计</th>
+                                            </tr>
+                                          </thead>
+                                        </table>
+                                    </th>
+                                    <th class="text-center">总计</th>
+                                    <th class="text-center">状态</th>
+                                    <th class="text-center">操作和信息</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                  <td style="width: 55%;">
+                                      <table class="table">
+                                          <tbody>
+                                            <tr>
+                                                <td style="width: 20%"><img class="img-responsive"  src="static/images/slide3.png"></td>
+                                                <td style="width: 30%">8寸 头像1 作者sgq</td>
+                                                <td style="width: 20%">500</td>
+                                                <td style="width: 10%">1</td>
+                                                <td style="width: 20%">500</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="width: 20%"><img class="img-responsive"  src="static/images/slide3.png"></td>
+                                                <td style="width: 30%">9寸 头像1 作者sgq</td>
+                                                <td style="width: 20%">600</td>
+                                                <td style="width: 10%">2</td>
+                                                <td style="width: 20%">1200</td>
+                                            </tr>
+                                          </tbody>
+                                      </table>
+                                  </td>
+                                  <td class="text-center" style="vertical-align: inherit;">1700</td>
+                                  <td class="text-center" style="vertical-align: inherit;">待确认</td>
+                                  <td class="text-center" style="vertical-align: inherit;">
+                                      <button class="btn btn-default check-pt">查看图样</button>
+                                      <button class="btn btn-default">确认图样</button>
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td style="width: 55%">
+                                      <table class="table">
+                                          <tbody>
+                                            <tr>
+                                                <td style="width: 20%"><img class="img-responsive"  src="static/images/slide3.png"></td>
+                                                <td style="width: 30%">8寸 头像1 作者sgq</td>
+                                                <td style="width: 20%">500</td>
+                                                <td style="width: 10%">1</td>
+                                                <td style="width: 20%">500</td>
+                                            </tr>
+                                          </tbody>
+                                      </table>
+                                  </td>
+                                  <td class="text-center">500</td>
+                                  <td class="text-center">已发货</td>
+                                  <td class="text-center">
+                                      <button class="btn btn-default ">查看物流</button>
+                                  </td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+            <!--收货信息-->
+            <div class="sit-item hidden" name="address" id="address">
+                <div class="panel panel-default" style="margin-top: 10px">
+                  <div class="panel-heading">默认收货信息</div>
+                  <div class="panel-body">
+                      <p>收货人姓名：<span gsname="consignee"></span></p>
+                      <p>收货人手机：<span gsname="phone">13707983689</span></p>
+                      <p>所在地区：<span gsname="gs-address1">江西省景德镇市昌江区</span></p>
+                      <p>详细地址：<span gsname="gs-address2">爱迪生发达</span></p>
+
+                  </div>
+                </div>
+                <div class="panel panel-default" style="margin-top: 10px">
+                  <div class="panel-heading">收货信息列表</div>
+                  <div class="panel-body table-responsive">
+                         <!-- Table -->
+
+                    <table class="table table-striped ">
+                        <thead>
+                            <tr>
+                                <th>收货人</th><!--表头里的列写成th不是td-->
+                                <th>收货人手机</th>
+                                <th>所在地区</th>
+                                <th>详细地址</th>
+                                <th>设为默认</th>
+                                <th>操作</th>
+                            </tr>
+                        </thead>
+
+
+                        <tbody>
+                            <tr>
+                                <td>Tanmay</td>
+                                <td>Bangalore</td>
+                                <td>560001</td>
+                                <td>560001</td>
+                                    <td>
+                                        <input type="radio" name="default-address" value="1" checked="checked">
+                                    </td>
+                                <td>
+                                    <a href="#">删除</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Sachin</td>
+                                <td>Mumbai</td>
+                                <td>400003</td>
+                                <td>400003</td>
+                                <td>
+                                    <input type="radio" name="default-address" value="2">
+                                </td>
+                                <td>
+                                    <a href="#">删除</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Uma</td>
+                                <td>Pune</td>
+                                <td>411027</td>
+                                <td>411027</td>
+                                <td>
+                                    <input type="radio" name="default-address" value="3">
+                                </td>
+                                <td>
+                                    <a href="#">删除</a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                  </div>
+                </div>
+                <div class="panel panel-default" style="margin-top: 10px">
+                  <div class="panel-heading">新建收货信息</div>
+                  <div class="panel-body">
+                      <!--
+                      从后端数据库收货信息表中获取的该用户的多行收货信息数据（向后端发送用户id，获取收货信息表中该用户的
+                      收货人姓名、手机、收货地址）
+                      -->
+                      <form class="form-horizontal">
+                          <div class="form-group">
+                            <label for="consignee" class="col-sm-2 control-label">收货人</label>
+                            <div class="col-sm-3">
+                              <input type="text" class="form-control" id="consignee" placeholder="请填写收货人姓名">
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <label for="phone" class="col-sm-2 control-label">收货人手机</label>
+                            <div class="col-sm-3">
+                              <input type="text" class="form-control" id="phone" placeholder="请填写收货人手机号码">
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <label for="gs-address1" class="col-sm-2 control-label">所在地区</label>
+                            <div class="col-sm-10">
+                              <input type="text" class="form-control" id="gs-address1" placeholder="请填写所在地区，例如：广东省深圳市福田区">
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <label for="gs-address2" class="col-sm-2 control-label">详细地址</label>
+                            <div class="col-sm-10">
+                                <textarea class="form-control" rows="3" id="gs-address2" placeholder="请填写详细地址，街道以及门牌号等"></textarea>
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <div class="col-sm-offset-2 col-sm-10">
+                              <div class="checkbox">
+                                <label>
+                                  <input type="checkbox"> 设为默认
+                                </label>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <div class="col-sm-offset-2 col-sm-10">
+                              <button type="reset" class="btn btn-default">清空</button>
+                              <button type="submit" class="btn btn-default">保存</button>
+                            </div>
+                          </div>
+                        </form>
+
+
+
+                  </div>
+                </div>
+            </div>
+            <!--安全设置-->
+            <div id="safe" class="sit-item hidden" name="safe">
+                <div class="panel panel-default" style="margin-top: 10px">
+                    <div class="panel-heading">安全设置</div>
+                    <div class="panel-body">
+                        <p>更换密码：建议您定期更换密码，设置安全性高的密码可以使帐号更安全。
+                            <button id="edit-pwd" class="btn btn-default" >修改</button>
+                            <!--修改后提示消息-->
+                            <span id="epwd-tip" class="hidden" style="color: red"></span>
+                        </p>
+                        <form  id="new-pwd-form" class="form-horizontal hidden" name="edit-pwd">
+                            <div class="form-group">
+                                <label for="old-pwd" class="col-sm-2 control-label">原密码:</label>
+                                <div class="col-sm-3">
+                                    <input type="password" class="form-control rpwd" id="old-pwd" placeholder="请输入原密码">
+                                    <span class="error_tip"></span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="new-pwd" class="col-sm-2 control-label">新密码:</label>
+                                <div class="col-sm-3">
+                                    <input type="password" class="form-control rpwd" id="new-pwd" placeholder="请输入新密码">
+                                    <span class="error_tip"></span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="new-cpwd" class="col-sm-2 control-label ">重复新密码:</label>
+                                <div class="col-sm-3">
+                                    <input type="password" class="form-control cpwd" id="new-cpwd" placeholder="请重复输入新密码">
+                                    <span class="error_tip"></span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-offset-2 col-sm-3">
+                                    <button id="safe-pwd-cancel" type="reset" class="btn btn-default form-cancel">取消</button>
+                                    <button id="safe-pwd" type="button" class="btn btn-default">提交</button>
+                                </div>
+                            </div>
+                        </form>
+                        <br>
+                        <p>绑定手机：<span name="safe-phone">13******689</span>
+                            <button id="edit-phone" class="btn btn-default">更换</button>
+                             <!--修改后提示消息-->
+                            <span id="ephone-tip" class="hidden" style="color: red"></span>
+                        </p>
+                        <form id="new-phone-form" class="form-horizontal hidden" name="edit-phone">
+                            <div class="form-group">
+                                <label for="phone-pwd" class="col-sm-2 control-label">密码：</label>
+                                <div class="col-sm-3">
+                                    <input type="password" class="form-control rpwd" id="phone-pwd" placeholder="请输入密码">
+                                    <span class="error_tip"></span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="new-phone" class="col-sm-2 control-label">手机：</label>
+                                <div class="col-sm-3">
+                                    <input type="text" class="form-control" id="new-phone" placeholder="请输入手机号">
+                                    <span class="error_tip"></span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="phone-codle" class="col-sm-2 control-label">验证码：</label>
+                                <div class="col-sm-3">
+                                    <input type="text" class="form-control" id="phone-codle" placeholder="请输入手机验证码">
+                                    <span class="error_tip"></span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-offset-2 col-sm-3">
+                                    <button id="safe-phone-cancel" type="reset" class="btn btn-default">取消</button>
+                                    <button id="safe-phone" type="button" class="btn btn-default">提交</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <!--待确认消息-->
+            <div id="message" class="sit-item hidden" name="message">
+                <div class="panel panel-default" style="margin-top: 10px">
+                     <div class="panel-heading">待确认消息</div>
+                     <div class="panel-body">
+                       <p>订单号：xxx</p>
+                       <p>待确认图样：afdaf</p>
+                       <div class="center-block">
+                           <img class="img-responsive center-block" src="static/images/slide3.png">
+                           <br>
+                           <div class="pull-right">
+                               <button class="btn btn-default">确认图样</button>
+                           </div>
+                           <br>
+                           <br>
+                           <p>如您对图样有修改建议，请在下面填写具体内容，或与客服沟通，我们将在1周内返回修改后的图样给您确认。</p>
+                           <form>
+                               <textarea id='edit-advise' class="form-control" rows="3"  placeholder="请对图样提出具体修改建议，我们将在1周内返回修改后的图样。"></textarea>
+                               <br>
+                               <button  id='edit-picture' class="btn btn-default pull-right">修改图样</button>
+                           </form>
+                       </div>
+                     </div>
+
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+<!-- 增加的内容结束-->
+
+<!--<div style="height: 1500px;width: 600px;border: 1px solid black"></div>-->
+
+<!-- 侧边栏-->
+    <div class="fixed-btn">
+        <a class="right-until" href="#" title="返回顶部" style="display: inline-block;">
+            <i class="icon-double-angle-up"></i>
+        </a>
+        <a class="qrcode right-until" href="javascript:void(0)" title="在线客服">
+            <i class="icon-comment-alt"></i>
+        </a>
+        <a class="writer" target="_blank" href="javascript:void(0)"  title="反馈建议">
+            <i class="icon-edit"></i>
+        </a>
+        <!-- 微信弹出框 -->
+        <!--<div id="bottom-qrcode" class="modal panel-modal hide fade in" style="display: inline-block;">
+          <h4>微信关注</h4>
+          <div class="panel-body"><img alt="微信关注" width="128" height="128" src="/wp-content/themes/runoob/assets/images/qrcode.png"></div>
+        </div>-->
+    </div>
+<!-- 底部版权-->
+    <hr style='background-color:#42ad46;height:1px;border:none;'><!--直线也有border，如果不清除border:none，会有灰色边框-->
+    <div class="container">
+        <footer>
+            <div style="text-align: center">
+                <a href="#">关于我们</a>
+                <span>|</span>
+                <a href="#">联系我们</a>
+                <span>|</span>
+                <a href="#">招聘人才</a>
+                <span>|</span>
+                <a href="#">友情链接</a>
+            </div>
+            <div style="text-align: center">CopyRight © 2018 <a href="#">瓷画网</a>All Rights Reserved</div>
+            <div style="text-align: center">电话：0798-****888    赣ICP备*******8号</div>
+
+        </footer>
+    </div>
+</body>
+<script>
+        $(function() {
+
+//            标签切换
+            $('#us-tabs li a').click(function () {
+//                激活自己标签，隐藏兄弟标签
+                $(this).parent().siblings().removeClass('active');
+                $(this).parent().addClass('active');
+//                展现自己详细页面
+                var i1 = '.sit-item[name="';
+                var v = $(this).attr('name');
+                var i2 = '"]';
+                var tmp = i1 + v + i2;
+                $(tmp).removeClass('hidden').siblings().addClass('hidden');
+//                console.log(v);
+            });
+//            个人信息页 设置手机
+            $('#btn-phone').click(function () {
+//                激活安全设置标签
+                $('#us-tabs li a[name="safe"]').parent().siblings().removeClass('active');
+                $('#us-tabs li a[name="safe"]').parent().addClass('active');
+//                展现安全设置详细页面
+                $('#safe').removeClass('hidden').siblings().addClass('hidden');
+            });
+//            个人信息页 设置收货地址
+            $('#btn-address').click(function () {
+                //                激活收货信息标签
+                $('#us-tabs li a[name="address"]').parent().siblings().removeClass('active');
+                $('#us-tabs li a[name="address"]').parent().addClass('active');
+//                展现收货信息详细页面
+                $('#address').removeClass('hidden').siblings().addClass('hidden');
+            });
+            //           安全设置页 密码检查
+            error_password=false;
+            error_check_password = false;
+        //        密码框检查 密码最少8位，最长20位
+            $('.rpwd').blur(function () {
+                var len = $(this).val().length;
+                if (len < 8 || len > 20) {
+                    $(this).next().html('密码最少8位，最长20位');
+                    $(this).next().show();
+                    error_password = false;
+                }
+                else {
+                    $(this).next().hide();
+                    error_password = true;
+                }
+                console.log(2)
+            });
+//        密码重复检查
+            $('.cpwd').blur(function () {
+                check_cpwd();
+                console.log(3)
+            });
+//            安全设置 更换密码
+            $('#edit-pwd').click(function () {
+                $('#epwd-tip').text('');//清空该按钮错误提示
+                $('#new-pwd-form .error_tip').text('');//清空密码框后的错误提示
+                $('#new-pwd-form input').val('');//清空输入框的值
+                $('#new-pwd-form').removeClass('hidden');//呈现密码框
+            });
+//          密码修改提交检查
+            $('#safe-pwd').click(function () {
+                console.log(1);
+                if(error_password && error_check_password ) {
+                    console.log(7);
+                    $.ajax({
+                        url:'index.html',
+                        type:"POST",
+                        data:$(this).parent().serialize(),
+                        dataType:"JSON",
+                        traditional:true,
+                        success:function (data) {
+                            var v=data.message;
+                            $('#epwd-tip').html(v);
+                        },
+                        error:function(data){
+	    		            $('#epwd-tip').removeClass('hidden').text('网络故障,修改失败');
+	    		        }
+                    });
+                    $('#new-pwd-form').addClass('hidden');
+
+                } else {
+                    console.log(8);
+                    // $(this).addAttr('disabled','disabled');
+                    return false;
+                }
+
+            });
+            $('#safe-pwd-cancel').click(function () {
+                $('#new-pwd-form').addClass('hidden')
+            });
+//            安全设置 绑定手机
+            $('#edit-phone').click(function () {
+                $('#ephone-tip').text('');//清空错误提示
+                $('#new-phone-form').removeClass('hidden');
+            });
+            $('#safe-phone').click(function () {
+                console.log(1);
+                $.ajax({
+                    url:'index.html',
+                    type:"POST",
+                    data:$(this).parent().serialize(),
+                    dataType:"JSON",
+                    traditional:true,
+                    success:function (data) {
+                        var v=data.message;
+                        $('#ephone-tip').html(v);
+                    },
+                    error:function(data){
+	    		        $('#ephone-tip').removeClass('hidden').text('网络故障,修改失败');
+	    		    }
+                });
+                $('#new-phone-form').addClass('hidden')
+            });
+            $('#safe-phone-cancel').click(function () {
+                $('#new-phone-form').addClass('hidden')
+            });
+
+//            订单页 查看图样按钮跳转到待确认消息页
+            $('.check-pt').click(function(){
+                /*                激活待确认消息标签*/
+                $('#us-tabs li a[name="message"]').parent().siblings().removeClass('active');
+                $('#us-tabs li a[name="message"]').parent().addClass('active');
+/*                展现待确认消息详细页面*/
+                $('#message').removeClass('hidden').siblings().addClass('hidden');
+            });
+
+
+//            待确认消息页 修改图样按钮
+            $('#edit-picture').click(function () {
+                var len=$('#edit-advise').val().length;
+                if (len==0){
+                    alert("建议不能为空!");
+                    console.log(9);
+                    return false;
+                }else {
+                    var v=confirm('您确定要修改吗?');
+                    console.log(0);
+                    return v;
+                }
+            });
+
+
+
+        });
+
+
+//        密码重复检查程序
+        function check_cpwd(){
+            var pass = $('#new-pwd').val();
+            var cpass = $('.cpwd').val();
+
+            if (pass != cpass) {
+                $('.cpwd').next().html('两次输入的密码不一致');
+                $('.cpwd').next().show();
+                error_check_password = false;
+            }else {
+                $('.cpwd').next().hide();
+                error_check_password = true;
+            }
+        }
+</script>
+</html>

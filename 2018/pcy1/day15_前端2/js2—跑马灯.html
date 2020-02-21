@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div id="i1">欢迎老男孩莅临指导</div>
+     <script>
+         function f1() {
+             //根据id获取指定标签的内容
+             var tag=document.getElementById('i1');
+             //获取标签内的文本
+             var content=tag.innerText;
+             //截取首字符
+             var f=content.charAt(0);
+             //截取子串
+             var l=content.substring(1,content.length);
+             //把原来的首字符放在末尾组成新文本
+             var new_content=l+f;
+             //输出新文本
+             tag.innerText=new_content
+
+         }
+         setInterval('f1()',300)//每个0.1秒执行1次函数f1.
+
+     </script>
+<!--下面是在console里执行的一些小片段-->
+<!--document.getElementById-->
+<!--ƒ getElementById() { [native code] }-->
+<!--document.getElementById('i1')-->
+<!--<div id=​"i1">​欢迎老男孩莅临指导​</div>​-->
+<!--tag=document.getElementById('i1');-->
+<!--<div id=​"i1">​欢迎老男孩莅临指导​</div>​-->
+<!--tag.innerText-->
+<!--"欢迎老男孩莅临指导"-->
+<!--content=tag.innerText-->
+<!--"欢迎老男孩莅临指导"-->
+<!--content-->
+<!--"欢迎老男孩莅临指导"-->
+<!--f=content.charAt(0)-->
+<!--"欢"-->
+<!--content.substring(1,content.len)-->
+<!--"迎老男孩莅临指导"-->
+<!--content.substring(1,content.len)-->
+<!--"迎老男孩莅临指导"-->
+<!--l=content.substring(1,content.length)-->
+<!--"迎老男孩莅临指导"-->
+<!--new_content=l+f;-->
+<!--"迎老男孩莅临指导欢"-->
+<!--new_content.charAt(0)-->
+<!--"迎"-->
+<!--m=new_content.charAt(0)-->
+<!--"迎"-->
+<!--n=new_content.substring(1,new_content.length)-->
+<!--"老男孩莅临指导欢"-->
+<!--new_new_content=n+m-->
+<!--"老男孩莅临指导欢迎"-->
+<!--tag.innerText=new_content-->
+<!--"迎老男孩莅临指导欢"-->
+<!--tag.innerText=new_new_content-->
+<!--"老男孩莅临指导欢迎"-->
+
+</body>
+</html>

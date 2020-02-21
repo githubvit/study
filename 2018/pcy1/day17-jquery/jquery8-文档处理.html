@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <input id='t1' type="text" />
+    <input id="i1" type="button" value="添加"/>
+    <input id="i2" type="button" value="删除"/>
+    <input id="i3" type="button" value="复制"/>
+    <ul id="a">
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+    </ul>
+    <script src="jquery-1.12.4.js"></script>
+    <script>
+        //添加
+        $('#i1').click(function () {
+            //取得text标签的值
+            var v=$('#t1').val();
+            //定义标签
+            var tmp='<li>'+v+'</li>';
+            //将标签追加到ul标签里,头部
+            $('#a').prepend(tmp);
+        });
+        //删除
+        $('#i2').click(function () {
+            //根据索引删除,获得输入的索引
+            var idx=$('#t1').val();
+            //删除相应下标的标签
+            $('#a').children().eq(idx).remove();
+        });
+        //复制
+        $('#i3').click(function () {
+            //根据索引复制,获得输入的索引
+            var idx=$('#t1').val();
+            //复制相应下标的标签
+            var v=$('#a').children().eq(idx).clone();
+            //追加到ul列表的尾部
+            $('#a').append(v);
+        })
+
+    </script>
+</body>
+</html>

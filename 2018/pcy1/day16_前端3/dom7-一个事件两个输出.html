@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div id="main" style="width: 300px; height: 300px; background-color: #00AA88">
+        <div id="content" style="width: 150px;height: 150px;background-color: #888888"></div>
+    </div>
+    <script>
+        var mymain=document.getElementById('main');
+        var mycontent=document.getElementById('content');
+        mycontent.addEventListener('click',function () {
+            console.log('content')
+        });
+        mymain.addEventListener('click',function () {
+            console.log('main')
+        },true);
+
+//    addEventListener('事件',匿名函数function(){},false或者true）默认是false
+//        当为false时，冒泡方式，从里往外处理，也就是最里面的先冒出来。
+        //当为true时，捕捉方式，从外往里处理，最外面的先出来。
+        //并且只要设置最外层的false或true。
+
+    </script>
+</body>
+</html>

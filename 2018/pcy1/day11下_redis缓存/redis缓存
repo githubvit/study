@@ -1,0 +1,1061 @@
+redis缓存
+
+我们刚学了rabbitmq消息队列，它完成的是不同进程的消息传递和数据收发。
+那么我们怎么实现不同进程之间的数据共享呢？
+我们知道可以用文件，比如利用json和pickle序列化，但这样要用到硬盘，速度太慢。
+多进程的Manager可以实现数据共享，不错，但是这仅仅是对python的进程;
+如果不同语言写的程序之间又如何呢，能不能像json一样实现不同语言间的数据共享呢?
+
+通过缓存和不同进程实现socket连接，帮助不同进程在缓存实现数据共享。
+这类典型缓存系统有：
+mongodb（直接持久化，即在内存又同步到硬盘）、
+redis（半持久化，默认在内存，通过手动调用可以存到硬盘）、
+memcache（没有持久化，轻量级缓存）。
+
+
+
+redis是单线程的，通过异步实现多并发，效率相当高，读可以达到8万次每秒。
+
+redis是业界主流的key-value （类似json）nosql数据库之一(NoSQL = Not Only SQL，意即“不仅仅是SQL” ) 。
+
+和Memcached类似，它支持存储的value类型相对更多，
+包括string(字符串)、list(链表)、set(集合)、zset(sorted set --有序集合)和hash（哈希类型）。
+这些数据类型都支持push/pop、add/remove及取交集并集和差集及更丰富的操作，而且这些操作都是原子性的。
+
+    windows下：
+
+        redis-server.exe 启动服务
+        redis-cli.exe 启动客户端
+
+
+
+
+
+
+第一节 redis与rehl7
+    一、安装redis
+    1，下载，先建立了redis目录。
+    [root@localhost redis]# wget http://download.redis.io/releases/redis-3.2.8.tar.gz
+    --2017-11-16 22:11:50--  http://download.redis.io/releases/redis-3.2.8.tar.gz
+    Resolving download.redis.io (download.redis.io)... 109.74.203.151
+    Connecting to download.redis.io (download.redis.io)|109.74.203.151|:80... connected.
+    HTTP request sent, awaiting response... 200 OK
+    Length: 1547237 (1.5M) [application/x-gzip]
+    Saving to: ‘redis-3.2.8.tar.gz’
+
+    100%[=============================================>] 1,547,237    268KB/s   in 6.0s
+
+    2017-11-16 22:11:57 (251 KB/s) - ‘redis-3.2.8.tar.gz’ saved [1547237/1547237]
+
+    2，解压
+    [root@localhost redis]# tar -xzvf redis-3.2.8.tar.gz
+    3，进入解压好的目录
+    [root@localhost redis]# cd redis-3.2.8
+    4，安装
+    [root@localhost redis-3.2.8]# make
+    cd src && make all
+    make[1]: Entering directory `/root/redis/redis-3.2.8/src'
+    rm -rf redis-server redis-sentinel redis-cli redis-benchmark
+    redis-check-rdb redis-check-aof *.o *.gcda *.gcno *.gcov redis.info lcov-html
+    (cd ../deps && make distclean)
+    。
+    。
+    。
+    Hint: It's a good idea to run 'make test' ;)
+    make[1]: Leaving directory `/root/redis/redis-3.2.8/src'
+
+    以上操作可以说已经完成了安装，但是为了操作方便，
+    我们将redis相关操作命令通过执行make install命令的方式将其加入/usr/local/bin目录中。
+    5，进入src目录
+    [root@localhost redis-3.2.8]# cd src
+    6，将redis相关操作命令加入/usr/local/bin目录中,make install
+    [root@localhost src]# make install
+
+    Hint: It's a good idea to run 'make test' ;)
+
+        INSTALL install
+        INSTALL install
+        INSTALL install
+        INSTALL install
+        INSTALL install
+    [root@localhost src]#
+    这样我们就可以不用进入redis安装目录，再执行redis-server redis-cli等命令，
+    我们查看/usr/local/bin目录，发现通过make install命令安装的redis相关命令在此。
+
+    二、启动redis服务
+
+    [root@localhost src]# cd ~
+    [root@localhost ~]# redis-server
+    37579:C 16 Nov 22:25:11.332 # Warning: no config file specified, using the default config.
+    In order to specify a config file use redis-server /path/to/redis.conf
+                    _._
+               _.-``__ ''-._
+          _.-``    `.  `_.  ''-._           Redis 3.2.8 (00000000/0) 64 bit
+      .-`` .-```.  ```\/    _.,_ ''-._
+     (    '      ,       .-`  | `,    )     Running in standalone mode
+     |`-._`-...-` __...-.``-._|'` _.-'|     Port: 6379
+     |    `-._   `._    /     _.-'    |     PID: 37579
+      `-._    `-._  `-./  _.-'    _.-'
+     |`-._`-._    `-.__.-'    _.-'_.-'|
+     |    `-._`-._        _.-'_.-'    |           http://redis.io
+      `-._    `-._`-.__.-'_.-'    _.-'
+     |`-._`-._    `-.__.-'    _.-'_.-'|
+     |    `-._`-._        _.-'_.-'    |
+      `-._    `-._`-.__.-'_.-'    _.-'     REQUIRE
+          `-._    `-.__.-'    _.-'
+              `-._        _.-'
+                  `-.__.-'
+
+    37579:M 16 Nov 22:25:11.335 # WARNING: The TCP backlog setting of 511 cannot be enforced
+    because /proc/sys/net/core/somaxconn is set to the lower value of 128.
+    37579:M 16 Nov 22:25:11.335 # Server started, Redis version 3.2.8
+    37579:M 16 Nov 22:25:11.335 # WARNING overcommit_memory is set to 0! Background save may
+    fail under low memory condition. To fix this issue add 'vm.overcommit_memory = 1' to /etc/sysctl.conf
+    and then reboot or run the command 'sysctl vm.overcommit_memory=1' for this to take effect.
+    37579:M 16 Nov 22:25:11.335 # WARNING you have Transparent Huge Pages (THP) support enabled in your kernel.
+    This will create latency and memory usage issues with Redis.
+    To fix this issue run the command 'echo never > /sys/kernel/mm/transparent_hugepage/enabled' as root,
+    and add it to your /etc/rc.local in order to retain the setting after a reboot.
+    Redis must be restarted after THP is disabled.
+    37579:M 16 Nov 22:25:11.335 * The server is now ready to accept connections on port 6379
+
+    三，另起一个窗口Terminal，运行redis-cli客户端
+    [root@localhost ~]# redis-cli
+    127.0.0.1:6379> set name alex
+    OK
+    127.0.0.1:6379> get name
+    "alex"
+    127.0.0.1:6379> set name jack ex 2 #设定name的值为Jack，过期时间为2秒
+    OK
+    127.0.0.1:6379> get name #再打开就没有了
+    (nil)
+    127.0.0.1:6379>
+
+    四，关闭redis服务
+    关闭客户端 直接exit
+    关闭服务端 [root@localhost ~]# pkill redis-server 类似于kill -9 pid的方式 终止线程。
+    另外一种关闭服务的命令：redis-cli shutdown
+    [root@localhost ~]# redis-cli
+    127.0.0.1:6379> shutdown   #关闭服务端
+    not connected> exit      #退出客户端
+    [root@localhost ~]#
+
+    五，远程连接linux redis服务器——虚拟机rhel7-2这台机器（password：another333）
+
+    1，设定密码：
+    默认是没有密码的，要去掉redis.conf文件480行注释，
+    redis.conf文件480 # requirepass foobared 密码为foobared。（当然密码也可以改）
+    这时在本机另外一个窗口terminal下，运行redis-cli客户端，发现可以登上，但是执行具体命令是提示操作不允许。
+
+    [root@localhost ~]# redis-cli
+    127.0.0.1:6379> get name
+    (error) NOAUTH Authentication required.
+    127.0.0.1:6379> keys *
+    (error) NOAUTH Authentication required.
+
+    使用-a foobared登陆后，可以操作命令
+    [root@localhost ~]# redis-cli -a foobared
+    127.0.0.1:6379> get name
+    (nil)
+
+    127.0.0.1:6379> keys *
+    (empty list or set)
+    127.0.0.1:6379>
+    127.0.0.1:6379>
+
+    2，修改redis.conf文件的bind参数，
+    将原来的61行 bind 127.0.0.1改为 61行 bind 0.0.0.0，
+    这样所有可以ping通本服务器的客户端都可以访问了。
+
+    如果你改为服务器本身的ip，bind 192.168.2.240，那么服务器将来改了ip，就还要改。
+    服务器自己的客户端访问命令也要写ip地址。不方便。
+
+    当然，如果你要指定模块网卡，那还是要改为网卡的ip。
+
+    3，重新启动redis服务：
+        一定要带配置文件启动，不然，python依然连不上。
+    [root@localhost redis-3.2.8]# redis-server redis.conf
+
+    这是python在pycharm上执行的情况：成功登陆linux的redis服务器。
+        import redis
+        # 连接linux远程redis服务器 普通方式
+        r = redis.Redis(host='192.168.2.240',port=6379,password='foobared')
+        #设定key和value
+        r.set('foo', 'Bar')#r.set(key,value)
+        #查看r对象
+        print r
+        # 获取'foo'key的value
+        print r.get('foo') #Bar
+
+    运行结果
+    F:\ProgramData\Anaconda2\python.exe D:/wksp1/pcy1/day11下_redis缓存/redis1_基本.py
+    Redis<ConnectionPool<Connection<host=192.168.2.240,port=6379,db=0>>>
+    Bar
+
+第二节 python使用redis
+
+    1，要安装redis模块，然后引入import redis
+
+    2，连接池
+
+    redis-py使用connection pool来管理对一个redis server的所有连接，避免每次建立、释放连接的开销。
+    默认，每个Redis实例都会维护一个自己的连接池。
+    可以直接建立一个连接池，然后作为Redis参数，这样就可以实现多个Redis实例共享一个连接池。
+        import redis
+        # 先启动redis服务，在运行
+        # 连接redis服务器
+        #普通方式
+        # r = redis.Redis(host='192.168.2.240', port=6379,password='foobared')
+        #连接池方式
+        pool= redis.ConnectionPool(host='192.168.2.240', port=6379,password='foobared')
+        r = redis.Redis(connection_pool=pool)
+        #设定key和value
+
+        r.set('foo', 'Bar')#r.set(key,value)
+        #查看r对象 原来的print r 会报错，这样用type包起来就可以了。
+        print type(r)
+        # 获取'foo'key的value
+        print r.get('foo') #Bar
+
+        普通方式结果第一节有。
+
+        连接池方式结果：
+        F:\ProgramData\Anaconda2\python.exe D:/wksp1/pcy1/day11下_redis缓存/redis1_基本.py
+        <class 'redis.client.Redis'>
+        Bar
+
+第三节 redis命令行操作
+ windows下：
+
+        redis-server.exe 启动服务
+        redis-cli.exe 启动客户端
+
+F:\redis\64bit>redis-cli.exe
+
+redis 127.0.0.1:6379> set name alex
+OK
+redis 127.0.0.1:6379> set age 22
+OK
+#查看现在有多少个key，keys *
+redis 127.0.0.1:6379> keys *
+1) "foo"
+2) "age"
+3) "name"
+redis 127.0.0.1:6379> get name
+"alex"
+redis 127.0.0.1:6379> get age
+"22"
+#重新赋值
+redis 127.0.0.1:6379> set name jack
+OK
+redis 127.0.0.1:6379> get name
+"jack"
+
+#只存活2秒钟，set name jack ex 2 在windows上报错，
+
+以下是在rehl7上运行的结果。
+启动服务，带配置文件
+[root@localhost redis-3.2.8]# redis-server redis.conf
+
+运行登陆命令，带密码。
+[root@localhost ~]# redis-cli -a foobared
+
+127.0.0.1:6379> set name jack ex 2 #设定name的值为Jack，过期时间为2秒
+OK
+127.0.0.1:6379> get name #再打开就没有了
+(nil)
+
+第四节 操作类型
+
+一，string
+    1，  set(name, value, ex=None, px=None, nx=False, xx=False)
+            在Redis中设置值，默认，不存在则创建，存在则修改
+        参数：
+         ex，过期时间（秒）
+         px，过期时间（毫秒）
+         nx，如果设置为True，则只有name不存在时，当前set操作才执行
+         xx，如果设置为True，则只有name存在时，岗前set操作才执行
+
+        127.0.0.1:6379> set name jack ex 2
+        OK
+        127.0.0.1:6379> get name
+        (nil)
+        127.0.0.1:6379> set name alex
+        OK
+        127.0.0.1:6379> set name Alex nx
+        (nil)
+        127.0.0.1:6379> get name
+        "alex"
+        127.0.0.1:6379> set name2 Alex nx
+        OK
+        127.0.0.1:6379> set name3 jack xx
+        (nil)
+        127.0.0.1:6379> set name2 jack xx
+        OK
+        127.0.0.1:6379> get name2
+        "jack"
+        127.0.0.1:6379>
+
+    2，  可以查看命令帮助 setex就是设置过期时间，格式如下
+        127.0.0.1:6379> help setex
+
+          SETEX key seconds value
+          summary: Set the value and expiration of a key
+          since: 2.0.0
+          group: string
+
+    3， 批量设置
+        mset n1 alex n2 22
+        批量获取
+        mget n1 n2
+        设置新值，返回旧值
+        getset n1 jack
+        127.0.0.1:6379> mset n1 alex n2 22
+        OK
+        127.0.0.1:6379> mget n1 n2
+        1) "alex"
+        2) "22"
+        127.0.0.1:6379> getset n1 jack
+        "alex"
+        127.0.0.1:6379> get n1
+        "jack"
+        127.0.0.1:6379>
+
+    4，  字符串切片
+        getrange n1 0 2
+        字符串替换 ，从指定为往后替换
+        setrange n2 0 A
+        127.0.0.1:6379> getrange n1 0 2
+        "jac"
+        127.0.0.1:6379> setrange n2 0 A
+        (integer) 2
+        127.0.0.1:6379> get n2
+        "A2"
+        127.0.0.1:6379>
+
+    5，  二进制位操作，value的值只能是1位0或1
+        setbit key offset value
+        setbit n2 1 01
+
+        127.0.0.1:6379> setbit n2 1 0
+        (integer) 1
+        127.0.0.1:6379> get n2
+        "\x01lx"
+
+        二进制位操作把a改成c用
+        127.0.0.1:6379> set n3 alex
+        OK
+        127.0.0.1:6379> get n3
+        "alex"
+        >>> ord('a')
+        97
+        >>> bin(97)
+        '0b1100001' 高位是0，就省掉了，完整应该0110 0001
+        >>>
+        改为99 应该 0110 0011，a变成c
+        把第6位改为1
+        127.0.0.1:6379> setbit n3 6 1
+        (integer) 0
+        127.0.0.1:6379> get n3
+        "clex"
+        127.0.0.1:6379>
+
+        牛逼应用:getbit countbit
+
+        新浪微博登陆，当前有哪些用户在线？常规操作，是在数据库有个状态字段，然后对状态字段循环
+        ，这首先就要在数据库中有状态这个字段，占用空间大，然后修改状态，io操作多。MySQL一张表
+        超过500万就慢了，涉及到分表等，效率低下。
+        bitcount是redis统计字符串中二进制的1的个数。
+        setbit可以设置任意位为1。
+        来，看，牛逼的来了，
+        每个用户都有id
+        我们心里设置一个登陆字符叫 n5，这个n5可以一开始没有。
+        有哪个id号登陆，就把n5对应的位置设为1
+        比如，1000号用户登陆
+        setbit n5 1000 1
+        55号用户登陆
+        setbit n5 55   1
+        6000号用户登陆
+        setbit n5 6000 1
+        这个时候统计用户在线人数，只要bitcount n5，就知道有多少用户在线。
+
+        想知道是哪些用户在线，只要知道哪些位置有1，就知道了用户id号。
+        想知道id为55号的用户在不在线，只要getbit n5 55看看结果是不是1.
+        循环整个n5字符串，就可以知道哪些用户在线。
+        1个字节就可以存8个用户，1k就可以存8*1024=8192个用户，1M可以存约838万个用户
+        10M就可以存下约8600万个用户在线列表。
+        127.0.0.1:6379> setbit n5 1000 1
+        (integer) 0
+        127.0.0.1:6379> setbit n5 55 1
+        (integer) 0
+        127.0.0.1:6379> setbit n5 6000 1
+        (integer) 0
+        127.0.0.1:6379> bitcount n5
+        (integer) 3
+        127.0.0.1:6379> getbit n5 55
+        (integer) 1
+        127.0.0.1:6379> getbit n5 555#555号用户不在线
+        (integer) 0
+        127.0.0.1:6379>
+
+        自加自减，来一个用户就加一个，走一个用户就减一个。
+        incr login_user 自加  decr login_user 自减
+        127.0.0.1:6379> incr login
+        (integer) 1
+        127.0.0.1:6379> incr login
+        (integer) 2
+        127.0.0.1:6379> incr login
+        (integer) 3
+        127.0.0.1:6379> incr login
+        (integer) 4
+        127.0.0.1:6379> incr login
+        (integer) 5
+        127.0.0.1:6379> decr login
+        (integer) 4
+        127.0.0.1:6379> decr login
+        (integer) 3
+        127.0.0.1:6379> decr login
+        (integer) 2
+        127.0.0.1:6379> decr login
+        (integer) 1
+        127.0.0.1:6379> decr login
+        (integer) 0
+        127.0.0.1:6379> decr login
+        (integer) -1
+
+        小数自加
+        127.0.0.1:6379> incrbyfloat n4 1.2#key和步距
+        "1.2"
+        127.0.0.1:6379> incrbyfloat n4 1.2
+        "2.4"
+        127.0.0.1:6379> incrbyfloat n4 1.2
+        "3.6"
+        127.0.0.1:6379> incrbyfloat n4 1.2
+        "4.8"
+        127.0.0.1:6379>
+
+        追加
+        append 在值后面加入
+        127.0.0.1:6379> get name
+        "alex"
+        127.0.0.1:6379> append name li
+        (integer) 6
+        127.0.0.1:6379> get name
+        "alexli"
+        127.0.0.1:6379>
+
+二，hash
+
+    1，  hset、hgetall、hget、hkeys、hvals
+            一个对象有多个值
+         127.0.0.1:6379> hset info name alex
+        (integer) 1
+        127.0.0.1:6379> hset info age 22
+        (integer) 1
+        127.0.0.1:6379> hset info sex m
+        (integer) 1
+        127.0.0.1:6379> HGET info name #看看info下name的值
+        "alex"
+        127.0.0.1:6379> hgetall info#查看所有
+        1) "name"
+        2) "alex"
+        3) "age"
+        4) "22"
+        5) "sex"
+        6) "m"
+        127.0.0.1:6379> hkeys info#查看所有key
+        1) "name"
+        2) "age"
+        3) "sex"
+        127.0.0.1:6379> hvals info#查看所有value
+        1) "alex"
+        2) "22"
+        3) "m"
+
+    2，  hmset批量设置 hmget批量获取
+        127.0.0.1:6379> hmset info2 k1 1 k2 2
+        OK
+        127.0.0.1:6379> hgetall info2
+        1) "k1"
+        2) "1"
+        3) "k2"
+        4) "2"
+        127.0.0.1:6379> hkeys info2
+        1) "k1"
+        2) "k2"
+        127.0.0.1:6379> hvals info2
+        1) "1"
+        2) "2"
+        127.0.0.1:6379> hmget info2 k1 k2
+        1) "1"
+        2) "2"
+        127.0.0.1:6379>
+
+
+    3，  hlen有几个key，hexists key是否存在，hdel 删除一个key。
+        127.0.0.1:6379> hlen info2
+        (integer) 2
+        127.0.0.1:6379>
+        127.0.0.1:6379> hexists info2 k1
+        (integer) 1
+        127.0.0.1:6379> hexists info2 k3
+        (integer) 0
+        127.0.0.1:6379>
+        127.0.0.1:6379> hdel info2 k2
+        (integer) 1
+        127.0.0.1:6379> hkeys info2
+        1) "k1"
+        127.0.0.1:6379> hgetall info2
+        1) "k1"
+        2) "1"
+        127.0.0.1:6379>
+
+    4，  自增及自减hincrby key field increment
+        127.0.0.1:6379> hincrby info3 k3 1
+        (integer) 1
+        127.0.0.1:6379> hincrby info3 k3 1
+        (integer) 2
+        127.0.0.1:6379> hincrby info3 k3 1
+        (integer) 3
+        127.0.0.1:6379> hincrby info3 k3 -1
+        (integer) 2
+        127.0.0.1:6379> hincrby info3 k3 -1
+        (integer) 1
+        127.0.0.1:6379> hincrby info3 k3 -1
+        (integer) 0
+        127.0.0.1:6379> hincrby info3 k3 -1
+        (integer) -1
+
+    5，  hscan 过滤，一个hash可以存200亿个变量，如果循环找就太慢了，用hscan可以快速找到。
+        hscan key cursor [MATCH pattern] [COUNT count]
+        cursor 光标位置，一般写0，match pattern 匹配规则，cunt 数量
+        127.0.0.1:6379> hkeys info
+        1) "name"
+        2) "age"
+        3) "sex"
+
+        127.0.0.1:6379> hscan info 0 match a*   #根据key中的field，a开头的
+        1) "0"光标开始位置
+        2) 1) "age"
+           2) "22"
+        127.0.0.1:6379> hscan info 0  match n*  #n开头的
+        1) "0"
+        2) 1) "name"
+           2) "alex"
+        127.0.0.1:6379> hscan info 0  match *a* #包含a的
+        1) "0"
+        2) 1) "name"
+           2) "alex"
+           3) "age"
+           4) "22"
+        127.0.0.1:6379> hscan info 0  match *e* #包含e的
+        1) "0"
+        2) 1) "name"
+           2) "alex"
+           3) "age"
+           4) "22"
+           5) "sex"
+           6) "m"
+    6,  对于几十亿的数据，有可能hscan出来的数据依然很多，这时就有分批读取，再循环的python做法来获取。
+
+        hscan_iter(name, match=None, count=None)
+
+        # 利用yield封装hscan创建生成器，实现分批去redis中获取数据
+
+        # 参数：
+            # match，匹配指定key，默认None 表示所有的key
+            # count，每次分片最少获取个数，默认None表示采用Redis的默认分片个数
+
+        # 如：
+            # for item in r.hscan_iter('xx'):
+            #     print item
+
+
+
+三，列表
+    1，  lpush先入后出放入、rpush先入先出放入 lrange读取列表
+        127.0.0.1:6379> lpush names alex hanyan zhangyang 先入后出放入
+        (integer) 3
+        127.0.0.1:6379> lrange names 0 -1 读取所有0 -1
+        1) "zhangyang"
+        2) "hanyan"
+        3) "alex"
+        127.0.0.1:6379> rpush  names wangsen zouyi 先入先出放入
+        (integer) 5
+        127.0.0.1:6379> lrange names 0 -1 读取所有
+        1) "zhangyang"
+        2) "hanyan"
+        3) "alex"
+        4) "wangsen"
+        5) "zouyi"
+        127.0.0.1:6379> lrange names 1 3 切片
+        1) "hanyan"
+        2) "alex"
+        3) "wangsen"
+        127.0.0.1:6379>
+    2，  lpushx 只有列表已存在，才向列表的最左边添加。
+        llen 列表元素个数
+        127.0.0.1:6379> lpush name sgq
+        (error) WRONGTYPE Operation against a key holding the wrong kind of value
+
+        127.0.0.1:6379> lpush names sgq
+        (integer) 6
+        127.0.0.1:6379> lrange names 0 -1
+        1) "sgq"
+        2) "zhangyang"
+        3) "hanyan"
+        4) "alex"
+        5) "wangsen"
+        6) "zouyi"
+        127.0.0.1:6379> llen names
+        (integer) 6
+
+    3，  插入
+        linsert key BEFORE|AFTER pivot value 插入 pivot标杆值
+        在alex前插入test
+        127.0.0.1:6379> linsert names before alex test
+        (integer) 7
+        127.0.0.1:6379> lrange names 0 -1
+        1) "sgq"
+        2) "zhangyang"
+        3) "hanyan"
+        4) "test"
+        5) "alex"
+        6) "wangsen"
+        7) "zouyi"
+        127.0.0.1:6379>
+    4，  修改某个位置的值lset
+        127.0.0.1:6379> lset names 3 ALEX
+        OK
+        127.0.0.1:6379> lrange names 0
+        (error) ERR wrong number of arguments for 'lrange' command
+        127.0.0.1:6379> lrange names 0  -1
+        1) "sgq"
+        2) "zhangyang"
+        3) "hanyan"
+        4) "ALEX"
+        5) "alex"
+        6) "wangsen"
+        7) "zouyi"
+        127.0.0.1:6379>
+
+    5，  删除指定的值lrem： lrem key count（删除个数） value
+        127.0.0.1:6379> lrem names 1 ALEX
+        (integer) 1
+        127.0.0.1:6379> lrange names 0 -1
+        1) "sgq"
+        2) "zhangyang"
+        3) "hanyan"
+        4) "alex"
+        5) "wangsen"
+        6) "zouyi"
+        127.0.0.1:6379>
+
+    6，  lpop取出最左边的值，获取一条消息删除掉，像队列
+        127.0.0.1:6379> lpop names
+        "sgq"
+        127.0.0.1:6379> lrange names 0 -1
+        1) "zhangyang"
+        2) "hanyan"
+        3) "alex"
+        4) "wangsen"
+        127.0.0.1:6379>
+    7，  lindex获取指定位置的值，ltrim 裁剪指定位置范围的列表
+            127.0.0.1:6379> lindex names 1
+            "hanyan"
+            127.0.0.1:6379> ltrim names 2 3
+            OK
+            127.0.0.1:6379> lrange names 0 -1
+            1) "alex"
+            2) "wangsen"
+            127.0.0.1:6379>
+    8，  rpoplpush 右取左入从一个列表最右边取出，放到另一个列表的最左侧。
+            127.0.0.1:6379> rpush names2 zhangyang hanyang
+            (integer) 2
+            127.0.0.1:6379> lrange names2 0 -1
+            1) "zhangyang"
+            2) "hanyang"
+            127.0.0.1:6379> rpoplpush names names2
+            "wangsen"
+            127.0.0.1:6379> lrange names 0 -1
+            1) "alex"
+            127.0.0.1:6379> lrange names2 0 -1
+            1) "wangsen"
+            2) "zhangyang"
+            3) "hanyang"
+            127.0.0.1:6379>
+    9，  brpop和blpop，阻塞式右拉取，阻塞式左拉取，设置阻塞时间（就是过期时间），到了时间没有数据就结束，数据到了就结束，每次只取1个。
+            127.0.0.1:6379> blpop names 4
+            1) "names"
+            2) "7"
+            127.0.0.1:6379> blpop names 4
+            1) "names"
+            2) "8"
+            127.0.0.1:6379> blpop names 4
+            1) "names"
+            2) "9"
+            127.0.0.1:6379> blpop names 4
+            (nil)
+            (4.01s)
+            127.0.0.1:6379>
+    10, brpoprpush 阻塞式右取左入，到了时间没有数据就结束。
+            127.0.0.1:6379> brpoplpush names names2 40
+            "0"
+            (3.98s)
+            127.0.0.1:6379> brpoplpush names names2 40
+            "9"
+            127.0.0.1:6379> brpoplpush names names2 40
+            "8"
+            127.0.0.1:6379> lrange names2
+            (error) ERR wrong number of arguments for 'lrange' command
+            127.0.0.1:6379> lrange names2 0 -1
+            1) "8"
+            2) "9"
+            3) "0"
+            4) "wangsen"
+            5) "zhangyang"
+            6) "hanyang"
+            127.0.0.1:6379>
+
+四，set集合
+    1，集合的建立和获取
+        sadd建立、smembers获取、scard个数
+        127.0.0.1:6379> sadd names3 alex alex jack jack 3 3
+        (integer) 3
+        127.0.0.1:6379> smembers names3
+        1) "alex"
+        2) "3"
+        3) "jack"
+        127.0.0.1:6379>
+        127.0.0.1:6379> scard names3
+        (integer) 3
+        127.0.0.1:6379>
+    2，差集names3有names4上没有，差集列表
+        127.0.0.1:6379> sadd names4 chengronghuo alex hanyan 4
+        (integer) 4
+        127.0.0.1:6379> sdiff names3 names4 差集
+        1) "jack"
+        2) "3"
+        127.0.0.1:6379> sdiffstore n6 names3 names4 差集列表n6 就是将3和4的差集放到新建的n6集合里
+        (integer) 2
+        127.0.0.1:6379> smembers n6
+        1) "jack"
+        2) "3"
+        127.0.0.1:6379>
+    3，交集sinter 交集列表sinterstore
+        127.0.0.1:6379> sinter names3 names4
+        1) "alex"
+        127.0.0.1:6379>
+    4，检查元素是否在集合中sismember
+        127.0.0.1:6379> sismember names3 alex检查alex是否在集合names3中
+        (integer) 1  有就为1 没就为0
+        127.0.0.1:6379>
+    5，把一个元素从一个集合移到另一个smove
+        127.0.0.1:6379> smove names3 names4 jack
+        (integer) 1
+        127.0.0.1:6379> smembers names3
+        1) "alex"
+        2) "3"
+        127.0.0.1:6379> smembers names4
+        1) "4"
+        2) "alex"
+        3) "hanyan"
+        4) "chengronghuo"
+        5) "jack"
+    6，随机获取集合的元素srandmember 个数 存上26个英文字母随机取
+        127.0.0.1:6379> srandmember names4 2
+        1) "chengronghuo"
+        2) "hanyan"
+        127.0.0.1:6379> srandmember names4 2
+        1) "4"
+        2) "jack"
+        127.0.0.1:6379> srandmember names4 2
+        1) "4"
+        2) "alex"
+        127.0.0.1:6379>
+
+    7，删除指定的值srem
+        127.0.0.1:6379> srem names4 alex
+        (integer) 1
+        127.0.0.1:6379> smember3 names4
+        (error) ERR unknown command 'smember3'
+        127.0.0.1:6379> smembers names4
+        1) "hanyan"
+        2) "chengronghuo"
+        3) "4"
+        4) "jack"
+        127.0.0.1:6379>
+
+    8，获取并集sunion 并集列表sunionstore
+        127.0.0.1:6379> sunion names3 names4
+        1) "chengronghuo"
+        2) "hanyan"
+        3) "3"
+        4) "alex"
+        5) "4"
+        6) "jack"
+        127.0.0.1:6379> sunionstore n7 names3 names4
+        (integer) 6
+        127.0.0.1:6379> smembers n7
+        1) "chengronghuo"
+        2) "hanyan"
+        3) "3"
+        4) "alex"
+        5) "4"
+        6) "jack"
+    9，sscan跟hscan一样使用，检查过滤。
+        127.0.0.1:6379> sscan n7 0 match j*
+        1) "0"
+        2) 1) "jack"
+
+
+    10，sscan_iter(name, match=None, count=None)
+        # 同字符串的操作，用于增量迭代分批获取元素，避免内存消耗太大
+
+五，有序集合zset
+    1，zadd建立集合 权重在值的前面，zrange查看集合元素 类似列表的lrange zcard和scad一样看个数
+       zrem删除指定的值。
+        127.0.0.1:6379> zadd z1 10 alex 5 jack 8 rain
+        (integer) 3
+        127.0.0.1:6379> zrange z1 0 -1
+        1) "jack"
+        2) "rain"
+        3) "alex"
+        127.0.0.1:6379> zadd z1 4 jane 增加
+        (integer) 1
+        127.0.0.1:6379> zrange z1 0 -1
+        1) "jane"
+        2) "jack"
+        3) "rain"
+        4) "alex"
+        127.0.0.1:6379> zadd z1 7 alex 调序 值永远只有1个，分数可以更新
+        (integer) 0
+        127.0.0.1:6379> zrange z1 0 -1
+        1) "jane"
+        2) "jack"
+        3) "alex"
+        4) "rain"
+        127.0.0.1:6379> zrange z1 0 -1 withscores 带权重查看
+        1) "jane"
+        2) "4"
+        3) "jack"
+        4) "5"
+        5) "alex"
+        6) "7"
+        7) "rain"
+        8) "8"
+        127.0.0.1:6379>
+    2，zcount获取一定分数范围的个数，zincrby按设定的数值自增指定值的权重
+       zrank获取指定值在集合中的排名（从0开始）
+        127.0.0.1:6379> zcount z1 6 9
+        (integer) 2
+        127.0.0.1:6379> zincrby z1 1 alex
+        "8"
+        127.0.0.1:6379> zincrby z1 1 alex
+        "9"
+        127.0.0.1:6379> zrank z1 alex
+        (integer) 3
+        127.0.0.1:6379>
+    3，zremrangebyrank根据排行范围删除
+        127.0.0.1:6379> zremrangebyrank z1 1 3
+        (integer) 3
+        127.0.0.1:6379> zrange z1 0 -1
+        1) "jane"
+        127.0.0.1:6379>
+       zremrangebyscore 根据分数范围删除
+       zremrangebylex 根据返回值删除
+
+    4，zscore 返回指定值的分数
+        127.0.0.1:6379> zscore z1 alex
+        "7"
+
+    5， zinterstore(dest, keys, aggregate=None)
+        # 获取两个有序集合的交集，如果遇到相同值，按照aggregate进行操作
+        # aggregate的值为:  SUM  MIN  MAX
+
+        127.0.0.1:6379> zadd z2 7 alex 9 jack
+        (integer) 2
+
+        127.0.0.1:6379> zinterstore z3 2 z1 z2 要告诉redis有2个集合
+        (integer) 2
+        127.0.0.1:6379> zrange z3 0 -1
+        1) "alex"
+        2) "jack"
+        127.0.0.1:6379> zrange z3 0 -1 withscores 带分数查看
+        1) "alex"
+        2) "14"
+        3) "jack"
+        4) "14"
+        127.0.0.1:6379>
+
+    6，zunionstore(dest, keys, aggregate=None)
+        # 获取两个有序集合的并集，如果遇到相同值，则按照aggregate进行操作
+        # aggregate的值为:  SUM  MIN  MAX
+        127.0.0.1:6379> zunionstore z4 2 z1 z2
+        (integer) 4
+        127.0.0.1:6379> zrange z4 0 -1 withscores
+        1) "jane"
+        2) "4"
+        3) "rain"
+        4) "8"
+        5) "alex"
+        6) "14"
+        7) "jack"
+        8) "14"
+
+    7， 过滤zscan(name, cursor=0, match=None, count=None, score_cast_func=float)
+        zscan_iter(name, match=None, count=None,score_cast_func=float)
+
+        # 同字符串相似，相较于字符串新增score_cast_func，用来对分数进行操作
+
+六，其他操作
+    1，del key 删除redis中的任意数据类型
+        127.0.0.1:6379> keys *
+         1) "foo"
+         2) "name2"
+         3) "n6"
+         4) "names2"
+         5) "info2"
+         6) "login"
+         7) "names"
+         8) "n1"
+         9) "n2"
+        10) "n4"
+        11) "z3"
+        12) "z2"
+        13) "z4"
+        14) "n5"
+        15) "n3"
+        16) "info"
+        17) "n7"
+        18) "z1"
+        19) "info3"
+        20) "names4"
+        21) "name"
+        22) "names3"
+        127.0.0.1:6379> del foo
+        (integer) 1
+        127.0.0.1:6379> keys *
+         1) "name2"
+         2) "n6"
+         3) "names2"
+         4) "info2"
+         5) "login"
+         6) "names"
+         7) "n1"
+         8) "n2"
+         9) "n4"
+        10) "z3"
+        11) "z2"
+        12) "z4"
+        13) "n5"
+        14) "n3"
+        15) "info"
+        16) "n7"
+        17) "z1"
+        18) "info3"
+        19) "names4"
+        20) "name"
+        21) "names3"
+        127.0.0.1:6379>
+
+    2，exists 检查是否存在
+        127.0.0.1:6379> exists name
+        (integer) 1
+        127.0.0.1:6379> exists alex
+        (integer) 0
+    3，keys 检查key 可以用正则
+
+       KEYS * 匹配数据库中所有 key 。
+       KEYS h?llo 匹配 hello ， hallo 和 hxllo 等。
+       KEYS h*llo 匹配 hllo 和 heeeeello 等。
+       KEYS h[ae]llo 匹配 hello 和 hallo ，但不匹配 hillo。
+
+    4，expire阻塞式删除 expire info 4 4秒后删除info
+        127.0.0.1:6379> expire info 4 还有
+        (integer) 1
+        127.0.0.1:6379> expire info 4
+        (integer) 1
+        127.0.0.1:6379> expire info 4 没了
+        (integer) 0
+        127.0.0.1:6379> hgetall info
+        (empty list or set)
+        127.0.0.1:6379>
+    5，rename重命名key
+        127.0.0.1:6379> rename info info1 info不存在 报错
+        (error) ERR no such key
+        127.0.0.1:6379> rename info2 info1 info2存在
+        OK
+        127.0.0.1:6379>
+    6，move将redis的某个值移动到指定的db下 move key db
+        127.0.0.1:6379> move info1 1
+        (integer) 1
+        127.0.0.1:6379> select 1 切换到db1下
+        OK
+        127.0.0.1:6379[1]> keys *
+        1) "info1"
+        127.0.0.1:6379[1]>
+        有同名的就不会移动
+        127.0.0.1:6379[1]> rename info1 info3
+        OK
+        127.0.0.1:6379[1]> move info3 0
+        (integer) 0 因为db0里有info3，所以移不了。
+    7，randomkey 随机获取一个key
+    8，type 获取类型
+        127.0.0.1:6379[1]> type info3
+        hash
+        127.0.0.1:6379> type login
+        string
+        127.0.0.1:6379> get login
+        "-1"
+        127.0.0.1:6379>
+    9，scan过滤
+        127.0.0.1:6379> scan 0 match *a*
+        1) "17"
+        2) 1) "names"
+           2) "names4"
+           3) "name2"
+        127.0.0.1:6379> scan 0 match *n*
+        1) "17"
+        2) 1) "n4"
+           2) "names"
+           3) "info3"
+           4) "names4"
+           5) "n7"
+           6) "n1"
+           7) "n2"
+           8) "name2"
+           9) "n6"
+        127.0.0.1:6379>
+    10，scan_iter(match=None, count=None)
+        # 同字符串操作，用于增量迭代获取key
+
+第五节 管道
+    把多条命令塞进管道，这样多条命令就形成原子操作。
+    #_*_coding:utf-8_*_
+    '''
+    redis-py默认在执行每次请求都会创建（连接池申请连接）和断开（归还连接池）一次连接操作，
+    如果想要在一次请求中指定多个命令，则可以使用pipline实现一次请求指定多个命令，
+    并且默认情况下一次pipline 是原子性操作。
+    原子操作的意思就是要么都做，要么都不做。
+    '''
+    import redis
+    import time
+    pool = redis.ConnectionPool(host='192.168.2.240', port=6379,password='foobared')
+
+    r = redis.Redis(connection_pool=pool)
+
+    # r.set('name','alex3')
+    # time.sleep(10)#不是原子操作，在等候的时候断电，上面执行，下面不执行
+    # r.set('role','sb3')
+
+    pipe = r.pipeline(transaction=True)
+
+    pipe.set('name', 'alex2')
+    time.sleep(10)#可以在等候的时候断电，如果是原子操作，则name alex2也不会执行。
+    pipe.set('role', 'sb2')
+
+    pipe.execute()
+
+第六节 发布订阅模式 收音机模型
+    redis原生就支持消息队列。redis对象有publish发布和pubsub订阅命令，通过redis服务器实现消息中转。

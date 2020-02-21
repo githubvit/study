@@ -1,0 +1,115 @@
+ORM介绍
+
+1. ORM介绍
+
+orm英文全称object relational mapping,就是对象关系映射程序，
+简单来说我们类似python这种面向对象的程序来说一切皆对象，
+但是我们使用的数据库却都是关系型的，为了保证一致的使用习惯，
+通过orm将编程语言的对象模型和数据库的关系模型建立映射关系，
+这样我们在使用编程语言对数据库进行操作的时候，
+可以直接使用编程语言的对象模型进行操作就可以了，而不用直接使用sql语言。
+
+没有orm时，访问数据库的路径：
+UI界面-->Business业务逻辑-->DataAccess数据库访问-->DAtaBase relational数据库
+
+有orm后，访问数据库的路径：
+
+              UI界面    --> |
+                           |
+     Business业务逻辑    --> |--> Object（对象）--> ORM --> DAtaBase relational数据库
+                           |
+  DataAccess数据库访问   --> |
+
+
+
+orm的优点：
+
+隐藏了数据访问细节，“封闭”的通用数据库交互，ORM的核心。
+他使得我们的通用数据库交互变得简单易行，并且完全不用考虑该死的SQL语句。
+快速开发，由此而来。
+ORM使我们构造固化数据结构变得简单易行。
+
+缺点：
+
+无可避免的，自动化意味着映射和关联管理，代价是牺牲性能（早期，这是所有不喜欢ORM人的共同点）。
+现在的各种ORM框架都在尝试使用各种方法来减轻这块（LazyLoad，Cache），效果还是很显著的。
+
+
+总之，orm使得我们像操作对象一样去操作数据库。
+
+二，SQLAlchemy
+在Python中，最有名的ORM框架是SQLAlchemy。用户包括openstack＼Dropbox等知名公司或应用。
+
+处理中文
+
+sqlalchemy设置编码字符集一定要在数据库访问的URL上增加charset=utf8，否则数据库的连接就不是utf8的编码格式
+
+eng = create_engine('mysql://root:root@localhost:3306/test2?charset=utf8',echo=True)
+加之前，中文乱码
+mysql> select * from books;
++----+-------------------------------+------------+
+| id | book_name                     | pub_date   |
++----+-------------------------------+------------+
+|  1 | learn python with Alex        | 2014-05-20 |
+|  2 | learn hook up girls with Alex | 2015-06-12 |
+|  3 | learn zhuangbiliti with Alex  | 2013-04-21 |
+|  4 | learn python with Alex        | 2014-05-20 |
+|  7 | è·ŸAlexåŽ»æ³°å›½              | 2016-06-12 |
++----+-------------------------------+------------+
+5 rows in set (0.00 sec)
+加之后，中文ok
+mysql> select * from books;
++----+-------------------------------+------------+
+| id | book_name                     | pub_date   |
++----+-------------------------------+------------+
+|  1 | learn python with Alex        | 2014-05-20 |
+|  2 | learn hook up girls with Alex | 2015-06-12 |
+|  3 | learn zhuangbiliti with Alex  | 2013-04-21 |
+|  4 | learn python with Alex        | 2014-05-20 |
+|  7 | è·ŸAlexåŽ»æ³°å›½              | 2016-06-12 |
+|  8 | 跟Alex去泰国                  | 2016-06-12 |
++----+-------------------------------+------------+
+6 rows in set (0.00 sec)
+
+三，orm基础练习
+    1，建表
+        方式1 orm1_base.py
+        方式2 orm1_metadata.py
+    2，插入数据
+        orm2_session_add_insert.py
+    3，修改数据
+       简单查询，用session的query查到单个对象（first）， 再用赋值方式修改 orm3_session_query_select_update.py
+       批量修改，经典，是自己摸索出来的方式，批量update，orm8_fk3_update.py
+    4，事务
+        orm4_session_rollback.py
+    5，查询
+        简单查询 orm3_session_query_select_update.py
+        全部查询和多条件查询 orm5_query_all_nfilter.py
+    6，分组统计
+        orm6_groupby_count.py
+    7，连表
+        orm7_join.py
+
+四，orm外键Foreign key及关联relationship
+    1，建表
+        orm8_foreignkey1_create_table.py
+    2，插入数据
+        orm8_fk2_insert.py
+    3，批量更新
+        orm8_fk3_update.py
+    4，正反查询
+        orm8_fk4_query_select.py
+    5，没有外键关联的表实现正反查询
+        orm9_nofk.py
+
+五，orm实现多外键关联及正反查 实例
+    一张表有两个外键关联另一张表的同一个字段。
+    顾客表Customer中的账单邮寄地址billing_address_id和货物邮寄地址shipping_address_id都关联地址表Address中的id字段
+    --在manyfk目录下。
+
+六，多对多关系 重点实例 在目录book_suthor下
+
+    现在来设计一个能描述“图书”与“作者”的关系的表结构，需求是
+
+        一本书可以有好几个作者一起出版
+        一个作者可以写好几本书

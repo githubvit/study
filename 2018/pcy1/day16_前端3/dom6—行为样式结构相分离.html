@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="Font-Awesome-master/css/font-awesome.min.css"/>
+</head>
+<!--样式-->
+<style>
+    #i1{
+        border: 1px solid;
+        width: 300px;
+    }
+
+</style>
+<body>
+    <!--结构-->
+    <table id="i1">
+      <tr><td>1</td><td>1</td><td>1</td></tr>
+      <tr><td>1</td><td>1</td><td>1</td></tr>
+      <tr><td>1</td><td>1</td><td>1</td></tr>
+    </table>
+    <div>
+        <i class="fa fa-tags" aria-hidden="true"></i><!--图标1-->
+        <i class="fa fa-thermometer" aria-hidden="true"></i><!--图标2-->
+    </div>
+
+    <!--行为 当鼠标移到表格哪行上就高亮和离开就取消高亮-->
+    <script>
+        var myTags=document.getElementsByTagName('tr');//获取行
+        for(var i=0;i<myTags.length;i++){//循环行
+            //  绑定事件onmouseover：当鼠标移到表格哪行上就高亮
+            myTags[i].onmouseover=function() {//事件绑定用匿名函数
+                console.log(i)
+                this.style.background='red';
+                // 这里的this指的是谁触发就是谁。
+                //this不能写成myTags[i]，因为当触发的时候，i已经=myTags.length;不存在myTags[i]这个对象了。
+
+            };
+            //  绑定事件onmouseout：当鼠标离开就取消高亮
+            myTags[i].onmouseout=function () {
+                this.style.background='';
+
+            }
+        }
+
+    </script>
+
+</body>
+</html>

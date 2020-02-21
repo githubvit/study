@@ -1,0 +1,75 @@
+用户模块
+class UserInfo(models.Model):
+    user
+    password
+    email
+    phone 绑定电话
+
+    ip  浏览ip
+    device 使用设备
+    tcookie 推广链接
+
+    sigintime 注册的时间
+    uploadtime 修改的时间
+
+    is_Deleter 是否删除
+
+    tag 属于哪个标签
+
+    note 备注 如果是用第三方登录，那么第三方登录获取的信息用字典转换成字符串的形式存在这里，如果要用这里的信息，就把字符串转成字典再获取想要的数据。
+
+    ********
+    第三方登录使用social-auth-app-django模块
+    该模块会自动创建social_auth_usersocialauth 数据表，用户登录的信息在该表中
+    id provider uid         extra_data                                              user_id
+    1  weiboa   5551810093  {"token_type":null,"username":"\u7389\u79c0\u65..."}    1
+    ********
+class LogisticInfo(models.Model):物流信息 第三方物流 快递鸟http://www.kdniao.com/product-track
+    lphone 收货人联系电话
+    laddress 收货地址
+    '''
+    或者
+    lpro 省
+    lcity 市
+    ldis 区/县
+    laddress 详细地址
+    '''
+    luser  收货人
+    user=models.ForeignKey(UserInfo) 和用户表的关系（一个用户有多个物流信息）
+
+class Area(models.Model):区域信息
+    title 区域
+    parent=models.ForeignKey('self')自关联
+
+
+class Spread(models.Model): 推广链接
+    spcookie 生成的推广session
+    sppay    加密的推广人的收款账号
+    suser=models.OnetoOneKey(UserInfo) 和用户采用1对1 必须先登录
+    '''
+    当点击该推广链接的时候，会在瓷画网内报文头内嵌入该推广链接的session-->spcookie,当某个用户点击了该推广链接，并成功交易，则该推广链拥有者
+    将获得预收益，当点击该链接的用户的交易状态为完成，即该交易已关闭，那么该推广链拥有者的预收益，将变为真实收益。
+    '''
+
+class SpreadPosition(models.Model):推广链位置表
+    sposition   该推广链的位置
+    spv         该推广链的位置的 用户总的点击次数
+    sdingjin    该推广链的位置的 用户中 当前状态 已付定金  金额数
+    spay        该推广链的位置的 用户中 当前状态 已付款    金额数
+
+    sclose      该推广链的位置的 用户中 当前状态 已完成    金额数
+
+    syreward    该推广链的位置的当前预收益 为已付款状态 金额数的%几
+    sreward     该推广链的位置的当前收益 为已完成交易状态 金额数的%几
+
+    spread=models.ForeignKey(Spread) 和推广链表的关系（1个推广链可以有多个推广位置）
+
+
+class SpreadDetailed(models.Model):推广链详细
+    suser 通过该推广链注册的用户
+
+
+
+
+
+

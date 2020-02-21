@@ -1,0 +1,138 @@
+页面嵌入腾讯地图：
+
+实例部分参见python全栈工程师 4
+0024-django官网项目之数据库表介绍2-VIP课程 时间20:10开始 22:55结束
+练习D:\django\usermangement 项目
+
+1，定义地图显示容器：指定标签id和样式class主要是大小width和height
+    <div id='contact-map-1' class="contact-map">
+        <!--   定义地图显示容器   -->
+    </div>
+    <div id="latLng">
+        <!--当设置鼠标移动显示地图坐标信息时，鼠标坐标展示区间   -->
+    </div>
+    <div>
+            <a target="_blank" href="http://apis.map.qq.com/uri/v1/marker?marker=coord:40.149730,116.29176;title:老男孩教育;addr:沙河青年创业大厦15层">
+                <i class="fa fa-search-plus">查看完整地图</i>
+            </a>
+            <!--  以URI调用方式 新开页面 打开完整地图   -->
+    </div>
+
+             <!-- target="_blank" 在新页面打开    -->
+             <!-- http://apis.map.qq.com/uri/v1/marker?marker=coord:40.149730,116.29176;title:老男孩教育;addr:沙河青年创业大厦15层
+                marker?marker=...
+                第一个marker是方法，意思是进行标记
+                第二个marker是参数组，就是marker字典，里面有标记点coord，弹出的标记框中的title和addr，title会以黑粗体显示。
+                marker={
+                    'coord':'40.149730,116.29176',
+                    'title':'老男孩教育',
+                    'addr':'沙河青年创业大厦15层',
+                }
+                以下引用自腾讯地图官方api文档
+
+                一次完整的URI调用需要包含两部分信息，引用地址、方法及参数。
+
+                1，引用地址
+
+                    指定启用的腾讯地图产品类型；
+
+                    Web/Wap版地图： http://apis.map.qq.com/uri/v1/
+
+                2，方法及参数
+
+                    指定启用的功能及该功能需要设定的参数。格式：method?param=value[&param=value&..]
+
+                    其中，method是方法名，具体支持的方法有：
+
+                    search，地点/公交搜索，周边搜索；
+
+                    routeplan，路线规划，包括公交、驾车；
+
+                    geocoder，逆地址解析；
+
+                    marker，地点标注；
+
+                    streetview，街景展示。
+
+                3, marker参数属性表
+
+                    参数	    必填	说明	                                                    示例
+                    coord	是	标注点的位置坐标：
+                                lat,lng
+                                注意：纬度在前，经度在后，两值之间用英文逗号分隔。	coord:39.892326,116.342763
+
+                    title	是	标注点名称	                                title:超好吃冰激凌
+
+                    addr	是	地址	                                        addr:北京市手帕口桥北铁路道口
+
+                    tel	    否	电话	                                        tel:010-88888888
+
+                    uid	    否	该参数将指定一个POI的唯一标识，
+                                可根据id获取腾讯基础库中的POI详情	                uid:11031837053015339230
+
+             -->
+
+2，按照腾讯的api把腾讯的js引入
+<script charset="utf-8" src="http://map.qq.com/api/js?v=2.exp"></script>
+3，然后加上指定的位置
+<script>
+$(function(){
+    initMap(40.149730,116.29176,'contact-map-1');})
+
+function initMap(argx,argy,mapid){
+
+    var center=new qq.maps.LatLng(argx,argy);//定义地图中心，维度在前，进度在后
+    //定义map变量 调用 qq.maps.Map() 构造函数   获取地图显示容器
+    var map=new qq.maps.Map(document.getElementById(mapid),{
+        //地图中心地理坐标
+        //center:new qq.maps.LatLng(39.916527,116.397128)
+        center:center,
+        zoom:11,
+        mapTypeId:qq.maps.MapTypeId.ROADMAP//设置地图样式详情参见MapType
+    });
+    //定义marker变量 调用qq.maps.Marker 标记函数
+    var marker=new qq.maps.Marker({
+        position:center,
+        map:map
+
+    });
+{#    var marker = new qq.maps.Label({#}
+{#    position: center,#}
+{#    map: map,#}
+{#    content:'文本标注'#}
+{#    });#}
+    //添加到提示窗
+    var info = new qq.maps.InfoWindow({
+        map: map
+    });
+    //获取标记的点击事件，动态获取data数据--点击时间
+    qq.maps.event.addListener(marker, 'click', function() {
+        info.open();
+        setInterval(function () {
+            var date=new Date();//用定时器每0.5毫秒获取1次时间，在内容框展示出来
+            info.setContent('<div style="text-align:center;white-space:nowrap;'+
+                'margin:10px;">单击标记'+"<br/>"+'当前时间为：'+
+                "<br/>"+date.getHours()+":"+date.getMinutes()+
+                ":"+date.getSeconds()+'</div>');},500);
+        info.setPosition(center);
+    });
+    //设置鼠标移动显示地图坐标信息
+    qq.maps.event.addListener(map,'mousemove',function(event) {
+        var latLng = event.latLng,
+            lat = latLng.getLat().toFixed(5),
+            lng = latLng.getLng().toFixed(5);
+        document.getElementById("latLng").innerHTML = lat+','+lng;
+    });
+    //设置比例尺控件
+    var scaleControl = new qq.maps.ScaleControl({
+        align: qq.maps.ALIGN.BOTTOM_LEFT,
+        margin: qq.maps.Size(85, 15),
+        map: map
+    });
+}
+
+
+'''
+多点标记和为多个标记添加事件
+http://lbs.qq.com/javascript_v2/case-run.html#sample-event-closure
+'''

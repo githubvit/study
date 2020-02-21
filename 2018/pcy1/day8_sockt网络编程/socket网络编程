@@ -1,0 +1,108 @@
+socket网络编程
+
+1，所有的网络通信、网络协议本质上都是对数据的收发。
+
+2，socket是对tcp和udp等传输层协议的封装。
+    屏蔽了传输协议底层封包、解包等一系列繁琐的操作。
+    只暴露了send、recv等几个简单动作，使得上层协议（http、smtp、ftp、ssh等）利用起来非常简单。
+
+3，服务端和客户端
+    3.1 服务端
+        server=socket.socket(地址簇,协议类型)不写默认就是ipv4（AF.INET）及tcp(socket.SOCK_STREAM)
+        server.bind((serverip,port))#只能有一个参数,用元组。
+        server.listen(5)#python2.7里必须有数字，python3.x不用。
+        while True:#不断接收下一个连接，但只能同时服务一个连接
+            conn,addr=server.accept()#阻塞，等客户端来连
+            print('new conn',addr)
+            while True:
+
+                data=conn.recv(1024)#大小官方建议不超过8192即8k。recv默认是阻塞的，客户端不发送，就在这等着。
+                if not data: #防止客户端断开后，conn.recv()收到的都是空数据，就会进入死循环。
+                    break
+                print (data)
+                conn.send(data.upper())#把发过来的变大写发回去
+    3.2 客户端
+        client=socket.socket()
+        client.connect(serverip,port)
+        client.send(data)
+        client.recv(data)
+
+4，收发同步
+    4.1 服务器端和客户端的收发不一致、
+        发送的数据不能一次收完，由于缓存的问题，导致收到的是上一次发送端剩余的结果，并不是
+        本次想要的结果。就会产生收发的不同步现象。
+    4.2 每次发数据前，先发数据bytes类型的大小，然后用while循环接收数据，把每次循环接收的数据大小累加，
+        和先发过来的数据大小比较，直到相等，就可以停止接收，保证收发的同步，并且用bytes类的大小进行比较。
+
+5，粘包问题
+    5.1 发送端连续多次发送，会容易产生把多次发送的数据黏连在一起再发送，产生问题。
+    5.2 解决办法：
+            发送端每次发送完毕后，再让接收端自动返回（发送）一个信号（内容随便，就是让其发一个，当然不能为空啊），
+            发送端再次接收这个返回的信号，这样就在发送端每两次发送之间加入了接收，从而解决了粘包问题。
+
+6，socketserver并发socket
+    6.1 socketserver这个模块简化了网络服务器的开发
+    The socketserver module simplifies the task of writing network servers.
+
+    6.2 分为四大类都是继承于baseserver。
+    There are four basic concrete server classes:
+    +------------+
+    | BaseServer |
+    +------------+
+          |
+          v
+    +-----------+        +------------------+
+    | TCPServer |------->| UnixStreamServer |
+    +-----------+        +------------------+
+          |
+          v
+    +-----------+        +--------------------+
+    | UDPServer |------->| UnixDatagramServer |
+    +-----------+        +--------------------+
+    UDPServer和TCPServer的语法是一样的。
+    UnixStreamServer 是Unix的TCPServer。
+    UnixDatagramServer 是Unix的UDPServer。
+
+    6.3 socketserver的编写四步骤
+    First, you must create a request handler处理类 class by subclassing the BaseRequestHandler class
+    and overriding覆盖 its handle() method; this method will process incoming requests. 　　
+    你必须自己创建一个请求处理类，并且这个类要继承BaseRequestHandler类,并且还有重写父类里的handle()
+
+    Second, you must instantiate实例化 one of the server classes, passing it the server’s address
+    and the request handler class.
+    你必须实例化TCPServer ，并且传递server ip 和 你上面创建的请求处理类 给这个TCPServer
+
+    Then call the handle_request() or serve_forever() method of the server object to process one or
+    many requests.
+    server.handle_request() #只处理一个请求
+    server.serve_forever() #处理多个请求，永远执行
+
+    Finally, call server_close() to close the socket
+
+7,paramiko 模块 python_ssh_client
+
+    7.1 主要用来
+        编写程序进行登录及操作，达到批量管理主机和进行干预，比如登录1000台机器，完成命令等。
+
+
+        import paramiko
+
+        # 1,创建SSH对象
+        ssh = paramiko.SSHClient()
+
+        # 允许连接不在know_hosts文件中的主机
+        ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+        # 2,连接服务器
+        ssh.connect(hostname='192.168.2.240', port=22, username='root', password='another333')
+        # 3,执行命令 会有三种标准输入、标准输出、标准错误
+        while True:
+            s=raw_input('>>')
+            stdin, stdout, stderr = ssh.exec_command(s)
+            # 4,获取命令结果
+            res,err = stdout.read(),stderr.read()
+            result = res if res else err
+
+            print(result.decode())
+
+        # 5,关闭连接
+        ssh.close()

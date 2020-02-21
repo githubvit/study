@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<style>
+    .hiden{
+        display: none;
+    }
+    .tab-menu{
+        width: 600px;
+        margin: 0 auto;
+    }
+    .menu-box{
+        height: 48px;
+        line-height: 48px;
+        background-color: #dddddd;
+        color: white;
+    }
+    .menu{
+        float: left;
+        border-right: 1px solid black;
+        padding: 0 5px;
+        cursor: pointer;
+    }
+    .bc{
+        background-color: #aaaaaa;
+    }
+    .content-box{
+        border: 1px solid #888888;
+        color: black;
+        height: 200px;
+    }
+</style>
+
+<body>
+<div class="tab-menu">
+    <div class="menu-box">
+        <div class="menu bc">菜单一</div>
+        <div class="menu">菜单二</div>
+        <div class="menu">菜单三</div>
+    </div>
+    <div class="content-box">
+        <div class="content">内容一</div>
+        <div class="content hiden">内容二</div>
+        <div class="content hiden">内容三</div>
+    </div>
+</div>
+<script src="jquery-1.12.4.js"></script>
+<script>
+    //点击菜单事件绑定
+    $('.menu').click(function (){
+        //给当前菜单标签添加bc样式并移除其他菜单bc样式
+        $(this).addClass('bc').siblings().removeClass('bc');
+        //获取当前菜单的下标
+        var menu_index=$(this).index();
+        //将当前菜单的下标传给内容标签列表，获取相应的内容标签
+        $('.content').eq(menu_index).removeClass('hiden').siblings().addClass('hiden');
+    })
+
+</script>
+</body>
+</html>

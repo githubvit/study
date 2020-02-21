@@ -1,0 +1,163 @@
+一，JavaScript正则
+
+
+    - 定义正则表达式
+
+         /.../  用于定义正则表达式
+         /.../g 表示全局匹配
+         /.../i 表示不区分大小写
+         /.../m 表示多行匹配：这个多行匹配是把字符串中的\n看成另起一行，而对行做操作。
+
+    - test 验证数据是否匹配-用于判断字符串是否符合规定的正则
+          比如：注册表单验证。
+          1，创建正则表达式
+                rep=/\d+/
+          2，匹配数据
+                rep.test('ASDFAD')
+                结果为false
+                rep.test('ASDFAD89')
+                结果为true(说明test默认只要有1个符合就为true)
+          3，要全部匹配，就要加开头和结尾rep=/^\d+$/
+                rep.test('ASDFAD89')
+                结果为false
+
+
+    - exec 获取匹配的数据
+        rep=/\d+/
+        str='wangsen_67_houyafa_20'
+        rep.exec(str)
+        结果为:["67"]
+        只拿到第一个。
+
+    - /.../g 表示全局匹配
+        rep=/\d+/g
+        每次执行获取1个值，直到全部取完，结果为null，表示已全部取完，再执行有重新开始取。
+            str='wangsen_67_houyafa_20'
+            "wangsen_67_houyafa_20"
+            rep=/\d+/g
+            /\d+/g
+            rep.exec(str)
+            ["67"]
+            rep.exec(str)
+            ["20"]
+            rep.exec(str)
+            null 取完
+    - 分组匹配
+        - 对已匹配结果按（）内的分组再匹配一次
+
+        str='wangsen7 houyafan9 wangjiu8 wangba0aejfa'
+        匹配wang开头的规则：'\bwang(\w+)\b'，\b表示单词的开头和结尾，以空格分开的这种。
+        - 先匹配'\bwang\w+\b'：
+                wangsen7  wangjiu8
+        - 再把结果匹配(\w+)：
+                sen7        jiu8
+            因此结果为： wangsen7  wangjiu8
+                        sen7        jiu8
+
+            var text = "JavaScript is more fun than \nJavaEE or JavaBeans!";
+            var pattern = /\bJava(\w*)\b/g;
+            pattern.exec(text)
+            ["JavaScript", "Script"]
+            pattern.exec(text)
+            ["JavaEE", "EE"]
+            pattern.exec(text)
+            ["JavaBeans", "Beans"]
+            pattern.exec(text)
+            null
+
+    - /.../m 表示多行匹配
+        是把字符串中的\n看成另起一行，而对行做操作。
+            var text = "JavaScript is more fun than \nJavaEE or JavaBeans!";
+            不加m，取以Java开头的字符串
+                var pattern = /^Java(\w*)/g;
+                pattern.exec(text)
+                ["JavaScript", "Script"]
+                pattern.exec(text)
+                null
+                只拿到1个，说明把整个text当成1个字符串，没取到\nJavaEE。
+            加m，取以Java开头的字符串
+                var pattern = /^Java(\w*)/gm;
+                pattern.exec(text)
+                ["JavaScript", "Script"]
+                pattern.exec(text)
+                ["JavaEE", "EE"]
+                pattern.exec(text)
+                null
+
+=====================验证======================
+js：前端用浏览器验证，减轻后端压力
+    但浏览器可以关掉js，因此后端还是要用python实现验证。
+
+    1，给要验证的标签添加自定义属性，
+        比如：
+        必填属性require='true'、
+        长度属性range='4-40'
+        密码确认属性confirmto='pwd'
+        手机号格式属性mobile='true'
+        用户名格式属性username='true'等等。
+    2，用js循环的时候，看该标签带哪些需要验证的属性，以及验证。
+     各种验证：用js正则test
+
+        $(':submit').click(function(){
+
+            flg=true;
+            // 清除提示标签
+            $('form').find(':text,:password').each(function(){
+                var username=$(this).attr('username')//获取属性值
+                if(username){//看该标签有没有该属性
+                    var req=/.../ //定义正则
+                    if(req.text(..)){//用正则判断
+                    //添加提示标签，输出提示
+                        flg=false;
+                        return false;//阻断循环
+                    }
+                    }
+                var require=$(this).attr('require')
+                if(require){
+                    ...
+                }
+                 ...
+                })
+
+            return flg；//阻断还是通过
+        })
+
+后端：python实现
+
+业务处理
+...
+
+二，组件
+    -BootStrap***** 全栈 https://v3.bootcss.com/
+        -css
+        -JS
+
+    1，响应式
+        @media
+    2，图标、字体
+        @font-face
+    3，基本使用
+        a,下载bootstrap，解压
+        b,将解压的文件夹拷贝至项目目录下
+        c,引入css共两个
+            <link rel="stylesheet" href="bootstrap-3.3.7-dist/css/bootstrap.css">
+            <link rel="stylesheet" href="bootstrap-3.3.7-dist/css/bootstrap-theme.css"><!--/*颜色相关*/-->
+
+        d,引入js共两个，先要引入jQuery的js，因为bootstrap的js依赖于jQuery的js，再引入bootstrap的js。
+            <script src="jquery-1.12.4.js"></script><!--/*要先引入jQuery，因为bootstrap依赖jQuery*/-->
+            <script src="bootstrap-3.3.7-dist/js/bootstrap.js"></script>
+        e,从bootstrap中查找合适的组件，复制黏贴。查看效果。
+        f,修改覆盖原内容，让自己添加的内容最优先!important。
+            .no-radius{
+                border-radius: 0 !important;/*去掉bootstrap导航条的圆角*/
+            }
+
+
+    -jQueryUI* 后台
+    http://jQueryUI.com
+
+    -EasyUI 后台===大量使用Ajax
+     http://www.jeasyui.net
+
+    -bxslider 主站轮播头图、大屏
+        https://bxslider.com/

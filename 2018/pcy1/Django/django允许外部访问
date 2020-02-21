@@ -1,0 +1,19 @@
+
+1、linux下关闭防火墙
+
+	service iptables stop
+
+2、设置django
+
+
+	开开启django时，使用0.0.0.0:xxxx，作为ip和端口例如：
+
+	    python manage.py runserver 0.0.0.0:9000
+
+	然后在settings里修改ALLOWED_HOSTS = []，
+
+	改为ALLOWED_HOSTS = ['*',]，注意不要漏掉“，”。
+
+	其他机器就可以通过这台机器的ip和端口号访问django了。
+
+	例如：https://192.168.14.40:9000/index.html

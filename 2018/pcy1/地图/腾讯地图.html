@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<!--
+一个简单的应用：通过输入框输入地名，点击搜索按钮后显示你输入地名附近的地图；
+-->
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>搜索地名</title>
+<script charset="utf-8" src="http://map.qq.com/api/js?v=2.exp"></script>
+<style>
+    #container { width:1000px; height:400px; margin:0 auto};
+</style>
+</head>
+
+<body>
+<input type="text" id="address" />
+<input type="button" value="搜索" id="ss" />
+<div id="container"></div>
+<script>
+    var geocoder,map = null;
+    window.onload = function(){
+        init();
+    };
+    var init = function(){
+        var center = new qq.maps.LatLng(39.916527,116.397128);
+        map = new qq.maps.Map(document.getElementById("container"),{
+            center:center,
+            zoom:17
+        });
+        geocoder = new qq.maps.Geocoder({
+            complete:function(result){
+                map.panTo(result.detail.location);
+            }
+        });
+    };
+    document.getElementById("ss").onclick = function(){
+        var address = document.getElementById("address").value;
+        geocoder.getLocation(address);
+    }
+</script>
+</body>
+</html>
+<!--
+微信打开页面获取用户详细位置
+最近做一个微信网页开发的项目，需要对用户进行地域限制，于是仔细阅读了一遍腾讯地图的文档。
+
+首先在HTML的头部<head>标签中引入:
+    <script charset="utf-8" src="http://map.qq.com/api/js?v=2.exp"></script>。
+
+移动用户需要禁止缩放：
+    在头部插入代码<meta name="viewport" content="initial-scale=1.0, user-scalable=no"/>
+
+地址解析：通过地址获取经纬度
+
+
+    var geocoder = new qq.maps.Geocoder({
+        complete : function(result){
+            var loc = result.detail.location;  //保存result的经纬度，是个对象
+            console.log(loc);
+        }
+    });
+
+    geocoder.getLocation('长沙市芙蓉区');
+
+qq.maps.Geocoder是地址解析服务类，可以把经纬度坐标解析成门址信息，也可以反过来通过门址信息解析成经纬度。
+
+    complete代码解析成功的回调函数，对应还有error。
+
+    getLocation()方法获取位置信息值。
+
+    反地址解析：通过经纬度获取地址
+
+
+    var geocoder = new qq.maps.Geocoder({
+        complete: function (result) {
+            var address = result.detail.address;  //保存result的详细地址信息
+    　　　　 console.log(address);//中国湖南省长沙市芙蓉区嘉雨路189号
+        }
+    });
+    geocoder.getAddress(new qq.maps.LatLng(28.20279, 113.03539));
+
+    getLocation()方法获取地址信息方法，传入的是一个有经纬度的地图对象。
+
+
+
+在微信打开的网页中可以用wx.getLocation()方法来获取使用者的当前位置所在经纬度，
+微信会询问用户是否允许访问其地理位置，允许并且获取到用户的地理位置就执行success的函数，
+然后通过反地址解析获取详细的地理位置信息；允许但没有获取到用户的地理位置就执行fail的函数；
+不允许就执行cancel的函数。
+
+    wx.ready(function () {
+        wx.getLocation({
+            success: function (res) {
+                console.log(res.latitude);  //纬度
+                console.log(res.longitude); //经度
+                var geocoder = new qq.maps.Geocoder({
+                    complete: function (result) {   //解析成功的回调函数
+                        var address = result.detail.address;  //获取详细地址信息
+                        console.log(address);
+                    }
+                });
+                geocoder.getAddress(new qq.maps.LatLng(res.latitude, res.longitude));
+            },
+            fail: function (res) {
+            },
+            cancel: function (res) {
+            }
+        });
+    });
+
+
+其他一些常用api：
+
+    var map = new qq.maps.Map(document.getElementById("container"),{
+            center: new qq.maps.LatLng(39.916527,116.397128),  //设置地图的中心点
+            zoom: 4, //设置地图的缩放级别(4至17)
+            draggable: false,  //用来设置地图是否能够鼠标拖拽，默认值为“可以”
+            scrollwheel: false, //用来配置地图是否能够通过鼠标滚轮操作进行放大，默认值为“可以”
+            disableDoubleClickZoom: false //用来配置地图是否可以通过鼠标双击进行放大，默认值为“可以”
+        });
+    map.zoomTo(6);  //修改缩放级别
+    map.getZoom(); //获取缩放级别
+    map.panTo(new qq.maps.LatLng(39.9, 116.4));  //初始化或修改地图的中心点
+    map.setCenter(new qq.maps.LatLng(39.9, 116.4));  //重新设定地图的中心点
+
+也可通过map.setDraggable();map.setScrollWheel();map.setZoomInByDblClick()方法来修改地图的配置(布尔值)；
+-->

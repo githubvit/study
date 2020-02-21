@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<style>
+    .out-border{
+        width: 600px;
+        margin: 0 auto;
+        border: 1px solid #dddddd;
+    }
+    .zan{
+        position: relative;
+        margin:50px 50px;
+        width: 50px;
+        /*border: 1px solid #dddddd;*/
+        cursor: pointer;
+    }
+</style>
+<body>
+<div class="out-border">
+    <div class="zan">
+        <span>点赞</span>
+    </div>
+</div>
+<div class="out-border">
+    <div class="zan">
+        <span>点赞</span>
+    </div>
+</div>
+<div class="out-border">
+    <div class="zan">
+        <span>点赞</span>
+    </div>
+</div>
+<script src="jquery-1.12.4.js"></script>
+<script>
+    //绑定点赞
+    $('.zan').click(function () {
+
+        //先建立几个变量用来给新建标签添加样式
+        var top=0;
+        var right=0;
+        var positison='absolute';
+        var fontsize=16;
+        var color='green';
+        var opacity=1;
+
+        //创建标签
+        var tag=document.createElement('span');
+
+        //给tag添加样式.css
+        $(tag).css('position',positison);
+        $(tag).css('top',top+'px');
+        $(tag).css('right',right+'px');
+        $(tag).css('fontSize',fontsize+'px');
+        $(tag).css('color',color);
+        $(tag).css('opacity',opacity);
+
+        //给tag添加内容.text
+        $(tag).text('+1');
+
+        //将tag标签追加到class='zan'标签里面
+        $(this).append(tag);
+
+        //用定时器每隔40毫秒给该标签样式添加位置、字体大小、透明度添加变化
+        var o=setInterval(function () {
+            //变化
+           top-=5;
+           right-=5;
+           fontsize+=5;
+           opacity-=0.1;
+
+           //把变化给标签
+           $(tag).css('top',top+'px');
+           $(tag).css('right',right+'px');
+           $(tag).css('fontSize',fontsize+'px');
+           $(tag).css('opacity',opacity);
+
+           //设定定时器截至条件(透明度<0),清除该标签，清除定时器
+            if(opacity<0){
+                $(tag).remove();
+                clearInterval(o);
+//                console.log(1)
+            }
+
+        },40)
+
+    })
+</script>
+
+</body>
+</html>

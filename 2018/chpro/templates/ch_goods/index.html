@@ -1,0 +1,527 @@
+{% extends 'master.html' %}
+{% block css%}
+<style>
+/*轮播图，图片*/
+    .carousel-inner>.item>img{
+        height: 420px;
+        max-width:none;
+        position: relative;
+        left:-175px;
+    }
+
+
+/*公司slog*/
+    .gry-bg{
+        background-color:#f2f2f2 ;
+    }
+    .common-title{
+        color:#333 ;
+        line-height: 1;
+        margin-top: 45px;
+    }
+    .common-detail{
+        color:#7a7a7a;
+        line-height: 28px;
+        margin-top: 18px;
+        margin-bottom: 18px;
+    }
+/*作品分类背景*/
+    .blue-bg {
+        background-color: #afc9d4;
+
+    }
+    .blue-bg h1,.blue-bg a{
+        color: #fff;
+    }
+/*购物车*/
+    .icon-shopping-cart{
+        color: black;
+    }
+</style>
+{% endblock css %}
+
+{% block cont %}
+<!-- 增加的内容-->
+<!--1，轮播图-->
+    <div id="myCarousel" class="carousel slide min_width" data-ride="carousel" >
+      <!-- Indicators -->
+      <ol class="carousel-indicators">
+        <li data-target="#myCarousel" data-slide-to="0" class=""></li>
+        <li data-target="#myCarousel" data-slide-to="1" class=""></li>
+        <li data-target="#myCarousel" data-slide-to="2" class=""></li>
+        <li data-target="#myCarousel" data-slide-to="3" class="active"></li>
+      </ol>
+      <div class="carousel-inner" role="listbox">
+        <div class="item" >
+          <img src="https://yanxuan.nosdn.127.net/594675e8ed578da87687aad8045e1d8a.jpg" alt="First slide" >
+          <div class="container">
+            <div class="carousel-caption">
+              <h1>笔墨春秋</h1>
+              <p> 随便写点什么，想写什么就写什么</p>
+              <p><a class="btn  btn-primary" href="#" role="button">立即购买</a></p>
+            </div>
+          </div>
+        </div>
+        <div class="item ">
+          <img src="https://s1.ax1x.com/2018/04/27/C3wsds.jpg" alt="Second slide" >
+          <div class="container">
+            <div class="carousel-caption">
+              <h1>传神之作</h1>
+              <p>随便写点什么，不知道。。。。。。</p>
+              <p><a class="btn  btn-primary" href="#" role="button">查看更多</a></p>
+            </div>
+          </div>
+        </div>
+        <div class="item ">
+          <img src="https://s1.ax1x.com/2018/04/27/C3wciq.jpg" alt="Third slide" >
+          <div class="container">
+            <div class="carousel-caption">
+              <h1>还是广告页</h1>
+              <p>随便写点什么，不知道写点什么，. 。。。</p>
+              <p><a class="btn  btn-primary" href="#" role="button">开始定制</a></p>
+            </div>
+          </div>
+        </div>
+        <div class="item active">
+          <img src="https://s1.ax1x.com/2018/04/27/C3wgJ0.jpg" alt="fourth slide" >
+          <div class="container">
+            <div class="carousel-caption">
+              <h1>不知道写点啥</h1>
+              <p>随便写点什么，不知道写点什么，想写什么就写什. 。。。</p>
+              <p><a class="btn  btn-primary" href="#" role="button">开始定制</a></p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+        <span class="sr-only">上一页</span>
+      </a>
+      <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+        <span class="sr-only">下一页</span>
+      </a>
+    </div>
+<!--2，公司slog-->
+    <div class="container-fluid gry-bg min_width" >
+        <div class="container">
+            <!--<h1 class="text-center common-title">网天下瓷画 惠四海宾朋</h1>-->
+            <h1 class="text-center common-title">瓷画四步定制流程</h1>
+
+            <div class="row">
+            <div class="col-lg-offset-2 col-lg-8 common-detail">
+                <p>
+                   第一步，选择器型及大小（告诉我们用什么材料画）；第二步，选择画什么类型的画（肖像、生活、山水等）；第三步，选择由谁来画（根据作品选作者）；第四步，上传图片（告诉我们画的内容）。
+
+                </p>
+            </div>
+        </div>
+        </div>
+    </div>
+<!--3，作品分类-->
+    <div class="container-fluid min_width">
+        <div class="container"> <!--加了这一层，限制了缩略图的大小-->
+            <div class="row" >
+                <div id="t1" style="height: 50px"></div>
+                <h1 style="text-align: center;" >瓷板画</h1>
+                <hr class="featurette-divider">
+                <div class="col-xs-3">
+                    <div class="thumbnail">
+                        <img src="/static/images/slide1.png" alt="通用的占位符缩略图">
+                        <div class="caption">
+                            <h3>缩略图标签</h3>
+                            <p>一些示例文本。一些示例文本。</p>
+                            <div class="pull-left">
+                                <a href="#" class="btn btn-default btn-sm btn-xs" role="button">
+                                    <i class="icon-shopping-cart"></i>
+                                </a>
+                            </div>
+                            <div class="pull-right">
+
+                                <a href="#" class="btn btn-danger btn-sm btn-xs" role="button">
+                                    购买成品
+                                </a>
+                                <a href="#" class="btn btn-primary btn-sm btn-xs" role="button">
+                                   参考定制
+                                </a>
+                            </div>
+	            			<div class="clearfix"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-3">
+                    <div class="thumbnail">
+                        <img src="/static/images/slide1.png" alt="通用的占位符缩略图">
+                        <div class="caption">
+                            <h3>缩略图标签</h3>
+                            <p>一些示例文本。一些示例文本。</p>
+                            <div class="pull-left">
+                                <a href="#" class="btn btn-default btn-sm btn-xs" role="button">
+                                    <i class="icon-shopping-cart"></i>
+                                </a>
+                            </div>
+                            <div class="pull-right">
+
+                                <a href="#" class="btn btn-danger btn-sm btn-xs" role="button">
+                                    购买成品
+                                </a>
+                                <a href="#" class="btn btn-primary btn-sm btn-xs" role="button">
+                                   参考定制
+                                </a>
+                            </div>
+	            			<div class="clearfix"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-3">
+                    <div class="thumbnail">
+                        <img src="/static/images/slide1.png" alt="通用的占位符缩略图">
+                        <div class="caption">
+                            <h3>缩略图标签</h3>
+                            <p>一些示例文本。一些示例文本。</p>
+                            <div class="pull-left">
+                                <a href="#" class="btn btn-default btn-sm btn-xs" role="button">
+                                    <i class="icon-shopping-cart"></i>
+                                </a>
+                            </div>
+                            <div class="pull-right">
+
+                                <a href="#" class="btn btn-danger btn-sm btn-xs" role="button">
+                                    购买成品
+                                </a>
+                                <a href="#" class="btn btn-primary btn-sm btn-xs" role="button">
+                                   参考定制
+                                </a>
+                            </div>
+	            			<div class="clearfix"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-3">
+                    <div class="thumbnail">
+                        <img src="/static/images/slide1.png" alt="通用的占位符缩略图">
+                        <div class="caption">
+                            <h3>缩略图标签</h3>
+                            <p>一些示例文本。一些示例文本。</p>
+                            <div class="pull-left">
+                                <a href="#" class="btn btn-default btn-sm btn-xs" role="button">
+                                    <i class="icon-shopping-cart"></i>
+                                </a>
+                            </div>
+                            <div class="pull-right">
+
+                                <a href="#" class="btn btn-danger btn-sm btn-xs" role="button">
+                                    购买成品
+                                </a>
+                                <a href="#" class="btn btn-primary btn-sm btn-xs" role="button">
+                                   参考定制
+                                </a>
+                            </div>
+	            			<div class="clearfix"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <h4 style="text-align: center"><a href="#">查看更多瓷板画...</a><a class="btn btn-primary" href="goods-detail-7.html">开始定制</a></h4>
+        </div>
+    </div>
+    <div class="container-fluid blue-bg min_width">
+        <div class="container">
+            <div class="row">
+            <div id="t2" style="height: 50px"></div>
+            <h1 style="text-align: center">圆形</h1>
+            <hr style='background-color:#fff;height:1px;border:none;'>
+            <div class="col-xs-3">
+                <div class="thumbnail">
+                    <img src="/static/images/slide2.png" alt="通用的占位符缩略图">
+                    <div class="caption">
+                    <h3>缩略图标签</h3>
+                    <p>一些示例文本。一些示例文本。</p>
+                    <div class="pull-right">
+                        <a href="#" class="btn btn-primary" role="button">
+                           开始定制
+                        </a>
+                    </div>
+	    			<div class="clearfix"></div>
+                </div>
+                </div>
+            </div>
+            <div class="col-xs-3">
+                <div class="thumbnail">
+                    <img src="/static/images/slide2.png" alt="通用的占位符缩略图">
+                    <div class="caption">
+                    <h3>缩略图标签</h3>
+                    <p>一些示例文本。一些示例文本。</p>
+                    <div class="pull-right">
+                        <a href="#" class="btn btn-primary" role="button">
+                           开始定制
+                        </a>
+                    </div>
+	    			<div class="clearfix"></div>
+                </div>
+                </div>
+            </div>
+            <div class="col-xs-3">
+                <div class="thumbnail">
+                    <img src="/static/images/slide2.png" alt="通用的占位符缩略图">
+                    <div class="caption">
+                    <h3>缩略图标签</h3>
+                    <p>一些示例文本。一些示例文本。</p>
+                    <div class="pull-right">
+                        <a href="#" class="btn btn-primary" role="button">
+                           开始定制
+                        </a>
+                    </div>
+	    			<div class="clearfix"></div>
+                </div>
+                </div>
+            </div>
+            <div class="col-xs-3">
+                <div class="thumbnail">
+                    <img src="/static/images/slide2.png" alt="通用的占位符缩略图">
+                    <div class="caption">
+                    <h3>缩略图标签</h3>
+                    <p>一些示例文本。一些示例文本。</p>
+                    <div class="pull-right">
+                        <a href="#" class="btn btn-primary" role="button">
+                           开始定制
+                        </a>
+                    </div>
+	    			<div class="clearfix"></div>
+                </div>
+                </div>
+            </div>
+        </div>
+            <h4 style="text-align: center"><a href="#">查看更多圆形...</a></h4>
+        </div>
+    </div>
+    <div class="container-fluid min_width">
+        <div class="container"> <!--加了这一层，限制了缩略图的大小-->
+            <div class="row">
+                <div id="t3" style="height: 50px"></div>
+                <h1 style="text-align: center">扇形</h1>
+                <hr class="featurette-divider">
+                <div class="col-xs-3">
+                    <div class="thumbnail">
+                        <img src="/static/images/g1.jpg" alt="通用的占位符缩略图">
+                        <div class="caption">
+                            <h3>缩略图标签</h3>
+                            <p>一些示例文本。一些示例文本。</p>
+                            <p>
+                                <a href="#" class="btn btn-default" role="button">
+                                    开始定制
+                                </a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-3">
+                    <div class="thumbnail">
+                        <img src="/static/images/g1.jpg" alt="通用的占位符缩略图">
+                        <div class="caption">
+                        <h3>缩略图标签</h3>
+                        <p>一些示例文本。一些示例文本。</p>
+                        <p>
+                            <a href="#" class="btn btn-default" role="button">
+                                开始定制
+                            </a>
+                        </p>
+                    </div>
+                    </div>
+                </div>
+                <div class="col-xs-3">
+                    <div class="thumbnail">
+                        <img src="/static/images/g1.jpg" alt="通用的占位符缩略图">
+                        <div class="caption">
+                        <h3>缩略图标签</h3>
+                        <p>一些示例文本。一些示例文本。</p>
+                        <p>
+                            <a href="#" class="btn btn-default" role="button">
+                               开始定制
+                            </a>
+                        </p>
+                    </div>
+                    </div>
+                </div>
+                <div class="col-xs-3">
+                    <div class="thumbnail">
+                        <img src="/static/images/g1.jpg" alt="通用的占位符缩略图">
+                        <div class="caption">
+                        <h3>缩略图标签</h3>
+                        <p>一些示例文本。一些示例文本。</p>
+                        <p>
+                            <a href="#" class="btn btn-default" role="button">
+                               开始定制
+                            </a>
+                        </p>
+                    </div>
+                    </div>
+                </div>
+            </div>
+            <h4 style="text-align: center"><a href="#">查看更多扇形...</a></h4>
+        </div>
+    </div>
+    <div class="container-fluid blue-bg min_width">
+        <div class="container">
+            <div class="row">
+            <div id="t4" style="height: 50px"></div>
+            <h1 style="text-align: center">瓷画装裱件</h1>
+            <hr style='background-color:#fff;height:1px;border:none;'>
+            <div class="col-xs-3">
+                <div class="thumbnail">
+                    <img src="/static/images/g1.jpg" alt="通用的占位符缩略图">
+                    <div class="caption">
+                    <h3>缩略图标签</h3>
+                    <p>一些示例文本。一些示例文本。</p>
+                    <div class="pull-right">
+                        <a href="#" class="btn btn-primary" role="button">
+                            立即购买
+                        </a>
+                        <a href="#" class="btn btn-default" role="button">
+                            <i class="icon-shopping-cart"></i>
+                        </a>
+                    </div>
+	    			<div class="clearfix"></div>
+                </div>
+                </div>
+            </div>
+            <div class="col-xs-3">
+                <div class="thumbnail">
+                    <img src="/static/images/g1.jpg" alt="通用的占位符缩略图">
+                    <div class="caption">
+                        <h3>缩略图标签</h3>
+                        <p>一些示例文本。一些示例文本。</p>
+                        <div class="pull-right">
+                            <a href="#" class="btn btn-primary" role="button">
+                                立即购买
+                            </a>
+                            <a href="#" class="btn btn-default" role="button">
+                                <i class="icon-shopping-cart"></i>
+                            </a>
+                        </div>
+	    			    <div class="clearfix"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-3">
+                <div class="thumbnail">
+                    <img src="/static/images/g1.jpg" alt="通用的占位符缩略图">
+                    <div class="caption">
+                        <h3>缩略图标签</h3>
+                        <p>一些示例文本。一些示例文本。</p>
+                        <div class="pull-right">
+                            <a href="#" class="btn btn-primary" role="button">
+                                立即购买
+                            </a>
+                            <a href="#" class="btn btn-default" role="button">
+                               <i class="icon-shopping-cart"></i>
+                            </a>
+                        </div>
+	    			    <div class="clearfix"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-3">
+                <div class="thumbnail">
+                    <img src="/static/images/g1.jpg" alt="通用的占位符缩略图">
+                    <div class="caption">
+                        <h3>缩略图标签</h3>
+                        <p>一些示例文本。一些示例文本。</p>
+                        <div class="pull-right">
+                            <a href="#" class="btn btn-primary" role="button">
+                                立即购买
+                            </a>
+                            <a href="#" class="btn btn-default" role="button">
+                                <i class="icon-shopping-cart"></i>
+                            </a>
+                        </div>
+	    			    <div class="clearfix"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+            <h4 style="text-align: center"><a href="#">查看更多其他...</a></h4>
+        </div>
+    </div>
+    <div class="container-fluid min_width">
+        <div class="container"> <!--加了这一层，限制了缩略图的大小-->
+            <div class="row">
+                <div id="t5" style="height: 50px"></div>
+                <h1  style="text-align: center;">大师作品</h1>
+                <hr class="featurette-divider">
+                <div class="col-xs-3">
+                    <div class="thumbnail">
+                        <img src="/static/images/g1.jpg" alt="通用的占位符缩略图">
+                        <div class="caption">
+                            <h3>缩略图标签</h3>
+                            <p>一些示例文本。一些示例文本。</p>
+                            <p>
+                                <a href="#" class="btn btn-primary" role="button">
+                                    立即购买
+                                </a>
+                                <a href="#" class="btn btn-default" role="button">
+                                    放入购物车
+                                </a>
+                            </p>
+	        		    	<div class="clearfix"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-3">
+                    <div class="thumbnail">
+                        <img src="/static/images/g1.jpg" alt="通用的占位符缩略图">
+                        <div class="caption">
+                            <h3>缩略图标签</h3>
+                            <p>一些示例文本。一些示例文本。</p>
+                            <p>
+                                <a href="#" class="btn btn-primary" role="button">
+                                    立即购买
+                                </a>
+                                <a href="#" class="btn btn-default" role="button">
+                                    放入购物车
+                                </a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-3">
+                    <div class="thumbnail">
+                        <img src="/static/images/g1.jpg" alt="通用的占位符缩略图">
+                        <div class="caption">
+                            <h3>缩略图标签</h3>
+                            <p>一些示例文本。一些示例文本。</p>
+                            <p>
+                                <a href="#" class="btn btn-primary" role="button">
+                                      立即购买
+                                </a>
+                                <a href="#" class="btn btn-default" role="button">
+                                   放入购物车
+                                </a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-3">
+                    <div class="thumbnail">
+                    <img src="/static/images/g1.jpg" alt="通用的占位符缩略图">
+                    <div class="caption">
+                        <h3>缩略图标签</h3>
+                        <p>一些示例文本。一些示例文本。</p>
+                        <p>
+                            <a href="#" class="btn btn-primary" role="button">
+                                立即购买
+                            </a>
+                            <a href="#" class="btn btn-default" role="button">
+                                放入购物车
+                            </a>
+                        </p>
+                    </div>
+                </div>
+                </div>
+            </div>
+            <h4 style="text-align: center"><a href="#">查看更多大师作品...</a></h4>
+        </div>
+    </div>
+
+<!-- 增加的内容结束-->
+{% endblock cont%}

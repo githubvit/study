@@ -1,0 +1,351 @@
+MySQL索引
+
+一，索引功能
+1，约束
+   外键约束：约束了表间关系
+   主键约束：不能为空，唯一，【自增（不是主键约束，只不过是常规设置时会添加自增）】
+   唯一约束：不能重复
+   普通
+   组合
+2，加速查询
+    为什么索引可以这么快？
+
+    是数据库中专门用于帮助用户快速查询数据的一种数据结构。
+    类似于字典中的目录，查找字典内容时可以根据目录查找到数据的存放位置，
+    然后直接获取即可。
+    bee-tree算法
+    对某列建立索引，会把该列所有数据拿出来，转换成数字，另外建立索引数据结构
+    数字行中存放真实表中当前行数据在硬盘上的位置，
+    假设name列，name='eric'转换成了6，相当于折半查找，
+                        30
+
+            10                        40
+
+       5         15            35             66
+
+    1    6    11    19      21      39     55     100
+
+
+
+二，索引分类
+MySQL中常见索引有：
+
+    普通索引
+    唯一索引
+    主键索引
+    组合索引
+
+1、普通索引index
+
+    普通索引仅有一个功能：加速查询
+    1.1 创建普通索引
+        a 建表时创建
+        create table in1(
+            nid int not null auto_increment primary key,
+            name varchar(32) not null,
+            email varchar(64) not null,
+            extra text,
+            index ix_name (name)
+        )
+        b 后来添加
+        create index index_name on table_name(column_name)
+
+        c 注意：对于创建索引时如果是BLOB 和 TEXT 类型，必须指定length。
+        create index ix_extra on in1(extra(32));
+
+    1.2 查看普通索引
+        show index from table_name;
+    1.3 删除
+        drop index_name on table_name;
+
+2、唯一索引unique index
+    唯一索引有两个功能：加速查询 和 唯一约束（可含null）
+    2.1 创建唯一索引
+        a 建表时创建
+        create table in1(
+            nid int not null auto_increment primary key,
+            name varchar(32) not null,
+            email varchar(64) not null,
+            extra text,
+            unique ix_name (name)
+        )
+        b 后来添加
+        create unique index 索引名 on 表名(列名)
+
+
+    2.2 查看唯一索引
+        show unique from table_name;
+    2.3 删除
+        drop unique index 索引名 on 表名
+
+3、主键索引primary key
+    主键有两个功能：加速查询 和 唯一约束（不可含null）
+    3.1 创建主键索引
+        a 建表时创建
+        create table in1(
+            nid int not null auto_increment primary key,
+            name varchar(32) not null,
+            email varchar(64) not null,
+            extra text,
+            index ix_name (name)
+        )
+        OR
+
+        create table in1(
+            nid int not null auto_increment,
+            name varchar(32) not null,
+            email varchar(64) not null,
+            extra text,
+            primary key(ni1),
+            index ix_name (name)
+        )
+        b 后来添加
+        alter table 表名 add primary key(列名);
+    3.2 删除主键
+        alter table 表名 drop primary key;
+
+4、组合索引
+    组合索引是将n个列组合成一个索引
+
+    其应用场景为：频繁的同时使用n列来进行查询，
+    如：where n1 = 'alex' and n2 = 666。
+    4.1 创建组合索引
+        a 建表时创建
+        create table in3(
+            nid int not null auto_increment primary key,
+            name varchar(32) not null,
+            email varchar(64) not null,
+            extra text,
+            index ix_name (name,email)
+        )
+        b 后来添加
+        create index ix_name_email on in3(name,email);
+
+    4.2 使用注意最左匹配原则
+
+        如上创建组合索引之后，查询：
+
+        name and email  -- 使用索引
+        name            -- 使用索引
+        email           -- 不使用索引
+        注意：对于同时搜索n个条件时，组合索引的性能好于多个单一索引合并。
+
+5、分页
+    select * from tb limit 10000,10;
+    这样写，要扫描tb表的10010条。最后给出10条结果集，显然效率低下。
+    如果能 ：select * from tb where nid>10000 limit 10000,10;
+    这样写，只扫描tb表的10001到10010共10条，和结果集一样。
+        页码：    1   2   3   4 。。。 18   19
+        起始ID    1  11  21  31
+        结束ID    10 20  30  40
+    好像这样很美好，但是nid会变，我们知道删除行记录后，自增id和行数并不对应。
+    会出现：
+        页码：    1   2   3   4 。。。 18   19
+        起始ID    1  18  52  85
+        结束ID    16 33  78  100
+    这怎么办呢？
+        --nid排列可能是中断的
+        -------方式1：上一页 下一页-----------
+        1，当用户查看页面时，第一页 limit 0,10：nid：1-16
+        2，当用户点下一页是，把上一页的最后的nid16传过来
+            select * from tb where nid>16 limit 16,10;
+                定义全局变量v，每次查询，把最后一个nid赋值给v，
+                v=0；
+                cursor.execute("select * from tb where nid>%s limit %s,10;",v)
+          详见实例 分页.py
+三、小结;
+    索引种类：
+        普通索引 - 加速查找
+        唯一索引 - 加速查找，约束列数据不能重复,null
+        主键索引 - 加速查找，约束列数据不能重复,不能null
+        组合索引 - 多列可以创建一个索引文件
+
+
+    1、普通索引
+        create index 索引名称 on  表（列名）
+
+    2、唯一索引
+        create unique index
+
+    3、主键索引
+        - 不能重复，不能null
+
+    4、组合索引
+        name,pwd
+        - 普通组合索引：
+                无约束
+                name,pwd
+        - 联合唯一索引：
+                有约束，两列数据同时不相同，才能插入，不然报错
+                name,pwd
+
+        查找：最左匹配
+        select * from tb1 where name = 'alex'
+        select * from tb1 where name = 'alex' and pwd='123'
+        select * from tb1 where pwd='123'  # 不会走索引
+
+        查找：最左匹配
+        name,pwd,email
+        select * xx where name ='alex'
+        select * xx where pwd ='alex'
+        select * xx where email ='alex'
+        select * xx where name='alex' and pwd='xx'
+
+
+
+    =====================
+    1、覆盖索引
+
+        select * from tb where nid=1
+        # 先去索引中找，
+        # 在去数据表找
+
+        select nid from tb where nid < 10
+        # 先去索引中找
+
+        -- 情况应用上索引，并且不用去数据表中操作，覆盖索引0
+        -- 只需要在索引表中就能获取到数据时，
+    2、合并索引
+        nid   name(单独索引)    email（单独索引）    pwd
+
+        select * from tb where name='alex'
+        select * from tb where email='alex3714@163.com'
+
+        select * from tb where name='alex' or email='alex3714@163.com'
+
+
+    3、组合索引
+        nid   name(组)    email（合）    pwd
+        # 最左前缀
+
+        select * from tb where name='alex'
+        select * from tb where email='alex3714@163.com' ########无法满足########
+
+        select * from tb where name='alex' or email='alex3714@163.com'
+
+
+
+       用户表：
+            nid   username（组）    password（合）
+             1     alex         123
+             2     shaogbing    123
+
+
+            select * from tb where username='xx' and password='xx'
+            select * from tb where username='xx'
+            # select * from tb where password='xx'
+
+            --> 组合和合并索引取舍？业务需求来决定
+        注意：对于同时搜索n个条件时，组合索引的性能好于多个单一索引合并。
+
+    4、执行计划 - 相对比较准确表达出当前SQL运行状况
+
+
+        是否走索引，不走索引效率不高
+
+        explain SQL语句
+
+
+        4.1 explain SQL语句
+            type： ALL    - 全数据表扫描
+            type： index  - 全索引表扫面
+
+        4.2 尽量limit
+            select * from tb1 where email='123'
+
+            select * from tb1 where email='123' limit 1;
+
+        -----SQL： ALL、Index，都是有优化的余地 -------
+
+
+        4.3 type效率
+
+        查询时的访问方式，性能：all < index < range < index_merge < ref_or_null < ref < eq_ref < system/const
+            ALL             全表扫描，对于数据表从头到尾找一遍
+                            select * from tb1;
+                            特别的：如果有limit限制，则找到之后就不在继续向下扫描
+                                   select * from tb1 where email = 'seven@live.com'
+                                   select * from tb1 where email = 'seven@live.com' limit 1;
+                                   虽然上述两个语句都会进行全表扫描，第二句使用了limit，则找到一个后就不再继续扫描。
+
+            INDEX           全索引扫描，对索引从头到尾找一遍
+                            select nid from tb1;
+
+            RANGE          对索引列进行范围查找
+                            select *  from tb1 where name < 'alex';
+                            PS:
+                                between and
+                                in
+                                >   >=  <   <=  操作
+                                注意：!= 和 > 符号
+
+
+            INDEX_MERGE     合并索引，使用多个单列索引搜索
+                            select *  from tb1 where name = 'alex' or nid in (11,22,33);
+
+            REF             根据索引查找一个或多个值
+                            select *  from tb1 where name = 'seven';
+
+            EQ_REF          连接时使用primary key 或 unique类型
+                            select tb2.nid,tb1.name from tb2 left join tb1 on tb2.nid = tb1.nid;
+
+
+
+            CONST           常量
+                            表最多有一个匹配行,因为仅有一行,在这行的列值可被优化器剩余部分认为是常数,const表很快,因为它们只读取一次。
+                            select nid from tb1 where nid = 2 ;
+
+            SYSTEM          系统
+                            表仅有一行(=系统表)。这是const联接类型的一个特例。
+                            select * from (select nid from tb1 where nid = 1) as A;
+
+
+    5、SQL正确使用索引
+
+        数据库表中添加索引后确实会让查询速度起飞，但前提必须是正确的使用索引来查询，
+        如果以错误的方式使用，则即使建立索引也会不奏效。
+        即使建立索引，索引也不会生效：
+        - like '%xx'
+            select * from tb1 where name like '%cn';
+        - 使用函数
+            select * from tb1 where reverse(name) = 'wupeiqi';
+        - or
+            select * from tb1 where nid = 1 or email = 'seven@live.com';
+            特别的：当or条件中有未建立索引的列才失效，以下会走索引
+                    select * from tb1 where nid = 1 or name = 'seven';
+                    select * from tb1 where nid = 1 or email = 'seven@live.com' and name = 'alex'
+        - 类型不一致
+            如果列是字符串类型，传入条件是必须用引号引起来，不然...
+            select * from tb1 where name = 999;
+        - '!='
+            select * from tb1 where name != 'alex'
+            特别的：如果是主键，则还是会走索引
+                select * from tb1 where nid != 123
+        - '>'
+            select * from tb1 where name > 'alex'
+            特别的：如果是主键或索引是整数类型，则还是会走索引
+                select * from tb1 where nid > 123
+                select * from tb1 where num > 123
+        - order by
+            select email from tb1 order by name desc;
+            当根据索引排序时候，选择的映射如果不是索引，则不走索引
+            特别的：如果对主键排序，则还是走索引：
+                select * from tb1 order by nid desc;
+
+        - 组合索引最左前缀
+            如果组合索引为：(name,email)
+            name and email       -- 使用索引
+            name                 -- 使用索引
+            email                -- 不使用索引
+
+    6、SQL其他注意事项
+        - 避免使用select *
+        - count(1)或count(列) 代替 count(*)
+        - 创建表时尽量时 char 代替 varchar
+        - 表的字段顺序固定长度的字段优先
+        - 组合索引代替多个单列索引（经常使用多个条件查询时）
+        - 尽量使用短索引
+        - 如果是BLOB 和 TEXT 类型，必须指定length。
+        - 使用连接（JOIN）来代替子查询(Sub-Queries)
+        - 连表时注意条件类型需一致
+        - 索引散列值（重复少）不适合建索引，例：性别不适合

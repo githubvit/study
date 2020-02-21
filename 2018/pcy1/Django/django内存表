@@ -1,0 +1,42 @@
+django内存表构建和使用
+
+
+
+视频表-->难度：初级、中级、高级,难度是不太变的不变的元素
+    这些不变的元素放在内存里即可，省去了数据库表的查询，提高效率加快访问速度。
+    因此在视频表中构建level_choice内存表和level字段，用admin的choices参数连接即可。
+在models中的视频表里构建
+class Video(models.Model):
+    level_choice=(
+        (1,u'初级'),#python2.7加上u，python3.x不用
+        (2,u'中级'),
+        (3,u'高级'),
+    )
+    level=models.IntegerField(verbose_name='级别'，choices=level_choice,default=1)
+1，常规使用
+    views取值：
+
+    def video(request):
+        level_list=models.Video.level_choice
+
+        取出来的level_list是一个个元组
+
+    前端使用：
+        {%for item in level_list%}
+        <a>{{item.1}}</a> 用元组的序号
+
+2，用匿名函数和map构建后台数据结构为字典，方便前端取值：
+    def video(request):
+        ret=models.Video.level_choice
+        ret=map([lambda x:{'id':x[0],'name':x[1]} ret])
+        level_list=list(ret)这样就构造出了列表里面套字典
+
+            [
+                {'id':1,'name':'初级'},
+                {'id':2,'name':'中级'},
+                {'id':3,'name':'高级'},
+            ]
+
+    前端使用：
+        {%for item in level_list%}
+        <a>{{item.name}}</a>   这样循环时，每个item都是字典，取值清晰

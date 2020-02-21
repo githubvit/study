@@ -1,0 +1,2 @@
+<?xml version='1.0' encoding='utf-8'?>
+<namelist><personinfo enrolled="yes"><name>alex</name><age checked="no">33</age><sex /></personinfo><personinfo enrolled="no"><name>sgq</name><age>19</age></personinfo></namelist>

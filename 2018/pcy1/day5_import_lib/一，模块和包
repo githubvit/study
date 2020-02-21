@@ -1,0 +1,118 @@
+
+第一节，模块与包
+
+1，定义
+    模块：用来从逻辑上组织python代码（变量、函数、类、逻辑：实现一个功能），
+    本质就是.py结尾的python文件(文件名：test.py，模块名：test)。
+
+    包：用来从逻辑上组织模块，实现更多的功能，本质就是一个目录（必须带有一个__init__.py文件）
+
+2，导入方法和调用方法
+    1）import 模块名
+    使用:模块名.变量名--》 调用模块中的该变量名的值
+    使用:模块名.方法名（）--》 调用模块中的方法或叫函数
+    多个模块导入 import 模块名1，模块名2，。。。
+
+    2）from 模块名 import *
+    使用:变量名--》 如果本脚本中未定义该变量名，就可以直接调用模块中的该变量名的值
+    使用:方法名（）--》 如果本脚本中未定义该方法，就可以直接调用模块中的方法或叫函数
+
+    因为，from 模块名 import *并没引入模块名，引入的是该文件下的所有代码。
+    所以，该导入方法没有模块名.变量名或方法名的使用方法。
+
+    注意：由于其没有模块名.变量名或方法名的使用方法，所以，如果该脚本和引入模块中有相同的变量名和方法名相同，
+    就容易产生错误，无法运行模块中的代码。要慎用。
+
+
+
+    3）from 模块名 import 方法名（变量名）
+    为了提高效率，从模块名中只引入需要的方法或变量。
+    使用方法同上2）。
+    多个方法导入 from 模块名 import 方法名1（变量名），方法名2，。。。
+
+    4）from 模块名 import 方法名 as 别名
+    从模块中只引入一段方法函数代码，为了避免冲突另起别名。
+
+3，import本质（路径搜索和搜索路径）
+    导入模块的本质就是找到模块的python文件（路径搜索）解释一遍，把结果赋给import的模块名或方法名。
+        3.1 路径搜索的本质，就是在sys.path这个路径列表中查找。
+            如果找到的路径包含模块文件，就可以import，否则就报错。
+            import 模块名---》模块名.py---》模块名.py的路径---》sys.path
+
+        3.2 而sys.path默认只包含当前路径（目录），如果所查找的模块在当前路径，就ok。
+            所以查找的模块不在当前路径下,就要用到os.path.abspath(__file__),
+            获取当前文件的绝对路径。__file__就是当前文件的内置变量指当前文件的文件名。
+            再通过目录名操作os.path.dirname(当前文件的绝对路径)的多次操作，获得查找模块的路径。
+            最后通过sys.path.append(查找模块的路径)加入sys.path列表。
+            注意，sys.path.append这样是把路径加到该列表的末尾，如果想加到前面要用列表的insert方法。
+            这样，就可以import模块了。
+
+        3.3 import 模块名 是把模块文件的所有代码赋给模块名。
+            模块名=’all code‘。所以要用模块名.方法名（变量名）调用。
+            比如：import test ---》test=（test.py all code）
+
+        3.4 而from 模块名 import 方法名（变量名） 是把模块文件中相关代码赋给方法名或变量名。
+            from test import name ---》name=（test.py name code）所以可以直接调用。
+
+
+
+    导入包的本质就是解释执行包里面的__init__.py文件。run __init__.py
+
+4，导入优化
+    在一段代码中，重复引入模块中的某个方法，比如200个：
+    import test
+    def log（）：
+        test.t1()
+        pass
+        .
+        .
+        .
+    def serch()
+        test.t1()
+        pass
+    每次调用，都要从test模块中去查找，找不到就报错，找到再执行。这就存在大量重复‘查找’，影响运行效率。
+    优化：
+    from test import t1
+    def log（）：
+        t1()
+        pass
+        .
+        .
+        .
+    def serch()
+        t1()
+        pass
+    这样就只有1次查找，大大优化，提高性能。
+    当然还可以加上别名避免冲突from test import t1 as t2
+
+5，模块分类
+    a:标准库 sys、os等内置模块，直接import。
+    b:开源模块
+    c:自定义模块
+
+6，外部模块安装（三种方式）
+
+    1） 安装好Anaconda后，就默认安装了包管理工具pip。
+        pip install 模块名
+
+    　　如果pip安装慢的话,用阿里云的源吧
+
+    　　pip install 模块名 -i  http://mirrors.aliyun.com/pypi/simple  --trusted-host mirrors.aliyun.com
+
+    　　在linux上需要改环境变量，不然无法使用pip安装模块
+
+            vim /etc/profile
+            加入一行
+            export PATH=/usr/local/python3/bin:$PATH
+            reboot
+
+
+    2）如果我们使用pip安装失败，那么我们可以直接下载包或模块的安装文件，然后手动安装。
+        下载压缩包，解压缩，进入解压缩目录，python setup.py install
+
+    3）安装后，模块可以直接在pychram里升级
+
+    　  File-Settings-Project-Project-Interpreter
+
+        功能很强大，能更新能安装
+

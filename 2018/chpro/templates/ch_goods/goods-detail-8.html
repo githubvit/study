@@ -1,0 +1,1005 @@
+{% extends 'master.html' %}
+{% block css  %}
+<style>
+    /*出现横向滚动条，宽度一定,页面大小固定，栅格全部为xs*/
+    .container{
+        width: 1200px;
+    }
+/*瓷画网广告栏和背景*/
+    .wbg{
+        background-color: white;
+        margin-bottom: 0;
+    }
+    .jumbotron{
+        padding-top: 22px;
+        padding-bottom: 22px;
+    }
+/*路径导航a标签字体*/
+    ol a{
+        color: #7a7a7a;;
+    }
+/*路径导航去背景和增加下划线去圆角*/
+    .breadcrumb{
+        background-color: transparent;
+        border-bottom: 1px solid;
+        border-radius: 0;
+    }
+/*调整左边作者画面距离上部的外形画的间距*/
+    .fix-img2{
+        margin-top: 50px;
+    }
+
+
+
+/*调整请选择器形radio的 间距和图片大小*/
+    .radio-inline {
+        padding-left: 0;
+        margin-bottom: 5px;
+    }
+    .radio-inline img{
+        width: 100%;
+    }
+
+
+
+/*隐藏瓷画器型的input单选点*/
+    .chqx input{
+        display: none;
+    }
+
+
+    /*颜色的input radio对齐*/
+    .ch-color .radio-inline{
+        vertical-align: 0;
+    }
+/*隐藏可选外框的input单选点*/
+    .kxwk input{
+        display: none;
+    }
+    /*可选外框：没有选择器型和尺寸，规定的缩略图宽和高等*/
+    .kxwk-noqx{
+        padding:44px;
+        width:100%;
+        height: 130.31px;
+        margin-bottom:0;
+        text-align: center
+    }
+    /*数量框的css*/
+    .ch-num{
+        display: inline-table;
+        vertical-align: middle;
+        height: 100%;
+        padding: 5px;
+        background-color: #f5f8fd;
+        text-align: center;
+    }
+    /*数量加减的css*/
+    .num-jj{
+        line-height: 1;
+        padding: 6px;
+    }
+    /*文字编辑框的不可编辑时的背景*/
+    .form-control[disabled]{
+        background-color: #f9fbfd;
+        opacity: 0.8;
+    }
+
+</style>
+{% endblock css %}
+{% block cont %}
+<!-- 增加的内容-->
+<!--1，瓷画网广告-->
+    <div class="jumbotron wbg">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-offset-2 col-xs-2">
+                    <a href="index.html">
+                        <img class="img-responsive" src="/static/images/yhzx_logo.jpg">
+
+                    </a>
+                </div>
+                <div class="col-xs-offset-1 col-xs-6">
+                    <h3 class="text-center">瓷画网汇集瓷画新工艺</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+<!--2,路径导航栏-->
+    <div class="container path-bar">
+        <ol class="breadcrumb">
+          <li><a href="index.html">首页</a></li>
+          <li><a href="#">转印瓷板画</a></li>
+          <li class="active">定制</li>
+        </ol>
+    </div>
+<!--3,详细页面-->
+    <div class="container">
+        <!--定制和结算-->
+        <div class="row">
+            <div class="col-xs-10">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            转印瓷板画定制
+                        </h4>
+                    </div>
+                    <div class="panel-body">
+                        <div class="col-xs-5">
+                            <img class="img-responsive fix-img1" style="margin-top: 35px" src="/static/images/1.jpg">
+                            <img class="img-responsive fix-img2" src="/static/images/1.jpg">
+
+                        </div>
+                        <div class="col-xs-7">
+                        <!--器型及尺寸-->
+                            <h4 >请选择器形、尺寸、颜色、文字</h4>
+                            <div id="myCarousel" class="carousel slide" data-interval="false" ><!--data-interval如果为 false，轮播将不会自动循环-->
+                                <div class="carousel-inner">
+                                    <div class="item active">
+                                        <div class="row chqx">
+                                            <div class="col-xs-4" >
+                                                <input type="radio" name="ch-qx" id="chqx1" value="1" tb-name="长方形瓷板">
+                                                <label  class="radio-inline" for="chqx1">
+                                                    <img class="img-responsive img-thumbnail" src="/static/images/1.jpg"  >
+                                                    <span style="display: inline-block">长方形瓷板</span>
+                                                </label>
+                                            </div>
+                                            <div class="col-xs-4">
+                                                <input type="radio" name="ch-qx" id="ch-qx2" value="2" tb-name="圆形瓷板">
+                                                <label  class="radio-inline" for="ch-qx2">
+                                                    <img class="img-responsive img-thumbnail" src="/static/images/3.jpg" >
+                                                    <span style="display: inline-block">圆形瓷板</span>
+                                                </label>
+                                            </div>
+                                            <div class="col-xs-4">
+                                                <input type="radio" name="ch-qx" id="ch-qx3" value="3" tb-name="扇形瓷板">
+                                                <label  class="radio-inline" for="ch-qx3">
+                                                    <img class="img-responsive img-thumbnail" src="/static/images/2.jpg" >
+                                                    <span style="display: inline-block">扇形瓷板</span>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="item ">
+                                        <div class="row chqx">
+                                            <div class="col-xs-4">
+                                                <input type="radio" name="ch-qx" id="ch-qx4" value="4" tb-name="椭圆形瓷板">
+                                                <label  class="radio-inline" for="ch-qx4">
+                                                    <img class="img-responsive img-thumbnail" src="/static/images/4.jpg" >
+                                                    <span style="display: inline-block">椭圆形瓷板</span>
+                                                </label>
+                                            </div>
+                                            <div class="col-xs-4">
+                                                <input type="radio" name="ch-qx" id="ch-qx5" value="5" tb-name="心形瓷板">
+                                                <label  class="radio-inline" for="ch-qx5">
+                                                    <img class="img-responsive img-thumbnail" src="/static/images/5.jpg" >
+                                                    <span style="display: inline-block">心形瓷板</span>
+                                                </label>
+                                            </div>
+                                            <div class="col-xs-4">
+                                                <input type="radio" name="ch-qx" id="ch-qx6" value="6" tb-name="条形屏风">
+                                                <label  class="radio-inline" for="ch-qx6">
+                                                    <img class="img-responsive img-thumbnail" src="/static/images/1.jpg" >
+                                                    <span style="display: inline-block">条形屏风</span>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="item ">
+                                        <div class="row chqx">
+                                            <div class="col-xs-4">
+                                                <input type="radio" name="ch-qx" id="ch-qx7" value="7" tb-name="横幅中堂">
+                                                <label  class="radio-inline" for="ch-qx7">
+                                                    <img class="img-responsive img-thumbnail" src="/static/images/2.jpg" >
+                                                    <span style="display: inline-block">横幅中堂</span>
+                                                </label>
+                                            </div>
+                                            <div class="col-xs-4">
+                                                <input type="radio" name="ch-qx" id="ch-qx8" value="8" tb-name="其他瓷板1">
+                                                <label  class="radio-inline" for="ch-qx8">
+                                                    <img class="img-responsive img-thumbnail" src="/static/images/3.jpg" >
+                                                    <span style="display: inline-block">其他瓷板1</span>
+                                                </label>
+                                            </div>
+                                            <div class="col-xs-4">
+                                                <input type="radio" name="ch-qx" id="ch-qx9" value="9" tb-name="瓷瓶">
+                                                <label  class="radio-inline" for="ch-qx9">
+                                                    <img class="img-responsive img-thumbnail" src="/static/images/4.jpg" >
+                                                    <span style="display: inline-block">瓷瓶</span>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--器形控制部分-->
+                            <div class="row">
+                                <div class="col-xs-3 ">
+                                    <a class="btn btn-default  btn-xs" href="#myCarousel"  data-slide="prev">
+                                        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                                        <span class="sr-only">Previous</span>
+                                    </a>
+                                    <a class="btn btn-default  btn-xs" href="#myCarousel"  data-slide="next">
+                                        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                                        <span class="sr-only">Next</span>
+                                    </a>
+                                </div>
+                                <div class="col-xs-4 chqx-hide hidden" >
+                                    <span id="qx1" class="chqx-span" style="margin-top: 0;font-weight: bold"></span>
+                                </div>
+                            </div>
+                            <!--尺寸选择-->
+                            <div class="row" style="margin-top: 12px">
+                                <div class="col-xs-4">
+                                    <div class="chqx-size">
+                                        <select name="size" class="form-control " id="size-st">
+                                            <option value tb-name="">请选择尺寸</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                    <!--颜色选择-->
+                                <span style="margin-left: 28px;font-size: 18px">请选择颜色</span>
+                                <div class="ch-color" style="display: inline-block;margin-left: 15px;font-size: 16px">
+                                    <input id="ch-color1" type="radio" name="ch-color" value="1" tb-name="黑白">
+                                    <label class="radio-inline" for="ch-color1" style="margin-right: 22px">黑白</label>
+                                    <input id="ch-color2" type="radio" name="ch-color" value="2" tb-name="彩色">
+                                    <label class="radio-inline" for="ch-color2">彩色</label>
+                                </div>
+                            </div>
+
+
+                            <!--画面中是否有字-->
+                            <div class="font1" style="margin-top: 16px;font-size: 18px">
+                                <span >是否有文字</span>
+                                <div class="ch-font" style="display: inline-block;margin-left: 15px; font-size: 16px">
+                                    <input id="ch-font1" type="radio" name="ch-font" value="1" tb-name="无" checked="checked">
+                                    <label class="radio-inline" for="ch-font1" style="margin-right: 22px">无</label>
+                                    <input id="ch-font2" type="radio" name="ch-font" value="2" tb-name="有">
+                                    <label class="radio-inline" for="ch-font2">有</label>
+                                    <button id='font-btn' class="btn btn-default btn-sm" style="line-height: 1;margin-left: 15px" >编辑画面文字</button>
+                                </div>
+                            </div>
+
+                            <div id="font-edit"  style="width:100%; margin-top: 10px">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading" style="padding: 5px 15px;">
+                                        <span class="panel-title" style="font-size: 11px">编辑画面文字</span>
+                                        <button id='font-submit' class="btn btn-default btn-xs pull-right" disabled="disabled">确定</button>
+                                    </div>
+                                    <div class="panel-body" style="padding: 0;" >
+                                        <textarea id="font-context"  class="form-control" style="width: 100%;border-top-left-radius: 0;border-top-right-radius: 0;  " rows="3" placeholder="请在这里输入画面上的文字，20个字符以内免费，最多为100个字符。" maxlength="100" disabled="disabled"></textarea>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div>
+                            <span style="padding-left: 15px;font-size: 15px">您上传图片-支付定金之后，我们会在3天内把图样放在您的个人中心，您对该图样确认后，我们会在1周内发货。</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+
+            <!--定制清单栏-->
+            <div class="col-xs-2 ">
+                <div class="panel panel-primary" style="margin-bottom: 20px">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">清单</h4>
+                    </div>
+                    <div class="panel-body" style="height: 319px;padding-left: 9px;padding-right: 9px;padding-top: 9px">
+                        <!--依据-->
+                        <div class="price1" style="margin-top: 0;line-height: 1.3;">
+                            <p>工艺：<span>热转印</span></p>
+                            <p>器型：<span class="chqx-span"></span></p>
+                            <p>尺寸：<span class="size-span"></span></p>
+                            <p>颜色：<span class="chys-span"></span></p>
+                            <p class="hidden">字数：<span class="font-span"></span></p>
+                        </div>
+
+                        <!--数量-->
+                        <div class="row" style="margin-left:0;margin-bottom: 10px">
+                            <span>数量：</span>
+                            <div class="input-group" style="display: inline-block">
+                                <span class="input-group-btn" style="display: inline-table">
+                                    <button id="num-sub" class="btn btn-default num-jj" type="button" style="width: 22px;">-</button>
+                                </span>
+                                <input id="ch-num" type="text" class="form-control ch-num" style="width: 53px;float: none;margin: -4px;color: red " placeholder="数量" value="1" max="5000" min="1">
+                                <span class="input-group-btn" style="display: inline-table">
+                                    <button id="num-add" class="btn btn-default num-jj" type="button" style="width: 22px;">+</button>
+                                </span>
+                            </div>
+                        </div>
+
+                        <!--价格-->
+                        <div style="line-height: 1">
+                            <p style="color: red;">单价：<span style="padding-left: 15px">¥</span><span id="ch-djia" style="font-size: 18px"></span></p>
+                            <p style="color: red">定金：<span style="padding-left: 15px">¥</span><span id="ch-djin" style="font-size: 18px"></span></p>
+                            <p class="hidden" style="color: red">
+                                外框：<span >¥</span>
+                                <span id="wk-dj" style="font-size: 18px;text-decoration-line: underline;"></span>
+                                <a id="ycwk" style="cursor: pointer;margin-left: 5px; color: red;" data-toggle="tooltip" title="移除"><i class="icon-remove-circle"></i></a>
+                            </p>
+                            <p class="hidden" style="color: red">小计：<span style="padding-left: 15px">¥</span><span id="ch-xj" style="font-size: 18px"></span></p>
+                            <p style="color: red">总价：<span>¥</span><span id="ch-zj" style="font-size: 18px"></span></p>
+                        </div>
+                    </div>
+                </div>
+                <p style="width: 100%">
+                    <button id="scwj" class="btn btn-danger" style="width: 100%;margin-bottom: 6px" disabled="disabled">上传图片 支付定金</button>
+                </p>
+                <p style="width: 100%">
+                    <button id='jrgwc' class="btn btn-primary" style="width: 100%"  disabled="disabled">加入购物车</button>
+                </p>
+            </div>
+
+        </div>
+        <hr>
+        <!--可选外框-->
+        <div class="row ">
+            <div class="col-xs-12"><!--不套这一层，面板的两侧会突出来，和上面的两侧对不齐-->
+                <div class="panel panel-primary" style="margin-bottom: 26px">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">可选外框</h4>
+                    </div>
+                    <div class="panel-body">
+                        <div class="col-xs-4">
+                            <a href="#">
+                                <img class="img-responsive" src="/static/images/1.jpg">
+                            </a>
+                        </div>
+
+                        <div class="col-xs-8">
+                            <div class="thumbnail kxwk-noqx hidden">
+                                <p >这是外框选择区，请先选择器型和尺寸。</p>
+                            </div>
+                            <div class="kxwk-div hidden">
+                                <div id="kxwk" class="carousel slide" data-interval="false" ><!--data-interval如果为 false，轮播将不会自动循环-->
+                                    <div class="row">
+                                        <!--可选外框左控制部分-->
+                                        <div class="col-xs-1" >
+                                            <a href="#kxwk"  data-slide="prev">
+                                                    <span class="glyphicon glyphicon-chevron-left" style="float: right; line-height: 4;" aria-hidden="true"></span><!--line-height用来控制行高，保证按钮居中-->
+                                                    <span class="sr-only">Previous</span>
+                                            </a>
+                                        </div>
+                                        <div class="col-xs-10">
+                                            <div class="carousel-inner " id="kxwk-div">
+
+                                            </div>
+                                        </div>
+                                        <!--可选外框右控制部分-->
+                                        <div class="col-xs-1">
+                                            <a href="#kxwk"  data-slide="next">
+                                                <span class="glyphicon glyphicon-chevron-right" style="line-height: 4;" aria-hidden="true"></span>
+                                                <span class="sr-only">Next</span>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row" style="margin-top: 18px">
+
+                                    <div class="kxwk-hide hidden" style="display: inline-block;margin-left: 150px">
+                                        <span id="wk" class="kxwk-span" style="margin-top: 0;font-weight: bold"></span>
+                                    </div>
+                                    <p class="pull-right" style="margin-bottom: 0">
+                                        <button id="kxwk-qd" class="btn btn-danger"   disabled="disabled">加入清单</button>
+                                    </p>
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <!--广告和说明-->
+        <div class="row ">
+            <div class="col-xs-12"><!--不套这一层，面板的两侧会突出来，和上面的两侧对不齐-->
+                <div class="panel panel-primary" style="margin-bottom: 26px">
+                <div class="panel-heading">
+                    <h4 class="panel-title">关于定制</h4>
+                </div>
+                <div class="panel-body">
+                    <div class="col-xs-2">
+                        <p>广告栏/推荐栏</p>
+                        <a href="#">
+                            <img class="img-responsive" src="static/images/xh.jpg">
+                        </a>
+                    </div>
+                    <div class="col-xs-8">
+                        <ul class="nav nav-tabs">
+                          <li role="presentation" class="active"><a href="#">定制说明</a></li>
+                          <li role="presentation"><a href="#">问与答</a></li>
+                          <li role="presentation"><a href="#">其他</a></li>
+                        </ul>
+                        <div style="margin-top: 33px">
+                            <div class="wrapper">
+                                <div class="content-main"><h4>瓷板画定制流程，只要4步</h4></div>
+                                <div class="content-secondary">
+                                    <p>1，选择瓷板外形及尺寸。</p>
+                                    <p>2，选择瓷板画类型（肖像、山水、生活等）及作者等。</p>
+                                    <p>3，直接上传您要定制的图片。</p>
+                                    <p>4，只要付40%定金我们就开始设计瓷板画图样，图样经过您的确认满意后，再付余款，制成瓷板画发货。</p>
+                                </div>
+                            </div>
+                            <div class="wrapper">
+                                <div class="content-secondary">
+                                    <img src="static/images/cb1.jpg">
+                                    <img src="static/images/cb2.jpg">
+                                    <img src="static/images/cb3.jpg">
+                                    <img src="static/images/cb4.jpg">
+                                    <img src="static/images/cb5.jpg">
+                                    <img src="static/images/cb6.jpg">
+                                    <img src="static/images/cb7.jpg">
+                                    <img src="static/images/cb8.jpg">
+                                    <img src="static/images/cb9.jpg">
+                                    <img src="static/images/cb10.jpg">
+                                    <img src="static/images/cb11.jpg">
+                                    <img src="static/images/cb12.jpg">
+                                    <img src="static/images/cb13.jpg">
+                                    <img src="static/images/cb14.jpg">
+                                    <img src="static/images/cb15.jpg">
+                                    <img src="static/images/cb16.jpg">
+                                    <img src="static/images/cb17.jpg">
+                                    <img src="static/images/cb18.jpg">
+                                    <img src="static/images/cb19.jpg">
+                                    <img src="static/images/cb20.jpg">
+                                    <img src="static/images/cb21.jpg">
+                                    <img src="static/images/cb22.jpg">
+                                    <img src="static/images/cb23.jpg">
+                                    <img src="static/images/cb24.jpg">
+                                    <img src="static/images/cb25.jpg">
+                                    <img src="static/images/cb26.jpg">
+                                    <img src="static/images/cb27.jpg">
+                                    <img src="static/images/cb28.jpg">
+                                    <img src="static/images/cb29.jpg">
+                                    <img src="static/images/cb31.jpg">
+                                    <img src="static/images/cb32.jpg">
+                                    <img src="static/images/cb33.jpg">
+                                    <img src="static/images/cb34.jpg">
+                                    <img src="static/images/cb35.jpg">
+                                    <img src="static/images/cb36.jpg">
+                                    <img src="static/images/cb37.jpg">
+                                    <img src="static/images/cb38.jpg">
+                                    <img src="static/images/cb39.jpg">
+                                    <img src="static/images/cb40.jpg">
+                                    <img src="static/images/cb41.jpg">
+                                    <img src="static/images/cb42.jpg">
+                                    <img src="static/images/cb43.jpg">
+                                    <img src="static/images/cb44.jpg">
+                                    <img src="static/images/cb45.jpg">
+                                    <img src="static/images/cb46.jpg">
+                                    <img src="static/images/cb47.jpg">
+                                    <img src="static/images/cb48.jpg">
+                                    <img src="static/images/cb49.jpg">
+                                    <img src="static/images/cb50.jpg">
+                                    <img src="static/images/cb51.jpg">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-2">
+                        <p>广告栏/推荐栏</p>
+                        <a href="#">
+                            <img class="img-responsive" src="static/images/xh.jpg">
+                        </a>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </div>
+
+    </div>
+<!-- 增加的内容结束-->
+{% endblock cont %}
+{% block js %}
+<script>
+    $(function () {
+//        瓷画器型开始载入时
+        chqx();
+        // 加载尺寸函数
+        chqx_size();
+        //字数统计函数
+        font_world();
+//        数量控制函数
+        num_cn();
+        //可选外框函数
+        kxwk();
+        //加入清单
+        jrqd();
+
+//        瓷画器形控制
+        $('.chqx :input[name="ch-qx"]').change(function () {
+//             Click事件是选择列表项，而Change事件则是编辑内容，不是这样的，内容改变
+// 这两个事件的结果都是使ComboBox控件中的现实内容发生变化，但是一个是通过鼠标点击，即Click；另一个是通过在输入框中编辑内容，即Change。
+            console.log(1);
+//            加载器型函数
+            chqx();
+            // 加载尺寸函数
+            chqx_size();
+            //加载外框函数
+            kxwk();
+            //加入清单
+            jrqd();
+
+            price ();
+        });
+        //尺寸控制
+        $('#size-st').change(function () {
+            // 加载尺寸函数
+            chqx_size();
+
+            //加载外框函数，当改变尺寸时，外框跟着变，而不是简单清空
+            kxwk();
+            //加入清单
+            jrqd();
+            price ();
+        });
+
+
+//        颜色控制
+        $('.ch-color :input[name="ch-color"]').change(function () {
+            var v=$(this).next().text();
+            $('.chys-span').text(v);
+            price ();
+        });
+//   字数控制
+//    *1,当name=ch-font的input单选框的值为value=2时，去掉‘编辑画面文字’按钮(id='font-btn')的隐藏，去掉文本框和确定按钮的'disabled'，以及清单中font-span标签的父标签的隐藏；
+//    * 2，使得‘编辑画面文字’按钮(id='font-btn')隐藏，增加文本框和确定按钮的'disabled'，以及隐藏清单中font-span标签的父标签；
+
+        $(':radio[name="ch-font"]').change(function () {
+            font_world();
+            price();
+        });
+//    * 3，当‘编辑画面文字’按钮被点击，去掉文本框和确定按钮的'disabled'，可以输入画面文字，
+        $('#font-btn').click(function () {
+            $('#font-context').removeAttr('disabled');
+            $('#font-submit').removeAttr('disabled');
+        });
+//    * 3.1，捕捉文本框的输入事件，进行编辑框中字数统计，同时，并把字数统计结果给到清单中的font-span标签；
+        $('#font-context').on("input propertychange",function () {
+             var font_val=$('#font-context').val();
+            //匹配非空字符,用正则\S匹配非空字符，g和m表示整个字符串和多行   ********
+            var font_rs=font_val.match(/\S/gm);
+            if(font_rs){//如果有非空字符，则计算长度和给清单中的font-span中同步字数
+                //获得匹配后的非空字符串，用length取得长度，这个长度就是非空的长度
+                var font_num=font_rs.length;
+                //  给清单中的font-span中同步字数
+                $('.font-span').html(font_num);
+            }else{
+                $('.font-span').html('');//清空清单里font-span中的内容
+            }
+
+            price();
+        });
+        //    * 3.2，点击确定按钮，进行编辑框中字数统计，同时，又使该编辑框和该按钮不可编辑，并把字数统计结果给到清单中的font-span标签；
+        $('#font-submit').click(function () {
+            //取得textarea的值
+            var font_val=$('#font-context').val();
+            //匹配非空字符,用正则\S匹配非空字符，g和m表示匹配整个字符串和多行匹配
+            var font_rs=font_val.match(/\S/gm);
+            if(font_rs){//如果有非空字符，则计算长度和给清单中的font-span中同步字数
+                //获得匹配后的非空字符串，用length取得长度，这个长度就是非空的长度
+                var font_num=font_rs.length;
+                //给清单中的font-span中同步字数
+                $('.font-span').html(font_num);
+            }else{
+                $('.font-span').html('');//清空清单里font-span中的内容
+            }
+            $('#font-context').attr('disabled','disabled');
+            $('#font-submit').attr('disabled','disabled');
+            price();
+
+        });
+
+//     数量控制
+    //数量输入框
+        $('#ch-num').on('input',function () {
+            //加载数量输入框控制函数
+            num_cn();
+            price();
+        });
+    //数量加按钮
+        $('#num-add').click(function () {
+            console.log('+');
+            //取数量输入框的值
+            var num_v=$('#ch-num').val();
+            //如果v是空的置其为1
+            if(num_v){
+                console.log('num_v:'+num_v);
+            }else{
+                var num_v=0;
+            }
+            num_v=parseInt(num_v)+1;
+            $('#ch-num').val(num_v);
+            //加载数量输入框控制函数，保证输入的值为合理的
+            num_cn();
+             price();
+            console.log('输入框+'+$('#ch-num').val())
+        });
+    //数量减按钮
+        $('#num-sub').click(function () {
+            console.log('-');
+            //取数量输入框的值
+            var num_v=$('#ch-num').val();
+            //如果v是空的置其为2
+            if(num_v){
+                console.log('num_v:'+num_v);
+            }else{
+                var num_v=2;
+            }
+            num_v=parseInt(num_v)-1;
+            $('#ch-num').val(num_v);
+            //加载数量输入框控制函数，保证输入的值为合理的
+            num_cn();
+             price();
+            console.log('输入框-'+$('#ch-num').val())
+        });
+
+// 可选外框,要用委托绑定
+        $('#kxwk-div').delegate(':radio[name="kxwk"]','change',function () {
+            console.log('可选外框');
+            kxwk();
+        });
+        //加入清单
+        $('#kxwk-qd').click(function () {
+            jrqd();
+            price();
+        });
+        //在清单移除外框
+        $('#ycwk').click(function () {
+            //置外框的span为空
+             $('#wk-dj').text('');
+             //将#wk-dj的父标签隐藏
+            $('#wk-dj').parent().addClass('hidden');
+            // 置小计的sapn为空
+            $('#ch-xj').text('');
+            //将小计的父标签解除隐藏
+            $('#ch-xj').parent().addClass('hidden');
+            price();
+        })
+
+    });
+//    价格函数
+    function price () {
+//        器型 :radio[name="ch-qx"] 作者：:radio[name="ch-zz"] 颜色：:radio[name="ch-color"]
+//        尺寸 select[name="size"] 外框：select[name="ch-wk"] 类型：select[name="ch-type"]
+//        人数 select[name="ch-rs"] 人和动物数 select[name="ch-rds"] 动物数：select[name="ch-ds"]
+        var p1=$(':radio[name="ch-qx"]:checked').val();// 器型
+        var p2=$('select[name="size"] option:selected').val();//尺寸
+        var p6=$(':radio[name="ch-color"]:checked').val();//颜色
+        //对于字数的计算
+        /*
+        * 1,如果radio[name="ch-font"]:checked value===1,就表示无字符，置p10=0；就是让字数等于0；
+        * 2,如果radio[name="ch-font"]:checked value===2,表示有字符，清单中的font-span标签应该有内容，$('.font-span').text()
+        * 2.1，非空字数<=20,置p10=0；就是让字数等于0；20个字符以内免费。
+        * 2.2，非空字数>20,置p10=字数-20；从第21个开始算钱。
+        * 2.3，非空字符没结果，则，置p10=false，为假，不让结算.
+        * */
+        if($(':radio[name="ch-font"]:checked').val()==='1'){
+            var p10=1;
+        }else{
+            if($('.font-span').text()){
+                if(parseInt($('.font-span').text())<=20){
+                    var p10=1;
+                }else{
+                    var p10=parseInt($('.font-span').text())-20;
+                }
+            }else{
+                var p10=false;
+            }
+        }
+//        对于数量的获取
+        /*
+        * 1,如果数量输入框有，取值，否则让p11=false。
+        *
+        * */
+        if($('#ch-num').val()){
+            var p11=$('#ch-num').val();
+        }else{
+            var p11=false;
+        }
+
+        console.log('p1:'+p1);
+        console.log('p2:'+p2);
+        console.log('p6:'+p6);
+        console.log('p10:'+p10);
+        console.log('p11:'+p11);
+
+        if(p1 && p2  && p6  && p10 && p11){
+            var price1=p2*10+p6*15+p10*5;
+        }else{
+            $('#ch-djia').html('');
+            $('#ch-djin').html('');
+            $('#scwj').attr('disabled','disabled');
+            $('#jrgwc').attr('disabled','disabled');
+            $('#ch-xj').html('');
+            $('#ch-zj').html('');
+            return
+        }
+
+        var djin=price1*0.4;
+        $('#ch-djia').html(price1.toFixed(2));
+        $('#ch-djin').html(djin.toFixed(2));
+        $('#scwj').removeAttr('disabled');
+        $('#jrgwc').removeAttr('disabled');
+
+        //当外框被选时，小计单价和外框，这个外框的价格不能选$(':radio[name="kxwk"]:checked')的价格，要选加入清单的价格，因为即使在可选外框选了，也不见得会加入清单
+        var wk_price=$('#wk-dj').text();//将text字符串转为数字
+        var ch_xj=parseFloat(price1)+parseFloat(wk_price);//保持类型一致，不然会报NaN；
+        //把小计后的价格ch-xj放入
+        $('#ch-xj').html(ch_xj.toFixed(2));
+
+        //  总价
+        /*
+        * 当有小计时，
+        * 1,总价=小计*数量
+        * 否则
+        * 2，总价=单价*数量
+        * */
+        if($('#ch-xj').text()!=='NaN'){
+            var price_zj=parseFloat($('#ch-xj').text())*parseInt($('#ch-num').val());
+        }else{
+            console.log('小计为空');
+            var price_zj=parseFloat($('#ch-djia').text())*parseInt($('#ch-num').val());
+        }
+        $('#ch-zj').html(price_zj.toFixed(2))
+    }
+
+//    器型显示控制 控制尺寸选项及控制外框种类
+    function chqx() {
+        //获取器型单选是否已选，ture或undifend
+        var qx=$(':radio[name="ch-qx"]:checked').prop('checked');
+        //删除原尺寸选择下拉框中的列表除第1项外的其余选项标签。
+        $('#size-st option:not(:first)').remove();
+        if (qx){
+            //如果为true，那么获取单选框选择的tb-name属性的值
+            var chqx=$(':radio[name="ch-qx"]:checked').attr('tb-name');
+            //将器型单选框的tb-name属性的值传给所有器型的span标签
+            $('.chqx-span').html(chqx);
+        //通过ajax上传该器型ID，获取该器型所有尺寸值列表，用ajax方式不刷新页面
+            //创建器型和尺寸的数据结构：{器型id：尺寸列表}，满足不同的器型有不同的尺寸列表
+            var size_dict={1:[7,8,9],2:[8,9,10],3:[8,9,10],4:[9,10,11],5:[10,11,12],6:[11,12,13],7:[12,13,14],8:[13,14,15],9:[14,15,16]};
+            //获取选中的器型id
+            var chqx_id=$(':radio[name="ch-qx"]:checked').val();
+            //将选中的器型id的尺寸列表放到尺寸选择框中，生成option选项
+            for (var i=0;i<size_dict[chqx_id].length;i++){
+                //创建标签<option>
+//                获取该尺寸列表size_dict[chqx_id]该轮循环的值
+                var vl=size_dict[chqx_id][i];
+                var op1='<option value='+vl+' tb-name="'+vl+'寸">'+vl+'寸'+'</option>';
+                //insertAdjacentHTML字符串形式插入标签，该方式只能是document.getElementBy..方式因此用$('#size-st')[0]
+                $('#size-st')[0].insertAdjacentHTML('beforeEnd',op1)
+            }
+
+            //如果是通过参考定制进来的应该再让参考链接的尺寸值被选中
+            //             假设尺寸的value值是8，设置select的值
+            // $('select[name="size"] option[value="8"]').prop('selected',true);
+
+//对于可选外框的控制，
+        // 1，清除外框轮播器中的item
+            $('#kxwk-div').children().remove();
+        // 2，获取选中器型的可选外框列表轮播
+            //创建轮播列表 器型id:[[wk1_name,wk1_img_src],[wk2_name,wk2_img_src],...]，应该有外框种类id器型id:[[wk1_name,wk1_img_src],[wk2_name,wk2_img_src],...]，这里暂时用循环值代替
+            var wk_dict={
+                1:[['外框1','/static/images/1.jpg'],['外框2','/static/images/2.jpg'],['外框3','/static/images/3.jpg'],['外框4','/static/images/4.jpg'],['外框5','/static/images/5.jpg'],['外框6','/static/images/1.jpg'],['外框7','/static/images/2.jpg']],
+                2:[['外框2','/static/images/2.jpg'],['外框3','/static/images/3.jpg'],['外框4','/static/images/4.jpg'],['外框5','/static/images/5.jpg'],['外框6','/static/images/1.jpg']],
+                3:[['外框3','/static/images/3.jpg'],['外框4','/static/images/4.jpg'],['外框5','/static/images/5.jpg'],['外框6','/static/images/1.jpg'],['外框7','/static/images/2.jpg']],
+                4:[['外框4','/static/images/4.jpg'],['外框5','/static/images/5.jpg'],['外框6','/static/images/1.jpg'],['外框7','/static/images/2.jpg'],['外框8','/static/images/3.jpg']],
+                5:[['外框5','/static/images/5.jpg'],['外框6','/static/images/1.jpg'],['外框7','/static/images/2.jpg'],['外框8','/static/images/3.jpg']],
+                6:[['外框1','/static/images/1.jpg'],['外框2','/static/images/2.jpg'],['外框3','/static/images/3.jpg'],['外框4','/static/images/4.jpg'],['外框5','/static/images/5.jpg'],['外框6','/static/images/1.jpg']],
+                7:[['外框2','/static/images/2.jpg'],['外框3','/static/images/3.jpg'],['外框4','/static/images/4.jpg'],['外框5','/static/images/5.jpg'],['外框6','/static/images/1.jpg']],
+                8:[['外框3','/static/images/3.jpg'],['外框4','/static/images/4.jpg'],['外框5','/static/images/5.jpg'],['外框6','/static/images/1.jpg']],
+                9:[['外框4','/static/images/4.jpg'],['外框5','/static/images/5.jpg'],['外框6','/static/images/1.jpg'],['外框7','/static/images/2.jpg']],
+            };
+        //3，创建轮播外框的item/row/////col-xs3/input-lable *************
+            //第一步，构建轮播外层item/row/，用wk_dict[chqx_id].length的值整除4，来构建看有几个item，并在item层构建class item-0、item-1、。。。 ********
+            for(var j=0;j<wk_dict[chqx_id].length/4;j++){
+
+                var tem='<div class="item item-'+j+'"> <div class="row kxwk"></div></div>';
+                //插入到外框轮播图外框里
+                $('#kxwk-div')[0].insertAdjacentHTML('beforeEnd',tem);
+
+            }
+            //激活item-0
+            $('.item-0').addClass('active');
+
+            //第二步，构建轮播内层，在上面刚创建的item-n里添加col-xs3/input-lable，此处用m即循环轮数暂时取代外框种类id  ********
+            for(var m=0;m<wk_dict[chqx_id].length;m++){
+                //定义标签内容
+                var tmp='<div class="col-xs-3"> ' +
+                        '<input type="radio" name="kxwk" id="kxwk' +m+
+                    '" value="'+m+'" tb-name="'+wk_dict[chqx_id][m][0]+'">'+
+                            '<label  class="radio-inline" for="kxwk'+m+'">'+
+                                '<img class="img-responsive img-thumbnail" src="'+wk_dict[chqx_id][m][1]+'" >'+
+                                '<span style="display: inline-block">'+wk_dict[chqx_id][m][0]+
+                    '</span> </label></div>';
+
+                //定义位置变量--用当前下标除4取整      ********
+                var di=m/4|0;
+
+                //在相应item位置插入标签
+                $('.item-'+di+' .kxwk')[0].insertAdjacentHTML('beforeEnd',tmp)
+            }
+//            打开可选外框
+            $('.kxwk-noqx').addClass('hidden').next().removeClass('hidden');
+            //移除器型控制的隐藏部分
+            $('.chqx-hide').removeClass('hidden');
+
+        }else{
+            //如果不为true，将器型控制的隐藏部分隐藏
+            $('.chqx-hide').addClass('hidden');
+            //            将外框隐藏
+            $('.kxwk-noqx').removeClass('hidden').next().addClass('hidden');
+        }
+    }
+
+    //尺寸函数 控制外框 控制头像数量
+    function chqx_size() {
+        console.log('chqx_size');
+       //获取尺寸选择下拉框是否已选，是不行的，因为第一项的值即value，是存在的，
+        // val=“”；$('select[name="size"] option:selected').val().length为0
+        var size_val=$('select[name="size"] option:selected').val();
+        var size_len=$('select[name="size"] option:selected').val().length;
+        //如果有长度，说明select下拉框有被选中
+        if(size_len){
+            //如果不为0，那么获取尺寸下拉框选择的tb-name属性的值
+            var size_tb=$('select[name="size"] option:selected').attr('tb-name');
+            //将尺寸下拉框选择的tb-name属性的值传给所有尺寸的span标签
+            $('.size-span').html(size_tb);
+            //把该尺寸下拉框选中的尺寸id通过ajax传给后台，获取后台发过来的匹配数据列表id以及name
+
+        //对于可选外框的控制，1，根据选中器型尺寸，匹配外框的尺寸价格 (外框种类，匹配尺寸，该类外框单位价格)
+            //构造外框数据结构{外框种类id：该类外框单位价格}
+            var wk_tp={0:10,1:11,2:12,3:13,4:14,5:15,6:16,7:17,8:18,9:19};
+            //获取可选外框种类列表--在value,获得列表
+            var wk_li=$('#kxwk-div :input[name="kxwk"]');//[2].getAttribute('tb-name')
+            //先清除原来的价格标签
+            $('.kxwk-price').remove();
+
+            //再创建新的价格标签
+            for(p=0;p<wk_li.length;p++){
+                //从外框种类id列表中获得每一个外框种类的具体id,用dom的getAttribute('属性')
+                var wk_id=wk_li[p].getAttribute('value');
+                //获得该外框id单位价格
+                var wk_dp=wk_tp[wk_id];
+                //求该匹配尺寸下该外框的价格
+                var wk_price=size_val*wk_dp;
+                //保留两位小数
+                var wk_price=wk_price.toFixed(2);
+                //创建字符串标签
+                var wk_tmp='<span style="display: inline-block; color: red" class="pull-right kxwk-price" >¥'+wk_price+'</span>';
+                //插入标签,1，先把dom转成jquery，2，通过next 找到input下的lable标签，3，再通过[0]转回dom，4，最后用insertAdjacentHTML()插入
+                $(wk_li[p]).next()[0].insertAdjacentHTML('beforeEnd',wk_tmp);
+            }
+
+
+        }else{
+            //将尺寸的span标签置空
+            $('.size-span').html('');
+
+            //删除可选外框的价格标签，并清空kxwk-hide里的内容
+            $('.kxwk-price').remove();
+            $('.kxwk-span').html('');
+            $('.kxwk-hide').addClass('hidden');
+            //置可选外框的input为false
+            $(':radio[name="kxwk"]:checked').prop('checked',false);
+        }
+    }
+
+    //外框控制函数
+    function kxwk() {
+//        获取可选外框的radio值是false还是ture，就是是否有选中的。
+        var kxwk_tag=$(':radio[name="kxwk"]:checked');
+        var kxwk=kxwk_tag.prop('checked');
+        //器型尺寸是否不为0
+        var p2=$('select[name="size"] option:selected').val();//尺寸
+        if(kxwk&&p2){
+            //外框名称
+            var kxwk_name=$(':radio[name="kxwk"]:checked').attr('tb-name');
+            //被选中外框单价
+            var kxwk_price=$(':radio[name="kxwk"]:checked').next().children('.kxwk-price').text();
+            var kxwk_px='<span class="pull-left" style="display: inline-block;padding-left: 15px">匹配器型：'+
+                $('select[name="size"] option:selected').attr('tb-name')+$(':radio[name="ch-qx"]:checked').attr('tb-name')+'</span>';
+            var kxwk_sv='<span style="display: inline-block;padding-left: 51px">外框名称：'+kxwk_name+
+                '</span><span style="display: inline-block;padding-left: 15px;padding-right: 15px;color: red" >外框单价：'+kxwk_price+'</span>';
+            var kxwk_span=kxwk_px+kxwk_sv;
+            $('.kxwk-hide').removeClass('hidden');
+            $('.kxwk-span').html(kxwk_span);
+            //置加入清单按钮为可用
+            $('#kxwk-qd').removeAttr('disabled');
+        }else{
+            $('.kxwk-span').html('');
+            $('.kxwk-hide').addClass('hidden');
+            //置加入清单按钮为disable
+            $('#kxwk-qd').attr('disabled','disabled');
+        }
+    }
+
+    //加入清单函数
+    function jrqd() {
+        var hdis=$('#kxwk-qd')[0].hasAttribute('disabled');
+        //清除原清单中外框单价
+        $('#wk-dj').text('');
+        if(hdis){
+            //将#wk-dj的父标签隐藏
+            $('#wk-dj').parent().addClass('hidden');
+            //将小计的父标签隐藏
+            $('#ch-xj').parent().addClass('hidden');
+        }else{
+            //清除原清单中外框单价
+            $('#wk-dj').text('');
+            //获取外框价格
+            var kxwk_price=$(':radio[name="kxwk"]:checked').next().children('.kxwk-price').text();
+            //将外框单价放入 #wk-dj中
+            $('#wk-dj').text(kxwk_price.substring(1));//substring(start,stop),截取字符串，去掉¥符号
+            //将#wk-dj的父标签解除隐藏
+            $('#wk-dj').parent().removeClass('hidden');
+            //将总价的父标签解除隐藏
+            $('#ch-xj').parent().removeClass('hidden');
+        }
+    }
+
+//    字数控制函数
+    /*
+    * 1,当name=ch-font的input单选框的值为value=2时，去掉‘编辑画面文字’按钮(id='font-btn')的隐藏，去掉文本框和确定按钮的'disabled'，以及清单中font-span标签的父标签的隐藏；
+    * 2，使得‘编辑画面文字’按钮(id='font-btn')隐藏，增加文本框和确定按钮的'disabled'，以及隐藏清单中font-span标签的父标签；
+
+    * */
+    function font_world() {
+        if($(':radio[name="ch-font"]:checked').val()==='2'){
+            $('#font-btn').removeClass('hidden');
+            $('#font-submit').removeAttr('disabled');
+            $('#font-context').removeAttr('disabled');
+            $('.font-span').parent().removeClass('hidden');//清单中的字数
+        }else {
+            $('#font-context').val('');
+            $('.font-span').html('');
+            $('#font-btn').addClass('hidden');
+            $('.font-span').parent().addClass('hidden');//清单中的字数
+            $('#font-context').attr('disabled','disabled');
+            $('#font-submit').attr('disabled','disabled');
+        }
+    }
+// 数量输入框控制函数
+/*
+*1，只能是数字
+* 2，不能低于下限min，不能高于上限max
+* 3，不能有小数
+*
+* */
+    function num_cn() {
+//        获得商品上限和下限
+        var max=$('#ch-num').attr('max');
+        var min=$('#ch-num').attr('min');
+//        1,定义正则
+        var rep=/^\d+$/;
+//        2，获得输入框val
+        var str=$('#ch-num').val();
+//        3，用正则进行匹配，看false还是true ********
+        var v=rep.test(str);
+        if(v){
+            if(parseInt(str)>=min){
+                if(parseInt(str)<=max){
+                    return true
+                }else{
+                    alert('高于该商品上限'+max);
+                    $('#ch-num').val(max);//置其为上限数量
+                }
+            }else {
+                alert('该商品'+min+'个起定');
+                $('#ch-num').val(min);//置其为下限数量
+            }
+        }else{
+            $('#ch-num').val('');//置其为下限数量
+        }
+    }
+
+
+</script>
+{% endblock js %}
+

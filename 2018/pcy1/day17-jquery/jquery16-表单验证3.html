@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form action="jquery2-多选反选取消.html" >
+    <div><input type="text"></div>
+    <div><input type="password"></div>
+    <div><input type="text"></div>
+    <div><input type="text"></div>
+    <div><input type="text"></div>
+    <div><input type="submit" value="提交"></div>
+
+</form>
+<script src="jquery-1.12.4.js"></script>
+<script>
+    $(':submit').click(function () {
+        flg=true;
+        $('.error').remove();//清除上次遗留的提示标签
+        $(this).parent().siblings().find('input[type="text"],input[type="password"]').each(function () {
+
+            if($(this).val().trim().length==0){
+                console.log(1);
+                //添加span提示标签
+                var tag=document.createElement('span');
+                //给标签添加样式error，为了在开始没填后来填了，再点击时清空该标签，再重新开始判断。
+                $(tag).addClass('error');
+                $(tag).text("必填");
+                $(this).after(tag);
+                flg=false;
+                return false;
+            }
+        });
+        return flg;
+    })
+
+
+</script>
+
+
+</body>
+</html>

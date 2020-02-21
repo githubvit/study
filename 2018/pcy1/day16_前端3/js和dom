@@ -1,0 +1,640 @@
+html
+    一大堆的标签：块级和行内。
+css
+    float（clear：both）
+    position
+    z-index
+    display
+    margin
+    padding
+    background
+    text-align
+    line-height
+    over-flow
+    opacity
+    :hover
+
+    补充：页面布局：区域划分
+            先分行，再分列。
+        主站布局：
+            上下一致，内容自动居中。
+            <!--<主站布局>-->
+                <div class="pg-header">
+                    <div style="width: 980px; margin: 0 auto">
+                        内容自动居中
+                    </div>
+                </div>
+                <div class="pg-bodyer">
+                    <div style="width: 980px; margin: 0 auto">
+                        内容自动居中
+                    </div>
+                </div>
+                <div class="pg-footer">
+                    <div style="width: 980px; margin: 0 auto">
+                        内容自动居中
+                    </div>
+                </div>
+        后台管理布局：
+        position:
+            fixed   --永远固定在窗口的某个位置
+            relative    --单独无意义
+            absolute    --第一次定位，可以在窗口指定位置，滚轮滚动时，不在了。。。;
+
+        1，pg-header 顶部固定栏，
+
+        2，pg-bodyer
+            左侧菜单栏left-menu
+            右侧内容栏right-content
+
+        3，在右侧内容栏right-content中添加overflow: auto;样式。
+            左侧菜单栏就不会随右侧窗口内容的增加而滚动，因为这样添加的滚动条是右侧内容栏的，跟其余区域无关。
+
+
+JavaScript
+一，函数：function func(arg){
+        return arg+1
+    }
+    var result=func(1)
+    console.log(result)
+   1， 普通函数：
+        function func(){}
+   2， 匿名函数：
+        function(){}由于没有函数名，一般用来做为参数：
+            setInterval('function(){}',5000)这样每隔5秒执行前面的匿名函数。
+   3， 自执行函数：(匿名函数)(实参)，创建函数并自动执行。
+        没名函数自动执行
+        (function(arg){console.log(arg)})(1)
+
+二，序列化
+    1，序列化JSON.stringify(obj)把对象转成字符串 列表本身不变 相当于py的dump
+        li=[11,22,33,44]
+        (4) [11, 22, 33, 44]
+
+        s=JSON.stringify(li) 把列表转成字符串
+        "[11,22,33,44]"
+        s
+        "[11,22,33,44]"
+
+        li列表本身不变
+        (4) [11, 22, 33, 44]
+
+    2，反序列化JSON.parse(str)把字符串转成对象 相当于py的load，这个最常用，
+        从数据库得到的是字符串，转成对象再应用。
+        newli=JSON.parse(s)
+        (4) [11, 22, 33, 44]
+
+
+三，转义 编解码
+    把中文转成特定的格式
+    decodeURI( )                   URl中未转义的字符
+    decodeURIComponent( )   URI组件中的未转义字符
+    encodeURI( )                   URI中的转义字符
+    encodeURIComponent( )   转义URI组件中的字符
+    escape( )                         对字符串转义
+    unescape( )                     给转义字符串解码
+    URIError                         由URl的编码和解码方法抛出
+
+    url="https://www.sogou.com/web?query=理解"
+    "https://www.sogou.com/web?query=理解"
+    url
+    "https://www.sogou.com/web?query=理解"
+
+    encodeURI(url)
+    "https://www.sogou.com/web?query=%E7%90%86%E8%A7%A3"
+
+    newurl=encodeURI(url)
+    "https://www.sogou.com/web?query=%E7%90%86%E8%A7%A3"
+
+    decodeURI(newurl)
+    "https://www.sogou.com/web?query=理解"
+
+    newurl1=encodeURIComponent(url)连url中的特殊字符都转义了
+    "https%3A%2F%2Fwww.sogou.com%2Fweb%3Fquery%3D%E7%90%86%E8%A7%A3"
+
+    客户端（cookie）=》 服务器端
+    从服务器中取数据，先要将对象转成字符串JSON，然后将字符串转义后，保存在cookie中。
+
+四，eval、时间
+    1，eval
+        先来看python
+            val i=eval(表达式) 比如'8*8' '1+1'之类的数学表达式，可以得到结果
+                   exec(执行代码) 只执行，不返回结果。
+
+        JavaScript中的eval是Python中eval和exec的合集，既可以编译代码也可以获取返回值。
+
+    2，时间
+        Date 类
+        var d= new Date() d 就拿到了当前时间
+        var d= new Date()
+        undefined
+        d
+        Tue Dec 19 2017 10:37:07 GMT+0800 (中国标准时间)
+        d.getHours()
+        10
+
+            d.getxxx() 用来获取
+            d.setxxx() 用来设置
+
+五，作用域
+    ============1,以函数为作用域。===============
+
+    其他语言：以代码块{}为作用域
+            public void Func(){
+                if(1==1){
+                    string name='Java';
+                }
+                console.writeline(name);
+            }
+            Func() 报错，name只在{}里作用，console.writeline(name);移动到里面的{}去，就可以。
+
+    python：以函数做为作用域
+            def func():
+                if 1==1:
+                    name='alex'
+                print name
+
+            func() 不报错，可以执行，python的作用域是以函数为作用域。
+
+    JavaScript：默认以函数为作用域。
+            function func(){
+                if(1==1){
+                    var name='alex'
+                }
+                console.log(name)
+            }
+            func() 不会报错，可以执行。
+
+    ============2,函数的作用域在函数未执行之前，已经创建===============
+    function func(){
+                if(1==1){
+                    var name='alex'
+                }
+                console.log(name)
+            }
+
+    作用域示例：
+        var myTags=document.getElementsByTagName('tr');//获取行
+        for(var i=0;i<myTags.length;i++){//循环行
+            //  绑定事件onmouseover：当鼠标移到表格哪行上就高亮
+            myTags[i].onmouseover=function() {//事件绑定用匿名函数
+                console.log(i)
+                //i=0,i=1,i=2 在执行之前，i已经等于3了。
+                this.style.background='red';
+                // 这里的this指的是谁触发就是谁。
+                //this不能写成myTags[i]，因为当触发的时候，i已经=myTags.length;不存在myTags[i]这个对象了。
+            };
+
+        }
+
+    ============3,函数的作用域存在作用域链，并且也是在未执行之前就创建了===============
+
+    情况1：在chrome的调试器里写函数回车换行时用shift+Enter,不然直接就执行。
+        xo='alex'
+        function func(){
+            var xo='eric'
+            function inner(){
+                var xo='tony';
+                console.log(xo)
+            }
+            inner()
+        }
+        func() 输出tony
+    情况2：
+        xo='alex'
+        function func(){
+            var xo='eric'
+            function inner(){
+                console.log(xo)
+            }
+            return inner
+        }
+        var ret=func()
+        ret() 输出eric
+
+    情况3：
+        xo='alex'
+        function func(){
+            var xo='eric'
+            function inner(){
+                console.log(xo)
+            }
+            var xo='tony'
+            return inner
+        }
+        var ret=func()
+        ret() 输出tony,调用的时候，外层的xo已经被改成了tony。
+
+
+
+
+    ============4,函数内局部变量 声明提前===============
+    情况1：
+        function func(){
+            console.log(xxoo)
+        }
+        func()程序报错
+
+    情况2：
+        function func(){
+            console.log(xxoo)
+            var xxoo='alex'
+        }
+        func()//程序输出undefined 这个要用词法分析，函数声明的形参，形成AO的属性，默认值是undefined。
+
+六，JavaScript之词法分析
+    1， JavaScript代码自上而下执行，但是在js代码执行前，会首先进行词法分析，
+        所以事实上，js运行要分为词法分析和执行两个阶段
+
+    2， 词法分析主要分为3步：
+        第1步：分析形参
+        第2步：分析局部变量声明
+        第3步：分析函数声明
+
+    3，  具体步骤：
+        0：在函数执行的一瞬间，生产 Active Object（活动对象），下面简称AO
+        1: 分析形参
+            1.1 函数声明的形参，形成AO的属性，默认值是undefined,
+            1.2 接收形参，给刚刚形成AO的属性的形参赋值
+
+        2：分析var声明变量！如 var age;（变量的值是在运行时期决定）
+            2.1 如果AO上还没有age属性，则给AO添加age属性，默认值是undefined
+            2.2 如果AO上已经有age属性，则不做任何操作。
+
+        3：分析函数声明！如 function foot(){}
+            3.1 如果AO上没有foot属性，则把函数赋给AO.foot属性
+            3.2 如果AO上有foot属性，则会直接覆盖，把函数赋给AO.foot属性-- 优先级最高
+
+    4，  代码演示与分析：
+        function a(b){
+            alert(b);
+            function b(){
+                alert(b);
+            }
+            b();
+        }
+        a(1);
+
+        这是个常见的JavaScript面试题，如果不懂JavaScript的词法分析，根本看不懂，
+        下面就按照JavaScript的词法步骤进行分析，前面说过JavaScript自上而下执行，
+        但是先进行词法分析后执行代码
+
+        分析过程：
+        0、形成活动对象AO={}
+        1、分析形参，--> AO={b:undefined}; 分析传参，--> AO={b:1}
+        2、分析变量声明var，没有
+        3、分析函数声明，AO.b=function(){alert(b);},执行覆盖操作
+
+        执行过程：
+        alert(b);//function
+        b(); // 执行function b...alert(b),在函数b的作用域内部找不到b,
+        根据作用域链原理往外层寻找，找到b就是函数自己，打印出function ...
+
+
+
+七，JavaScript面向对象
+    1,创建类 关键字 this ，this代指对象，就相当于py中的self。
+        function Foo(n){
+            this.name=n;
+            this.sayName=function(){
+                console.log(this.name)
+            }
+        }
+    2,实例化Foo(), 关键字 new ，创建该类对象obj
+        var obj1=new Foo('alex');
+        obj1.name就是obj1的静态属性，值为alex
+        obj1.sayName()是obj1的方法
+
+    3,这样定义，那么:
+        var obj2=new Foo('eric');
+        obj2的内存块中也会有name属性和sayName方法
+        我们知道，name会不同应该在对象的内存块中，但这样定义方法就划不来了，这就大量重复定义了。
+        python中类的方法在类内存中，不是在对象内存中的。
+
+
+        解决：引入原型
+            function Foo(){
+                this.name=n
+            }
+            #Foo的原型：这个原型像字典key='sayName',value是匿名函数
+            Foo.prototype={
+                'sayName':function(){
+                    console.log(this.name)
+                }
+            }
+
+
+    PS.js运算符
+
+            是否包含指定字符： ~
+                ~"str1".indexOf("str2")
+
+                str1 被查找的字符串
+                str2 查找的字符串
+                如果 str1 不含有 str2 ，则返回数字 0 。
+
+                例：
+
+                var str1='abc';
+                var str2='a';
+                if(~str1.indexOf(str2)){
+                  console.log('有'+str2) //有a
+                }else{
+                  console.log('无'+str2)
+                }
+
+            取整： |
+                num | 0
+
+                num 整数
+
+                例：
+
+                1.3 | 0 //1
+
+            取半： >>
+                num >> 1
+
+                num 整数
+                例：求 50 的 1/2
+
+                50 >> 1 //25
+                有除号 / 干嘛不用呢？多好呀： 50/2 //25
+
+
+            成长值评级： ||
+                需求1：
+                成长值为5是1星；
+                成长值为10是2星；
+                成长值为12是3星；
+                成长值为15是4星；
+                其他都是0星。
+
+                ({'5':1,'10':2,'12':3,'15':4}[val] || 0);
+
+                val 成长值。
+
+
+            判断奇偶： &
+                num & 1
+
+                num 整数
+
+                例：
+
+                var num=3;
+                if (num & 1) {
+                    console.log("num是奇数"); //num是奇数
+                } else {
+                    console.log("num是偶数");
+                }
+
+            交换两个数字的值： ^=
+                使用位运行符：
+
+                var num1 = 1, num2 = 2;
+                num1 ^= num2;
+                num2 ^= num1;
+                num1 ^= num2;
+                console.log(num1,num2); //2 1
+                使用数组：
+
+                var num1 = 1, num2 = 2;
+                num1 = [num2, num2 = num1][0];
+                console.log(num1,num2); //2 1
+
+            2的n次方： << 和 **
+                1 << n-1
+                使用位运行符：
+
+                2的n次方
+                例：2的3次方：1<<3 //8
+
+                使用幂运行符：
+
+                个人觉得这个不如直接使用 幂 的方式好。
+
+            x的y次方： x**y
+
+                例：2的3次方：2**3 //8
+
+                方法比较：
+
+                使用 << 的方式可以支持负数，** 需要用括号否则出错。
+                使用 ** 比较直观，没研究过 << 方法的任意数的任意次方的规律。
+
+                1<<3 //8
+                2**3 //8
+                -1<<3 //-8
+                -2**3 // 报错
+                -(2**3) //-8
+                3<<2 //12 错误
+                3**2 //9 正确
+
+            是否是指定字符串开头： ! 和 ^
+                !str1.indexOf("str2")
+
+                例：
+
+                var str1='abc';
+                var str2='a';
+                if(!str1.indexOf(str2)){
+                  console.log('是开头')
+                }else{
+                  console.log('不是开头')
+                }
+                使用正则方式
+
+                /^a/.test('abc') //a开头，true
+                /c$/.test('abc') //c结尾，true
+
+            字符串转数字： +
+                +str
+
+                例：
+
+                var str='123';
+                typeof(str) //string
+                typeof(+str) //number
+                回目录
+                转为 Boolean 值： !!
+                !!obj
+
+                例：
+
+                !!'text' //true
+
+
+
+
+
+DOM
+    1，找：直接找，间接找
+
+    2，操作
+一,文本内容操作
+    1,innerText：仅仅是文本
+    2,innerHTML：全部内容
+
+        v.innerText
+        "老男孩 谷歌"
+        v.innerHTML
+        "
+                <a>老男孩</a>
+                <a>谷歌</a>
+            "
+        v.innerHTML='<a href="http://www.oldboyedu.com">老男孩</a>'
+        "<a href="http://www.oldboyedu.com">老男孩</a>"
+        v.innerHTML
+        "<a href="http://www.oldboyedu.com">老男孩</a>"
+
+    3,value
+        input       value获取当前标签中的值
+        select      获取选中的value值（selectedIndex获取select多选的下标）
+        textarea    value获取当前标签中的值
+        搜索框的示例
+二，样式操作
+    1，大粒度
+        className 以字符串形式获取样式和添加样式
+        classList 以列表形式获取样式、添加和删除样式（add、remove）
+    2，小粒度style.xxx
+        obj.style.fontSize='16px'
+三，属性操作
+    1，设置属性
+        obj.setAttribute('key','value')
+            obj.setAttribute('XXX','alex')
+    2，获取属性
+        obj.getAttribute('key')获取单个属性
+            obj=document.getElementById('i1')
+            <input id=​"i1" onfocus=​"Focus()​" onblur=​"Blur()​" type=​"text" value=​"请输入关键字">​
+            obj.getAttribute('type')
+            "text"
+        obj.attribute获取所有属性
+            obj.attributes
+            NamedNodeMap {0: id, 1: onfocus, 2: onblur, 3: type, 4: value, 5: xxx, length: 6}
+    3，删除属性
+        obj.removeAttribute('key')
+
+四，创建标签并添加到HTML中（dom3-添加标签）
+    1，字符串形式
+        function addEle1() {//方式1
+            //创建一个标签
+            var tag='<p><input type="text"/></p>';
+
+            //将标签添加到i1里面insertAdjacentHTML('位置',标签) 标签以字符串的形式传入
+            //注意：第一个参数只能是'beforeBegin'、 'afterBegin'、 'beforeEnd'、 'afterEnd'
+            document.getElementById('i1').insertAdjacentHTML('beforeEnd',tag)
+
+        }
+    2，对象的方式
+        function addEle2() {//方式2
+            //创建一个input标签
+            var tag=document.createElement('input');
+            tag.setAttribute('type','text');//设置属性
+            tag.style.fontSize='16px';//添加样式
+            tag.style.color='red';
+            //创建一个p标签
+            var p=document.createElement('p')
+            //将input放到p标签里面
+            p.appendChild(tag)
+
+            //将标签添加到i1里面appendChild(标签) 标签以对象形式传入
+            document.getElementById('i1').appendChild(p)
+        }
+
+五，提交表单
+
+    任何标签通过dom都可以提交表单。
+
+    <form id="i1" action="http://www.163.com">
+        <input type="text"/>
+        <input type="submit" value="提交"/>
+        <a onclick="submitForm()">提交吧</a>
+    </form>
+    <script>
+        function submitForm() {
+            document.getElementById('i1').submit()//提交表单
+            var v=confirm("真的要删除吗");//确认框
+            console.log(v)//true和false
+        }
+    </script>
+
+六，其他操作
+    console.log()         浏览器调试台输出 相当于print
+    alert('提示信息')       弹窗
+    confirm('提示信息')     确认框 有两个值true和false
+
+    location.href           获取当前url
+    location.href='newurl'  重定向到新的url，跳转
+    location.reload()       页面刷新
+
+    // 定时器
+    setInterval                 多次定时器
+    clearInterval               清除多次定时器
+        var obj=setInterval(function(){
+                ...
+        },5000)
+        clearInterval(obj)
+    setTimeout                  单次定时器，只执行1次
+    clearTimeout                清除单次定时器
+    （dom5-已删除5秒）
+
+七，事件
+    1，事件类型
+        onclick点击、
+        onfocus--焦点（table键选中或鼠标选中）、onblur失焦、
+        onmouseover鼠标放上去、onmouseout离开
+
+
+                属性	    此事件发生在何时...
+
+                onabort	图像的加载被中断。
+                onblur	元素失去焦点。
+                onchange	域的内容被改变。
+                onclick	当用户点击某个对象时调用的事件句柄。
+                ondblclick	当用户双击某个对象时调用的事件句柄。
+                onerror	在加载文档或图像时发生错误。
+                onfocus	元素获得焦点。
+                onkeydown	某个键盘按键被按下。
+                onkeypress	某个键盘按键被按下并松开。
+                onkeyup	某个键盘按键被松开。
+                onload	一张页面或一幅图像完成加载。
+                onmousedown	鼠标按钮被按下。
+                onmousemove	鼠标被移动。
+                onmouseout	鼠标从某元素移开。
+                onmouseover	鼠标移到某元素之上。
+                onmouseup	鼠标按键被松开。
+                onreset	重置按钮被点击。
+                onresize	窗口或框架被重新调整大小。
+                onselect	文本被选中。
+                onsubmit	确认按钮被点击。
+                onunload	用户退出页面。
+
+
+
+    2，事件绑定
+        2.1 直接标签绑定 把this这个对象作为self的实参传进去，
+            <input  type="button"  onclick="func(this)"/>
+            function func(self){
+             //self 当前点击的标签
+            }
+
+
+        2.2 在JavaScript用dom实现绑定：
+            先获取DOM对象obj，然后进行绑定
+
+              obj.事件=匿名函数 关键就是this，这里必须用this，不要用obj。
+
+                obj.onmouseover=function () {
+                    this.style.background='red';//鼠标在上的时候，背景变成红色
+                }
+                obj.onmouseout=function () {
+                    this.style.background='';//鼠标离开的时候，背景为空
+                }
+        2.3 dom2绑定，一个事件两个输出;
+
+
+
+
+
+
+

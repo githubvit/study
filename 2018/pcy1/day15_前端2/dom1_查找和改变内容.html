@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+ <div id="i1">我是’i1‘</div>
+ <a>asdf</a><a>afdasf</a><a>afdf</a>
+
+<input type="button" onclick="f1();" value="改变">
+
+<script>
+    function f1() {
+        document.getElementById('i1').innerText='改变i1'
+        var ali=document.getElementsByTagName('a')//得到a标签的列表
+        for(var i in ali){
+            ali[i].innerText=777
+        }
+    }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,53 @@
+# -*- coding: utf-8 -*-
+from __future__ import unicode_literals
+
+from django.db import models
+
+# Create your models here.
+
+class UserInfo(models.Model):
+    uname=models.CharField(max_length=64,verbose_name="用户名")
+    upwd=models.CharField(max_length=64,verbose_name='密码')
+    uemail=models.EmailField(max_length=64,verbose_name="邮箱")
+    uphon=models.CharField(max_length=16,verbose_name="电话",default='')#不是必须填的,电话不是数值，是数字的集合，是字符串
+    uctime=models.DateTimeField(auto_now_add=True,verbose_name="注册时间")#创建时间
+    uuptime=models.DateTimeField(auto_now=True)#修改时间
+    is_Delete=models.BooleanField(default=False,verbose_name='删除该用户')
+
+    def __unicode__(self):
+        return self.uname
+    class Meta:
+        verbose_name="用户"
+        verbose_name_plural="用户表"
+
+
+class LogisticsInfo(models.Model):
+    lname=models.CharField(max_length=16,verbose_name="收货人")
+    lphon=models.CharField(max_length=11,verbose_name="电话")
+    larea=models.CharField(max_length=32,verbose_name="所在地区", default='北京市海淀区')
+    laddress=models.CharField(max_length=128,verbose_name="详细地址")
+    lyoubian=models.CharField(max_length=6,verbose_name="邮编",default='')
+    lctime = models.DateTimeField(auto_now_add=True,verbose_name="建立时间")
+    lutime = models.DateTimeField(auto_now=True,verbose_name="更新时间")
+    luser=models.ForeignKey(UserInfo,verbose_name="用户",related_name='lg')
+    is_Delete = models.BooleanField(default=False, verbose_name='删除该地址')
+    is_Default = models.BooleanField(default=False, verbose_name='默认')
+    def __unicode__(self):
+        return self.laddress
+    class Meta:
+        verbose_name='地址'#改对象名
+        verbose_name_plural="收货地址表"#改表名
+
+# 微信扫码登录用户
+class wxuserinfo(models.Model):
+    wxuin=models.CharField(max_length=16,verbose_name='标识')
+    wxnickname=models.CharField(max_length=32,verbose_name='昵称')
+    wxinfo=models.TextField(max_length=1280,verbose_name='用户信息')
+    uctime = models.DateTimeField(auto_now_add=True, verbose_name="注册时间")  # 创建时间
+    uuptime = models.DateTimeField(auto_now=True)  # 修改时间
+    wxuser=models.ForeignKey(UserInfo,verbose_name='用户id')
+    def __unicode__(self):
+        return self.wxnickname
+    class Meta:
+        verbose_name='微信用户'#改对象名
+        verbose_name_plural="微信用户表"#改表名

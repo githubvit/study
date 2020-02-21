@@ -1,0 +1,441 @@
+{% extends 'ch_goods/dz-base.html' %}
+{% block dz-css %}
+<style>
+
+/*调整左边作者画面距离上部的外形画的间距*/
+    .fix-img2{
+        margin-top: 50px;
+    }
+
+/*调整请选择器形radio的 间距和图片大小*/
+    .radio-inline {
+        padding-left: 0;
+        margin-bottom: 5px;
+    }
+    .radio-inline img{
+        width: 100%;
+    }
+
+/*隐藏瓷画器型的input单选点*/
+    .chqx input{
+        display: none;
+    }
+
+    /*颜色的input radio对齐*/
+    .ch-color .radio-inline{
+        vertical-align: 0;
+    }
+
+    /*数量框的css*/
+    .ch-num{
+        display: inline-table;
+        vertical-align: middle;
+        height: 100%;
+        padding: 5px;
+        background-color: #f5f8fd;
+        text-align: center;
+    }
+
+    /*数量加减的css*/
+    .num-jj{
+        line-height: 1;
+        padding: 6px;
+    }
+
+    /*文字编辑框的不可编辑时的背景*/
+    .form-control[disabled]{
+        background-color: #f9fbfd;
+        opacity: 0.8;
+    }
+
+</style>
+{% endblock dz-css%}
+
+{% block tupian %}
+<img class="img-responsive fix-img1" style="margin-top: 35px" src="/static/images/1.jpg">
+<img class="img-responsive fix-img2" src="/static/images/1.jpg">
+{% endblock tupian%}
+
+{% block qixin %}
+<div class="item active">
+    <div class="row chqx">
+        <div class="col-xs-4" >
+            <input type="radio" name="ch-qx" id="chqx1" value="1" tb-name="长方形瓷板">
+            <label  class="radio-inline" for="chqx1">
+                <img class="img-responsive img-thumbnail" src="/static/images/1.jpg"  >
+                <span style="display: inline-block">长方形瓷板</span>
+            </label>
+        </div>
+        <div class="col-xs-4">
+            <input type="radio" name="ch-qx" id="ch-qx2" value="2" tb-name="圆形瓷板">
+            <label  class="radio-inline" for="ch-qx2">
+                <img class="img-responsive img-thumbnail" src="/static/images/3.jpg" >
+                <span style="display: inline-block">圆形瓷板</span>
+            </label>
+        </div>
+        <div class="col-xs-4">
+            <input type="radio" name="ch-qx" id="ch-qx3" value="3" tb-name="扇形瓷板">
+            <label  class="radio-inline" for="ch-qx3">
+                <img class="img-responsive img-thumbnail" src="/static/images/2.jpg" >
+                <span style="display: inline-block">扇形瓷板</span>
+            </label>
+        </div>
+    </div>
+</div>
+<div class="item ">
+    <div class="row chqx">
+        <div class="col-xs-4">
+            <input type="radio" name="ch-qx" id="ch-qx4" value="4" tb-name="椭圆形瓷板">
+            <label  class="radio-inline" for="ch-qx4">
+                <img class="img-responsive img-thumbnail" src="/static/images/4.jpg" >
+                <span style="display: inline-block">椭圆形瓷板</span>
+            </label>
+        </div>
+        <div class="col-xs-4">
+            <input type="radio" name="ch-qx" id="ch-qx5" value="5" tb-name="心形瓷板">
+            <label  class="radio-inline" for="ch-qx5">
+                <img class="img-responsive img-thumbnail" src="/static/images/5.jpg" >
+                <span style="display: inline-block">心形瓷板</span>
+            </label>
+        </div>
+        <div class="col-xs-4">
+            <input type="radio" name="ch-qx" id="ch-qx6" value="6" tb-name="条形屏风">
+            <label  class="radio-inline" for="ch-qx6">
+                <img class="img-responsive img-thumbnail" src="/static/images/1.jpg" >
+                <span style="display: inline-block">条形屏风</span>
+            </label>
+        </div>
+    </div>
+</div>
+<div class="item ">
+    <div class="row chqx">
+        <div class="col-xs-4">
+            <input type="radio" name="ch-qx" id="ch-qx7" value="7" tb-name="横幅中堂">
+            <label  class="radio-inline" for="ch-qx7">
+                <img class="img-responsive img-thumbnail" src="/static/images/2.jpg" >
+                <span style="display: inline-block">横幅中堂</span>
+            </label>
+        </div>
+        <div class="col-xs-4">
+            <input type="radio" name="ch-qx" id="ch-qx8" value="8" tb-name="其他瓷板1">
+            <label  class="radio-inline" for="ch-qx8">
+                <img class="img-responsive img-thumbnail" src="/static/images/3.jpg" >
+                <span style="display: inline-block">其他瓷板1</span>
+            </label>
+        </div>
+        <div class="col-xs-4">
+            <input type="radio" name="ch-qx" id="ch-qx9" value="9" tb-name="瓷瓶">
+            <label  class="radio-inline" for="ch-qx9">
+                <img class="img-responsive img-thumbnail" src="/static/images/4.jpg" >
+                <span style="display: inline-block">瓷瓶</span>
+            </label>
+        </div>
+    </div>
+</div>
+{% endblock qixin %}
+
+{% block dzpannel-cont %}
+<!--尺寸和颜色选择-->
+<div class="row" style="margin-top: 12px">
+    <!--尺寸选择-->
+    <div class="col-xs-4">
+        <div class="chqx-size">
+            <select name="size" class="form-control " id="size-st">
+                <option value tb-name="">请选择尺寸</option>
+            </select>
+        </div>
+    </div>
+    <!--颜色选择-->
+    <span style="margin-left: 28px;font-size: 18px">请选择颜色</span>
+    <div class="ch-color" style="display: inline-block;margin-left: 15px;font-size: 16px">
+        <input id="ch-color1" type="radio" name="ch-color" value="1" tb-name="黑白">
+        <label class="radio-inline" for="ch-color1" style="margin-right: 22px">黑白</label>
+        <input id="ch-color2" type="radio" name="ch-color" value="2" tb-name="彩色">
+        <label class="radio-inline" for="ch-color2">彩色</label>
+    </div>
+</div>
+ <!--画面中是否有字-->
+<div class="font1" style="margin-top: 16px;font-size: 18px">
+    <span >是否有文字</span>
+    <div class="ch-font" style="display: inline-block;margin-left: 15px; font-size: 16px">
+        <input id="ch-font1" type="radio" name="ch-font" value="1" tb-name="无" checked="checked">
+        <label class="radio-inline" for="ch-font1" style="margin-right: 22px">无</label>
+        <input id="ch-font2" type="radio" name="ch-font" value="2" tb-name="有">
+        <label class="radio-inline" for="ch-font2">有</label>
+        <button id='font-btn' class="btn btn-default btn-sm" style="line-height: 1;margin-left: 15px" >编辑画面文字</button>
+    </div>
+</div>
+<div id="font-edit"  style="width:100%; margin-top: 10px">
+    <div class="panel panel-default">
+        <div class="panel-heading" style="padding: 5px 15px;">
+            <span class="panel-title" style="font-size: 11px">编辑画面文字</span>
+            <button id='font-submit' class="btn btn-default btn-xs pull-right" disabled="disabled">确定</button>
+        </div>
+        <div class="panel-body" style="padding: 0;" >
+            <textarea id="font-context"  class="form-control" style="width: 100%;border-top-left-radius: 0;border-top-right-radius: 0;  " rows="3" placeholder={{ placeholder }} maxlength="100" disabled="disabled"></textarea>
+
+        </div>
+    </div>
+</div>
+{% endblock dzpannel-cont %}
+
+{% block dz-jh %}
+    <div>
+    <span style="padding-left: 15px;font-size: 15px">您上传图片-支付定金之后，我们会在3天内把图样放在您的个人中心，您对该图样确认后，我们会在1周内发货。</span>
+</div>
+{% endblock dz-jh %}
+
+{% block qidan %}
+<div class="panel-body" style="height: 319px;padding-left: 9px;padding-right: 9px;padding-top: 9px">
+    <!--依据-->
+    <div class="price1" style="margin-top: 0;line-height: 1.3;">
+        <p>工艺：<span>{{ dzgy }}</span></p>
+        <p>器型：<span class="chqx-span"></span></p>
+        <p>尺寸：<span class="size-span"></span></p>
+        <p>颜色：<span class="chys-span"></span></p>
+        {% block jd-item %}{% endblock jd-item %}
+
+    </div>
+
+    <!--数量-->
+    <div class="row" style="margin-left:0;margin-bottom: 10px">
+        <span>数量：</span>
+        <div class="input-group" style="display: inline-block">
+            <span class="input-group-btn" style="display: inline-table">
+                <button id="num-sub" class="btn btn-default num-jj" type="button" style="width: 22px;">-</button>
+            </span>
+            <input id="ch-num" type="text" class="form-control ch-num" style="width: 53px;float: none;margin: -4px;color: red " placeholder="数量" value={{ minm }} max={{ maxm }} min={{ minm }}>
+            <span class="input-group-btn" style="display: inline-table">
+                <button id="num-add" class="btn btn-default num-jj" type="button" style="width: 22px;">+</button>
+            </span>
+        </div>
+    </div>
+
+    <!--价格-->
+    <div style="line-height: 1">
+        <p style="color: red;">单价：<span style="padding-left: 15px">¥</span><span id="ch-djia" style="font-size: 18px"></span></p>
+        <p style="color: red">定金：<span style="padding-left: 15px">¥</span><span id="ch-djin" style="font-size: 18px"></span></p>
+        <p class="hidden" style="color: red">
+            外框：<span >¥</span>
+            <span id="wk-dj" style="font-size: 18px;text-decoration-line: underline;"></span>
+            <a id="ycwk" style="cursor: pointer;margin-left: 5px; color: red;" data-toggle="tooltip" title="移除"><i class="icon-remove-circle"></i></a>
+        </p>
+        <p class="hidden" style="color: red">小计：<span style="padding-left: 15px">¥</span><span id="ch-xj" style="font-size: 18px"></span></p>
+        <p style="color: red">总价：<span>¥</span><span id="ch-zj" style="font-size: 18px"></span></p>
+    </div>
+</div>
+{% endblock qidan %}
+
+{% block dz-js %}
+{% block dz-dz-js %}
+{% endblock dz-dz-js %}
+<script>
+    $(function () {
+        // 字函数
+        font_world();
+        // 数量控制函数
+        num_cn();
+        // 尺寸控制
+        $('#size-st').change(function () {
+            // 加载尺寸函数
+            chqx_size();
+            //加载外框函数，当改变尺寸时，外框跟着变，而不是简单清空
+            kxwk();
+            //加入清单
+            jrqd();
+            price ();
+        });
+
+
+        // 数量控制
+        //数量输入框
+        $('#ch-num').on('input',function () {
+            //加载数量输入框控制函数
+            num_cn();
+            price();
+        });
+        //数量加按钮
+        $('#num-add').click(function () {
+            console.log('+');
+            //取数量输入框的值
+            var num_v=$('#ch-num').val();
+            //如果v是空的置其为1
+            if(num_v){
+                console.log('num_v:'+num_v);
+            }else{
+                var num_v=0;
+            }
+            num_v=parseInt(num_v)+1;
+            $('#ch-num').val(num_v);
+            //加载数量输入框控制函数，保证输入的值为合理的
+            num_cn();
+             price();
+            console.log('输入框+'+$('#ch-num').val())
+        });
+        //数量减按钮
+        $('#num-sub').click(function () {
+            console.log('-');
+            //取数量输入框的值
+            var num_v=$('#ch-num').val();
+            //如果v是空的置其为2
+            if(num_v){
+                console.log('num_v:'+num_v);
+            }else{
+                var num_v=2;
+            }
+            num_v=parseInt(num_v)-1;
+            $('#ch-num').val(num_v);
+            //加载数量输入框控制函数，保证输入的值为合理的
+            num_cn();
+             price();
+            console.log('输入框-'+$('#ch-num').val())
+        });
+        //在清单移除外框
+        $('#ycwk').click(function () {
+            //置外框的span为空
+             $('#wk-dj').text('');
+             //将#wk-dj的父标签隐藏
+            $('#wk-dj').parent().addClass('hidden');
+            // 置小计的sapn为空
+            $('#ch-xj').text('');
+            //将小计的父标签解除隐藏
+            $('#ch-xj').parent().addClass('hidden');
+            price();
+        })
+    });
+
+
+    //尺寸函数 控制外框
+    function chqx_size() {
+        console.log('chqx_size');
+       //获取尺寸选择下拉框是否已选，是不行的，因为第一项的值即value，是存在的，
+        // val=“”；$('select[name="size"] option:selected').val().length为0
+        var size_val=$('select[name="size"] option:selected').val();
+        var size_len=$('select[name="size"] option:selected').val().length;
+        //如果有长度，说明select下拉框有被选中
+        if(size_len){
+            //如果不为0，那么获取尺寸下拉框选择的tb-name属性的值
+            var size_tb=$('select[name="size"] option:selected').attr('tb-name');
+            //将尺寸下拉框选择的tb-name属性的值传给所有尺寸的span标签
+            $('.size-span').html(size_tb);
+            //把该尺寸下拉框选中的尺寸id通过ajax传给后台，获取后台发过来的匹配数据列表id以及name
+
+        //对于可选外框的控制，1，根据选中器型尺寸，匹配外框的尺寸价格 (外框种类，匹配尺寸，该类外框单位价格)
+            //构造外框数据结构{外框种类id：该类外框单位价格}
+            var wk_tp={0:10,1:11,2:12,3:13,4:14,5:15,6:16,7:17,8:18,9:19};
+            //获取可选外框种类列表--在value,获得列表
+            var wk_li=$('#kxwk-div :input[name="kxwk"]');//[2].getAttribute('tb-name')
+            //先清除原来的价格标签
+            $('.kxwk-price').remove();
+
+            //再创建新的价格标签
+            for(p=0;p<wk_li.length;p++){
+                //从外框种类id列表中获得每一个外框种类的具体id,用dom的getAttribute('属性')
+                var wk_id=wk_li[p].getAttribute('value');
+                //获得该外框id单位价格
+                var wk_dp=wk_tp[wk_id];
+                //求该匹配尺寸下该外框的价格
+                var wk_price=size_val*wk_dp;
+                //保留两位小数
+                var wk_price=wk_price.toFixed(2);
+                //创建字符串标签
+                var wk_tmp='<span style="display: inline-block; color: red" class="pull-right kxwk-price" >¥'+wk_price+'</span>';
+                //插入标签,1，先把dom转成jquery，2，通过next 找到input下的lable标签，3，再通过[0]转回dom，4，最后用insertAdjacentHTML()插入
+                $(wk_li[p]).next()[0].insertAdjacentHTML('beforeEnd',wk_tmp);
+            }
+
+
+        }else{
+            //将尺寸的span标签置空
+            $('.size-span').html('');
+
+            //删除可选外框的价格标签，并清空kxwk-hide里的内容
+            $('.kxwk-price').remove();
+            $('.kxwk-span').html('');
+            $('.kxwk-hide').addClass('hidden');
+            //置可选外框的input为false
+            $(':radio[name="kxwk"]:checked').prop('checked',false);
+        }
+    }
+
+    //加入清单函数
+    function jrqd() {
+        var hdis=$('#kxwk-qd')[0].hasAttribute('disabled');
+        //清除原清单中外框单价
+        $('#wk-dj').text('');
+        if(hdis){
+            //将#wk-dj的父标签隐藏
+            $('#wk-dj').parent().addClass('hidden');
+            //将小计的父标签隐藏
+            $('#ch-xj').parent().addClass('hidden');
+        }else{
+            //清除原清单中外框单价
+            $('#wk-dj').text('');
+            //获取外框价格
+            var kxwk_price=$(':radio[name="kxwk"]:checked').next().children('.kxwk-price').text();
+            //将外框单价放入 #wk-dj中
+            $('#wk-dj').text(kxwk_price.substring(1));//substring(start,stop),截取字符串，去掉¥符号
+            //将#wk-dj的父标签解除隐藏
+            $('#wk-dj').parent().removeClass('hidden');
+            //将总价的父标签解除隐藏
+            $('#ch-xj').parent().removeClass('hidden');
+        }
+    }
+
+//    字数控制函数
+    /*
+    * 1,当name=ch-font的input单选框的值为value=2时，去掉‘编辑画面文字’按钮(id='font-btn')的隐藏，去掉文本框和确定按钮的'disabled'，以及清单中font-span标签的父标签的隐藏；
+    * 2，使得‘编辑画面文字’按钮(id='font-btn')隐藏，增加文本框和确定按钮的'disabled'，以及隐藏清单中font-span标签的父标签；
+
+    * */
+    function font_world() {
+        if($(':radio[name="ch-font"]:checked').val()==='2'){
+            $('#font-btn').removeClass('hidden');
+            $('#font-submit').removeAttr('disabled');
+            $('#font-context').removeAttr('disabled');
+            $('.font-span').parent().removeClass('hidden');//清单中的字数
+        }else {
+            $('#font-context').val('');
+            $('.font-span').html('');
+            $('#font-btn').addClass('hidden');
+            $('.font-span').parent().addClass('hidden');//清单中的字数
+            $('#font-context').attr('disabled','disabled');
+            $('#font-submit').attr('disabled','disabled');
+        }
+    }
+    // 数量输入框控制函数
+    /*
+    *1，只能是数字
+    * 2，不能低于下限min，不能高于上限max
+    * 3，不能有小数
+    *
+    * */
+    function num_cn() {
+//        获得商品上限和下限
+        var max=$('#ch-num').attr('max');
+        var min=$('#ch-num').attr('min');
+//        1,定义正则 必须是数字
+        var rep=/^\d+$/;
+//        2，获得输入框val
+        var str=$('#ch-num').val();
+//        3，用正则进行匹配，看false还是true ********
+        var v=rep.test(str);
+        if(v){
+            if(parseInt(str)>=1){
+                if(parseInt(str)<=max){
+                    return true
+                }else{
+                    alert('高于该商品上限'+max);
+                    $('#ch-num').val(max);//置其为上限数量
+                }
+            }else {
+                alert('该商品'+min+'个起定');
+                $('#ch-num').val(min);//置其为下限数量
+            }
+        }else{
+            $('#ch-num').val('');//置其为下限数量
+        }
+    }
+</script>
+{% endblock dz-js %}
+

@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .hidden{
+            display: none;
+        }
+        .c1{
+            z-index: 9;
+            position: fixed;
+            top:0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #dddddd;
+            opacity: 0.6;
+        }
+        .c2{
+            z-index: 10;
+            position: fixed;
+            height: 400px;
+            width: 500px;
+            left: 50%;
+            top: 50%;
+            margin-top: -200px;
+            margin-left: -250px;
+            background-color: white;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <input type="button" onclick="showModel();" value="添加"/>
+        <input type="button" onclick="ChooseAll();" value="全选"/>
+        <input type="button" onclick="CancelAll() ;" value="取消"/>
+        <input type="button" onclick="Reverse();" value="反选"/>
+        <table>
+            <thead>
+                <tr>
+                    <th>选择</th>
+                    <th>主机名</th>
+                    <th>端口</th>
+                </tr>
+            </thead>
+            <tbody id="tbd">
+                <tr>
+                    <td><input type="checkbox"/></td>
+                    <td>1.1.1.1</td>
+                    <td>91</td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox"/></td>
+                    <td>1.1.1.2</td>
+                    <td>92</td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox"/></td>
+                    <td>1.1.1.3</td>
+                    <td>93</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <!--遮罩层开始-->
+    <div id="i1" class="c1 hidden">
+    </div>
+    <!--遮罩层结束-->
+    <!--弹出层开始-->
+    <div  id="i2" class="c2 hidden">
+        <p><input type="text"/> </p>
+        <p><input type="text"/> </p>
+        <p><input type="button" onclick="HiddModel()" value="取消"/>
+            <input type="button" value="确定"/>
+        </p>
+
+    </div>
+    <!--弹出层结束-->
+    <script>
+        function showModel() {
+            document.getElementById('i1').classList.remove('hidden');
+            document.getElementById('i2').classList.remove('hidden');
+
+        }
+        function HiddModel() {
+            document.getElementById('i1').classList.add('hidden');
+            document.getElementById('i2').classList.add('hidden');
+        }
+        function ChooseAll() {
+            var tbody=document.getElementById('tbd');
+
+            var tr_list=tbody.children; //找到行tr
+            for(var i=0;i<tr_list.length;i++){
+                //改成(var i in tr_list)，可以执行，但是调试器报Uncaught TypeError: Cannot read property。
+
+                var td_list=tr_list[i].children;//找到列td
+
+                var checkbox=td_list[0].children[0];//找到CheckBox
+
+                checkbox.checked=true;//打钩
+
+            }
+        }
+        function CancelAll() {
+            var tbody=document.getElementById('tbd');
+            //找到行tr
+            var tr_list=tbody.children;
+            for(var i=0;i<tr_list.length;i++){
+                //找到列td
+                var td_list=tr_list[i].children;
+                //找到CheckBox
+                var checkbox=td_list[0].children[0];
+                //取消
+                checkbox.checked=false;
+            }
+
+        }
+        function Reverse() {
+            var tbody=document.getElementById('tbd');
+            //找到行tr
+            var tr_list=tbody.children;
+            for(var i=0;i<tr_list.length;i++){
+                //找到列td
+                var td_list=tr_list[i].children;
+                //找到CheckBox
+                var checkbox=td_list[0].children[0];
+                //取消
+                if (checkbox.checked){
+                    checkbox.checked=false;
+                }else{checkbox.checked=true;};
+            }
+
+        }
+    </script>
+
+</body>
+</html>

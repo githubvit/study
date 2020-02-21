@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form action="jquery2-多选反选取消.html" >
+    <input type="text">
+    <input type="text">
+    <input type="text">
+    <input type="text">
+    <input type="text">
+    <input type="submit" value="提交">
+
+</form>
+<script src="jquery-1.12.4.js"></script>
+<script>
+    //只要有1个不为空，都可以提交。
+    $(':submit').click(function () {
+//        console.log(111);
+        if($(':text').val().trim().length==0){
+            alert('不能为空');
+            return false;
+        }
+    })
+
+</script>
+</body>
+</html>

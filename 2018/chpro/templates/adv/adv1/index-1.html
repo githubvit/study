@@ -1,0 +1,478 @@
+{% extends 'master.html' %}
+{% load advcompute %}
+<link rel="stylesheet" href="/static/css/bootstrap.min.css">
+{% block css%}
+<style>
+/*先去掉栅格系统的所有边距，得到相对纯净的栅格系统*/
+/*栅格container 原来是左右内边距15px*/
+.container{
+    width: 1090px;
+    margin: 0 auto;
+    padding-right: 0;
+    padding-left: 0;
+}
+/*栅格row，原来是左右外边距-15px*/
+.row{
+    margin-left: 0;
+    margin-right: 0;
+}
+/*栅格col-xs-3，原来是左右内边距15px*/
+.col-xs-3{
+    padding-left: 0;
+    padding-right: 0;
+}
+/*轮播图，图片，max-width使得图片不变小变大，left和margin-left使得图片得以居中*/
+    #myCarousel .lbt-img{
+        height: 420px;
+        max-width:none;
+        position: relative;
+        left:50%;
+        margin-left:-960px;/*因为原图尺寸是1920*/
+    }
+
+
+/*公司slog*/
+    .gry-bg{
+        background-color:#f2f2f2 ;
+    }
+    .common-title{
+        color:#333 ;
+        line-height: 1;
+        margin-top: 45px;
+    }
+    .common-detail{
+        color:#7a7a7a;
+        line-height: 28px;
+        margin-top: 18px;
+        margin-bottom: 18px;
+    }
+/*作品分类背景*/
+    .blue-bg {
+        background-color: #afc9d4;
+
+    }
+    .blue-bg h1,.blue-bg a{
+        color: #fff;
+    }
+/*购物车*/
+    .icon-shopping-cart{
+        color: black;
+    }
+/*推荐*/
+
+    .sytj a,.sytj span{ /*一开始写成.sytj a,span，结果所有的span都变啦，导致导航和轮播都变形，小心准确引导*/
+        display: inline-block;
+        font-size: 18px;
+        line-height: 1;
+        color:#333;
+    }
+
+    .sytj  a.active,.chdz1{
+
+        font-size: 28px;
+        font-weight: 700;
+        color: #000;
+        text-decoration: none;
+        outline: 0;
+        }
+
+
+/*缩略图*/
+    .thumbnail {
+        display: block;
+        padding: 0;
+        margin-bottom: 20px;
+        line-height: 1;
+        background-color: #fff;
+        border: 0 ;
+        border-radius: 0;
+    /* border: 1px solid #ddd; */
+{#    border-radius: 4px;#}
+{#    -webkit-transition: border .2s ease-in-out;#}
+{#    -o-transition: border .2s ease-in-out;#}
+{#    transition: border .2s ease-in-out;#}
+    }
+{#/*图片缩小会产生抖动，所以用图片放大*/#}
+{#    .thumbnail img:hover{#}
+{#        width: 100%;#}
+{##}
+{#    }#}
+
+/*推荐内容*/
+.sytj-con{
+    margin-top: 10px;
+}
+/* 活动标签*/
+.activetag{
+    display: inline-block;
+    height: 20px;
+    line-height: 20px;
+    color: #fff;
+    padding: 0 5px;
+    font-size: 12px;
+    background-color: #e36844;
+}
+/*瓷画定制*/
+.chdz a:hover{
+    font-weight: 700;
+    color: #000;
+    text-decoration: none;
+    outline: 0;
+}
+.chdz-con .thumbnail{
+    position: relative;
+}
+.chdz-con .thumbnail .chdz-mask{
+    position: absolute;
+    left:0;
+    top:0;
+    width:100%;
+    height: 265px;
+    background-color: grey;
+    opacity: 0.7;
+    display: none;
+}
+.chdz-con .thumbnail:hover .chdz-mask{
+    display: block;
+}
+.chdz-con .thumbnail:hover .chdz-mask a:hover{
+    text-decoration: none;
+}
+
+</style>
+{% endblock css %}
+
+{% block cont %}
+<!-- 增加的内容-->
+<!--1，轮播图-->
+    <div id="myCarousel" class="carousel slide min_width" data-ride="carousel" >
+{#      <!-- Indicators  {{ list|length }} 返回列表个数 在语句行中不要加括号-->#}
+      <ol class="carousel-indicators">
+{#         接收轮播图数量，控制点的数量#}
+
+          {% for i in li1_count %}
+                {% if forloop.first %}
+                    <li data-target="#myCarousel" data-slide-to="{{ i }}" class="active"></li>
+                {% else %}
+                    <li data-target="#myCarousel" data-slide-to="{{ i }}" class=""></li>
+                {% endif %}
+          {% endfor %}
+      </ol>
+      <div class="carousel-inner" role="listbox">
+{#          接收次位置参数#}
+          {% for row in adv1_li1 %}
+              {% if row.advtp.advposition2 is 1 %}<!--注意用字段跨表-->
+                    <div class="item active" >
+                        <a href="javascript:" sid="{{ row.advuser.id }}">
+                            <img src="/static/{{ row.advpic1 }}" alt="{{ row.advpic1art }}" class="lbt-img">
+                        </a>
+                    </div>
+              {% else %}
+                    <div class="item" >
+                        <a href="javascript:" sid="{{ row.advuser.id }}">
+                            <img src="/static/{{ row.advpic1 }}" alt="{{ row.advpic1art }}" class="lbt-img">
+                        </a>
+                    </div>
+              {% endif %}
+          {% endfor %}
+
+      </div>
+      <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+        <span class="sr-only">上一页</span>
+      </a>
+      <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+        <span class="sr-only">下一页</span>
+      </a>
+    </div>
+
+
+<!--2，单品推荐-->
+    <div class="container-fluid min_width" >
+        <div class="container"> <!--加了这一层，限制了缩略图的大小-->
+            <div class="row" >
+                <div id="t" style="height: 50px"></div>
+                <div id="sytj2" class="sytj">
+                    <a class="active" href="javascript:" name="bjtj2">编辑推荐</a>
+                    <span >|</span>
+                    <a href="javascript:" name="rqtj2">人气推荐</a>
+                    <span >|</span>
+                    <a href="javascript:" name="xpsf2">新品首发</a>
+                </div>
+                <div class="sytj-con">
+                    <div id="bjtj2" name="bjtj2">
+                        {% for row in adv1_li2 %}
+                        <div class="col-xs-3">
+                            <div class="thumbnail">
+                                <div style="width:268px;height: 268px;background-color: #f4f4f4">
+                                    <a  href="javascript:" sid="{{ row.advuser.id }}" gid="{{ row.advgoods.gmgoods.id }}" title=" {{ row.advgoods.gmgoods.gtitle|slice:"20" }} "> <img  src="/static/{{ row.advpic1 }}" alt="{{ row.advpic1art }}"></a>
+                                </div>
+                                <div class="caption">
+
+                                    <!--获取商品活动标签，注意商品管理和商品活动是多对多，要用all，再获取-->
+
+                                    <p style="text-align: center;height: 21px">
+
+                                    {% for i in row.advgoods.gmsales.all %}
+                                            <span class="activetag">{{ i.stitle}}</span>
+                                    {% endfor %}
+                                    </p>
+
+                                    <!--直接获取商品名称-->
+
+                                    <p style="text-align: center;font-weight: bolder">{{ row.advgoods.gmgoods.gtitle|slice:"20" }}</p>
+
+                                    <!--直接获取商品对象下的规格列表、单价率给到后台，得到商品单价-->
+
+                                    <p style="text-align: center;color: red">¥
+                                        {% pricerst row.advgoods.gmgoods.s_goods.all row.advgoods.gxprice  %}<!--采用自定义模板函数在这里获取参数，然后后端函数自己计算，返回结果-->
+                                    </p>
+	                    			<div class="clearfix"></div>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+
+                    </div>
+                    <div id="rqtj2" class="hidden" name="rqtj2">
+                        {% for row in adv1_li3 %}
+                        <div class="col-xs-3">
+                            <div class="thumbnail"  >
+                                <div style="width:268px;height: 268px;background-color: #f4f4f4">
+                                    <a  href="javascript:" sid="{{ row.advuser.id }}" gid="{{ row.advgoods.gmgoods.id }}" title=" {{ row.advgoods.gmgoods.gtitle|slice:"20" }} "> <img  src="/static/{{ row.advpic1 }}" alt="{{ row.advpic1art }}"></a>
+                                </div>
+                                <div class="caption">
+
+                                    <!--获取商品活动标签，注意商品管理和商品活动是多对多，要用all，再获取-->
+
+                                    <p style="text-align: center;height: 21px">
+
+                                    {% for i in row.advgoods.gmsales.all %}
+                                            <span class="activetag">{{ i.stitle}}</span>
+                                    {% endfor %}
+                                    </p>
+
+                                    <!--直接获取商品名称-->
+
+                                    <p style="text-align: center;font-weight: bolder">{{ row.advgoods.gmgoods.gtitle|slice:"20"  }}</p>
+
+                                    <!--直接获取商品对象下的规格列表、单价率给到后台，得到商品单价-->
+
+                                    <p style="text-align: center;color: red">¥
+                                        {% pricerst row.advgoods.gmgoods.s_goods.all row.advgoods.gxprice  %}<!--采用自定义模板函数在这里获取参数，然后后端函数自己计算，返回结果-->
+
+                                    </p>
+	                    			<div class="clearfix"></div>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    <div id="xpsf2" class="hidden" name="xpsf2">
+                        {% for row in adv1_li4 %}
+                        <div class="col-xs-3">
+                            <div class="thumbnail" >
+                                <div style="width:268px;height: 268px;background-color: #f4f4f4">
+                                    <a  href="javascript:" sid="{{ row.advuser.id }}" gid="{{ row.advgoods.gmgoods.id }}" title=" {{ row.advgoods.gmgoods.gtitle|slice:"20" }} "> <img src="/static/{{ row.advpic1 }}" alt="{{ row.advpic1art }}"></a>
+                                </div>
+                                <div class="caption">
+                                    <!--获取商品活动标签，注意商品管理和商品活动是多对多，要用all，再获取-->
+
+                                    <p style="text-align: center;height: 21px">
+
+                                    {% for i in row.advgoods.gmsales.all %}
+                                            <span class="activetag">{{ i.stitle}}</span>
+                                    {% endfor %}
+                                    </p>
+                                    <!--直接获取商品名称-->
+                                    <p style="text-align: center;font-weight: bolder">{{ row.advgoods.gmgoods.gtitle|slice:"20"  }}</p>
+                                    <!--直接获取商品对象下的规格列表、单价率给到后台，得到商品单价-->
+                                    <p style="text-align: center;color: red">¥
+                                        <!--采用自定义模板函数在这里获取商品的规格对象列表和商品的单价率，然后后端函数自己计算，返回结果-->
+                                        <!--这里又会产生多次数据库查询，因为我们是用select_related在后端一次获取，到商品后再查找规格，是一对多的查询，因此又要发起数据库的查询-->
+                                        {% pricerst row.advgoods.gmgoods.s_goods.all row.advgoods.gxprice  %}
+                                    </p>
+	                    			<div class="clearfix"></div>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+<!--3，瓷画订制-->
+    <div class="container-fluid min_width" >
+        <div class="container"> <!--加了这一层，限制了缩略图的大小-->
+            <div class="row" >
+                <div id="t0" style="height: 50px"></div>
+                <div class="chdz" >
+                    <p class="chdz1" style="display: inline-block;margin-right: 20px">瓷画定制</p>
+                    <span style="display: inline-block;font-size: 14px;color: #333;margin-right: 20px">高山流水遇知音</span>
+                    <div style="display: inline-block;float: right;">
+                        <span style="display: inline-block;font-size: 18px;color: #333;margin-right: 20px">>>> </span>
+                        <a href="javascript:" title="天下没有两件相同的手绘作品" ><span style="display: inline-block;font-size: 18px;color: #333;margin-right: 20px">手绘</span></a>
+                        <a href="javascript:" title="采用现代陶瓷工艺"><span style="display: inline-block;font-size: 18px;color: #333;margin-right: 20px">彩印</span></a>
+                        <a href="javascript:" title="适用于大批量定制"><span style="display: inline-block;font-size: 18px;color: #333;">贴花</span></a>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container" >
+            <!--加了这一层，限制了缩略图的大小-->
+            <div class="row">
+                <div id="chdz" class="carousel slide" data-ride="carousel"><!--data-interval如果为 false，轮播将不会自动循环-->
+                    <div class="carousel-inner " id="chdz-div" >
+                        <div class="item  active">
+                            <div class="chdz-con">
+                                {% for row in adv1_li3 %}
+                                <div class="col-xs-3" >
+                                    <div class="thumbnail"  >
+                                        <div style="width:268px;height: 268px;background-color: #f4f4f4">
+                                            <img src="/static/{{ row.advpic1 }}" alt="{{ row.advpic1art }}">
+                                        </div>
+                                        <div class="chdz-mask">
+                                            <p style="padding-top: 20px;padding-left: 15px;color: white;line-height: 1.5">
+                                            <span style="display: inline-block;margin-right: 15px">工艺：{{ row.advgoods.gmgoods.get_gtechnique_display }}</span>
+                                            {% for i in row.advgoods.gmgoods.s_goods.all %}
+                                                <span style="display: inline-block;margin-right: 15px">器型：{{ i.sqixing }}</span>
+                                                <span style="display: inline-block;margin-right: 15px">尺寸：长{{ i.w }}宽{{ i.d }}高{{ i.h }} 单位mm</span>
+                                                <span style="display: inline-block;margin-right: 15px">规格：{{ i.oldsize }}{{ i.oldunti }}</span>
+                                            {% endfor %}
+                                            <span style="display: inline-block;margin-right: 15px">画面类型：山水</span>
+                                            <span style="display: inline-block;margin-right: 15px">风格：写意</span>
+                                            <!--直接获取商品对象下的规格列表、单价率给到后台，得到商品单价-->
+                                            </p>
+                                            <p style="text-align: center;margin-top: 120px">
+                                                <a  href="javascript:" sid="{{ row.advuser.id }}" gid="{{ row.advgoods.gmgoods.id }}">
+                                                    <button class="btn btn-danger" >立即购买 ¥{% pricerst row.advgoods.gmgoods.s_goods.all row.advgoods.gxprice  %}</button>
+                                                </a>
+                                                <a  href="javascript:" sid="{{ row.advuser.id }}" gid="{{ row.advgoods.gmgoods.id }}">
+                                                    <button class="btn btn-primary" >参考定制</button>
+                                                </a>
+                                            </p>
+
+                                        </div>
+                                        <div class="caption">
+                                            <!--获取商品活动标签，注意商品管理和商品活动是多对多，要用all，再获取-->
+
+                                            <p style="text-align: center;height: 21px">
+
+                                            {% for i in row.advgoods.gmsales.all %}
+                                                    <span class="activetag">{{ i.stitle}}</span>
+                                            {% endfor %}
+                                            </p>
+                                            <!--直接获取商品名称-->
+
+                                            <p style="text-align: center;font-weight: bolder">{{ row.advgoods.gmgoods.gtitle|slice:"20" }}</p>
+
+                                            <!--直接获取可定制商品器型、尺寸、工艺、画面类型 风格-->
+
+
+                                            <div class="clearfix"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="chdz-con">
+                                {% for row in adv1_li4 %}
+                                <div class="col-xs-3" >
+                                    <div class="thumbnail"  >
+                                        <div style="width:268px;height: 268px;background-color: #f4f4f4">
+                                            <img src="/static/{{ row.advpic1 }}" alt="{{ row.advpic1art }}">
+                                        </div>
+                                        <div class="chdz-mask">
+                                            <p style="padding-top: 20px;padding-left: 15px;color: white;line-height: 1.5">
+                                            <span style="display: inline-block;margin-right: 15px">工艺：{{ row.advgoods.gmgoods.get_gtechnique_display }}</span>
+                                            {% for i in row.advgoods.gmgoods.s_goods.all %}
+                                                <span style="display: inline-block;margin-right: 15px">器型：{{ i.sqixing }}</span>
+                                                <span style="display: inline-block;margin-right: 15px">尺寸：长{{ i.w }}宽{{ i.d }}高{{ i.h }} 单位mm</span>
+                                                <span style="display: inline-block;margin-right: 15px">规格：{{ i.oldsize }}{{ i.oldunti }}</span>
+                                            {% endfor %}
+                                            <span style="display: inline-block;margin-right: 15px">画面类型：山水</span>
+                                            <span style="display: inline-block;margin-right: 15px">风格：写意</span>
+                                            <!--直接获取商品对象下的规格列表、单价率给到后台，得到商品单价-->
+                                            </p>
+                                            <p style="text-align: center;margin-top: 120px">
+                                                <a  href="javascript:" sid="{{ row.advuser.id }}" gid="{{ row.advgoods.gmgoods.id }}">
+                                                    <button class="btn btn-danger" >立即购买 ¥{% pricerst row.advgoods.gmgoods.s_goods.all row.advgoods.gxprice  %}</button>
+                                                </a>
+                                                <a  href="javascript:" sid="{{ row.advuser.id }}" gid="{{ row.advgoods.gmgoods.id }}">
+                                                    <button class="btn btn-primary" >参考定制</button>
+                                                </a>
+                                            </p>
+
+                                        </div>
+                                        <div class="caption">
+                                            <!--获取商品活动标签，注意商品管理和商品活动是多对多，要用all，再获取-->
+
+                                            <p style="text-align: center;height: 21px">
+
+                                            {% for i in row.advgoods.gmsales.all %}
+                                                    <span class="activetag">{{ i.stitle}}</span>
+                                            {% endfor %}
+                                            </p>
+                                            <!--直接获取商品名称-->
+
+                                            <p style="text-align: center;font-weight: bolder">{{ row.advgoods.gmgoods.gtitle|slice:"20" }}</p>
+
+                                            <!--直接获取可定制商品器型、尺寸、工艺、画面类型 风格-->
+
+
+                                            <div class="clearfix"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--可选外框左控制部分-->
+                    <a href="#chdz" data-slide="prev" style="position: absolute;left:0;top: 0;">
+                        <span class="glyphicon glyphicon-chevron-left" style="line-height:1;font-size: 35px ;color: black;top:135px" aria-hidden="true"></span><!--line-height用来控制行高，保证按钮居中-->
+                        <span class="sr-only">Previous</span>
+                    </a>
+
+                    <!--可选外框右控制部分-->
+                    <a href="#chdz" data-slide="next" style="position: absolute;right:0;top: 0;">
+                        <span class="glyphicon glyphicon-chevron-right" style="line-height:1;font-size: 35px ;color: black;top:135px;font-weight: normal;" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+<!--4，商品分类-->
+
+<!-- 增加的内容结束-->
+{% endblock cont%}
+{% block js %}
+<script>
+//标签和内容切换,点击和鼠标在上为同一函数
+    $('.sytj a').on('click mouseover',function () {
+
+        // 激活自己标签，隐藏兄弟标签
+        $(this).siblings().removeClass('active');
+        $(this).addClass('active');
+        // 展现自己详细页面
+        var i1 = '#';
+        var v = $(this).attr('name');
+        var tmp = i1 + v ;
+        $(tmp).removeClass('hidden').siblings().addClass('hidden');
+{#        console.log($(this).attr('name'))#}
+    });
+
+</script>
+{% endblock %}

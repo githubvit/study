@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body style="height: 300px;width: 300px">
+
+    <img id="wx-load" width="270px" height="270px" src="https://login.weixin.qq.com/qrcode/{{ code }}">
+
+</body>
+<script src="/static/js/jquery-1.12.4.js"></script>
+<script>
+    $(function () {
+        //加载长轮询函数
+        polling();
+        console.log(5)
+    });
+    //长轮询函数：根据状态码，用递归方式实现长轮询pending
+    function polling() {
+        console.log(6);
+        //ajax方式实现长轮询,不发送数据,访问轮询函数
+        $.ajax({
+            url:'/user/polling_wx/',
+            type:'GET',
+            dataType:'json',
+            success:function (data) {
+                console.log(1);
+                if(data.status==408){
+                    console.log(1);
+                    //等待手机扫描二维码,轮询
+                    console.log(data.status);
+                    polling()//递归
+                }else if(data.status==201){
+                    //已经扫描二维码，获取头像，等待手机确认，轮询
+                    console.log(2);
+                    //获取头像
+                    $('#wx-load').attr('src',data.src);
+                    polling()//递归
+                }else {
+                    //手机已经确认，这时状态码应该为data.status=200，实现跳转到另一个页面
+                    console.log(3);
+                    window.location.href='/'
+                }
+            }
+
+        })
+    }
+</script>
+</html>

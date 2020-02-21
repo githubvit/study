@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <input type="button" value="全选" onclick="checkAll()"/>
+    <input type="button" value="反选" onclick="checkRevose()"/>
+    <input type="button" value="取消" onclick="cancelAll()"/>
+    <table id="tb" border="1">
+        <thead>
+            <tr>
+                <th>选项</th>
+                <th>IP</th>
+                <th>Port</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><input type="checkbox"/></td>
+                <td>1.1.1.1</td>
+                <td>80</td>
+            </tr>
+            <tr>
+                <td><input type="checkbox"/></td>
+                <td>1.1.1.2</td>
+                <td>80</td>
+            </tr>
+            <tr>
+                <td><input type="checkbox"/></td>
+                <td>1.1.1.3</td>
+                <td>80</td>
+            </tr>
+
+        </tbody>
+    </table>
+    <script src="jquery-1.12.4.js"></script>
+    <script>
+        function checkAll() {
+            //jquery方法内置循环，prop('')专门给checked和selected用的
+            //当对循环内的每个元素进行统一操作xxx时，直接$('#tb :checkbox').xxx
+            $('#tb :checkbox').prop('checked',true);
+        }
+        function cancelAll() {
+            $('#tb :checkbox').prop('checked',false);
+        }
+        function checkRevose() {
+            //当对循环内的每个元素进行不同操作时，用each(function(){})
+            $('#tb :checkbox').each(function(){
+                //this,代指当前循环的每个元素，是dom对象
+                //反选1,dom方式
+//                if (this.checked){
+//                    this.checked=false;
+//                }else{
+//                    this.checked=true;
+//                }
+                //反选2，jquery方式
+//                if($(this).prop('checked')){//在prop里写一个，就表示获取值
+//                    $(this).prop('checked',false)//在prop里写两个，就表示设置值
+//                }else{
+//                    $(this).prop('checked',true)
+//                }
+                //反选3，三元运算 jquery
+//                var v=条件？真值:假值
+//                var v=$(this).prop('checked')?false:true;
+//                $(this).prop('checked',v)//把v的值给checked属性
+                //反选3，三元运算 dom
+                var v=this.checked?false:true;
+                this.checked=v//把v的值给checked属性
+            })
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,123 @@
+csrf跨站请求伪造
+实例：
+018_Python 3 视频 高级运维 Django 基础进阶高级 项目实战全新教程\第22周-Python3.5-零基础-高级-项目实战最新教程-共21章节
+第22周-第10章节-Python3.5-Django之CSRF原理详解1
+第22周-第11章节-Python3.5-Django之CSRF原理详解2
+自己完成的： D:\django\usermangement
+
+
+一、简介
+ csrf：非法用户劫持cookie发送伪造请求。
+
+django为用户实现防止跨站请求伪造的功能，
+通过中间件 django.middleware.csrf.CsrfViewMiddleware 来完成。
+而对于django中设置防跨站请求伪造功能有分为全局和局部。
+
+全局：
+　　中间件 django.middleware.csrf.CsrfViewMiddleware
+
+局部：通过后台给请求函数加装饰器
+@csrf_protect，为当前函数强制设置防跨站请求伪造功能，即便settings中没有设置全局中间件。
+@csrf_exempt，取消当前函数防跨站请求伪造功能，即便settings中设置了全局中间件。
+注：from django.views.decorators.csrf import csrf_exempt,csrf_protect
+
+二、form表单
+html中设置Token:
+　　{% csrf_token %}
+三、ajax
+通过在请求头中加入csrftoken的cookie
+<script src="/static/jquery-1.12.4.js"></script>
+<script src="/static/jquery.cookie.js"></script>
+$.ajax({
+    headers:{'X-CSRFtoken':$.cookie('csrftoken')},//在请求头中加入csrftoken随机字符串
+    ...
+})
+
+四、代码
+<style>
+    img{
+        width: 200px;
+        height: 200px
+    }
+</style>
+<body>
+    <div id="imgs">
+        {% for item in img_list %}
+        <img src="/{{ item.path }}" >
+        <!--注意src里有个'/'      **********            -->
+        {% endfor %}
+    </div>
+    <input type="file" name="fafafa">
+    <input id="up" type="button" value="aj上传">
+    <!--FormData对象
+        dict=new FormData(); 生成FormData对象
+        dict.append('k1','v1');
+        dict.append('fafafa',文件对象);
+        FormData对象可以装任何对象，直接把dict发给服务端就可以了，它里面是
+        key，value字典形式的数据结构
+
+    -->
+</body>
+<script src="/static/jquery-1.12.4.js"></script>
+<script src="/static/jquery.cookie.js"></script>
+<script>
+    $(function () {
+        $('#up').click(function () {
+            var dic=new FormData();
+            dic.append('user','v1');
+            dic.append('fafafa',$('input[name="fafafa"]')[0].files[0]);
+            //取得该标签里个文件，通常可以有多个文件files，是个列表，只取第1个
+
+            $.ajax({
+                url:'/upload.html/',
+                type:'POST',
+                data:dic,//直接把dic这个FormData发送到后端
+                headers:{'X-CSRFtoken':$.cookie('csrftoken')},//在请求头中加入合法的csrftoken的cookie随机字符串发送给服务器
+                processData:false,//告诉jquery不要去处理dic这个数据了
+                contentType:false,//告诉jquery不要去设置类型了，让dic保持原样
+                dataType:'JSON',
+                success:function (arg) {
+                    if (arg.status){
+                        console.log(arg);
+                        var img=document.createElement('img');
+                        img.src='/'+arg.path;//添加src属性注意'/'
+                        $('#imgs').append(img);
+                    }
+
+                }
+
+            })
+        })
+    })
+</script>
+
+五、番外
+以上在每个ajax请求中加入headers:{'X-CSRFtoken':$.cookie('csrftoken')},可以实现跨站。
+
+1，但是如果太多ajax请求，每个ajax都这样配置有些麻烦，为了精简代码，就对所有的ajax请求提供统一配置，
+    $.ajaxSetup({//对当前页面的所有的ajax请求提供统一配置
+                beforeSend: function(xhr, settings) {   //在发送ajax前，进行配置
+                    xhr.setRequestHeader("X-CSRFToken", csrftoken); //在请求头中加入合法的csrftoken的cookie随机字符串发送给服务器
+                }
+    });
+    xhr是ajax请求的xmlHttpResponse原生对象，
+    settings是ajax的请求配置。
+
+2，又当所有的ajax请求中，有些方法是不需要实现csrf验证的比如(GET|HEAD|OPTIONS|TRACE)，
+    因此用js的正则进行排除，可以节约资源。
+    function csrfSafeMethod(method) {//定义正则函数
+                // these HTTP methods do not require CSRF protection
+                return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+            }
+
+
+    $.ajaxSetup({
+                beforeSend: function(xhr, settings) {
+                    if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+                    //先用上面定义的正则函数进行方法settings.type匹配，并排除跨域请求
+
+                        //然后在请求头中加入csrftoken
+                        xhr.setRequestHeader("X-CSRFToken", csrftoken);
+                    }
+                }
+            });

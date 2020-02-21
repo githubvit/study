@@ -1,0 +1,269 @@
+mysql多表
+
+一，关于外键：表与表间的关系可以通过外键进行关联
+
+    1，外键的创建：创建学生考勤记录表study_record和student1表关联，
+
+        考勤记录表 ：id、day、status（状态）、stu_id，该表的stu_id学生id和student1表的id关联。
+
+        1.1先建表study_record
+            create table study_record(
+            id int auto_increment primary key,
+            day int not null,
+            status char(16) not null default 'no',
+            stu_id int(11) not null
+            );
+            查看study_record表结构。
+            mysql> desc study_record;
+            +--------+----------+------+-----+---------+----------------+
+            | Field  | Type     | Null | Key | Default | Extra          |
+            +--------+----------+------+-----+---------+----------------+
+            | id     | int(11)  | NO   | PRI | NULL    | auto_increment |
+            | day    | int(11)  | NO   |     | NULL    |                |
+            | status | char(16) | NO   |     | no      |                |
+            | stu_id | int(11)  | NO   |     | NULL    |                |
+            +--------+----------+------+-----+---------+----------------+
+            4 rows in set (0.00 sec)
+
+        1.2为study_record表添加外键，关联student1表。
+            alter table 从表名 add foreign key 外键名(从表外键字段) references 主表名(主表外键字段);
+            mysql> alter table study_record add foreign key fk_stu_key(stu_id) references student1(id);
+            Query OK, 0 rows affected (0.57 sec)
+            Records: 0  Duplicates: 0  Warnings: 0
+            查看添加好外键的study_record表结构。MUL标识索引
+            mysql> desc study_record;
+            +--------+----------+------+-----+---------+----------------+
+            | Field  | Type     | Null | Key | Default | Extra          |
+            +--------+----------+------+-----+---------+----------------+
+            | id     | int(11)  | NO   | PRI | NULL    | auto_increment |
+            | day    | int(11)  | NO   |     | NULL    |                |
+            | status | char(16) | NO   |     | no      |                |
+            | stu_id | int(11)  | NO   | MUL | NULL    |                |
+            +--------+----------+------+-----+---------+----------------+
+            4 rows in set (0.00 sec)
+
+        1.3查看study_record创建记录，看到外键关联。FOREIGN KEY (`stu_id`) REFERENCES `student1` (`id`)
+            mysql> show create table study_record;
+            | study_record | CREATE TABLE `study_record` (
+              `id` int(11) NOT NULL AUTO_INCREMENT,
+              `day` int(11) NOT NULL,
+              `status` char(16) NOT NULL DEFAULT 'no',
+              `stu_id` int(11) NOT NULL,
+              PRIMARY KEY (`id`),
+              KEY `fk_stu_key` (`stu_id`),
+              CONSTRAINT `study_record_ibfk_1` FOREIGN KEY (`stu_id`) REFERENCES `student1` (`id`)
+            ) ENGINE=InnoDB DEFAULT CHARSET=utf8 |
+            ==============================================================================
+            外键，一个特殊的索引，只能是指定内容
+            creat table color(
+                nid int not null primary key,
+                name char(16) not null
+            )
+
+            create table fruit(
+                nid int not null primary key,
+                smt char(32) null ,
+                color_id int not null,
+                constraint fk_cc（外键名称） foreign key (color_id)（本表字段） references color(nid)（另外一张表及字段）
+            )
+
+    2，插入数据
+            看student1的表情况，
+            mysql> select * from student1;
+            +----+---------+---------------+--------+
+            | id | name    | register_date | gender |
+            +----+---------+---------------+--------+
+            |  1 | wangsen | 2016-06-12    | M      |
+            |  2 | zhouyi  | 2016-06-12    | M      |
+            +----+---------+---------------+--------+
+            由于study_record中的stu_id和student1的id相关联，
+            分别为wangsen和zhouyi写了两条和1条记录
+            mysql> insert into study_record(day,status,stu_id) values(1,'yes',1);
+            Query OK, 1 row affected (0.05 sec)
+
+            mysql> insert into study_record(day,status,stu_id) values(1,'yes',2);
+            Query OK, 1 row affected (0.03 sec)
+            重复为id=1的wangsen添加
+            mysql> insert into study_record(day,status,stu_id) values(1,'yes',1);
+            Query OK, 1 row affected (0.04 sec)
+
+            mysql> select * from study_record;
+            +----+-----+--------+--------+
+            | id | day | status | stu_id |
+            +----+-----+--------+--------+
+            |  1 |   1 | yes    |      1 |
+            |  2 |   1 | yes    |      2 |
+            |  3 |   1 | yes    |      1 |
+            +----+-----+--------+--------+
+            3 rows in set (0.00 sec)
+            添加student1中没有的id，让stu_id=5，发现报错，这不符合参照完整性。
+            mysql> insert into study_record(day,status,stu_id) values(1,'yes',5);
+            ERROR 1452 (23000): Cannot add or update a child row:
+            a foreign key constraint fails (`test`.`study_record`,
+            CONSTRAINT `study_record_ibfk_1` FOREIGN KEY (`stu_id`)
+             REFERENCES `student1` (`id`))
+    3，删除记录
+             在从表中删除记录。
+            mysql> delete from study_record where id=3;
+            Query OK, 1 row affected (0.03 sec)
+
+            在主表中删除记录报错。因为该条记录被从表引用，同样不符合参照完整性。
+            mysql> delete from student1 where id=1;
+            ERROR 1451 (23000): Cannot delete or update a parent row:
+            a foreign key constraint fails (`test`.`study_record`,
+            CONSTRAINT `study_record_ibfk_1` FOREIGN KEY (`stu_id`)
+            REFERENCES `student1` (`id`))
+            mysql>
+
+
+    4，删除外键
+            alter table 表名 drop foreign key 外键名；
+            mysql> alter table study_record drop foreign key study_record_ibfk_1;
+            Query OK, 0 rows affected (0.08 sec)
+            Records: 0  Duplicates: 0  Warnings: 0
+
+            索引依然还在，不知道怎么消除索引？
+            mysql> desc study_record;
+            +--------+----------+------+-----+---------+----------------+
+            | Field  | Type     | Null | Key | Default | Extra          |
+            +--------+----------+------+-----+---------+----------------+
+            | id     | int(11)  | NO   | PRI | NULL    | auto_increment |
+            | day    | int(11)  | NO   |     | NULL    |                |
+            | status | char(16) | NO   |     | no      |                |
+            | stu_id | int(11)  | NO   | MUL | NULL    |                |
+            +--------+----------+------+-----+---------+----------------+
+            4 rows in set (0.00 sec)
+
+            关联已经没了。
+            mysql> show create table study_record;
+
+            | study_record | CREATE TABLE `study_record` (
+              `id` int(11) NOT NULL AUTO_INCREMENT,
+              `day` int(11) NOT NULL,
+              `status` char(16) NOT NULL DEFAULT 'no',
+              `stu_id` int(11) NOT NULL,
+              PRIMARY KEY (`id`),
+              KEY `fk_stu_key` (`stu_id`)
+            ) ENGINE=InnoDB DEFAULT CHARSET=utf8 |
+
+            1 row in set (0.00 sec)
+
+二，关于索引
+    建立外键时，都会为外键建立索引，这样可以加快检索速度。
+    当为某个或几个字段建立了索引，mysql就会用btree算法为索引字段的每个值建立一一对应的映射值，并且该值是有序的。
+    
+    如果合理的设计且使用索引的MySQL是一辆兰博基尼的话，那么没有设计和使用索引的MySQL就是一个人力三轮车。
+    
+    索引分单列索引和组合索引：
+    单列索引，即一个索引只包含单个列，一个表可以有多个单列索引，但这不是组合索引。组合索引，即一个索包含多个列。
+    
+    创建索引时，你需要确保该索引是应用在 SQL 查询语句的条件(一般作为 WHERE 子句的条件)。
+    
+    实际上，索引也是一张表，该表保存了主键与索引字段，并指向实体表的记录。
+    
+    上面都在说使用索引的好处，但过多的使用索引将会造成滥用。因此索引也会有它的缺点：虽然索引大大提高了查询速度，
+    同时却会降低更新表的速度，如对表进行INSERT、UPDATE和DELETE。因为更新表时，MySQL不仅要保存数据，还要保存一下索引文件。
+    建立索引会占用磁盘空间的索引文件。
+
+    1，普通索引:这是最基本的索引，它没有任何限制。
+        1.1 创建索引
+            1.1.1 给已经存在的表创建索引
+
+            方式一,CREATE INDEX indexName ON mytable(username(length));
+
+                定义索引名indexName
+                指定表名及字段名，ON mytable(username(length))，还有索引的长度length。
+                如果是CHAR，VARCHAR类型，length可以小于字段实际长度；如果是BLOB和TEXT类型，必须指定 length。
+
+            方式二，通过修改表结构，添加普通索引，索引值可出现多次。
+                ALTER mytable ADD INDEX [indexName] ON (username(length))
+
+            1.1.2 创建表的时候直接指定索引
+                CREATE TABLE mytable(
+
+                ID INT NOT NULL,
+
+                username VARCHAR(16) NOT NULL,
+
+                INDEX [indexName] (username(length))
+
+                );
+        2.2 删除索引
+            2.2.1 直接删除填入索引名indexName和表名mytable
+                    DROP INDEX indexName ON mytable;
+            2.2.2 用ALTER TABLE下的DROP INDEX命令删除。
+                    ALTER TABLE mytable DROP INDEX indexName;
+    2，唯一索引：UNIQUE INDEX
+        它与前面的普通索引类似，不同的就是：
+        索引列的值必须唯一，但允许有空值。如果是组合索引，则列值的组合必须唯一。
+        它有以下几种创建方式：
+
+            创建索引
+            CREATE UNIQUE INDEX indexName ON mytable(username(length))
+
+
+            修改表结构，添加唯一索引，创建索引的值必须是唯一的（除了NULL外，NULL可能会出现多次）。
+            ALTER mytable ADD UNIQUE indexName ON (username(length))
+
+
+            创建表的时候直接指定
+            CREATE TABLE mytable(
+
+            ID INT NOT NULL,
+
+            username VARCHAR(16) NOT NULL,
+
+            UNIQUE indexName (username(length))
+
+            );
+
+    3,显示索引信息
+        SHOW INDEX FROM table_name;或太长了就用SHOW INDEX FROM table_name\G 注意结尾不能有‘;’号。
+
+
+
+三，事务
+    事务是必须满足4个条件（ACID）： Atomicity（原子性）、Consistency（稳定性）、Isolation（隔离性）、Durability（可靠性）
+
+    1、事务的原子性：一组事务，要么成功；要么撤回。
+    2、稳定性 ： 有非法数据（外键约束之类），事务撤回。
+    3、隔离性：事务独立运行。一个事务处理后的结果，影响了其他事务，那么其他事务会撤回。事务的100%隔离，需要牺牲速度。
+    4、可靠性：软、硬件崩溃后，InnoDB数据表驱动会利用日志文件重构修改。
+    可靠性和高速度不可兼得， innodb_flush_log_at_trx_commit选项决定什么时候吧事务保存到日志里。
+
+    在Mysql控制台使用事务来操作：
+        begin 开始一个事务，rollback回滚（等于撤销事务），commit提交事务。
+
+    mysql> begin； ＃开始一个事务
+
+    mysql> insert into a (a) values(555);
+
+    mysql>rollback; 回滚 ， 这样数据是不会写入的
+
+    然如果上面的数据没问题，就输入commit提交命令就行；commit之后就无法回滚。
+    
+四，mysql启动和关闭外键约束的方法(FOREIGN_KEY_CHECKS)
+    在MySQL中删除一张表或一条数据的时候，出现
+    [Err] 1451 -Cannot delete or update a parent row: a foreign key constraint fails (...)
+    这是因为MySQL中设置了foreign key关联，造成无法更新或删除数据。可以通过设置FOREIGN_KEY_CHECKS变量来避免这种情况。
+
+    我们可以使用
+        SET FOREIGN_KEY_CHECKS=0;
+    来禁用外键约束.
+
+    之后再用
+        SET FOREIGN_KEY_CHECKS=1;
+    来启动外键约束.
+
+    查看当前FOREIGN_KEY_CHECKS的值可用如下命令
+        SELECT  @@FOREIGN_KEY_CHECKS;
+
+
+五，数据库导入导出
+
+    导出现有数据库数据：
+    mysqldump -u用户名 -p密码 数据库名称 >导出文件路径xx.sql          # 结构+数据
+    mysqldump -u用户名 -p密码 -d 数据库名称 >导出文件路径xx.sql       # 结构
+
+    导入现有数据库数据：
+    mysqldump -uroot -p密码  数据库名称 < 文件路径xx.sql

@@ -1,0 +1,82 @@
+response理解
+
+1，在django.http模块中定义了HttpResponse对象的API
+2，HttpRequest对象由Django自动创建，HttpResponse对象由程序员创建,
+3，不调用模板，直接返回数据
+    #coding=utf-8
+    from django.http import HttpResponse
+    def index(request):
+        return HttpResponse('你好')
+
+4，调用模板
+    模板执行分为两步，加载和渲染
+    from django.http import HttpResponse
+    from django.template import RequestContext, loader
+
+    def index(request):
+        #加载模板
+        t1 = loader.get_template('polls/index.html')
+        #获取数据
+        context = RequestContext(request, {'h1': 'hello'})
+        #用模板的render方法对模板填充数据，进行渲染，构造HttpResponse对象，最后返回给浏览器
+        return HttpResponse(t1.render(context))
+
+    上面是完整的写法，django为了简化对render进行了封装，使用render快捷方法django.shortcuts简化的代码，但是实际上还是按照上述的过程。
+    from django.shortcuts import render
+
+    render(request, template_name[, context])
+    结合一个给定的模板和一个给定的上下文字典，并返回一个渲染后的HttpResponse对象
+
+        request：该request用于生成response
+        template_name：要使用的模板的完整名称
+        context：添加到模板上下文的一个字典，视图将在渲染模板之前调用它
+        from django.shortcuts import render
+        def index(request):
+            return render(request, 'booktest/index.html', {'h1': 'hello'})
+
+
+5，属性
+    content：表示返回的内容，字符串类型
+    charset：表示response采用的编码字符集，字符串类型
+    status_code：响应的HTTP响应状态码
+    content-type：指定输出的MIME类型（比如：content-type：text/html 指的就是该段text文本输出为html）
+
+6，方法
+    6.1，init ：使用页内容实例化HttpResponse对象
+    6.2，write(content)：以文件的方式写
+    6.3，flush()：以文件的方式输出缓存区
+
+    6.4，set_cookie(key, value='', max_age=None, expires=None)：设置Cookie
+            key、value都是字符串类型
+            max_age是一个整数，表示在指定秒数后过期
+            expires是一个datetime或timedelta对象，会话将在这个指定的日期/时间过期，注意datetime和timedelta值只有在使用PickleSerializer时才可序列化
+            *max_age与expires二选一
+            如果不指定过期时间，则两个星期后过期
+                例如：
+                    from django.http import HttpResponse
+                    from datetime import *
+                    def index(request):
+                        response = HttpResponse()
+                        #接收cookie用requests.COOKIES，是一个字典对象
+                        cookie=request.COOKIES
+                        if cookie.has_key('h1'):#判断请求头中是否有key为h1的cookie-->has_key('h1')
+                            response.write('<h1>' + cookie['h1'] + '</h1>')
+                        #没有就设置cookie 键为h1，值为你好，过期时间为120秒
+                        response.set_cookie('h1', '你好', 120)
+                        #过期时间为2016年10月31日
+                        # response.set_cookie('h1', '你好', None, datetime(2016, 10, 31))
+                        return response
+
+            cookie是基于网站隔离的：跨域名cookie就没了。（某个网站的cookie只会存在该网站）
+            但为什么我访问了淘宝，然后再访问别的网站，会推送我在淘宝访问或搜索过的关键字广告呢？
+            因为该网站内嵌了淘宝的广告页，该广告页是淘宝的，因此可以拿到你在淘宝访问的cookie，从而推送广告。
+            比如在该网站用<iframe scr="taobao.com/guanggao.html">...</iframe>内嵌淘宝广告网页。
+
+    6.5，delete_cookie(key)：删除指定的key的Cookie，如果key不存在则什么也不发生
+
+    6.6，HttpResponse子类1：HttpResponseRedirect重定向，比如注册成功，或登录成功后，转到用户中心
+        简写redirect 同render一样被简化了。
+
+        return redirect('')
+
+    6.7，HttpResponse子类2：JsonResponse,返回json数据，return JsonRsponse({'list':'abc'})

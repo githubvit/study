@@ -1,0 +1,29 @@
+Django 的模板中的数学运算
+前言
+django模板只提供了加法的filter，没有提供专门的乘法和除法运算；
+django提供了widthratio的tag用来计算比率，可以变相用于乘法和除法的计算。
+
+加法
+{{value|add:10}}
+note:value=5,则结果返回15
+
+减法
+{{value|add:-10}}
+note:value=5,则结果返回-5，加一个负数就是减法了
+
+乘法
+{% widthratio 5 1 100%}
+note:等同于：(5 / 1) * 100 ，结果返回500，withratio需要三个参数，它会使用参数1/参数2*参数3的方式进行运算，进行乘法运算，使「参数2」=1
+
+除法
+{% widthratio 5 100 1%}
+note:等同于：(5 / 100) * 1,则结果返回0.05,和乘法一样，使「参数3」= 1就是除法了。
+
+乘法 A*B: {% widthratio A 1 B %}
+除法 A/B: {% widthratio A B 1 %}
+
+利用 add 这个filter ,可以做更疯狂的事:
+
+计算 A^2: {% widthratio A 1 A %}
+计算 (A+B)^2: {% widthratio A|add:B 1 A|add:B %}
+计算 (A+B) * (C+D): {% widthratio A|add:B 1 C|add:D %}

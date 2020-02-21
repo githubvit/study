@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<!--上面声明按统一标准的规范-->
+<html lang="en"><!--标签 标签尖括号里的东西叫属性-->
+<head>
+    <meta charset="UTF-8">
+    <!--meta是自封闭标签，
+    属性有：编码charset="UTF-8"
+    刷新 每3秒刷新一次
+    <meta http-equiv="Refresh" content="3" />
+    跳转 5秒后跳转到http://www.baidu.com 这个不常用
+    <meta http-equiv="Refresh" content="5;Url=http://www.baidu.com" />
+    关键字 搜索引擎搜索到相应的关键字，会列出该页面
+    <meta name="keywords" content="汽车,汽车之家,汽车网,汽车报价,汽车图片,新闻,评测,社区,俱乐部"/>
+    描述 本页面介绍 摘要
+    <meta name="description" content="汽车之家为您提供最新汽车报价，汽车图片，汽车价格大全，最全的中国汽车网站。"/>
+    IE兼容
+    <meta http-equiv="X-UA-Compatible" content="IE=9;IE=8;IE=7" />
+-->
+    <title>用来显示本页面标题</title>
+    <!--
+
+    <link />
+    <link rel="shortcut icon" href="图标文件">搞title图标
+    <style>
+    <script>
+    -->
+
+</head>
+<body>
+<!--要搞明白块级标签和行内标签，
+大部分都是块级标签，标签之间的内容占整行；行内标签写多少占多少。-->
+<!--段落p 段落之间有空行， 换行br 无空行-->
+    <p>sadfsfsafsaffsadfd<br/>asasa<br/>sfsafds</p>
+    <p>1</p>
+    <p>2</p>
+<!--特殊符号:http://www.cnblogs.com/web-d/archive/2010/04/16/1713298.html
+图标：空格&nbsp;，小于号右尖括号&lt;， 大于号左尖括号&gt;，示例  李    <a>杰-->
+    <p>李&nbsp;&nbsp;&nbsp;&nbsp;&lt;a&gt;杰</p>
+<!--页内标题，加大加粗，从大到小，最小h6.-->
+    <h1>hello</h1>
+    <h2>hello</h2>
+    <h3>hello</h3>
+    <h4>hello</h4>
+    <h5>hello</h5>
+    <h6>hello</h6>
+<!--span是行内标签（内联标签），无特性，像一个白板，因此可以用css好好打扮，想变成什么都可以-->
+    <span>hello</span><span>hello</span><!--这两个span的hello是连在一起的，无空格-->
+    <span>hello</span>
+    <span>hello</span>
+<!--牛逼标签div 使用率最多-->
+    <div>&lt;div&gt;是块级标签，无特性，也是一个白板，因此是css的好材料，用的非常多</div>
+    <div>标签之间可以嵌套</div>
+    <div>标签存在的意义：为了更容易操作内容，定位操作、css操作、js操作都非常方便</div>
+    <div>chrome审查元素的使用：
+        放大镜
+        -定位
+        -查看样式
+    </div>
+<!--表单form  输入input 是行内标签 -->
+    <form>
+        <input type="text"/><!--文本框输入-->
+        <input type="password"><!--密码框输入-->
+        <input type="button" value="登录1"><!--按钮输入-->
+        <input type="submit" value="登录2"><!--提交按钮输入-->
+    </form>
+</body>
+</html>

@@ -1,0 +1,126 @@
+前端三大利器：
+1，html 框架，裸体的人
+2，css  给这个人打扮、穿衣戴帽
+3，js   让这个人动起来，怎么动
+
+一次请求的过程：
+    客户端发送请求
+    服务端接收请求
+    把要返回给客户端的字符串加上浏览器能识别的标签，写在文件里。这个就是前端干的事。
+    服务端读出文件
+    发送给客户端
+    服务端关闭该连接。
+
+要干前端的活：除了三大利器，还要掌握web框架，才可以写出比较好的前端代码。
+
+测试：
+    1，本地测试，就是直接找到写好的html文件，用浏览器打开看效果
+    2，pycharm测试，pycharm写完html代码后，就已经内建了socket服务端，在IDE上点浏览器打开。
+    3，有些时候pycharm试不出效果，就用本地测试方法即可。
+
+css:
+    1，即可以写在标签的style属性里，也可以写在head标签的<style>标签里,还可以写在单独的.css文件中，用link标签。
+        <link rel="stylesheet" href="coms.css"> (css1,css3)
+    2，格式：
+        key：value键值对的写法，多个key：value之间用分号隔开
+
+            background-color: #2459a2;
+            height:48px;
+            color: white;
+            ...
+            (css1)
+    3， 注释：/*  */(css1)
+    4， 选择器
+          - id选择器
+                   #i1{
+                    background-color: #2459a2;
+                    height:48px;
+                    color: white;
+                }
+                <div id="i1">1</div>
+
+          - class选择器 最常用的 *****
+                  .c1{
+                    background-color: #dddddd;
+                    height:48px;
+                }
+                    <span class="c1">2asdfadaf</span>
+
+          - 标签选择器
+                div{
+                    ...
+                }
+                html里所有的div设置成该样式
+
+          - 层级选择器，用空格分开，找到最底层的一个，不要写的太深。*****
+                  .c1 .c2 div{
+                    ....
+                  }
+          - 组合选择器，用逗号分开，给多个标签应用共同的样式*****
+                    .c1,.c2,div{
+                    ....
+                  }
+          - 属性选择器 *****
+                中括号[属性]{...}
+                教程里说：对选择到的标签通过属性再进行一次筛选
+                    input[type="password"]或
+                    .c3[type="password"]
+
+                但是我没有通过前缀，直接用[n="alex"]也可以实现,上面单独用[type="password"]也可以实现。
+                [n="alex"]{
+                    width: 100px;
+                    height: 200px;
+
+                }
+                input[type="password"]{
+                    width: 200px;
+                    height: 100px;
+
+                }
+                <input class="c2" type="text" n="alex"/><!--n="alex"是自定义属性-->
+                <input class="c3" type="password" />
+                (css1)
+        ps：优先级
+            当多个样式对同一标签有重叠部分，按就近原则生效，标签上的最优先。(css2)
+
+    5，边框
+        - 宽度，线型，颜色（border: 1px solid red;）
+        - 可以单独设置边框的左右上下border-left\right\top\bottom
+
+        (css4)
+    6，height、width、line-height、color、font-size、font-weight
+                height: 48px;      高度
+                width:80%;         宽度 （像素、百分比）
+                color: black;      字体颜色
+                font-size: 16px;   字体大小
+                font-weight: bold  字体加粗
+                text-align: center;文字水平居中
+                line-height: 48px; 垂直方向根据标签高度居中
+       (css4)
+
+    7，float
+        让标签浮起来，块级标签也可以堆叠。
+        老子管不住：
+         在最后加：<div style="clear: both"></div><!--管住float起来的儿子-->
+        (css5,css6)
+
+    8,display
+        display：none --让标签消失
+        display: inline
+        display: block
+        display：inline—block
+           既具有inline，默认自己有多少占多少的特性；
+           又具有block，可以设置宽、高、内边距、外边距的特性。
+
+        ******
+        行内标签：无法设置宽、高、内边距、外边距
+        块级标签：可以设置宽、高、内边距、外边距
+        (css7)
+
+    9,padding margin
+        padding:内边距
+        margin:外边距
+        margin(0,auto)0指上下，auto指左右
+        （css8，css6）
+
+

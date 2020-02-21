@@ -1,0 +1,114 @@
+jsonp的js实现
+
+一，什么是jsonp？
+  JSONP是JSON with Padding的略称。可以让网页从别的域名（网站）那获取资料，即跨域读取数据。
+创建一个回调函数，然后在远程服务上调用这个函数并且将JSON 数据形式作为参数传递，完成回调。
+
+
+#--------http://127.0.0.1:8001源中
+访问http://127.0.0.1:8002/get_byjsonp/这个api接口---------
+
+<script>
+    function fun1(arg){ //创建一个回调函数
+        alert("hello"+arg)
+    }
+</script>
+//利用src属性可跨域访问的特性
+<script src="http://127.0.0.1:8002/get_byjsonp/"></script>  //返回：<script>fun1("yuan")</script>
+
+
+
+#---------http://127.0.0.1:8002/get_byjsonp中view函数的写法利用jsonp
+
+def get_byjsonp(req):
+    print('8002...')
+    return HttpResponse('fun1("yuan")')
+
+
+'fun1()'就是8001源中的回调函数，而"yuan"就是8002发送给8001的数据
+
+当8001对8002实现跨域访问时，
+8002会发送jsonp对象（8001的回调函数和填充数据），
+8001执行自己的回调函数处理8002发过来的填充数据。
+
+二，利用jQuery的ajax可以很方便的实现JSONP来进行跨域访问。　　
+
+注解1: JSONP一定是GET请求
+ jsonpCallback参数可以不定义，
+ jquery会自动定义一个随机名发过去，
+ 那前端就得用回调函数来处理对应数据了。
+<script src="/static/jquery-1.8.2.min.js"></script>
+<script type="text/javascript">
+    function f(){
+        $.ajax({
+        url:"http://127.0.0.1:8002/get_byjsonp",
+        dataType:"jsonp",       //类型为jsonp
+        jsonp: 'callbacks',
+        //定义jsonp回调函数关键字，但并不用定义回调函数名
+        //实际上success的匿名函数就具备了回调函数的功能。
+        success :function(data){        //传过来的数据会被转换成js对象
+            console.log(data);          //Object {name: Array[2]}
+            console.log(typeof data);   //object
+            console.log(data.name)      //["alex", "alvin"]
+        }
+   });
+    }
+</script>
+-----------------------8002views.py
+def get_byjsonp(req)://建立跨域访问函数，提供数据
+
+    func=req.GET.get("callbacks")//取得8001ajax发过来的随机回调函数名
+
+    a=json.dumps({'name':('alex','alvin')})//给8001的数据
+    return HttpResponse("%s(%s)"%(func,a))//把数据装入回调函数返回给8001.
+
+
+    #return HttpResponse("%s({'name':('alex','alvin')})"%func)
+
+    #return HttpResponse("%s('hello')"%func)
+    #return HttpResponse("%s([12,34])"%func)
+    #return HttpResponse("%s(5)"%func)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <button onclick="f()">submit</button>
+
+    <script>
+        function addScriptTag(src){
+         var script = document.createElement('script');
+             script.setAttribute("type","text/javascript");
+             script.src = src;
+             document.body.appendChild(script);
+             document.body.removeChild(script);
+        }
+        function SayHi(arg){ //回调函数
+            alert("Hello "+arg)
+        }
+
+        function f(){//跨域访问
+             addScriptTag("http://127.0.0.1:8002/get_byjsonp/?callbacks=SayHi")
+        }
+    </script>
+
+    将客户端定义的回调函数的函数名传送给服务端，
+    服务端则会返回以你定义的回调函数名的方法，
+    将获取的json数据传入这个方法完成回调：----------》
+    ----------------------views.py------------
+
+    def get_byjsonp(req):
+
+        func=req.GET.get("callbacks")
+
+        return HttpResponse("%s('yuan')"%func)

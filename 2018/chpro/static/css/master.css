@@ -1,0 +1,123 @@
+/*出现横向滚动条，宽度一定,页面大小固定，栅格全部为xs*/
+    .container{
+        width: 1090px;!important;
+        margin: 0 auto;!important;
+    }
+    body{
+        padding-top: 50px;
+    }
+    /*限制页面最小宽度，小于该宽度将出现滚动条，取消bootstrap的窗口响应*/
+    .min_width{
+        min-width: 1238px;
+
+    }
+
+/*导航区禁止出现media，就用了自己定义的*/
+    .navtop{
+        position: fixed;
+        top:0;!important;
+        right: 0;
+        left: 0;
+        height: 50px;
+        margin-right: 0;
+        margin-left: 0;
+        border-radius: 0;
+        z-index: 1030;
+        background-color: white;
+
+    }
+    /*导航条log框大小，边距*/
+    .nav-log{
+        padding-top: 5px;
+    }
+    .nav-log img{
+        width:50px;
+        display: block;
+    }
+
+
+/*导航条右侧搜索框和菜单的响应大小*/
+    .nav-right{
+        display: block!important;
+        width: 100%;
+        height: auto!important;
+        padding-left: 0;
+        padding-bottom: 0;
+        list-style: none;
+        /*overflow: visible!important;*/
+    }
+    .nav-right .li-block{
+
+        display: block;
+        float: left;
+        padding: 15px 6px 13px;
+
+    }
+    .nav-right .li-block>a{
+        color: #333;
+        padding: 10px;
+    }
+    .nav-right li>a:hover {
+        color: #262626;
+        text-decoration: none;
+        background-color: #f5f5f5;
+    }
+
+    .navbar-form1 {
+        padding: 0 15px;
+        margin-top: 8px;
+        margin-right: 0;
+        margin-left: 0;
+        width: 28%;
+        border: 0;
+        float: left;
+    }
+    .navbar-form1 .input-group {
+        width: 100%;
+    }
+
+/*侧边栏*/
+    .fixed-btn {/*侧边栏总外框及定位*/
+        position: fixed;
+        right: 1%;
+        bottom: 5%;
+        width: 40px;
+        border: 1px solid #eee;
+        background-color: #f7f7f7;
+        font-size: 24px;
+        z-index: 1040;
+        -webkit-backface-visibility: hidden;
+    }
+    .fixed-btn .right-until {
+        border-bottom: 1px solid #eee;
+    }
+    .fixed-btn a {
+        display: inline-block;
+        width: 39px;
+        height: 40px;
+        text-align: center;
+        line-height: 40px;
+    }
+    .fixed-btn .writer {
+        font-size: 24px;
+    }
+/*登录提示*/
+    .user-error,.pwd-error{
+        color: #e62e2e;
+        display: none;
+    }
+/*注册提示*/
+    .error_tip {
+        color: #e62e2e;
+        display: none;
+    }
+/*同意用户协议*/
+    .error_tip2 {
+        color: #e62e2e;
+        display: none;
+    }
+
+/*底部a标签字体*/
+    footer a{
+        color:#333;
+    }

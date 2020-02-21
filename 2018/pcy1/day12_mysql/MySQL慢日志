@@ -1,0 +1,35 @@
+MySQL慢日志
+
+在MySQL的配置文件my-default.ini中加入以下语句开启慢日志
+
+slow_query_log=ON                   #开启慢日志
+log_queries_not_using_indexes=ON    #没有命中索引
+long_query_time=0.5                 #查询时间超过0.5秒
+slow_query_log_file=D:\slow.log     #慢日志路径和名称
+
+mysql默认未开启慢日志。
+    mysql正常启动是输入
+        --mysqld
+    这时候的配置文件在内存中，内存中的配置文件有如下的值
+    slow_query_log=OFF
+    log_queries_not_using_indexes=OFF
+    long_query_time=1
+    slow_query_log_file=...
+
+如何开启慢日志？
+
+    方式1：重启服务
+        写一个配置文件，在配置文件加入如下值
+        slow_query_log=ON                   #开启慢日志
+        log_queries_not_using_indexes=ON    #没有命中索引
+        long_query_time=0.5                 #查询时间超过0.5秒
+        slow_query_log_file=D:\slow.log     #慢日志路径和名称
+        mysqld--default-files=c:\my-default.ini #重启MySQL服务加入配置文件
+
+    方式2：直接在内存中改
+        查看配置中相关设置命令：show variables like '%query%';
+        设置配置中相关值命令：
+        set long_query_time=0.5;
+        这就直接在内存中改了，但是重启后该值还是原来的。
+
+        不要轻易重启mysql，运行多年的mysql重启很可能就起不来了。

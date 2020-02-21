@@ -1,0 +1,517 @@
+
+第二节，标准库
+
+一，时间模块：time和datatime
+    1，时间的表示方法;
+        a,格式化的时间字符串'2016-08-20 13:08:01'--->
+
+        b,时间戳：自1970年到现在的秒数。---> time.time()
+
+        c,时间的元组（struct_time）:共九个元素，年、月、日、时、分、秒、星期、一年中的第几天、是否使用夏时制（0表示不使用）
+          --->time.localtime()
+          time.struct_time\
+          (tm_year=2017, tm_mon=8, tm_mday=25, tm_hour=23, tm_min=50, tm_sec=37, tm_wday=4, tm_yday=237,\
+           tm_isdst=0)
+           星期是（星期一0，星期天是6），tm_wday=4,表示星期五。
+
+
+    2,python中时间日期格式化符号：
+        %y 两位数的年份表示（00-99）
+        %Y 四位数的年份表示（000-9999）
+        %m 月份（01-12）
+        %d 月内中的一天（0-31）
+        %H 24小时制小时数（0-23）
+        %I 12小时制小时数（01-12）
+        %M 分钟数（00=59）
+        %S 秒（00-59）
+        %a 本地简化星期名称
+        %A 本地完整星期名称
+        %b 本地简化的月份名称
+        %B 本地完整的月份名称
+        %c 本地相应的日期表示和时间表示
+        %j 年内的一天（001-366）
+        %p 本地A.M.或P.M.的等价符
+        %U 一年中的星期数（00-53）星期天为星期的开始
+        %w 星期（0-6），星期天为星期的开始
+        %W 一年中的星期数（00-53）星期一为星期的开始
+        %x 本地相应的日期表示
+        %X 本地相应的时间表示
+        %Z 当前时区的名称
+        %% %号本身
+
+    3,datetime模块
+
+
+二，random随机模块
+
+    import  random
+    1，# 随机浮点数
+        print random.random() #生成0到1之间的随机浮点数。
+        print random.uniform(1,10)#生成1到10之间的随机浮点数。
+    2，# 随机整数
+        print random.randint(1,7) #生成1到7之间的随机整数（包含1和7）[1,7]
+        print random.randrange(7)#生成0到7之间的随机整数（包含0，不包含7）[1,7）
+        print random.randrange(0,101,2)#随机选取0到100间的偶数
+    3，# 随机序列
+        print random.choice((1,'a',66))#从一个序列中随机找一个值
+        print random.choice('hello')#从一个序列中随机找一个值
+        print random.sample('hello',2)#从一个序列中随机取两个值，组成列表
+
+    4，# 洗牌
+        items=[1,2,3,4,5,6,7]
+        print  items
+        random.shuffle(items)
+        print  items
+
+三，os操作系统模块
+os模块提供对操作系统进行调用的接口，实现对文件或目录的增删改查。
+
+import os
+
+    1,获取当前工作目录，即当前python脚本工作的目录路径，类似linux下的pwd
+        print os.getcwd()
+    2，切换目录，相当于shell下的cd
+        os.chdir('..')
+        print os.getcwd()
+    3，返回当前目录：（‘.’）
+        os.curdir
+        print os.getcwd()
+
+    4，获取当前目录的父目录的字符串名：（‘..’）
+        print os.pardir
+    5，生成多层递归目录
+        # os.makedirs(r'd:\a\b\c\d')
+    6，递归删除空目录
+        # os.removedirs(r'd:\a\b\c\d')
+    7，生成单级目录
+        # os.mkdir(r'd:\a')
+    8，删除单级空目录
+        # os.rmdir(r'd:\a')
+    9，列出指定目录下的所有文件和子目录，包括隐藏文件，并以列表方式打印
+        print os.listdir(r'.')
+    10，删除一个文件
+        # os.remove(r'd:\a.txt')
+    11，重命名文件/目录
+        # os.rename(r'd:\a.txt',r'b.txt')#'d:\a.txt'没了，在当前目录下D:\wksp1\pcy1\day5_import_lib多了个b.txt。
+    12，获取文件/目录信息
+        print os.stat(r'b.txt')
+
+    13，输出操作系统特定的路径分隔符，win下为'\\',linux下为'/',可实现跨平台。
+        # print os.sep
+    14,输出当前平台的行终止符，win下为'\r\n',linux下为'\n'
+        # print os.linesep
+    15，当有多个路径是，输出用于分割文件路径的字符串，win下为';'，linux下为':'
+        print os.pathsep
+        # >>> os.linesep
+        # '\r\n'
+        # >>> os.sep
+        # '\\'
+        # >>> os.pathsep
+        # ';'
+    16，输出当前平台类型名字的字符串。win->'nt',linux->'posix'
+        # >>> os.name
+        # 'nt'
+    17，运行shell命令，直接显示
+        # os.system('dir')#调用系统命令,不保存结果，返回0值，和linux一样表示执行成功
+        #
+        # cms=os.popen('dir').read() # popen调用系统命令,保存结果在内存临时地址，通过read读出来
+        # print cms.decode('gbk')
+    18，获取系统环境变量
+        print os.environ
+    19，获取当前文件的绝对路径
+        print  os.path.abspath(__file__)
+    20，将path分割成目录和文件名二元组返回
+        print os.path.split(r'c:\a\b\c\a.txt')#('c:\\a\\b\\c', 'a.txt')
+
+    21，返回上一级目录。
+        print os.path.dirname(os.path.abspath(__file__))
+    22，只取path最后的文件名。如果path以/或\结尾，那么就会返回空值，即os.path.spilt(path)的第二个元素
+        print os.path.basename(os.path.abspath(__file__))
+    23，如果path存在，返回True，如果path不存在，返回False。
+        print os.path.exists(r'c:\a\b\c\a.txt')
+        print os.path.exists(os.path.abspath(__file__))
+    24，如果path是绝对路径，返回True win下有多个根c:\,d:\等，linux下只有一个根/.
+        print os.path.isabs(r'c:\a')
+        # >>> os.path.isabs(r'c:\a')
+        # True
+        # >>> os.path.isabs(r'c:')
+        # False
+        # >>> os.path.isabs(r'/a/b/c')
+        # True
+    25，如果path是一个存在的文件，返回True，等于做了两件是1，存在吗，2，是文件吗
+        # >>> os.path.isfile(r'c:\a.txt')#这个文件不存在
+        # False
+        # >>> os.path.isfile(r'c:\sparkraw.log')
+        # True
+
+    26，如果path是一个存在的目录，返回True
+        # >>> os.path.isdir(r'c:')
+        # True
+
+    27，将多个路径组合后返回，第一个绝对路径之前的参数将被忽略
+        # >>> os.path.join('c:','\a','b','c.txt')#没有r
+        # 'c:\x07\\b\\c.txt'
+        # >>> os.path.join('c:','a','b','c.txt')#没有r也没有\
+        # 'c:a\\b\\c.txt'
+        # >>> os.path.join('c:',r'\a','b','c.txt')#对于win，在盘符后跟r'\'
+        # 'c:\\a\\b\\c.txt'
+    28，返回path所指向的文件或者目录的最后存取时间-时间戳格式
+        # >>> os.path.getatime(r'c:\sparkraw.log')
+        # 1482173508.5647464
+
+    29，返回path所指向的文件或者目录的最后修改时间-时间戳格式
+        # >>> os.path.getmtime(r'c:\sparkraw.log')
+        # 1503641703.3386898
+
+三，sys模块
+    1 sys.argv           读取命令行参数List，第一个元素是程序本身路径
+    2 sys.exit(n)        退出程序，正常退出时exit(0)
+    3 sys.version        获取Python解释程序的版本信息
+    4 sys.maxint         最大的Int值
+    5 sys.path           返回模块的搜索路径，初始化时使用PYTHONPATH环境变量的值
+    6 sys.platform       返回操作系统平台名称
+    7 sys.stdout.write('please:')    在标准输出设备屏幕上输出please：对应print
+    8 val = sys.stdin.readline()[:-1]   在标准输入设备上输入，相当于raw_input,-1表示全部接收，0表示关闭，1表示接收1个字节
+
+四，shelve模块
+用于数据序列化和反序列化，可以持久化任何pickle可支持的python数据格式，比pickle方便。
+
+import shelve
+
+    import datetime
+
+# shelve模块是一个简单的k,v将内存数据通过文件持久化的模块，可以持久化任何pickle可支持的python数据格式
+
+    d = shelve.open('shelve_test')  # 打开一个文件
+
+    # 序列化
+    # info={'age':22,'job':'it'}
+    # name=[1,2,'alex']
+    # d['info']=info #持久化字典 相当于pickle的dump
+    # d['name']=name #持久化列表
+    # d['now_time']=datetime.datetime.now() #持久化datetime，而json是不能序列化改数据类型的
+    # d.close()
+
+    # 反序列化
+    print (d.get('info')) #相当于pickle的load
+    print (d.get('name'))
+    print (d.get('now_time'))
+    print (d.items()) #一次性读取序列化中的所有元素。
+
+五，xml模块
+    xml是实现不同语言或程序之间进行数据交换的协议，跟json差不多，但json使用起来更简单，
+    不过，古时候，在json还没诞生的黑暗年代，大家只能选择用xml，至今很多传统公司如金融行业的很多系统的接口还主要是xml。
+    xml协议在各个语言里的都是支持的。
+
+    可以用该模块创建、修改xml文件。
+
+    import xml.etree.ElementTree as ET
+    tree = ET.parse('xml_test.xml') 加载xml文件相当于json的load
+    root = tree.getroot() 获取根标签
+
+    <rank updated="yes">2</rank>
+    rank是标签tag，updated="yes"是属性attrib，2是内容text
+
+
+六，PyYAML模块
+
+    1，YAML介绍
+
+    多行缩进
+        数据结构可以用类似大纲的缩排方式呈现，
+        结构通过缩进来表示，连续的项目通过减号“-”来表示，map结构里面的key/value对用冒号“:”来分隔。样例如下：
+
+        house:
+          family:
+            name: Doe
+            parents:
+              - John
+              - Jane
+            children:
+              - Paul
+              - Mark
+              - Simone
+          address:
+            number: 34
+            street: Main Street
+            city: Nowheretown
+            zipcode: 12345
+    注意：
+        字串不一定要用双引号标识；
+        在缩排中空白字符的数目并不是非常重要，只要相同阶层的元素左侧对齐就可以了（不过不能使用TAB字符）；
+        允许在文件中加入选择性的空行，以增加可读性；
+        在一个档案中，可同时包含多个文件，并用“——”分隔；
+        选择性的符号“...”可以用来表示档案结尾（在利用串流的通讯中，这非常有用，可以在不关闭串流的情况下，发送结束讯号）。
+
+    单行缩写
+        YAML也有用来描述好几行相同结构的数据的缩写语法，数组用'[]'包括起来，hash用'{}'来包括。因此，上面的这个YAML能够缩写成这样:
+        house:
+          family: { name: Doe, parents: [John, Jane], children: [Paul, Mark, Simone] }
+          address: { number: 34, street: Main Street, city: Nowheretown, zipcode: 12345 }
+
+    特色;
+        1,其让人最容易上手的特色是巧妙避开各种封闭符号，如：引号、各种括号等，这些符号在嵌套结构中会变得复杂而难以辨认。
+        2,YAML是纯粹用来表达资料的语言，所以内部不会存代码注入的可执行命令。
+
+    应用场景：
+        1，脚本语言
+        由于实现简单，解析成本很低，YAML特别适合在脚本语言中使用。
+        列一下现有的语言实现：Ruby，Java，Perl，Python，PHP，OCaml，JavaScript，除了Java，其他都是脚本语言。
+
+        2，序列化
+        YAML比较适合做序列化。因为它是宿主语言数据类型直转的。
+
+        3，配置文件
+        YAML做配置文件也不错。写YAML要比写XML快得多(无需关注标签或引号)，并且比ini文档功能更强。
+        比如Ruby on Rails的配置就选用的YAML。对ROR而言，这很自然，也很省事.
+        由于兼容性问题，不同语言间的数据流转建议不要用YAML.
+
+    2，PyYAML模块
+
+    是python用来对YAML解析的模块
+    参照如下信息安装和使用;
+    Installation
+
+    Download the source package PyYAML-3.08.tar.gz and unpack it. Go to the directory PyYAML-3.08 and run
+        $ python setup.py install
+
+    If you want to use LibYAML bindings, which are much faster than the pure Python version, you need to download
+    and install LibYAML. Then you may build and install the bindings by executing
+        $ python setup.py --with-libyaml install
+
+    In order to use LibYAML based parser and emitter, use the classes CParser and CEmitter. For instance,
+
+        from yaml import load, dump
+        try:
+            from yaml import CLoader as Loader, CDumper as Dumper
+        except ImportError:
+            from yaml import Loader, Dumper
+
+        # ...
+
+        data = load(stream, Loader=Loader)#读入YAML
+
+        # ...
+
+        output = dump(data, Dumper=Dumper)#写入YAML
+
+    Note that there are some subtle (but not really significant) differences between pure Python and
+    LibYAML based parsers and emitters.
+
+        import yaml
+        document = """
+          a: 1
+          b:
+            c: 3
+            d: 4
+        """
+        print yaml.dump(yaml.load(document))
+
+    give load的结果是字典的格式
+        a: 1
+        b: {c: 3, d: 4}
+
+
+七，ConfigParser模块
+    用于生成和修改常见配置文档，当前模块的名称在 python 3.x 版本中变更为 configparser。
+
+    来看一个好多软件的常见文档格式如下:
+
+        [DEFAULT]
+        ServerAliveInterval = 45
+        Compression = yes
+        CompressionLevel = 9
+        ForwardX11 = yes
+
+        [bitbucket.org]
+        User = hg
+
+        [topsecret.server.com]
+        Port = 50022
+        ForwardX11 = no
+
+    用python生成一个这样的文档
+
+
+
+八，hashlib模块与hmac 模块
+    用于加密相关的操作，3.x里代替了md5模块和sha模块，
+    主要提供 SHA1, SHA224, SHA256, SHA384, SHA512 ，MD5 算法，都是基于hash的。
+
+    还不够吊？python 还有一个 hmac 模块，它内部对我们创建 key 和 内容 再进行处理然后再加密，
+    相当于双层加密。
+
+    散列消息鉴别码，简称HMAC，是一种基于消息鉴别码MAC（Message Authentication Code）的鉴别机制。
+    使用HMAC时,消息通讯的双方，通过验证消息中加入的鉴别密钥K来鉴别消息的真伪。
+    速度比较快。
+
+    一般用于网络通信中消息加密，前提是双方先要约定好key,就像接头暗号一样，然后消息发送用key消息加密，
+    接收方用key ＋ 消息明文再解密，拿加密后的值跟 发送者的相对比是否相等，
+    这样就能验证消息的真实性，及发送者的合法性了
+
+九，正则表达式见-->> python正则表达式word文档
+
+十，loging模块
+
+    1 简单使用
+
+        #!/usr/local/bin/python
+        # -*- coding:utf-8 -*-
+        import logging
+
+        logging.debug('debug message')
+        logging.info('info message')
+        logging.warn('warn message')
+        logging.error('error message')
+        logging.critical('critical message')
+        输出：
+
+        WARNING:root:warn message
+        ERROR:root:error message
+        CRITICAL:root:critical message
+        默认情况下，logging模块将日志打印到屏幕上(stdout)，
+        日志级别为WARNING(即只有日志级别高于WARNING的日志信息才会输出)，日志格式如所示：
+        WARNING:root:warn message
+        日志级别：logger实例名称：日志消息
+
+        简单配置
+
+    2 日志级别
+
+            级别	        何时使用
+            DEBUG	    详细信息，典型地调试问题时会感兴趣。
+            INFO	    证明事情按预期工作。
+            WARNING	    表明发生了一些意外，或者不久的将来会发生问题（如‘磁盘满了’）。软件还是在正常工作。
+            ERROR	    由于更严重的问题，软件已不能执行一些功能了。
+            CRITICAL	关键错误，表明软件已不能继续运行了
+
+            级别	        数值
+            CRITICAL	50
+            ERROR	    40
+            WARNING	    30
+            INFO	    20
+            DEBUG	    10
+            NOTSET	    0
+
+    3 简单配置
+
+        #!/usr/local/bin/python
+        # -*- coding:utf-8 -*-
+        import logging
+
+        # 通过下面的方式进行简单配置输出方式与日志级别
+        logging.basicConfig(filename='logger.log', level=logging.INFO)
+
+        logging.debug('debug message')
+        logging.info('info message')
+        logging.warn('warn message')
+        logging.error('error message')
+        logging.critical('critical message')
+        输出：
+        标准输出(屏幕)未显示任何信息，发现当前工作目录下生成了logger.log，内容如下：
+
+        INFO:root:info message
+        WARNING:root:warn message
+        ERROR:root:error message
+        CRITICAL:root:critical message
+        因为通过level=logging.INFO设置日志级别为INFO，所以除debug外的日志信息均输出出来了。
+
+    4 几个重要的概念
+
+        Logger 记录器，暴露了应用程序代码能直接使用的接口。
+        Handler 处理器，将（记录器产生的）日志记录发送至合适的目的地。
+        Filter 过滤器，提供了更好的粒度控制，它可以决定输出哪些日志记录。
+        Formatter 格式化器，指明了最终输出中日志记录的布局。
+
+    5 Logger 记录器
+
+
+        5.1 在使用接口debug，info，warn，error，critical之前必须创建Logger实例，
+            即创建一个记录器，如果没有显式的进行创建，则默认创建一个root logger，并应用默认的日志级别(WARN)，
+            处理器Handler(StreamHandler，即将日志信息打印输出在标准输出上)，
+            和格式化器Formatter(默认的格式即为第一个简单使用程序中输出的格式)。
+
+            创建方法: logger = logging.getLogger(logger_name)
+            创建Logger实例后，可以使用以下方法进行日志级别设置，增加处理器Handler。
+
+            logger.setLevel(logging.ERROR) # 设置日志级别为ERROR，即只有日志级别大于等于ERROR的日志才会输出
+            logger.addHandler(handler_name) # 为Logger实例增加一个处理器
+            logger.removeHandler(handler_name) # 为Logger实例删除一个处理器
+
+
+        5.2 Loggers 具有以下的属性和方法：
+            注意永远不要直接初始化Loggers，而应该通过模块级别的函数logging.getLogger(name)来得到它。
+            以相同的名称多次调用getLogger()将永远返回相同Logger对象的引用。
+
+            Logger是一个树形层级结构，name可以是一个以句号分隔的层次结构的值，比如foo.bar.baz（它也可以只是普通的foo）。
+            层次列表下游的loggers是上游loggers的子孙。
+            例如，对于名称为foo的logger，名称为foo.bar、foo.bar.baz和foo.bam的logger都是foo的后代。
+            logger名称的层次结构类似于Python包的层次结构，
+            如果你使用建议的构造方式logging.getLogger(__name__)来组织你的基于模块的loggers，
+            那么层次结构就是一样的。因为在一个模块中，__name__是Python包命名空间中模块的名字。
+
+            class logging.Logger
+            Logger.propagate
+            如果它为真，记录到该logger的事件除了传递给该logger的handler之外，也被传递给上游（祖先）logger的handler。
+            信息将直接传递给祖先logger的handler - 不会考虑祖先logger的级别和filter。
+
+            如果它为假，日志消息不会传递给祖先loggers的handlers。
+
+            构造函数设置该属性为True。
+
+            注: 如果你添加一个handler到logger和 它的一个或多个祖先中，它可能多次打印相同的记录。
+            一般来说，你不应该需要将一个handler添加给多个logger - 如果你只将它添加到合适的logger而它是logger层次中最高的，
+            那么它将看到所有子logger记录的事件，只要它们的propagate设置保留为True。
+            一个常见的场景是将handlers附加给根logger，然后让propagation负责剩下的事情。
+
+    6 Handler 处理器
+
+        Handler处理器类型有很多种，比较常用的有三个，StreamHandler，FileHandler，NullHandler。
+
+        创建StreamHandler之后，可以通过使用以下方法设置日志级别，设置格式化器Formatter，增加或删除过滤器Filter。
+
+        ch.setLevel(logging.WARN) # 指定日志级别，低于WARN级别的日志将被忽略
+        ch.setFormatter(formatter_name) # 设置一个格式化器formatter
+        ch.addFilter(filter_name) # 增加一个过滤器，可以增加多个
+        ch.removeFilter(filter_name) # 删除一个过滤器
+
+        StreamHandler
+        创建方法: sh = logging.StreamHandler(stream=None)
+
+        FileHandler
+        创建方法: fh = logging.FileHandler(filename, mode='a', encoding=None, delay=False)
+
+        NullHandler
+
+        NullHandler类位于核心logging包，不做任何的格式化或者输出。
+        本质上它是个“什么都不做”的handler，由库开发者使用。
+
+
+
+    7 Formatter 格式化器
+
+        使用Formatter对象设置日志信息最后的规则、结构和内容，默认的时间格式为%Y-%m-%d %H:%M:%S。
+
+        创建方法: formatter = logging.Formatter(fmt=None, datefmt=None)
+        其中，fmt是消息的格式化字符串，datefmt是日期字符串。
+        如果不指明fmt，将使用'%(message)s'。
+        如果不指明datefmt，将使用ISO8601日期格式。
+
+    8 Filter 过滤器
+
+        Handlers和Loggers可以使用Filters来完成比级别更复杂的过滤。
+        Filter基类只允许特定Logger层次以下的事件。
+        例如用‘A.B’初始化的Filter允许Logger ‘A.B’, ‘A.B.C’, ‘A.B.C.D’, ‘A.B.D’等记录的事件，
+        logger‘A.BB’, ‘B.A.B’ 等就不行。
+        如果用空字符串来初始化，所有的事件都接受。
+
+        创建方法: filter = logging.Filter(name='')
+
+    9 以下是相关概念总结:
+
+        熟悉了这些概念之后，有另外一个比较重要的事情必须清楚，即Logger是一个树形层级结构;
+        Logger可以包含一个或多个Handler和Filter，即Logger与Handler或Fitler是一对多的关系;
+        一个Logger实例可以新增多个Handler，一个Handler可以新增多个格式化器或多个过滤器，而且日志级别将会继承。
+
+
+

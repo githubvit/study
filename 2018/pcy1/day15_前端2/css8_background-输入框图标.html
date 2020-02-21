@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .c1{
+            width: 365px;
+            height: 35px;
+            padding-right: 30px;
+            background: url('i_name.jpg') no-repeat ;
+            background-position: right;
+        }
+        .c2{
+            position: absolute;
+            right:10px;
+            top:10px;
+            display: inline-block;height: 16px;width: 16px;
+            background: url('i_name.jpg') no-repeat;
+        }
+
+    </style>
+</head>
+<body>
+<!--直接在输入框添加-->
+    <input class="c1" type="text"/>
+    <p></p>
+
+
+<!--通过span标签分层添加-->
+    <div style="width:400px;height: 35px;position: relative;">
+        <input type="text" style="height: 35px;width: 365px;padding-right: 35px"/>
+        <span class="c2"></span>
+    </div>
+<!--两种效果对比，后一种漂亮-->
+</body>
+</html>

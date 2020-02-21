@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<!--a标签 行内标签 跳转 target="_blank"实现在新窗口打开-->
+<a href="http://www.baidu.com " target="_blank">百度</a>
+<!--a标签 锚点 实现本页面内的跳转 id只能唯一-->
+<!--<a href="#i1">第一章</a>-->
+<!--<a href="#i2">第二章</a>&lt;!&ndash;a标签 锚点 href="#某个标签的id"&ndash;&gt;-->
+<!--<a href="#i3">第三章</a>-->
+<!--<a href="#i4">第四章</a>-->
+<!--<div id='i1' style="height: 600px">内容1</div>-->
+<!--<div id='i2' style="height: 600px">内容2</div>-->
+<!--<div id='i3' style="height: 600px">内容3</div>-->
+<!--<div id='i4' style="height: 600px">内容4</div>-->
+<!--<div id='i5' style="height: 600px">内容5</div>-->
+
+<!--img标签 alt表示当照片找不到时显示的文字，title表示鼠标在图片上弹出的提示-->
+    <a href="http://www.baidu.com " target="_blank">
+        <img src="马20170924.png" style="height: 200px;width: 200px;" alt="百度" title="baidu"/>
+    </a>
+<!--ul和ol列表，ul行首带'.', ol用数字在行首，li表项 ,-->
+    <ul>
+        <li>afasf</li>
+        <li>afasf</li>
+        <li>afasf</li>
+        <li>afasf</li>
+    </ul>
+    <ol>
+        <li>afasf</li>
+        <li>afasf</li>
+        <li>afasf</li>
+        <li>afasf</li>
+    </ol>
+<!--dl列表 dt标题，dd内容-->
+    <dl>
+        <dt>a</dt>
+        <dd>123</dd>
+        <dd>123</dd>
+        <dd>123</dd>
+        <dt>b</dt>
+        <dd>456</dd>
+        <dd>456</dd>
+        <dd>456</dd>
+    </dl>
+<!--label标签,获取光标，实现点用户名也能在文本框输入,通过for属性-->
+    <label for="username">用户名：</label>
+    <input id='username' type="text" name="user"/>
+<!--fieldset标签 实现画框，在画框里添加内容-->
+    <fieldset>
+        <legend>登录</legend><!--登录出现在画框线中间，-->
+        <label for="username1">用户名：</label>
+        <input id='username1' type="text" name="user"/>
+    </fieldset>
+</body>
+</html>

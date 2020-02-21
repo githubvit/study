@@ -1,0 +1,60 @@
+jQuery循环后台取到的数据
+
+实例部分参见python全栈工程师 4
+0030-django官网项目之图片瀑布流实现（js）-VIP课程 开始时间01:58
+
+访问页面，执行相关views
+url render
+渲染的html开始什么都没有，紧接着页面通过js发送ajax请求，获取后台数据，
+构造后台数据结构--列表套字典,字典的key相同而值不同，前端就可以用jquery的each获取：
+
+1，构造后台数据结构：
+    views：通过orm从数据库取得的结果是queryset对象，queryset对象里面套的是字典，
+          <queryset{'k':'v'}>
+          queryset是形似列表，但不是列表，要将其进行转换
+          list(结果)
+          这样，就取得如下想要的数据结构---列表套字典：
+
+    [
+        {'k1':'v1','k2':'v2','k3':'v3','k4':'v4','k5':'v5',...},
+        {'k1':'av1','k2':'av2','k3':'av3','k4':'av4','k5':'av5',...},
+        {'k1':'bv1','k2':'bv2','k3':'bv3','k4':'bv4','k5':'bv5',...},
+        ...
+    ]
+
+    然后通过json.dumps()变成字符串发送到前端
+
+2，前端jQuery循环
+
+
+
+
+    拿到后台数据，通过jQuery进行循环
+
+    $.each(data,function(index,item){
+
+        ...循环所有的数据，index是列表的下标索引，item就是每个字典
+
+    })
+
+3，前端详细
+页面加载完成，执行ajax
+<script>
+    $(fuction(){
+        $.ajax({
+            url:'{{request.path_info}}',
+            type:'POST',//为了区分和刚开始获取页面的情况，用post，这样后台好处理。
+
+
+
+        })
+
+
+
+
+    })
+
+
+
+
+</script>

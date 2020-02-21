@@ -1,0 +1,19 @@
+数据库导入和导出命令：mysqldump
+
+1，导出
+    将现有数据库数据导出为数据库脚本：
+    mysqldump -u用户名 -p密码 数据库名称 >导出文件路径           # 结构+数据
+    mysqldump -u用户名 -p密码 -d 数据库名称 >导出文件路径       # 结构
+
+    mysqldump -uroot -p666 dbname > 1.sql   结构和数据都导出
+    将名为dbname数据库的表结构和数据导出为SQL脚本文件1.sql
+
+    mysqldump -uroot -d -p666 dbname > 1.sql 加入-d参数 仅结构
+    将名为dbname数据库的表结构导出为SQL脚本文件1.sql
+
+2，导入
+    将数据库脚本文件导入现有数据库：
+    mysqldump -uroot -p密码  数据库名称 < 文件路径
+
+    mysqldump -uroot -p666 dbname < 1.sql
+    将1.sql数据库脚本文件导入dbname数据库

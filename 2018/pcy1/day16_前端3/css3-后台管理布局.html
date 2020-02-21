@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="Font-Awesome-master/css/font-awesome.min.css"/>
+</head>
+<style>
+
+    .left{
+        float: left;
+    }
+    .right{
+        float: right;
+    }
+    .close{
+        clear:both;
+    }
+
+    .pg-header{
+        position:absolute;
+        left: 0;right: 0;
+        top:0;
+        background-color: #333;
+        height: 48px;
+        color:#ddd ;
+        line-height: 48px;
+
+    }
+    .li{
+        position: relative;
+
+
+    }
+    .popup{/*弹出框样式*/
+        position: absolute;
+        top: 50px;
+        left:-130px;
+        width: 150px;
+        height: 80px;
+        z-index: 10;
+        border: 1px solid #dddddd;
+        color: #888888;
+        display: none;
+        box-shadow: 0 5px 30px rgba(0,0,0,.3);/*阴影效果*/
+        z-index: 10;
+    }
+    .span-block{
+        display: inline-block;
+        padding: 0 10px;
+        cursor: pointer;
+
+    }
+    .span-block:hover{
+        background-color: #888888;
+    }
+    .span-block1{
+        display: block;
+        height: 30px;
+        font-size: 12px;
+        margin-left: 10px;
+        line-height: 30px;
+        cursor: default;/*箭头*/
+    }
+    .li:hover .popup{/*弹出框*/
+        display: block;
+    }
+    .border-radio{
+        display: inline-block;
+        position: absolute;
+        top: 5px;
+        right: 20px;
+        height: 13px;
+        width: 13px;
+        border-radius: 50%;
+        font-size: 11px;
+        background-color: #f7f7f7;
+        text-align: center;
+        line-height: 13px;
+        color: #444;
+
+    }
+    .log{
+        display: inline-block;
+        width: 65px;
+        margin-left: 65px;
+        margin-top: 5px;
+
+    }
+    .log img{
+        width: 65px;
+    }
+    .pg-bodyer{}
+    .left-menu{
+        width: 200px;
+        background: #3d3d3d;
+        color: #888;
+        position: absolute;
+        top:50px;
+        left: 0;
+        bottom: 0;
+        display: inline-block;
+
+
+    }
+    .menu-title{
+        font-size: 16px;
+        background: #3d3d3d;
+    }
+    .menu-content{
+        font-size: 13px;
+        background-color: #aaaaaa;
+    }
+    .right-content{
+        position: absolute;
+        left: 200px;
+        top:50px;
+        right: 0;
+        bottom: 0;
+        background-color: #f7f7f7 ;
+        overflow: auto;/*如果注释掉，左侧菜单会跟随，不注释，左侧菜单就固定*/
+
+        /*background-color: #aaaaaa;*/
+    }
+
+    .pg-footer{}
+</style>
+<body>
+<div class="pg-header">
+    <div class="log left">
+        <a href="#"><img src="logo2.png"></a>
+    </div>
+    <div class=""></div>
+    <div class="li right">
+
+        <a href="#"><img src="1h.jpg" style="height: 45px ;border: 0;padding-right: 10px"></a>
+        <div class="popup hiden">
+            <span class="span-block1">我的资料</span>
+            <span class="span-block1">退出</span>
+        </div>
+    </div>
+    <div class="right">
+
+        <span class="span-block">客户服务</span>
+        <span class="span-block">VIP会员俱乐部</span>
+        <span class="span-block">我的订单</span>
+        <span class="span-block">免费注册</span>
+        <span class="span-block">登录</span>
+        <span class="span-block" style="padding-right: 30px;position: relative;font-size: 19px">
+            <i class="fa fa-commenting-o" aria-hidden="true"></i>
+            <span class="border-radio">5</span>
+        </span>
+    </div>
+    <div class="close"></div>
+</div>
+<!--<hr/>-->
+<div class="pg-bodyer">
+    <div class="left-menu left">
+        <div class="menu-title">菜单3</div>
+        <div class="menu-content">
+            <div>内容1</div>
+            <div>内容1</div>
+            <div>内容1</div>
+        </div>
+
+    </div>
+    <div class="right-content">
+        <div>内容1</div><p>内容1</p>
+        <p>内容1</p><p>内容1</p>
+        <p>内容1</p>
+        <p>内容1</p>
+        <p>内容1</p><p>内容1</p>
+        <p>内容1</p>
+        <p>内容1</p>
+        <p>内容1</p><p>内容1</p>
+        <p>内容1</p>
+        <p>内容1</p>
+        <p>内容1</p><p>内容1</p>
+        <p>内容1</p>
+        <p>内容1</p>
+
+    </div>
+    <div class="close"></div>
+</div>
+<div class="pg-footer"></div>
+
+</body>
+</html>

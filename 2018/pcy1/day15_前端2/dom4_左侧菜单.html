@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .hiden{
+            display: none;
+        }
+        .menu{
+            background-color: #2459a2;
+            color: white;
+
+        }
+    </style>
+
+</head>
+<body>
+<div style="width: 300px;">
+
+    <div class="item">
+        <div id="i1" class="menu" onclick="ShowMenu('i1');">菜单1</div>
+        <!--对于要收拢的东西，拿个div包起来，便于收拢-->
+        <div class="content">
+            <div>内容1</div>
+            <div>内容1</div>
+            <div>内容1</div>
+        </div>
+    </div>
+    <div class="item">
+        <div id="i2" class="menu" onclick="ShowMenu('i2');">菜单2</div>
+        <div class="content hiden">
+            <div>内容1</div>
+            <div>内容1</div>
+            <div>内容1</div>
+        </div>
+    </div>
+    <div class="item">
+        <div id="i3" class="menu" onclick="ShowMenu('i3');">菜单3</div>
+        <div class="content hiden">
+            <div>内容1</div>
+            <div>内容1</div>
+            <div>内容1</div>
+        </div>
+    </div>
+
+
+</div>
+<script>
+    function ShowMenu(id) {
+        var tag=document.getElementById(id);
+        var item_li=tag.parentElement.parentElement.children;
+        for(var i=0; i<item_li.length;i++){
+            var item_ch=item_li[i].children;
+            item_ch[1].classList.add('hiden');//先全关了
+        }
+        tag.nextElementSibling.classList.remove('hiden');//最后把自己的打开
+
+    }
+</script>
+</body>
+</html>

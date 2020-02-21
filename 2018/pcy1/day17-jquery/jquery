@@ -1,0 +1,537 @@
+jQuery
+
+    模块=类库
+
+    集成了DOM/BOM/JavaScript的类库
+    jquery查询：http://jquery.cuishifeng.cn/
+
+一，jquery对象和document对象的关系
+    1 jquery对象包含document对象
+    2 jquery对象和document对象的转换
+       a. jquery对象[0]=》Dom对象
+             $('#i1')[0]=document.getElementById('i1')
+
+             $('#i1')
+             [div#i1, context: document, selector: "#i1"]
+             $('#i1')[0]
+             <div id=​"i1">​</div>​
+             document.getElementById('i1')
+             <div id=​"i1">​</div>​
+
+       b. $(Dom对象)=》jquery对象
+            $(d)=$('#i1')
+
+            d=document.getElementById('i1')
+            <div id=​"i1">​</div>​
+            $(d)
+            [div#i1, context: div#i1]
+
+二，查找元素
+    1，选择器 关键字$('') $指代jquery
+        直接找到某个或某类标签
+       1.1 id
+            $('#id')
+       1.2 class
+            <div class='c1'></div>
+            $('.c1')
+       1.3 标签
+            <div id='i10'>
+                <a alex="123">f</a>
+                <a alex="456">f</a>
+                <div class='c2'>
+                    <a>f</a>
+                </div>
+            </div>
+            <div class='c1'>
+                <a>f</a>
+            </div>
+            <div class='c1'>
+                <div class='c2'></div>
+            </div>
+
+            $('a') 找到所有a标签
+            $('*')所有
+       1.4 组合选择
+             $('a,.c2,#i10')找到所有a标签和class='c2'的标签以及id='i10'的标签
+
+       1.5 层级选择
+            $('#i10 a') 找到id='i10'里面所有的子子孙孙a标签
+            $('#i10>a') 找到id='i10'里面所有的子a标签
+
+    2，基本筛选器（字符串）
+        2.1 :frist :last
+             $('a:first') 找到所有a标签里面的第一个
+             $('#i10>a:first') 找到id='i10'里面所有的子a标签里面的第一个
+
+        2.2 :not
+             $('a:not(:first)') 找到所有a标签除了第一个
+             (3) [a, a, a, prevObject: jQuery.fn.init(1), context: document, selector: "a:not(:first)"]
+             $('a')
+             (4) [a, a, a, a, prevObject: jQuery.fn.init(1), context: document, selector: "a"]
+
+        2.3 :eq(index) :lt(index) :gt(index)
+             $('#i10 a:eq(0)') 找到id='i10'里面所有的子孙a标签中下标为0的标签
+             $('#i10 a:gt(0)') 找到id='i10'里面所有的子孙a标签中下标大于0的标签
+             $('#i10 a:lt(2)') 找到id='i10'里面所有的子孙a标签中下标小于2的标签
+                    gte=1大于等于1
+                    lte=1小于等于1
+        2.4 属性 $('[属性名]') $('[属性名=“属性值”]') *****
+             $('[alex]') 找到所有具有alex属性的标签，而不管该属性的值是多少
+             $('[alex="123"]')找到alex属性等于123的标签
+
+        2.5 form表单属性选择
+            $('input[type="text"]')=$(':text')
+            :input
+            :text
+            :password
+            :file
+            :radio
+            :checkbox
+            :submit
+            :button
+            :reset
+            :image
+            表单对象属性选择：
+            :disabled
+            :enabled
+            :checked
+            :selected
+
+三，以上应用实例：
+    1，多选、反选、取消
+        - 选择器
+        - prop('')专门给checked和selected用的
+            $('#tb :checkbox').prop('checked');        获取值 true或false
+            $('#tb :checkbox').prop('checked',true);   设置值 全选 false 全不选
+        - jquery方法本身就内置循环
+            当对循环内的每个元素进行统一操作xxx时，直接
+            $('#tb :checkbox').xxx
+        - jquery循环each(function(){})
+            当对循环内的每个元素进行不同操作时，用
+            $('#tb :checkbox').each(function(k){
+                //k是当前索引
+                //this,代指当前循环的每个元素，是dom对象
+                //将this转换为jquery对象$(this)
+               }
+        - 三元运算
+            v=条件？真值:假值
+            var v=$(this).prop('checked')?false:true//反选，真变假，假变真
+            $(this).prop('checked',v)//把v的值给checked属性
+
+    2，左侧菜单
+        - 事件绑定
+            $('.title').click(function () {
+                ...
+            })
+
+        - 对象筛选器
+            .next() 下一个
+                .nextAll() 找到下面全部
+                .nextUtil('#i10')往下找到i10为止
+            .prev() 上一个
+                .prevAll() 找到上面全部
+                .prevUtil('#i10')往上找到i10为止
+            .parent() 父
+                .parents()从父亲直到祖宗，从里一直往外
+                .parentsUntil('.c1')从里往外找到class="c1"的为止
+            .children() 子
+            .siblings() 兄弟
+
+            -ps
+                .eq(index)
+                   $('#i10').eq(0)=$('#i10 :eq(0)')
+                    结果是一样的，但左边是对象筛选，右边是字符串筛选。
+                .fist()
+                .last()
+                .hasClass() 是否具有该样式
+
+
+        - .find('') 子孙查找
+
+        - 添加和移除样式
+            .addClass('hiden')
+            .removeClass('hiden')
+
+        - jquery支持链式编程
+            一行代码实现展开自己，隐藏其它。
+            $(this).next().removeClass('hiden').parent().siblings().find('.content').addClass('hiden');
+
+
+
+
+
+四，操作元素
+    1，文本操作
+        $(..).text()        获取文本
+        $(..).text('..')    设置文本
+
+        $(..).html()        获取内容
+        $(..).html('..')    设置内容
+
+        对于form表单(input\checkbox\select\textare\radio等)的value
+        $(':input').val()       获取值
+        $(':input').val('..')   设置值
+
+        实例：文本操作
+            <div id="i1">asdfad</div>
+            <input type="text" name="hostname" value="1.1.1.1"/>
+            <input type="text" name="port" value="22"/>
+
+            $('#i1').text()
+            $('#i1').text('改变')
+            $('#i1').html()
+            $('#i1').html('<h1>变大</h1>')
+            $(':text[name="hostname"]').val()
+            $(':text[name="hostname"]').val('1.1.1.2')
+
+
+    2，样式操作
+
+        添加和移除样式
+            .addClass('hiden')
+            .removeClass('hiden')
+        开关样式
+            toggleClass实现开关灯,一行代码即可
+            $('.c1').toggleClass('hiden');对于.c1标签有hiden样式就去除，没有就加上，如同开关。
+
+    3，属性操作
+        专门用来对标签属性做操作（实例：tab菜单和内容切换）
+        $(..).attr('属性')         获取该属性的值
+        $(..).attr('属性','值')    设置该属性的值
+        $(..).removeAttr('属性')   移除该属性
+
+        专门用于checked、selected的选中操作，jquery3以下的版本用attr做这类操作都有bug，因此要用prop
+        $(..).prop('checked')      获取值
+        $(..).prop('checked',true) 设置值
+        --input radio单选框
+            获取true或false $(':radio[name="ch-qx"]:checked').prop('checked')
+            获取radio的值 $("input[name='radio']:checked").val();或$(":radio:checked").val();
+            设置radio的值 至第二项被选中$(':radio[value="2"]').prop('checked',true);
+            置radio的值为空 $(':input[name="gender"]:checked').prop('checked',false)
+        --input checkbox多选框
+            $('#tb :checkbox').prop('checked');        获取值 true或false
+            $('#tb :checkbox').prop('checked',true);   设置值 全选 false 全不选
+
+        --select下拉框
+            获取选中的值 $('select[name="size"] option:selected').val();
+            设置select的值$('select[name="size"] option[value="8"]').prop('selected',true);
+        ps：
+            获取下标(实例：tab菜单index内容切换)
+            $(this).index()
+
+    4，文档处理（实例：文档处理、点赞+1）
+        4.1，添加标签
+                $('#u1').append('..') 在id='u1'标签内，尾部追加。
+                $('#u1').prepend('..') 在id='u1'标签内，头部追加。
+                $('#u1').after('..') 在id='u1'标签外，下部追加。
+                $('#u1').before('..') 在id='u1'标签外，上部追加。
+        4.2，删除标签
+                $(..).remove() 清除该标签
+                $(..).empty() 清除该标签内容-清空
+        4.3，复制标签
+                var v=$(..).clone() 复制该标签
+
+    5，css处理（更细粒度的样式处理）(实例：点赞+1)
+
+        $(..).css('样式属性名')                 获取值
+        $(..).css('样式属性名','样式属性值')      设置值
+
+    6，位置处理（实例：位置处理 移动窗口）
+        6.1 滚轮高度
+            $(..).scrollTop()  获取滚轮高度
+            $(..).scrollTop(0) 设置滚轮高度为0.
+            要分清$(..)是谁，比如窗体window，$(window).scrollTop(0)就是设置窗体的滚轮高度为零。
+            可以用来设置返回顶部。
+
+        6.2 滚轮左右尺寸
+            $(..).scrollLeft()  获取滚轮左边尺寸
+            $(..).scrollLeft(0) 设置滚轮在左边最开始的位置.
+
+        6.3 绝对位置尺寸 $(..).offset()
+            $('#i1').offset() 获取坐标尺寸
+            {top: 8, left: 8}
+            $('#i1').offset().left 获取x坐标尺寸
+            8
+            $('#i1').offset().top   获取y坐标尺寸
+            8
+
+        6.4 相对位置尺寸 $(..).position() 获取相对父标签的left和top。
+        6.5 标签尺寸
+            a. $(..).height()           纯高度
+                $('#i1').height()      100
+
+            b. $(..).innerHeight()      纯高度+padding
+                $('#i1').innerHeight() 110
+
+            c. $(..).outerHeight()      纯高度+padding+边框
+                $('#i1').outerHeight() 112
+
+            d. $(..).outerHeight(true)  纯高度+padding+边框+margin
+                $('#i1').outerHeight(true) 122
+
+
+
+
+    7，事件绑定：(实例：事件绑定)
+        7.1 $(..).click(function)
+        7.2 $(..).bind('click',function)
+            $(..).unbind('click')
+        7.3 $(..).on('click',function)
+            $(..).off('click')
+        7.4 $('ul').delegate('li','click',function)委托绑定。
+            这种绑定方式对于后添加的标签也可以同样进行事件绑定。
+            前面3种绑定方式，都是事先绑定好了，因此后添加的标签无法绑定，
+            而这种delegate绑定是委托绑定：
+                a，对子标签进行绑定
+                b，事件发生时才绑定
+            $('ul').undelegate('li','click')
+        ps：
+            7.4这种委托绑定在py3后就取消了，统一归到7.3 on绑定，实现条件和delegate一样，实现委托绑定。
+    8，事件阻断：（实例：事件阻断\表单验证）
+        8.1，大部分标签后添加的事件优先执行。
+        8.2，return false 会阻断后面的事件，让其不再发生。
+            <a id="a1" href="http://www.baidu.com">走你2</a>
+            $('#a1').click(function () {
+                   alert(456);
+                   return false;
+            })
+        8.3，标签默认事件优先执行的标签，checkbox
+
+
+
+
+
+
+    9，快速加载
+        当页面框架加载完毕后，不必等每个元素加载完，自动执行，加快速度。
+
+        方式1：就是用匿名函数把script的内容包起来。
+
+        $(function(){
+
+            ....
+
+        })
+        方式2：
+        $(document).ready(function(){
+
+            ...
+        })
+        $(document).ready(function(){
+          $('.bxslider').bxSlider();
+        });
+
+    10，jquery扩展extend
+            10.1，扩展一 $.extend({'方法名'：匿名函数})，
+                  使用就是$.方法名()
+
+                   定义扩展-：
+                       $.extend({
+                             'wangsen':function(){
+                               return 'sb';
+                             }
+
+                       })
+                   使用扩展-：
+                       var v=$.wangsen();
+                       alert(v)
+
+            10.2，扩展二 $.fn.extend({'方法名'：匿名函数})，
+                  使用要用选择器加方法名--$(..).方法名()
+
+                   定义扩展二：
+                       $.fn.extend({
+                           'hanyang':function() {
+                           return 'db';
+                           }
+                       });
+                   使用扩展二：
+                       var i=$('#i1').hanyang();
+                       alert(i);
+
+            10.3，引入jquery扩展
+                a.建立js文件
+                b.用自执行函数封装引入的js文件，规避全局变量冲突。
+                (function(arg){
+                        var status=1;
+                        //封装变量
+                        arg.extend({
+                            'wangsen':function(){
+                              return 'sb';
+                            }
+                        });
+                })($)
+
+
+
+
+五，以上应用实例分析
+    1，tab菜单和内容切换：
+        - 建立菜单和内容属性对应关系 mu='a' cn='a'
+            <div class="menu-box">
+                <div mu="a" class="menu bc">菜单一</div>
+                <div mu="b" class="menu">菜单二</div>
+                <div mu="c" class="menu">菜单三</div>
+            </div>
+            <div class="content-box">
+                <div cn="a" class="content">内容一</div>
+                <div cn="b" class="content hiden">内容二</div>
+                <div cn="c" class="content hiden">内容三</div>
+            </div>
+
+        - 利用mu属性和cn属性对应的关系，切换内容的显示
+            取菜单mu属性的值
+            var v=$(this).attr('mu');
+
+            把v值给相应的cn移除hiden样式，但下面这样写，v就是字符串，不是v传过去的值。
+            $('.content[cn="v"]')).removeClass('hiden')
+
+        - 利用字符串拼接解决v的传值
+            使用字符串拼接解决 注意content[之间不能有空格。
+            var i1='.content[cn="';
+            var i2='"]';
+            var tmp=i1+v+i2;
+        - $(tmp).removeClass('hiden').siblings().addClass('hiden');
+
+    2，tab菜单index内容切换
+        - 不用建立属性对应关系，按默认的下标处理菜单和内容的对应关系
+            //点击菜单事件绑定
+            $('.menu').click(function (){
+            /给当前菜单标签添加bc样式并移除其他菜单bc样式
+            $(this).addClass('bc').siblings().removeClass('bc');
+        - 获取当前菜单的下标
+            var menu_index=$(this).index();
+        - 将当前菜单的下标传给内容标签列表，获取相应的内容标签
+            $('.content').eq(menu_index).removeClass('hiden').siblings().addClass('hiden');
+            })
+
+    3，点赞+1变化
+        - 添加标签
+             .append()
+
+        - 给标签添加样式
+             .css()
+
+        - 给标签添加内容
+             .text()
+
+        - 用定时器给样式做变化产生效果,清除定时器
+             setInterval
+             clearInterval
+
+        - 删除标签
+             .remove()
+
+        - 变化内容
+             位置变化position
+             字体大小fontSize
+             透明度  opacity
+
+    4，移动窗口
+        - 根据事情过程，绑定事件
+             - 移动窗口事情过程：                   标题栏事件
+                  1，鼠标放在窗口标题栏上            mouse over
+                  2，按着鼠标                      mouse down
+                  3，移动鼠标，窗口跟着移动           mouse move
+                  4，释放鼠标，窗口不再跟着移动。      mouse up
+
+                  注意： mouse move事件是在mouse down事件的过程中发生，
+                        mouse move的绑定应该在mouse down事件的过程中，
+                        mouse up事件发生时mouse move应该解绑
+
+             - 绑定事件：
+                 根据过程，绑定title标签的三个事件$('#title').mousedown(鼠标按下).mouseup(鼠标释放)
+                 在鼠标按下时再绑定鼠标移动事件，让父标签（窗口）随鼠标移动，在鼠标释放时再解绑。
+                     $('#title').mousedown(function(e){
+                             //参数e就是鼠标down事件对象
+                             //通过e可以获取鼠标按下时的x坐标和y坐标
+                             //获取窗口位置left和top
+
+                         $(this).bind('mousemove',function(v){
+                             //参数v就是鼠标move事件对象
+                             //通过v可以获取鼠标按下并移动时的x坐标和y坐标
+                             //获取鼠标变化
+                                 x=xmove-xdown,y=ymove-ydown
+                             //把鼠标变化传递给窗口的位置
+                                 left=left+x；
+                                 top=top+y；
+                             //把新的窗口位置传递给窗口，让窗口随鼠标移动
+
+                         })
+                     }).mouseup(
+
+                         $(this).unbind('mousemove');
+
+                     )
+
+        - 链式编程：
+             根据过程编程
+             $('#title').mousedown(鼠标按下).mouseup(鼠标释放)
+
+        - 获取鼠标位置 clientX clientY 相对浏览器窗口绝对位置。
+
+             从mousemove事件匿名函数参数v中捕获鼠标移动对象
+             var _new_event = v ;
+             获取鼠标移动式的坐标位置
+             var new_x = _new_event.clientX;
+             var new_y = _new_event.clientY;
+
+        - 获取标签位置 offset()
+             获取鼠标按下时父标签的坐标
+             var parent_left = $(this).parent().offset().left;
+             var parent_top = $(this).parent().offset().top;
+
+        - 添加样式
+             $(..).css('样式属性名','样式属性值')
+             改变光标形状
+             $(this).css('cursor','move');
+             恢复光标
+             $(this).css('cursor','');
+
+             窗口移动，将父标签移动到新位置上，父标签样式内必须有position为absolute。
+             $(this).parent().css('left',x+'px');
+             $(this).parent().css('top',y+'px');
+
+        - 绑定和解绑 bind、unbind
+             $(this).bind('mousemove', function(v){
+                 ...
+             })
+
+             $(this).unbind('mousemove');
+
+    5，表单验证3
+        -find查找 子孙查找
+        -each循环
+        $(this).parent().siblings().find('input[type="text"],input[type="password"]').each(function () {
+
+            //对每个输入框的值进行验证
+
+        }
+        -取值 $(this).val()
+            if($(this).val().trim().length==0)
+        -创建标签dom方式
+            var tag=document.createElement('span');
+        -添加标签样式
+            $(tag).addClass('error');
+        -添加标签内容
+            $(tag).text("必填");
+        -添加标签
+            $(this).after(tag);
+        -移除标签
+            $('.error').remove();
+
+        -事件阻断
+            return flg;
+            若flg为false则阻断，为true则提交表单。
+
+
+
+
+
+===》实例：
+1，模态对话框
+2，多选反选
+3，添加和删除、编辑表单
+4，tab菜单 时间轴
+5，点赞+号
+6，表单格式验证

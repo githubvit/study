@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div style="width: 600px;margin: 0 auto;">
+        <input  id="i1" onfocus="Focus()" onblur="Blur()"  type="text" value="请输入关键字">
+        <input type="text" placeholder="请输入关键字"/><!--用placeholder这个就可以了不用写js了，但是不兼容老的浏览器-->
+    </div>
+    <script>
+        function Focus() {
+//            console.log(1)//调试手段，保证事件能相应
+            var i=document.getElementById('i1');
+            if (i.value=='请输入关键字'){
+                i.value=''
+            }
+        }
+        function Blur() {
+//            console.log(2)//调试手段
+            var i=document.getElementById('i1');
+            if (i.value.trim().length==0){//trim() 移除空白
+                i.value='请输入关键字'
+            }
+        }
+    </script>
+</body>
+</html>

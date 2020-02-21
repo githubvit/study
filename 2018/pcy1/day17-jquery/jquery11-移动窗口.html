@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div style="width: 400px;border: 1px solid #dddddd;position: absolute">
+        <div id="title" style="height: 38px;background-color: black"></div>
+        <div id="content" style="height: 200px"></div>
+    </div>
+    <script src="jquery-1.12.4.js"></script>
+    <script>
+        //绑定title标签的三个事件$('#title').mousedown(鼠标按下).mouseup(鼠标抬起)
+        //在鼠标按下时再绑定鼠标移动事件，让父标签（窗口）随鼠标移动
+        //mousedown和mouseup不区分鼠标左中右键
+        $('#title').mousedown(function (e) {
+            //改变光标形状
+            $(this).css('cursor','move');
+//            console.log('down')
+
+            //在mousedown事件的匿名函数中，参数e（当然也可以是别的名字）代表每一次鼠标按下事件的对象，
+            var _event = e ;
+//            console.log(_event);
+
+            //获取鼠标按下时的坐标位置，clientX和clientY是绝对位置。
+            var ord_x = _event.clientX;
+            var ord_y = _event.clientY;
+            console.log(ord_x,ord_y);
+
+            //获取鼠标按下时父标签的坐标
+            var parent_left = $(this).parent().offset().left;
+            var parent_top = $(this).parent().offset().top;
+
+            //在鼠标按下时再绑定鼠标移动事件，让父标签（窗口）随鼠标移动
+            $(this).bind('mousemove', function(v){
+                //从mousemove事件匿名函数参数v中捕获鼠标移动对象
+                var _new_event = v ;
+                //获取鼠标移动式的坐标位置
+                var new_x = _new_event.clientX;
+                var new_y = _new_event.clientY;
+                console.log(new_x,new_y);
+                //根据鼠标的新旧位置差，定义父标签的新位置
+                var x = parent_left + (new_x - ord_x);
+                var y = parent_top + (new_y - ord_y);
+
+                //窗口移动，将父标签移动到新位置上，父标签样式内必须有position为absolute。
+                $(this).parent().css('left',x+'px');
+                $(this).parent().css('top',y+'px');
+
+            })
+
+
+        }).mouseup(function () {
+//            console.log('up')
+            //当鼠标抬起时，解绑mousemove事件，窗口不再跟着鼠标。
+            //恢复光标
+            $(this).css('cursor','');
+            $(this).unbind('mousemove');
+        });
+    </script>
+</body>
+</html>

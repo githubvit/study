@@ -1,0 +1,47 @@
+
+当我们不知道参数的内容时，可以这样
+
+def index(request):
+
+先用type包一下，看看是什么类，
+    print(type(request))
+
+输出了：   django.core.handlers.wsgi.WSGIRequest
+说明request是django.core.handlers.wsgi.WSGIRequest这个类的对象，
+然后引入这个类
+#     from django.core.handlers.wsgi import WSGIRequest
+查看该类
+class WSGIRequest(http.HttpRequest):
+    def __init__(self, environ):
+
+    def _get_scheme(self):
+
+    @cached_property
+    def GET(self):
+
+    def _get_post(self):
+
+    def _set_post(self, post):
+
+    @cached_property
+    def COOKIES(self):
+
+    @property
+    def FILES(self):
+
+    POST = property(_get_post, _set_post)
+可以看到有一些构造函数和方法，查看request中的某些属性和方法，
+     print(request.environ)，发现是个很长的字典
+     用for循环
+     for k,v in request.environ.items():
+         print(k,v)
+
+     单独查看该字典的下的某个值
+     print(request.environ['HTTP_USER_AGENT'])
+
+当然也可以用这个思路查看request对象的其他属性和方法
+     request.POST
+     request.GET
+     request.COOKIES
+
+ 这样就可以对request这个参数有较详细的了解。

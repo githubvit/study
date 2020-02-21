@@ -1,0 +1,181 @@
+mysql基础4
+一，触发器
+对某个表进行【增/删/改】操作的前后如果希望触发某个特定的行为时，
+可以使用触发器，触发器用于定制用户对表的行进行【增/删/改】前后的行为。
+注意触发器无法由用户直接调用，而是由于对表的【增/删/改】操作被动引发的。
+
+1、创建基本语法
+    # 插入前
+    CREATE TRIGGER tri_before_insert_tb1 BEFORE INSERT ON tb1 FOR EACH ROW
+    BEGIN
+        ...
+    END
+
+    # 插入后
+    CREATE TRIGGER tri_after_insert_tb1 AFTER INSERT ON tb1 FOR EACH ROW
+    BEGIN
+        ...
+    END
+
+    # 删除前
+    CREATE TRIGGER tri_before_delete_tb1 BEFORE DELETE ON tb1 FOR EACH ROW
+    BEGIN
+        ...
+    END
+
+    # 删除后
+    CREATE TRIGGER tri_after_delete_tb1 AFTER DELETE ON tb1 FOR EACH ROW
+    BEGIN
+        ...
+    END
+
+    # 更新前
+    CREATE TRIGGER tri_before_update_tb1 BEFORE UPDATE ON tb1 FOR EACH ROW
+    BEGIN
+        ...
+    END
+
+    # 更新后
+    CREATE TRIGGER tri_after_update_tb1 AFTER UPDATE ON tb1 FOR EACH ROW
+    BEGIN
+        ...
+    END
+2，示例
+    在向tb1表插入数据之前，判断插入的数据中NEW. NAME 是否是 'alex'
+    如果是，就向tb2表中添加NAME='aa'行记录。
+    delimiter //
+    CREATE TRIGGER tri_before_insert_tb1 BEFORE INSERT ON tb1 FOR EACH ROW
+    BEGIN
+
+    IF NEW. NAME == 'alex' THEN
+        INSERT INTO tb2 (NAME)
+    VALUES
+        ('aa')
+    END
+    END//
+    delimiter ;
+
+3，NEW和OLD
+    NEW：MySQL中的变量，封装新输入的值。
+    OLD：MySQL中的变量，封装已存在的值。
+
+    插入触发器：添加某行数据，数据都是新输入的，用NEW。
+    删除触发器：删除某行数据，数据都是已存在的，用OLD。
+    更新触发器：更新某行数据，是对已存在数据（即OLD）用新输入的（即NEW）进行替换，
+    因此，既要用NEW，又要用OLD。
+
+4，删除触发器
+    DROP TRIGGER tri_after_insert_tb1;
+
+二，事务
+MySQL中引擎ENGINE=InnoDB支持事务：原子操作、回滚。
+1，开启事务START TRANSACTION
+    START TRANSACTION; 开启
+       DELETE from tb1;
+       insert into tb2(name)values('seven');
+    COMMIT; 提交
+
+2，异常处理sqlexception
+    DECLARE exit handler for sqlexception
+    BEGIN
+      -- ERROR
+      set p_return_code = 1;
+      rollback; 回滚
+    END;
+
+3，警告处理sqlwarning 一般用的少，比如SQL写的不规范
+    DECLARE exit handler for sqlwarning
+    BEGIN
+    -- WARNING
+    set p_return_code = 2;
+    rollback; 回滚
+    END;
+
+4，存储过程中开启事务
+    delimiter \\
+    create PROCEDURE p1(        定义存储过程p1
+        OUT p_return_code tinyint 定义输出参数p_return_code
+    )
+    BEGIN
+      DECLARE exit handler for sqlexception 定义异常处理
+      BEGIN
+        -- ERROR
+        set p_return_code = 1;
+        rollback; 回滚
+      END;
+
+      DECLARE exit handler for sqlwarning  定义警告处理
+      BEGIN
+        -- WARNING
+        set p_return_code = 2;
+        rollback;
+      END;
+
+      START TRANSACTION; 开启事务
+        DELETE from tb1;
+        insert into tb2(name)values('seven');
+      COMMIT;提交事务
+
+      -- SUCCESS  #--是SQL的注释
+      set p_return_code = 0;
+
+      END\\
+    delimiter ;
+
+    成功了输出0，
+    异常了输出1，并回滚
+    警告了输出2，并回滚
+
+三，函数
+1，理解一下
+    a,定义函数func
+        def func(arg):
+            return arg+100
+    b，未使用函数的sql
+        select nid from student
+        输出的是自增nid列：1,2,3,4,5，。。。
+    c，使用函数的sql
+        select func(nid) from student
+        输出的是自增nid列：101,102,103,104,105，。。。
+
+
+
+2，自定义函数
+    delimiter \\
+    create function f1(
+        i1 int,参数
+        i2 int)
+    returns int 返回值的类型
+    BEGIN
+        declare num int; 声明变量
+        set num = i1 + i2; 为变量赋值
+        return(num);定义返回值
+    END \\
+    delimiter
+
+    在查询中使用
+    select f1(11,nid) ,name from tb2;
+    查询结果集使用f1函数，为tb2表的每个nid加了11.
+
+    删除函数
+    drop function func_name;
+
+3，函数和存储过程的区别
+    函数：
+       a. SQL语句不允许
+
+       b. 使用“select value into 变量名” 赋值
+          declare a int;
+          select nid into a from student where name='alex' # nid: 11 name:alex
+          # 当student表中name字段value为alex时，将该行的nid赋值给a，
+          #set a = nid
+          上面这段不是sql，注意into这个关键字，是为a变量进行赋值，相当于# set a = 11;
+
+        c. 通过return 返回
+        d. 通过select 函数名(参数)调用
+    存储过程：
+        a. sql语句可以多条
+        b. 通过intout,out构造返回值
+        c. 通过 call: 存储过程名称调用
+
+4，MySQL内置函数

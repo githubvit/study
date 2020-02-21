@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<style>
+    .hiden{
+        display: none;
+    }
+    .title{
+        background-color: black;
+        color: white;
+    }
+    .content{
+        min-height: 50px;
+    }
+</style>
+<body>
+<div style="width: 200px;height: 300px;border: 1px solid #dddddd">
+    <div class="item">
+        <div class="title">标题一</div>
+        <div class="content">内容</div>
+    </div>
+    <div class="item">
+        <div class="title">标题二</div>
+        <div class="content hiden">内容</div>
+    </div>
+    <div class="item">
+        <div class="title">标题三</div>
+        <div class="content hiden">内容</div>
+    </div>
+</div>
+<script src="jquery-1.12.4.js"></script>
+<script>
+    //jquery事件绑定,所有的class="title"都已绑定
+    $('.title').click(function () {
+        //调试
+        console.log(1)
+    //  展开自己 移除hiden。注意不能写成removeClass('.hiden')
+//        $(this).next().removeClass('hiden');
+        //隐藏其它，增加hiden
+//        $(this).parent().siblings().find('.content').addClass('hiden')
+        /*
+        添加和移除样式
+            .addClass('hiden')
+            .removeClass('hiden')
+        筛选器
+            .next() 下一个
+            .prev() 上一个
+            .parent() 父
+            .children() 子
+            .siblings() 兄弟
+
+        .find('') 子孙中查找
+            */
+        //jquery支持链式编程，一行代码实现展开自己，隐藏其它。
+        $(this).next().removeClass('hiden').parent().siblings().find('.content').addClass('hiden');
+    })
+</script>
+</body>
+</html>

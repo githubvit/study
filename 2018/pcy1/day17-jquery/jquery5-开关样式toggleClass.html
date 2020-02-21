@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<style>
+    .hiden{
+        display: none;
+    }
+</style>
+<body>
+    <input type="button" value="开/关"/>
+    <div class="c1">灯灯灯灯灯灯灯</div>
+    <script src="jquery-1.12.4.js"></script>
+    <script>
+        //绑定事件
+        $(':button').click(function () {
+            //开关灯
+//            if($('.c1').hasClass('hiden')){
+//                $('.c1').removeClass('hiden');
+//            }else{
+//                $('.c1').addClass('hiden');
+//            }
+            //toggleClass实现开关灯,一行代码即可
+            $('.c1').toggleClass('hiden');
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,203 @@
+cookie和session
+
+一、cookie
+1，什么是cookie
+     a.当客户端浏览器访问服务器时，服务器返回时，在响应头给客户端浏览器设置的键值对，
+       存于客户端浏览器上。{"user": 'dachengzi'}
+     b.存在于客户端浏览器上的一个文件，
+       访问服务器时客户端会在请求头数据中加入服务器设置的cookie。
+     c.客户端浏览器也可以设置cookie。
+        客户端浏览器上操作cookie
+            dom          --> 麻烦
+            jquery插件   --> jquery.cookie.js
+
+2，设置cookie
+        三种后台返回方式均可设置（字符串HttpResponse、模板render、跳转redirect）
+        rep = HttpResponse(...) 或 rep ＝ render(request, ...)
+
+        rep.set_cookie(key,value,...)
+
+        参数：
+            key,              键
+            value='',         值
+            max_age=None,     过多长时间 超时时间
+            expires=None,     到什么时间 超时时间
+            path='/',         Cookie生效的路径，/ 表示根路径，特殊的：根路径的cookie可以被任何url的页面访问
+            domain=None,      Cookie生效的域名
+            secure=False,     https传输
+            httponly=False    只能http协议传输，无法被JavaScript获取（不是绝对，底层抓包可以获取到也可以被覆盖）
+
+        例1：
+            if dic['pwd'] == p:
+                res = redirect('/index/')#跳转页面对象
+                res.set_cookie('username111',u)
+                return res
+
+        例2：
+            response = render(request,'index.html')
+            # 设置cookie，关闭浏览器失效
+            response.set_cookie('key',"value")
+            # 设置cookie, 10秒后失效
+            response.set_cookie('username111',"value",max_age=10)
+            # 设置cookie, 截止时间失效
+            import datetime
+            current_date = datetime.datetime.utcnow()
+            current_date = current_date + datetime.timedelta(seconds=5)
+            response.set_cookie('username111',"value",expires=current_date)
+
+            return response
+
+
+3，获取cookie
+    request.COOKIES['key']
+
+    # request.COOKIES['username111']
+    request.COOKIES.get('username111')
+
+4，加密cookie
+    设置：
+        response.set_signed_cookie(key,value,salt='加密盐',...)
+    获取：
+        request.get_signed_cookie(key, default=RAISE_ERROR, salt='加密盐')
+    参数：
+        default: 默认值
+           salt: 加密盐
+    设置例1：
+        obj = HttpResponse('s')
+        obj.set_signed_cookie('username',"kangbazi",salt="asdfasdf")
+    获取例1：盐要一样
+        request.get_signed_cookie('username',salt="asdfasdf")
+
+5，应用实例：
+    a，用cookie做用户认证
+        cookie不安全
+        普通cookie
+                - 敏感信息（直接看到），不宜放置在cookie中，
+                只能把敏感信息放在数据库，导致频繁操作数据库
+        签名（加密）的cookie
+                - 敏感信息（可能会解密）
+
+    b，前端设置和获取cookie--改变分页的显示行数 select绑定onchange事件
+6，cookie特性
+    6.1保存在用户浏览器
+    6.2可以主动清除
+    6.3也可以被“伪造”
+    6.4跨域名cookie不共享
+    6.5浏览器可以设置不接受cookie
+
+二，session
+1，什么是session
+    a.依赖于cookie
+    b.是服务器给客户端浏览器的随机字符串
+    c.服务器保存着以随机字符串为名称的字典，字典中记录着一系列键值对。
+    d.session 给的时机可以不同，以用户登录为例
+        用户登录1：3次请求响应过程，先获取session再登录
+         第1次：
+          客户端--->服务器--->生成随机字符串给客户端同时存于服务器，返回登录页面
+         第2次：
+          客户端填写表单，携带随机字符串登录服务器--->通过验证，服务器在内存中记录该字符串的状态is_login=true，
+          还可以记录用户名等其他状态信息。
+          --->结束认证。如果用户名和密码在数据库表，那么request.session['is_login']=true
+          表示该用户已认证。
+         第3次：
+          客户端--->页面，页面在服务端检查到is_login=true--->返回页面给客户端
+
+        用户登录2：3次请求响应过程，登录成功再获取
+         第1次：
+            客户端登录--->服务器--->返回客户端登录页面
+         第2次：
+            客户端填写表单--->服务器，通过验证后（用户名密码ok）--->生成随机字符串给客户端同时存于服务器，
+            并在服务器记录记录该字符串的状态is_login=true及相关信息。
+            默认django是记录在数据表django_session表中，表中有session_key字段、session_data字段、expire_date字段。
+            对应用session随机字符串、相关信息、session过期时间（默认是2周）。
+
+         第3次：
+            客户端--->页面，页面在服务端检查到is_login=true--->返回页面给客户端
+            页面检查：if request.session.get('is_login',None)：
+
+        因为session只是一个随机字符串，其相关键值对信息保存在服务器上，因此可以保存敏感信息，避免频繁操作数据库
+
+2，session获取、设置、删除
+    request.session['k']         --获取
+    request.session['k1'] = v1   --设置
+    request.session['k2'] = v2   --设置
+
+    del request.session['k1']   --删除 session字典中的某一条键值对
+    request.session.clear()     --删除该条session记录，再登录就要重新来了，用来注销当前用户
+
+
+    # 获取、设置、删除Session中数据
+    request.session['k1']
+    request.session.get('k1',None)
+    request.session['k1'] = 123
+    request.session.setdefault('k1',123) # 存在则不设置
+    del request.session['k1']个别session被清除
+
+    # 所有 键、值、键值对
+    request.session.keys()          ---获取键
+    request.session.values()        ---获取值
+    request.session.items()         ---获取键值对
+    request.session.iterkeys()  ---变成迭代器iter，用于for循环，不用全部拿到，取1次拿1次
+    request.session.itervalues()
+    request.session.iteritems()
+
+
+    # 用户session的随机字符串
+    request.session.session_key
+
+    # 将所有Session失效日期小于当前日期的数据删除
+    request.session.clear_expired()
+
+    # 检查 用户session的随机字符串 在数据库中是否存在
+    request.session.exists("session_key")
+
+    # 删除当前用户的所有Session数据
+    request.session.delete("session_key")#request.session.clear()就是调用该条命令
+
+三，djan session
+Django中默认支持Session，其内部提供了5种类型的Session供开发者使用：
+
+    数据库（默认）
+    缓存
+    文件
+    缓存+数据库
+
+1、数据库Session
+
+    Django默认支持Session，并且默认是将Session数据存储在数据库中，即：django_session 表中。
+
+    配置 settings.py
+
+        SESSION_ENGINE='django.contrib.sessions.backends.db'   # 引擎（默认）
+
+        SESSION_COOKIE_NAME="sessionid"          # Session的cookie保存在浏览器上时的key，即：sessionid＝随机字符串（默认）
+        SESSION_COOKIE_PATH="/"                  # Session的cookie保存的路径（默认）
+        SESSION_COOKIE_DOMAIN = None                # Session的cookie保存的域名（默认）
+        SESSION_COOKIE_SECURE = False               # 是否Https传输cookie（默认）
+        SESSION_COOKIE_HTTPONLY = True              # 是否Session的cookie只支持http传输（默认）
+        SESSION_COOKIE_AGE = 1209600                # Session的cookie失效日期（2周）（默认）
+        SESSION_EXPIRE_AT_BROWSER_CLOSE = False     # 是否关闭浏览器使得Session过期（默认）
+        SESSION_SAVE_EVERY_REQUEST = False          # 是否每次请求都保存Session，默认修改之后才保存（默认）
+
+     在settings.py中看不到以上这些内容,如果不改变上述内容就不要动settings，
+     如果要改变上述内容，就把上面的内容改好后，贴到setting.py中就可以了。
+
+
+2、缓存Session 只是引擎变化，其余配置和数据库session相同
+
+    配置 settings.py
+    SESSION_ENGINE = 'django.contrib.sessions.backends.cache'  # 引擎
+    SESSION_CACHE_ALIAS = 'default'   # 使用的缓存别名（默认内存缓存，也可以是memcache），此处别名依赖缓存的设置
+
+3、文件Session
+    配置 settings.py
+    SESSION_ENGINE = 'django.contrib.sessions.backends.file'    # 引擎
+    SESSION_FILE_PATH = None  # 缓存文件路径，如果为None，则使用tempfile模块获取一个临时地址tempfile.gettempdir()
+
+4、缓存+数据库Session
+    数据库用于做持久化，缓存用于提高效率
+    配置 settings.py
+    SESSION_ENGINE = 'django.contrib.sessions.backends.cached_db'  # 引擎
+
+
+5、如果只改引擎，不改其余选项，就只要在settings.py中添加引擎配置即可。

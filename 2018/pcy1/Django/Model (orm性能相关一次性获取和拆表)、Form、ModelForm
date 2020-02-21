@@ -1,0 +1,326 @@
+Model
+Form
+ModelForm
+
+博客参考：
+
+    Model操作：http://www.cnblogs.com/wupeiqi/articles/6216618.html
+     Form操作：http://www.cnblogs.com/wupeiqi/articles/6144178.html
+ModelForm操作：http://www.cnblogs.com/wupeiqi/articles/6229414.html
+
+一、Model 强大的数据库操作，弱小的数据验证
+    表间关系：ForeignKey参数
+    ForeignKey(ForeignObject) # ForeignObject(RelatedField)
+        to,                         # 要进行关联的表名
+        to_field=None,              # 要关联的表中的字段名称
+        on_delete=None,             # 当删除关联表中的数据时，当前表与其关联的行的行为
+                                        - models.CASCADE，删除关联数据，与之关联也删除
+                                        - models.DO_NOTHING，删除关联数据，引发错误IntegrityError
+                                        - models.PROTECT，删除关联数据，引发错误ProtectedError
+                                        - models.SET_NULL，删除关联数据，与之关联的值设置为null（前提FK字段需要设置为可空）
+                                        - models.SET_DEFAULT，删除关联数据，与之关联的值设置为默认值（前提FK字段需要设置默认值）
+                                        - models.SET，删除关联数据，
+                                                      a. 与之关联的值设置为指定值，设置：models.SET(值)
+                                                      b. 与之关联的值设置为可执行对象的返回值，设置：models.SET(可执行对象)
+
+                                                        def func():
+                                                            return 10
+
+                                                        class MyModel(models.Model):
+                                                            user = models.ForeignKey(
+                                                                to="User",
+                                                                to_field="id"
+                                                                on_delete=models.SET(func),)
+        related_name=None,          # 反向操作时，使用的字段名，用于代替 【表名_set】 如： obj.表名_set.all()
+        related_query_name=None,    # 反向操作时，使用的连接前缀，用于替换【表名】     如： models.UserGroup.objects.filter(表名__字段名=1).values('表名__字段名')
+        limit_choices_to=None,      # 在Admin或ModelForm中显示关联数据时，提供的条件：
+                                    # 如：
+                                            - limit_choices_to={'nid__gt': 5}
+                                            - limit_choices_to=lambda : {'nid__gt': 5}
+
+                                            from django.db.models import Q
+                                            - limit_choices_to=Q(nid__gt=10)
+                                            - limit_choices_to=Q(nid=8) | Q(nid__gt=10)
+                                            - limit_choices_to=lambda : Q(Q(nid=8) | Q(nid__gt=10)) & Q(caption='root')
+        db_constraint=True          # 是否在数据库中创建外键约束
+        parent_link=False           # 在Admin中是否显示关联数据
+
+    orm操作   2017年老男孩最新全栈python第2期视频教程
+              67-13视频 Model拾遗之select_related和prefetch_related剖析(三)
+               67-13讲解 67-14性能测试 视频
+        性能相关：连表和拆表
+        def select_related(self, *fields)连表 一次性获取
+             性能相关：表之间进行join连表操作，一次性获取关联的数据。
+             model.tb.objects.all().select_related()
+             model.tb.objects.all().select_related('外键字段')
+             model.tb.objects.all().select_related('外键字段__外键字段') 多级向下查询
+        v = models.User.objects.all().select_related('user_type')
+
+        def prefetch_related(self, *lookups)为避免连表操作带来的性能下降，拆表
+            性能相关：多表连表操作时速度会慢，使用其执行多次SQL查询在Python代码中实现连表操作。
+                # 获取所有用户表
+                # 获取用户类型表where id in (用户表中的查到的所有用户ID)
+                models.UserInfo.objects.prefetch_related('外键字段')
+
+        v = models.User.objects.all().prefetch_related('user_type')
+
+
+    原生sql操作
+        def raw(self, raw_query, params=None, translations=None, using=None):
+            # 执行原生SQL
+            models.UserInfo.objects.raw('select * from userinfo')
+
+            #不推荐  如果SQL是其他表时，必须将名字设置为当前UserInfo对象的主键列名
+            models.UserInfo.objects.raw('select id as nid from 其他表')
+
+            # 为原生SQL设置参数
+            models.UserInfo.objects.raw('select id as nid from userinfo where nid>%s', params=[12,])
+
+            # 将获取的到列名转换为指定列名
+            name_map = {'first': 'first_name', 'last': 'last_name', 'bd': 'birth_date', 'pk': 'id'}
+            Person.objects.raw('SELECT * FROM some_other_table', translations=name_map)
+
+            # 指定数据库
+            models.UserInfo.objects.raw('select * from userinfo', using="default")
+
+        ###################更彻底的 原生SQL ###################
+        from django.db import connection, connections
+        cursor = connection.cursor()  # cursor = connections['default'].cursor()
+        cursor.execute("""SELECT * from auth_user where id = %s""", [1])
+        row = cursor.fetchone() # fetchall()/fetchmany(..)
+
+
+
+
+
+
+    a. 表
+        一对多：
+            to
+            to_fields
+            related_name
+            related_query_name
+            on_delete
+            limit_choices_to
+            ...
+        ...
+
+    b. 操作
+        create
+        。。。
+
+    c. 验证（弱小）
+        full_clean    ->  字段正则判定  -->  clean方法（钩子）
+
+二、Form  强大的数据验证
+
+
+
+
+       is_valid()  ->  full_clean()  ->
+                                     -> 每个字段的正则，每个字段的方法 clean_字段名()
+
+                                     -> _clean_form  -> clean(钩子)
+                                     -> _post_clean(钩子)
+
+
+        ===》
+            返回值is_valid()
+            cleaned_data
+            errors
+
+
+        ==》 实时显示新插入的数据
+
+
+    from django.shortcuts import render
+    from django import forms
+    from django.forms import fields
+    from django.forms import models as models_fields
+    from django.core.exceptions import ValidationError
+    from app01 import models
+
+    class UserForm(forms.Form):
+        username = fields.CharField(label='用户名')
+        email = fields.EmailField(label='邮箱')
+        user_type1 = fields.ChoiceField(choices=models.UserType.objects.values_list('id','name'))
+        user_type2 = models_fields.ModelChoiceField(queryset=models.UserType.objects.all(),
+                                                    empty_label='请选择用户类型',
+                                                    to_field_name="id",
+                                                    limit_choices_to={'id':1})
+        user_type3 = models_fields.ModelMultipleChoiceField(queryset=models.UserType.objects.all(),
+                                                    to_field_name="id",
+                                                    limit_choices_to={'id': 1})
+
+        def __init__(self,*args,**kwargs):
+            super(UserForm,self).__init__(*args,**kwargs)
+            self.fields['user_type1'].widget.choices = models.UserType.objects.all().values_list('id', 'name')
+
+        def clean_username(self):#字段验证方法
+            #
+            value = self.cleaned_data['username']
+            if value == 'root':
+                return value
+            else:
+                raise ValidationError('你不是我的...')
+
+        def clean(self):#整体验证方法
+            v1 = self.cleaned_data['username']
+            v2 = self.cleaned_data['email']
+            if v1 == "root" and v2 == "root@live.com":
+                pass
+            else:
+                raise ValidationError('用户名或邮箱错误!!!')
+
+            return self.cleaned_data
+        # def _post_clean(self):#
+        #     v1 = self.cleaned_data['username']
+        #     v2 = self.cleaned_data['email']
+        #     if v1 == "root" and v2 == "root@live.com":
+        #         pass
+        #     else:
+        #         self.add_error("__all__", ValidationError('用户名或邮箱错误...'))
+                    整体验证的错误放入"__all__"
+        '''
+        错误形式：
+            {
+                "__all__":...,#整体错误
+                'user':[{code:'','message':'asdfafsaf'}]#字段错误
+
+            }
+        '''
+
+    def index(request):
+        if request.method == "GET":
+            obj = UserForm()
+            return render(request,'fm.html',{'obj': obj})
+        elif request.method == "POST":
+            obj = UserForm(request.POST)
+            obj.is_valid()
+            # data = obj.clean()
+            # obj.cleaned_data
+            # print(obj.errors)
+            return render(request, 'fm.html', {'obj': obj})
+
+
+三、ModelForm 强大的数据验证，适中的数据库操作
+
+    Form:
+                                   UserForm -> Form -> BaseForm
+
+    ModelForm:
+        UserModelForm -> ModelForm -> BaseModelForm -> BaseForm
+
+
+
+
+
+
+    from django.shortcuts import render
+    from django import forms
+    from app01 import models
+
+    class UserModelForm(forms.ModelForm):
+        #可以增加form字段，这个 字段如果和model中的字段相同，则在页面覆盖掉model中该字段
+        #如果不同，则增加该form字段
+        pwd=forms.CharField()
+
+        class Meta:
+            model = models.User
+            fields = "__all__"
+
+    class Meta相关字段说明
+
+     class Meta:
+            model,                           # 对应Model的
+            fields=None,                     # 字段
+                fields = "__all__" 表示model中所有字段在html中显示
+                fields=['name',..] 表示model中的name字段和其他字段在html中显示
+
+            exclude=None,                    # 排除字段
+                exclude=['name']表示model中除name字段的其余字段在HTML中显示
+
+            labels=None,                     # 提示信息
+                labels={
+                    'email':'邮箱’
+                }      表示在email中将email显示为邮箱
+
+            help_texts=None,                 # 帮助提示信息
+                会在相应标签后显示出来
+                help_texts={
+                    'email':'请输入邮箱格式'#或者'*'表示必填
+                }
+
+            widgets=None,                    # 自定义插件
+                插件字段的使用要注意与form中引入的widgets发生冲突，因此要使用别名
+                from django.forms import widgets as ws
+                widgets={
+                    'name':ws.Textarea#本来是text框，通过插件变成了Textarea多文本框
+                    #可以在后面加attr进行样式定制
+                    'name':ws.Textarea(attrs={'class':'c1'})
+                }
+
+
+            error_messages=None,             # 自定义错误信息（整体错误信息from django.core.exceptions import NON_FIELD_ERRORS）
+                error_messages={
+                    'name':{'required':'必填','invalid':'格式错误'}
+                }
+
+            field_classes=None               # 自定义字段类 （也可以自定义字段）
+                如果觉得model中的字段验证不合适，可以在这里更改
+                比如name字段在model中是CharField，但是在页面中可以用EmailField进行验证
+                field_classes={
+                    'name':forms.EmailField#还可以写正则表达式
+                }
+            localized_fields=('birth_date',) # 本地化，如：根据不同时区显示数据
+            如：
+                数据库中是UTC
+                    2016-12-27 04:10:57
+                setting中的配置
+                    TIME_ZONE = 'Asia/Shanghai'
+                    USE_TZ = True
+                则显示本地时间：
+                    2016-12-27 12:10:57
+
+               ps：要引入pytz模块实现本地化
+                    """
+                    pip3 install pytz
+                    import pytz
+                    pytz.all_timezones#所有时区
+                    pytz.timezone('Asia/Shanghai')
+                    """
+
+
+    b. 验证执行过程
+
+
+    def index(request):
+        if request.method == "GET":
+            obj = UserModelForm()
+            return render(request,'mf.html',{'obj': obj})
+        elif request.method == "POST":
+            obj = UserModelForm(request.POST)
+            if obj.is_valid():
+                # print(obj.cleaned_data)
+                # models.User.objects.create(**obj.cleaned_data)
+                obj.save(commit=True)
+                """
+                mobj = obj.save(commit=False)
+                mobj.save()
+                obj.save_m2m()
+                """
+            print(obj.errors)
+            return render(request, 'mf.html', {'obj': obj})
+
+    def edit_index(request,nid):
+        if request.method == "GET":
+            model_obj = models.User.objects.get(id=nid)
+            obj =UserModelForm(instance=model_obj)
+            return render(request, 'mf1.html', {'obj': obj,'nid': nid})
+        elif request.method == 'POST':
+            model_obj = models.User.objects.get(id=nid)
+
+            obj = UserModelForm(request.POST, instance=model_obj)
+            if obj.is_valid():
+                obj.save()
+            return render(request, 'mf1.html', {'obj': obj})
