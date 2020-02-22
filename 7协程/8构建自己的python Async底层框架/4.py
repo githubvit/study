@@ -388,6 +388,7 @@ def five():
             # 每次执行完一轮的协程先放入延时队列，按终结时间排序，这是并发的关键。
             heapq.heappush(self.sleeping,(deadline,self.sequence,self.current))
             # sleep改成 协程 函数，就可以放进来了，不然await 不能放到普通函数中。
+            # self.current=None  
             await switch()                                              # 3 暂停 
 
         # 除第一次的协程(即做线头时)用 scher.new_task(coro) 直接放入self.ready外，

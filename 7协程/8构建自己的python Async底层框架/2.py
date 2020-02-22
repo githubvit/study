@@ -49,7 +49,7 @@ def one():
     t2.join()
     print('[one]time',time.time()-start)
 
-# one()
+one()
 # 结果
     # 生产了 0
     # 消费了 0
@@ -202,7 +202,7 @@ def two():
     sched.run()
     print('[two]time',time.time()-start)
 
-two()
+# two()
 
 # 结果
     # 生产了 0
