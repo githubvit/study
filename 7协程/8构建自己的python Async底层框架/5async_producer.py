@@ -1,5 +1,6 @@
-# 生产 消费 模式  单线程 消息传递
-
+# 生产消费者模型1 协程 实现 单线程 任务 消息传递 
+# https://www.bilibili.com/video/av81742647?from=search&seid=13812321267434886846
+# 时间：91：00
 
 # 多线程 实现 消息传递
 import queue
@@ -91,7 +92,7 @@ def two():
             self.sequence += 1
             deadline=time.time()+delay
             heapq.heappush(self.sleeping,(deadline,self.sequence,self.current))
-            self.current=None
+            # self.current=None
             await switch()
 
         def run(self):
