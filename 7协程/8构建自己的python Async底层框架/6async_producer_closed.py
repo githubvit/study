@@ -203,7 +203,8 @@ def two():
         # 收消息
         async def get(self):
             while not self.items:
-            # if not self.items:
+            # if not self.items:   # 必须改成上面 不然 最后一次 不会激发异常 
+            # 而是 会继续return 然后 报错 IndexError: pop from an empty deque
                 if self._closed:
                     raise QueueClosed()
                 self.waitting.append(scher.current) # get来早了 就把父协程 consumer收集到waitting
