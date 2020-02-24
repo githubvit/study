@@ -120,23 +120,56 @@ sched = Scheduler()    # Background scheduler object
 # ----------------
 
 from socket import *
-async def tcp_server(addr):
-    sock = socket(AF_INET, SOCK_STREAM)
-    sock.bind(addr)
-    sock.listen(5)
-    while True:
-        client, addr = await sched.accept(sock)
-        print('Connection from', addr)
-        sched.new_task(echo_handler(client))
+# async def tcp_server(addr):
+#     sock = socket(AF_INET, SOCK_STREAM)
+#     sock.bind(addr)
+#     sock.listen(5)
+#     while True:
+#         client, addr = await sched.accept(sock)
+#         print('Connection from', addr)
+#         sched.new_task(echo_handler(client))
 
-async def echo_handler(sock):
+# async def echo_handler(sock):
+#     while True:
+#         data = await sched.recv(sock, 10000)
+#         if not data:
+#             break
+#         await sched.send(sock, b'Got:' + data)
+#     print('Connection closed')
+#     sock.close()
+
+# sched.new_task(tcp_server(('', 30000)))
+# sched.run()
+
+
+# 收发 通信循环
+async def communication(conn,cli_addr):
     while True:
-        data = await sched.recv(sock, 10000)
-        if not data:
+        try:
+            data=await sched.recv(conn,1024)
+            if not data:break
+            await sched.send(conn,b'GOT:'+data.upper())
+        except ConnectionResetError:
             break
-        await sched.send(sock, b'Got:' + data)
-    print('Connection closed')
-    sock.close()
+    # print('关闭来自[%s]的连接'%(cli_addr))  # 报错，元组作为一个元素要加‘，’
+    # ypeError: not all arguments converted during string formatting
+    print('关闭来自[%s]的连接'%(cli_addr,))  # 加','，表示该元组作为一个元素，就解决了。  
+    print('队列中的数量:{}'.format(len(sched.ready))) 
+    conn.close()
 
-sched.new_task(tcp_server(('', 30000)))
+async def server():
+    server=socket(AF_INET,SOCK_STREAM)
+    server.bind(('127.0.0.1',8081))
+    server.listen(5)
+    server.setblocking(False)
+    print('开始。。。')
+    while True:
+        # conn,cli_addr=server.accept()
+        conn,cli_addr=await sched.accept(server)
+        print('sock：{}, from:{}'.format(conn,cli_addr))
+        # 建立 新的收发 协程
+        sched.new_task(communication(conn,cli_addr))
+    server.close()    
+
+sched.new_task(server())
 sched.run()
