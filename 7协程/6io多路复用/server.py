@@ -40,7 +40,7 @@ w_list=[]
 w_data={}
 
 while True:
-    # 用select和系统打交道，如果都没有是u发，则轮询3秒，再往下运行。
+    # 用select和系统打交道，如果都没有收发，则轮询3秒，再往下运行。
     # 一旦某个套接字有收发（即rl\wl中的len不是零，有套接字对象了），
     # 则立即不停催动下面的代码执行。
     rl,wl,xl=select.select(r_list,w_list,[],3)

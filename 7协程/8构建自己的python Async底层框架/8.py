@@ -1,7 +1,9 @@
-#统一 普通函数 协程 实现 单线程 多任务 并发 的 调度类 class Scheduler
+# 用 协程 async/await 来 实现 单线程 并发 socket
 # https://www.bilibili.com/video/av81742647?from=search&seid=13812321267434886846
-# 时间：107:00
+# 时间：115:00
 
+# read_wait  readable
+# write_wait  writeable
 
 from collections import deque
 import heapq
@@ -20,15 +22,11 @@ def switch():
 class Task:
     def __init__(self,coro):
         self.coro=coro
-                                    # 让 协程对象 和 普通函数 在调度类 run中的 执行代码 统一
-    def __call__(self):             # 该方法 是加括号就执行 即 Task(coro) 加 () 就执行 
-        scher.current=self          # 调度对象 接收的当前对象 是 外包后的协程对象 Task(coro)
-                                    # 所以 调度对象 接收 func和Task(coro)，取出后都是加 () 就执行 
-        try:
-            print('next')
-            self.coro.send(None) # 执行 协程 更新 协程对象
-            print('next-1')
 
+    def __call__(self): # 该方法 是加括号就 执行 即 Task(coro)() 就执行
+        scher.current=self
+        try:
+            self.coro.send(None) # 执行 协程 更新 协程对象
         except StopIteration:
             pass
 
@@ -109,99 +107,4 @@ class AsyncQueue:
                 raise Queueclosed()
             self.waitting.append(scher.current)     # 把父协程 consumer 放入排队队列 self.waitting
             await switch()                          # 暂停 交出执行权
-        return self.items.popleft()             
-
- 
-
-# 普通函数 数数
-def countDown(n):
-    def _run(n):
-        if n>0:
-        # while n>0:    
-            print('Down',n)
-            # time.sleep(1)
-            scher.call_later(1,lambda: _run(n-1))
-            # n -=1
-        # print('Down done') 
-        else:
-            print('Down done')
-    _run(n)
-
-def countUp(stop):
-    def _run(x):
-        # while x<stop:
-        if x<stop:
-            print('Up',x)
-            # time.sleep(1)
-            scher.call_later(1,lambda:_run(x+1))
-            # x += 1
-        # print('Up done')  
-        else:
-            print('Up done') 
-    _run(0)        
-
-
-# 协程
-
-async def producer(q,count):
-    for i in range(count):
-        print('生产了',i)
-        q.put(i)
-        await scher.sleep(1)
-    print('生产结束')
-    q.close()
-
-async def consumer(q):
-    try:
-        while True:
-            item=await q.get()
-            print('消费了',item)
-    except Queueclosed:
-        print('消费结束')
-        
-
-start=time.time()
-q=AsyncQueue()
-scher.new_task(producer(q,10))
-scher.new_task(consumer(q,))
-scher.call_soon(lambda:countDown(5))
-scher.call_soon(lambda:countUp(5))
-scher.run()
-print('[one]time:{:.4f}s'.format(time.time()-start))
-
-# 结果
-    # 生产了 0
-    # 消费了 0
-    # Down 5
-    # Up 0
-    # 生产了 1
-    # 消费了 1
-    # Down 4
-    # Up 1
-    # 生产了 2
-    # 消费了 2
-    # Down 3
-    # Up 2
-    # 生产了 3
-    # 消费了 3
-    # Down 2
-    # Up 3
-    # 生产了 4
-    # 消费了 4
-    # Down 1
-    # Up 4
-    # 生产了 5
-    # 消费了 5
-    # Down done
-    # Up done
-    # 生产了 6
-    # 消费了 6
-    # 生产了 7
-    # 消费了 7
-    # 生产了 8
-    # 消费了 8
-    # 生产了 9
-    # 消费了 9
-    # 生产结束
-    # 消费结束
-    # [one]time:10.0085s
+        return self.items.popleft() 

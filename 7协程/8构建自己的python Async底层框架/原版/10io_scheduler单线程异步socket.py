@@ -123,7 +123,7 @@ from socket import *
 async def tcp_server(addr):
     sock = socket(AF_INET, SOCK_STREAM)
     sock.bind(addr)
-    sock.listen(1)
+    sock.listen(5)
     while True:
         client, addr = await sched.accept(sock)
         print('Connection from', addr)
