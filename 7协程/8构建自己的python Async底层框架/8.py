@@ -90,6 +90,7 @@ class Scheduler:
             except BlockingIOError:
                 # 将父协程 communication 先放到 等待读队列
                 self.read_wait.append(self.current)
+                
                 # print('暂停，交出执行权') 
                 # 暂停 交出执行权
                 await switch()    
@@ -115,17 +116,19 @@ class Scheduler:
                 sock.close()
                 raise ConnectionResetError()
 
-      
-
     def run(self):
         while self.ready or self.sleeping or self.accept_wait:
             if not self.ready:
                 if self.accept_wait:
-                    # print('取出ser')
+                    # time.sleep(0.3)         # 无阻塞 socket cpu 占用 太高 人为停一停 降低占用率
+                    # 0.5的速度 并发 cpu占用率 瞬间最高到20% 没有问题，
+                    # 0.05的速度 就大了，cpu占用率 瞬间最高到50%，非常高，并发的客户端 有时 会崩溃。
                     self.ready.append(self.accept_wait.popleft())
                 if self.read_wait:
+                    # time.sleep(0.3)  
                     self.ready.append(self.read_wait.popleft())    
                 if self.write_wait:
+                    # time.sleep(0.3)  
                     self.ready.append(self.write_wait.popleft())    
                 if self.sleeping:    
                     deadline,_,func=heapq.heappop(self.sleeping)    # 取出 终结时间 最小的
@@ -137,8 +140,6 @@ class Scheduler:
             while self.ready:                                   # 只要立即执行队列里有，就一直执行
                 func=self.ready.popleft()
                 func()
-
-
 
 # 生成调度对象
 scher=Scheduler()
@@ -186,6 +187,7 @@ from socket import *
 # 收发 通信循环
 async def communication(conn,cli_addr):
     while True:
+       
         try:
             data=await scher.recv(conn,1024)
             if not data:break
@@ -198,6 +200,7 @@ async def communication(conn,cli_addr):
     print('队列中的数量:{}'.format(len(scher.ready))) 
     conn.close()
 
+# 链接 循环
 async def server():
     server=socket(AF_INET,SOCK_STREAM)
     server.bind(('127.0.0.1',8081))
@@ -205,14 +208,13 @@ async def server():
     server.setblocking(False)
     print('开始。。。')
     while True:
+        
         # conn,cli_addr=server.accept()
         conn,cli_addr=await scher.accept(server)
         print('sock：{}, from:{}'.format(conn,cli_addr))
         # 建立 新的收发 协程
         scher.new_task(communication(conn,cli_addr))
     server.close()    
-
-
 
 # 普通函数 数数
 def countDown(n):
@@ -261,15 +263,15 @@ async def consumer(q):
         print('消费结束')
         
 
-# start=time.time()
-# q=AsyncQueue()
-# scher.new_task(producer(q,10))
-# scher.new_task(consumer(q,))
-# scher.call_soon(lambda:countDown(5))
-# scher.call_soon(lambda:countUp(5))
+start=time.time()
+q=AsyncQueue()
+scher.new_task(producer(q,10))
+scher.new_task(consumer(q,))
+scher.call_soon(lambda:countDown(5))
+scher.call_soon(lambda:countUp(5))
 scher.new_task(server())
 scher.run()
-# print('[one]time:{:.4f}s'.format(time.time()-start))
+print('[one]time:{:.4f}s'.format(time.time()-start))
 
 
 

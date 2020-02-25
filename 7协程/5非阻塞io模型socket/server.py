@@ -23,8 +23,8 @@ while True:
         # 不阻塞 有链接来了 把链接对象加入链接列表 读列表
         r_list.append(conn)
     except BlockingIOError: # 处理accept阻塞 即没链接过来
-        # 由于是非阻塞模型，因此资源占用非常高，解决该问题，就人为添加阻塞
-        # time.sleep(0.5)
+        # 由于是非阻塞模型，因此资源占用非常高，解决该问题，就人为添加阻塞，降低cpu占用
+        time.sleep(0.5)
         # accept阻塞 就处理recv
         print('accept阻塞处理recv')
         print('链接对象r_list:',len(r_list))

@@ -144,7 +144,9 @@ from socket import *
 
 # 收发 通信循环
 async def communication(conn,cli_addr):
+    
     while True:
+        await sched.sleep(1) # 放到 这里就是 传 timeout
         try:
             data=await sched.recv(conn,1024)
             if not data:break
@@ -161,12 +163,13 @@ async def server():
     server=socket(AF_INET,SOCK_STREAM)
     server.bind(('127.0.0.1',8081))
     server.listen(5)
-    server.setblocking(False)
+    # server.setblocking(False)
     print('开始。。。')
     while True:
         # conn,cli_addr=server.accept()
         conn,cli_addr=await sched.accept(server)
         print('sock：{}, from:{}'.format(conn,cli_addr))
+        # await sched.sleep(1) # 报错 第 50 行 self._write_waiting, [], timeout) 提供了无效参数，这时还没有
         # 建立 新的收发 协程
         sched.new_task(communication(conn,cli_addr))
     server.close()    

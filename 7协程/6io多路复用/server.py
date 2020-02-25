@@ -29,7 +29,7 @@ server.listen(5)
 # 后面的程序要try except捕捉错误
 # 也可以理解为不是报错是提示，那后面跟着提示处理就可以了。
 # select会自动处理这些错误。send的阻塞要自己处理
-server.setblocking(False)
+# server.setblocking(False)
 
 # 定义两个列表，便于收发和捕捉阻塞
 # 1 收消息的套接字对象列表叫读列表，要先把server放入列表，这样一旦客户端连接过来，就可以accept;

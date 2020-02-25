@@ -226,7 +226,7 @@ def two():
         try:
             while True:
                 item=await q.get()      # 协程嵌套 无结果就阻塞 有结果才返回
-                if item is None: break
+                # if item is None: break
                 print('消费了',item)
         except QueueClosed:
             print('消费结束')         
