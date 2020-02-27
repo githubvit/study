@@ -143,8 +143,7 @@ from socket import *
 
 
 # 收发 通信循环
-async def communication(conn,cli_addr):
-    
+async def communication(conn,cli_addr): 
     while True:
         await sched.sleep(1) # 放到 这里就是 传 timeout
         try:
@@ -174,5 +173,35 @@ async def server():
         sched.new_task(communication(conn,cli_addr))
     server.close()    
 
+
+
+# 普通函数 数数
+def countDown(n):
+    def _run(n):
+        if n>0:
+        # while n>0:    
+            print('Down',n)
+            # time.sleep(1)
+            sched.call_later(1,lambda: _run(n-1))
+            # n -=1
+        # print('Down done') 
+        else:
+            print('Down done')
+    _run(n)
+
+def countUp(stop):
+    def _run(x):
+        # while x<stop:
+        if x<stop:
+            print('Up',x)
+            # time.sleep(1)
+            sched.call_later(1,lambda:_run(x+1))
+            # x += 1
+        # print('Up done')  
+        else:
+            print('Up done') 
+    _run(0)        
+sched.call_soon(lambda:countDown(5))
+sched.call_soon(lambda:countUp(5))
 sched.new_task(server())
 sched.run()
