@@ -54,15 +54,9 @@
 
     # 正是因为这样定义，才可以实现当 该sock 有返回，就 返回到 当前sock 的 协程。
         
-        # sock recv 封装 sock.recv(maxnum)
-        # async def recv(self,sock,maxnum):
-              # 将 该sock对象 和 当前协程 交给 select 的 等待读字典
-        #     self.read_wait[sock]=self.current
-              # 暂停 交出执行权
-        #     await switch()    
-              # 当select监测到该sock 有了返回，就回到当前协程的暂停处。
-              # 用 该sock去取结果。
-        #     return  sock.recv(maxnum)
+    # 也正是因为这样定义，才可以 让 self.read_wait.pop(sock) 实现：
+        #  在select的读字典中 删除 当前sock 项
+        #  返回 以 当前 sock 为 key 的 值 ，即当前sock暂停的协程
 
 
 from collections import deque
@@ -231,7 +225,7 @@ from socket import *
 # 收发 通信循环
 async def communication(conn,cli_addr):
     while True:
-        await scher.sleep(1)
+        await scher.sleep(1) # 这就实现了延时1秒，而不是和原版中的这里是传timeout
         try:
             data=await scher.recv(conn,1024)
             if not data:break

@@ -120,12 +120,11 @@ class Scheduler:
         while self.ready or self.sleeping or self.accept_wait or self.read_wait or self.write_wait:
             if not self.ready:
                 if self.accept_wait:
-                            # 无阻塞 socket cpu 占用 太高 人为停一停 降低占用率
+                    time.sleep(0.3)         # 无阻塞 socket cpu 占用 太高 人为停一停 降低占用率
                     # 0.5的速度 并发 cpu占用率 瞬间最高到20% 没有问题，
                     # 0.05的速度 就大了，cpu占用率 瞬间最高到50%，非常高，并发的客户端 有时 会崩溃。
                     self.ready.append(self.accept_wait.popleft())
                 if self.read_wait:
-                    # time.sleep(1) 
                     self.ready.append(self.read_wait.popleft())    
                 if self.write_wait:
                     self.ready.append(self.write_wait.popleft())    
