@@ -151,7 +151,7 @@ def two():
                 # 下次 put 的时候，就会把  排队 里的get 添加 到 调度对象的 执行队列中 立即执行 
                 # 这就保证 get 一定在 put 后执行
                 self.waiting.append(lambda: self.get())
-                
+
     # 切函数 定义
     def producer(q,count):
         def _run(n):
@@ -171,6 +171,28 @@ def two():
         # print('生产结束')
         # q.put(None)
 
+    # 下面对于 消费者的 切函数  该定义是错的，
+        # 因为 对于 item=q.get() 这种需要get结果的语句，
+        # 这种方式 会导致 没结果 就会 收到 None 就退出了。
+        # 所以 输出：
+            # 生产了 0
+            # 消费了 0
+            # 消费结束
+            # ...
+        # 以上结果说明，消费者收到消息0后，又继续取消息，这时没消息，
+        # 按get的定义，有消息返回消息，没消息，就把自己放到排队队列waitting。
+        # 由于这里是 item=q.get(),  在没消息时，get是没返回的，
+        # 而对于没有返回的函数要结果，就收到None。
+        # 所以，消费者就退出了。
+        # 
+        # 有人说，这简单，把结束信号改为别的值，比如字符串'None',
+        # 那样，当然不会退出了，但就会一直输出'消费了 None'，卡在这，永远结束不了。 
+        # 
+        # 对于 含有 item=q.get() 的 切函数 的 定义，
+        # 要使用回调方式:q.get(call_back)。
+        # 有消息就用回调call_back处理，并定义下一步切函数；
+        # 没消息，就把q.get(call_back)放到排队队列waitting。
+        # 见 3. get 采用 call_back 回调+切函数
     def consumer(q):
         # 切函数
         def _run():
@@ -180,8 +202,6 @@ def two():
             else:
                 print('消费了',item)
                 # 切函数 循环 添加到 准备执行列表 立即执行 
-                # 下一步函数中 继续收消息 不断get 因此还要 q.get(callback = _consume)  
-                # 所以这里放cousumer(q)
                 sched.call_soon(lambda: _run())    
         _run()
 
@@ -201,30 +221,21 @@ def two():
 
 two()
 
-# 结果
-    # 生产了 0
-    # 消费了 0
-    # 生产了 1
-    # 消费了 1
-    # 生产了 2
-    # 消费了 2
-    # 生产了 3
-    # 消费了 3
-    # 生产了 4
-    # 消费了 4
-    # 生产了 5
-    # 消费了 5
-    # 生产了 6
-    # 消费了 6
-    # 生产了 7
-    # 消费了 7
-    # 生产了 8
-    # 消费了 8
-    # 生产了 9
-    # 消费了 9
-    # 生产结束
-    # 消费结束
-    # [one]time 10.01154351234436
+# 结果 是 错的
+# 生产了 0
+# 消费了 0
+# 消费结束
+# 生产了 1
+# 生产了 2
+# 生产了 3
+# 生产了 4
+# 生产了 5
+# 生产了 6
+# 生产了 7
+# 生产了 8
+# 生产了 9
+# 生产结束
+# [two]time 10.005387544631958
 
 
 
@@ -294,7 +305,7 @@ def three():
         # [没消息(即来早了) 就 去排队 (put之后再get)] 
         def get(self,callback):
             # 取消息
-            # 如果 items 有 一个 有效的 item ，就返回这个 item
+            # 如果 items 有 一个 有效的 item ，就用回调处理这个消息
             if self.items:
                 callback(self.items.popleft()) #用回调处理左取出的 item
             else:
@@ -322,20 +333,29 @@ def three():
         # print('生产结束')
         # q.put(None)
 
+
+    # 对于原函数中有 item=q.get() 语句 的，切函数定义要使用回调方式。
+
+    # 切函数定：采用 call_back 回调+切函数
+    # 有消息就用回调call_back处理消息，并定义下一步切函数；
+    # 没消息，就把q.get(call_back)放到排队队列waiting。
     def consumer(q):
         # 回调函数： 消息处理 和 切函数 循环
         def _consume(item):
+            # 终止
             if item is None:
                 print('消费结束') 
             else:
+                # 处理消息
                 print('消费了',item)
-                # 切函数 循环 添加到 准备执行列表 立即执行 
+                # 定义 下一步切函数
+                # 添加到 立即执行列表
                 # 下一步函数中 继续收消息 不断get 因此还要 q.get(callback = _consume)  
                 # 所以这里放cousumer(q)
                 sched.call_soon(lambda: consumer(q))
 
         # 收消息 并用 回调方式 处理消息  
-        # 如果没有消息 该q.get(callback = _run) 函数体 会 放入 排队队列 
+        # 如果没有消息 该q.get(callback = _consume) 函数体 会 放入 排队队列 waiting
         # 因为 q 的get 使用 回调的方式处理消息
         # 所以 在 get 前，一定要有 消息处理函数，以便回调     
         q.get(callback = _consume)        
