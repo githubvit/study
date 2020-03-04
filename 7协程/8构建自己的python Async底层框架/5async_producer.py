@@ -152,7 +152,7 @@ def two():
                     await switch()
                     print('s')
 
-        # 错误的 get 协程写法 导致 consumer 协程中 item=await q.get()得到 Noneitem
+        # 错误的 get 协程写法 导致 consumer 协程中 item=await q.get()得到 None item
         async def get1(self):
             if self.items:
                 return self.items.popleft()
@@ -193,7 +193,7 @@ def two():
                 # 就是 没结果 就在 子协程 阻塞，有结果 父协程才继续执行。
                 # 这一段代码就是子协程的代码，这里看不到的。
 # 有结果返回的协程写法注意事项：
-    # 看get协程的注释，错误的写法导致返回None，因为没有return时，结果就是None   
+    # 看get1协程的注释，错误的写法导致返回None，因为没有return时，结果就是None   
     # 导致一轮后，item就得到None,退出了consumer的循环，不再get，显示'消费结束'。 
     # 就把原来的 if item is None 改成了 if item == 'None'，才发现是get协程写法错误导致。 
 #------------------------------------------------        
