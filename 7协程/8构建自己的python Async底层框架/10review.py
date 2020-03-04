@@ -204,9 +204,181 @@
     3.2 难点1：在于 处理来早了的get，即get时 队列里 没有消息，来早了，怎么办？等等呗，在哪等？
         因此，在  AsyncQueue 中定义了 排队队列 waitting，收集来早了的get。
 
-    3.3 难点2：对于普通函数的消费者函数consumer的切函数定义，
+    3.3 难点2：对于原函数中有 item=q.get() 语句,为避免无消息时错误的返回None。
+        对于协程：使得有消息就返回消息，无消息就把父协程放到排队队列，然后暂停交出执行权。
+            当生产者put消息时，再去处理排队队列里的父协程，这时，就返回到get的暂停处向后执行。
+            这里就要注意写法，避免返回None。
+            while not items:
+                self.waitting.append(self.current)
+                await switch()
+            return self.items.popleft()    
+        对于普通函数：消费者函数consumer的切函数定义要用 回调方式 处理，
+            使得有消息，就用回调处理消息并定义下一步切函数；没有消息就把get[ self.get(call_back)]
+            放到排队队列中。 
 
+    3.4 难点3：队列的关闭，一定要在队列的关闭方法 close() 中处理 最后一次 put 时，来早了的get。
+        用这个get才能关闭队列和激发队列异常，使得消费者consumer程序捕捉到队列异常退出程序。
+        要定义队列异常类 class QueueClosed(Exception)。
+        对于协程：
+            当put或get检测到closed状态为True时，激发队列异常。consumer捕获异常使得退出消费者程序。
+        对于普通函数：
+            要再定义一个 class Result 类，其中 定义 result方法，把该类的对象作为回调的参数，
+            让消费者调用 Result对象的 result方法，item=res.result()。
+            使得当get正常返回时，返回值 callback(Result(val=self.items.popleft()))。
+            当closed状态为True时，返回异常 callback(Result(exc=QueueClosed())) 。
+            这样，当消费者调用 Result对象的 result方法 捕获到异常就退出了程序。
+
+4. 异步队列 class AsyncQueue
+    普通函数：
+        # 1. 定义一个队列关闭异常
+        class QueueClosed ( Exception ):
+            pass
+
+        # 2. 普通函数 定义callback的参数对象 用的类  
+        class Result:
+            def __init__(self,val=None,exc=None):
+                self.value=val
+                self.exc=exc
+
+            # 定义 正常返回 和 激发异常 的方法
+            def result(self):
+                # if self.value:
+                #     return self.value
+                # if self.exc:
+                #     raise self.exc    
+                # 上面的写法 当 self.value=0时 怎么办？
+                # 所以改成：
+                if self.exc:
+                    raise self.exc
+                else:
+                    return self.value
+
+        # 写一个异步的队列 
+        class AsyncQueue:
+            def __init__(self):
+                self.items=deque()    # 消息队列 装的 就是 消息
+                self.waiting=deque()  # 排队队列 这里面装的是 来早了的get
+                # 3 设定状态
+                self._closed=False     # 默认是打开的
+
+            # 4 定义关闭的方法
+            def close(self):
+                self._closed=True      # 关闭队列
+                if self.waiting and not self.items: #处理 无消息时 排队队列 里的get
+                    for func in self.waiting:
+                        sched.call_soon(func)   
+
+            #放消息 并 如果排队队列有get,就把 get 添加 到 调度对象的 准备执行队列中 执行
+            #这样 放进去 的 消息 就立即被 取出 并得到 执行 了
+            def put(self,item):
+
+                # 5 状态判断
+                if self._closed:
+                    raise QueueClosed() # 激发 QueueClosed异常
+
+                # 放消息
+                self.items.append(item)
+                if self.waiting: # 处理排队中来早了的get
+                    func=self.waiting.popleft() # 取出 get
+                    # 立即执行 即self.get(callback)
+                    # func()  # 可能会得到深度调用、递归等
+                    sched.call_soon(func) # 加入 调度对象的 准备执行队列中 用 调度对象的 run 执行
+
+            # 普通函数的 get 和协程不同，其余都是一样的。
+            # [有消息 就 取消息 并 处理消息] 或 
+            # [没消息(即来早了) 就 去排队 (put之后再get)] 
+            def get(self,callback):
+
+                # 取消息
+                # 如果 items 有 一个 有效的 item ，就返回这个 item
+                if self.items:
+                    # 6 用Result对象 作为 参数 取值
+                    callback(Result(val=self.items.popleft())) #用回调处理左取出的 item
+                else:
+                    # 7 状态判断  
+                    if self._closed:
+                        # 8 用Result对象 作为 参数 传递异常
+                        callback(Result(exc=QueueClosed())) #
+                    # 排队 (来早了，就去排队，把get放到排队队列self.waiting 中)
+                    # 如果 items是空的，就把 这次的 get函数体 添加到 排队队列 self.waiting 
+                    # 下次 put 的时候，就会把  排队 里的get 添加 到 调度对象的 执行队列中 立即执行 
+                    # 这就保证 get 一定在 put 后执行
+                    self.waiting.append(lambda: self.get(callback))
+           
+            #普通函数的消费者切函数定义 用 回调 方式
+            def consumer(q):
+                # 回调函数： 消息处理 和 切函数 循环
+                # 10 改造：用 Result类对象 作为参数,调用其result方法 实现 正常返回 和 激发异常
+                # 11 捕捉异常 
+                def _consume(res):
+                    try:
+                        item=res.result()
+                        print('消费了',item,q.con)
+                        # 切函数 循环 添加到 准备执行列表 立即执行 
+                        # 下一步函数中 继续收消息 不断get 因此还要 q.get(callback = _consume)  
+                        # 所以这里放cousumer(q)
+                        sched.call_soon(lambda: consumer(q))
+                    except QueueClosed:
+                        print('消费结束') 
+
+                # 收消息 并用 回调方式 处理消息  
+                # 如果没有消息 该q.get(callback = _run) 函数体 会 放入 排队队列 
+                # 因为 q 的get 使用 回调的方式处理消息
+                # 所以 在 get 前，一定要有 消息处理函数，以便回调     
+                q.get(callback = _consume)        
+
+                # 原函数
+                # while True:
+                #     item=q.get()
+                #     if item is None:
+                #         break
+                #     print('消费了',item)
+                # print('消费结束')
     
+    协程：
+        # 队列关闭异常
+        class QueueClosed(Exception):
+            pass
 
+        # 异步队列
+        class AsyncQueue:
+            def __init__(self):
+                self.items=deque()      # 消息队列
+                self.waitting=deque()   # 排队队列 收集来早了的get
+                self._closed=False      # 状态 默认是打开的 
 
+            def close(self):
+                self._closed=True
+                # 处理put时的最后一个 get ，用这个get激发异常让consumer结束
+                if self.waitting and not self.items:
+                    for coro in self.waitting:
+                        scher.ready.append(coro)
 
+            # 放消息
+            def put(self,item):
+                if self._closed:        # 状态判断
+                    raise QueueClosed()   # 激发异常
+                self.items.append(item)
+                if self.waitting:       # 处理来早了的get 阻塞的consumer 让其继续执行
+                    scher.ready.append(self.waitting.popleft())
+
+            # 收消息 其实 就是 这里和普通函数处理不同，其余都一样。
+            async def get(self):
+                while not self.items:
+                # if not self.items:   # 必须改成上面 不然 最后一次 不会激发异常 
+                # 而是 会继续return 然后 报错 IndexError: pop from an empty deque
+                    if self._closed:
+                        raise QueueClosed()
+                    self.waitting.append(scher.current) # get来早了 就把父协程 consumer收集到waitting
+                    await switch()  # 暂停 交出执行权
+                return self.items.popleft()
+
+        # 消费者 协程
+        async def consumer(q):
+            try:
+                while True:
+                    item=await q.get()      # 协程嵌套 无结果就阻塞 有结果才返回
+                    # if item is None: break
+                    print('消费了',item)
+            except QueueClosed:
+                print('消费结束')         
