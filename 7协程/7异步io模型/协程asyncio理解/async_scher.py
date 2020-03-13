@@ -6,6 +6,29 @@ import heapq
 import time
 import select
 
+# 增加 调度类 的 回调类
+# 使得协程或普通函数 在做线头时，即最开始使用调度类对象把协程或普通函数的切函数放进立即队列时。
+# 即 new_task、later_task(协程的立即调用和稍后调用) 或 call_soon及call_later(普通函数的立即及延时调用)
+# 返回一个 回调类的对象SchedulerCallback(func)
+# 这样就可以用该对象下的回调方法了。
+class SchedulerCallback:
+    def __init__(self,func):
+        self.key=func
+        self.result_status=False
+        self.result=None
+        self.status='Pending'
+        self.callback=None
+
+    # 回调 生成函数体
+    def add_done_callback(self,*args,callback=None):
+        self.callback=lambda : callback(args,self)
+
+    # 结果 改变状态
+    def get_result(self):
+        self.result_status=True
+        
+        
+        
 # 可等待类
 class Awaitable:
     def __await__(self):
@@ -32,29 +55,60 @@ class Scheduler:
         self.current=None   # 当前 协程对象
         self.sleeping=[]    # 延时堆
         self.sequence=0     # 延时 小函数 序号 排序的最终依据
+
         # 1 定义 收发 字典：
         self.read_wait={}    # 等待接收的sock
         self.write_wait={}   # 等待发送的sock
 
+        # 回调功能
+        self.res={}          # 回调结果
+
+        # 不能删的内容
+        self.not_del_fn=[]
+
     # 普通函数 把切函数 放进 立即执行队列
     def call_soon(self,func):
         self.ready.append(func)
+        
+        # 回调功能 生成每步协程的字典回调对象
+        self.res[func]=SchedulerResult(func)
+        return self.res[func]
+        
 
     # 普通函数 延时调用
     def call_later(self,delay,func):
         self.sequence +=1
         deadline=time.time()+delay  # 终结时间
         heapq.heappush(self.sleeping,(deadline,self.sequence,func)) # 放进延时推 并 排序
+
+        # 回调功能 生成每步协程的字典回调对象
+        self.res[func]=SchedulerResult(func)
+        return self.res[func]
    
     # 协程 延时调用
     async def sleep(self,delay):
-        self.call_later(delay,self.current)
+        self.sequence +=1
+        deadline=time.time()+delay  # 终结时间
+        heapq.heappush(self.sleeping,(deadline,self.sequence,self.current)) # 放进延时推 并 排序
         await switch()
+
+        
     
     # 协程 立即调用
     def new_task(self,coro):
-        self.ready.append(Task(coro))  
-    
+        func=Task(coro)
+        self.not_del_fn.append(func)
+        self.ready.append(func)  
+
+        # 回调功能 生成每步协程的字典回调对象
+        self.res[func]=SchedulerResult(func)
+        return self.res[func]
+
+    # 协程 稍后调用
+    def later_task(self,delay,coro):
+        func=Task(coro)
+        self.call_later(delay,func)      
+
     # 2 封装 socket 的 accept recv send
     # SOCK accept
     async def accept(self,sock):
@@ -87,6 +141,7 @@ class Scheduler:
         return sock.send(msg)    
     
     def run(self):
+        cnt=0
         while self.ready or self.sleeping or self.read_wait or self.write_wait:
         
             if not self.ready:
@@ -109,14 +164,119 @@ class Scheduler:
                     # 并发：等则同，否则帮。
                     if delat>0:
                         time.sleep(delat)
+                    
                     self.ready.append(func)
             # 只要立即执行队列里有，就一直执行
             while self.ready:                             
                 func=self.ready.popleft()
-                func()
+                # 要结果的就存结果，没要求的就不存
+                if self.res[func].result_status:
+                    self.res[func].result=func()
+                else:
+                    func()
+                # 每步函数 运行的状态 'pending' 和 'Done'
+                self.res[func].status='Done'
+                
+                print('fo对象',func,self.res[func],len(self.res),self.current)
+                # 如果有回调,就执行回调
+                if self.res[func].callback: 
+                    self.res[func].callback()
+                    
+                    cnt +=1
+                    print('cnt',cnt)
+                    # print('self.current:',self.current)
+                if func not in self.not_del_fn:
+                    del self.res[func]
+
+      
+
 
 # 生成调度对象
 scher=Scheduler()
 
 
 
+# 二 异步队列 AsyncQueue
+
+ # 1. 定义一个队列关闭异常
+class QueueClosed ( Exception ):
+    pass
+# 2. 普通函数 定义callback的参数对象 用的类  
+class Result:
+    def __init__(self,val=None,exc=None):
+        self.value=val
+        self.exc=exc
+    # 定义 正常返回 和 激发异常 的方法
+    def result(self):
+        # if self.value:
+        #     return self.value
+        # if self.exc:
+        #     raise self.exc    
+        # 上面的写法 当 self.value=0时 怎么办？
+        # 所以改成：
+        if self.exc:
+            raise self.exc
+        else:
+            return self.value
+# 写一个异步的队列 
+class AsyncQueue:
+    def __init__(self):
+        self.items=deque()    # 消息队列 装的 就是 消息
+        self.waiting=deque()  # 排队队列 这里面装的是 来早了的get
+        # 3 设定状态
+        self._closed=False     # 默认是打开的
+    # 4 定义关闭的方法
+    def close(self):
+        self._closed=True      # 关闭队列
+        if self.waiting and not self.items: #处理 无消息时 排队队列 里的get
+            for func in self.waiting:
+                sched.call_soon(func)   
+    #放消息 并 如果排队队列有get,就把 get 添加 到 调度对象的 准备执行队列中 执行
+    #这样 放进去 的 消息 就立即被 取出 并得到 执行 了
+    def put(self,item):
+        # 5 状态判断
+        if self._closed:
+            raise QueueClosed() # 激发 QueueClosed异常
+        # 放消息
+        self.items.append(item)
+        if self.waiting: # 处理排队中来早了的get
+            func=self.waiting.popleft() # 取出 get
+            # 立即执行 即self.get(callback)
+            # func()  # 可能会得到深度调用、递归等
+            sched.call_soon(func) # 加入 调度对象的 准备执行队列中 用 调度对象的 run 执行
+   
+    # 普通函数 get f_get()
+    # 和协程不同，其余都是一样的。
+    # [有消息 就 取消息 并 处理消息] 或 
+    # [没消息(即来早了) 就 去排队 (put之后再get)] 
+    def f_get(self,callback):
+        # 取消息
+        # 如果 items 有 一个 有效的 item ，就返回这个 item
+        if self.items:
+            # 6 用Result对象 作为 参数 取值
+            callback(Result(val=self.items.popleft())) #用回调处理左取出的 item
+        else:
+            # 7 状态判断  
+            if self._closed:
+                # 8 用Result对象 作为 参数 传递异常
+                callback(Result(exc=QueueClosed())) #
+            # 排队 (来早了，就去排队，把get放到排队队列self.waiting 中)
+            # 如果 items是空的，就把 这次的 get函数体 添加到 排队队列 self.waiting 
+            # 下次 put 的时候，就会把  排队 里的get 添加 到 调度对象的 执行队列中 立即执行 
+            # 这就保证 get 一定在 put 后执行
+            self.waiting.append(lambda: self.get(callback))
+   
+    # 协程 get c_get()
+    # 收消息 其实 就是 这里和普通函数处理不同，其余都一样。
+    async def c_get(self):
+        while not self.items:
+        # if not self.items:   # 必须改成上面 不然 最后一次 不会激发异常 
+        # 而是 会继续return 然后 报错 IndexError: pop from an empty deque
+            if self._closed:
+                raise QueueClosed()
+            self.waitting.append(scher.current) # get来早了 就把父协程 consumer收集到waitting
+            await switch()  # 暂停 交出执行权
+        return self.items.popleft()
+
+
+q=AsyncQueue()

@@ -3,7 +3,8 @@
 
 import asyncio
 import random
-import functools
+# import functools
+import time
 
 # 1 没有实现并发 实际串行
 def one():
@@ -27,6 +28,47 @@ def one():
     asyncio.run(coro_scheduler())
 
 # one()
+
+# 1.5 自定义async 框架 实现上例1 串行
+import async_scher
+scher=async_scher.scher
+def one_five():
+    # 定义调度器 入口
+    async def coro_scheduler():
+        page=1
+        while page<11:
+            await scher.sleep(1) # 每隔1秒
+            # 调job
+            url='{}/{}'.format('www.baidu.com',page)
+            await job(url)
+            page +=1
+
+    # # 定义job 下载网页 www.baidu.com/1
+    async def job(url):
+        # 模拟下载时间
+        await scher.sleep(random.randint(1,3))
+        print('下载成功',url) 
+
+    # 启动协程
+    start=time.time()
+    scher.new_task(coro_scheduler())
+    scher.run()
+    print('[one_five]time{:.4f}s'.format(time.time()-start))
+
+# one_five()
+
+# 结果
+    # 下载成功 www.baidu.com/1
+    # 下载成功 www.baidu.com/2
+    # 下载成功 www.baidu.com/3
+    # 下载成功 www.baidu.com/4
+    # 下载成功 www.baidu.com/5
+    # 下载成功 www.baidu.com/6
+    # 下载成功 www.baidu.com/7
+    # 下载成功 www.baidu.com/8
+    # 下载成功 www.baidu.com/9
+    # 下载成功 www.baidu.com/10
+    # [one_five]time28.0096s
 
 # 2 实现 并发 的关键： 
 #   1). 不能在一个协程等另一个协程，而是要把 另一个协程 注册给 事件循环loop
@@ -76,6 +118,52 @@ def two():
 
 # two()   
 
+# 2.5 自定义async 框架 实现上例2 并发
+def two_five():
+    async def coro_scheduler():
+        page=1
+        while page<11:
+            
+            await scher.sleep(1) # 每隔1秒
+            # 调job
+            url='{}/{}'.format('www.baidu.com',page)
+            # 实现并发的关键 就是在这里 新起 一个独立任务
+            # scher.new_task(job(url))
+
+            # 如果采用上述调用方式，就是一个协程两次运行，就会产生两次回调的问题，
+            # 因此，在自定义的async框架中 增加了下面这种调用方式：稍后调用，
+            # 就统一了 scher.new_task(job(url)) 和 原来job协程里的 await scher.sleep(random.randint(1,3))
+            # 使得该协程只在稍后运行一次。因此，只产生一次回调。
+            scher.later_task(random.randint(1,3),job(url))
+            print ('page',page)
+            page +=1
+
+    # 定义job 下载网页 www.baidu.com/1
+    async def job(url):
+        # 模拟下载时间
+        # await scher.sleep(random.randint(1,3))
+        print('下载成功',url) 
+
+    # 启动协程
+    start=time.time()
+    scher.new_task(coro_scheduler())
+    scher.run()
+    print('[two_five]time{:.4f}s'.format(time.time()-start))
+
+two_five()
+
+# 结果
+    # 下载成功 www.baidu.com/1
+    # 下载成功 www.baidu.com/3
+    # 下载成功 www.baidu.com/2
+    # 下载成功 www.baidu.com/5
+    # 下载成功 www.baidu.com/4
+    # 下载成功 www.baidu.com/6
+    # 下载成功 www.baidu.com/7
+    # 下载成功 www.baidu.com/8
+    # 下载成功 www.baidu.com/9
+    # 下载成功 www.baidu.com/10
+    # [two_five]time11.0030s
 
 # 3 并发+实现回调
 def three():
@@ -132,7 +220,7 @@ def three():
     finally:        
         print('game over')
    
-three()
+# three()
     
 # 速度0.001的瞬间 按下ctrl+c 启动了近6000任务，执行完了近4000任务。
 # 5946
@@ -177,3 +265,50 @@ three()
 # 7118
 # 7119
 # game over
+
+
+# 3.5 自定义async 实现 并发+回调  <协程 + 并发 普通函数 + 回调函数>
+# 从自定义async 引入q
+# q=async_scher.q
+
+def three_five():
+    # 协程
+    async def coro_scheduler():
+        page=1
+        while page<11:
+            await scher.sleep(1) # 每隔1秒
+            # 调job
+            url='{}/{}'.format('www.baidu.com',page)
+
+            # 普通函数的并发
+            # 实现并发的关键 就是在这里 新起 一个独立任务
+            sf_obj=scher.call_later(random.randint(1,3),lambda:job(url))
+            
+            # 回调
+            sf_obj.add_done_callback(url,callback=call_job_done)
+
+            # 表示要取得结果，才能在callback中用对象的result取得结果
+            sf_obj.get_result()
+            
+            page +=1
+
+    # 并发 普通函数
+    # 定义job 下载网页 www.baidu.com/1
+    def job(url):
+        # 模拟下载时间
+        # scher.call_later(random.randint(1,3),lambda:job(url))
+        # print('3')
+        return '返回值'
+
+    # 回调
+    def call_job_done(url,task): #回调的最后一个参数是SchedulerResult object ,
+        # 用 SchedulerResult object 的 result 可以取得 并发普通函数 的返回值
+        print('下载成功',url,task.result) 
+        
+    # 启动协程
+    start=time.time()
+    scher.new_task(coro_scheduler())
+    scher.run()
+    print('[three_five]time{:.4f}s'.format(time.time()-start))
+
+# three_five()

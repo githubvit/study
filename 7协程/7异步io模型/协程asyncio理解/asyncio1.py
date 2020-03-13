@@ -3,7 +3,7 @@
 # https://www.bilibili.com/video/av85024826
 # up主：小鱼儿teacher
 
-# 原生协程 实现 并发
+# 基于 原生async框架 用 协程 实现 并发
 import asyncio,time
 
 def one():
@@ -54,6 +54,7 @@ def one():
 
 import async_scher
 scher=async_scher.scher
+
 def two():
     
     async def h1(count):
@@ -61,7 +62,7 @@ def two():
         while n<count:
             print('hello world! 1')
             n+=1
-            await scher.sleep(1) # await 交出运行控制权
+            await scher.sleep(1) 
 
     async def h2(n):
         while n>0:
@@ -70,6 +71,7 @@ def two():
             await scher.sleep(1)
 
     start=time.time()
+
     scher.new_task(h1(5))
     scher.new_task(h2(5))
     scher.run()
@@ -79,7 +81,6 @@ def two():
 two()
 
 # 结果
-
     # hello world! 1
     # hello world! 2
     # hello world! 1
