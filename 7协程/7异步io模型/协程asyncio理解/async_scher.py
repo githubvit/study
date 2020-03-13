@@ -6,6 +6,7 @@ import heapq
 import time
 import select
 
+# 回----------------------------------------------------------------------------------------------调
 # 增加 调度类 的 回调类
 # 使得协程或普通函数 在做线头时，即最开始使用调度类对象把协程或普通函数的切函数放进立即队列时。
 # 即 new_task、later_task(协程的立即调用和稍后调用) 或 call_soon及call_later(普通函数的立即及延时调用)
@@ -27,7 +28,7 @@ class SchedulerCallback:
     def get_result(self):
         self.result_status=True
         
-        
+# 回----------------------------------------------------------------------------------------------调        
         
 # 可等待类
 class Awaitable:
@@ -59,21 +60,23 @@ class Scheduler:
         # 1 定义 收发 字典：
         self.read_wait={}    # 等待接收的sock
         self.write_wait={}   # 等待发送的sock
-
+        # 回----------------------------------------------------------------------------------------------调
         # 回调功能
         self.res={}          # 回调结果
 
         # 不能删的内容
         self.not_del_fn=[]
-
+        # 回----------------------------------------------------------------------------------------------调
+    
     # 普通函数 把切函数 放进 立即执行队列
     def call_soon(self,func):
         self.ready.append(func)
-        
+
+        # 回----------------------------------------------------------------------------------------------调
         # 回调功能 生成每步协程的字典回调对象
         self.res[func]=SchedulerResult(func)
         return self.res[func]
-        
+        # 回----------------------------------------------------------------------------------------------调
 
     # 普通函数 延时调用
     def call_later(self,delay,func):
@@ -81,10 +84,12 @@ class Scheduler:
         deadline=time.time()+delay  # 终结时间
         heapq.heappush(self.sleeping,(deadline,self.sequence,func)) # 放进延时推 并 排序
 
+        # 回----------------------------------------------------------------------------------------------调
         # 回调功能 生成每步协程的字典回调对象
         self.res[func]=SchedulerResult(func)
         return self.res[func]
-   
+        # 回----------------------------------------------------------------------------------------------调
+    
     # 协程 延时调用
     async def sleep(self,delay):
         self.sequence +=1
@@ -96,6 +101,7 @@ class Scheduler:
     
     # 协程 立即调用
     def new_task(self,coro):
+    # 回----------------------------------------------------------------------------------------------调
         func=Task(coro)
         self.not_del_fn.append(func)
         self.ready.append(func)  
@@ -103,12 +109,13 @@ class Scheduler:
         # 回调功能 生成每步协程的字典回调对象
         self.res[func]=SchedulerResult(func)
         return self.res[func]
-
+        
     # 协程 稍后调用
     def later_task(self,delay,coro):
         func=Task(coro)
         self.call_later(delay,func)      
-
+    # 回----------------------------------------------------------------------------------------------调
+   
     # 2 封装 socket 的 accept recv send
     # SOCK accept
     async def accept(self,sock):
@@ -169,6 +176,7 @@ class Scheduler:
             # 只要立即执行队列里有，就一直执行
             while self.ready:                             
                 func=self.ready.popleft()
+                # 回----------------------------------------------------------------------------------------------调
                 # 要结果的就存结果，没要求的就不存
                 if self.res[func].result_status:
                     self.res[func].result=func()
@@ -185,9 +193,11 @@ class Scheduler:
                     cnt +=1
                     print('cnt',cnt)
                     # print('self.current:',self.current)
+                
+                # 如果不是不能删除的 就删   
                 if func not in self.not_del_fn:
                     del self.res[func]
-
+                # 回----------------------------------------------------------------------------------------------调
       
 
 
