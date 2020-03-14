@@ -9,9 +9,9 @@ import select
 # 回----------------------------------------------------------------------------------------------调
 # 增加 调度类 的 回调类
 # 使得协程或普通函数 在做线头时，即最开始使用调度类对象把协程或普通函数的切函数放进立即队列时。
-# 即 new_task、later_task(协程的立即调用和稍后调用) 或 call_soon及call_later(普通函数的立即及延时调用)
+# 即 new_task(协程的立即调用) 或 call_soon及call_later(普通函数的立即及延时调用)
 # 返回一个 回调类的对象SchedulerCallback(func)
-# 这样就可以用该对象下的回调方法了。
+# 这样就可以用该对象下的回调方法绑定回调函数了。
 class SchedulerCallback:
     def __init__(self,func):
         self.key=func
@@ -20,9 +20,9 @@ class SchedulerCallback:
         self.status='Pending'
         self.callback=None
 
-    # 回调 生成函数体
+    # 回调 生成函数体 
     def add_done_callback(self,*args,callback=None):
-        self.callback=lambda : callback(args,self)
+        self.callback=lambda : callback(args,self) # 传入 self 保证回调函数的最后一个参数是回调对象自身
 
     # 结果 改变状态
     def get_result(self):
@@ -47,8 +47,12 @@ class Task:
         scher.current=self
         try:
             self.coro.send(None) # 执行 协程 更新 协程对象
-        except StopIteration:
-            pass
+        except StopIteration as e:
+            # print('1',e)
+            # 取得 该协程 结果
+            if scher.res[self].result_status:
+                # print('2',e)
+                scher.res[self].result=e
 # 统一的调度类
 class Scheduler:
     def __init__(self):
@@ -60,21 +64,18 @@ class Scheduler:
         # 1 定义 收发 字典：
         self.read_wait={}    # 等待接收的sock
         self.write_wait={}   # 等待发送的sock
+
         # 回----------------------------------------------------------------------------------------------调
         # 回调功能
         self.res={}          # 回调结果
-
-        # 不能删的内容
-        self.not_del_fn=[]
         # 回----------------------------------------------------------------------------------------------调
-    
+
+
     # 普通函数 把切函数 放进 立即执行队列
     def call_soon(self,func):
         self.ready.append(func)
-
         # 回----------------------------------------------------------------------------------------------调
-        # 回调功能 生成每步协程的字典回调对象
-        self.res[func]=SchedulerResult(func)
+        self.res[func]=SchedulerCallback(func)
         return self.res[func]
         # 回----------------------------------------------------------------------------------------------调
 
@@ -85,11 +86,21 @@ class Scheduler:
         heapq.heappush(self.sleeping,(deadline,self.sequence,func)) # 放进延时推 并 排序
 
         # 回----------------------------------------------------------------------------------------------调
-        # 回调功能 生成每步协程的字典回调对象
-        self.res[func]=SchedulerResult(func)
+        self.res[func]=SchedulerCallback(func)
         return self.res[func]
         # 回----------------------------------------------------------------------------------------------调
     
+            
+    
+    # 协程 立即调用
+    def new_task(self,coro):
+    # 回----------------------------------------------------------------------------------------------调
+        func=Task(coro)
+        self.ready.append(func)  
+        self.res[func]=SchedulerCallback(func)
+        return self.res[func]
+    # 回----------------------------------------------------------------------------------------------调
+   
     # 协程 延时调用
     async def sleep(self,delay):
         self.sequence +=1
@@ -97,25 +108,6 @@ class Scheduler:
         heapq.heappush(self.sleeping,(deadline,self.sequence,self.current)) # 放进延时推 并 排序
         await switch()
 
-        
-    
-    # 协程 立即调用
-    def new_task(self,coro):
-    # 回----------------------------------------------------------------------------------------------调
-        func=Task(coro)
-        self.not_del_fn.append(func)
-        self.ready.append(func)  
-
-        # 回调功能 生成每步协程的字典回调对象
-        self.res[func]=SchedulerResult(func)
-        return self.res[func]
-        
-    # 协程 稍后调用
-    def later_task(self,delay,coro):
-        func=Task(coro)
-        self.call_later(delay,func)      
-    # 回----------------------------------------------------------------------------------------------调
-   
     # 2 封装 socket 的 accept recv send
     # SOCK accept
     async def accept(self,sock):
@@ -145,7 +137,14 @@ class Scheduler:
         self.write_wait[sock]=self.current
         # 暂停 交出执行权
         await switch() 
-        return sock.send(msg)    
+        return sock.send(msg) 
+    
+    # 回----------------------------------------------------------------------------------------------调   
+    # 回调信号
+    def callback_able(self):
+        if self.res[self.current]:
+            self.res[self.current].status='Done'
+    # 回----------------------------------------------------------------------------------------------调        
     
     def run(self):
         cnt=0
@@ -176,27 +175,21 @@ class Scheduler:
             # 只要立即执行队列里有，就一直执行
             while self.ready:                             
                 func=self.ready.popleft()
+                func()
+
                 # 回----------------------------------------------------------------------------------------------调
-                # 要结果的就存结果，没要求的就不存
-                if self.res[func].result_status:
-                    self.res[func].result=func()
-                else:
-                    func()
+
                 # 每步函数 运行的状态 'pending' 和 'Done'
-                self.res[func].status='Done'
-                
-                print('fo对象',func,self.res[func],len(self.res),self.current)
-                # 如果有回调,就执行回调
-                if self.res[func].callback: 
-                    self.res[func].callback()
-                    
-                    cnt +=1
-                    print('cnt',cnt)
-                    # print('self.current:',self.current)
-                
-                # 如果不是不能删除的 就删   
-                if func not in self.not_del_fn:
-                    del self.res[func]
+                if self.res[func].status=='Done':                
+                    print('fo对象',func,self.res[func],len(self.res),self.current)
+                    # 如果有回调,就执行回调
+                    if self.res[func].callback: 
+                        self.res[func].callback()
+                        cnt +=1
+                        print('cnt',cnt)
+                        # print('self.current:',self.current)
+                    # 执行完了，就删除
+                    del self.res[func]  
                 # 回----------------------------------------------------------------------------------------------调
       
 

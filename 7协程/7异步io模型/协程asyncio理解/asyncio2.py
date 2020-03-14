@@ -128,20 +128,24 @@ def two_five():
             # 调job
             url='{}/{}'.format('www.baidu.com',page)
             # 实现并发的关键 就是在这里 新起 一个独立任务
-            # scher.new_task(job(url))
+            task=scher.new_task(job(url))
 
-            # 如果采用上述调用方式，就是一个协程两次运行，就会产生两次回调的问题，
-            # 因此，在自定义的async框架中 增加了下面这种调用方式：稍后调用，
-            # 就统一了 scher.new_task(job(url)) 和 原来job协程里的 await scher.sleep(random.randint(1,3))
-            # 使得该协程只在稍后运行一次。因此，只产生一次回调。
-            scher.later_task(random.randint(1,3),job(url))
-            print ('page',page)
+            print ('page',page,type(task))
             page +=1
 
     # 定义job 下载网页 www.baidu.com/1
     async def job(url):
         # 模拟下载时间
-        # await scher.sleep(random.randint(1,3))
+        # 回调的处理，我们知道 如果用new_task调用方式启动协程，
+        # 如果协程中间有yield或 await switch ，则 针对 每个回调类对象，会执行多次回调，这是不允许的
+        # 那么，我们怎么办呢？
+        # 针对 每个回调类对象，给一个可以回调的信号 callback_able=True 
+        # 怎么给呢？
+        # 在调度类 定义callback_able()方法，给当前回调对象 状态 置 'done'
+        # 在调度类的run中，回调对象状态为'done',才能回调。回调完成，就可以删除该对象了。
+        await scher.sleep(random.randint(1,3))
+        # 给可以回调的信号
+        scher.callback_able()
         print('下载成功',url) 
 
     # 启动协程
@@ -150,7 +154,7 @@ def two_five():
     scher.run()
     print('[two_five]time{:.4f}s'.format(time.time()-start))
 
-two_five()
+# two_five()
 
 # 结果
     # 下载成功 www.baidu.com/1
@@ -267,7 +271,7 @@ def three():
 # game over
 
 
-# 3.5 自定义async 实现 并发+回调  <协程 + 并发 普通函数 + 回调函数>
+# 3.5 自定义async 实现 并发+回调  <协程 + 并发 + 回调函数>
 # 从自定义async 引入q
 # q=async_scher.q
 
@@ -280,29 +284,43 @@ def three_five():
             # 调job
             url='{}/{}'.format('www.baidu.com',page)
 
-            # 普通函数的并发
             # 实现并发的关键 就是在这里 新起 一个独立任务
-            sf_obj=scher.call_later(random.randint(1,3),lambda:job(url))
-            
-            # 回调
-            sf_obj.add_done_callback(url,callback=call_job_done)
+            sc_obj=scher.new_task(job(url))
 
-            # 表示要取得结果，才能在callback中用对象的result取得结果
-            sf_obj.get_result()
+            # print(sf_obj)#SchedulerCallback object对象
+            
+            # 用 SchedulerCallback object对象 的 add_done_callback 方法
+            # 绑定回调
+            sc_obj.add_done_callback(url,callback=call_job_done)
+
+            # 如果 想要 在 回调中 取得 该回调对象的协程的结果，
+            # 就要先用get_result()方法先提出申请
+            # 表示要取得结果，
+            # 才能在callback中用SchedulerCallback object对象的result取得结果
+            sc_obj.get_result()
             
             page +=1
 
-    # 并发 普通函数
+    # 并发 
     # 定义job 下载网页 www.baidu.com/1
-    def job(url):
-        # 模拟下载时间
-        # scher.call_later(random.randint(1,3),lambda:job(url))
-        # print('3')
-        return '返回值'
-
+    async def job(url):
+        # 回调的处理，我们知道 如果用new_task调用方式启动协程，
+        # 如果协程中间有yield或 await switch ，则 针对 每个回调类对象，会执行多次回调，这是不允许的
+        # 那么，我们怎么办呢？
+        # 针对 每个回调类对象，给一个可以回调的信号 callback_able=True 
+        # 怎么给呢？
+        # 在调度类 定义callback_able()方法，给当前回调对象 状态 置 'done'
+        # 在调度类的run中，回调对象状态为'done',才能回调。回调完成，就可以删除该对象了。
+        await scher.sleep(random.randint(1,3)) #模拟 网速
+        # 发回调信号
+        scher.callback_able()
+        # 结果
+        return '返回值'+url
+        
+        
     # 回调
-    def call_job_done(url,task): #回调的最后一个参数是SchedulerResult object ,
-        # 用 SchedulerResult object 的 result 可以取得 并发普通函数 的返回值
+    def call_job_done(url,task): #回调的最后一个参数是SchedulerCallback object 对象 ,
+        # 如果事先申请了结果get_result()，那么用 SchedulerCallback 对象 的 result 可以取得 该对象的协程 的返回值
         print('下载成功',url,task.result) 
         
     # 启动协程
@@ -311,4 +329,4 @@ def three_five():
     scher.run()
     print('[three_five]time{:.4f}s'.format(time.time()-start))
 
-# three_five()
+three_five()
