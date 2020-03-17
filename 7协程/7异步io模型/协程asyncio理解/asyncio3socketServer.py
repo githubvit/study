@@ -12,7 +12,14 @@ async def handle_echo(reader, writer):
 
     print(f"Send: {message!r}")
     writer.write(data)
+
+    
+    # 这是一个与底层 IO 输入缓冲区交互的流量控制方法 await writer.drain()
+        # 当缓冲区达到上限时，drain() 阻塞，待到缓冲区回落到下限时，写操作恢复
+        # 当不需要等待时，drain() 会立即返回，例如上面的消息内容较少，不会阻塞
+        # 这就是一个控制消息的数据量的控制阀 缓冲区满了就阻塞  有空就不阻塞
     await writer.drain()
+
 
     print("Close the connection")
     writer.close()

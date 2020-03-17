@@ -127,9 +127,9 @@ def two_five():
             await scher.sleep(1) # 每隔1秒
             # 调job
             url='{}/{}'.format('www.baidu.com',page)
+
             # 实现并发的关键 就是在这里 新起 一个独立任务
             task=scher.new_task(job(url))
-
             print ('page',page,type(task))
             page +=1
 
@@ -154,20 +154,30 @@ def two_five():
     scher.run()
     print('[two_five]time{:.4f}s'.format(time.time()-start))
 
-# two_five()
+two_five()
 
 # 结果
+    # page 1 <class 'async_scher.SchedulerCallback'>
+    # page 2 <class 'async_scher.SchedulerCallback'>
     # 下载成功 www.baidu.com/1
+    # page 3 <class 'async_scher.SchedulerCallback'>
+    # page 4 <class 'async_scher.SchedulerCallback'>
     # 下载成功 www.baidu.com/3
     # 下载成功 www.baidu.com/2
-    # 下载成功 www.baidu.com/5
+    # page 5 <class 'async_scher.SchedulerCallback'>
     # 下载成功 www.baidu.com/4
+    # page 6 <class 'async_scher.SchedulerCallback'>
+    # 下载成功 www.baidu.com/5
+    # page 7 <class 'async_scher.SchedulerCallback'>
     # 下载成功 www.baidu.com/6
+    # page 8 <class 'async_scher.SchedulerCallback'>
     # 下载成功 www.baidu.com/7
-    # 下载成功 www.baidu.com/8
+    # page 9 <class 'async_scher.SchedulerCallback'>
+    # page 10 <class 'async_scher.SchedulerCallback'>
     # 下载成功 www.baidu.com/9
+    # 下载成功 www.baidu.com/8
     # 下载成功 www.baidu.com/10
-    # [two_five]time11.0030s
+    # [two_five]time11.0252s
 
 # 3 并发+实现回调
 def three():
@@ -330,3 +340,37 @@ def three_five():
     print('[three_five]time{:.4f}s'.format(time.time()-start))
 
 three_five()
+
+# 结果
+
+    # fo对象 <async_scher.Task object at 0x00000156FE53D3C8> <async_scher.SchedulerCallback object at 0x00000156FE53D788> 3 <async_scher.Task object at 0x00000156FE53D3C8>
+    # 下载成功 ('www.baidu.com/1',) 返回值www.baidu.com/1
+    # cnt 1
+    # fo对象 <async_scher.Task object at 0x00000156FE53EF08> <async_scher.SchedulerCallback object at 0x00000156FE53EF48> 3 <async_scher.Task object at 0x00000156FE53EF08>
+    # 下载成功 ('www.baidu.com/2',) 返回值www.baidu.com/2
+    # cnt 2
+    # fo对象 <async_scher.Task object at 0x00000156FE5440C8> <async_scher.SchedulerCallback object at 0x00000156FE544048> 3 <async_scher.Task object at 0x00000156FE5440C8>
+    # 下载成功 ('www.baidu.com/3',) 返回值www.baidu.com/3
+    # cnt 3
+    # fo对象 <async_scher.Task object at 0x00000156FE544248> <async_scher.SchedulerCallback object at 0x00000156FE5441C8> 3 <async_scher.Task object at 0x00000156FE544248>
+    # 下载成功 ('www.baidu.com/4',) 返回值www.baidu.com/4
+    # cnt 4
+    # fo对象 <async_scher.Task object at 0x00000156FE5443C8> <async_scher.SchedulerCallback object at 0x00000156FE544348> 3 <async_scher.Task object at 0x00000156FE5443C8>
+    # 下载成功 ('www.baidu.com/5',) 返回值www.baidu.com/5
+    # cnt 5
+    # fo对象 <async_scher.Task object at 0x00000156FE544548> <async_scher.SchedulerCallback object at 0x00000156FE5444C8> 4 <async_scher.Task object at 0x00000156FE544548>
+    # 下载成功 ('www.baidu.com/6',) 返回值www.baidu.com/6
+    # cnt 6
+    # fo对象 <async_scher.Task object at 0x00000156FE53D788> <async_scher.SchedulerCallback object at 0x00000156FE53D3C8> 4 <async_scher.Task object at 0x00000156FE53D788>
+    # 下载成功 ('www.baidu.com/8',) 返回值www.baidu.com/8
+    # cnt 7
+    # fo对象 <async_scher.Task object at 0x00000156FE53EFC8> <async_scher.SchedulerCallback object at 0x00000156FE53EF08> 3 <async_scher.Task object at 0x00000156FE53EFC8>
+    # 下载成功 ('www.baidu.com/7',) 返回值www.baidu.com/7
+    # cnt 8
+    # fo对象 <async_scher.Task object at 0x00000156FE544308> <async_scher.SchedulerCallback object at 0x00000156FE544248> 3 <async_scher.Task object at 0x00000156FE544308>
+    # 下载成功 ('www.baidu.com/9',) 返回值www.baidu.com/9
+    # cnt 9
+    # fo对象 <async_scher.Task object at 0x00000156FE544148> <async_scher.SchedulerCallback object at 0x00000156FE5445C8> 2 <async_scher.Task object at 0x00000156FE544148>
+    # 下载成功 ('www.baidu.com/10',) 返回值www.baidu.com/10
+    # cnt 10
+    # [three_five]time13.0617s

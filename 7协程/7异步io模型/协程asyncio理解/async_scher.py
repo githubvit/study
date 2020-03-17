@@ -181,14 +181,14 @@ class Scheduler:
 
                 # 每步函数 运行的状态 'pending' 和 'Done'
                 if self.res[func].status=='Done':                
-                    print('fo对象',func,self.res[func],len(self.res),self.current)
+                    # print('fo对象',func,self.res[func],len(self.res),self.current)
                     # 如果有回调,就执行回调
                     if self.res[func].callback: 
                         self.res[func].callback()
                         cnt +=1
-                        print('cnt',cnt)
+                        # print('cnt',cnt)
                         # print('self.current:',self.current)
-                    # 执行完了，就删除
+                    # 执行完了，就删除，节约空间
                     del self.res[func]  
                 # 回----------------------------------------------------------------------------------------------调
       

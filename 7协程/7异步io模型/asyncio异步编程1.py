@@ -1,3 +1,6 @@
+# 
+# https://www.cnblogs.com/zhaof/p/8490045.html python中重要的模块--asyncio
+# 
 # 一些概念：
 # • event_loop 事件循环：
 #       程序开启一个无限的循环，并把一些函数注册到事件循环上。
@@ -8,7 +11,7 @@
 #       而是会返回一个协程对象。协程对象需要注册到事件循环，由事件循环调用
 
 # • task 任务：
-#       一个协程对象就是一个原生可以挂起的函数，任务则是对协程进一步封装，
+#       一个协程对象就是一个原生 可以挂起 的函数，任务则是对协程进一步封装，
 #       其中包含任务的各种状态
 #       Task 对象被用来在事件循环中运行协程。
 #       如果一个协程在等待一个 Future 对象，Task 对象会挂起该协程的执行并等待该 Future 对象完成。
@@ -21,42 +24,53 @@
 #       Python3.5 用于定义协程的关键字，async 定义一个协程，
 #       await 用于挂起阻塞的异步调用接口
 
+# 使用async可以定义协程对象，使用await可以针对耗时的操作进行挂起，
+# 就像生成器里的yield一样，函数让出控制权。
+# 协程遇到await，事件循环将会挂起该协程，执行别的协程，
+# 直到其他的协程也挂起或者执行完毕，再进行下一个协程的执行
+
+# 耗时的操作一般是一些IO操作，例如网络请求，文件读取等。
+# 我们使用asyncio.sleep函数来模拟IO操作。
+# 协程的目的也是让这些IO操作异步化。
+
 import time
 import asyncio
 import functools
 # 1. 基本协程
 def one():
-    start = time.time()
+    now=lambda : time.time()
+    start = now()
     
     # async 关键字可定义一个协程函数
     # @asyncio.coroutine 这个装饰器也可以定义协程
-    # 注意，函数的返回值才是协程，也叫事件
-	
+    
     # 协程不能单独运行，需要作为事件注入到事件循环 loop 里
 
     async def do_some_work(x):
         # time.sleep(.01) # 因为time.sleep会阻断整个线程，当单线程多任务时，就会卡住所有任务，这与协程的初衷不符。
         await asyncio.sleep(.01)
         print('[do_some_work]  这是个协程任务')
-        print('[do_some_work]  Coroutine {}'.format(x))
+        print(f'[do_some_work]  Coroutine {x!r}') # 等于 '[do_some_work]  Coroutine {}'.format(x)
 
-    coroutine = do_some_work('one')     # 创建协程
+    coroutine = do_some_work('one')     # 创建协程对象
 
     loop = asyncio.get_event_loop()     # 创建事件循环
 
     loop.run_until_complete(coroutine)  # 将协程注入事件循环生成任务对象并启动
 
-    print('----- 运行耗时：{:.4f}s -----'.format(time.time()-start)) # :.4f 保留4位小数
+    print('----- 运行耗时[one]：{:.4f}s -----'.format(now()-start)) # :.4f 保留4位小数
 
-# one()
+one()
 
 # [do_some_work]  这是个协程任务
-# [do_some_work]  Coroutine one
+# [do_some_work]  Coroutine one    这是 f'[do_some_work]  Coroutine {x}'
+# [do_some_work]  Coroutine 'one'  这是 f'[do_some_work]  Coroutine {x!r}'
 # ----- 运行耗时：0.0120s -----
 
 # 2. task 任务
 def two():
-    start = time.time()
+    now=lambda : time.time()
+    start=now()
     async def do_some_work(x):
         await asyncio.sleep(.01)
         print('[do_some_work]  这是个协程任务')
@@ -69,7 +83,8 @@ def two():
     # task = asyncio.ensure_future(coroutine) 作用同上
     # task 是 asyncio.Task 类的实例，asyncio.Task 是 asyncio.Future 的子类
     # 为什么要用协程创建 task ？这个过程中 asyncio.Task 类中做了一些工作
-    # 其中包括预激协程，以及协程运行过程中遇到某些异常时的处理
+    # 1.其中包括预激协程，以及协程运行过程中遇到某些异常时的处理
+    # 2.保存了协程运行后的状态，用于未来获取协程的结果,可以根据状态进行回调的处理
 
     print(isinstance(task, asyncio.Task))   
     print(isinstance(task, asyncio.Future))
@@ -78,7 +93,7 @@ def two():
     loop.run_until_complete(task)           # 将任务注入事件循环并启动
 
     print('[task] ', task._state)           # 打印任务状态
-    print('----- 运行耗时：{:.4f}s -----'.format(time.time()-start))
+    print('----- 运行耗时：{:.4f}s -----'.format(now()-start))
 
 # two()
 
@@ -197,7 +212,7 @@ def four():
    
     print('----- 运行耗时：{:.4f}s -----'.format(time.time()-start))
 
-four()
+# four()
 
 # [do_some_work] coroutine start sleep <5> s
 # [do_some_work] coroutine start sleep <2> s
