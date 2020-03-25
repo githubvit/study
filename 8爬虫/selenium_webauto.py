@@ -33,6 +33,7 @@ def index_search(url,search_el,search_btn_el,keyword):
     # 一 打开网页 用WebDriver 对象
     # 调用WebDriver 对象的get方法 可以让浏览器打开指定网址
     wd.get(url)
+    print("session:",wd.session_id)
 
     # 二 选取节点  用WebDriver 对象 选取 返回 WebElement对象 
     # 一般使用 css 选择器 选取搜索框'.nav-search-keyword'
@@ -90,7 +91,8 @@ def index_search(url,search_el,search_btn_el,keyword):
             break
     
     search_url=wd.current_url
-    # print(search_url)
+    print("session:",wd.session_id)
+    print(search_url)
     # 3 跳回
 
     # 五 页面冻结 http://www.python3.vip/doc/tutorial/selenium/skills_2/#冻结界面
@@ -117,18 +119,17 @@ def index_search(url,search_el,search_btn_el,keyword):
     # 退出 会关闭浏览器
     # wd.quit()
 
-    return search_url
+    return {"search_url":search_url,'session':wd.session_id}
 
 
 # if __name__ == "__main__":
-#     # url='https://www.bilibili.com'
-#     # search_el='.nav-search-keyword'
-#     # search_btn_el='.bilifont bili-icon_dingdao_sousuo,.nav-search-submit'
-#     # keyword='小升初'
-    
-#     url='https://www.ixigua.com'
-#     search_el='.search-wrap input'
-#     search_btn_el='.search-btn span' # 定位到span 搜索 文字 否则有时可以有时不行
+#     url='https://www.bilibili.com'
+#     search_el='.nav-search-keyword'
+#     search_btn_el='.bilifont bili-icon_dingdao_sousuo,.nav-search-submit'
 #     keyword='小升初'
 
-#     index_search(url,search_el,search_btn_el,keyword)
+    # url='https://www.ixigua.com'
+    # search_el='.search-wrap input'
+    # search_btn_el='.search-btn span' # 定位到span 搜索 文字 否则有时可以有时不行
+    # keyword='小升初'
+    # index_search(url,search_el,search_btn_el,keyword)
