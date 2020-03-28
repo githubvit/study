@@ -1,4 +1,4 @@
-#  移动端自动化 
+#  移动端自动化 http://www.python3.vip/doc/tutorial/appium/01/
 
 #  一 appium 简介
 #  appium是模仿 selenium web自动化而 打造的 移动端 自动化 框架。
