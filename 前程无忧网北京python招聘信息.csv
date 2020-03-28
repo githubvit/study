@@ -1,5 +1,56 @@
 职位名称,详细链接,公司名称,工作地点,薪资,发布时间,职位信息
-Python工程师,https://jobs.51job.com/beijing/107487885.html?s=01&t=0,中包物联网科技（北京）有限公司,北京,7-12万/年,03-25,"岗位职责：
+Python开发工程师-财务报表平台,https://jobs.51job.com/beijing/120936463.html?s=01&t=0,字节跳动,北京,2-4万/月,03-26,"职位描述：
+1、负责财务报表平台Python后端服务开发与维护；
+2、负责高质量的设计和编码；承担重点、难点的技术攻坚；
+3、负责推动、优化ETL技术体系、组件抽象，提升开发效率。
+职位要求：
+1、本科及以上学历，计算机等相关专业；
+2、3年以上Python后端开发经验；
+3、熟悉MySQL或NoSQL等常用储存方案及基本原理，能够合理设计数据库结构；
+4、具有大数据存储和计算经验，了解或使用过hive，spark，hadoop，yarn，kafka等大数据存储与计算集群；
+5、热爱技术，有较强的学习能力，有强烈的求知欲、好奇心和进取心 ，能及时关注和学习业界最新的技术；
+6、熟悉pandas等数据工具，有jupyter使用或运维经验docker等容器技术相关经验者优先。
+职能类别：
+软件工程师
+微信分享"
+Python开发工程师(中科实数）,https://jobs.51job.com/beijing-cyq/110777636.html?s=01&t=0,广州中国科学院软件应用技术研究所...,北京-朝阳区,0.8-1.6万/月,03-26,"岗位职责：
+1 负责公司内部项目服务端的研发工作；
+2 负责编写设计开发文档、设计手册、应用手册相关技术文档；
+3 参与项目需求认证，设计。
+    任职资格：
+1 本科以上（211,985优先）学历，计算机相关专业，三年以上Python 开发经验；
+2 熟悉Django/Tornado/Flask等web框架；熟悉HTTP网络协议；
+3 了解Javaicript、HTML、CSS、AJAX、Jquery、Bootstrap等前端技术；
+4 熟练PostgreSQL，Mysql数据库的使用设计、调优；
+5 熟悉Linux下的常用命令;
+6 熟悉Redis/Memcache等优先。
+
+
+职能类别：
+软件工程师
+微信分享"
+python开发工程师-北京,https://jobs.51job.com/beijing-hdq/120727547.html?s=01&t=0,中电福富信息科技有限公司,北京-海淀区,1-1.5万/月,03-26,"1、 功能型脚本开发、测试；
+2、 功能型工具开发，基本使用python开发，封装为windows的可执行文件；
+3、 基于云资源池实现网络设备、主机和存储设备的监控，及告警规则建立，及应对告警的初步自动化处理方案；
+4、 自动化运维平台构建，整合Prometheus、elk、蓝鲸平台，初步构建适合云公司内部的人员使用的自动化平台。
+
+任职资格：
+1、 计算机、软件工程、通信工程等相关专业，本科及以上学历；
+2、 2年以上基于Linux/Unix平台的系统运维或开发经验；
+3、 熟练使用Linux下各种常用命令；
+4、 能够独立编写shell、python等脚本；
+5、 熟悉使用Python标准库和流行第三方库，有Django web开发框架使用经验；
+6、 熟悉JavaScript语言，能使用JQuery + DIV + CSS完成相应WEB开发;
+7、 思维清晰，优化代码，解决Bug，能够独立完成项目；
+8、 熟悉主流服务器基于带外的管理和配置及自动化的信息提取；
+9、 熟悉主流交换机配置，有实际操作经验***；
+10、  熟悉软件开发流程、设计模式，具备一定的需求分析和系统设计的能力。
+职能类别：
+Python开发工程师
+关键字：
+python
+微信分享"
+Python工程师,https://jobs.51job.com/beijing/107487885.html?s=01&t=0,中包物联网科技（北京）有限公司,北京,7-12万/年,03-26,"岗位职责：
 1、设计和建立物联网云平台和数据设施；
 2、优化大数据处理算法及数据库性能，实现大数据的数据挖掘及AI算法；
 3、搭建系统开发环境，完成系统框架和核心代码的实现，负责解决开发过程中的技术问题；
@@ -23,7 +74,7 @@ Python工程师,https://jobs.51job.com/beijing/107487885.html?s=01&t=0,中包物
 关键字：
 Python框架熟悉Flask精通MySQLSocket编程、HTTPXML
 微信分享"
-高级Python工程师,https://jobs.51job.com/beijing-cyq/120879071.html?s=01&t=0,北京荣之联科技股份有限公司,北京-朝阳区,2-3万/月,03-25,"1、计算机相关专业，本科及以上学历，10年以上爬虫相关工作经验； 
+高级Python工程师,https://jobs.51job.com/beijing-cyq/120879071.html?s=01&t=0,北京荣之联科技股份有限公司,北京-朝阳区,2-3万/月,03-26,"1、计算机相关专业，本科及以上学历，10年以上爬虫相关工作经验； 
 2、对爬虫编程有强烈爱好，熟练精通掌握至少1种语言java、python，在需要的情况下能快速上手新语言切换；
 3、深入理解tpc/ip、http、以及web登录认证的机制，有成功破解复杂验证码的经验；
 4、有通用分布式爬虫系统架构和开发经验，能快速部署新的爬虫应用；
@@ -39,7 +90,7 @@ Python框架熟悉Flask精通MySQLSocket编程、HTTPXML
 职能类别：
 Python开发工程师
 微信分享"
-python少儿讲师,https://jobs.51job.com/beijing-dxq/120853221.html?s=01&t=0,达内时代科技集团有限公司,北京-大兴区,0.8-1.2万/月,03-25,"岗位职责：
+python少儿讲师,https://jobs.51job.com/beijing-dxq/120853221.html?s=01&t=0,达内时代科技集团有限公司,北京-大兴区,0.8-1.2万/月,03-26,"岗位职责：
 
 1.      教授10岁以上孩子的python编程类课程
 
@@ -77,7 +128,7 @@ python少儿讲师,https://jobs.51job.com/beijing-dxq/120853221.html?s=01&t=0,�
 关键字：
 讲师python
 微信分享"
-Python开发工程师,https://jobs.51job.com/beijing-xcq/115334584.html?s=01&t=0,因诺（上海）资产管理有限公司,北京-西城区,1-2万/月,03-25,"【工作职责】
+Python开发工程师,https://jobs.51job.com/beijing-xcq/115334584.html?s=01&t=0,因诺（上海）资产管理有限公司,北京-西城区,1-2万/月,03-26,"【工作职责】
 负责量化交易系统的前端设计和开发工作
 负责我司相关运维平台设计和开发工作。
 参与数据系统的开发；
@@ -101,151 +152,69 @@ Python开发工程师,https://jobs.51job.com/beijing-xcq/115334584.html?s=01&t=0
 关键字：
 PythonDjangoLinuxshellMySQLCSSJSc++
 微信分享"
-Python开发工程师,https://jobs.51job.com/beijing/120817366.html?s=01&t=0,北京安德医智科技有限公司,北京,1-1.8万/月,03-25,"python开发工程师
-将会参与AI引擎开发团队，负责AI的集成开发工作。
-1，熟练掌握Python编程语言，并具备一定的前端开发基础；
-2，熟练掌握linux使用技能；
-3，熟练掌握sql脚本，熟悉postgresql数据库的优先；
-4，熟悉docker的生态环境；
-5，熟练git等代码管理工具；
-6，熟悉医学图像、dicom协议的优先；
-职能类别：
-Python开发工程师
-微信分享"
-Python算法研发工程师一名,https://jobs.51job.com/beijing-hdq/120378329.html?s=01&t=0,北京立方天地科技发展有限责任公司...,北京-海淀区,0.6-1.5万/月,03-25,"1、技术人员职位，需按上级领导指示定期完成量化的工作要求；
-2、能够独立处理和解决所负责的任务；
-3、负责数据维护、统计分析、策略开发及代码编写；
-4、维护程序使之保持可用性和稳定性。
+Python后端开发工程师,https://jobs.51job.com/beijing-cyq/107996008.html?s=01&t=0,乐荐信息科技（北京）有限公司,北京-朝阳区,1-2万/月,03-26,"工作职责:
+(1) 与团队协同工作， 致力于Web应用及服务器端HTTP接口开发，构建高性能、高可用性的产品，服务以及支持系统；
+(2) 你将完成程序编制及单元测试，并确保开发过程遵循公司的相关开发规范；
+(3) 你将负责维护并升级完成的程序代码，因为需求会经常变更；
+(4) 与产品及测试团队或其他需要你支持的部门保持良好的沟通；
+(5) 我们可能需要你在压力下工作，以期保证产品服务的开发进度。
 
-职位要求 ：
-1、理工科本科及以上学历，具有优秀的研究能力和编程实现能力；
-2、熟练掌握Python，有长期使用Python进行数据处理的经验；
-3、有较强的数据分析和统计能力，有时序信号分析经验者优先，会使用机器学习者优先；
-4、做事严谨踏实，责任心强，有良好的团队合作精神和沟通协调能力。
-5、数学、计算机、金融等相关专业学习背景者优先考虑。
+背景知识及技能要求:
+(1) 熟悉Web应用程序体系结构(LAMP)；
+(2) 具备深厚的面向对象编程经验；
+(3) 精通基于Python Django的Web应用开发；
+(4) 具备良好的面向对象程序设计基础；
+(5) 熟悉HTTP协议、HTML规范，了解AJAX技术，深入了解HTML5的特性集；
+(6) 精通基于JQuery的JavaScript程序；
+(7) 熟悉MySQL / PostgreSQL数据库, 善用数据库建模工具进行数据库的设计；
+(8) 熟悉Linux服务器系统环境，掌握必要的Unix Shell的用法；
+(9) 熟悉Apache服务器的配置；
+(10) 良好的代码书写规范。
 
-北京立方天地科技成立于2002年，坐落于北京市海淀区北三环，是国内PIV系统生产商，业务范围涵盖了PIV技术相关的设备生产、销售、使用、维护到客户订制方案的解决。是一支具有高学历高素质的研发团队，保证用户可以不断拥有采用新型的PIV技术开发所得各种产品，由于业务扩大现招聘Python算法研发工程师一名以及流体力学工程师一名，欢迎有识之士加入我们！
-
-福利待遇：五险一金、年终奖金、绩效奖金，***。
-
-职能类别：
-算法工程师Python开发工程师
-关键字：
-Python算法工程师研发工程师数据处理数据分析
-微信分享"
-Python开发工程师,https://jobs.51job.com/beijing-hdq/119024346.html?s=01&t=0,北京聚源锐思数据科技有限公司,北京-海淀区,0.8-1万/月,03-25,"（一）岗位描述：
-1、负责设计和开发分布式网络爬虫系统，进行多平台信息的抓取和分析
-2、负责信息抽取、数据清洗等研发和优化工作
-3、负责抓取数据的深度提取和挖掘
-4、参与爬虫核心算法的策略优化研究，提升网页抓取的效率和质量。
-（二）任职要求：
-1、熟悉linux平台开发，精通Python/Java两种编程语言中的至少一种
-2、精通网页抓取原理及技术，精通正则表达式，从结构化的和非结构化的数据中获取信息
-3、熟悉Mysql，有过数据库调优和海量数据存储经验优先
-4、具有搜索相关技术研发经验者优先
+我们找的就是你，致力于Web应用及服务器端HTTP接口开发，构建高性能、高可用性的产品，服务以及支持系统的你！加入乐荐，扶摇直上！
 职能类别：
 软件工程师
+关键字：
+PythonJavaScriptHTMLCSSLinuxWeb端DjangoGIT
 微信分享"
-EPR开发工程师（JAVA/Python）,https://jobs.51job.com/beijing-hdq/120823291.html?s=01&t=0,紫光同芯微电子有限公司,北京-海淀区,1.5-2.5万/月,03-25,"工作内容：
-1、负责公司常规业务系统（ERP、BPM、BI报表、办公系统等）开发和运维;
-2、参与业务需求整理，业务系统选型和评估;
-3、参与系统二次开发、实施和运维;
-4、负责内部功能性程序的开发。
-任职资格：
-1、本科及以上学历，计算机软件等相关专业；3年以上企业信息系统开发经验；
-2、掌握并熟练运用JAVA/Python及主流框架；掌握并熟练运用WEB前端开发；
-3、熟悉ERP系统、供应链、CRM、财务系统、人力系统、数据交换、BI等系统开发优先；
-4．熟悉主流数据库系统使用和优化（Oracle / Postgre SQL / My SQL / SQL Server之一）优先；
-5、团队合作，钻研精神，责任心强，承压力强。
+Python中级开发工程师,https://jobs.51job.com/beijing-xcq/119756829.html?s=01&t=0,深圳市赢时胜信息技术股份有限公司...,北京-西城区,1-1.2万/月,03-26,"1、岗位职责
+（1）全面、认真地理解系统需求和系统设计。
+（2）对系统设计进行实现最后层次的细化工作。
+（3）独立承担编制代码及代码的单元测试工作。
+（4）负责解决开发中遇到的较复杂的技术难题和技术攻关。
+（5）负责核心业务、公共组件等重要功能的编程实现。
+（6）认真贯彻执行公司质量体系文件及其相关制度的管理要求。
+（7）执行公司、中心各项管理制度、标准作业规程和操作规范，确保各项工作符合规范化要求。
+2、任职要求
+（1）计算机相关专业本科以上，从事开发5年以上，211以上学历优先。
+（2）精通OO，AOP，设计模式，熟悉多线程并发，网络编程技术。
+（3）精通python 技术栈，包括 pandas，numpy等，熟悉使用python进行数据处理。
+（4）熟练使用Mysql、Oracle数据库，掌握sql语言规范，具有国产数据库、分布式数据经验者加分。
+（5）有分布式开发经验、熟练使用分布式服务框架，消息中间件和分布式存储系统等。
+（6）对技术有强烈的兴趣，喜欢钻研，具有良好的学习能力，沟通技能，团队合作能力。
 
 职能类别：
 Python开发工程师
 关键字：
-javapython
+python软件开发
 微信分享"
-python开发工程师（舆情方向）,https://jobs.51job.com/beijing-cyq/120818816.html?s=01&t=0,太极计算机股份有限公司,北京-朝阳区,1.1-1.8万/月,03-25,"岗位职责:
-1.帮助舆情处工作人员梳理历史报告，了解历史报告组成结构和变化
-2.通过程序方法将历史报告结构化，包括标题，内容主题，分块等
-3.根据舆情处对结构化算法的设计和要求，改进报告结构化方法并通过关键词组合和/或正则表达式进行实现
-
-
-任职资格:
-1.积极主动，具备一定沟通能力，能快速理解用户的工作需求
-2.具备基础代码能力（***是具备脚本类语言经验，python能力为佳）
-3.有文本处理程序开发经验更佳
+python开发,https://jobs.51job.com/beijing-cyq/117605888.html?s=01&t=0,深圳市捷兴电子商务有限公司,北京-朝阳区,2-3万/月,03-26,"工作职责：
+      1. 负责公司devops平台的研发。
+      2. 负责公司监控平台二次研发工作。
+      3. 负责devops同k8s对接。
+      职位要求：
+      1. 熟悉python + django 框架。
+      2. 熟悉vue， bootstrap, jquery，ajax等前端框架。
+      3. 实施过devops平台 以及cmdb数据库的设计。
+      4. 能够基于各种python开源框架做二次开发。
+      5. 有reset api设计经验。
+      6. 有k8s 运维经验优先。  
 职能类别：
-Python开发工程师
-微信分享"
-Python开发工程师,https://jobs.51job.com/beijing-cyq/119888121.html?s=01&t=0,中国广视索福瑞媒介研究有限责任公...,北京-朝阳区,1.2-2万/月,03-25,"**工作职责**
-1 后端的开发和部署；
-2 已有项目的维护，bug处理等；
-2 与产品和前端沟通，确定技术路线、解决前后端联调中的问题等；
-**技术要求**
-1 熟悉Python；
-2 熟悉Django框架和Django RestFul框架；
-3 熟悉HTTP协议；
-4 对Redis，Elasticsearch，Celery，PostgreSQL等常规后端技术栈有充分的了解，在实际工作中对其中一种或者多种有过应用；
-5 理解前端常规技术和原理，理解JavaScript，NodeJs；
-6 理解ci，在实际工作中有部署ci的经验；
-7 理解自动化测试，在实际工作中有部署自动化测试的经验；
-8 熟悉git，理解常规的版本控制原理和良好实践；
-9 熟练阅读英文文档
-**团队要求**
-1 工作主动性强，自我驱动，目标导向，结果导向，对进度和结果负责；
-2 良好的团队意识和沟通技巧，能理解团队有成绩个人才有成绩；
-3 独立分析和解决问题的能力；
-4 抗压能力强。
-职能类别：
-Python开发工程师
+高级软件工程师软件工程师
 关键字：
-python
+python开发
 微信分享"
-Python开发（AI语音识别方向）,https://jobs.51job.com/beijing-hdq/118385358.html?s=01&t=0,中软国际科技服务有限公司,北京-海淀区,1-1.5万/月,03-25,"SPEECH
-背景介绍：
-近些年来，随着移动互联网和移动终端设备的高速发展，语音识别也开始步入到我们的日常生活中，并逐渐为大众所了解，语音识别的发展也日新月异。语音技术正伴随着设备计算能力、网络技术等的发展，从实验室走入现实生活，从“超前”、不成熟变成越来越有价值的商业应用，这项技术使人类以最自然的方式与设备交互从而正在改变未来。在移动互联网，智能家居，可穿戴设备，车载设备等领域的广阔前景，使全球各大科技公司（微软、苹果、谷歌、三星、百度...）都在争相投入巨资进行研发。
-中软语音团队与微软合作，在这个领域潜心耕耘了14年，我们的工程师正在与微软科学家一起为Cortana智能语音助手、Skype Translator等产品共同努力。热忱期待有专业的语音识别或自然语言处理背景的专家，同时也欢迎有坚实的计算机科学基础，对于新技术有强烈渴望、有创新精神、致力于语音技术发展的优秀人才加入我们。
-项目名称 Speech （认真严谨）语音识别开发
-岗位名称（中文） 开发工程师（北京）
-技能点：Java/C/C++/Python
-级别：中高级 3年以上
-岗位职责:
-1、产品模型识别缺陷修复
-2、产品模型识别缺陷修复
-涉及的工具开发，40%开发量
-3、产品模型识别缺陷跟踪，汇报
-必备项(Must)
-1）必须具备 Python
-2）熟练掌握 或C/C++
-3）可以独立使用的技能 或Java
-岗位要求： 3年以上Java/C/C++/Python 工作经验，大专（学信网可查）及以上工作经验，英语口语可以开口做简单的英语自我介绍，项目的一些对接，简单的英译汉，汉译英翻译，计算机相关专业。有2年以上编程经验，至少熟练一种编程语言，如 C/C++/C#/Java/Python
-· 熟练使用至少一种脚本语言，perl优先 。
-· 精通正则表达式，并有实际文本处理经验。
-· 细心，有负责心，善于学习，钻研，较强的沟通能力。
-· 通过英语四级，可以用英文进行书面汇报。
-有语音识别背景优先
-· 熟悉多国语言者优先。
-工作时间：弹性工作制：早8:30--17:30 或早9:30--18:30 周末双休
-五险一金 法定节假日休息 薪资体面议，
-工作地点：北京市海淀区美丽园中路16号院5号楼 裕友大厦4层
-职能类别：
-语音识别工程师
-关键字：
-PythonCC++JAVA开发产品人工智能
-微信分享"
-Python开发工程师 - 变现业务,https://jobs.51job.com/beijing/104618787.html?s=01&t=0,字节跳动,北京,2.5-4万/月,03-25,"职位描述:
-1、负责今日头条商业变现产品后台服务的设计、开发、优化等研发工作，保证产品的质量和开发进度；
-2、负责客户增长相关技术的设计与实现；
-3、研究新兴技术，对产品进行持续优化。
-职位要求:
-1、本科及以上学历，计算机相关专业，基础知识扎实；
-2、聪明，学习能力强，有独立解决问题的能力；
-3、熟悉面向对象编程，掌握java/c++/python/php中的至少一门语言；
-4、良好的编程习惯，追求极致的代码品质，熟悉常用设计模式和一般项目的开发流程；
-5、开朗上进，积极沟通，善于团队协作。
-职能类别：
-软件工程师
-微信分享"
-Python开发工程师,https://jobs.51job.com/beijing/120325115.html?s=01&t=0,文思海辉技术有限公司Pactera Tec...,北京,1-1.5万/月,03-25,"职位描述：
+Python开发工程师,https://jobs.51job.com/beijing/120325115.html?s=01&t=0,文思海辉技术有限公司Pactera Tec...,北京,1-1.5万/月,03-26,"职位描述：
 1.负责某车联网在线服务RESTFUL API开发工作；
 2.负责某车联网业务web系统开发。
 职位要求：
@@ -263,26 +232,106 @@ Python开发工程师,https://jobs.51job.com/beijing/120325115.html?s=01&t=0,文
 职能类别：
 软件工程师
 微信分享"
-Java/Python软件工程师.,https://jobs.51job.com/beijing/98913477.html?s=01&t=0,南京拾柴信息科技有限公司,北京,0.8-2万/月,03-25,"工作职责：
-1、 负责大数据类产品的系统设计和开发；
-2、 负责数据后台服务的设计、开发、优化、测试等研发工作；
-3、 和伙伴们一起研究技术；
-4、 支撑前端开发，支撑数据工程师开发。
+Python高级开发工程师,https://jobs.51job.com/beijing-hdq/94990357.html?s=01&t=0,北京棣南新宇科技有限公司,北京-海淀区,1.5-2万/月,03-26,"职责：
+开发微服务平台系统。
 
-职位要求：
-0、 扎实的计算机基础，熟练掌握数据结构、算法、计算机网络、操作系统等基础知识；
-1、 具有高度的责任心，坚定的执行力，较强的沟通力，善于团队协作，主动思考，自我驱动力强；
-2、 熟悉Java或Python开发；
-3、 熟悉MySQL，Redis等常用数据库，具有数据库开发和设计能力；
-4、 有Hadoop/Spark开发经验优先；
-5、 有全栈开发经验优先；
-6、 有数据挖掘、机器学习开发经验优先。
+要求：
+1. 正规大学本科以上学历。
+2. 3年及以上Python开发经验，精通Python开发。
+3. 精通Django框架，有实际应用项目经验。
+4. 熟悉HTML5，Javascript，Json，熟悉Mysql数据库，熟练使用SQL。
+5. 有websocket server开发经验者优先。
+6. 有Redis开发、部署经验者优先。
+7. 了解HTTP协议，微服务，以及Restful API。
+8. 熟悉云服务平台（google，ali），了解服务器的部署和监控，了解负载平衡。
+9. 了解敏捷开发，熟悉软件设计模式。
 职能类别：
 软件工程师高级软件工程师
 关键字：
-JavaPython大数据
+PythonDjangoHTML5JavascriptJsonMysqlSQLHTTPRestfulAPI
 微信分享"
-Python开发工程师,https://jobs.51job.com/tangshan/119718166.html?s=01&t=0,唐山千家网络科技有限公司,异地招聘,0.7-1.5万/月,03-25,"职位：Python软件工程师  SE-L7-0810
+软件测试工程师（C++、java、python）,https://jobs.51job.com/beijing/113363548.html?s=01&t=0,北京天行汇通信息技术有限公司,北京,1-2万/月,03-26,"职位描述：
+1.根据项目说明、设计文档、使用说明书等，做好测试前的准备工作，保证产品测试工作的计划性与规范性；
+2.按照测试流程、计划以及对产品特性的把握，编写测试案例，确保测试目的的达成；
+3.根据测试计划及测试案例，执行测试，确保在软件发布前基本排除其缺陷；
+4.根据测试结果，与开发部门等反复沟通测试情况，修正测试中发现的缺陷，完善软件性能；
+5.整理测试文档，编写测试总结；
+6.完成测试相关工具的开发。
+
+任职资格：
+1.学历要求：
+-毕业于211或985院校、统招本科及以上学历。
+2.能力要求：
+-熟悉java、C/C++、Python其中一种语言，具备软件工程理论知识，精通软件测试理论及测试方法；
+-能够熟练书写测试脚本、测试用例，熟练使用各种测试工具；
+-熟悉Junit/gtest/unittest其中一种框架。
+3.优先考虑：
+-有团队管理经验者优先。
+职能类别：
+软件测试工程师系统测试
+微信分享"
+Python/Java Software Engineer,https://jobs.51job.com/beijing-cyq/115035415.html?s=01&t=0,北京莱博智环球科技有限公司,北京-朝阳区,1.4-1.6万/月,03-26,"What You'll Do 
+You will work with our software team to develop and deliver an unprecedented end-to-end localization automation solution that supports our cloud and on premises software products in up to multi languages spoken around the world. This is an ideal opportunity for someone with strong technical skills and is passionate about cultures and languages. Your responsibility will include: 
+Establish operational and technical procedures, develop tools and integration solutions to automate and streamline internal workflow and processes
+Perform day to day localization software engineering work for software user interface and documentation
+Create and maintain high quality language packs in various languages for the collaboration products, both on premise and cloud based
+Troubleshoot, resolve, and document localization issues and customer cases 
+          Who you will work with
+You've got experience creating automation tools and solutions for software and web-based applications. You will work with a group of professionals delivering culturally appropriate, high quality localized product software and documentations. You have an unique opportunity to join this highly empowered collaborative team.
+  Who You are
+You are a motivated self-starter who is highly results driven, love what you do, and strive to achieve engineering excellence and take initiative in your ongoing self-development. Inspire teamwork and collaboration.
+   Our minimum requirements for this role:
+  Bachelor's degree or Masters preferably in Computer Science or other related engineering discipline.
+2 years of fully engaged Python software engineering, development, and testing, in a scrum or paired programming environments
+2 years of experience in Java development, HTML, CSS, and JavaScript
+Working experience with CI/CD systems Git, GitHub, Jenkins
+Ability to learn and adapt to new, complex development environments with deep dive analytical skills and quantitative problem-solving ability
+            Our desired requirements for this role:
+Localization engineering experience preferred. Experience in enterprise applications
+Working knowledge of cloud platforms (such as AWS) and SQL
+Experience in Translation Memory Management Systems (XTM Cloud or WorldServer) or Computer Aided Translations tools (Passolo or Trados) 
+Self-starter with demonstrated ability to learn quickly, take initiative, and be accountable for results and deadlines
+Flexibility and creativity in planning and problem solving throughout the product life cycle, from high level conceptual design to detailed implementation and testing tasks
+Able to communicate and collaborate effectively with team members of varied work styles
+Understanding for diverse cultural, political and religious environments and be able to work successfully in those environments. Maintaining a sense of humor in stressful situations
+
+职能类别：
+软件工程师
+关键字：
+PythonJava
+微信分享"
+Python工程师,https://jobs.51job.com/beijing/115265485.html?s=01&t=0,奇虎360科技有限公司,北京,2.5-3万/月,03-26,"岗位描述：
+
+职位描述：
+1、 负责信息安全系统服务端设计与开发；
+2、 与前端进行联调；
+3、 现有系统的维护，优化。
+
+任职要求
+
+职位要求：
+1、 本科以上学历计算机相关专业，如能力突出或项目经验丰富可放宽要求；
+2、 熟悉Linux开发环境；
+3、 熟练掌握Python；
+4、 良好的算法基础；
+5、 熟悉常用数据库使用和网络基础；
+思路清晰，有独立思考解决问题的能力；
+良好的团队合作精神，共享精神，对工作具有责任心，勤奋好学。
+能力加分：
+1、 有信息安全背景优先；
+2、 有团队管理经验优先；
+3、 有机器学习经验背景优先。
+职能类别：
+高级软件工程师
+微信分享"
+"Software Engineer - Python, C++（121763）",https://jobs.51job.com/beijing/115694701.html?s=01&t=0,西门子（中国）有限公司Siemens L...,北京,,03-26,"提醒：
+请务必通过西门子专属申请链接（如下）申请该职位，您需要登录西门子专属招聘系统后方可提交申请，未注册用户需先注册。https://ars2.equest.com/?response_id=341ed18ec81f713167825859c0463ce2
+
+Job Description We are looking for a design application lead engineer for cutting edge design applications development for Gas Turbine Engineering. This position provides an exciting opportunity to work in a fast paced, dynamic, product development environment to develop design applications for gas turbine components at Siemens Gas Turbine R&D Hub in Beijing. What are my responsibilities? • Development of gas turbine system and component design tools including all phases of the development life cycle (i.e., functional specifications, implementation, testing, and release) Software requirement analysis and clarification with customers, break down software requirements into functional specification and design specification, concept design and detail designLeading developing new design applications and upgrades in the interdisciplinary teams. Ensure software coding quality according to standards and agile development process.Software implementation as well as technical documentation, and customer training. Trouble shooting on complex solutions and technical difficulties during project implementationCustomer-oriented software solutions and products marketing, keeping close interaction with customer to do project planning, project management and project coordinationWhat do I need to qualify for this job?· Master or above in Software Engineering, Mechanics/Mechanical Engineering, or Aerospace Engineering· Over 3 years of experience with a programming language (e.g., Python, C++) and Linux a plus Over 2 years of experience in system requirement analysis, architecture design and optimization are required· Experience of leading small software development teams is desirable where User Experience, front- and back-end design and implementation were performed· Advanced knowledge of computational method with proven expertise in CAD and/or CAE simulation.· Understanding of engineering design process (e.g., gas turbine, aircraft, or other complex systems)· Design/analysis experience with components for turbo-machinery applications or similar applications is a plus.· Demonstrated detail-oriented and innovative thinking mindset· Ability to communicate effectively with external customers· Must have exceptional inter-personal skills and enjoy working with colleagues from different organizations and cultural background· Fluent in English and Chinese.
+职能类别：
+软件工程师
+微信分享"
+Python开发工程师,https://jobs.51job.com/tangshan/119718166.html?s=01&t=0,唐山千家网络科技有限公司,异地招聘,0.7-1.5万/月,03-26,"职位：Python软件工程师  SE-L7-0810
 
 薪资待遇：6.5千-1.5万
 
@@ -315,38 +364,111 @@ Python开发工程师,https://jobs.51job.com/tangshan/119718166.html?s=01&t=0,�
 职能类别：
 软件工程师
 微信分享"
-后端研发（Python）,https://jobs.51job.com/beijing/120024299.html?s=01&t=0,重庆微创软件有限公司,北京,0.9-1.4万/月,03-25,"岗位职责：
- 1.负责交通项目后台功能模块的研发
-2.负责交通项目在保定、长沙的上线及效果评估等工作
+python开发,https://jobs.51job.com/beijing-cyq/117622446.html?s=01&t=0,深圳市若昕科技有限公司,北京-朝阳区,2-3万/月,03-26,"工作职责：
+      1. 负责公司devops平台的研发。
+      2. 负责公司监控平台二次研发工作。
+      3. 负责devops同k8s对接。
+      职位要求：
+      1. 熟悉python + django 框架。
+      2. 熟悉vue， bootstrap, jquery，ajax等前端框架。
+      3. 实施过devops平台 以及cmdb数据库的设计。
+      4. 能够基于各种python开源框架做二次开发。
+      5. 有reset api设计经验。
+      6. 有k8s 运维经验优先。  
+职能类别：
+高级软件工程师软件工程师
+关键字：
+python开发
+微信分享"
+Python开发工程师,https://jobs.51job.com/beijing-hdq/119024346.html?s=01&t=0,北京聚源锐思数据科技有限公司,北京-海淀区,0.8-1万/月,03-26,"（一）岗位描述：
+1、负责设计和开发分布式网络爬虫系统，进行多平台信息的抓取和分析
+2、负责信息抽取、数据清洗等研发和优化工作
+3、负责抓取数据的深度提取和挖掘
+4、参与爬虫核心算法的策略优化研究，提升网页抓取的效率和质量。
+（二）任职要求：
+1、熟悉linux平台开发，精通Python/Java两种编程语言中的至少一种
+2、精通网页抓取原理及技术，精通正则表达式，从结构化的和非结构化的数据中获取信息
+3、熟悉Mysql，有过数据库调优和海量数据存储经验优先
+4、具有搜索相关技术研发经验者优先
+职能类别：
+软件工程师
+微信分享"
+Python开发工程师,https://jobs.51job.com/beijing/118631099.html?s=01&t=0,深圳市法本信息技术有限公司上海分...,北京,1.5-2.2万/月,03-26,"注：1,3年以上经验  2，高级或者资深级别3,***可以带团队4，学历学信网可查5，全栈***6，上班地点顺义区中航信大楼
 
-任职要求：
-1、计算机相关专业，本科学历以上，1年以上工作经验；
-2、熟悉linux操作系统，具备一年以上基于linux系统的开发经验； 
-3、具备Java/C++/Python其中一种编程经验；偏向Python
-4、沟通能力强，吃苦耐劳，具体较好的团队合作精神；
+1,三年以上开发经验
+2,精通Python及Web开发，至少精通一项python web框架比如Django；有实际web业务应用开发经验
+3,熟练掌握mysql，熟悉redis及消息队列等中间件
+理解分布式服务概念，具有中间件使用经验，有较复杂的业务场景实现经验
+4,有互联网公司开发经验，熟悉DevOps工具链和生态系统，具备DevOps领域的架构设计与实践经验者优先
+5,熟悉java/reactJs/docker者优先
+职能类别：
+软件工程师
+关键字：
+dockerDjango
+微信分享"
+Python开发工程师,https://jobs.51job.com/beijing-hdq/118654749.html?s=01&t=0,北京寄云鼎城科技有限公司,北京-海淀区,1.5-2万/月,03-26,"职责：
+1、负责云平台服务端模块的开发；
+2、对新技术和方案进行调研评估和引进。
+
+
+要求:
+1、精通Python语言，熟练使用Python标准库模块和第三方模块；
+2、熟悉高级消息管理协议，如RabbitMQ、Kafka；
+3、熟练使用Linux系统，熟悉各种Linux命令的使用，能够在Linux环境下进行开发工作，对虚拟化技术有一定的了解；
+4、了解开源项目，有OpenStack，CloudStack开发经验优先。
+5、熟悉运维流程，熟悉自动化运维配置管理（Saltstack、Ansible等）优先。
+职能类别：
+软件工程师
+微信分享"
+Python算法研发工程师一名,https://jobs.51job.com/beijing-hdq/120378329.html?s=01&t=0,北京立方天地科技发展有限责任公司...,北京-海淀区,0.6-1.5万/月,03-26,"1、技术人员职位，需按上级领导指示定期完成量化的工作要求；
+2、能够独立处理和解决所负责的任务；
+3、负责数据维护、统计分析、策略开发及代码编写；
+4、维护程序使之保持可用性和稳定性。
+
+职位要求 ：
+1、理工科本科及以上学历，具有优秀的研究能力和编程实现能力；
+2、熟练掌握Python，有长期使用Python进行数据处理的经验；
+3、有较强的数据分析和统计能力，有时序信号分析经验者优先，会使用机器学习者优先；
+4、做事严谨踏实，责任心强，有良好的团队合作精神和沟通协调能力。
+5、数学、计算机、金融等相关专业学习背景者优先考虑。
+
+北京立方天地科技成立于2002年，坐落于北京市海淀区北三环，是国内PIV系统生产商，业务范围涵盖了PIV技术相关的设备生产、销售、使用、维护到客户订制方案的解决。是一支具有高学历高素质的研发团队，保证用户可以不断拥有采用新型的PIV技术开发所得各种产品，由于业务扩大现招聘Python算法研发工程师一名以及流体力学工程师一名，欢迎有识之士加入我们！
+
+福利待遇：五险一金、年终奖金、绩效奖金，***。
+
+职能类别：
+算法工程师Python开发工程师
+关键字：
+Python算法工程师研发工程师数据处理数据分析
+微信分享"
+python开发,https://jobs.51job.com/beijing-cyq/117623562.html?s=01&t=0,上海雍米计算机科技有限公司,北京-朝阳区,2-3万/月,03-26,"工作职责：
+      1. 负责公司devops平台的研发。
+      2. 负责公司监控平台二次研发工作。
+      3. 负责devops同k8s对接。
+      职位要求：
+      1. 熟悉python + django 框架。
+      2. 熟悉vue， bootstrap, jquery，ajax等前端框架。
+      3. 实施过devops平台 以及cmdb数据库的设计。
+      4. 能够基于各种python开源框架做二次开发。
+      5. 有reset api设计经验。
+      6. 有k8s 运维经验优先。  
+职能类别：
+高级软件工程师软件工程师
+关键字：
+python开发
+微信分享"
+Python开发工程师,https://jobs.51job.com/beijing/120817366.html?s=01&t=0,北京安德医智科技有限公司,北京,1-1.8万/月,03-26,"python开发工程师
+将会参与AI引擎开发团队，负责AI的集成开发工作。
+1，熟练掌握Python编程语言，并具备一定的前端开发基础；
+2，熟练掌握linux使用技能；
+3，熟练掌握sql脚本，熟悉postgresql数据库的优先；
+4，熟悉docker的生态环境；
+5，熟练git等代码管理工具；
+6，熟悉医学图像、dicom协议的优先；
 职能类别：
 Python开发工程师
 微信分享"
-安全工程师（Python、Golang 方向）,https://jobs.51job.com/beijing/120418898.html?s=01&t=0,央视国际网络有限公司,北京,1-2万/月,03-25,"根据需求负责安全产品研发和内部安全平台建设，包括并不限于漏洞扫描器研发、网络爬虫、漏洞管理系统研发和数据分析等相关工作。
-
-任职资格
-1.全日制大学本科及以上学历，计算机、网络或其他相关专业优先；
-2.熟练使用 Python 或 Golang，能够设计实现相对复杂的工程；
-3.熟练使用 MySQL、MongoDB、Redis 等常见数据库，了解常见的数据库优化；
-4.有动态爬虫和反爬虫（验证码破解、JS解密）相关经验者优先；
-5.有安全产品（黑/白盒扫描器）研发经验者优先；
-6.熟悉安全数据分析的基本方法和思路；
-7.熟悉Linux平台的基本开发技能；
-8.熟悉常见渗透手段和攻击原理；
-9.熟悉TCP/IP、HTTP等主要网络协议；
-10.有良好的沟通能力、团队合作精神，具有高度的敬业精神、有责任心;
-11.优秀应届毕业生优先考虑。
-职能类别：
-其他
-关键字：
-PythonGolangMySQLLinux
-微信分享"
-高级测试-python,https://jobs.51job.com/beijing-hdq/119947861.html?s=01&t=0,广联达,北京-海淀区,1.5-2万/月,03-25,"岗位职责：
+高级测试-python,https://jobs.51job.com/beijing-hdq/119947861.html?s=01&t=0,广联达,北京-海淀区,1.5-2万/月,03-26,"岗位职责：
 1、参与项目的全流程测试，根据计划制定测试用例并实施，撰写测试报告，及时发现并汇报问题，跟踪全程并评估风险，保证项目质量;
 2、参与完成产品的接口测试、集成测试、系统测试及产品性能和其他方面测试;
 3、系统测试环境搭建及维护工作。
@@ -361,202 +483,7 @@ PythonGolangMySQLLinux
 关键字：
 python自动化测试
 微信分享"
-python开发,https://jobs.51job.com/beijing-cyq/117623562.html?s=01&t=0,上海雍米计算机科技有限公司,北京-朝阳区,2-3万/月,03-25,"工作职责：
-      1. 负责公司devops平台的研发。
-      2. 负责公司监控平台二次研发工作。
-      3. 负责devops同k8s对接。
-      职位要求：
-      1. 熟悉python + django 框架。
-      2. 熟悉vue， bootstrap, jquery，ajax等前端框架。
-      3. 实施过devops平台 以及cmdb数据库的设计。
-      4. 能够基于各种python开源框架做二次开发。
-      5. 有reset api设计经验。
-      6. 有k8s 运维经验优先。  
-职能类别：
-高级软件工程师软件工程师
-关键字：
-python开发
-微信分享"
-Python开发工程师,https://jobs.51job.com/beijing-hdq/118555909.html?s=01&t=0,中电太极（集团）有限公司,北京-海淀区,1.5-3万/月,03-25,"1.具有扎实的Python基础，熟悉常用的类库；
-2.熟练使用Python进行抓取及格式化信息提取；
-3.熟悉Python多进程协程开发，至少熟悉django、Flask、tornado等一种常见框架；
-4.熟悉网络协议；
-5.熟悉至少一种关系型数据库和一种非关系数据库。
-职能类别：
-软件工程师
-关键字：
-python
-微信分享"
-Python工程师,https://jobs.51job.com/beijing/115265485.html?s=01&t=0,奇虎360科技有限公司,北京,2.5-3万/月,03-25,"岗位描述：
-
-职位描述：
-1、 负责信息安全系统服务端设计与开发；
-2、 与前端进行联调；
-3、 现有系统的维护，优化。
-
-任职要求
-
-职位要求：
-1、 本科以上学历计算机相关专业，如能力突出或项目经验丰富可放宽要求；
-2、 熟悉Linux开发环境；
-3、 熟练掌握Python；
-4、 良好的算法基础；
-5、 熟悉常用数据库使用和网络基础；
-思路清晰，有独立思考解决问题的能力；
-良好的团队合作精神，共享精神，对工作具有责任心，勤奋好学。
-能力加分：
-1、 有信息安全背景优先；
-2、 有团队管理经验优先；
-3、 有机器学习经验背景优先。
-职能类别：
-高级软件工程师
-微信分享"
-"Software Engineer - Python, C++（121763）",https://jobs.51job.com/beijing/115694701.html?s=01&t=0,西门子（中国）有限公司Siemens L...,北京,,03-25,"提醒：
-请务必通过西门子专属申请链接（如下）申请该职位，您需要登录西门子专属招聘系统后方可提交申请，未注册用户需先注册。https://ars2.equest.com/?response_id=341ed18ec81f713167825859c0463ce2
-
-Job Description We are looking for a design application lead engineer for cutting edge design applications development for Gas Turbine Engineering. This position provides an exciting opportunity to work in a fast paced, dynamic, product development environment to develop design applications for gas turbine components at Siemens Gas Turbine R&D Hub in Beijing. What are my responsibilities? • Development of gas turbine system and component design tools including all phases of the development life cycle (i.e., functional specifications, implementation, testing, and release) Software requirement analysis and clarification with customers, break down software requirements into functional specification and design specification, concept design and detail designLeading developing new design applications and upgrades in the interdisciplinary teams. Ensure software coding quality according to standards and agile development process.Software implementation as well as technical documentation, and customer training. Trouble shooting on complex solutions and technical difficulties during project implementationCustomer-oriented software solutions and products marketing, keeping close interaction with customer to do project planning, project management and project coordinationWhat do I need to qualify for this job?· Master or above in Software Engineering, Mechanics/Mechanical Engineering, or Aerospace Engineering· Over 3 years of experience with a programming language (e.g., Python, C++) and Linux a plus Over 2 years of experience in system requirement analysis, architecture design and optimization are required· Experience of leading small software development teams is desirable where User Experience, front- and back-end design and implementation were performed· Advanced knowledge of computational method with proven expertise in CAD and/or CAE simulation.· Understanding of engineering design process (e.g., gas turbine, aircraft, or other complex systems)· Design/analysis experience with components for turbo-machinery applications or similar applications is a plus.· Demonstrated detail-oriented and innovative thinking mindset· Ability to communicate effectively with external customers· Must have exceptional inter-personal skills and enjoy working with colleagues from different organizations and cultural background· Fluent in English and Chinese.
-职能类别：
-软件工程师
-微信分享"
-Python开发工程师-机器人,https://jobs.51job.com/beijing-cyq/118591996.html?s=01&t=0,艾普拉斯投资顾问（北京）有限公司...,北京-朝阳区,1.5-3万/月,03-25,"岗位要求：
-1、计算机，名校优先
-2、掌握语?：Python、C、C++任?
-3、经验：1年以上编程经验，有机器?/传感器开发经验者优先
-4、逻辑思维、学习能?、沟通能?、不怕困难
-5、Geek，好奇?强烈，热爱计算机技术、Coding和机器?技术等具备者优先考虑
-工作内容：
-参与项目模块的开发、调试等
-职能类别：
-机器视觉工程师机器学习工程师
-微信分享"
-Python/PHP开发工程师,https://jobs.51job.com/beijing/50840084.html?s=01&t=0,北京华脉世纪石油科技有限公司,北京,0.8-1万/月,03-25,"岗位职责：
-1、根据需求完成软件模块的详细设计；
-2、完成相关开发文档；
-3、网站设计、开发、升级、维护；
-4、设计文档编写；
-5、信息安全管理；
-
-任职资格：
-1、重点大学、计算机相关专业、本科及以上学历，英语四级及以上水平； 
-2、能够熟练进行Python/PHP开发；
-3、熟悉数据库开发；
-4、工作态度认真、主动，做事踏实、细心，性格沉稳，为人诚恳；
-5、具备一定的沟通能力，思路及表达清晰；具备独立工作能力。
-
-职能类别：
-软件工程师网页设计师
-关键字：
-Python,php
-微信分享"
-Python开发工程师,https://jobs.51job.com/beijing/97824451.html?s=01&t=0,北京斯普信信息技术有限公司,北京,1-1.5万/月,03-25,"1、完成网络拓扑架构研发
-2、完成页面布局、浏览器适配、分辨率适配等功能
-3、完成相应模块的前端及后端功能研发
-4、配合完成测试以及bug修复
-任职资格：
-1、熟悉HTML5、CSS、JS、AJAX、JSON、Web、bootstrap等框架开发；
-2、熟悉拓扑功能实现，有过拓扑展示开发经验；
-3、熟悉不同浏览器之间的差异，熟练调试代码；
-4、有较强的前端布局设计、规划能力，能准确把握网站的整体风格和色彩的设计；
-5、熟悉python等开发语言，熟悉运维业务运作流程优先考虑；
-6、了解常用数据库系统，例如Oracle，MySQL等，熟悉常用的SQL语句。
-7、具备好的团队能力和良好的沟通能力，良好的理解力和学习能力； 
-
-职能类别：
-高级软件工程师
-关键字：
-Python开发
-微信分享"
-python开发,https://jobs.51job.com/beijing-cyq/117614294.html?s=01&t=0,广州华钧软件科技有限公司,北京-朝阳区,2-3万/月,03-25,"工作职责：
-      1. 负责公司devops平台的研发。
-      2. 负责公司监控平台二次研发工作。
-      3. 负责devops同k8s对接。
-      职位要求：
-      1. 熟悉python + django 框架。
-      2. 熟悉vue， bootstrap, jquery，ajax等前端框架。
-      3. 实施过devops平台 以及cmdb数据库的设计。
-      4. 能够基于各种python开源框架做二次开发。
-      5. 有reset api设计经验。
-      6. 有k8s 运维经验优先。  
-职能类别：
-高级软件工程师软件工程师
-关键字：
-python开发
-微信分享"
-Python/Java Software Engineer,https://jobs.51job.com/beijing-cyq/115035415.html?s=01&t=0,北京莱博智环球科技有限公司,北京-朝阳区,1.4-1.6万/月,03-25,"What You'll Do 
-You will work with our software team to develop and deliver an unprecedented end-to-end localization automation solution that supports our cloud and on premises software products in up to multi languages spoken around the world. This is an ideal opportunity for someone with strong technical skills and is passionate about cultures and languages. Your responsibility will include: 
-Establish operational and technical procedures, develop tools and integration solutions to automate and streamline internal workflow and processes
-Perform day to day localization software engineering work for software user interface and documentation
-Create and maintain high quality language packs in various languages for the collaboration products, both on premise and cloud based
-Troubleshoot, resolve, and document localization issues and customer cases 
-          Who you will work with
-You've got experience creating automation tools and solutions for software and web-based applications. You will work with a group of professionals delivering culturally appropriate, high quality localized product software and documentations. You have an unique opportunity to join this highly empowered collaborative team.
-  Who You are
-You are a motivated self-starter who is highly results driven, love what you do, and strive to achieve engineering excellence and take initiative in your ongoing self-development. Inspire teamwork and collaboration.
-   Our minimum requirements for this role:
-  Bachelor's degree or Masters preferably in Computer Science or other related engineering discipline.
-2 years of fully engaged Python software engineering, development, and testing, in a scrum or paired programming environments
-2 years of experience in Java development, HTML, CSS, and JavaScript
-Working experience with CI/CD systems Git, GitHub, Jenkins
-Ability to learn and adapt to new, complex development environments with deep dive analytical skills and quantitative problem-solving ability
-            Our desired requirements for this role:
-Localization engineering experience preferred. Experience in enterprise applications
-Working knowledge of cloud platforms (such as AWS) and SQL
-Experience in Translation Memory Management Systems (XTM Cloud or WorldServer) or Computer Aided Translations tools (Passolo or Trados) 
-Self-starter with demonstrated ability to learn quickly, take initiative, and be accountable for results and deadlines
-Flexibility and creativity in planning and problem solving throughout the product life cycle, from high level conceptual design to detailed implementation and testing tasks
-Able to communicate and collaborate effectively with team members of varied work styles
-Understanding for diverse cultural, political and religious environments and be able to work successfully in those environments. Maintaining a sense of humor in stressful situations
-
-职能类别：
-软件工程师
-关键字：
-PythonJava
-微信分享"
-python开发工程师,https://jobs.51job.com/beijing-cyq/119774827.html?s=01&t=0,360金融,北京-朝阳区,2.5-4万/月,03-25,"岗位职责：
-1、负责算法模型的工程化实现；
-2、协助或者负责框架设计。
-任职要求：
-1、需具备5年以上Python开发经验，参与过大型高并发网站开发和实施工作；
-2、精通Python语言，熟练使用常用模块，使用过Flask/Django/Tornado等web框架；
-3、具有良好的自学能力，能通过研究开源项目来解决开发中遇到的难题；
-4、熟悉以下技术者优先考虑：Redis、Memcache、MongoDB、Hadoop。
-职能类别：
-软件工程师
-微信分享"
-Python 工程师,https://jobs.51job.com/beijing-cyq/115007713.html?s=01&t=0,北京友聚四海网络科技有限公司,北京-朝阳区,1-1.5万/月,03-25,"岗位职责
-1.使用Python语言编程技术实现产品功能；
-2.主动推进产品功能进化，配合产品经理挖掘产品价值；
-3.数据模型设计，相关文档编写。
-任职要求：
-1.熟悉Python主流Django框架；
-2.熟悉Mysql，熟悉Memcached, Redis等常见的NoSQL数据存储者优先； 
-3.有良好的编码习惯，对代码和设计质量有严格要求，重视Code Review ；
-4.具有自我驱动、创新和团队精神，乐于沟通和分享，热爱开源，保持开放心态。
-职能类别：
-其他
-微信分享"
-资深Python工程师,https://jobs.51job.com/beijing/111120680.html?s=01&t=0,北京红铅笔广告有限公司,北京,1.8-3.6万/月,03-25,"1、负责人工智能产品相关的基础架构设计和研发工作 ;
-2、负责根据产品和项目计划按时完成功能模块的架构设计、编码、测试的全流程工作;
-3、负责提供高并发的数据请求分析的处理能力；
-4、负责持续优化系统架构，提高系统的容灾容错能力，保证系统的可运维、高可用性、高可靠性。
-
-任职要求:
-1、计算机相关专业，大学本科及以上学历，两年以上开发经验，熟悉后端开发相关技术；
-2、具备全面的软件知识结构，基础扎实，精通常用数据结构与算法，算法设计与实现功底扎实，有较强的架构设计和逻辑思维能力；
-3、熟练使用Python语言，熟悉使用常用模块，完成过基于Python的大型项目；
-4、熟悉Tornado、Django或Flask三种框架之一；
-5、熟悉主流数据库和缓存系统，如MySQL、Redis、MongoDB等；
-6、熟悉Nginx部署，有独立部署经验；
-7、熟悉Linux基本操作，了解 Shell 脚本，有Linux下的多线程编程和性能调优经验，熟悉后端同步互斥的控制；
-8、具备良好的沟通能力和团队协作能力，工作态度严谨。
-
-加分项:
-1、熟悉机器学习、大数据技术者优先；
-2、对人工智能行业兴趣浓厚者优先。
-职能类别：
-高级软件工程师
-微信分享"
-Python工程师,https://jobs.51job.com/beijing-cyq/120488947.html?s=01&t=0,医药魔方,北京-朝阳区,1-2万/月,03-25,"1、负责文本分类、语义理解、情感分析等NLP任务的研发工作；
+Python工程师,https://jobs.51job.com/beijing-cyq/120488947.html?s=01&t=0,医药魔方,北京-朝阳区,1-2万/月,03-26,"1、负责文本分类、语义理解、情感分析等NLP任务的研发工作；
 2、负责NLP算法系统的开发和优化。
 岗位要求：
     1、国内外知名学校的硕士研究生及以上学历；具有计算机、电子、数学等相关专业背景   
@@ -571,481 +498,7 @@ Python开发工程师软件工程师
 关键字：
 python软件开发开发工程师
 微信分享"
-Python开发工程师,https://jobs.51job.com/beijing/118631099.html?s=01&t=0,深圳市法本信息技术有限公司上海分...,北京,1.5-2.2万/月,03-25,"注：1,3年以上经验  2，高级或者资深级别3,***可以带团队4，学历学信网可查5，全栈***6，上班地点顺义区中航信大楼
-
-1,三年以上开发经验
-2,精通Python及Web开发，至少精通一项python web框架比如Django；有实际web业务应用开发经验
-3,熟练掌握mysql，熟悉redis及消息队列等中间件
-理解分布式服务概念，具有中间件使用经验，有较复杂的业务场景实现经验
-4,有互联网公司开发经验，熟悉DevOps工具链和生态系统，具备DevOps领域的架构设计与实践经验者优先
-5,熟悉java/reactJs/docker者优先
-职能类别：
-软件工程师
-关键字：
-dockerDjango
-微信分享"
-后端高级工程师（Python）,https://jobs.51job.com/beijing-hdq/109278655.html?s=01&t=0,中建材信息技术股份有限公司,北京-海淀区,1.5-2.5万/月,03-25,"1、系统架构的开发；能给出系统的技术方案，核心代码开发和系统优化；
-2、参与制定代码规范、测试规范，建立起开发质量控制方法；
-3、协助团队攻克技术难关；参与技术调研，新技术引入等。
-
-任职资格：
-教育背景：本科及以上学历，计算机或相关专业毕业，能力优秀者可放宽;                                                                                                                     
-工作经验：4年以上                                                                                                                          
-技能、技术要求：
-1. 熟练使用Python；精通Python开发框架：flask/django/tornado；
-2. 熟练使用Mongo DB、redis、mysql 等数据库，熟悉性能优化；
-3. 对面向对象有深刻的理解、熟悉常用设计模式，熟悉微服务架构，有丰富的开发经验；
-4. 开发语言无依赖。有强烈的学习意愿，能够适应项目中不同语言的开发；
-认证资格要求：无                                                                                                                       
-通用胜任力素质要求：
-1. 有扎实的编程能力，思路清晰，善于思考，能独立分析和解决问题；
-2.责任心强，具备良好的团队合作精神和抗压能力；                
-职能类别：
-项目主管
-微信分享"
-Go/Python,https://jobs.51job.com/beijing/113785518.html?s=01&t=0,北京阿提拉科技有限公司,北京,0.8-1万/月,03-25,"岗位职责:
-编写运维自动化框架相关程序；
-编写运维自动化操作相关程序或脚本
-任职要求:
-本科学历
-熟悉Windows、Linux操作系统基本编程；
-熟悉互联网相关技术，包括nginx,redis等应用的管理、配置。
-具备go或Python相关开发调试经验；
-熟练使用shell、autoit、python等脚本语言工作，有实际编程经验。
-具备良好的沟通能力及风险意识，逻辑思维清晰。
-熟悉平台化devops系统优先；
-熟悉不限于open-falcon、Apollo、Prometheus等开源系统优先；
-熟悉Grafana等展示工具优先。
-职能类别：
-软件工程师
-微信分享"
-Python高级开发工程师,https://jobs.51job.com/beijing-hdq/94990357.html?s=01&t=0,北京棣南新宇科技有限公司,北京-海淀区,1.5-2万/月,03-25,"职责：
-开发微服务平台系统。
-
-要求：
-1. 正规大学本科以上学历。
-2. 3年及以上Python开发经验，精通Python开发。
-3. 精通Django框架，有实际应用项目经验。
-4. 熟悉HTML5，Javascript，Json，熟悉Mysql数据库，熟练使用SQL。
-5. 有websocket server开发经验者优先。
-6. 有Redis开发、部署经验者优先。
-7. 了解HTTP协议，微服务，以及Restful API。
-8. 熟悉云服务平台（google，ali），了解服务器的部署和监控，了解负载平衡。
-9. 了解敏捷开发，熟悉软件设计模式。
-职能类别：
-软件工程师高级软件工程师
-关键字：
-PythonDjangoHTML5JavascriptJsonMysqlSQLHTTPRestfulAPI
-微信分享"
-Python开发工程师,https://jobs.51job.com/beijing/118890092.html?s=01&t=0,翰竺科技（北京）有限公司,北京,1.5-2.5万/月,03-25,"岗位要求：
-1.参与云平台核心系统的设计与研发工作，负责云平台系统的优化和实施。
-2.参与云平台系统的线上运维工作，能够高效定位和解决问题。
-3.根据开发进度和任务分配，按时完成相应模块的文档编写、设计、开发、编程任务。
-4.了解开源社区，了解云计算相关技术和前沿技能。
-5.云平台自身系统docker部署及性能优化。
-任职要求：
-1.本科及以上学历，3年以上Python Web开发工作经验。
-2. 深刻理解计算机数据结构和算法设计，熟悉linux操作系统原理，能熟练运用系统命令。
-3. 熟练掌握Python web开发框架（Django、Flask或其他框架），具备良好的代码风格，有高并发经验者优先。
-4. 理解HTTP协议，熟悉REST开发风格。
-5. 熟悉docker和k8s运行、运维机制。
-6.有memcache、redis等缓存和rabbitmq等消息队列开发经验者优先。
-7.做事严谨踏实，责任心强，有很强的学习能力，以及分析和解决问题的能力。
-职能类别：
-高级软件工程师
-微信分享"
-Python工程师,https://jobs.51job.com/beijing-ftq/119259435.html?s=01&t=0,北京先进数通信息技术股份公司,北京-丰台区,0.6-1万/月,03-25,"岗位职责：
-1.自动化运维脚本编写，包括需求分析、设计、测试和维护等；
-2.能够独立完成软件程序的设计和编写；
-3.完成项目经理、技术经理要求的配套文档编写；
-4.配合项目经理完成项目的质量管理及配置管理等方面工作；
-5.完成公司领导交办的其他任务。
-岗位要求：
-1.熟练掌握Python，熟练使用flask、Django等主流框架，进行项目开发；
-2.熟练使用Linux常用命令，并编写简单说shell脚本；
-3.了解HTML、CSS、JQuery、ajax等前端开发技术；
-4.熟练使用Git进行源代码管理。
-5.严格遵循Restful API接口规范；
-6.能独立部署项目，并搭建联调测试环境。
-职能类别：
-软件工程师
-微信分享"
-python开发,https://jobs.51job.com/beijing-cyq/117605888.html?s=01&t=0,深圳市捷兴电子商务有限公司,北京-朝阳区,2-3万/月,03-25,"工作职责：
-      1. 负责公司devops平台的研发。
-      2. 负责公司监控平台二次研发工作。
-      3. 负责devops同k8s对接。
-      职位要求：
-      1. 熟悉python + django 框架。
-      2. 熟悉vue， bootstrap, jquery，ajax等前端框架。
-      3. 实施过devops平台 以及cmdb数据库的设计。
-      4. 能够基于各种python开源框架做二次开发。
-      5. 有reset api设计经验。
-      6. 有k8s 运维经验优先。  
-职能类别：
-高级软件工程师软件工程师
-关键字：
-python开发
-微信分享"
-Python开发工程师,https://jobs.51job.com/beijing/112936784.html?s=01&t=0,北京中软融通科技有限公司,北京,0.7-2万/月,03-25,"岗位职责：
-1. 搭建系统开发环境，完成系统框架和核心代码的开发，负责解决开发过程中的技术问题
-2. 负责Python技术的相关产品规划、需求、设计、开发、测试等研发工作
-3. 研究并跟踪IT前沿技术
-任职要求：
-1. 大学本科或以上学历，计算机或相关专业毕业，2年以上开发经验
-2. 熟悉Linux操作系统
-3. 熟悉HTTP、TCP/IP等协议
-4. 熟悉常用数据结构及算法
-5. 精通Python，掌握爬虫技术，熟悉 pyspider框架等；熟悉Django、tornado框架
-6. 熟悉MySql数据库和Redis、MongoDB等NoSQL技术
-7. 有移动互联网、微信公众号、小程序开发经验者优先
-8. 需具备独立设计数据库并且独立开发内部系统的能力
-9. 具有良好的编程思想、沟通、团队合作精神、优秀的分析问题和解决问题的能力，能够独立承受工作压力
-
-职能类别：
-高级软件工程师软件工程师
-微信分享"
-Python开发工程师,https://jobs.51job.com/beijing/87083574.html?s=01&t=0,博彦科技股份有限公司,北京,1-1.5万/月,03-25,"岗位职责：
-人工智能类产品的相关开发工作
-
-岗位要求：
-1.计算机相关专业本科及以上学历，2年以上开发经验；
-2.至少掌握一种动态语言的开发（如python, perl, ruby等），python优先；
-3.良好的学习能力、沟通能力，较强的抗压，独立工作和解决问题的能力；
-4.掌握基本的数据结构和算法知识；
-5.掌握C#或其他编程语言者优先。
-职能类别：
-软件工程师
-微信分享"
-Python开发工程师,https://jobs.51job.com/beijing-ftq/111252070.html?s=01&t=0,北京展云科技有限公司,北京-丰台区,1.5-2.5万/月,03-25,"任职要求:
-1. 三年以上工作经验。
-2. 精通Python语言（Python3），熟练使用至少一门面向对象语言，精通至少一种Python Web后端框架（首选Flask, 其次Django）；
-3. 能独立开发RESTful API服务；熟悉Python后端程序的性能优化；
-4. 熟练掌握MongoDB，了解mongoDB机制，掌握各种查询语法，懂得数据库查询调优。能够使用MySQL、Redis，具有数据库设计和 SQL 优化能力；
-5. 熟悉多进程、多线程、协程，熟悉常见的网络编程模型；
-6. 熟悉http/websocket等协议及相关知识，熟悉nginx等web服务器常用配置；
-7. 能够维护已有代码；
-8. 良好的英文阅读与理解能力；
-9. 能够接受的敏捷开发方式，紧张的开发节奏；
-10. 具备良好的沟通能力和团队协作精神，善于学习、研究、总结，乐于分享。
-职能类别：
-软件工程师
-关键字：
-产品研发
-微信分享"
-Python开发工程师,https://jobs.51job.com/beijing-hdq/117620542.html?s=01&t=0,浙江华治数聚科技股份有限公司,北京-海淀区,1-1.5万/月,03-25,"1. 3 年以上 Python 开发经验，熟悉常见的服务端开发技术：Django/Mysql/Redis/Nginx/MongDB/MQ，熟练 Linux 的日常操作；
-2. 了解计算机基本的系统原理：存储、网络、操作系统
-2. 了解常见的在线交互、异步流程等系统设计方法，并能运用在实际业务当中；
-3. 了解 Git 使用，代码有***。
-职能类别：
-软件工程师数据库工程师(DBA)
-微信分享"
-Python开发工程师,https://jobs.51job.com/beijing-xcq/120152956.html?s=01&t=0,北京凯普顿医药科技开发有限公司,北京-西城区,1-2万/月,03-25,"职位描述：
- ? 1. 参与爬虫系统的架构设计与开发，开发分布式网络爬虫，提取结构化信息，识别结构化信息的质量，设计爬虫策略和防屏蔽规则，提升网页抓取的效率和质量
-2. 基于python的后台系统、脚本开发和维护，根据需求完成一些系统后台搭建、客户端脚本、运维脚本等开发工作
- ? 岗位要求：
- ? 1. 本科毕业，计算机/软件相关专业优先
-2. 从事 Python 开发2-3年及以上，熟练使用 Python 进行各种需求的开发，有其它后台语言经验者优先，如java、nodejs等
-3. 熟悉 Linux 开发环境，熟练使用 Shell、git/svn，了解运用ajax、JavaScript、html、css、div等前端技术
-4. 有mysql、mongodb、redis等常用数据库的使用经验
-5. 有高并发服务的设计和实现经验，对分布式系统有很好的理解
- 6. 熟知计算机网络协议，了解操作系统核心原理，具备开发高效低延迟程序的能力
- 7. 有爬虫工作经验者优先，具有数据挖掘、自然语言处理、信息检索、机器学习背景者优先
- 8. 热衷研究新兴技术，对技术精进有要求，愿意学习大数据相关知识，并付诸实践。 
-职能类别：
-Python开发工程师
-微信分享"
-诚聘Python数据工程师,https://jobs.51job.com/beijing-cyq/120658903.html?s=01&t=0,北京环球医疗救援有限责任公司,北京-朝阳区,1.5-2万/月,03-25,"岗位职责：
-1. 从结构化的和非结构化的数据中获取文本信息，对海量文本数据进行提取、去重、清洗、入库等操作
-2. 综合运用各种算法对预处理后的文本数据进行搜索、分类、实体识别、关系识别、模式识别等操作
-3. 参与数据产品的的需求调研和分析，撰写相关技术文档
-4. 有时需要进行算法可视化的设计和研发
-
-任职要求：
-1. 计算机或相关专业本科以上
-2. 熟练掌握Python语言，三年以上实际Python项目开发经验
-3. Python的科学计算库numpy、scipy、数据分析库pandas、机器学习库scikit-learn库的熟练使用
-4. Python的re、requests、beautifulSoup等库的熟练使用
-5. 熟悉常见的数据库，例如MySQL、MongoDB、Redis等
-6. 熟悉ElasticSearch等全文检索工具
-7. 有深度学习、NLP算法经验是加分项
-职能类别：
-Python开发工程师算法工程师
-关键字：
-pythonpython数据python开发
-微信分享"
-资深Python开发工程师(J21618),https://jobs.51job.com/beijing-dxq/117572474.html?s=01&t=0,京东方健康投资管理有限公司,北京-大兴区,2.5-3万/月,03-25,"工作职责:
-1、负责专科医联体平台应用后端服务平台的产品迭代开发
-2、负责企业级web应用的RESTful API的设计和核心业务逻辑的开发以及部署
-任职资格:
-教育程度:本科
-工作经历:
-1、5年以上后端开发经验
-2、对Python Web开发相关技术栈有深入理解，对HTTP协议，Websocket，以及Django framework有实际项目经验，对RESTful API的设计有正确认知
-3、熟悉Linux开发环境，熟练掌握MySQL和MongoDB数据库，熟悉微服务架构和Docker容器技术。有基于Docker K8S的实际Devops经验者优先
-所需专业: 计算机、电子工程专业
-其他要求:无
-语言要求:无
-职能类别：
-软件工程师
-微信分享"
-Python开发工程师,https://jobs.51job.com/beijing-cyq/108886345.html?s=01&t=0,麦田春雪科贸（北京）有限公司,北京-朝阳区,1.5-2万/月,03-25,"岗位职责：
-1. 负责基于Python的数据爬取、数据分析、数据处理、数据开发等工作；
-2. 负责基于Python/Java机器学习模型封装、部署、上线，并负责测试和维护；
-3. 参与数据挖掘和建模
-
-岗位要求：
-1. 本科及以上学历，计算机，电子信息工程及相关专业毕业；
-2. 精通Python，熟练掌握Java和SQL（必备），有常用开源框架使用经验，熟悉常见的缓存技术；
-3. 掌握多线程、多进程编程，具备优秀的编程能力，在常用功能实现方面有自己独到的设计；
-4. 学习领悟能力强，具备高度的责任心及团结协作精神，善于交流；
-5. 具有相关开发经验者优先；
-职能类别：
-软件工程师高级软件工程师
-关键字：
-python开发研发
-微信分享"
-Python开发工程师,https://jobs.51job.com/beijing-hdq/114711267.html?s=01&t=0,天池创新（北京）软件技术有限公司...,北京-海淀区,1.5-2万/月,03-25,"岗位职责：（此岗位会进行背调，请保证简历的真实性）
-1、海量数据的处理与分析；
-2、开发自动化工具；
-3、开发API接口共外部调用（高并发）
-4、持续优化项目、性能调优等
-5、参与项目的技术评审、代码评审等
-6、参与项目需求分析、业务逻辑流程设计，技术文档编写
-任职要求：
-1、熟练使用python语言
-2、熟练运用linux的基础命令
-3、认真负责、勇于承担、自我学习能力强、善于沟通、有责任心、有良好的团队协作能力
-职能类别：
-软件工程师算法工程师
-微信分享"
-Python开发工程师-北京-05233,https://jobs.51job.com/beijing/119784604.html?s=01&t=0,博彦科技股份有限公司,北京,0.9-1.3万/月,03-25,"岗位职责
-（1）全面、认真地理解系统需求和系统设计。
-（2）对系统设计进行实现最后层次的细化工作。
-（3）独立承担编制代码及代码的单元测试工作。
-（4）负责解决开发中遇到的较复杂的技术难题和技术攻关。
-（5）负责核心业务、公共组件等重要功能的编程实现。
-（6）认真贯彻执行公司质量体系文件及其相关制度的管理要求。
-（7）执行公司、中心各项管理制度、标准作业规程和操作规范，确保各项工作符合规范化要求。
-任职要求
-（1）学历大专及以上，实际工作两年及以上。
-（2）精通OO，AOP，设计模式，熟悉多线程并发，网络编程技术。
-（3）精通python 技术栈，包括 pandas，numpy等，熟悉使用python进行数据处理。
-（4）熟练使用Mysql、Oracle数据库，掌握sql语言规范，具有国产数据库、分布式数据经验者加分。
-（5）有分布式开发经验、熟练使用分布式服务框架，消息中间件和分布式存储系统等。
-（6）对技术有强烈的兴趣，喜欢钻研，具有良好的学习能力，沟通技能，团队合作能力。
-职能类别：
-软件工程师
-微信分享"
-Python中级开发工程师,https://jobs.51job.com/beijing-xcq/119756829.html?s=01&t=0,深圳市赢时胜信息技术股份有限公司...,北京-西城区,1-1.2万/月,03-24,"1、岗位职责
-（1）全面、认真地理解系统需求和系统设计。
-（2）对系统设计进行实现最后层次的细化工作。
-（3）独立承担编制代码及代码的单元测试工作。
-（4）负责解决开发中遇到的较复杂的技术难题和技术攻关。
-（5）负责核心业务、公共组件等重要功能的编程实现。
-（6）认真贯彻执行公司质量体系文件及其相关制度的管理要求。
-（7）执行公司、中心各项管理制度、标准作业规程和操作规范，确保各项工作符合规范化要求。
-2、任职要求
-（1）计算机相关专业本科以上，从事开发5年以上，211以上学历优先。
-（2）精通OO，AOP，设计模式，熟悉多线程并发，网络编程技术。
-（3）精通python 技术栈，包括 pandas，numpy等，熟悉使用python进行数据处理。
-（4）熟练使用Mysql、Oracle数据库，掌握sql语言规范，具有国产数据库、分布式数据经验者加分。
-（5）有分布式开发经验、熟练使用分布式服务框架，消息中间件和分布式存储系统等。
-（6）对技术有强烈的兴趣，喜欢钻研，具有良好的学习能力，沟通技能，团队合作能力。
-
-职能类别：
-Python开发工程师
-关键字：
-python软件开发
-微信分享"
-python开发,https://jobs.51job.com/beijing-cyq/117622446.html?s=01&t=0,深圳市若昕科技有限公司,北京-朝阳区,2-3万/月,03-24,"工作职责：
-      1. 负责公司devops平台的研发。
-      2. 负责公司监控平台二次研发工作。
-      3. 负责devops同k8s对接。
-      职位要求：
-      1. 熟悉python + django 框架。
-      2. 熟悉vue， bootstrap, jquery，ajax等前端框架。
-      3. 实施过devops平台 以及cmdb数据库的设计。
-      4. 能够基于各种python开源框架做二次开发。
-      5. 有reset api设计经验。
-      6. 有k8s 运维经验优先。  
-职能类别：
-高级软件工程师软件工程师
-关键字：
-python开发
-微信分享"
-Python开发工程师(网络安全行业）,https://jobs.51job.com/beijing-hdq/120500919.html?s=01&t=0,江苏御维科技有限公司,北京-海淀区,1.2-2万/月,03-24,"岗位职责
- 1. 参与产品需求分析，产品设计；
- 2. 负责系统RESTFUL服务接口开发，系统业务后台开发和相关文档的编写；
- 3. 负责服务器性能的优化，保证服务端稳定安全的运行。
- 岗位要求
- 1. 本科及以上学历，3年以上Python语言开发经验；
- 2. 熟练掌握flask开发框架，具有独立搭建web后端和部署的实际经验，能够实现后端需要的各种功能，除flask框架外，还熟悉其他python web开发框架者优先；
- 3. 理解并能应用RESTFul规范,具备较强的编程能力和良好的编码风格；
- 4. 熟悉 Linux 以及服务器端常用软件，对算法、数据结构有一定了解；
- 5. 熟悉 MongoDB/MySQL/Redis/ElasticSerch 等数据库；
- 6. 有网络安全产品开发经验者优先。
-职能类别：
-Python开发工程师
-关键字：
-python爬虫软件开发flask
-微信分享"
-Python后端开发工程师,https://jobs.51job.com/beijing/119576878.html?s=01&t=0,迪思杰（北京）数据管理技术有限公...,北京,1.5-2万/月,03-24,"岗位职责:
-1、根据需求完成系统设计和代码的实现；
-2、系统开发测试、部署和集成；
-3、负责解决开发过程中的技术问题；
-4. 相关接口文档的编写和维护 。
-岗位要求：
-1.       熟悉Web应用程序体系结构；
-2.       具备深厚的面向对象编程经验；
-3.       精通基于Python Django的Web应用开发；
-4.       精通RESTful接口开发
-5.       熟悉MySQL / PostgreSQL数据库, 善用数据库建模工具进行数据库的设计；
-6.       熟悉Linux服务器系统环境，掌握必要的Unix Shell的用法；
-7.       熟悉Apache/NGIX服务器的配置；
-8.       良好的代码书写规范。
-
-职能类别：
-Python开发工程师
-关键字：
-Python
-微信分享"
-Python开发(数据分析),https://jobs.51job.com/beijing-hdq/120528651.html?s=01&t=0,清控紫荆（北京）教育科技股份有限...,北京-海淀区,1.5-2.2万/月,03-24,"一、 工作内容: 
-1. 负责各广告投放、销售活动的数据获取、清洗、统计分析；
-2. 开发数据统计分析结果报告；
-3. 基于统计分析结果为业务部门提供过程改进解决方案。
-4. 完成领导交办的其他任务。 
-二、任职资格: 
-1. 统招本科以上学历，计算机、统计学、数学相关专业优先； 
-2. 熟悉python语言、linux操作系统、熟练使用python常用模块。 
-3. 熟练使用pandas、numpy等库多数据进行组织清洗；熟练使用数据可视化工具库(Matplotlib、Seaborn、Pyecharts)一种，可以简单对数据结果进行可视化处理；
-4. 至少熟悉tornado/flask/django等一种python框架,有过接口开发经验。
-5. 软件开发相关经验3年以上；
-6. 具备较强的逻辑分析和数据分析能力，工作认真负责，耐心仔细，学习能力强 ；
-职能类别：
-Python开发工程师
-微信分享"
-Python高级开发工程师,https://jobs.51job.com/beijing-cpq/112667563.html?s=01&t=0,北京学神科技有限公司,北京-昌平区,1.5-3万/月,03-24,"岗位职责：
-1、负责人工智能+python课程产品的设计，提供成熟的技术解决方案
-2、负责人工智能+python项目、案例的研发与讲解
-3、负责人工智能+python实体班授课、在线班授课
-4、要有良好的沟通能力、协调能力、领导能力
-5、完成上级领导交办的工作任务
-任职要求：
-1. 本科及以上学历，计算机相关专业，3年以上工作经验；
-2. 熟练掌握python语言
-3. 熟练掌握TensorFlow框架
-4.熟悉人工智能软件开发、设计模式、常用算法 
-5.熟练Python 自动化运维高阶 (Python Paramiko、Redis、xpath 、re ) 
-6.熟练Python 运维开发和运维框架二次开发(Zabbix 、ansible 、saltstack)   
-职能类别：
-高级软件工程师软件工程师
-关键字：
-开发PythonDjango自动化运维讲师
-微信分享"
-Python开发工程师-北京-00113,https://jobs.51job.com/beijing/118708929.html?s=01&t=0,北软互联（北京）科技有限公司,北京,1-1.5万/月,03-24,"职位描述
-
-职责描述：
-1、根据项目需求，开发和维护python算法框架；
-2、进行金融工程指定算法实现；
-3、python相关系统的测试、安装部署、性能调优、技术支持等工作。
-4、负责研发基于数理模型及人工智能算法的做市以及自营交易算法， 涵盖银行间市场主要交易资产类别，包含债券，外汇，贵金属等现货及各衍生品；
-5、与客户业务部门紧密合作，负责客户委托的策略开发工作；
-6、与公司开发团队紧密合作，负责把编辑的策略嵌入部署至系统中。
-岗位职责
-
-任职要求：
-1、全日制大学本科及以上，数学、物理及计算机或相关专业；
-2、具备2年以上python开发经验，有实际项目开发；对数据敏感，具备优秀的数据分析能力；
-3、熟悉Windows及Linux下python的安装、部署及调试；
-4、具备良好的沟通协调能力和团队合作意识，工作踏实，态度积极，能够承受工作压力；
-5、熟悉金融行业基本知识及有金融工程算法开发实现经验者优先；
-6、熟练使用python, R, matlab任意一项或者多项编程语音；
-职能类别：
-软件工程师高级软件工程师
-微信分享"
-Python开发工程师,https://jobs.51job.com/shenzhen/118443902.html?s=01&t=0,深圳市第一企业管理咨询有限公司,异地招聘,3-4万/月,03-24,"工作职责：         
-1、负责游戏功能系统的服务端开发工作；          
-2、对服务器程序进行架构分析和软件设计，并完成相应的文档；          
-3、主动跟进与处理各模块的bug；          
-4、开发服务端各项周边工具；          
-5、负责自己所编写模块的单元测试工作；    
-6、重点关注系统幵发性能、可靠性等方面，解决系统开发技术难点，参与架构持续升级；         
-7、参与新系统需求分析与讨论，并提出技术可行性方案。      
-
-职位要求：        
-1、三年以上网络游戏服务端大型服务通信系统核心开发经验；         
-2、对面向对象编程、设计模式、软件工程等有较深入的理解，对产品交付和用户体验有高要求；         
-3、了解TCP/IP、网络、多线程。多进程。协程编程、异步编程模型，了解线程安全和线程可见性，能编写正确且高效的并发代码 ；   
-4、熟悉计算机网络的基本知识及互联网上常见的通讯协议，熟悉常用数据结构与算法、Socket编程、多线程编程等；        
-5、熟练掌握mysql数据库，了解一些非关系型数据库（memcached , redis）；         
-6、热爱游戏开发，有较强的自学能力、分析及解决问题能力，良好的团队合作能力以及需求分析能力；         
-7、对新技术保持热情，持续学习并乐于分享；具有良好的沟通能力和项目管理意识；        
-8、有很强的学习能力，有主动性和上进心，能承担压力；        
-9、熟悉python、twisted、gevent、tornado、flask 框架者优先。
-职能类别：
-软件工程师游戏开发工程师
-关键字：
-python
-微信分享"
-Python开发工程师,https://jobs.51job.com/beijing/120671171.html?s=01&t=0,北京华脉世纪石油科技有限公司,北京,0.8-1万/月,03-24,"需求专业：软件工程、计算机相关专业
-岗位职责：负责网站开发及运营维护
-工作地点：北京
-职能类别：
-Python开发工程师大数据开发工程师
-关键字：
-python爬虫软件开发软件工程师开发维护工程师
-微信分享"
-Python开发工程师,https://jobs.51job.com/beijing-cyq/114166286.html?s=01&t=0,北京三六九数动科技有限公司,北京-朝阳区,2-2.5万/月,03-24,"岗位职责：
-1. 负责服务器端后台设计、功能开发及维护；
-2. 参与技术方案讨论和技术调研；
-3. 负责相关工具开发和相关文档的编写；
-4. 负责服务器性能的优化，保证服务端稳定安全的运行；
-5.产品上线后，保障运营平台的稳定，解决相关技术问题
-任职资格：
-1.计算机、软件开发、通信、电子类相关专业全日制本科及以上学历,5年以上Python开发工作经验；
-2.熟练使用python编程；了解Django、tornado、 Flask等常用的Web框架开发；有一定的Git、VIM使用经验；
-3. 熟练使用Linux系统，对算法、数据结构有一定了解；
-4.熟练掌握MySQL/Memcached/ElasticSerch 等常用存储技术（数据库系统）；
-5. 热爱工作, 有良好的学习能力, 能够接受新鲜事务, 对新技术及新模块可以快速掌握运用；
-6. 良好的沟通与表达能力、思路清晰，较强的动手能力与逻辑分析能力。
-职能类别：
-软件工程师
-微信分享"
-软件测试工程师（C++、java、python）,https://jobs.51job.com/beijing/113363548.html?s=01&t=0,北京天行汇通信息技术有限公司,北京,1-2万/月,03-24,"职位描述：
-1.根据项目说明、设计文档、使用说明书等，做好测试前的准备工作，保证产品测试工作的计划性与规范性；
-2.按照测试流程、计划以及对产品特性的把握，编写测试案例，确保测试目的的达成；
-3.根据测试计划及测试案例，执行测试，确保在软件发布前基本排除其缺陷；
-4.根据测试结果，与开发部门等反复沟通测试情况，修正测试中发现的缺陷，完善软件性能；
-5.整理测试文档，编写测试总结；
-6.完成测试相关工具的开发。
-
-任职资格：
-1.学历要求：
--毕业于211或985院校、统招本科及以上学历。
-2.能力要求：
--熟悉java、C/C++、Python其中一种语言，具备软件工程理论知识，精通软件测试理论及测试方法；
--能够熟练书写测试脚本、测试用例，熟练使用各种测试工具；
--熟悉Junit/gtest/unittest其中一种框架。
-3.优先考虑：
--有团队管理经验者优先。
-职能类别：
-软件测试工程师系统测试
-微信分享"
-Python开发工程师,https://jobs.51job.com/beijing-hdq/118654749.html?s=01&t=0,北京寄云鼎城科技有限公司,北京-海淀区,1.5-2万/月,03-24,"职责：
-1、负责云平台服务端模块的开发；
-2、对新技术和方案进行调研评估和引进。
-
-
-要求:
-1、精通Python语言，熟练使用Python标准库模块和第三方模块；
-2、熟悉高级消息管理协议，如RabbitMQ、Kafka；
-3、熟练使用Linux系统，熟悉各种Linux命令的使用，能够在Linux环境下进行开发工作，对虚拟化技术有一定的了解；
-4、了解开源项目，有OpenStack，CloudStack开发经验优先。
-5、熟悉运维流程，熟悉自动化运维配置管理（Saltstack、Ansible等）优先。
-职能类别：
-软件工程师
-微信分享"
-Python研发工程师,https://jobs.51job.com/beijing/119923751.html?s=01&t=0,北京利和制药有限公司,北京,2-4万/月,03-24,"一、岗位职责:
+Python研发工程师,https://jobs.51job.com/beijing/119923751.html?s=01&t=0,北京利和制药有限公司,北京,2-4万/月,03-26,"一、岗位职责:
 1. 负责自动化运维工具开发，搭建自动化运维平台，提高整体运维效率；
 2. 参与自动化操作系统的软件产品设计开发任务;
 3. 负责自动化操作工具的开发和优化；
@@ -1068,182 +521,375 @@ Python研发工程师,https://jobs.51job.com/beijing/119923751.html?s=01&t=0,北
 关键字：
 python软件工程师
 微信分享"
-python开发工程师-北京,https://jobs.51job.com/beijing-hdq/120727547.html?s=01&t=0,中电福富信息科技有限公司,北京-海淀区,1-1.5万/月,03-23,"1、 功能型脚本开发、测试；
-2、 功能型工具开发，基本使用python开发，封装为windows的可执行文件；
-3、 基于云资源池实现网络设备、主机和存储设备的监控，及告警规则建立，及应对告警的初步自动化处理方案；
-4、 自动化运维平台构建，整合Prometheus、elk、蓝鲸平台，初步构建适合云公司内部的人员使用的自动化平台。
+Python开发工程师,https://jobs.51job.com/beijing-cyq/114166286.html?s=01&t=0,北京三六九数动科技有限公司,北京-朝阳区,2-2.5万/月,03-26,"岗位职责：
+1. 负责服务器端后台设计、功能开发及维护；
+2. 参与技术方案讨论和技术调研；
+3. 负责相关工具开发和相关文档的编写；
+4. 负责服务器性能的优化，保证服务端稳定安全的运行；
+5.产品上线后，保障运营平台的稳定，解决相关技术问题
+任职资格：
+1.计算机、软件开发、通信、电子类相关专业全日制本科及以上学历,5年以上Python开发工作经验；
+2.熟练使用python编程；了解Django、tornado、 Flask等常用的Web框架开发；有一定的Git、VIM使用经验；
+3. 熟练使用Linux系统，对算法、数据结构有一定了解；
+4.熟练掌握MySQL/Memcached/ElasticSerch 等常用存储技术（数据库系统）；
+5. 热爱工作, 有良好的学习能力, 能够接受新鲜事务, 对新技术及新模块可以快速掌握运用；
+6. 良好的沟通与表达能力、思路清晰，较强的动手能力与逻辑分析能力。
+职能类别：
+软件工程师
+微信分享"
+Python 工程师,https://jobs.51job.com/beijing-cyq/115007713.html?s=01&t=0,北京友聚四海网络科技有限公司,北京-朝阳区,1-1.5万/月,03-26,"岗位职责
+1.使用Python语言编程技术实现产品功能；
+2.主动推进产品功能进化，配合产品经理挖掘产品价值；
+3.数据模型设计，相关文档编写。
+任职要求：
+1.熟悉Python主流Django框架；
+2.熟悉Mysql，熟悉Memcached, Redis等常见的NoSQL数据存储者优先； 
+3.有良好的编码习惯，对代码和设计质量有严格要求，重视Code Review ；
+4.具有自我驱动、创新和团队精神，乐于沟通和分享，热爱开源，保持开放心态。
+职能类别：
+其他
+微信分享"
+Python开发工程师,https://jobs.51job.com/beijing/97824451.html?s=01&t=0,北京斯普信信息技术有限公司,北京,1-1.5万/月,03-26,"1、完成网络拓扑架构研发
+2、完成页面布局、浏览器适配、分辨率适配等功能
+3、完成相应模块的前端及后端功能研发
+4、配合完成测试以及bug修复
+任职资格：
+1、熟悉HTML5、CSS、JS、AJAX、JSON、Web、bootstrap等框架开发；
+2、熟悉拓扑功能实现，有过拓扑展示开发经验；
+3、熟悉不同浏览器之间的差异，熟练调试代码；
+4、有较强的前端布局设计、规划能力，能准确把握网站的整体风格和色彩的设计；
+5、熟悉python等开发语言，熟悉运维业务运作流程优先考虑；
+6、了解常用数据库系统，例如Oracle，MySQL等，熟悉常用的SQL语句。
+7、具备好的团队能力和良好的沟通能力，良好的理解力和学习能力； 
+
+职能类别：
+高级软件工程师
+关键字：
+Python开发
+微信分享"
+后端高级工程师（Python）,https://jobs.51job.com/beijing-hdq/109278655.html?s=01&t=0,中建材信息技术股份有限公司,北京-海淀区,1.5-2.5万/月,03-26,"1、系统架构的开发；能给出系统的技术方案，核心代码开发和系统优化；
+2、参与制定代码规范、测试规范，建立起开发质量控制方法；
+3、协助团队攻克技术难关；参与技术调研，新技术引入等。
 
 任职资格：
-1、 计算机、软件工程、通信工程等相关专业，本科及以上学历；
-2、 2年以上基于Linux/Unix平台的系统运维或开发经验；
-3、 熟练使用Linux下各种常用命令；
-4、 能够独立编写shell、python等脚本；
-5、 熟悉使用Python标准库和流行第三方库，有Django web开发框架使用经验；
-6、 熟悉JavaScript语言，能使用JQuery + DIV + CSS完成相应WEB开发;
-7、 思维清晰，优化代码，解决Bug，能够独立完成项目；
-8、 熟悉主流服务器基于带外的管理和配置及自动化的信息提取；
-9、 熟悉主流交换机配置，有实际操作经验***；
-10、  熟悉软件开发流程、设计模式，具备一定的需求分析和系统设计的能力。
+教育背景：本科及以上学历，计算机或相关专业毕业，能力优秀者可放宽;                                                                                                                     
+工作经验：4年以上                                                                                                                          
+技能、技术要求：
+1. 熟练使用Python；精通Python开发框架：flask/django/tornado；
+2. 熟练使用Mongo DB、redis、mysql 等数据库，熟悉性能优化；
+3. 对面向对象有深刻的理解、熟悉常用设计模式，熟悉微服务架构，有丰富的开发经验；
+4. 开发语言无依赖。有强烈的学习意愿，能够适应项目中不同语言的开发；
+认证资格要求：无                                                                                                                       
+通用胜任力素质要求：
+1. 有扎实的编程能力，思路清晰，善于思考，能独立分析和解决问题；
+2.责任心强，具备良好的团队合作精神和抗压能力；                
+职能类别：
+项目主管
+微信分享"
+Python开发工程师,https://jobs.51job.com/beijing-ftq/111252070.html?s=01&t=0,北京展云科技有限公司,北京-丰台区,1.5-2.5万/月,03-26,"任职要求:
+1. 三年以上工作经验。
+2. 精通Python语言（Python3），熟练使用至少一门面向对象语言，精通至少一种Python Web后端框架（首选Flask, 其次Django）；
+3. 能独立开发RESTful API服务；熟悉Python后端程序的性能优化；
+4. 熟练掌握MongoDB，了解mongoDB机制，掌握各种查询语法，懂得数据库查询调优。能够使用MySQL、Redis，具有数据库设计和 SQL 优化能力；
+5. 熟悉多进程、多线程、协程，熟悉常见的网络编程模型；
+6. 熟悉http/websocket等协议及相关知识，熟悉nginx等web服务器常用配置；
+7. 能够维护已有代码；
+8. 良好的英文阅读与理解能力；
+9. 能够接受的敏捷开发方式，紧张的开发节奏；
+10. 具备良好的沟通能力和团队协作精神，善于学习、研究、总结，乐于分享。
+职能类别：
+软件工程师
+关键字：
+产品研发
+微信分享"
+Python开发工程师-北京-00113,https://jobs.51job.com/beijing/118708929.html?s=01&t=0,北软互联（北京）科技有限公司,北京,1-1.5万/月,03-26,"职位描述
+
+职责描述：
+1、根据项目需求，开发和维护python算法框架；
+2、进行金融工程指定算法实现；
+3、python相关系统的测试、安装部署、性能调优、技术支持等工作。
+4、负责研发基于数理模型及人工智能算法的做市以及自营交易算法， 涵盖银行间市场主要交易资产类别，包含债券，外汇，贵金属等现货及各衍生品；
+5、与客户业务部门紧密合作，负责客户委托的策略开发工作；
+6、与公司开发团队紧密合作，负责把编辑的策略嵌入部署至系统中。
+岗位职责
+
+任职要求：
+1、全日制大学本科及以上，数学、物理及计算机或相关专业；
+2、具备2年以上python开发经验，有实际项目开发；对数据敏感，具备优秀的数据分析能力；
+3、熟悉Windows及Linux下python的安装、部署及调试；
+4、具备良好的沟通协调能力和团队合作意识，工作踏实，态度积极，能够承受工作压力；
+5、熟悉金融行业基本知识及有金融工程算法开发实现经验者优先；
+6、熟练使用python, R, matlab任意一项或者多项编程语音；
+职能类别：
+软件工程师高级软件工程师
+微信分享"
+Python开发工程师(网络安全行业）,https://jobs.51job.com/beijing-hdq/120500919.html?s=01&t=0,江苏御维科技有限公司,北京-海淀区,1.2-2万/月,03-26,"岗位职责
+ 1. 参与产品需求分析，产品设计；
+ 2. 负责系统RESTFUL服务接口开发，系统业务后台开发和相关文档的编写；
+ 3. 负责服务器性能的优化，保证服务端稳定安全的运行。
+ 岗位要求
+ 1. 本科及以上学历，3年以上Python语言开发经验；
+ 2. 熟练掌握flask开发框架，具有独立搭建web后端和部署的实际经验，能够实现后端需要的各种功能，除flask框架外，还熟悉其他python web开发框架者优先；
+ 3. 理解并能应用RESTFul规范,具备较强的编程能力和良好的编码风格；
+ 4. 熟悉 Linux 以及服务器端常用软件，对算法、数据结构有一定了解；
+ 5. 熟悉 MongoDB/MySQL/Redis/ElasticSerch 等数据库；
+ 6. 有网络安全产品开发经验者优先。
 职能类别：
 Python开发工程师
 关键字：
-python
+python爬虫软件开发flask
 微信分享"
-Python爬虫工程师,https://jobs.51job.com/beijing-cyq/116939177.html?s=01&t=0,天津市淇奥科技发展有限公司,北京-朝阳区,0.8-1万/月,03-23,"岗位描述：
-1.  负责公司核心数据抓取平台的开发、升级、维护等工作。
+python开发工程师,https://jobs.51job.com/beijing-cyq/119774827.html?s=01&t=0,360金融,北京-朝阳区,2.5-4万/月,03-26,"岗位职责：
+1、负责算法模型的工程化实现；
+2、协助或者负责框架设计。
+任职要求：
+1、需具备5年以上Python开发经验，参与过大型高并发网站开发和实施工作；
+2、精通Python语言，熟练使用常用模块，使用过Flask/Django/Tornado等web框架；
+3、具有良好的自学能力，能通过研究开源项目来解决开发中遇到的难题；
+4、熟悉以下技术者优先考虑：Redis、Memcache、MongoDB、Hadoop。
+职能类别：
+软件工程师
+微信分享"
+python开发,https://jobs.51job.com/beijing-cyq/117614294.html?s=01&t=0,广州华钧软件科技有限公司,北京-朝阳区,2-3万/月,03-26,"工作职责：
+      1. 负责公司devops平台的研发。
+      2. 负责公司监控平台二次研发工作。
+      3. 负责devops同k8s对接。
+      职位要求：
+      1. 熟悉python + django 框架。
+      2. 熟悉vue， bootstrap, jquery，ajax等前端框架。
+      3. 实施过devops平台 以及cmdb数据库的设计。
+      4. 能够基于各种python开源框架做二次开发。
+      5. 有reset api设计经验。
+      6. 有k8s 运维经验优先。  
+职能类别：
+高级软件工程师软件工程师
+关键字：
+python开发
+微信分享"
+Python开发工程师,https://jobs.51job.com/beijing/87083574.html?s=01&t=0,博彦科技股份有限公司,北京,1-1.5万/月,03-26,"岗位职责：
+人工智能类产品的相关开发工作
+
 岗位要求：
-1.  熟练掌握数据结构、计算机网络、设计模式、算法等基础知识
-2.  熟悉Python语言，熟练使用Python的开发
-3.  熟悉MySQL，熟悉SQL语句，了解常用的SQL优化方法
-4.  熟练使用常用的Python爬虫框架，Scrapy、pyspyider等
-5.  熟练使用Redis、Memcache，了解原理者优先
-6.  了解一些常见的Python Web开发框架的使用，Django、Flask等
-7.  大学统招本科及以上学历
+1.计算机相关专业本科及以上学历，2年以上开发经验；
+2.至少掌握一种动态语言的开发（如python, perl, ruby等），python优先；
+3.良好的学习能力、沟通能力，较强的抗压，独立工作和解决问题的能力；
+4.掌握基本的数据结构和算法知识；
+5.掌握C#或其他编程语言者优先。
 职能类别：
-数据库工程师(DBA)算法工程师
+软件工程师
+微信分享"
+诚聘Python数据工程师,https://jobs.51job.com/beijing-cyq/120658903.html?s=01&t=0,北京环球医疗救援有限责任公司,北京-朝阳区,1.5-2万/月,03-26,"岗位职责：
+1. 从结构化的和非结构化的数据中获取文本信息，对海量文本数据进行提取、去重、清洗、入库等操作
+2. 综合运用各种算法对预处理后的文本数据进行搜索、分类、实体识别、关系识别、模式识别等操作
+3. 参与数据产品的的需求调研和分析，撰写相关技术文档
+4. 有时需要进行算法可视化的设计和研发
+
+任职要求：
+1. 计算机或相关专业本科以上
+2. 熟练掌握Python语言，三年以上实际Python项目开发经验
+3. Python的科学计算库numpy、scipy、数据分析库pandas、机器学习库scikit-learn库的熟练使用
+4. Python的re、requests、beautifulSoup等库的熟练使用
+5. 熟悉常见的数据库，例如MySQL、MongoDB、Redis等
+6. 熟悉ElasticSearch等全文检索工具
+7. 有深度学习、NLP算法经验是加分项
+职能类别：
+Python开发工程师算法工程师
+关键字：
+pythonpython数据python开发
+微信分享"
+Python开发工程师,https://jobs.51job.com/beijing/112936784.html?s=01&t=0,北京中软融通科技有限公司,北京,0.7-2万/月,03-26,"岗位职责：
+1. 搭建系统开发环境，完成系统框架和核心代码的开发，负责解决开发过程中的技术问题
+2. 负责Python技术的相关产品规划、需求、设计、开发、测试等研发工作
+3. 研究并跟踪IT前沿技术
+任职要求：
+1. 大学本科或以上学历，计算机或相关专业毕业，2年以上开发经验
+2. 熟悉Linux操作系统
+3. 熟悉HTTP、TCP/IP等协议
+4. 熟悉常用数据结构及算法
+5. 精通Python，掌握爬虫技术，熟悉 pyspider框架等；熟悉Django、tornado框架
+6. 熟悉MySql数据库和Redis、MongoDB等NoSQL技术
+7. 有移动互联网、微信公众号、小程序开发经验者优先
+8. 需具备独立设计数据库并且独立开发内部系统的能力
+9. 具有良好的编程思想、沟通、团队合作精神、优秀的分析问题和解决问题的能力，能够独立承受工作压力
+
+职能类别：
+高级软件工程师软件工程师
+微信分享"
+Python开发(数据分析),https://jobs.51job.com/beijing-hdq/120528651.html?s=01&t=0,清控紫荆（北京）教育科技股份有限...,北京-海淀区,1.5-2.2万/月,03-26,"一、 工作内容: 
+1. 负责各广告投放、销售活动的数据获取、清洗、统计分析；
+2. 开发数据统计分析结果报告；
+3. 基于统计分析结果为业务部门提供过程改进解决方案。
+4. 完成领导交办的其他任务。 
+二、任职资格: 
+1. 统招本科以上学历，计算机、统计学、数学相关专业优先； 
+2. 熟悉python语言、linux操作系统、熟练使用python常用模块。 
+3. 熟练使用pandas、numpy等库多数据进行组织清洗；熟练使用数据可视化工具库(Matplotlib、Seaborn、Pyecharts)一种，可以简单对数据结果进行可视化处理；
+4. 至少熟悉tornado/flask/django等一种python框架,有过接口开发经验。
+5. 软件开发相关经验3年以上；
+6. 具备较强的逻辑分析和数据分析能力，工作认真负责，耐心仔细，学习能力强 ；
+职能类别：
+Python开发工程师
+微信分享"
+Python开发工程师,https://jobs.51job.com/beijing-hdq/117620542.html?s=01&t=0,浙江华治数聚科技股份有限公司,北京-海淀区,1-1.5万/月,03-26,"1. 3 年以上 Python 开发经验，熟悉常见的服务端开发技术：Django/Mysql/Redis/Nginx/MongDB/MQ，熟练 Linux 的日常操作；
+2. 了解计算机基本的系统原理：存储、网络、操作系统
+2. 了解常见的在线交互、异步流程等系统设计方法，并能运用在实际业务当中；
+3. 了解 Git 使用，代码有***。
+职能类别：
+软件工程师数据库工程师(DBA)
+微信分享"
+Python开发工程师,https://jobs.51job.com/beijing-xcq/120152956.html?s=01&t=0,北京凯普顿医药科技开发有限公司,北京-西城区,1-2万/月,03-26,"职位描述：
+ ? 1. 参与爬虫系统的架构设计与开发，开发分布式网络爬虫，提取结构化信息，识别结构化信息的质量，设计爬虫策略和防屏蔽规则，提升网页抓取的效率和质量
+2. 基于python的后台系统、脚本开发和维护，根据需求完成一些系统后台搭建、客户端脚本、运维脚本等开发工作
+ ? 岗位要求：
+ ? 1. 本科毕业，计算机/软件相关专业优先
+2. 从事 Python 开发2-3年及以上，熟练使用 Python 进行各种需求的开发，有其它后台语言经验者优先，如java、nodejs等
+3. 熟悉 Linux 开发环境，熟练使用 Shell、git/svn，了解运用ajax、JavaScript、html、css、div等前端技术
+4. 有mysql、mongodb、redis等常用数据库的使用经验
+5. 有高并发服务的设计和实现经验，对分布式系统有很好的理解
+ 6. 熟知计算机网络协议，了解操作系统核心原理，具备开发高效低延迟程序的能力
+ 7. 有爬虫工作经验者优先，具有数据挖掘、自然语言处理、信息检索、机器学习背景者优先
+ 8. 热衷研究新兴技术，对技术精进有要求，愿意学习大数据相关知识，并付诸实践。 
+职能类别：
+Python开发工程师
+微信分享"
+Python开发工程师,https://jobs.51job.com/beijing-hdq/114711267.html?s=01&t=0,天池创新（北京）软件技术有限公司...,北京-海淀区,1.5-2万/月,03-26,"岗位职责：（此岗位会进行背调，请保证简历的真实性）
+1、海量数据的处理与分析；
+2、开发自动化工具；
+3、开发API接口共外部调用（高并发）
+4、持续优化项目、性能调优等
+5、参与项目的技术评审、代码评审等
+6、参与项目需求分析、业务逻辑流程设计，技术文档编写
+任职要求：
+1、熟练使用python语言
+2、熟练运用linux的基础命令
+3、认真负责、勇于承担、自我学习能力强、善于沟通、有责任心、有良好的团队协作能力
+职能类别：
+软件工程师算法工程师
+微信分享"
+Java/Python软件工程师.,https://jobs.51job.com/beijing/98913477.html?s=01&t=0,南京拾柴信息科技有限公司,北京,0.8-2万/月,03-26,"工作职责：
+1、 负责大数据类产品的系统设计和开发；
+2、 负责数据后台服务的设计、开发、优化、测试等研发工作；
+3、 和伙伴们一起研究技术；
+4、 支撑前端开发，支撑数据工程师开发。
+
+职位要求：
+0、 扎实的计算机基础，熟练掌握数据结构、算法、计算机网络、操作系统等基础知识；
+1、 具有高度的责任心，坚定的执行力，较强的沟通力，善于团队协作，主动思考，自我驱动力强；
+2、 熟悉Java或Python开发；
+3、 熟悉MySQL，Redis等常用数据库，具有数据库开发和设计能力；
+4、 有Hadoop/Spark开发经验优先；
+5、 有全栈开发经验优先；
+6、 有数据挖掘、机器学习开发经验优先。
+职能类别：
+软件工程师高级软件工程师
+关键字：
+JavaPython大数据
+微信分享"
+EPR开发工程师（JAVA/Python）,https://jobs.51job.com/beijing-hdq/120823291.html?s=01&t=0,紫光同芯微电子有限公司,北京-海淀区,1.5-2.5万/月,03-26,"工作内容：
+1、负责公司常规业务系统（ERP、BPM、BI报表、办公系统等）开发和运维;
+2、参与业务需求整理，业务系统选型和评估;
+3、参与系统二次开发、实施和运维;
+4、负责内部功能性程序的开发。
+任职资格：
+1、本科及以上学历，计算机软件等相关专业；3年以上企业信息系统开发经验；
+2、掌握并熟练运用JAVA/Python及主流框架；掌握并熟练运用WEB前端开发；
+3、熟悉ERP系统、供应链、CRM、财务系统、人力系统、数据交换、BI等系统开发优先；
+4．熟悉主流数据库系统使用和优化（Oracle / Postgre SQL / My SQL / SQL Server之一）优先；
+5、团队合作，钻研精神，责任心强，承压力强。
+
+职能类别：
+Python开发工程师
+关键字：
+javapython
+微信分享"
+python开发工程师（舆情方向）,https://jobs.51job.com/beijing-cyq/120818816.html?s=01&t=0,太极计算机股份有限公司,北京-朝阳区,1.1-1.8万/月,03-26,"岗位职责:
+1.帮助舆情处工作人员梳理历史报告，了解历史报告组成结构和变化
+2.通过程序方法将历史报告结构化，包括标题，内容主题，分块等
+3.根据舆情处对结构化算法的设计和要求，改进报告结构化方法并通过关键词组合和/或正则表达式进行实现
+
+
+任职资格:
+1.积极主动，具备一定沟通能力，能快速理解用户的工作需求
+2.具备基础代码能力（***是具备脚本类语言经验，python能力为佳）
+3.有文本处理程序开发经验更佳
+职能类别：
+Python开发工程师
+微信分享"
+Python开发工程师,https://jobs.51job.com/beijing-cyq/119888121.html?s=01&t=0,中国广视索福瑞媒介研究有限责任公...,北京-朝阳区,1.2-2万/月,03-26,"**工作职责**
+1 后端的开发和部署；
+2 已有项目的维护，bug处理等；
+2 与产品和前端沟通，确定技术路线、解决前后端联调中的问题等；
+**技术要求**
+1 熟悉Python；
+2 熟悉Django框架和Django RestFul框架；
+3 熟悉HTTP协议；
+4 对Redis，Elasticsearch，Celery，PostgreSQL等常规后端技术栈有充分的了解，在实际工作中对其中一种或者多种有过应用；
+5 理解前端常规技术和原理，理解JavaScript，NodeJs；
+6 理解ci，在实际工作中有部署ci的经验；
+7 理解自动化测试，在实际工作中有部署自动化测试的经验；
+8 熟悉git，理解常规的版本控制原理和良好实践；
+9 熟练阅读英文文档
+**团队要求**
+1 工作主动性强，自我驱动，目标导向，结果导向，对进度和结果负责；
+2 良好的团队意识和沟通技巧，能理解团队有成绩个人才有成绩；
+3 独立分析和解决问题的能力；
+4 抗压能力强。
+职能类别：
+Python开发工程师
 关键字：
 python
 微信分享"
-Python开发工程师-北京,https://jobs.51job.com/beijing-hdq/116659905.html?s=01&t=0,杭州迪普科技股份有限公司,北京-海淀区,1-2万/月,03-23,"工作职责:
-1、参与公司云平台产品（基于OpenStack）的系统研发；
-2、根据开发计划，负责公司基于OpenStack的IaaS/PaaS/SaaS云平台功能模块的详细设计、开发和单元测试工作；
-3、解决部署实施过程遇到的技术问题。
-任职资格:
-1、熟悉Python，有1年以上系统开发和设计经验；
-2、熟悉Django开发框架
-3、熟悉Linux系统，熟悉网络原理；
-4、熟悉OpenStack ，CloudStack等云计算开源项目，有云计算的项目开发及运维经验者优先；
-以上要求至少满足两种
-5、本科及以上学历，计算机、通信、电子或相关专业；
-6、英语四级以上。
+Python开发工程师-北京-05233,https://jobs.51job.com/beijing/119784604.html?s=01&t=0,博彦科技股份有限公司,北京,0.9-1.3万/月,03-26,"岗位职责
+（1）全面、认真地理解系统需求和系统设计。
+（2）对系统设计进行实现最后层次的细化工作。
+（3）独立承担编制代码及代码的单元测试工作。
+（4）负责解决开发中遇到的较复杂的技术难题和技术攻关。
+（5）负责核心业务、公共组件等重要功能的编程实现。
+（6）认真贯彻执行公司质量体系文件及其相关制度的管理要求。
+（7）执行公司、中心各项管理制度、标准作业规程和操作规范，确保各项工作符合规范化要求。
+任职要求
+（1）学历大专及以上，实际工作两年及以上。
+（2）精通OO，AOP，设计模式，熟悉多线程并发，网络编程技术。
+（3）精通python 技术栈，包括 pandas，numpy等，熟悉使用python进行数据处理。
+（4）熟练使用Mysql、Oracle数据库，掌握sql语言规范，具有国产数据库、分布式数据经验者加分。
+（5）有分布式开发经验、熟练使用分布式服务框架，消息中间件和分布式存储系统等。
+（6）对技术有强烈的兴趣，喜欢钻研，具有良好的学习能力，沟通技能，团队合作能力。
 职能类别：
 软件工程师
 微信分享"
-Python开发工程,https://jobs.51job.com/beijing/120596640.html?s=01&t=0,杭州鲸算科技有限公司,北京,,03-23,"【工作内容】
-1、高并发分布式风控系统的研发和优化；
-2、对业内前沿技术进行评估和落地；
-3、对于服务性能和数据请求策略进行不断的分析和优化；
-4、对线上服务的查错和运营；
-5、自动化工具的开发和维护。
-【任职要求】:
-1、全日制本科以上学历计算机相关专业；
-2、熟悉Python/Java/Scala/Go中的一种或多种语言；
-3、对代码和设计质量有严格要求,重视CodeReview和单元测试；
-4、有良好的沟通能力、优秀的解决问题能力者优先；
-5、强烈的责任心与主动性，对所负责工作有owner意识，并能自我驱动成长。
+Python开发（AI语音识别方向）,https://jobs.51job.com/beijing-hdq/118385358.html?s=01&t=0,中软国际科技服务有限公司,北京-海淀区,1-1.5万/月,03-26,"SPEECH
+背景介绍：
+近些年来，随着移动互联网和移动终端设备的高速发展，语音识别也开始步入到我们的日常生活中，并逐渐为大众所了解，语音识别的发展也日新月异。语音技术正伴随着设备计算能力、网络技术等的发展，从实验室走入现实生活，从“超前”、不成熟变成越来越有价值的商业应用，这项技术使人类以最自然的方式与设备交互从而正在改变未来。在移动互联网，智能家居，可穿戴设备，车载设备等领域的广阔前景，使全球各大科技公司（微软、苹果、谷歌、三星、百度...）都在争相投入巨资进行研发。
+中软语音团队与微软合作，在这个领域潜心耕耘了14年，我们的工程师正在与微软科学家一起为Cortana智能语音助手、Skype Translator等产品共同努力。热忱期待有专业的语音识别或自然语言处理背景的专家，同时也欢迎有坚实的计算机科学基础，对于新技术有强烈渴望、有创新精神、致力于语音技术发展的优秀人才加入我们。
+项目名称 Speech （认真严谨）语音识别开发
+岗位名称（中文） 开发工程师（北京）
+技能点：Java/C/C++/Python
+级别：中高级 3年以上
+岗位职责:
+1、产品模型识别缺陷修复
+2、产品模型识别缺陷修复
+涉及的工具开发，40%开发量
+3、产品模型识别缺陷跟踪，汇报
+必备项(Must)
+1）必须具备 Python
+2）熟练掌握 或C/C++
+3）可以独立使用的技能 或Java
+岗位要求： 3年以上Java/C/C++/Python 工作经验，大专（学信网可查）及以上工作经验，英语口语可以开口做简单的英语自我介绍，项目的一些对接，简单的英译汉，汉译英翻译，计算机相关专业。有2年以上编程经验，至少熟练一种编程语言，如 C/C++/C#/Java/Python
+· 熟练使用至少一种脚本语言，perl优先 。
+· 精通正则表达式，并有实际文本处理经验。
+· 细心，有负责心，善于学习，钻研，较强的沟通能力。
+· 通过英语四级，可以用英文进行书面汇报。
+有语音识别背景优先
+· 熟悉多国语言者优先。
+工作时间：弹性工作制：早8:30--17:30 或早9:30--18:30 周末双休
+五险一金 法定节假日休息 薪资体面议，
+工作地点：北京市海淀区美丽园中路16号院5号楼 裕友大厦4层
 职能类别：
-大学/大专应届毕业生
-微信分享"
-Python后端开发工程师,https://jobs.51job.com/beijing-cyq/107996008.html?s=01&t=0,乐荐信息科技（北京）有限公司,北京-朝阳区,1-2万/月,03-22,"工作职责:
-(1) 与团队协同工作， 致力于Web应用及服务器端HTTP接口开发，构建高性能、高可用性的产品，服务以及支持系统；
-(2) 你将完成程序编制及单元测试，并确保开发过程遵循公司的相关开发规范；
-(3) 你将负责维护并升级完成的程序代码，因为需求会经常变更；
-(4) 与产品及测试团队或其他需要你支持的部门保持良好的沟通；
-(5) 我们可能需要你在压力下工作，以期保证产品服务的开发进度。
-
-背景知识及技能要求:
-(1) 熟悉Web应用程序体系结构(LAMP)；
-(2) 具备深厚的面向对象编程经验；
-(3) 精通基于Python Django的Web应用开发；
-(4) 具备良好的面向对象程序设计基础；
-(5) 熟悉HTTP协议、HTML规范，了解AJAX技术，深入了解HTML5的特性集；
-(6) 精通基于JQuery的JavaScript程序；
-(7) 熟悉MySQL / PostgreSQL数据库, 善用数据库建模工具进行数据库的设计；
-(8) 熟悉Linux服务器系统环境，掌握必要的Unix Shell的用法；
-(9) 熟悉Apache服务器的配置；
-(10) 良好的代码书写规范。
-
-我们找的就是你，致力于Web应用及服务器端HTTP接口开发，构建高性能、高可用性的产品，服务以及支持系统的你！加入乐荐，扶摇直上！
-职能类别：
-软件工程师
+语音识别工程师
 关键字：
-PythonJavaScriptHTMLCSSLinuxWeb端DjangoGIT
+PythonCC++JAVA开发产品人工智能
 微信分享"
-Python讲师（Python Web方向）,https://jobs.51job.com/beijing-syq/120684206.html?s=01&t=0,传智播客教育集团顺义校区,北京-顺义区,40-60万/年,03-21,"岗位职责：
-1. 负责 Python Web课程整体设计，技术?向确定；
-2. 负责Python Web项?课程案例的研发与讲解；
-3. 负责实体班授课、在线班授课；
-4. 完成上级领导交办的教辅相关?作任务
-
-任职要求：
-1. 本科及以上学历，精通 Python 语?，5年以上 Python Web 开发经验，掌握?少?种常?的Python Web开发框架(Django、Flask、Tornado)，并深?了解其底层原理。
-2. 深?理解各种数据库(如MySQL、PostgreSQL)和NoSQL(如Redis、MongoDB)系统，具有丰富的数据库性能调优及?可?、集群实战经验；
-3. 具有分布式服务设计及开发经验，Kafka、RabbitMQ等消息队列使?经验
-4. 具有?型?站的后端架构实践经验，以及性能优化实践经验(如解决：负载，?并发)；
-5. 熟悉容器技术。熟练使?Docker、K8S。理解容器的资源管理?式，镜像制作；
-6. 熟悉并能使? Python 相关的技术栈，如前端(jQuery，Vue)、爬?(Scrapy)、运维(Ansible，Salt)、机器学习及深度学习等内容；
-7. ??伶俐，善于交流，具备团队协作能?；
-8. 具有较强的学习能?、具备独?解决问题的能?、能够承受?作压?
-
-加分项：
-1、崇尚开源，有 Github 项?；
-2、有持续更新的技术博客。
-职能类别：
-Python开发工程师
-关键字：
-讲师pythonDjangoFlaskTornadoMySQLNoSQLKafkaDockerGithub
-微信分享"
-PHP/Python开发工程师,https://jobs.51job.com/beijing-cpq/117438923.html?s=01&t=0,上海锐岢网络科技有限公司北京分公...,北京-昌平区,1.1-2.2万/月,03-20,"1.负责客户服务平台和应用软件的架构和前、后台开发；
-2.参与运营系统和工具的维护开发；
-3.与第三方平台的对接及API开发；
-4.保证代码的高品质和软件、服务的健壮性、易用性；
-5.与业务、运营积极沟通协作，对软件需求和流程优化等进行梳理。
-
-资格：
-1.全日制统招本科，计算机或EE专业；
-2.三年以上Rest服务和微服务设计和开发经验，熟练掌握面向对象开发
-3.以下语言中熟练至少两种：Python，PHP，Java, NodeJS，Golang；
-4.熟练使用关系型数据库如mysql,postgresql；
-5.熟练使用Linux（ubuntu，centos)及shell;
-6.熟悉常用设计模式；
-7.熟悉系统和应用安全
-8.出色的逻辑分析能力、创造性解决问题的能力，优秀的自我驱动及自我管理能力；
-
-有以下经验优先：
-1.Javascript经验
-2.系统日志、网络监控和报表、数据处理
-3.熟悉ORM等框架
-职能类别：
-软件工程师
-关键字：
-API开发运营系统工具维护开发
-微信分享"
-Python开发工程师,https://jobs.51job.com/beijing-ftq/120220419.html?s=01&t=0,北京华泽云防科技有限公司,北京-丰台区,1-1.5万/月,03-20,"1、熟悉 python，掌握常用的框架Django、Flask、Tornado等；
-2、掌握 python的工程化方法，熟悉蓝图、包的使用；
-3、熟悉分布式、微服务、高性能Web服务的开发，有一定的系统架构设计能力；
-4、熟悉数据库基本原理，熟练使用SQL语句，熟悉关系型数据库Oracle、MySQL等，掌握E-R图，熟悉Powerdesigner设计工具的优先；
-5、熟练掌握 restfulAPI 的开发。
-6、熟悉 http 协议，熟练掌握 JavaScript、HTML等web开发技术，掌握Vue.js或React.js其中一种开发技术。
-
-任职要求：
-1、有独立分析和解决问题的能力，有良好的团队合作精神；踏实勤勉，对技术精益求精。
-2、计算机软件及相关专业，本科及以上学历，工作 2年以上。
-职能类别：
-Python开发工程师
-微信分享"
-Python开发工程师,https://jobs.51job.com/beijing-hdq/119981845.html?s=01&t=0,润建股份有限公司,北京-海淀区,0.8-1.3万/月,03-19,"一、岗位职责
-1. 负责对责任项目进行技术可行性和需求评估；
-2. 负责责任项目模块编程设计与代码编写；
-3. 根据项目具体要求，承担开发任务，按计划完成任务目标；
-4. 负责监督开发的各个阶段工作，管控并及时汇报开发进度；
-5. 对需要产品化的项目，负责组织安排产品化工作；
-6.负责编程开发，完成领导安排的其他技术研究和开发工作；
-7.负责代码单元测试，对自己开发的产品质量负责。
-二、任职要求
-1、大学本科学历及以上，3年以上python开发经验;
-2、熟悉B/S架构和MVC模式，熟悉python以上框架，熟悉面向对象的编程;
-3、熟悉数据库mssql,熟Database设计与应用;
-4、熟悉python框架，
-5、具有良好的编程风格，有多层结构的开发经验;
-6、能独立完成模块的设计、开发、调试;
-7、有较强的逻辑思维能力、学习能力和理解能力，对用户体验要有一定的认识，有良好的代码风格;
-8、有良好的团队协调能力，充满工作热情，做事细心有耐心，能承受工作压力;
-9、抗压能力强、适应加班
-10、遵从软件开发流程和代码编写规范，能承受工作压力，对技术开发有浓厚兴趣
-职能类别：
-软件工程师
-微信分享"
-Python开发工程师,https://jobs.51job.com/beijing-hdq/119333598.html?s=01&t=0,北京中科三方网络技术有限公司,北京-海淀区,0.8-1万/月,03-19,"岗位职责：
+Python开发工程师,https://jobs.51job.com/beijing-hdq/119333598.html?s=01&t=0,北京中科三方网络技术有限公司,北京-海淀区,0.8-1万/月,03-25,"岗位职责：
 负责网页信息抽取、数据清洗等研发和优化工作；
 负责公司数据仓库平台的 ETL 分析、设计、开发工作。   
 任职资格：
@@ -1257,1296 +903,4 @@ Python开发工程师,https://jobs.51job.com/beijing-hdq/119333598.html?s=01&t=0
 大数据开发工程师
 关键字：
 pythonlinux爬虫北京户口
-微信分享"
-20届校招-python开发工程师（北京研究所）,https://jobs.51job.com/beijing-xcq/120194582.html?s=01&t=0,深信服科技股份有限公司,北京-西城区,1.3-2万/月,03-18,"本科年薪19万+，硕士年薪20万+
-岗位描述：
-参与深信服集团母公司云计算管理平台开发建设工作；完成云计算管理产品设计，开发，测试标准化迭代开发工作；
-为众多的企业级用户提供更简单、更安全、更有价值的产品。
-岗位要求：
-1、本科及以上学历，专业不限；
-2、熟悉Linux/unix操作系统基础原理，熟练使用Linux系统；
-3、熟悉TCP/IP、HTTP等协议，有良好的网络、数据传输、安全、计算机体系结构方面的知识；
-4、熟悉使用Django, Flask, Tornado框架中的至少一种；熟悉Python语言开发，有Openstack等微服务开发经验优先。
-职能类别：
-Python开发工程师
-微信分享"
-VBA/Python项目开发工程师,https://jobs.51job.com/beijing-cyq/117504913.html?s=01&t=0,玛泽咨询（上海）有限公司,北京-朝阳区,0.9-1.2万/月,03-18,"Main Responsibilities 工作职责：
-
-Research, test and implement technology solutions which will assist the firm and / or our clients to automate data processing and to gain greater insight to support financial process
-研究，测试和实施技术解决方案来帮助企业或客户自动化处理数据，优化财务办公流程
-Develop tools and program under VBA for Excel、Word and SharePoint
-运用VBA开发Excel，Word及网络平台等程序
-Maintain accounting software
-会计软件维护
-Lead consulting engagements for our clients to implement cloud accounting business management software, management of customer accounts
-为客户提供咨询服务，实施云计算业务管理软件, 管理客户账户
-Be an active member of our innovation team
-成为我们创新团队的积极成员
-Work on project-based assignment
-进行基于项目的工作
-
-
-Qualification 职位要求：
-
-College degree or above, major in computer or other Science and engineering related major
-计算机或其他理工科专业，本科及以上学历
-Fluent in English
-具有良好的英语书写沟通能力
-Familiar with hardware and network, office software and Excel
-熟悉硬件、网络、办公软件，熟练运用Excel各项功能
-Proactive, with practical ability to implement financial software projects, good communicative skills, a team player and a self-learner
-有较强的上进心和执行项目财务软件实施能力、沟通协调能力、和团队协作精神及自我学习能力
-Familiar with VBA is preferred
-熟悉VBA者优先
-Hold a professional accounting qualification is preferred
-持有会计相关专业资格证书者优先
-Eager to build on existing skills and develop management and leadership skills for a successful career
-渴望不断提升自我，具有开发管理和领导技能
-Proactive attitude with the ability to implement solutions to problems
-态度积极主动，拥有良好的解决问题能力
-Able to work under pressure and to tight deadline
-能够应对较高的工作压力
-
-职能类别：
-软件工程师数据库工程师(DBA)
-关键字：
-VBAPython项目实施财务
-微信分享"
-算法工程师(Java/Python/C++),https://jobs.51job.com/beijing/120612702.html?s=01&t=0,北京青牛技术股份有限公司,北京,,03-18,"岗位职责：
-参与企业智能呼叫中心整体解决方案中NLP/ASR/TTS相关算法模型开发与应用部署；
-任职要求：
-1、熟悉自然语言处理、语音识别与合成的算法原理和机器学习基本理论。
-2、具备扎实良好的数学基础和英语阅读能力及自学能力，了解人工智能、机器学习等领域的前沿方向与研究动向，具备将机器学习与自然语言处理的理论转化为实践的能力。
-3、精通Python/Java/C++语言、具有机器学习、深度学习编程经验，熟悉一种以上主流深度学习框架（Tensorflow/Pytorch等）。
-职能类别：
-大学/大专应届毕业生
-微信分享"
-Python开发工程师,http://evp.51job.com/ccbfintech/job/index.html?jobid=119402617,建信金融科技有限责任公司,北京-海淀区,30-60万/年,03-17,
-WEB服务架构师(Python),https://jobs.51job.com/beijing-hdq/111769574.html?s=01&t=0,北京中创信测科技股份有限公司,北京-海淀区,2-2.5万/月,03-17,"岗位职责：
-1、为系统和项目提供 API 支持；
-2、参与设计并维护系统架构，保证线上服务稳定可用；
-3、不断改善系统的用户体验和开发体验.
-
--基本要求 
-1、 拥有5年以上 Python 实际开发经验；
-2、熟悉 Python Web 开发的常规模式；
-3、熟悉 API 开发的常规组件，如 MySQL, Redis,zookeeper,MongoDB 等；
-4、自我驱动的学习和工作习惯，对未知技术和领域能快速掌握并实践；
--优先条件：
-1、有分布式系统、大数据开发经验；
-2、有 Python Flask 开发 Web API 的经验；
-3、有C++经验者优先； 
-4、有 GraphQL 开发经验；
-5、有基本的前端开发经验；
-6、有通信行业相关项目经验；
-7、良好的沟通、协调能力，有团队管理经验者优先；
-8、如有 GitHub 账号或技术博客，请在简历中写明。
-职能类别：
-高级软件工程师
-微信分享"
-计算机视觉算法工程师（python）(002083),https://jobs.51job.com/beijing/120153402.html?s=01&t=0,北京辰安科技股份有限公司,北京,1.5-2万/月,03-17,"岗位职责:
-""1. 负从事深度学习算法模型的研究与开发，使用深度学习方法解决图像中的目标检测、分类、识别、分割等问题；
-2. 参与AI应用系统的需求分析,功能模块代码的实现及项目重要设计文档的编制；
-3. 应用AI解决大规模产业界实际问题。""
-
-任职资格:
-""1. 对深度学习理论有深刻理解，对卷积神经网络有良好的理论和实操经验；
-2. 至少对于以下领域之一有良好的实际项目经验积累：使用深度学习解决图像中的目标检测和识别、图像分类、区域分割、字符识别、图像检索、图像内容理解等等；
-3. 熟悉TensorFlow，pytorch等框架，熟悉SSD, Faster R-CNN，Mask R-CNN，Yolo等目标检测网络者；
-4. 熟悉Python，具有将算法原型进行工程落地的思维和能力；
-5. 有较强的英文文档、论文阅读能力，关心相关领域新进展；
-6. 具备优秀的沟通能力，良好的服务精神及团队合作能力，责任心强。""
-职能类别：
-图像算法工程师
-微信分享"
-Python开发工程师,https://jobs.51job.com/beijing/120585663.html?s=01&t=0,北京陌陌信息技术有限公司,北京,,03-17,"岗位职责：
-1、参与安全数据平台的设计与开发，包括数据采集与清洗、数据仓库建设、建模与跟踪等；  
-2、参与业务安全底层服务的设计与开发，包括规则引擎、业务API、运营管理后台。 
-岗位要求： 
-1、热爱计算机科学和互联网技术，熟悉Python编程语言； 
-2、良好的计算机基础知识，深入理解数据结构、算法、操作系统、计算机网络知识；  
-3、有强烈的求知欲，优秀的学习和沟通能力 
-4、面向2020年及之后毕业的学生，本科及以上学历，计算机相关专业。
-职能类别：
-大学/大专应届毕业生
-微信分享"
-安全测试工程师-Python（2020届）,https://jobs.51job.com/beijing/120583903.html?s=01&t=0,北京启明星辰信息安全技术有限公司...,北京,,03-17,"岗位职责： 
-1、分析安全防护设备日志，对日志进行研判，帮助客户优化日志以及解决日常疑难问题； 2、 研究分析重要漏洞，搭建靶场环境，开展POC测试，编写检测规则； 
-3、 防护规则测试，自动化测试程序的优化。 
-任职资格： 
-1、了解网络信息安全基础知识，至少熟悉一种主流编程语言（如PHP/Java/Python等），可开发简单的安全工具； 
-2、熟悉主流安全工具及常规安全测试流程和方法，如burpsuite sqlmap namp msf等； 3、熟悉各类安全设备如WAF IDS IPS的使用，可深入分析日志报警情况及溯源。
-职能类别：
-大学/大专应届毕业生
-微信分享"
-EB/JAVA/Python软件研发工程师,https://jobs.51job.com/beijing/120540527.html?s=01&t=0,中国科学院软件研究所,北京,,03-16,"任职要求
-   1、熟练DIV+CSS布局,精通HTML、Javascript、ajax等前端技术，熟悉html5新特性，至少熟练掌握一种后端开发技术（如Java、C#.NET）；
-   2、.熟练SqlServer、Oracle、MySQL、等主流关系数据库，并具有一定的SQL优化能力；
-   3、精通MVC等框架应用，熟练掌握面向对象原理；理解web标准，了解不同浏览器之间的差异，开发的页面具有良好的兼容性。
-   4.具有云计算、人工智能理论基础，熟悉机器学习、数据挖掘常用算法，了解Spark、DevOps等大数据、云计算平台技术； 
-   5、熟练掌握Java/Python语言，有Linux开发经验。
-职能类别：
-大学/大专应届毕业生
-微信分享"
-Python开发工程师,https://jobs.51job.com/beijing/120532844.html?s=01&t=0,南京擎盾信息科技有限公司,北京,,03-16,"（1）负责Python Web后端项目开发；
- （2）负责数据库模型设计； 
-（3）负责接口设计、开发； 
-（4）负责接口文档编写；
-职能类别：
-大学/大专应届毕业生
-微信分享"
-go/Python开发工程师,https://jobs.51job.com/beijing/120515339.html?s=01&t=0,北京百家互联科技有限公司,北京,,03-15,"岗位职责： 
-1、参与软件系统的设计和分析； 
-2、负责解决开发过程中的技术问题； 
-3、根据开发进度和任务分配，完成软件模块的设计、开发、测试和文档编写。 
-任职资格： 
-1、本科及以上学历，计算机相关专业； 
-2、熟悉掌握C、C++或Golang编程技能； 
-3、熟练使用常用数据结构与算法；
-4、熟悉Socket网络通信，熟悉TCP/IP，UDP协议，熟悉多线程编程； 
-5、熟悉 Linux Shell或Python 等脚本语言； 
-6、对工作认真负责，有良好的学习能力、沟通能力和团队合作精神。
-职能类别：
-大学/大专应届毕业生
-微信分享"
-云计算Python开发工程师-华为OD,https://jobs.51job.com/beijing-hdq/119777731.html?s=01&t=0,华为技术有限公司,北京-海淀区,1.5-3万/月,03-15,"1、负责华为云自动化部署产品相关模块的架构设计；
-2、负责核心功能需求分析与设计，编码、单元测试及功能交付；
-3、负责组织规范团队编码以及团队代码审核工作，确保软件性能、质量和安全；
-4、参与软件概要设计、详细设计以及需求文档编写，满足质量要求；
-5、能够独立分析并解决软件开发过程中的问题；
-6、完成主管安排的其他工作。
-
-任职要求：
-1、本科及以上学历，同岗位工作经验1年或以上；
-2、熟悉Python语言编程，有扎实的基础知识，熟悉常用设计模式；
-3、熟练使用PyCharm、Git等开发、构建、版本控制工具；
-4、掌握多线程并发编程以及性能调优；
-5、一本以上院校，计算机相关专业优先。
-
-注：此岗位为华为OD岗位，不同于传统外包岗位，工作地华为北京，合同签外企德科，同岗位同职级工资和年终奖与华为相同薪酬框架，绩效优秀者可转华为。
-职能类别：
-Python开发工程师
-关键字：
-python云计算软件开发软件工程师
-微信分享"
-Python开发工程师（北京）,https://jobs.51job.com/beijing/120484203.html?s=01&t=0,北京超图软件股份有限公司,北京,,03-14,"1、熟练使用Python开发语言; 
-2、熟悉Django、Flask、Tornado等Web框架; 
-3、熟悉Mongodb、MySQL、Redis、memecached等数据库或数据存储系统; 
-4、熟练使用Linux操作系统，了解gcc/automake等相关编译链工具; 
-5、熟悉TensorFlow、Spark、Hadoop等相关框架; 
-6、具备C++后台开发经验，或Java开发经验者，或GIS软开发经验者优先。
-
-职能类别：
-大学/大专应届毕业生
-微信分享"
-Python后端研发工程师,https://jobs.51job.com/beijing/120460013.html?s=01&t=0,中国科学院自动化研究所,北京,1.5-4.5万/月,03-14,"参与核心AI系统架构设计和开发
-参与后端引擎及服务的设计和开发
-负责AI相关软件产品和服务的开发
-
-任职要求
-具有3年及以上软件系统后端研发工作经验，计算机专业及相关专业本科及以上学历
-熟练掌握Python语言开发，具备3年以上开发经验
-熟悉设计模式，具有可扩展，高可用性系统的设计和维护经验
-注重代码规范，能写出高质量的代码 
-熟悉Linux，shell脚本，能直接在Linux环境下编写和调试代码
-较强的团队沟通和协作能力，较强的自我驱动能力
-了解并有意愿学习人工智能相关技术者优先考虑
-有大数据、可视化、微服务、消息队列等实战经验的优先考虑
-职能类别：
-软件工程师
-关键字：
-python
-微信分享"
-开发工程师（Python方向）,https://jobs.51job.com/beijing/120448118.html?s=01&t=0,因诺（上海）资产管理有限公司,北京,,03-14,"【工作职责】
-1、 负责量化交易系统的前端设计和开发工作
-2、 负责我司相关运维平台设计和开发工作。
-3、参与数据系统的开发；
-4、参与公司策略盈亏分析系统的开发与维护；
-
-【职位要求】
-1、国内外计算机、电子、自动化等相关专业；
-2、计算机编程能力强，精通Python语言，具有不低于一年的python实际项目经验。
-3、熟练掌握Django等Python相关Web开发框架。
-4、具有Linux系统环境下的开发经验，并具有编写Shell脚本的经验。
-5、熟悉常见的关系型数据库如MySQL等，使用过版本控制工具Git；
-职能类别：
-研究生
-微信分享"
-Python开发工程师（支撑平台）,https://jobs.51job.com/beijing-hdq/111943884.html?s=01&t=0,北京牧游科技有限公司,北京-海淀区,1.5-2万/月,03-13,"岗位职责
-1 、负责产品线后台的设计和开发工作； 
-2 、负责系统架构设计、数据库结构设计、业务逻辑抽象等编码工作； 
-3 、负责线上服务的性能分析,并进行调优,保降线上服务的高可用性；
-
-任职要求
-1、3年以上 Python语言为主的在线服务架构设计、开发经验,有过高并发、高可用的大型项目经验者优先；
-2、精通 Python编程,熟悉常用的 Python服务框架如 Tornado 、django 或 flask 等框架,并了解其原理；
-3、熟悉分布式、缓存、消息队列等机制和原理；
-4、算法功底扎实，实际编程能力强，熟悉多进程/多线程开发模式；
-5、学习能力、责任感强，有较强的沟通能力；
-职能类别：
-软件工程师
-关键字：
-pythontormado
-微信分享"
-Python开发工程师,https://jobs.51job.com/beijing-hdq/119979628.html?s=01&t=0,深圳市法本信息技术股份有限公司,北京-海淀区,0.9-1.4万/月,03-12,"""工作职责：
--负责交通项目后台功能模块的研发
--负责交通项目在保定、长沙的上线及效果评估等工作""
-任职要求：
-""1、计算机相关专业，本科学历以上，1年以上工作经验；
-2、熟悉linux操作系统，具备一年以上基于linux系统的开发经验；
-3、具备Java/C++/Python其中一种编程经验；
-4、沟通能力强，吃苦耐劳，具体较好的团队合作精神；
-
-重点：优先linux shell，主要是负责服务部署，开发较少，编程语言都可以
-重点偏mysql、linux shell，能进行服务部署，另外有一定java、python开发能力的就行
-
-工作面试地点：百度科技园
-职能类别：
-软件工程师
-关键字：
-linuxpython服务部署
-微信分享"
-Python开发工程师,https://jobs.51job.com/beijing-hdq/119888283.html?s=01&t=0,北京童程童美科技有限公司,北京-海淀区,0.8-1万/月,03-12,"专业方向：计算机专业优先，熟悉Java、JavaScript、HTML、C++、Python中的任一门编程语言
-
-职位描述：
-负责少儿趣味编程或机器人编程类课程的研发、课程录制及课堂讲授，参与日常教学管理工作及教研活动。
-
-团队氛围：
-团队年轻化、沟通无障碍；
-教育行业前景可期，上市公司平台保障，制度化规模化运营管理
-
-工作地点：
-北京、上海、广州、深圳、天津、西安、郑州、石家庄、济南、青岛、武汉、昆明、长沙、太原、合肥等20余个城市。
-职能类别：
-Python开发工程师培训讲师
-关键字：
-python编程讲师
-微信分享"
-Python/Go研发工程师,https://jobs.51job.com/beijing/120520392.html?s=01&t=0,北京国双科技有限公司,北京,,03-12,"岗位职责：
-1、参与公司DevOps平台产品的模块设计和实现；
- 2、参与容器化基础设施的研究和持续优化；
- 3、协助业务产品线提升研发流水线效率。
-任职资格：
-1、本科及以上学历，计算机专业优先；
- 2、熟练掌握DevOps相关工具链的使用
- 3、熟悉Python语言；
- 4、熟练掌握容器化、运维自动化等相关技术；
- 5、善于沟通和解决问题，乐于总结分享，有想法，有冲劲，有团队精神、主人翁意识和责任感
-职能类别：
-大学/大专应届毕业生
-微信分享"
-Python开发工程师,https://jobs.51job.com/beijing-hdq/119585728.html?s=01&t=0,北京启明星辰信息安全技术有限公司...,北京-海淀区,1.5-2.2万/月,03-11,"岗位职责：
-1.       完成软件系统代码的实现，编写代码注释和开发文档；
-2.       辅助进行系统的功能定义，程序设计；
-3.       根据设计文档或需求说明完成代码编写，调试，测试和维护；
-4.       分析并解决软件开发过程中的问题；
-5.       协助测试工程师制定测试计划，定位发现的问题；
-6.       配合研发经理完成相关任务目标。
-
-任职要求：
-1.       3年以上正规项目开发经验，要求Python开发经验/Web前端开发经验；
-2.       熟悉前后端分离的开发模式，熟悉MySql、MongoDb等主流数据库；
-3.       熟悉软件开发流程、体系结构，较好的文档能力及编码风格；
-4.       有Linux C及其他语言基础的开发使用经验优先，如Go等；
-5.       有基于虚拟化开发经验者优先；
-6.       有驱动开发经验者优先；
-7.       有Docker、阿里云、Amazon等云上部署经验的优先。
-职能类别：
-软件工程师
-微信分享"
-Python开发工程师,https://jobs.51job.com/beijing/120414487.html?s=01&t=0,北京鑫瑞天翔科技发展有限公司,北京,1.5-2万/月,03-08,"岗位职责：
-1.完成算法设计、程序包设计、开发、单元测试、消缺等工作
-2.按照公司质量管理体系要求,参与软件工程文档编写,发布和维护；
-
-任职要求：
-同行业工作经验（年）：3年以上python实际开发经验
-所需的核心工作经验（年）：1年以上
-1.熟练掌握Python3.x语言和常用类库； 
-2.熟练使用至少一种关系型数据库，精通SQL；
-3.了解Django等Web框架；了解Web开发相关知识，如HTML, Css, JavaScript；
-4.熟练使用Linux操作系统；
-5.有供应链算法经验优先考虑（如消耗预测、安全库存设计、采购计划等）
-6.熟悉常见机器学习算法（如逻辑回归、SVM、神经网络、决策树、贝叶斯等）以及最优化算法；
-优先录用条件： 有较好的学习习惯和主动性、供应链相关系统开发经验
-
-
-职能类别：
-高级软件工程师算法工程师
-微信分享"
-Python开发工程师,https://jobs.51job.com/beijing-hdq/120313631.html?s=01&t=0,北京智谱华章科技有限公司,北京-海淀区,1.5-2.8万/月,03-07,"岗位职责
-1.维护智能机器人的API及现有模块的运营。
-2.维护标注平台的后端数据。 
-3.定期提取数据日志及简单数据处理。
-4.简单平台功能设计与开发。
-岗位要求
-1.本科及以上学历，计算机相关专业。
-2.精通python,掌握Flask等工具，有扎实的编程能力。
-3.数据数据库设计与基本数据库操作（mongoDB、mysql）.
-4.熟悉后端API开发及说明文档撰写等业务。
-5.掌握AWS、docker、Git、Elasticsearch、hive等工具。
-职能类别：
-Python开发工程师
-关键字：
-python软件开发开发工程师API数据库AWSdockerGit
-微信分享"
-Python开发工程师,https://jobs.51job.com/beijing-ftq/115317941.html?s=01&t=0,北京航标时代检测认证有限公司,北京-丰台区,1-1.5万/月,03-04,"从事软件工具开发；
-研究相关算法及建模；
-参与应用设计与方案讨论；
-上级领导交付的其他相关工作。
-任职资格：
-本科及以上学历，计算机、电子、通信、数学等相关专业；
-熟练掌握Python语言，具备较强的编程能力；
-有一定的数据结构与算法基础；
-熟悉MySQL或SQL Server或Oracle其中的一种；
-熟悉Git；
-熟悉Linux基本操作；
-熟悉pyqt5、具有相关软件开发经验者优先，有前端开发经验者优先；
-有开源项目、各类技术论坛账号且有原创文章的优先；
-中共党员优先。
-
-
-
-职能类别：
-科研人员工程/设备工程师
-关键字：
-软件开发
-微信分享"
-云计算openstack(python/shell/golang)开发,https://jobs.51job.com/beijing/120003311.html?s=01&t=0,联通云数据有限公司,北京,30-50万/年,03-04,"主要岗位职责：
-1.基于openstack 核心组件定制开发与维护；
-2.负责沃云平台系统的设计、开发与维护，提高系统的扩展性和自动化程度；
-3.负责沃云平台产品的软件功能实现，需求变更实现及客户新需求分解；
-4.跟踪openstack社区新技术的演进和应用落地；
-
-任职资格要求：
-1．最低学历学位：本科（学士学位）
-2．专业知识：本科以上学历，计算机/软件工程专业优先；
-3．专业技能： 
-(1)熟悉OpenStack架构，有云计算相关开发工作经验； 
-(2)熟练掌握Python编程； 
-(3)熟悉虚拟化基础组件kvm、 libvirt、qemu，OpenStack主要组件（nova,neutron,cinder,ironic，keystone等） 并且能够进行定制开发； 
-(4)熟悉Linux系统性能调优理论知识及常用工具的使用；
-(5)熟悉rabbitmq，redis，memcache等中间件的使用；
-(6)熟悉计算机存储基本知识 
-(7)熟悉Linux iptables，dnsmasq，ip命令，网络命名空间的使用及配置； 
-(8)熟悉OpenStack下的flat、vlan、vxlan、gre等网络拓扑； 
-4．能力与个性：良好的团队合作精神和沟通能力；愿意学习并应用业界新知识。
-5. 优先条件： 有开源社区贡献人员优先；
-              具备openstack,k8s,docker等实际研发经验者优先。
-              有边缘计算架构及开发经验的（EdgeX foundry，StarlingX等）的优先
-              有Go语言开发经验者优先
-              熟悉主流服务器存储系统（ceph,glusterfs,sheepdog等）者优先
-
-职能类别：
-软件工程师
-微信分享"
-Python研发工程师(001288),https://jobs.51job.com/beijing-hdq/112277093.html?s=01&t=0,空中网,北京-海淀区,1.2-1.8万/月,03-02,"岗位职责:
-1.负责服务器后端运营平台相关程序设计、开发，技术和业务文档编写
-2.负责根据产品需求制定技术方案，项目计划
-3.负责分析业务领域比较复杂的问题，提出解决方案
-4.负责对研发项目制定单元测试、压力测试方案并执行
-5.负责对现有系统进行优化和重构
-
-
-任职资格:
-1.2年以上相关工作经验，至少1年以上Python编程经验，使用Python开发过大型平台经验者优先；
-2.精通Python语言，熟悉Python多进程应用开发，熟练掌握至少一门Python Web开发框架（Tornado、Django、Flask等)；
-3.熟练使用mysql，redis，有丰富的mysql，redis性能优化经验以及高可用、集群实战经验
-4.拥有良好的代码习惯，结构清晰，命名规范，逻辑性强；
-6.有独立分析和解决问题的能力，团队精神、责任心强、很好的沟通能力，能够承受工作压力；
-7.熟悉Linux、golang、分布式、微服务、高性能Web服务开发、有一定的系统架构设计能力者优先。
-职能类别：
-软件工程师网站架构设计师
-微信分享"
-Python研发工程师(J12191),https://jobs.51job.com/beijing-hdq/119981161.html?s=01&t=0,绿盟科技,北京-海淀区,1.2-2.4万/月,03-02,"工作职责:
-1、参与北京地区重大项目研发交付，负责架构设计以及核心功能开发；
-2、带领本地和异地研发人员开展研发工作，输出研发计划，识别研发风险以及定期进度汇报；
-3、重大项目现场支持，包括需求沟通，问题排查与解决。
-任职资格:
-1、熟悉hadoop、spark、kafka等大数据相关技术。熟悉PostgreSQL或MySQL数据库；
-2、精通Python语言、Django框架。熟练使用Linux系统，能够在Linux环境下进行开发工作；
-3、三年以上python相关研发工作经验，良好的代码开发风格及开发习惯；
-4、较强的文档写作能力，具备网络安全从业经验者优先；
-5、有活力有冲劲，沟通与表达能力强，有独立解决分析、解决问题的能力，良好的团队合作意识。
-职能类别：
-Python开发工程师
-关键字：
-python
-微信分享"
-Python编程教师,https://jobs.51job.com/beijing-tzq/119358086.html?s=01&t=0,北京酷智博教育科技有限公司,北京-通州区,6-8千/月,03-02,"Python编程教师职位描述
-职位内容：
-1、按照公司制定的教学计划，认真负责的讲授青少年Python编程课程。
-2、按照公司的课程体系，快速掌握教学方法并进行开班授课。
-3、负责Python课程、课件的优化等工作。
-4、负责班级的日常管理和维护等工作。
-5、负责学生辅导、教学答疑、家长沟通。
-6、积极配合其他部门完成相关工作。
-职位要求：
-1、熟练掌握Python、C/C++、Java、PHP编程语言中的其中一种，熟练掌握Python编程语言者优先。
-2、大专及以上学历，热爱教育培训行业，有教育培训经验者优先。
-3、具备独立工作能力和学习能力，具备团队协作精神。
-4、普通话标准，语言表达能力强，逻辑思维清晰，具有优秀的沟通技巧。
-职能类别：
-自然语言处理(NLP)
-微信分享"
-Python开发工程师,https://jobs.51job.com/beijing-cyq/120231876.html?s=01&t=0,绫致时装（天津）有限公司,北京-朝阳区,1.5-2万/月,03-02,"岗位职责: 1. 负责私有云管理平台业务模块的开发和维护 2. 负责优化及维护数据项目后端代码和运维相关平台设计开发工作； 3. 参与相关平台系统的日常管理和运维，参与系统相关的运维; 4. 参与开发资产管理、代码部署、系统监控等自动化系统； 5. 收集日常工作中的管理需求，编写实施方案, 按照设计要求和源代码编写规范编写程 序代码，对其质量、性能负责； 6. 与 IT 部其它岗位(系统工程师、网络工程师、DBA 等)合作，优化和完善云平台交付需 求； 7. 具备极强的学习能力和动力，对新技术和领域能快速掌握并实践. 任职资格： 1. 1 年以上系统运维经验，精通 Linux 系统和 Windows 系统运维；精通 Apache、NginX、 MySQL、Redis 等常用服务的安装、配置和维护； 2. 2 年以上 Python 开发经验，精通 Django 容器、Activiti 工作流、Matplotlib 报表工具； 3. 熟悉自动化运维工具（saltstack/ansible）的原理及使用， 4. 具备 Devops 实施经验和相关的二次开发经验； 5. 有资产管理平台、自动构建及部署系统、配置管理系统、监控报警平台等有实际建设经验者优先； 6. 有任务调度编排、监控系统、云服务产品相关开发经验者优先； 7. 有一定的 VMWare/KVM、Openstack 云平台管理系统使用经验，具有云平台的部署和维护经验者优先
-职能类别：
-Python开发工程师
-微信分享"
-python,https://jobs.51job.com/beijing/110549823.html?s=01&t=0,北京远大创新科技有限公司,北京,1.2-1.7万/月,03-01,"python岗位职责
-1、按照需求和设计文档开发指定的功能模块，独立进行软件设计、编码和调试；
-
-2、和软件工程师协作，完成产品化落地；
-
-3、在项目中承担核心开发工作，能够高质量地完成工作；
-
-4、能够对开发过程以及支持过程中快速找寻解决方案
-
-5、熟悉基本数据结构及标准库用法
-
-6、熟悉 WEB 编程架构,至少熟悉一种PythonWeb框架，如django、flask。
-
-7、至少熟练使用一种关系型数据库,如 MySQL,熟悉 Redis 等常用缓存方案。
-
-8、负责Web端的架构设计、程序设计、底层搭建、开发维护。
-
-9、负责数据API接口程序开发、调试与优化。
-
-10、根据需求进行odoo功能模块设计、odoo产品功能模块需求分析、设计和开发；
-
-python相关要求
-
-任职要求：
-
-1、全日制相关专业本科及以上学历，3年以上相关工作经验；
-
-2、精通python，熟悉Socket编程、HTTP、TCP协议等，有网络开发经验；
-
-3、精通MySQL，能独立完成整套数据库的搭建；
-
-4、熟悉Python多线程应用开发；
-
-5、熟悉Windows/Linux开发环境，有丰富的数据结构和算法知识；
- 6、具有良好的团队合作精神，有较强的解决问题的能力和钻研精神；
-
-7、有ERP开发经验，odoo(OpenERP)开发经验者优先考虑,熟悉odoo(OpenERP)二次开发；
-
-8、熟悉常用数据交换技术JSON,XML。
-职能类别：
-高级软件工程师
-微信分享"
-高级C/C++/Python开发工程师,https://jobs.51job.com/beijing-hdq/120132535.html?s=01&t=0,北京协成房地产经纪有限责任公司,北京-海淀区,2-3万/月,02-28,"1. 负责高性能数据备份产品的开发和维护；
-2. 配合产品经理完成产品的需求分析和设计；
-3. 产品文档及手册编写。
-任职资格
-1. 计算机或相关专业本科以上，3年以上Python，C/C++开发经验；
-2. 熟悉linux系统，熟悉shell脚本，GCC，以及GDB调试程序；
-3. 熟练使用Python和C/C++混合开发
-4. 深入理解Socket编程、多线程等相关技术
-5. 对网络安全、数据安全等有比较深刻的理解；
-6. 具备良好的表达和沟通能力、具备团队合作精神，对工作热情，有一定的抗压能力，有责任心和独立分析能力；
-7. 有机器学习、深度学习应用开发经验者优先；
-8. 有数据挖掘、数据交换、数据安全产品、安全审计产品、安全管理产品（soc）等相关经验者优先；
-9. 熟悉网络协议, 具有路由器、交换机等网络设备开发经验者优先。
-职能类别：
-高级软件工程师
-微信分享"
-EB/JAVA/Python软件研发工程师,https://jobs.51job.com/beijing-hdq/117162155.html?s=01&t=0,中国科学院软件研究所,北京-海淀区,10-15万/年,02-28,"1、熟练DIV+CSS布局,精通HTML、Javascript、ajax等前端技术，熟悉html5新特性，至少熟练掌握一种后端开发技术（如Java、C#.NET）；                                               2、.熟练SqlServer、Oracle、MySQL、等主流关系数据库，并具有一定的SQL优化能力；
-3、精通MVC等框架应用，熟练掌握面向对象原理；理解web标准，了解不同浏览器之间的差异，开发的页面具有良好的兼容性。
-4.具有云计算、人工智能理论基础，熟悉机器学习、数据挖掘常用算法，了解Spark、DevOps等大数据、云计算平台技术；
-5、具有良好工程实现和调优能力，熟练掌握Java/Python语言，有Linux开发经验
-岗位职责
-承担卫星网络管控系统、网络测试平台等系统的设计与研发以及航天大数据云平台软件开发工作。
-职能类别：
-高级软件工程师软件工程师
-微信分享"
-Python开发工程师,https://jobs.51job.com/beijing-hdq/112369075.html?s=01&t=0,广州佳众联科技有限公司,北京-海淀区,1-1.5万/月,02-27,"1.熟练掌握Python的使用，具备1年以上Python Web项目开发经验，熟悉Django开发框架，熟悉前端的HTML、DIV+CSS、JavaScript、Jquery、AJAX等技术；
-2.熟练掌握MYSQL、SQL Server、SQLite数据库应用开发技术,了解常用的数据库性能优化方法；
-3.熟悉Bootstrap、Node.js、.NET、Linux Shell优先；
-4.具备较好的学习能力、问题分析能力，可以独立调试解决问题；
-5.良好的沟通协调能力和团队合作意识，工作踏实，态度积极，能够承受工作压力。
-职能类别：
-软件工程师
-微信分享"
-金融教育信息研究中心—Python开发工程师,https://jobs.51job.com/beijing/119729901.html?s=01&t=0,清华大学五道口金融学院,北京,1.5-2万/月,02-27,"1. 按照设计要求及源代码编写规范编写程序代码，并编写相关技术文档，对其质量、性能负责；
-2. 完成其他工作相关的临时性工作；
-3. 持续提高自身技术能力，跟进行业关键技术发展；
-
-任职资格：
-1. 数学或计算机相关专业，本科及以上学历，2年以上开发经验，具备较强的钻研能力和学习能力；
-2. 精通Python，精通Django/Flask等Web开发框架，代码风格严谨工整；
-3. 精通MySQL/MongoDb等一种或多种数据库技术；
-4. 熟悉Linux平台上的系统编程和常用命令；
-5. 熟悉Web前端开发，能独立开发较为简单的网站；
-6. 良好的系统分析和架构设计能力，熟悉主流分布式系统架构；熟悉常见数据结构和相关算法;
-7. 良好的沟通能力和团队合作意识, 能主动承担，乐于分享；
-8. 有教育信息化系统、SaaS系统开发经验的优先
-
-职能类别：
-其他
-微信分享"
-Python开发工程师,https://jobs.51job.com/beijing-hdq/118966011.html?s=01&t=0,北京中经惠众科技有限公司,北京-海淀区,1-2万/月,02-27,"1.参与后台服务的设计、开发、优化、维护等研发工作；
-2.与算法及工程团队协同工作，完成产品部署上线和项目交付；
-岗位要求：
-1.掌握python语言开发，了解python虚拟环境
-2.熟悉flask、django等web框架
-3.了解关系型数据库
-4.了解docker等容器化工具
-5.熟悉redis、消息队列等中间件部署使用
-6.熟悉nginx代理服务器
-7.熟悉掌握linux操作
-8.熟悉掌握Web开发相关知识；
-9.良好的沟通能力，团队合作精神，学习能力，有责任感，有实际后端产品的开发经验
-职能类别：
-软件工程师
-关键字：
-pythonflaskredisnginxlinuxWeb开发
-微信分享"
-python工程师(J11346),https://jobs.51job.com/beijing-hdq/119916265.html?s=01&t=0,明略科技集团,北京-海淀区,1.5-2.5万/月,02-24,"工作职责:
-1. 负责Python后端服务开发，解决业务逻辑和数据产品相关业务；
-2. 负责算法工程化，对接外部应用和数据源；
-3. 负责搭建和维护后台服务；
-4. 负责服务API开发。
-任职资格:
-1、统招本科及以上学历，计算机相关专业优先；3年以上Python后端开发经验，掌握java开发，熟悉MVC架构，精通Flask/Django/tornado等框架；
-2、熟悉网络编程，熟悉tcp，http等通讯协议，熟练使用多进程和多线程；
-3、熟悉mysql、redis等常用储存方案及基本原理，能够独立地合理设计数据库结构；
-4、精通Linux系统结构，并熟练使用各种linux操作系统命令；
-5、良好的编码习惯，熟悉RESTFul；
-6、有机器学习经验者优先。
-
-职能类别：
-Python开发工程师
-关键字：
-python:java
-微信分享"
-python开发工程师,https://jobs.51job.com/beijing-hdq/111277929.html?s=01&t=0,北京华宇泰聚科技有限公司,北京-海淀区,1.2-1.8万/月,02-22,"1、熟练掌握python                 
-2、熟悉框架tornado                 
-3、熟悉数据库，如mysql、redis、mongodb                 
-4、对网络技术有一定了解                 
-5、具有较强的沟通能力、学习能力                 
-6、能够维护已有代码                 
-7、能够适应驻场工作并符合驻场工作要求
-职能类别：
-软件工程师
-关键字：
-Python
-微信分享"
-Python工程师（大数据）,https://jobs.51job.com/beijing-cyq/117721116.html?s=01&t=0,成都信必优信息技术有限公司,北京-朝阳区,1.5-2万/月,02-12,"工作内容：
-1.与算法平台相关的产品开发
-2.系统维护以及系统维护相关的产品研发
-岗位要求：
-1.精通Python，熟练使用sklearn/pyhive/pyspark/thift等常用库
-2.熟悉Docker及K8s
-3.you Hadoop/Spark等大数据平台经验优先
-4.有GPU计算经验优先
-5.必须是学信网或民教网可查本科
-职能类别：
-高级软件工程师
-关键字：
-Python大数据
-微信分享"
-python软件工程师,https://jobs.51job.com/beijing-hdq/118731240.html?s=01&t=0,北京经纬恒润科技有限公司,北京-海淀区,1-1.5万/月,02-11,"岗位职责:
-（1）负责开发和维护部门的软件平台产品；
-（2）负责项目定制化需求的软件程序开发；
-（3）参与智能算法相关技术平台的设计和研发。
-
-任职资格:
-（1）熟悉Python编程语言，掌握Flask、Django等架构技术；
-（2）熟悉SQL语句，能够编写数据库服务程序；
-（3）掌握Spark架构，熟悉数据分析算法的实现和应用。
-职能类别：
-系统工程师
-微信分享"
-Python开发工程师西二旗（hbw),https://jobs.51job.com/beijing-hdq/119570556.html?s=01&t=0,北京华路时代信息技术股份有限公司...,北京-海淀区,1.5-2万/月,02-06,"系统开发工程师（后端）-金融产品与风控部门 1人
-岗位职责：
-负责结构化产品系统架构设计与开发、系统后期维护、风险监控
-岗位要求：
-本科/硕士
-2+年工作经验
-计算机系/物理系/数学系/电子工程系 （按顺序优先）
-熟悉以下技术：Python/Django/RESTful API/SQL/Redis/Kafka。
-具有大型系统或金融机构系统开发经验优先。
-有较强的沟通能力，以及对新领域的理解力。
-职能类别：
-Python开发工程师
-微信分享"
-python后端开发工程师,https://jobs.51job.com/beijing-cyq/115600813.html?s=01&t=0,北京人人金服投资管理有限公司,北京-朝阳区,1.1-2万/月,02-03,"负责公司相关金融业务的 Python Web Service 及数据平台搭建
-  基础技能：
-       1.使用Python开发Web相关项目2年以上，熟悉Django/Flask或其他Web框架；
-       2.具备数据处理和分析的基本能力，掌握 Numpy，pandas，Spark/Hadoop 等数据处理工具；
-       3.熟练掌握爬虫系统的搭建与维护；
-       4.熟练使用MySQL并具备性能优化能力，有较强的数据结构设计能力，熟悉redis；
-       5.熟练使用Git，Linux 命令行，能进行服务器日常维护及日志分析，具备Shell脚本经验
-  加分技能：
-       1.对金融市场相关数据抱有强烈兴趣
-       2.有证券、期货、基金等相关金融从业经验
-       3.热爱学习，积极拥抱新知识、新技术
-
-职能类别：
-软件工程师
-微信分享"
-大数据开发工程师-无人车配送中心,https://jobs.51job.com/beijing-cyq/120899140.html?s=01&t=0,美团点评,北京-朝阳区,2.5-3万/月,03-25,"美团的使命是“帮大家吃得更好，生活更好”。作为中国领先的生活服务电子商务平台，公司拥有美团、大众点评、美团外卖、美团打车、摩拜单车等消费者熟知的 App，服务涵盖餐饮、外卖、打车、共享单车、酒店旅游、电影、休闲娱乐等 200 多个品类，业务覆盖全国 2800 个县区市。
-2018 年 9 月 20 日，美团点评（股票代码：3690.HK）正式在港交所挂牌上市。
-当前，美团战略聚焦 Food +Platform，正以“吃”为核心，建设生活服务业从需求侧到供给侧的多层次科技服务平台。与此同时，美团正着力将自己建设成为一家社会企业，希望通过和党政部门、高校及研究院所、主流媒体、公益组织、生态伙伴等的深入合作，构建智慧城市，共创美好生活。
-
-工作职责：
-1.负责无人车数据的收集、清洗、存储等数据处理工作，参与高性能数据服务平台的设计与开发；
-2.负责并发大数据计算处理、实时计算处理等相关开发工作，支撑自动驾驶算法训练测试、地图生产、仿真回放等；
-3 .通过技术提升无人车数据平台的可靠性、稳定性、易用性，完善数据平台工具链的建设。
-
-职位要求：
-1.精通Unix/Linux操作系统下Java或Scala开发，了解Python、C/C++或Go等，有良好的编码习惯，有扎实的计算机理论基础；
-2.熟练掌握大数据处理技术栈，有丰富的Hadoop/Spark/SparkStreaming/Storm/Flink的实际项目使用经验；
-3.熟练掌握HDFS/HBase/Hive/S3等分布式大数据存储技术；
-4.有大规模高并发分布式系统开发经验，有良好的系统工程化能力；
-5.具备良好的逻辑思维和学习能力，有分析解决实际问题的能力;
-6.具备强烈的进取心、求知欲及团队合作精神，热衷于追求技术完美与创新。
-职能类别：
-软件工程师
-微信分享"
-数据运营顾问（外包）(J200324008),https://jobs.51job.com/beijing-hdq/120899465.html?s=01&t=0,滴滴,北京-海淀区,1.5-2万/月,03-25,"岗位职责:
-1. 建立日常业务分析体系，为运营决策和业务策略提供有质量的数据支持，并通过深入分析提供解决方案决策依据，助力运营数据化及产品化；
-2. 基于业务发展方向，建立数据监控和项目管理机制，对异常趋势和问题进行分析拆解，并有效联动各端资源，不断推进解决；
-3. 针对某个突出业务问题，独立完成专题，较深入的挖掘原因并给出建议；
-4. 协助团队完成其它数据分析及运营任务。
-任职资格:
-1. 本科及以上学历，计算机、数学、统计学、大数据等相关专业；
-2. 2、3年以上BI、商业分析、运营分析或数据挖掘经验，可独立完成业务分析并推动落地；
-3. 熟练应用SQL、Excel进行数据提取与处理，了解python、R等工具经验者优先；
-4. 良好的结构性思维，口头和书面表达能力优秀；自驱、有责任感。
-5. 有互联网运营、供应链管理、共享单车运营行业经验者优先。
-职能类别：
-网站运营专员
-微信分享"
-校招-后端开发工程师（2020届应届生）,https://jobs.51job.com/beijing-cyq/120905807.html?s=01&t=0,美团点评,北京-朝阳区,1.5-2.5万/月,03-25,"岗位亮点
-1.美团点评是国内知名的本地生活服务电商，业务场景复杂，流量超大，且仍在高速发展中；
-2.在这里能够接触行业前沿的商家、销售、广告、外卖、配送等核心业务需求，负责美团O2O核心业务的技术研发；
-3.研发的系统直接服务于亿万用户、商家、骑手、司机，参与千亿交易额，相关的后端系统建设非常具有挑战性；
-4.公司技术氛围浓厚，对外有知名的技术博客，对内有技术学院和技术委员会，来自名校大厂的技术大牛众多，各层级的技术交流和培训机制非常完善。
-
-岗位说明
-1.负责各类后台服务和业务系统的需求分析、系统设计、开发实现；
-2.参与后端模块、数据平台、基础服务等的开发工作；
-3.分析并优化业务流程，参与系统长期架构设计与规划，探索合理、可扩展的系统模型，通过自动化等手段提升研发效率，提升需求迭代速度与系统能力；
-4.保证系统稳定性，提升系统的容灾、降级及应急能力，提升系统的可用性和可维护性，协同QA保证高质量开发交付；
-5.积极主动协调相关团队完成项目，促进团队合作，积极影响其它成员。
-
-岗位要求
-1.本科及以上学历；
-2.掌握一种以上的开发语言，包括但不限于Java、C、C++、Python、Golang等，了解MySQL等基本使用，熟练使用SQL语句；
-3.具有扎实的数据结构、操作系统、数据库、算法、网络等计算机基础知识；
-4.优秀的学习能力，对新技术有强烈的求知精神，能深入代码研究，能通过英文论文等***手资料了解业界新技术；
-5.优秀的逻辑思维能力，善于从复杂系统表象中分析问题。具有较强的解决问题能力，对解决复杂问题充满激情；
-6.有良好的团队合作精神和协调沟通能力，有一定推动能力。
-
-具备以下者优先
-1.有参与各级计算机竞赛并获奖经历者优先；
-2.有原创的技术博客或者参与过知名的开源项目者优先；
-3.有在知名公司核心部门的实习经历者优先。
-职能类别：
-后端开发
-微信分享"
-大数据资深架构师,https://jobs.51job.com/beijing-hdq/119351408.html?s=01&t=0,湛熙企业管理咨询（上海）有限公司...,北京-海淀区,45-100万/年,03-25,"1、负责公司数据平台建设，业务领域核心数据体系的规划设计，在数据化运营和数据能力产品化等方向上，制定数据技术和服务的策略；
-2、规划设计数据服务工具，提升数据研发的工作效率，搭建数据服务的工具/产品，赋能业务同学和业务产品，灵活支撑业务的创新和探索，让数据价值更浸透；
-3、负责数据质量、稳定性等数据管理，数据内部共享融通的数据平台，让数据标准更规范、数据获取更高效。
-4、负责 AI 算力核心方向上的大数据组件、机器学习组件等相关系统的设计和开发；
-
-【岗位要求】
-1）计算机科学相关专业，本科及以上学历；
-2）熟悉Hadoop/Spark大数据计算框架，对GPU服务器和Docker/Kubernetes容器技术有一定的了解，具有扎实的算法理论基础。
-3）具有5年以上基于Hadoop/Spark计算框架的AI数据准备经验，主持并参与过多个基于该框架的AI数据集成或数据仓库建设项目，对基于该框架的数据抽取、清洗、加工、集成等技术有充分的了解，能够熟练使用这些技术相关的工具方法；
-4）具有良好的编程能力，熟悉Java、Scala、Shell、Python、R等编程语言，熟悉Linux编程环境，具有基于云平台的大数据应用开发经验；
-5）具备良好的团队协作能力和沟通能力，自我驱动力强，能够积极主动开展工作，具有较强的工作规划和执行能力；
-职能类别：
-系统架构设计师
-微信分享"
-数据挖掘与分析工程师,https://jobs.51job.com/beijing-cpq/115480466.html?s=01&t=0,昂坤视觉（北京）科技有限公司,北京-昌平区,1.5-3万/月,03-25,"背景描述：公司是为LED生产工艺各个环节提供光学检测和测算设备及解决方案，属于机器视觉工业检测。被检测物体表面的缺陷，在不同工艺过程中受各种因素影响会发生演变。我们现要将各环节设备采集到的数据信息归集到数据仓库，通过数据传递、共享、挖掘、建模分析进行预测、验证等，并以此推动信息整合、效率提升。设备涉及光机电软算五部分，其中软件开发是语言是C#、C++、Windows下Visual Studio编程环境。
-一、工作职责：
-1. 运用Python、R、SQL等工具，根据业务需求进行大数据模型设计与开发；
-2. 基于模型部署、测试、实施及模型应用效果监控工作，进行模型调优与维护；
-3. 从数据中提取决策价值，撰写项目可行性方案、建模分析报告，跟踪分析并提供决策支持；
-4. 完成需求分析、样本抽样、模型构建、指标定义以及相关文档编写；
-5. 配合售前工作或研发团队将分析结果落地实施。
-二、任职要求：
-1. 应用数学、统计、机器学习、计算机及相关专业，硕士以上学历需3-5年工业制造领域工作经验，博士及以上学历需2年工业制造领域工作经验；
-2. 具有数学建模或大数据建模实际项目经验，熟悉数学建模与优化算法设计；（不局限于掌握逻辑回归、决策树、神经网络等机器学习算法）
-3. 熟练运用Python、R、Matlab等常用数学建模与分析工具；
-4. 熟悉数据库结构，熟练运用SQL等数据库语言，熟悉数据清洗、预处理与特征工程，熟悉 Hadoop生态、Spark结构，C#语言；
-5. 具有扎实的统计分析功底，快速精准的分析能力，能够处理大量数据进行建模；
-6. 具有良好的业务问题分析，模型抽象能力和创新能力；
-7. 学习能力强，善于沟通合作，工作责任心强；
-8. 具备较强的独立工作及处理突发事件的能力；
-9. 思维清晰敏捷，逻辑分析能力强，有很强的分析问题和解决问题的能力。
-
-基于背景描述，若对职责技能要求有误，诚邀技术牛人投递联系与指正。
-职能类别：
-算法工程师
-关键字：
-数据建模数据挖掘数据分析
-微信分享"
-北斗算法工程师,https://jobs.51job.com/beijing-hdq/120909135.html?s=01&t=0,北京航天宏图信息技术股份有限公司...,北京-海淀区,1-1.5万/月,03-25,"1、负责北斗/GNSS数据处理及监测评估核心算法研发、设计、仿真工作；
-2、负责所属模块的代码开发、调试工作；
-3、负责系统联调、优化、维护工作；
-4、完成项目实施过程中设计需求、技术材料等相关文档编写；
-任职要求：
-1、卫星导航、大地测量等相关专业硕士及以上学位；
-2、具有扎实的卫星导航定位理论基础；
-3、精通GNSS定位、导航、授时等原理；
-4、精通PPP、RTK、伪距单点定位、卡尔曼滤波、最小二乘等算法；
-5、具有良好开发能力，至少掌握JAVA、C/C++、Python等其中一门编程语言；
-6、参与BDS/GNSS监测评估、BDS/GNSS数据处理等相关项目者优先；
-7、具有较强的抗压能力、责任意识及上进心，踏实诚恳，具备良好的沟通能力与团队协作能力。
-
-职能类别：
-算法工程师
-关键字：
-C++仿真大地测量测绘工程
-微信分享"
-生物信息工程师,https://jobs.51job.com/beijing-cpq/120908721.html?s=01&t=0,北京贝瑞和康生物技术有限公司,北京-昌平区,0.8-1万/月,03-25,"工作职责：
-1.负责新流程的开发工作，完成公司或部门的新方向的流程开发计划；
-2.根据产品的需要制定开发方案、设计、编写代码，进行程序测试，负责撰写相关技术文档； 3.设计、创建和维护各类生物信息分析流程；
-4.作为技术骨干，协助解决开发的技术难题；
-5.领导交代的其他任务。
-任职要求：
-1. 硕士及以上学历，生物，数学，计算机等相关专业；
-2. 能熟练使用perl、R、python、C++、java等编程语言，并且熟悉Linux操作系统，有较强的程序开发能力；
-3.具有大量高通量测序信息分析项目经验或编写过生物信息学相关软件；
-4 .热爱生物信息分析工作；
-5 .学习创新能力强，具备良好的沟通能力和团队合作精神。
-职能类别：
-生物工程/生物制药
-微信分享"
-技术预研工程师,https://jobs.51job.com/beijing-cpq/120908219.html?s=01&t=0,北京智芯微电子科技有限公司,北京-昌平区,12-20万/年,03-25,"岗位职责：
-1.负责人工智能或边缘计算技术在电力物联网的适用性研究；
-2.负责人工智能算法在电力物联网业务中的仿真与应用；
-3.负责科技项目申报，编写可行性研究报告、技术报告、研究报告，以及专利、软著等知识产权成果。
-任职要求：
-1、业务能力要求：具备机器学习、深度学习等人工智能算法研究及其在电力物联网相关业务的仿真与应用能力；具备技术报告、研究报告编制能力，以及专利、软著等知识产权成果申请能力； 
-2、专业能力要求：计算机、电力系统、自动化等相关专业毕业，硕士及以上学历；
-3、技能要求：熟悉电力系统的仿真软件；掌握Python、C++等至少一门编程语言；
-4、综合能力：具有良好的沟通和团队协作能力，工作认真负责，能适应一定的工作压力。
-职能类别：
-科研人员
-微信分享"
-C++高级开发工程师,https://jobs.51job.com/beijing-ftq/117411704.html?s=01&t=0,江苏薇米区块链科技有限公司,北京-丰台区,2-3万/月,03-25,"1、linux c/c++ 研发工程师
-1.配合完成编码任务；
-
-2.负责区块链公链研发；
-
-3.搭建基于区块链的底层架构，能实现公链、侧链、私有链及多种逻辑；
-
-4.实施技术决策和技术方案，实现模块升级优化；
-
-5.跟踪互联网领域相关技术变化，并应用于实际研发产品中。
-
-任职资格：
-
-1.3年以上工作经验，1年以上区块链实际研发经验；
-
-2.熟悉Linux，精通c/c++（主要技能），熟悉GoLang、lua、Python、Node.js等语言中至少1种，并参与区块链开发社区并贡献源码者优先；
-
-3.有分布式网络、应用密码学、网络安全等经验；
-
-4.年轻有激情，能够承受工作压力；有强烈的自我学习和成长欲望。
-职能类别：
-高级软件工程师
-微信分享"
-PHP研发工程师,https://jobs.51job.com/beijing/120894853.html?s=01&t=0,上海微创软件股份有限公司北京分公...,北京,1.2-1.8万/月,03-25,"岗位职责：
-1、从事语音识别合成等AI ToB的研发交付
-2、从事语音平台和产品的研发
-3、保质保量按时完成开发任务；
-4、部署排查问题
-
-任职要求：
-1、熟练掌握PHP编程语言
-2、工作1-2 年以上，计算机及计算机相关专业本科或本科以上学历
-3、熟悉Linux/Unix 平台上，熟悉shell ，python等一种脚本语言
-4、工作会对接ToB一线的工程师或客户，需要踏实肯干、客户服务意识，较强的沟通能力，良好的团队合作精神。
-5、熟悉C++编程语言加分
-职能类别：
-PHP开发工程师
-关键字：
-php开发php
-微信分享"
-AI专家（工技）,https://jobs.51job.com/beijing-sjsq/120907691.html?s=01&t=0,北京中油瑞飞信息技术有限责任公司...,北京-石景山区,5-7万/月,03-25,"1、从事油气领域人工智能前沿算法的研发，技术驱动，探索人工智能的创新应用；
-2、负责油气领域+AI的技术规划与实施管理；
-3、能够利用算法、模型和机器学习方法与工具，组织进行领域研究工作等；
-4、从具体的场景和问题出发，研发算法系统，产出解决方案；
-5、构建公司人工智能平台，将智能服务的能力赋予更多的业务和产品。  
-
-岗位要求：
-1、国内、国际一流院校计算机、数理统计类专业背景相关专业硕士及以上学位，博士优先；
-2、对以下领域有深入研究或者资深的工作经验： 深度学习、图像识别、知识图谱、问答系统、自然语言处理、统计机器学习、智能计算硬件等 ；
-3、有较强的业务理解力和具体的业务实践经验，6年以上领域相关经验，有大型平台和AI项目经验者优先；
-4、熟悉人工智能相关技术底层算法和应用框架，熟悉Caffe、Tensorflow、Hadoop、Spark等开源社区，熟悉Python 、Java、C/C++，有实际开发经验者优先；
-5、学习能力强、善于沟通、对技术创新充满激情，具备探索精神。  
-职能类别：
-其他
-微信分享"
-Web前端开发工程师,https://jobs.51job.com/beijing-hdq/120906788.html?s=01&t=0,天宇正清科技有限公司,北京-海淀区,1-1.5万/月,03-25,"1.3年以上WEB开发经验，本科及以上学历；
-2.精通HTML、CSS、JS等语言，熟练使用前端调试工具；
-3.深刻理解WEB标准，对前端性能、兼容性、可维护性有所掌握和实践经验；
-4.工作积极主动，具有很强的学习能力，良好的团队合作精神和沟通能力；
-5.有webpack实践经验，熟悉ES6；熟练掌握VUE.js前端框架；
-6.有浏览器3D模型开发经验；
-7.有丰富的SVG开发经验；
-8.熟练使用python语言者，优先考虑。
-职能类别：
-Web前端开发前端开发
-微信分享"
-测试工程师（保险）（01）,https://jobs.51job.com/beijing/116058753.html?s=01&t=0,上海复深蓝软件股份有限公司,北京,1-1.5万/月,03-25,"职位描述：
-1、负责公司内部系统测试工作；
-2、参与测试案例的编写、测试案例的执行；
-3、运维变更自动化脚本编写及验证；
-4、认证环境TSP、mpos、语音支付测试问题支持；
-5、应用系统日常维护手册、服务处理手册更新；
-6、应用系统服务处理自动化脚本编写及验证；
-7、主要系统服务优化分析专项测试；
-8、各系统服务移交工作；
-9、系统趋势分析、容量分析工作。
-
-技术要求：
-1、3年以上测试经验，熟悉后台测试、自动化测试者优先；
-2、熟悉unix命令，熟悉shell脚本；
-3、熟悉数据库常规操作，有DB2数据库经验优先；
-3、具备良好的沟通能力和一定的抗压能力；
-4、有python、java开发经验及QTP、jmeter者优先考虑；
-5、有保险类测试经验的优先。
-职能类别：
-其他
-微信分享"
-硬件测试工程师,https://jobs.51job.com/beijing-cyq/115948381.html?s=01&t=0,北京星河亮点技术股份有限公司,北京-朝阳区,1-2万/月,03-25,"1、 负责生产型综测仪的功能/性能测试工作；
-2、 负责分解仪表的技术需求，并设计相应的功能/性能测试用例；
-3、 熟练使用各芯片厂商（海思/高通/MTK/展讯）生产测试工具，并进行测试用例执行；
-4、 负责开发和调试自动化测试脚本；
-5、 负责分析测试问题，并与开发人员协作解决；
-6、 负责撰写测试报告，对软件版本进行评估；
-7、 负责与技术支持人员协作，现场/远程解决客户在使用过程中出现的问题。
-任职要求：
-1、 通信、电子、计算机等相关专业，本科及以上学历；
-2、  具备扎实的无线通信理论基础知识，对GSM/WCDMA/TDS-CDMA/LTE有的实际测试经验经验，从事过5G射频/协议测试优先； 
-3、  熟悉软件测试过程，至少掌握白盒/黑盒测试方法的一种；
-4、  熟练操作基本测试仪表，如综测仪（CMW500、100/MT8821、8870等）、信号源、频谱仪等；
-5、  熟练使用各芯片厂商（高通/MTK/展讯/海思）测试工具，采用手动/自动模式进行测试用例执行；
-6、  熟悉C/C++/Python其中的一种,并有相关使用经验；
-7、  具备一定的协调沟通能力，具备较强的文字表达能力，可以独立完成测试用例的设计开发，测试日志/测试报告的撰写。
-职能类别：
-硬件测试工程师
-微信分享"
-测试经理,https://jobs.51job.com/beijing-hdq/112742051.html?s=01&t=0,北京循环智能科技有限公司,北京-海淀区,3-4万/月,03-25,"工作职责：
-1、整体负责QA团队的全部工作；
-2、参与审查系统架构、数据模型及接口等的设计，确保系统的可测试性；
-3、设计软件系统的测试策略和方法，特别是在系统的稳定性、可靠性以及性能等方面的测试方法、技术线路 和质量标准；
-4、设计并研发自动化测试框架等工具，提高测试效率；
-5、跟踪并分析开发过程中以及生产环境出现的各种问题；
-6、持续改进软件工程中与质量保障相关的各个环节的具体实践。
-任职要求：
-1、计算机相关专业，本科及以上学历，5年以上互联网项目工作经验；有2年以上团队管理经验；
-2、熟悉Linux、MongoDB、HTML、CSS以及HTTP等常用互联网技术；
-3、熟练掌握和应用单元测试、接口测试、性能测试等测试手段，并具备实际的工作经验；
-4、熟练掌握至少一种常用编程语言，***是Golang或Python，以及Javascript；
-5、具备企业级产品技术支持能力或者经验者优先；
-6、具备开放的心态，较强的自我驱动与学习能力以及良好的团队协作能力。
-职能类别：
-软件测试工程师
-关键字：
-测试开发自动化测试功能测试
-微信分享"
-软件测试工程师,https://jobs.51job.com/beijing-cyq/120900513.html?s=01&t=0,端云信息技术（上海）有限公司,北京-朝阳区,1-1.5万/月,03-25,"1、主要负责公司网站及app移动应用的功能测试、安全及性能测试；
-2、参与项目的需求分析，了解项目设计的合理性；
-3、根据项目计划编写测试计划、方案和测试用例，执行测试用例并跟踪bug，编写测试报告，并能提出对产品有效改进方案；
-
-职位要求：
-1、计算机及相关专业，本科及以上学历，两年及以上的测试经验；
-2、熟悉测试工作流程，熟悉测试理论知识，具备互联网软件测试经验；
-3、熟悉Jira/禅道等测试管理工具；
-4、责任心强，积极主动，善于沟通，具有良好的团队精神和抗压能力；
-5、了解php/ruby/html/javascript/JAVA/C++/Python等编程技术中的至少一种；
-6、熟悉SQL（sqlserver/Oracle/Mysql）；
-7、熟练使用subversion版本管理工具；
-8、熟悉linux基本命令；
-9、熟悉性能测试工具jmeter、loadrunner等，熟悉安全测试技术及工具使用者优先；
-10、有互联网及移动自动化测试经验者优先；
-职能类别：
-软件测试工程师
-关键字：
-软件测试功能测试性能测试
-微信分享"
-测试工程师,https://jobs.51job.com/beijing-ftq/120899651.html?s=01&t=0,北京前景无忧电子科技有限公司,北京-丰台区,0.8-1万/月,03-25,"一、工作内容：
-1、负责宽带载波模块、智能配变终端等产品测试；
-2、负责编写测试大纲及测试用例；
-3、独立承担项目测试工作，按照测试用例执行测试；
-4、发现产品缺陷，跟踪定位bug，协助开发人员解决问题；
-5、负责提交测试报告，对bug跟踪以及执行回归测试；
-二、学历要求：
-1、本科及以上学历；
-2、电气工程、电子电信、软件工程、仪器仪表等相关专业；
-三、岗位要求:
-1、熟悉国家电网用电信息采集系统相关的通信协议，如：Q/GDW 1376.1、Q/GDW 1376.2、DL/T 698、DL/T 645、IEC 104者优先；
-2、熟悉一门或以上脚本语言（如python、c等）者优先；
-3、学习能力强，能较快的理解和掌握新技术、新知识；
-4、善于思考，能独立分析和解决问题，具备独立思考和承担部分独立工作的能力；
-职能类别：
-测试工程师
-关键字：
-测试
-微信分享"
-web中级研发工程师(J11467),https://jobs.51job.com/beijing/120899324.html?s=01&t=0,北京天融信科技有限公司,北京,1-1.5万/月,03-25,"工作职责:
-主要负责PC端页面开发和技术优化
-任职资格:
-1、统招本科及以上学历；
-2、熟悉Web设计和编码，精通 HTML5、CSS、JavaScript、jQuery 等前端技术；
-3、至少熟悉一种MV框架：Angular、React、Ember等，能够快速单页应用开发；
-4、至少了解一门服务端开发语言（如：Python、Java等）；
-5、了解nodeJs/sass/less使用者优先；
-6、具备良好的代码编程习惯及较强的文档编写能力；
-职能类别：
-Web前端开发
-关键字：
-HTML5CSSJavaScriptjQuery
-微信分享"
-算法工程师（数据挖掘）,https://jobs.51job.com/beijing-hdq/99939494.html?s=01&t=0,清华大学,北京-海淀区,20-30万/年,03-25,"1、电力能源领域大数据分析相关模型技术研究；
-2、数据清洗、特征分析，规律抽取及整理，对数据未来变化的数值及趋势进行预测；
-3、机器学习/深度学习相关人工智能算法在产品/业务中的应用研究； 
-4、负责业务需求相关算法模块设计与工程实现；
-5、负责项目技术方案相关文档撰写工作。
-任职资格：
-1、电气工程、数学、计算机、物理、热能、自动化等相关专业；
-2、熟悉各类数据挖掘算法，如聚类、回归、SVM等;
-3、熟悉机器学习/深度学习框架者优先，例如sklearn、tensorflow等；
-4、至少熟悉一门编程语言，如C++/Java/Python等；
-5、有电力/能源规划决策领域相关项目经验优先；
-6、善于学习总结，有较强的求知欲，对探索未知领域和解决问题充满热情；
-7、工作严谨踏实，责任心强，条理清楚；有良好的团队合作精神和沟通能力。
-职能类别：
-大数据开发工程师算法工程师
-关键字：
-数据挖掘机器学习数学建模参数调优深度学习人工智能
-微信分享"
-挖掘建模工程师（DX1kx）(J11904),https://jobs.51job.com/beijing/120898721.html?s=01&t=0,北京东方国信科技股份有限公司,北京,0.8-1.2万/月,03-25,"工作职责:
-1、 协调运营商及内部资源，提供客户项目实施技术方案，并跟进方案的实施交付；
-2、 根据不同的业务场景，搭建数据模型，深入分析业务数据，提供数据反馈和建议；
-3、 针对重点业务实现专题研究分析，追踪、整理和分析相关数据，辅助活动策略制定，体现数据分析价值。
-任职资格:
-1、 全日制本科及以上学历，统计、数学等相关专业；
-2、 熟悉SQL、python，对于Spark、Hadoop、HBase、Hive等大数据处理平台有一定了解；
-3、 3年以上，电信业务相关建模分析经验；
-4、 工作认真，思维敏锐，具有良好的逻辑分析及报告呈现能力，熟练应用Excel、ppt、等办公软件；
-5、 接受出差。
-职能类别：
-数据建模工程师
-微信分享"
-量化策略实习（机器学习方向）,https://jobs.51job.com/beijing-hdq/120879417.html?s=01&t=0,九坤投资(北京)有限公司,北京-海淀区,200元/天,03-25,"岗位职责：
-基于Ａ股市场的日内高频信息，使用机器学习方法研究分析市场微观结构并提取有效特征；
-运用统计手段分析市场数据以及实盘交易结果，协助量化交易团队设计交易模型；
-在独立研发出有效特征因子的基础上，构建完整量化策略；
-进行必要的数据清洗和挖掘工作。
- 岗位要求：
-具有良好的数理统计基础，熟悉机器学习和深度学习中的经典算法和网络结构；
-具有探索精神和良好的动手能力，熟练使用Python、C++实现相关算法；
-有机器学习/深度学习相关的研究或项目经验。
-备注：实习表现优秀者可转正。
-职能类别：
-量化研究
-微信分享"
-研发中心-高级产品数据工程师(J15208),https://jobs.51job.com/beijing-dxq/120898237.html?s=01&t=0,金风科技-研发中心,北京-大兴区,2-2.5万/月,03-25,"1、系统策划产品线业务关键数据流管理，构建并维护整机设计数据库。概念设计逻辑，以实现开发提效和系统集成为目标，提炼工具开发需求；
-2、 参与梳理整机设计逻辑，形成概念设计阶段平台或软件工具的需求分析、架构设计、详细开发和验证完善；
-3、基于各产品线机型开发或可靠性提升具体需求，协同相关团队进行数据挖掘和分析，支撑某子系统优化设计和提升。
-
-任职要求：
-1、计算机、数据分析、数学、电气工程等相关专业本科以上学历；
-2、3年以上风电行业工作经历，具备基于场景的数据分析的系统策划和实现能力；
-3、熟悉python等语言，了解统计学方法和机器学习算法，使用回归、决策树、随机森林等算法解决过实际问题；
-4、 有风电行业数据分析经验者优先.
-职能类别：
-其他
-微信分享"
-高级算法工程师,https://jobs.51job.com/beijing-cyq/119455382.html?s=01&t=0,人民日报媒体技术股份有限公司,北京-朝阳区,3-4万/月,03-25,"岗位职责：
-1、负责公司自然语言处理平台的技术架构规划建设，确保3~5年内保持在媒体行业内的应用领先水平；
-2、负责自然语言处理相关算法研发工作，包括但不限于语义理解，文本分类，摘要生成，对话管理，信息抽取，知识图谱，自动问答，聊天机器人等；
-3、针对专用细分领域进行相关NLP算法的工程优化，并应用于实际上线的产品中，如相关对话模型训练、知识图谱管理等；
-4、研究机器学习、深度学习相关算法并进行商用。
-岗位要求：
-1、硕士以上学历，计算机、数学相关专业；
-2、4年以上算法相关工作经验；
-3、熟悉LINUX系统，精通C/C++/PYTHON等编程语言；
-4、熟悉自然语言处理，文本分类、实体识别、语义分析、语言生成、对话管理等相关领域知识，熟练掌握相关开源工具；
-5、熟悉文本相似度计算，文本分类等相关算法；
-6、具有扎实的机器学习、深度学习相关知识，掌握机器学习算法的原理，更够完成机器学习相关算法实现和优化等工作；
-7、熟悉TensorFlow、Caffe、PaddlePaddle等深度学习平台的一种或多种。
-
-
-职能类别：
-算法工程师
-微信分享"
-自动化测试工程师,https://jobs.51job.com/beijing-cyq/118546517.html?s=01&t=0,北京三才智者技术服务有限公司,北京-朝阳区,1.2-1.6万/月,03-25,"岗位职责
-1，编写自动化测试脚本，实现项目自动化测试；,
-2，根据产品特点和测试要求搭建测试环境，编写、执行测试用例，记录测试结果；
-3，输出测试报告和质量分析，保证交付质量；
-4，制定测试计划，保证产品测试工作的计划性与规范性。
-任职要求
-1，熟悉测试流程，有良好的软件工程知识和质量意识；
-2，熟练掌握一种或以上编程语言如VBScript、Java、Python或C/C++等；
-3，熟练掌握一种或以上自动化测试工具或框架如QTP、Appium等；
-4，熟悉数据库操作，能编写查询和简单的存储语句；
-5，熟悉网络、http协议等基础知识；
-6，具备一定的开发基础，熟悉性能测试方法及流程，并对其他类型（功能、自动化、安全等）的测试有一定的了解；
-7，具备良好的沟通能力及风险意识，逻辑思维清晰。
-加分项
-1，自动化测试一年以上经验着优先；
-2，熟悉移动APP、熟悉各种金融客户端者，或具有金融业务相关经验者优先。""
-
-职能类别：
-系统测试
-微信分享"
-测试中高级工程师-北京,https://jobs.51job.com/beijing/119911764.html?s=01&t=0,上海梦创双杨数据科技股份有限公司...,北京,0.8-1.5万/月,03-25,"岗位职责：
-1、根据项目计划、需求说明书以及设计方案，编写测试用例；
-2、根据项目要求，从SVN获取最新版代码，搭建、更新及维护测试环境；
-3、按照测试用例中的步骤说明，执行测试工作，并提交此项目的BUG及测试报告；
-4、清晰的描述问题的出现场景和环境，对问题进行分析和定位，协助开发人员确定问题发生的原因；
-5、对测试结果进行总结与统计分析，对问题进行跟踪、回归测试，保证问题必须被解决；
-6、完成上级领导安排的其它临时性工作。
-
-岗位要求：
-1、大学本科或以上学历，计算机及相关专业，3年以上设计和开发测试框架或平台的经验；具有自动化测试经验及WEB项目测试经验优先；
-2、精通自动化测试、黑盒测试、白盒测试、压力测试，熟悉单元测试工具和常见的开源测试工具；
-3、掌握Java或者C/C++、SQL、MySQL、 html、css、js、jquery等前端编程语言；至少熟悉一种脚本语言，如Python/Ruby/Shell等；
-4、熟悉Jekins、持续集成、持续测试、持续部署；熟悉Linux操作系统、微服务体系下的前后端测试；
-5、具备快速的学习能力、协作能力、沟通能力和抗压能力；
-6、党员优先。
-
-【聊聊梦想】：
-27年来，我们一直奉行“智能化助力治理能力现代化”的使命，致力于成为国内一流的政企数智化专家，在国家和企业走向现代化的过程中，在民族复兴的伟大进程中，我们拥有巨大机遇，欢迎有梦想，有情怀，有能力，有毅力的你加入梦创大家庭，成为一名追梦人，为“中国之治”的伟大梦想贡献力量。
-【聊聊前途】：
-公司处于快速发展时期，拥有省部级客户近50家，全国超过1万家客户，遍布全国所有省市，覆盖超过1000万用户，公司近几年平均增速超过50%，我们期待你快速成长，独当一面，成为公司区域里的“省长”、“市长”，成为技术领域的“专家”、“院士”，成为职能部门的“局长”、“部长”。
-【聊聊福利】：
-除了常规福利，我们为你提供了怦然心动的“I-Dream”计划，我们将为你提供公司分红和期权；为你和父母提供国内国外旅游机会，为你及家人设立住房和大病基金，为你提供无息贷款，为你解决上海户口，为孩子提供优秀学校，让你可以无后顾之忧的投入自己的事业发展中来。
-
-优秀的我们，期待卓越的你！
-职能类别：
-软件测试工程师
-关键字：
-软件测试
-微信分享"
-Linux项目实施经理,https://jobs.51job.com/beijing-dxq/120894378.html?s=01&t=0,统信软件技术有限公司,北京-大兴区,1.5-2.5万/月,03-25,"岗位职责：
-1、负责支撑销售的售前技术支持服务，保障销售团队的技术支持响应；
-2、开展与客户的技术沟通交流及业务访谈，了解业务问题和需求，提出解决方案，依据客户需求设计咨询方案，并向客户提供咨询服务；
-3、负责售前项目的客户需求调研、技术交流、投标方案制定、指标整理、标书整理，配合销售人员投标；
-4、根据客户需求进行需求分析，开展技术方案设计、调试和验证，提供技术咨询服务，确定解决方案可行性，推进项目签单，进一步协调研发平台共同为销售人员提供产品解决方案和服务解决方案
-
-任职要求：
-1、统招本科以上学历，计算机相关专业毕业或相关从业经验，3年以上相关工作经验，英语四级以上水平或相当水平；
-2、熟悉至少一个Linux发行版，熟练使用shell脚本编程；
-3、熟悉国内外一线厂商主流服务器、存储，及相关外设的体系架构、优势差异；
-4、了解SAN、NAS、ISCSI等存储技术，了解基于Linux的高可用集群、负载均衡集群、集群文件系统、分布式文件系统、虚拟化、云计算等相关技术；
-5、能熟练撰写解决方案、成功案例、演示文稿等相关技术文档；
-加分项：
-1、有Linux操作系统打包构建、系统运维、系统裁剪工作经验优先；
-2、有RHCE，CCNP或HCNA认证者优先；
-3、掌握使用shell脚本语言能力；能使用python等脚本工具解决一般性问题
-职能类别：
-项目经理技术支持/维护经理
-关键字：
-linux项目实施解决方案项目经理
-微信分享"
-软件测试工程师,https://jobs.51job.com/beijing-hdq/120893798.html?s=01&t=0,北京思特奇信息技术股份有限公司,北京-海淀区,1-1.5万/月,03-25,"技能要求：
-功能测试，web测试，Jmeter，BURPSUITE，SELENIUM，自动化测试
-岗位职责：
-1、了解参与的项目情况，熟悉需求，编写测试方案、测试用例、测试计划；
-2、对参与的商务项目和研发产品进行Web功能测试、性能测试、安全测试等，提交bug并跟踪处理；
-3、对测试执行进展及bug处理情况进行分析总结，定期向主管或项目组汇报，输出测试报告；
-4、对产品线项目的执行质量根据度量数据进行统计分析，指导和督促责任人改进。
-
-任职要求：
-1、计算机或软件相关专业，有软件测试工作经验，会使用Jmeter、Burpsuite、Selenium等主流测试工具及BUG管理工具；
-2、会用常用的Linux命令、MySQL或Oracle的sql语句，了解计算机、网络、编程语言(python/JAVA/C之一)基础理论；
-3、能根据商务项目或集中研发安排接受出差参与项目测试；
-职能类别：
-软件测试工程师
-微信分享"
-加密算法工程师（数据加密方向）,https://jobs.51job.com/beijing-hdq/120262349.html?s=01&t=0,星群（北京）科技发展有限公司,北京-海淀区,1-1.5万/月,03-25,"1.负责数据网络应用安全防御系统的建设、维护和管理。
-2.负责加密解密用户数据、算法，加密容器与应用间交互数据，输出算法库设计文档及测试验证报告。
-2.负责高性能、高安全密码算法实现方案研究，确保产品满足各种高安全应用场景。
-3.负责密码算法技术支持，对算法库进行性能和安全性优化。
-4.负责安全协议、前沿密码算法的研究与实践。
-5. 在产品需求、设计相关工作中，提供密码技术、算法等相关支持。
-任职要求：
-1. 计算机, 信息安全, 应用数学等相关专业大学以上学历。
-2.熟悉各种对称，非对称加密算法 。
-3. 熟悉ECC算法和国密算法，熟悉加解密，数字签名，密钥管理，Commitment Scheme等技术，熟练掌握密码算法的使用和开源库，熟悉PKI体系、CA系统以及安全协议。
-4.熟悉C/C++、GO语言/Python、JAVA中的一种或多种编程语言。
-5.了解当前主流技术如虚拟化、云计算及大数据，对数据安全领域有理论基础和实践经验。
-6.熟悉主流操作系统、数据库和中间件的安全管理，具备安全事件处理和分析能力。
-7.责任心强，具备良好的沟通，协调能力和团队合作精神。
-数据加密
-职能类别：
-算法工程师
-微信分享"
-软件测试工程师,https://jobs.51job.com/beijing/120889946.html?s=01&t=0,北京趋动科技有限公司,北京,1.5-3.5万/月,03-25,"软件测试工程师
-职位性质：全职
-学历要求：本科及以上
-资历要求：3年以上
-工作地点：北京，上海
-职位描述
-负责软件产品的测试，包括测试流程设计，测试用例实现，测试环境的构建。
-职位要求
-K.       计算机科学或相关技术领域
-L.        至少3年相关工作经验
-M.      熟练使用Linux系统以及常见系统工具
-N.      熟练使用Jenkins
-O.      熟练使用Docker，会编写Dockerfile
-P.       熟练掌握如下的一种或多种编程语言，C/C++/Go/Python
-Q.      具备Kubernetes，虚拟机操作相关技能者优先
-R.       具备HPCC，NVDIA CUDA，人工智能和深度学习，深度学习框架（如TensorFlow，PyTorch）等相关工作经验者优先
-职能类别：
-软件测试工程师
-微信分享"
-web前端工程师,https://jobs.51job.com/beijing/119100705.html?s=01&t=0,北京信普达系统工程有限公司,北京,0.6-1.2万/月,03-25,"岗位要求：
-1.统招本科及以上学历，计算机相关专业。
-2.熟悉W3C规范，精通HTML、CSS、JavaScript前端开发语言，能脱离IDE手写代码；熟悉HTML5/CSS3优先。
-3.熟悉原生 javascript，熟悉 EXTjs,jQuery 框架或其他流行的开源 js 框架，对于建立 js 框架有自己的想法者优先。
-4.擅长Ajax等页面信息异步展现技术，熟悉SSH、Php或Python优先。
-5.能解决常见浏览器兼容性问题，熟悉IE、Firefox、Chrome等主流浏览器的常见兼容性问题，并有可行的解决办法。
-6.对表现与数据分离、Web语义化等有深刻理解；熟悉常用的WEB前端优化方法，并有相关优化经验。
-7.良好的沟通能力和团队合作精神，愿意融入一个创业团队长期发展。
-岗位职责：
-1.负责公司产品Web前端的架构设计与研发。
-2.负责统一Javascript框架、公共组件架构。
-3.负责与产品设计师沟通协调，完成设计内容的技术实现；与后端开发人员紧密配合，完成产品的整体开发。
-4.负责钻研WEB前沿技术。
-职能类别：
-Web前端开发
-关键字：
-周末双休带薪年假五险一金出差补贴节日福利专业培训立即上岗定期体检加班补助
-微信分享"
-算法工程师（北京）,https://jobs.51job.com/beijing/120550753.html?s=01&t=0,北京万集科技股份有限公司,北京,,03-25,"职位描述：
-1、参与交通相关产品算法设计、实现及优化【通信、激光等】；
-2、熟悉目标检测、特征提取、噪声处理、分类算法等；
-3、熟练掌握C/C++、mat lab 、python等，具有较强的算法分析和实现能力，并具备良好的代码和文档风格；
-4、在算法设计、性能优化方面有见解；
-5、深入研究业内领先的技术思路、高效算法。
-
-职能类别：
-大学/大专应届毕业生
-微信分享"
-信号处理工程师,https://jobs.51job.com/beijing/120565919.html?s=01&t=0,北京人机意科技有限公司,北京,,03-25,"对语音信号处理的算法进行研究，（语音增强、回声消除、混响消除、自动增益控制、波束形成等）；
-开展目标探测、识别以及信号处理相关技术领域的理论和算法研究；
-负责项目合作时的技术沟通。
-任职要求：
-数学、计算机、电子、通信工程，水声工程相关专业；
-精通C/C++或MATLAB，熟悉Java、Python等 ，能编程实现语音信号处理算法；
-熟悉麦克风阵列信号处理技术；
-熟悉语音信号处理技术，进行过回声消除、语音增强等算法的研究和实现；
-进行过语音/音频处理算法在DSP或ARM等硬件平台上的开发、移植和优化。
-职能类别：
-大学/大专应届毕业生
-微信分享"
-软件运维工程师,https://jobs.51job.com/beijing/120615456.html?s=01&t=0,航科院（北京）科技发展有限公司,北京,,03-25,"1.负责基于java/c/python技术开发的B/S、C/S架构的软件的项目实施和维护 
-2.能够按项目主管的统一安排，完成系统的需求确认及分析、软件功能模块编码、软件功能测试及问题跟踪、用户数据转储、倒换等工作; 
-3.保证在线系统正常运行，对客户系统在运行过程中出现的问题作及时的解决，保障系统正常运转；收集客户新需求并及时反馈给项目主管或产品经理；完成维护相关的质量记录;
-1.熟练使用mySQL数据库工具，熟悉常用SQL语句的编写； 
-2.熟悉UNIX、LINUX操作系统； 有C，python编程基础。""
-
-职能类别：
-大学/大专应届毕业生
-微信分享"
-软件开发工程师（后端开发）,https://jobs.51job.com/beijing/119305842.html?s=01&t=0,中国航空结算有限责任公司,北京,,03-25,"1. 依据公司软件研发相关规范，根据软件详细设计说明书，按项目进度完成应用程序代码的编写
-2. 配合产品人员和系统架构师完成业务分析和架构设计
-3. 参与设计和制定交互流程，实现业务需求，指导业务人员及用户使用产品
-4. 参与设计系统技术方案，核心代码开发和系统调优，并参与项目组代码评审
-任职资格：
-1. 全日制本科及以上学历，计算机及相关专业
-2. 扎实的数据结构和算法基础，熟悉Java、C++、C#、Python中一种编程语言
-3. 理解面向对象思想，有较强的编码能力，热爱计算机技术
-4. 有优秀的逻辑分析能力，能够对业务逻辑进行合理的抽象和拆分
-5. 具备较强的学习能力和沟通能力，具备良好的团队合作精神
-
-
-职能类别：
-软件工程师
-微信分享"
-CSIG16-地图大数据挖掘工程师,https://jobs.51job.com/beijing/120851321.html?s=01&t=0,深圳市腾讯计算机系统有限公司,北京,,03-25,"岗位职责：
-负责地图的大数据挖掘工作：应用机器学习/深度学习技术，针对位置、轨迹、内容等海量信息进行数据建模，解决基于基础数据的挖掘等核心问题；跟踪深度学习在工业界以及学术界的最新研究成果。
-岗位要求：
-计算机、数学、统计学、自动化等相关专业等相关专业硕士以上学位；精通数学建模,机器学习及模式识别等领域的理论基础及常用算法，具有良好的逻辑思维能力及数据分析能力，深入理解MapReduce，具有Spark/Hadoop/Storm等大规模分布式计算平台的使用经验；在以下至少一个领域有深入的研究：
-1、统计机器学习（如深度神经网络、Boosting、图模型、概率统计、最优化方法等）；
-2、大数据分析（位置、轨迹内容大数据挖掘，用户行为分析，用户画像等）；
-精通C/C++,熟悉python等一种脚本语言,熟悉linux下开发；有高水平国际期刊和***国际会议论文发表者优先。
-职能类别：
-高级软件工程师
-微信分享"
-数据分析工程师,https://jobs.51job.com/beijing/120847380.html?s=01&t=0,神州数码信息系统有限公司,北京,0.8-1万/月,03-25,"数据分析工程师
-工作地点：北京
-岗位职责：
-1、深刻理解业务目标，梳理业务数据，围绕数据进行建模和挖掘工作；
-2、模型算法的设计和工程实现；
-3、结合具体业务场景，对数学模型及算法进行优化调整。
-任职资格：
-1、计算机科学、软件工程、统计学、数学等相关专业本科/硕士学历；
-2、具备扎实的计算机理论基础，对数据结构及算法有较强的功底；
-3、熟悉JAVA或Python语言，熟练运用SQL，有使用数据分析工具软件的经验；
-4、熟悉机器学习、深度学习算法，有实际建模经验；
-5、对主流的大数据、数据库、BI、数据仓库技术及理论有基本的了解；
-6、关注细节，对数据敏感，具备良好的数据分析能力和逻辑推理能力；
-7、较好的沟通交流能力、合作精神及主动工作精神。
-职能类别：
-数据分析师
-微信分享"
-后端开发工程师,https://jobs.51job.com/beijing-hdq/120738733.html?s=01&t=0,北京华光普泰生物技术有限公司,北京-海淀区,1.5-2.5万/月,03-25,"岗位职责：
-1、负责公司项目后端设计和开发；
-2、负责后台业务的基础梳理，数据库设计；
-3、按照要求编写合格的文档与代码；
-4、遵循开发部各项流程规范。
-  岗位要求：
-1、具有3年及以上Web后端开发经验并负责过一个独立项目设计，有大型互联网项目开发经验者优先；
-2、具有良好的程序设计思想，理解面向对象程序设计，能合理运用设计模式；
-3、对Web架构和编程具有较为深入的理解；
-4、熟练使用JAVA开发语言；
-5、对MySQL有深入了解，并具有设计、开发和优化的实际经验。如对NoSQL（redis，mongodb，hbase等）有深入了解者更佳；
-6、熟悉Linux环境，掌握SVN/GIT使用。
-职能类别：
-Java开发工程师Python开发工程师
-关键字：
-java开发python开发软件软件工程师软件开发
-微信分享"
-机器学习总监,https://jobs.51job.com/beijing/120860567.html?s=01&t=0,成都太能蜗客人力资源管理有限公司...,北京,7-10万/月,03-25," 1. 通过多种数据挖掘算法对公司业务多源数据进行挖掘，用于精准营销与用户增长； 
-2. 对用户日志数据进行挖掘，对用户建模，精准刻画用户行为，进行用户理解； 
-3.对风控系统和推荐系统进行设计和开发
-岗位要求： 
-1. 熟悉Linux环境，精通Java、C++、Python编程中的至少一种； 
-2. 熟悉常用的数据挖掘技术，如决策树、聚类、逻辑回归、神经网络等，及常用深度学习框架； 
-3. 熟悉Hadoop、Spark、Hive等大数据处理工具，有海量数据挖掘项目经验者优先； 
-4. 计算机、数学、统计相关专业本科以上学历，相关工作经验3年以上；
- 5. 良好的沟通能力和合作精神，逻辑思维能力优秀，热爱算法，热爱思考； 
-6. 在神经网络、用户画像、时序挖掘、自然语言处理等方向有深入研究者优先。
-
-职能类别：
-机器学习工程师
-关键字：
-数据算法数据挖掘linux
-微信分享"
-软件测试工程师,https://jobs.51job.com/beijing-cyq/110134094.html?s=01&t=0,北京经世万方信息技术有限公司,北京-朝阳区,8-10万/年,03-25,"  岗位职责
-  1）独立完成测试软件项目的需求分析、计划制定、用例设计、用例执行、提交并管理缺陷；
-  2）独立完成软件项目的单元、部件、配置项、系统测试；
-  3）组织策划项目各个阶段评审；对代理和自研产品提供技术支持；
-  4）基于要求和技术规范书写测试计划和案例，编写测试相关文档；
-  5）设置测试环境并执行测试案例，对于失败案例，分析测试结果核查其功能性和推荐纠正措施。
-  6）分离、复制和跟踪漏洞并核查漏洞修复
-  7）按照流程备份测试计划、测试案例并产生测试报告。
-  8）设计并执行性能测试，开发和维持测试工具
-  9）负责生命周期各阶段对应测试；独立设计和执行测试方案和测试用例；进行设备搭建和维护测试环境；
-  10）协助开发人员快速重现和解决产品BUG；
-     岗位要求
-  1）计算机科学或工程相关专业的本科及以上学历。
-  2）本科2年以上软件测试或开发工作经历，研究生1年以上软件测试或开发工作经历，至少参加过1个完整的测试项目。
-  3）熟练掌握JAVA、C、C++编程语言，具备简单的开发能力，从事Linux、MS Windows系统的经历。
-  4）具备良好的协调沟通能力；工作认真、细致，思维开放，有敬业精神和合作精神
-  能适应繁琐重复的工作。
-  5）熟悉软件测试过程；熟悉主流代码级测试工具使用，如Tested、C++test、VectorCAS等优先考虑。
-  6）具有国网相关开发、测试工作经验者优先。
-  7）扎实的软件自动化经验和使用Perl或Python的动手编程技能，或者擅长Linux shell脚本。
-  8）熟悉软件开发的生命周期和过程。敏捷开发经验者优先。
-
-职能类别：
-软件测试工程师
 微信分享"
