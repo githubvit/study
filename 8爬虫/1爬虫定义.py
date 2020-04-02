@@ -93,9 +93,9 @@
                 location    重定向
 
             响应体：
-                html(静态页面) ：用正则匹配想要的内容。
-                json（ajax后台请求的动态数据）：用json模块反序列化获取想要的数据。
-                二进制b（图片、视频等）：以wb方式打开一个文件，把该二进制写入该文件，即可。
+                html(静态页面) ：用正则匹配想要的内容。response.text
+                json（ajax后台请求的动态数据）：用json模块反序列化获取想要的数据。response.json
+                二进制b（图片、视频等）：以wb方式打开一个文件，把该二进制写入该文件，即可。response.content
 
 
 # 白月黑羽讲requests和http协议
@@ -197,6 +197,7 @@
     2 浏览器不用抓包工具，因为其调式窗口自带。
     3 使用requests 模块 如何使用抓包工具代理：proxies参数
         示例
+            # fiddler 启动后 默认 127.0.0.1:8888
             import requests
 
             proxies = {

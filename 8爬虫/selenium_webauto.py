@@ -95,26 +95,7 @@ def index_search(url,search_el,search_btn_el,keyword):
     print(search_url)
     # 3 跳回
 
-    # 五 页面冻结 http://www.python3.vip/doc/tutorial/selenium/skills_2/#冻结界面
-    # 有些元素甚至页面 需要鼠标放在上面才有，离开就消失，不利于进行页面分析。
-    # 因此在 开发者工具栏 console 里面执行如下js代码
-
-    # setTimeout(function(){debugger}, 5000) 便会在5秒后冻结页面，即使鼠标移开也不会消失，
-    # 这样就捕捉元素，分析页面了。
-
-    # 六 弹出对话框
-    # 通知框    Alert
-    #    获取提示信息 driver.switch_to.alert.text
-    #    点击ok或确认 driver.switch_to.alert.accept()
-
-    # 确认框    Confirm
-    #    以上两点与Alert一致
-    #    点击cancel或取消 driver.switch_to.alert.dismiss()
-
-
-    # 输入确认框  Prompt
-    #     以上三点一致
-    #     在输入框中输入 driver.switch_to.alert.send_keys('输入的内容')
+   
 
     # 退出 会关闭浏览器
     # wd.quit()
@@ -133,3 +114,30 @@ def index_search(url,search_el,search_btn_el,keyword):
     # search_btn_el='.search-btn span' # 定位到span 搜索 文字 否则有时可以有时不行
     # keyword='小升初'
     # index_search(url,search_el,search_btn_el,keyword)
+
+
+ # 五 页面冻结 http://www.python3.vip/doc/tutorial/selenium/skills_2/#冻结界面
+    # 有些元素甚至页面 需要鼠标放在上面才有，离开就消失，不利于进行页面分析。
+    # 因此在 开发者工具栏 console 里面执行如下js代码
+
+    # setTimeout(function(){debugger}, 5000) 便会在5秒后冻结页面，即使鼠标移开也不会消失，
+
+    # 5秒后 页面出现 paused in debugger界面，页面暂停了。
+    # 这样就可捕捉元素，分析页面了。
+
+    # 在paused in debugger界面点击 跳出，页面就恢复了。
+
+# 六 弹出对话框
+    # 通知框    Alert
+    #    获取提示信息 driver.switch_to.alert.text
+    #    点击ok或确认 driver.switch_to.alert.accept()
+
+    # 确认框    Confirm
+    #    以上两点与Alert一致
+    #    点击cancel或取消 driver.switch_to.alert.dismiss()
+
+
+    # 输入确认框  Prompt
+    #     以上三点一致
+    #     在输入框中输入 driver.switch_to.alert.send_keys('输入的内容')
+

@@ -13,7 +13,7 @@ desired_caps = {
   'resetKeyboard': True, # 执行完程序恢复原来输入法
   'noReset': True,       # 不要重置App           很重要 *****  否则每次都是刚刚安装打开的状态 数据都没有了
   'newCommandTimeout': 6000, # 客户端 命令的 超时时间
-  'automationName' : 'UiAutomator2'
+  'automationName' : 'UiAutomator2' 
   # 'app': r'd:\apk\bili.apk',
 }
 
@@ -30,27 +30,41 @@ wd.implicitly_wait(5)
 
 # bili启动 界面通知
 # 如果有`青少年保护`界面，点击`我知道了`
-iknow = wd.find_elements_by_id("text3")
+# iknow = wd.find_elements_by_id("text3")
+# 用find_elements_by_android_uiautomator直接获取元素 不用 appserver 翻译
+iknow = wd.find_elements_by_android_uiautomator('new UiSelector().resourceId("tv.danmaku.bili:id/text3")')
 if iknow:
     iknow.click()
 
 # 在搜索框点击 到达搜索页
 # 根据id定位搜索位置框，点击
-wd.find_element_by_id("expand_search").click()
+# wd.find_element_by_id("expand_search").click()
+# 直接法中resourceId必须写全名
+wd.find_element_by_android_uiautomator(
+    'new UiSelector().resourceId("tv.danmaku.bili:id/expand_search")'
+    ).click()
+
 
 # 在搜索页的搜索框中输入关键字 并 回车
 # 根据id定位搜索输入框，点击
-sbox = wd.find_element_by_id('search_src_text')
+# sbox = wd.find_element_by_id('search_src_text')
+# 根据 元素的content-desc 内容描述 定位 by_accessibility_id
+# sbox = wd.find_element_by_accessibility_id('搜索查询')
+# 用直接获取的api 是 description
+sbox = wd.find_element_by_android_uiautomator('new UiSelector().description("搜索查询")')
 sbox.send_keys('白月黑羽')
 # 输入回车键，确定搜索
 wd.press_keycode(AndroidKey.ENTER)
 
 # 在后台打印 视频标题
-# 选择（定位）所有视频标题
-eles = wd.find_elements_by_id("title")
+# 选择（定位）所有视频标题 可以看到id不唯一 用elemesnts
+# eles = wd.find_elements_by_id("title")
+eles = wd.find_elements_by_android_uiautomator('new UiSelector().resourceId("tv.danmaku.bili:id/title")')
+# 根据 元素的class_name
+# eles = wd.find_elements_by_class_name("android.widget.TextView")
 
 for ele in eles:
-    # 打印标题
+    # 打印标题 
     print(ele.text)
 
 # 用input让程序停在这儿，然后按任意键退出
@@ -141,6 +155,10 @@ wd.quit()
         # 通过 WebElement 对象调用这样的方法，查找范围是该节点的子节点
 
     # 不同于 selenium web自动化 这里的 find_element_by_id 并不一定唯一。
+    # 有个突兀的 
+        # 根据 元素的content-desc 内容描述 定位 by_accessibility_id
+            # sbox = wd.find_element_by_accessibility_id('搜索查询')
+        # 元素的 content-desc 属性是用来描述该元素的作用的。
     
 # 4 界面元素查看工具
     # Selenium Web 自动化的时候，要找到元素，
@@ -159,7 +177,7 @@ wd.quit()
                 # redource-id:tv.danmaku.bili:id/expand_search  这是find_element_by_id选择的id。
                 # class:android.widget.TextView 当前标签的类型TextView，类似于web中的标签名
                 # package:tv.danmaku.bili  当前元素所属包名
-                # content-desc 当前元素的内容描述 空
+                # content-desc 当前元素的内容描述 空 
                 # checkable:false 是可选择吗 不可选择
                 # checked：false 是被选中吗 不
                 # clickable:true 是可点击吗 可以
@@ -198,4 +216,82 @@ wd.quit()
                 # 最大的优势，在于有节点搜索功能 search for element 放大镜。
                     # 可以输入id或其他属性 看到找到的节点的数量，并可以点击看是不是要找的。
                 # 手机页面变化，只用点击刷新按钮即可。
+
+# 5 元素选择 http://www.python3.vip/doc/tutorial/appium/02/#安卓-uiautomator
+    #  调用UI Automator API的java代码，实现最为直接的自动化控制
+    #  对于安卓，appium server 和 安卓移动端之间 最终是通过 操控 安卓系统的 UI Automator 进行 操作的。
+    #  根据id，classname， accessibilityid，xpath，这些方法选择元素，
+    #  其实底层都是利用了安卓 uiautomator框架的API功能实现的。
+    
+    #  参考 这里的谷歌安卓官方文档介绍： https://developer.android.google.cn/training/testing/ui-automator
+           
+            # UI Automator 是一个界面测试框架，适用于整个系统上以及多个已安装应用间的跨应用功能界面测试。
             
+            # UI Automator 测试框架的主要功能包括：
+                # 用于检查布局层次结构的查看器。如需了解详情，请参阅 UI Automator 查看器。
+                    # 在 4 界面元素查看工具 已经介绍了。
+                
+                # 用于检索状态信息并在目标设备上执行操作的 API。如需了解详情，请参阅访问设备状态。
+                    # 提供了 UiDevice 类，用于在运行目标应用的设备上访问和执行操作。
+                    # 您可以调用其方法来访问设备属性，如当前屏幕方向或显示屏尺寸。
+                    # 改变设备状态，例如，要模拟按主屏幕按钮的操作，请调用 UiDevice.pressHome() 方法。
+               
+                # 支持跨应用界面测试的 API。如需了解详情，请参阅 UI Automator 
+                    # 提供了多组api，捕获和操纵界面组件，设置用于运行 UI Automator 测试的关键参数。
+                    # 其中一组api是界面元素捕获的 UiSelector：表示对设备上的一个或多个目标界面元素的查询。
+                        # https://developer.android.google.cn/reference/androidx/test/uiautomator/UiSelector
+                        # 而这组api是直接对应 4 界面元素查看工具中 属性列表的 非常直观。使用Java代码。
+        
+    # 通过 UiSelector 这个类里面的方法实现元素定位的
+        # 多条件叠加
+            # '''
+            #     比如
+            #     code = 'new UiSelector().text("热门").className("android.widget.TextView")'
+            #     ele = driver.find_element_by_android_uiautomator(code)
+            #     ele.click()
+            #     就是通过 text 属性 和 className的属性 两个条件 来定位元素。
+            #     可以在.text('xx')接着.className('xxx'),叠加多个条件定位。
+            # '''
+        
+        # UiSelector 的 instance 和 index 也可以用来定位元素，都是从0开始计数， 他们的区别：
+    
+            # instance是匹配的结果所有元素里面 的第几个元素
+            
+            # index则是其父元素的几个节点，类似xpath 里面的*[n]
+    
+        # UiSelector 的 childSelector 可以选择后代元素，比如
+            # '''
+            # code = 'new UiSelector().resourceId("tv.danmaku.bili:id/recycler_view").
+            # childSelector(new UiSelector().className("android.widget.TextView"))'
+    
+            # ele = driver.find_element_by_android_uiautomator(code)
+            # 注意： childSelector后面的引号要框住整个 子 uiSelector 的表达式
+    
+            # 目前有个bug：只能找到符合条件的第一个元素.
+            # '''
+        # UiSelector里面有些元素选择的方法 可以解决 前面解决不了的问题。
+    
+            # 比如
+            # 
+            # text 方法
+                # 
+                # 可以根据元素的文本属性查找元素
+                # 
+            # textContains
+                # 
+                # 根据文本包含什么字符串
+                # 
+            # textStartsWith
+                # 
+                # 根据文本以什么字符串开头
+                # 
+            # textmartch 方法
+                # 
+                # 可以使用正则表达式 选择一些元素，如下
+                # 
+                # code = 'new UiSelector().textMatches("^我的.*")'
+    
+    # 注意，使用直接法 在Java 代码中的 resourceId和className等必须写全名  *****
+        # code = 'new UiSelector().resourceId("tv.danmaku.bili:id/recycler_view").
+        # childSelector(new UiSelector().className("android.widget.TextView"))'
+
