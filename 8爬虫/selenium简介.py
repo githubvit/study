@@ -228,7 +228,7 @@ def xpath_sl():
     finally:
         driver.close()
 
-xpath_sl()
+# xpath_sl()
 # 结果
     # Name: My image 1
     # ==> Name: My image 5
@@ -247,8 +247,64 @@ xpath_sl()
     # 使用click() 方法可以模拟鼠标单击操作,
     # 但是鼠标操作还包括:右击、双击、悬停、鼠标拖动等复杂功能就可以使用actionchains对象。
 
+
+from selenium.webdriver import ActionChains
+# 分析人移动鼠标的过程 产生移动轨迹
+def make_track(distancex):
+    # 轨迹点
+    track_list=[]
+    # 匀加速和快接近就匀急减速
+
+    # 初始速度
+    v=0
+    # 间隔时间
+    t=0.23
+    # 减速点
+    deceleration_point=distancex*4/5
+
+    # 初始距离
+    cs=0
+    while cs<distancex:
+        if cs<deceleration_point:
+            # 匀加速
+            a=2.5
+        else:
+            # 匀减速
+            a=-4
+
+        # 记录移动距离
+        s=v*t+0.5*a*(t**2)  
+        # 把当前移动距离加入轨迹列表
+        track_list.append(round(s)) 
+        # 更新当前移动总距离
+        cs=cs+s
+        # 更新当前速度
+        v=v+a*t
+
+    return track_list
+
+# 按移动轨迹移动滑块 通过验证
+def move_slid(wd,slider,track_list):
+    
+    # 获取 滑块
+    slider=wd.find_element_by_css_selector(slider)
+    # 按住滑块
+    ActionChains(wd).click_and_hold(slider).perform()
+    # 按轨迹移动
+    for x in track_list:
+        # print(x)
+        ActionChains(wd).move_by_offset(xoffset=x,yoffset=0).perform()
+
+    # else:
+    #     # 先移过去一点，再移回来，更像人的移动
+    #     mouse.move_by_offset(xoffset=2.5,yoffset=0).perform()
+    #     mouse.move_by_offset(xoffset=-2.5,yoffset=0).perform()
+    # 释放
+    time.sleep(0.5) #0.5秒后释放鼠标
+    ActionChains(wd).release().perform()
+
 def move_el():
-    from selenium.webdriver import ActionChains
+    
     driver = webdriver.Chrome(driver_path)
     driver.get('http://www.runoob.com/try/try.php?filename=jqueryui-api-droppable')
     
@@ -259,8 +315,18 @@ def move_el():
         driver.switch_to.frame('iframeResult') ##切换到iframeResult
 
         # 找到要操作的元素
+        
         sourse=driver.find_element_by_id('draggable')
         target=driver.find_element_by_id('droppable')
+        # 获取鼠标移动距离
+        distance=target.location['x']-sourse.location['x']
+
+        # 模仿人移动 产生轨迹
+        track_list=make_track(distance)
+        print(f'轨迹：{track_list}，{sum(track_list)},距离：{distance}')
+
+        # 按轨迹 移动 滑块
+        move_slid(driver,'#draggable',track_list)
 
         #方式一：基于同一个动作链串行执行
         # actions=ActionChains(driver) #拿到动作链对象
@@ -269,17 +335,24 @@ def move_el():
 
         #方式二：不同的动作链，每次移动的位移都不同
         # 用 ActionChains(driver)对象，按住鼠标左键不放
-        ActionChains(driver).click_and_hold(sourse).perform()
-        # 获取鼠标移动距离
-        distance=target.location['x']-sourse.location['x']
-
-        track=0
-        while track < distance:
-            # 用 ActionChains(driver)对象，按住鼠标左键不放并沿x，移动鼠标，每次2像素。
-            ActionChains(driver).move_by_offset(xoffset=2,yoffset=0).perform()
-            track+=2
-        # # 用 ActionChains(driver)对象，释放鼠标。这里会弹出对话框，结束。
-        ActionChains(driver).release().perform()
+        # ActionChains(driver).click_and_hold(sourse).perform()
+        
+        # track=0
+        # while track < distance:
+        #     # 用 ActionChains(driver)对象，按住鼠标左键不放并沿x，移动鼠标，每次2像素。
+        #     ActionChains(driver).move_by_offset(xoffset=2,yoffset=0).perform()
+        #     track+=2
+        # for track in track_list:
+            # ActionChains(driver).move_by_offset(xoffset=track,yoffset=0).perform()
+        # else:
+            # ActionChains(driver).move_by_offset(xoffset=3,yoffset=0).perform()
+            # ActionChains(driver).move_by_offset(xoffset=-3,yoffset=0).perform()
+        
+        #  用 ActionChains(driver)对象，释放鼠标。这里会弹出对话框，结束。
+        
+        # ActionChains(driver).release().perform()
+        
+        
 
         time.sleep(3)
 
@@ -301,4 +374,4 @@ def move_el():
     finally:
         driver.close()
 
-# move_el()
+move_el()

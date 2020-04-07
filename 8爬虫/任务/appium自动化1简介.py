@@ -44,7 +44,7 @@
     # 把 nodejs 运行环境、Appium Server 和一些工具 打包在里面了，只需要简单的下载安装就可以了。
     # Appium Desktop官方下载： https://github.com/appium/appium-desktop/releases/latest
 
-# 3 安装 Android SDK ：本例主要讲解 安卓APP的自动化，必须要安装安卓SDK
+# 3 安装 Android SDK ：本例主要讲解 安卓APP的自动化，必须要安装安卓SDK，安装在d盘根目录下D:\androidsdk。
     # 3.1 安装 JDK(java 编译器)
         # 安卓SDK需要 java 环境。
         # 安装 java : jdk-8u211-windows-x64.exe

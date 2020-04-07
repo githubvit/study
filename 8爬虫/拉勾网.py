@@ -14,6 +14,7 @@ s=requests.session()
 r1=s.get('https://passport.lagou.com/login/login.html',headers={
     'User-Agent':'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.149 Safari/537.36'
 })  
+# re.S 是指 模式为单行，即 把文档变成一行，没有了换行，'.'就可以匹配该文档的所有了。
 X_Anti_Forge_Token=re.findall("X_Anti_Forge_Token.*?'(.*?)'",r1.text,re.S)[0]
 X_Anti_Forge_Code=re.findall("X_Anti_Forge_Code.*?'(.*?)'",r1.text,re.S)[0]
 print(X_Anti_Forge_Token,'---',X_Anti_Forge_Code)
