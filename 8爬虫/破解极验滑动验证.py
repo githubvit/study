@@ -14,10 +14,10 @@
         #  crop_img=page_img.crop((left,top,right,bottom))
         
     # 用pillow图片Image逐点加载load()[x,y] 取得该点的rgb
-        # 循环图片的宽和高，逐点取得rgb,每个点都是一个数组[r,g,b]，
+        # 循环图片的宽和高，逐点取得rgb,每个点都是一个元组(r,g,b,255)，
          # for x in range(w): 
             # for y in range(h):
-                #rgb1=img1.load()[x,y] #[r,g,b]
+                #rgb1=img1.load()[x,y] #(r,g,b,255)
         # 两幅图片逐点取得rgb就可以比较。
 
     # webdriver执行js 
@@ -28,7 +28,7 @@
     # webdriver控制鼠标
         # 按住滑块
             # ActionChains(wd).click_and_hold(slider).perform()
-        # 移动
+        # 移动  要记住的是xoffset和yoffset只能是正整数或负整数或零
             # ActionChains(wd).move_by_offset(xoffset=x,yoffset=0).perform()
         # 释放
             # ActionChains(wd).release().perform()
@@ -93,15 +93,15 @@ from PIL import Image
 
 # wd=webdriver.Chrome() # webdriver 被放到Anaconda3的脚本目录了，不用填写了，会自动找到"D:\Anaconda3\Scripts\chromedriver.exe"
 
-wd=webdriver.Firefox() #启动火狐浏览器，火狐的webdriver即geckodriver.exe，被复制到"D:\Anaconda3\Scripts\geckodriver.exe"路径了
+# wd=webdriver.Firefox() #启动火狐浏览器，火狐的webdriver即geckodriver.exe，被复制到"D:\Anaconda3\Scripts\geckodriver.exe"路径了
 
 # 启动极速360
-# option=webdriver.ChromeOptions()
-# option.add_experimental_option('excludeSwitches',['enable-automation'])
+option=webdriver.ChromeOptions()
+option.add_experimental_option('excludeSwitches',['enable-automation'])
 # 极速360目录
-# option.binary_location=r'D:\360js\360Chrome\Chrome\Application\360chrome.exe'
+option.binary_location=r'D:\360js\360Chrome\Chrome\Application\360chrome.exe'
 # 与其对应的webdriver驱动
-# wd=webdriver.Chrome(r'D:\360js\chromedriver.exe',options=option)
+wd=webdriver.Chrome(r'D:\360js\chromedriver.exe',options=option)
 
 wd.implicitly_wait(5)
 
@@ -209,6 +209,7 @@ def get_dx(img1,img2):
             #用图片的load方法 获取[x,y]该点的[r,g,b] 值
             rgb1=img1.load()[x,y]
             rgb2=img2.load()[x,y]
+            print(rgb1,rgb2)
 
             # 比较两幅图片该点r、g、b的差
             r=abs(rgb1[0]-rgb2[0])
@@ -216,9 +217,9 @@ def get_dx(img1,img2):
             b=abs(rgb1[2]-rgb2[2])
 
             # 如果差超过阈值，则判为缺口起始x
-            if not (r<threshold and g<threshold and b<threshold):
-                return x-7 #经过测试，误差为大概为7
-        return x-7
+            if r>=threshold and g>=threshold and b>=threshold:
+                return x-7 #经过测试，误差大概为7
+    return img1.size[0]-7
             
 
 # 分析人移动鼠标的过程 产生移动轨迹
@@ -246,8 +247,8 @@ def make_track(distancex):
 
         # 记录移动距离
         s=v*t+0.5*a*(t**2)  
-        # 把当前移动距离加入轨迹列表
-        track_list.append(s) 
+        # 把当前移动距离加入轨迹列表 要取整，因为移动功能接收的移动参数只能是正整数、负整数或零
+        track_list.append(round(s)) 
         # 更新当前移动总距离
         cs=cs+s
         # 更新当前速度
@@ -262,13 +263,13 @@ def move_slid(wd,slider,track_list):
     
     # 按住滑块
     ActionChains(wd).click_and_hold(slider).perform()
-    # 按轨迹移动
+    # 按轨迹移动 
     for x in track_list:
-        ActionChains(wd).move_by_offset(xoffset=x,yoffset=0).perform()
+        ActionChains(wd).move_by_offset(xoffset=x,yoffset=0).perform() # 要记住的是xoffset和yoffset只能是正整数或负整数或零
     else:
         # 先移过去一点，再移回来，更像人在操作
-        ActionChains(wd).move_by_offset(xoffset=2.5,yoffset=0).perform()
-        ActionChains(wd).move_by_offset(xoffset=-2.5,yoffset=0).perform()
+        ActionChains(wd).move_by_offset(xoffset=2,yoffset=0).perform()
+        ActionChains(wd).move_by_offset(xoffset=-2,yoffset=0).perform()
     
     # 释放
     time.sleep(0.5) #0.5秒后释放鼠标
@@ -281,22 +282,25 @@ def geetest():
     user_ipt=wd.find_element_by_css_selector('[placeholder="请输入邮箱"]')
     pwd_ipt=wd.find_element_by_css_selector('[placeholder="请输入密码"]')
 
-    # 产生随机字符窜 输入用户名、密码
-    u=''.join(random.sample(['z','y','x','w','v','u','t','s','r','q','p','o','n','m','l','k','j','i','h','g','f','e','d','c','b','a'], 8))
-    p1=''.join(random.sample(['z','y','x','w','v','u','t','s','r','q','p','o','n','m','l','k','j','i','h','g','f','e','d','c','b','a'], 5))
-    p2=''.join(random.sample(['z','0','1','2','3','4','5','6','7','q','p','8','n','m','9','k','j','i','h','g','f','e','d','c','b','a'], 5))
-    p=p1+p2
-    
-    user_ipt.click()
-    time.sleep(0.5)
-    user_ipt.send_keys(u)
-    time.sleep(1)
-    pwd_ipt.click()
-    time.sleep(0.8)
-    pwd_ipt.send_keys(p)
+    while True:
+        # 产生随机字符窜 输入用户名、密码
+        u=''.join(random.sample(['z','y','x','w','v','u','t','s','r','q','p','o','n','m','l','k','j','i','h','g','f','e','d','c','b','a'], 8))
+        p1=''.join(random.sample(['z','y','x','w','v','u','t','s','r','q','p','o','n','m','l','k','j','i','h','g','f','e','d','c','b','a'], 5))
+        p2=''.join(random.sample(['z','0','1','2','3','4','5','6','7','q','p','8','n','m','9','k','j','i','h','g','f','e','d','c','b','a'], 5))
+        p=p1+p2
+
+        user_ipt.click()
+        user_ipt.clear()
+        time.sleep(0.5)
+        user_ipt.send_keys(u)
+        time.sleep(1)
+        pwd_ipt.click()
+        user_ipt.clear()
+        time.sleep(0.8)
+        pwd_ipt.send_keys(p)
     
 
-    while True:
+    
         time.sleep(5)
         # 找到人机验证按钮 [aria-label="点击按钮进行验证"]
         rjl=wd.find_elements_by_css_selector('[aria-label="点击按钮进行验证"]')

@@ -260,17 +260,17 @@ def make_track(distancex):
     # 间隔时间
     t=0.23
     # 减速点
-    deceleration_point=distancex*4/5
+    deceleration_point=distancex*3/4
 
     # 初始距离
     cs=0
     while cs<distancex:
         if cs<deceleration_point:
             # 匀加速
-            a=2.5
+            a=2
         else:
             # 匀减速
-            a=-4
+            a=-3
 
         # 记录移动距离
         s=v*t+0.5*a*(t**2)  
@@ -295,10 +295,10 @@ def move_slid(wd,slider,track_list):
         # print(x)
         ActionChains(wd).move_by_offset(xoffset=x,yoffset=0).perform()
 
-    # else:
-    #     # 先移过去一点，再移回来，更像人的移动
-    #     mouse.move_by_offset(xoffset=2.5,yoffset=0).perform()
-    #     mouse.move_by_offset(xoffset=-2.5,yoffset=0).perform()
+    else:
+        # 先移过去一点，再移回来，更像人的移动
+        ActionChains(wd).move_by_offset(xoffset=2.5,yoffset=0).perform()
+        ActionChains(wd).move_by_offset(xoffset=-2.5,yoffset=0).perform()
     # 释放
     time.sleep(0.5) #0.5秒后释放鼠标
     ActionChains(wd).release().perform()

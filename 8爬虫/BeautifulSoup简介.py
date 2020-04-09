@@ -1,9 +1,11 @@
 # 解析库 BeautifulSoup 
-from bs4 import BeautifulSoup
+
 # 1 安装
     # pip install beautifulsoup4
-    # 安装支持html5的库，lxml ,具有容错功能：在html代码不完整的情况下,使用该模块可以识别该错误。
+    # 安装解析器：lxml,具有容错功能：在html代码不完整的情况下,使用该模块可以识别该错误。
         # pip install lxml
+from bs4 import BeautifulSoup
+
 def bs1():
     # 定义不完整的html
     html_doc = """
@@ -21,7 +23,8 @@ def bs1():
     """
     # 建立soup对象
     soup=BeautifulSoup(html_doc,'lxml') #用lxml库解析，具有容错功能
-    # soup=BeautifulSoup(open('a.html'),'lxml') #打开一个html 文件，建立soup对象。
+    # soup=BeautifulSoup(open('a.html','r',enconding='utf-8'),'lxml') #打开一个html 文件(默认模式就是'r',)，用lxml库解析，建立soup对象。
+    # soup=BeautifulSoup(open('a.html'),'lxml') #打开一个html 文件(默认模式就是'r',)，用lxml库解析，建立soup对象。
     res=soup.prettify() #处理好缩进，结构化显示
     print(res)
 # bs1()
@@ -64,9 +67,9 @@ def bs1():
   
 # 2 使用
 # 2.1 选择器
-# 2.1.1标签选择
+# 2.1.1标签选择 ： 就是遍历文档树
 def bsbq():
-    #遍历文档树：即直接通过标签名字选择，特点是选择速度快，但如果存在多个相同的标签则只返回第一个
+    #标签选择：点方式，即直接通过标签名字选择，特点是选择速度快，但如果存在多个相同的标签则只返回第一个
     html_doc = """
     <html><head><title>The Dormouse's story</title></head>
     <body>
@@ -187,7 +190,7 @@ def bsbq():
     # <generator object PageElement.previous_siblings at 0x00000285524A94C8>
 # bsbq()
 
-# 2.1.2 find_all、find
+# 2.1.2 find_all、find：搜索文档树
     # 唯一的区别是 find_all() 方法的返回结果是值包含一个元素的列表,而 find() 方法直接返回结果.
     # find_all() 方法没有找到目标是返回空列表, find() 方法找不到目标时,返回 None .
 
@@ -215,13 +218,28 @@ def bs_find_all():
     <p class="story">...</p>
     """
     soup=BeautifulSoup(html_doc,'lxml')
+    # def find_all(self, name=None, attrs={}, recursive=True, text=None,
+    #              limit=None, **kwargs):
 
-    #1、五种过滤器: 字符串、正则表达式、列表、True、方法
+    #1、五种过滤器: 针对name=、attrs={}、text=字段可以使用字符串、正则表达式、列表、True、方法五种过滤器。
     #1.1、字符串：即标签名
-    print(soup.find_all('b')) # [<b class="boldest" id="bbb">The Dormouse's story</b>]
+    print(soup.find_all(name='b')) # 等同于 print(soup.find_all('b')) 
+     # [<b class="boldest" id="bbb">The Dormouse's story</b>]
+    print(soup.find_all(attrs={'class':'sister'}))
+    # [<a class="sister" href="http://example.com/elsie" id="link1">Elsie</a>, 
+    # <a class="sister" href="http://example.com/lacie" id="link2">Lacie</a>, 
+    # <a class="sister" href="http://example.com/tillie" id="link3">Tillie</a>]
+    print(soup.find_all(text="The Dormouse's story")) # 找到了两个文本
+    # ["The Dormouse's story", "The Dormouse's story"]
+    print(soup.find_all(name='title',text="The Dormouse's story"))
+    # [<title>The Dormouse's story</title>]
+
+    print(soup.find(name='p',class_='story').a) # find和find_all用法相同，结合标签选择器，找到该p标签下的第一个a标签
+    # <a class="sister" href="http://example.com/elsie" id="link1">Elsie</a>
 
     #1.2、正则表达式
     import re
+    
     # print(soup.find_all(re.compile('^b'))) #找出b开头的标签，结果有body和b标签
     # 结果
         # [<body>
@@ -236,12 +254,14 @@ def bs_find_all():
         # </body>, <b class="boldest" id="bbb">The Dormouse's story</b>]
 
     #1.3、列表：如果传入列表参数,Beautiful Soup会将与列表中任一元素匹配的内容返回.下面代码找到文档中所有<a>标签和<b>标签:
-    # print(soup.find_all(['a','b']))
+    # print(soup.find_all(name=['a','b'])) # 同 soup.find_all(['a','b'])
     # 结果 
     # [<b class="boldest" id="bbb">The Dormouse's story</b>, 
     # <a class="sister" href="http://example.com/elsie" id="link1">Elsie</a>,
     #  <a class="sister" href="http://example.com/lacie" id="link2">Lacie</a>, 
     # <a class="sister" href="http://example.com/tillie" id="link3">Tillie</a>]
+    print(soup.find_all(text=[re.compile('E'),re.compile('^L')])) #查找包含E的文本、和以L开头的文本
+    # ['Elsie', 'Lacie']
 
     #1.4、True：可以匹配任何值,下面代码查找到所有的tag,但是不会返回字符串节点
     # print(soup.find_all(True))
@@ -297,12 +317,22 @@ def bs_find_all():
         # a
         # p
 
+    print(soup.find_all(attrs={'id':True})) #找到 具有id属性的标签
+    # [<p class="title" id="my p"><b class="boldest" id="bbb">The Dormouse's story</b></p>, 
+    # <b class="boldest" id="bbb">The Dormouse's story</b>, 
+    # <a class="sister" href="http://example.com/elsie" id="link1">Elsie</a>, 
+    # <a class="sister" href="http://example.com/lacie" id="link2">Lacie</a>, 
+    # <a class="sister" href="http://example.com/tillie" id="link3">Tillie</a>]
+
+    print(soup.find_all(name='p',attrs={'id':True})) #找到 具有id属性的p标签
+    # [<p class="title" id="my p"><b class="boldest" id="bbb">The Dormouse's story</b></p>]
+
     #1.5、方法:如果没有合适过滤器,那么还可以定义一个方法,方法只接受一个元素参数 ,
     # 如果这个方法返回 True 表示当前元素匹配并且被找到,如果不是则反回 False
     def has_class_but_no_id(tag):
         return tag.has_attr('class') and not tag.has_attr('id')
 
-    print(soup.find_all(has_class_but_no_id))#在find_all(func)只传递函数名即可
+    print(soup.find_all(name=has_class_but_no_id)) #在find_all(func)只传递函数名即可
     # 结果
         # [<p class="story">Once upon a time there were three little sisters; and their names were
             # <a class="sister" href="http://example.com/elsie" id="link1">Elsie</a>,
@@ -310,8 +340,11 @@ def bs_find_all():
             # <a class="sister" href="http://example.com/tillie" id="link3">Tillie</a>;
             # and they lived at the bottom of a well.</p>, 
         # <p class="story">...</p>]
+   
+    print(soup.find(name=has_class_but_no_id,text=re.compile('\.')))#从has_class_but_no_id标签中，过滤出文本包含'.'的标签。
+    # <p class="story">...</p>
 
-    
+
     #2、find_all( name , attrs , recursive , text , **kwargs )
     #2.1、name: 搜索name参数的值可以使任一类型的 过滤器 ,字符窜,正则表达式,列表,方法或是 True .
     print(soup.find_all(name=re.compile('^t'))) # [<title>The Dormouse's story</title>]
@@ -388,7 +421,7 @@ def bs_find_all():
     soup.title.find_all(text=True)
     soup.title(text=True)
     '''
-# bs_find_all()
+bs_find_all()
 
 # 2.1.3 css 选择器： select
 def bs_select():
@@ -455,15 +488,19 @@ def bs_select():
     print(soup.select('#list-2 h1')[0].get_text())
     # Foo
 
-bs_select()
+# bs_select()
 
 # 总结:
 #1、推荐使用lxml解析库
 #2、讲了三种选择器:标签选择器,find与find_all，css选择器
     # 1、标签选择器筛选功能弱,但是速度快
     # 2、建议使用find,find_all查询匹配单个结果或者多个结果
-    
+     
     # 3、如果对css选择器非常熟悉建议使用select
 
+    # 4、三种选择器可以结合使用：
+        # soup.p.find_all()
+        # soup.p.select()
+        # soup.find(name='p',class_='story').a  搜索文档树结合遍历文档数，查找该p标签下的第一个a标签。
 #3、记住常用的获取属性attrs和文本值get_text()的方法
 
