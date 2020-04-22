@@ -13,7 +13,7 @@ def play():
     print('%s play 1'%current_thread().getName())
     time.sleep(5)
     print('%s play 2'%current_thread().getName())
-
+# 提交任务
 g1=gevent.spawn(eat)
 g2=gevent.spawn(play)
 
@@ -21,6 +21,7 @@ g2=gevent.spawn(play)
 # g1.join()
 # g2.join()
 print(current_thread().getName())
+# 卡住
 gevent.joinall([g1,g2])
 
 # MainThread

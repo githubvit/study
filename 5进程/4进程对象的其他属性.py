@@ -16,8 +16,8 @@ if __name__ == '__main__':
     # p1.terminate() #直接终止子程序 很少用 下面的p1.is_alive()会报True,
     # 因为这里只是向操作系统发了个信号，操作系统还没来得及结束p1
 
-    # p1.join() #父进程等待子进程执行完 下面的p1.is_alive()会报False，
-    # 因为join会卡住父进程。等子进程p1执行完，再执行下面的代码。
+    p1.join() #父进程等待子进程执行完 下面的p1.is_alive()会报False，
+    # 因为join会卡住父进程。等子进程p1执行完，再执行下面的代码，所以这次的is_alive()=False。
     print(p1.is_alive()) #p1进程是否是存在
 #
     print('主')

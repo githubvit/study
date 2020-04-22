@@ -283,7 +283,7 @@ def countUp(stop):
     _run(0)        
 
 
-# 协程
+# 协程 生产-消费
 
 async def producer(q,count):
     for i in range(count):

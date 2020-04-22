@@ -66,15 +66,17 @@ def two():
             x+=1
 
     start=time.time()
+    # 建一个线程池 起两个线程
     tp=ThreadPoolExecutor(2)
-
+    # 一个线程装countdown(5)
     tp.submit(countdown,5)
+    # 一个线程装countup(5)
     tp.submit(countup,5)
-
     tp.shutdown()#关池
     print('[two]time: {:.4f}'.format(time.time()-start))
 
 # two()
+# 操作系统就会根据是否阻塞来切换线程。
 # Down 5
 # up 0
 # Down 4
@@ -182,7 +184,7 @@ def three_two():
             while self.ready or self.sleeping:
                 if not self.ready:
                     # 在sleeping列表里找到最近的终止时间，因为已经排序，0号元组就是
-                    # deadline,func=self.sleeping[0]# 这是错误的用法，不能用来解压
+                    # deadline,func=self.sleeping[0]# 这是错误的用法，不能用来解压,要pop
                     deadline,func=self.sleeping.pop(0)
                     # 计算延时 不一定 就是delay,
                     # 如果延时相同，只用一个等，其余的到这，就不会>0了，不再睡了，直接加入队列执行。

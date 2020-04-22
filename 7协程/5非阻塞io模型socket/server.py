@@ -10,6 +10,8 @@ server.listen(5)
 # 后面的程序要try except捕捉错误
 # 也可以理解为不是报错是提示，那后面跟着提示处理就可以了。
 server.setblocking(False)
+# 设置为非阻塞，一旦阻塞就抛异常BlockingIOError，
+# 通过捕捉BlockingIOError异常，就达到了监控IO的作用。
 
 # 定义两个列表，便于收发和捕捉阻塞
 # 1 收消息的列表叫读列表
@@ -22,8 +24,9 @@ while True:
         conn,cli_addr=server.accept()
         # 不阻塞 有链接来了 把链接对象加入链接列表 读列表
         r_list.append(conn)
+    
     except BlockingIOError: # 处理accept阻塞 即没链接过来
-        # 由于是非阻塞模型，因此资源占用非常高，解决该问题，就人为添加阻塞，降低cpu占用
+        # 由于是非阻塞模型，因此资源占用非常高，解决该问题，就人为添加阻塞，降低cpu占用，否则cpu有被烧掉的风险。
         time.sleep(0.5)
         # accept阻塞 就处理recv
         print('accept阻塞处理recv')

@@ -1,5 +1,5 @@
 # 1个进程下的多个线程协同工作，多个线程依赖某个线程的情况。
-# 即其 他线程需要通过判断某个线程的状态来确定自己下一步的操作。
+# 即 其他线程需要通过判断某个线程的状态来确定自己下一步的操作。
 # 就把某个线程比作红绿灯，其他的多个线程比作车。
 
 # event.isSet()：返回event的状态值 = True/False；
@@ -75,10 +75,10 @@ def connt():
             raise TimeoutError('超时')#结束该线程 不是结束程序
         print('%s try to connect MySQL...[%s]time'%(current_thread().getName(),count))
         
-        # 阻塞1-2秒 （如果wait中没有数字，就会一直等event.set()）
+        # 阻塞1-3秒 （如果wait中没有数字，就会一直等event.set()）
         # 由于上面sleep是5秒，
         # 如果某线程随机时间平均值>5/3大约1.67，则该线程可以连上
-        event.wait(random.randint(1,2))
+        event.wait(random.randint(1,3))
         count+=1
     print('%s connected MySQL.'%current_thread().getName())
 

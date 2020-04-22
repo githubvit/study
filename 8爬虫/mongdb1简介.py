@@ -131,11 +131,11 @@
             }
             '''
     # 当我们创建好用户后，就要配置有认证机制的登录 必须以管理员权限
-        # 要先停止MongoDB服务。
+        # 1 要先停止MongoDB服务。
             PS C:\WINDOWS\system32> net stop MongoDB
             MongoDB 服务正在停止.
             MongoDB 服务已成功停止。
-        # 把该服务从系统服务中移除。
+        # 2 把该服务从系统服务中移除。
             # 必须以管理员权限 
             PS C:\WINDOWS\system32> services.msc
             PS C:\WINDOWS\system32> mongod --remove
@@ -144,15 +144,15 @@
             2020-04-09T16:08:43.779+0800 I  CONTROL  [main] Trying to remove Windows service 'MongoDB'
             2020-04-09T16:08:43.781+0800 I  CONTROL  [main] Service 'MongoDB' removed
        
-        # 用命令加载含有授权信息的服务 
+        # 3 用命令加载含有授权信息的服务 
             # 执行如下命令，重启服务
             PS C:\WINDOWS\system32> mongod --bind_ip 0.0.0.0 --port 27017 --logpath D:\MongoDB\log\mongod.log --logappend --dbpath D:\MongoDB\data\db  --serviceName "MongoDB" --serviceDisplayName "MongoDB"  --install --auth
             PS C:\WINDOWS\system32> net start MongoDB
             MongoDB 服务正在启动 .
             MongoDB 服务已经启动成功。
 
-        # 登录
-            # 以超级用户gq登录
+    # 登录
+        # 以超级用户gq登录
                 在命令行输入mongo,
                 可以看到原来的警告和提示都没有了。
                 输入show dbs，没有应答。
@@ -181,8 +181,7 @@
                 db1     0.000GB
                 local   0.000GB
                 >
-
-            # 以普通用户egon登录，在db1只能读，不能写，在test可以读写
+        # 以普通用户egon登录，在db1只能读，不能写，在test可以读写
                 C:\Users\69598>mongo
                 MongoDB shell version v4.2.5
                 connecting to: mongodb://127.0.0.1:27017/?compressors=disabled&gssapiServiceName=mongodb
@@ -218,142 +217,25 @@
                 WriteResult({ "nInserted" : 1 })
                 > db.t1.find()
                 { "_id" : 1, "name" : "alex" }
-
-            # 输入 用户名 密码 该用户所在的库 登录
-                C:\Users\69598>mongo -u "gq" -p "another333" --authenticationDatabase "admin"
-                MongoDB shell version v4.2.5
-                connecting to: mongodb://127.0.0.1:27017/?authSource=admin&compressors=disabled&gssapiServiceName=mongodb
-                Implicit session: session { "id" : UUID("d8b28424-d760-4e8b-a7b4-90c635ad80dd") }
-                MongoDB server version: 4.2.5
-                ---
-                Enable MongoDB's free cloud-based monitoring service, which will then receive and display
-                metrics about your deployment (disk utilization, CPU, operation statistics, etc).
-
-                The monitoring data will be available on a MongoDB website with a unique URL accessible to you
-                and anyone you share the URL with. MongoDB may use this information to make product
-                improvements and to suggest MongoDB products and deployment options to you.
-
-                To enable free monitoring, run the following command: db.enableFreeMonitoring()
-                To permanently disable this reminder, run the following command: db.disableFreeMonitoring()
-                ---
-
-                > show dbs
-                admin   0.000GB
-                config  0.000GB
-                db1     0.000GB
-                local   0.000GB
-                test    0.000GB
-                >
-# 使用  
-        
-    # 库
-        在mongodb里，没有创建数据库和创建表的命令，只有插入记录的命令。
-        空的数据库和空的表永远不会显示。
-        怎么建库呢，切换即创建库，比如原来没有db1库,use db1 即可。
-        就是没有也可以切换，use db1,
-        但是 show dbs 是看不到db1，因为此时db1为空。
-        '''
-        > use db1
-        switched to db db1
-        > db
-        db1
-        > show dbs
-        admin   0.000GB
-        config  0.000GB
-        local   0.000GB
-        >
-        '''
-        # 增
-            use # 有则切换，无则新增
-        # 查
-            show dbs #查看所有数据库
-            db #查看当前数据库
-        
-        # 删
-            db.dropDatabase()   #所谓删除当前数据库 实际上是清空了数据，因为数据库不是建的，是有数据才有的，空数据库不显示。
-            
-            # 删除db1数据库
+        # 输入 用户名 密码 该用户所在的库 登录
+            C:\Users\69598>mongo -u "gq" -p "another333" --authenticationDatabase "admin"
+            MongoDB shell version v4.2.5
+            connecting to: mongodb://127.0.0.1:27017/?authSource=admin&compressors=disabled&gssapiServiceName=mongodb
+            Implicit session: session { "id" : UUID("d8b28424-d760-4e8b-a7b4-90c635ad80dd") }
+            MongoDB server version: 4.2.5
+            ---
+            Enable MongoDB's free cloud-based monitoring service, which will then receive and display
+            metrics about your deployment (disk utilization, CPU, operation statistics, etc).
+            The monitoring data will be available on a MongoDB website with a unique URL accessible to you
+            and anyone you share the URL with. MongoDB may use this information to make product
+            improvements and to suggest MongoDB products and deployment options to you.
+            To enable free monitoring, run the following command: db.enableFreeMonitoring()
+            To permanently disable this reminder, run the following command: db.disableFreeMonitoring()
+            ---
             > show dbs
             admin   0.000GB
             config  0.000GB
             db1     0.000GB
             local   0.000GB
             test    0.000GB
-            > use db1           # 切换到数据库db1
-            switched to db db1
-            > db.dropDatabase() # 删除当前数据库db1
-            { "dropped" : "db1", "ok" : 1 }
-            > show dbs          # 因为清空了数据 所以 db1 不显示。
-            admin   0.000GB
-            config  0.000GB
-            local   0.000GB
-            test    0.000GB
-            > db                #继续查看当前数据库 还是在db1，因此，所谓删除当前数据库 实际上是清空了数据，
-            db1
             >
-
-    # 表 集合
-        # 增
-            db.user
-            但是此时，show tables 是看不见user的，user为空。
-            db.user.info
-            表可用点命名，表明名义上的逻辑关系。表的命名空间有120个字符。
-            user表和user.info表只有名义上的逻辑关系，实际是两个独立的关系，没有任何瓜葛。
-
-            '''
-            > db.user.insert({"_id":1,"name":"alex"})
-            WriteResult({ "nInserted" : 1 })
-            > db.user.find()
-            { "_id" : 1, "name" : "alex" }
-            > db.user.info.insert({"age":18,"sex":"m"})
-            WriteResult({ "nInserted" : 1 })
-            > show tables 
-            user
-            user.info
-            >
-            '''
-        # 查
-            show collections
-            show tables #为了和原来关系型数据库保持一致
-            db.user.help() #查看 操作user表的帮助
-            '''
-            > db.user             建表或集合
-            db1.user
-            > show collections    查看  空 不显示
-            > show tables
-            >
-            > db.user.insert({"_id":1,"name":"egon"})  在user表中插入一条记录或称一个文档
-            WriteResult({ "nInserted" : 1 })           
-            > show tables                              此时查看 可以看到 当前数据库中不为空的表
-            user
-            > show collections
-            user
-            >
-            > show dbs                                 此时 db1数据库不为空 用数据库查看命令也可以看到 db1数据库
-            admin   0.000GB
-            config  0.000GB
-            db1     0.000GB
-            local   0.000GB
-            > db.user.help()                           查看user表的帮助 
-            DBCollection help
-                    db.user.find().help() - show DBCursor help
-                    。。。
-                    db.user.drop() drop the collection
-                    。。。
-                    db.user.latencyStats() - display operation latency histograms for this collection
-            >
-            '''
-        # 删
-            db.user.drop()
-            '''
-            > db.user.info.drop()
-            true
-            > show tables
-            user
-            >
-            '''
-    # 记录 文档
-        # 增
-        
-        # 查
-        # 删

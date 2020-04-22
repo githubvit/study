@@ -34,11 +34,15 @@ async def work(t):
 def run_forever2():
     # 创建多协程
     coros=[work(i) for i in range(1,11)]
+    
     # 创建多任务
     # tasks=asyncio.ensure_future(*coros) #报错TypeError: ensure_future() takes 1 positional argument but 10 were given
     tasks=asyncio.gather(*coros)
     # 创建事件循环
     loop=asyncio.get_event_loop()
+
+    # tasks=[asyncio.ensure_future(work(i)).add_done_callback(functools.partial(call_back_loop_stop,loop)) for i in range(1,11)] 
+    # 只有1个任务运行完成。
 
     # 因为要所有任务都完成，再终止事件循环，
     # 所以给任务收集器绑定回调，用偏函数传递loop参数

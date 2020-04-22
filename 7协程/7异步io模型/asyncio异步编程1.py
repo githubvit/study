@@ -60,7 +60,7 @@ def one():
 
     print('----- 运行耗时[one]：{:.4f}s -----'.format(now()-start)) # :.4f 保留4位小数
 
-one()
+# one()
 
 # [do_some_work]  这是个协程任务
 # [do_some_work]  Coroutine one    这是 f'[do_some_work]  Coroutine {x}'
@@ -245,8 +245,8 @@ def five():
     async def main():
         tasks=[]
         for i in range(1,6):
-            tasks.append(asyncio.ensure_future(do_some_work(i)))
-            # tasks.append(do_some_work(i))
+            tasks.append(asyncio.ensure_future(do_some_work(i))) #按顺序输出
+            # tasks.append(do_some_work(i)) # 随机输出
 
         for task in asyncio.as_completed(tasks):
             call_back(await task) #回调直接取得了协程的结果   
@@ -282,3 +282,73 @@ def five():
 # [do_some_work] coroutine done sleep [4] s
 # [do_some_work] coroutine done sleep [5] s
 # ----- 运行耗时：4.9944s -----
+
+# 6. 集成函数io 
+# 把原来不能await func(*args) 变成可以  # awaitable loop.run_in_executor(executor, func, *args) 
+# 与线程池executor,配合，使用多线程，在协程中集成阻塞io，
+# 使得 原来报错说不是Awaitable 的，变成了Awaitable 可等待对象，就可以await 挂起和切换了。
+
+# asyncio run_in_executor与线程池配合https://blog.csdn.net/mixintu/article/details/102472276
+
+def six():
+    import asyncio,requests,time
+    urls=[
+        'https://www.baidu.com/',
+        'https://www.python.org/',
+        'https://www.bilibili.com/'
+    ]
+
+    async def get_page(func,*args):
+        print(f'get_page:{args[0]}')
+
+        # -------------------------------------*****-------------------------------------
+        response=await loop.run_in_executor(None,func,*args) # 运行并解压 普通函数  碰到io阻塞就自动切换
+        # -------------------------------------*****-------------------------------------
+        return (args[0],response.text)
+        # 原型 :
+
+            # awaitable loop.run_in_executor(executor, func, *args) 
+
+        # 参数 : executor 可以是  ThreadPoolExecutor线程池 / ProcessPool 进程池 , 如果是None 则使用默认线程池，
+        # 可使用 yield from 或 await 挂起函数
+        # 作用  ： 把一些模块的io操作交给线程去做 方便挂起切换
+        
+
+    # 作为 回调
+    def parse(res):
+        print(f'parse:{res[0]} : counts：{len(res[1])}')
+
+    # 即时取得协程结果 使用asyncio.as_completed(tasks)
+    async def main():
+
+        # coros=[get_page(requests.get,url) for url in urls]
+
+        # tasks=asyncio.gather(*coros) #不能使用gather对象，必须是 Iterable 比如列表
+        # tasks=[]
+        # for coro in coros:
+        #     tasks.append(asyncio.ensure_future(coro))
+        # for url in urls:
+        #     tasks.append(asyncio.ensure_future(get_page(requests.get,url)))
+
+        tasks=[asyncio.ensure_future(get_page(requests.get,url)) for url in urls]
+
+        # -------------------------------------*****-------------------------------------
+        # for task in asyncio.as_completed(coros):#协程不按顺序输出
+        for task in asyncio.as_completed(tasks):
+            parse(await task) # 回调直接取得了协程的结果   
+        # -------------------------------------*****-------------------------------------
+
+    start=time.time()
+    loop=asyncio.get_event_loop() # 创建事件循环
+    loop.run_until_complete(main())
+    loop.close()
+    done=time.time()
+    print(f'six_time:{done-start}')
+six()
+# get_page:https://www.baidu.com/
+# get_page:https://www.python.org/
+# get_page:https://www.bilibili.com/
+# parse:https://www.baidu.com/ : counts：2443
+# parse:https://www.bilibili.com/ : counts：151345
+# parse:https://www.python.org/ : counts：49058
+# six_time:8.606613874435425

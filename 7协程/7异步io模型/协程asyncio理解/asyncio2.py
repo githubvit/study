@@ -3,7 +3,7 @@
 
 import asyncio
 import random
-# import functools
+import functools
 import time
 
 # 1 没有实现并发 实际串行
