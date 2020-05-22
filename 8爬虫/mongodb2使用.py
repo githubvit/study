@@ -122,10 +122,10 @@
                 > db.t1.insert({"x":new Date(),"pattern":/^egon.*?$/i,"z":ObjectId()})
                 WriteResult({ "nInserted" : 1 })
                 # 正则写在／／内，后面的i代表:
-                # i 忽略大小写
-                # m 多行匹配模式
-                # x 忽略非转义的空白字符
-                # s 单行匹配模式
+                    # i 忽略大小写
+                    # m 多行匹配模式
+                    # x 忽略非转义的空白字符
+                    # s 单行匹配模式
 
             # 查看插入的结果
                 > db.t1.find()
