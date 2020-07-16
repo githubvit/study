@@ -1,0 +1,238 @@
+/* 哪些控件 在什么状态下 有怎样的样式外观 */
+
+
+/* 选择器[:伪状态]{
+    声明
+} */
+
+
+/* 选择器：
+    确定某些样式起作用的范围。
+    
+    通配符选择器：
+        *，匹配所有。
+    类型选择器：
+        包含子类，比如QWiget包含QPushButton、QLabel等子类控件。
+    类选择器：
+        与类型选择器的区别就是多个'.'，不包含子类。
+        比如 .QWiget仅仅指本身是QWiget类型的控件，不包含QPushButton、QLabel等子类型控件。
+    id选择器：
+        对应于控件的objectname.
+        不同于html，qt的id不是唯一的，不同的控件可以有相同的objectname。
+        注意：尽管qt没有限制，但是，我们要养成习惯，objectname不重，也就是不同的控件使用不同的objectname。
+    属性选择器：
+        对应控件使用'.setProperty('key'='value')设置的属性来匹配控件
+        用案例来说明：
+            标签背景统一为粉色，
+            如果是标签的notice属性值为error，添加红色边框。
+            如果是标签的notice属性值为warning，添加黄色边框。
+    后代选择器：
+        空格，包含子子孙孙，即里面所有该后代。
+        比如
+        #box1 QPushButton 指选择父控件objectname为box1的里面直接和间接包含的按钮，一句话就是名称为box1里的所有按钮子控件。
+    子选择器:
+        >,只包含儿子。
+
+    子控件选择器：
+        主要用来筛选复合控件上的子控件
+        QCheckBox\QRadioButton::indicator
+        QComboBox ::drop.down
+        QSpinBox\QDateEdit\QTimeEdit\QDateTimeEdit::up.button\down.button\up.arrow\down.arrow
+        QSlider
+        QProgressBar
+        QScrollBar
+        QGroupBox
+        QTableView
+
+    注意：各个选择器之间用逗号隔开，可以实现多个选择器实现同一样式
+
+*/
+
+
+/* 伪状态：
+    :checked button控件被选中
+    :unchecked button控件未被选中
+    :hover 鼠标在控件上
+    :pressed 控件被按下
+    :focus   控件取得焦点
+    :disable 控件失效
+    :enable  控件有效
+    :indeterminate   checkbox或radiobutton部分选中  三态中的 半选中
+    :on  控件处于on状态
+    :off 控件处于off状态
+    on和off相对于可切换的状态类似checked和unchecked。
+    
+    注意：
+        1. 不同的控件可能有某种特定的伪状态，无法通用，具体看官方文档。
+        2. ！可以用来否定 ，比如 :!checked 没有被选中时，!:focus 没有取得焦点时。
+        3. 伪状态可以连续使用
+                :hover:checked 鼠标在上并且被选中时
+                :hover:!checked 鼠标在上并且未被选中时
+                
+
+*/
+
+
+/*  */
+
+
+/* 通配符选择器 */
+
+
+/* * {
+    background-color: cyan;
+} */
+
+
+/* 类型选择器 */
+
+
+/* QWidget {
+    background-color: cyan;
+} */
+
+
+/* 类选择器 */
+
+
+/* .QWidget {
+    background-color: cyan;
+} */
+
+
+/* id选择器 */
+
+#box1 {
+    background-color: orange;
+}
+
+#box2 {
+    background-color: cyan;
+}
+
+#box3 {
+    background-color: lightgray;
+}
+
+
+/* 属性案例 */
+
+
+/* 
+给有notice_leve属性的标签添加粉色背景 
+标签1和标签2有效果，标签3没有该属性，就不会有效果
+*/
+
+QLabel[notice_leve] {
+    background-color: pink;
+}
+
+
+/* 按属性加边框 */
+
+QLabel[notice_leve='error'] {
+    border: 2px solid red;
+}
+
+QLabel[notice_leve='warning'] {
+    border: 2px solid yellow;
+}
+
+
+/* 后代选择器 */
+
+
+/* 给box2里的所有按钮添加绿色背景 按钮2和按钮4都变绿了*/
+
+
+/* 
+#box2>按钮2
+#box2>#box3>按钮4 */
+
+#box2 QPushButton {
+    background-color: green;
+}
+
+
+/* 子选择器 */
+
+
+/* 直接的儿子 给box2中的按钮2的文字设为红色 
+同时用','组合选择标签3的字体也为红色*/
+
+#box2>QPushButton,
+#lb3 {
+    color: red;
+}
+
+
+/* 子控件选择器 */
+
+
+/* 把checkbox复选框的方框 改为 图片 
+注意路径符号的方向应如下/，不能\.
+*/
+
+
+/* QCheckBox::indicator {
+    image: url(D:/pyj/st/study/pyside2_pyqt/pys2/xxx.png);
+    width: 20px;
+    height: 20px;
+} */
+
+
+/* 伪状态案例
+
+checkbox 方框子控件 用一张20*20的图片样式替代
+checkbox 未选中 方框子控件 是一张open图片
+checkbox 选中 方框子控件 是一张xxxx图片
+
+*/
+
+QCheckBox::indicator {
+    width: 20px;
+    height: 20px;
+}
+
+QCheckBox::indicator:checked {
+    image: url(D:/pyj/st/study/pyside2_pyqt/pys2/xxx.png);
+}
+
+QCheckBox::indicator:unchecked {
+    image: url(D:/pyj/st/study/pyside2_pyqt/pys2/open.png);
+}
+
+
+/* 添加一个半选中 图片 */
+
+QCheckBox::indicator:indeterminate {
+    image: url(D:/pyj/st/study/pyside2_pyqt/pys2/close.png);
+}
+
+
+/* 伪状态 */
+
+
+/* hover */
+
+
+/* 给所有按钮添加 当鼠标在上时显示如下边框 */
+
+QPushButton:hover {
+    border: 2px solid rgb(145, 42, 214);
+}
+
+
+/* focus */
+
+
+/* 给所有控件添加黑色聚焦方框 */
+
+*:focus {
+    border: 3px solid rgb(0, 0, 0);
+}
+
+
+/* #label_1 {
+    background-color: red;
+} */

@@ -1,0 +1,184 @@
+/* 特殊样式 */
+
+QPushButton {
+    border: 2px solid darkgray;
+    border-radius: 5px;
+    max-width: 100px;
+}
+
+QCheckBox {
+    margin-left: 20px;
+    padding-left: 10px;
+    border: 1px solid black;
+}
+
+QRadioButton {
+    padding-left: 10px;
+    spacing: 60px;
+    color: red;
+    font-size: 20px;
+    border: 1px solid black;
+    border-radius: 40px;
+}
+
+
+/* 1 QLineEdit */
+
+QLineEdit {
+    min-width: 50px;
+    min-height: 50px;
+    border: 3px solid rgb(41, 57, 85);
+    border-radius: 10px;
+    background: white;
+    selection-background-color: green;
+    /*控制选中后的背景色 背景绿色块*/
+    selection-color: red;
+    /*控制选中后的前景色 比如文字会变红*/
+    font-size: 14px;
+}
+
+
+/* 当设置了密文模式 
+ascⅡ码 为65 表示字符 大写 A
+用大写字母A占位  但是在这里无效
+
+*/
+
+QLineEdit[echoMode='2'] {
+    background-color: gray;
+    /*这个有效，说明选择器有效*/
+    lineedit-password-character: 65;
+    /*这个在这里无效，当用设计师编辑时有效*/
+}
+
+
+/* 设置了只读 背景就变灰 */
+
+QLineEdit[readOnly='true'] {
+    background-color: gray;
+}
+
+QLineEdit:hover {
+    border: 4px solid blue;
+}
+
+
+/* 2 QTextEdit */
+
+QTextEdit {
+    border: 3px solid rgb(41, 57, 85);
+    border-radius: 20px;
+    padding-top: 10px;
+    padding-left: 30px;
+    /* border-image: url(pyside2_pyqt/pys2/xxx.png); */
+    selection-background-color: green;
+    selection-color: red;
+    font-size: 14px;
+}
+
+
+/* 3 QComboBox */
+
+QComboBox {
+    color: red;
+    selection-background-color: orange;
+    min-height: 40px;
+    min-width: 80px;
+}
+
+
+/* 这里是下拉框QComboBox的下拉文本框子控件QAbstractItemView */
+
+QComboBox QAbstractItemView {
+    font: 14px;
+    selection-color: white;
+    selection-background-color: rgb(80, 80, 80);
+    background-color: orange;
+}
+
+QComboBox QAbstractItemView::item {
+    color: green;
+}
+
+
+/* 下拉箭头按钮控件  */
+
+QComboBox::drop-down {
+    background-color: cyan;
+}
+
+
+/* 下拉箭头按钮中的箭头 */
+
+QComboBox::down-arrow {
+    image: url(pyside2_pyqt/pys2/xxx.png);
+    width: 20px;
+    height: 20px;
+}
+
+
+/* 4 QSlider */
+
+
+/* 滑槽 指示条
+margin外边距设为负值，是扩大了内容区，方便滑块的滑动。
+也可以用内边距padding设置。
+margin-left: -10px;
+margin-right: -10px;
+margin-top: -5px;
+margin-bottom: -5px;
+*/
+
+QSlider::groover:Horizontal {
+    background: lightgray;
+    height: 16px;
+    /* padding-left: -15px; */
+    /* padding-right: -15px; */
+}
+
+
+/* 水平滑块 指示器 handle专指水平滑块*/
+
+QSlider::handle:Horizontal {
+    border-image: url(pyside2_pyqt/pys2/xxx.png);
+    height: 60px;
+    width: 30px;
+}
+
+
+/* add-page表示还没有滑过区的部分 */
+
+QSlider::add-page:Horizontal {
+    background-color: white;
+    height: 4px;
+}
+
+
+/* sub-page表示已经滑过了的部分 没有出效果*/
+
+
+/* QSlider::sub-page:Horizontal {
+    background-color: qlineargradient (x1: 0, y1: 0, x2: 1, y2: 0, stop: 0 cyan, stop: 1 blue);
+    height: 4px;
+} */
+
+
+/* 5 QProgressBar */
+
+QProgressBar {
+    border: 2px solid gray;
+    border-radius: 5px;
+    text-align: center;
+    color: yellow;
+    font-size: 20px;
+    background-color: orange;
+}
+
+
+/* 进度条是由很多chunk小方块组成的，每个小方块样式如下 */
+
+QProgressBar::chunk {
+    background-color: green;
+    width: 10px;
+    margin: 0.5px;
+}

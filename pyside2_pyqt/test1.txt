@@ -1,0 +1,20 @@
+
+(venv) D:\pyj\st\study>d:/pyj/st/venv/Scripts/python.exe d:/pyj/st/study/pyside2_pyqt/pys2/35-1-QFileDialog-案例.py
+Traceback (most recent call last):
+  File "d:/pyj/st/study/pyside2_pyqt/pys2/35-1-QFileDialog-案例.py", line 32, in <module>
+    wd=Window()
+  File "d:/pyj/st/study/pyside2_pyqt/pys2/35-1-QFileDialog-案例.py", line 12, in __init__
+    self.setup_ui()
+  File "d:/pyj/st/study/pyside2_pyqt/pys2/35-1-QFileDialog-案例.py", line 27, in setup_ui
+    print(result)
+NameError: name 'result' is not defined
+
+(venv) D:\pyj\st\study>d:/pyj/st/venv/Scripts/python.exe d:/pyj/st/study/pyside2_pyqt/pys2/35-1-QFileDialog-案例.py
+
+(venv) D:\pyj\st\study>d:/pyj/st/venv/Scripts/python.exe d:/pyj/st/study/pyside2_pyqt/pys2/35-1-QFileDialog-案例.py
+
+
+新变局1
+新变局1
+新变局1
+新变局1

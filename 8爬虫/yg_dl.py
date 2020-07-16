@@ -11,8 +11,8 @@ def yg_dl(url):
 
 if __name__ == "__main__":
     urls=[
-        'https://www.bilibili.com/video/BV19441127ba?p=213',
-        'https://www.bilibili.com/video/BV19441127ba?p=214',
+        'https://www.bilibili.com/video/BV19441127ba?p=27',
+        'https://www.bilibili.com/video/BV19441127ba?p=94',
     ]
     # 线程池 不填数量 默认=cpu核心数量*5
     pool=ThreadPoolExecutor(2)

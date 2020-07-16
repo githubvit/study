@@ -239,3 +239,6 @@
             local   0.000GB
             test    0.000GB
             >
+        # 输入 exit 退出
+            > exit
+            bye

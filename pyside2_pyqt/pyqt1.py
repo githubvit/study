@@ -144,9 +144,14 @@ class Stats():
                     )
 # 程序实例化
 app = QApplication([])
+
 # 界面类实例化
 stats = Stats()
-# 界面类主窗口的展示 ***
+# 秀出界面 显示窗口 没有show() 就不显示 界面类主窗口的展示 ***
 stats.window.show()
-# 启动程序
+
+# 启动程序 进入死循环 阻塞 直到按x 退出阻塞
 app.exec_()
+
+# 只有关闭界面后才会执行下一行代码
+print('阻塞了')

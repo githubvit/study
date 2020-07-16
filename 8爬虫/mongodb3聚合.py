@@ -55,7 +55,7 @@ def data_ready():
     ('jinxin','male',18,'19000301','teacher',30000,401,1),
     ('成龙','male',48,'20101111','teacher',10000,401,1),
 
-    ('歪歪','female',48,'20150311','sale',3000.13,402,2),#以下是销售部门
+    ('歪歪','female',48,'20150311','sale',3000.13,402,2), #以下是销售部门
     ('丫丫','female',38,'20101101','sale',2000.35,402,2),
     ('丁丁','female',18,'20110312','sale',1000.37,402,2),
     ('星星','female',18,'20160513','sale',3000.29,402,2),
@@ -139,6 +139,19 @@ def data_ready():
             { "_id" : "operation", "avg_salay" : 10000.13 }
             { "_id" : "teacher", "avg_salay" : 204780.062 }
             >
+            db.emp.aggregate(
+                {"$match":{}}, #匹配所有
+                {"$group":{"_id":"$post","avg_salay":{"$avg":"$salary"}}}
+            )
+            > db.emp.aggregate(
+            ...                 {"$match":{}},
+            ...                 {"$group":{"_id":"$post","avg_salay":{"$avg":"$salary"}}}
+            ...             )
+            { "_id" : "teacher", "avg_salay" : 151842.90142857144 }
+            { "_id" : "老男孩驻沙河办事处外交大使", "avg_salay" : 7300.33 }
+            { "_id" : "sale", "avg_salay" : 2600.294 }
+            { "_id" : "operation", "avg_salay" : 16800.026 }
+            >
         # 4 找到年龄大于20的 按岗位分组 并显示 岗位平均工资  过滤出 岗位平均工资>10000的
             select post,avg(salary)as avg_salary from db1.emp where age>20 group by post having avg(salary)>10000
             db.emp.aggregate(
@@ -146,7 +159,7 @@ def data_ready():
                 {"$group":{"_id":"$post","avg_salay":{"$avg":"$salary"}}},
                 {"$match":{"avg_salay":{"$gt":10000}}}
             )
-            # 从上面看出一聚合aggregate就是建立了管道，每步把结果放到管道里，下一步从管道取出执行右放到管道里，
+            # 从上面看出一聚合aggregate就是建立了管道，每步把结果放到管道里，下一步从管道取出执行又放到管道里，
             # 每步都从管道里拿上一步输出的结果作为输入。
             > db.emp.aggregate(
             ...                 {"$match":{"age":{"$gt":20}}},
@@ -155,6 +168,15 @@ def data_ready():
             ...             )
             { "_id" : "teacher", "avg_salay" : 204780.062 }
             { "_id" : "operation", "avg_salay" : 10000.13 }
+            >
+
+            > db.emp.aggregate(
+            ... {'$match':{}},
+            ... {'$group':{'_id':'$post','avg_salary':{'$avg':'$salary'}}},
+            ... {'$match':{'avg_salary':{'$gte':10000}}}
+            ... )
+            { "_id" : "teacher", "avg_salary" : 151842.90142857144 }
+            { "_id" : "operation", "avg_salary" : 16800.026 }
             >
 
 
@@ -223,10 +245,10 @@ def data_ready():
 
         # 4 把""_id"改成 "部门",再次投射
         db.emp.aggregate(
-            {"$project":{"_id":0,"post":1,"annual_salary":{"$multiply":[12,"$salary"]}}},
-            {"$group":{"_id":"$post","平均年薪":{"$avg":"$annual_salary"}}},
-            {"$match":{"平均年薪":{"$gt":1000000}}},
-            {"$project":{"_id":0,"部门":"$_id","平均年薪":1}}
+            {"$project":{"_id":0,"post":1,"annual_salary":{"$multiply":[12,"$salary"]}}},  #投射
+            {"$group":{"_id":"$post","平均年薪":{"$avg":"$annual_salary"}}},                #分组
+            {"$match":{"平均年薪":{"$gt":1000000}}},                                        #筛选
+            {"$project":{"_id":0,"部门":"$_id","平均年薪":1}}                               #再次投射
         )
         > db.emp.aggregate(
         ...             {"$project":{"_id":0,"post":1,"annual_salary":{"$multiply":[12,"$salary"]}}},
@@ -425,6 +447,18 @@ def data_ready():
         }
         >
 
+        db.emp.aggregate(
+            {"$group":{
+                "_id":"$post", 
+                "max_age":{"$max":"$age"},          
+                "min_id":{"$min":"$_id"},           
+                "avg_salary":{"$avg":"$salary"},    
+                "sum_salary":{"$sum":"$salary"},    
+                "count":{"$sum":1},                 
+                "names":{"$push":"$name"},           
+                "ids":{"$push":"$_id"}         
+            }}
+        ).pretty()
 
 # 四 排序：$sort、限制：$limit、跳过：$skip
     {"$sort":{"字段名":1,"字段名":-1}} # 1升序，-1降序

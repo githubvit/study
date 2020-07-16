@@ -159,6 +159,18 @@
 
                     2 便于分布式布置，分散压力，提高效率、提高健壮性。
 
+                #创建ObjectId
+                > newObjectId = ObjectId()
+                ObjectId("5ece005ddeef26fe3d1e092c")
+                # 用变量名从ObjectId获取时间 报错
+                > ObjectId(newObjectId).getTimestamp()
+                2020-05-27T13:56:44.852+0800 E  QUERY    [js] Error: invalid object id: length :
+                @(shell):1:1
+                >
+                # 用创建的ObjectId获取时间 成功 这个时间是国际时即ISO时间不是中国时区 在’T05:53:33Z‘要+8，北京时间应该是13:53:33.
+                > ObjectId("5ece005ddeef26fe3d1e092c").getTimestamp()
+                ISODate("2020-05-27T05:53:33Z")
+
             单行插入insert(user0)
             多行插入insertMany([user1,user2,user3,user4])
                 > db.user.drop()
@@ -554,7 +566,7 @@
             # 8 排序
                # 排序:--1代表升序，-1代表降序
                 db.user.find().sort({"name":1,})
-                db.user.find().sort({"age":-1,'_id':1})
+                
 
             # 9 分页
                 #  分页:--limit代表取多少个document，skip代表跳过前多少个document。
@@ -841,7 +853,16 @@
                     {"multi":true}
                 )
                 WriteResult({ "nMatched" : 9, "nUpserted" : 0, "nModified" : 9 })
+                
+                # 
+                db.emp.update(
+                    {},
+                    {'recode':{
+                        't1':[],
+                        'tr':[],
 
+                    }}
+                )
 
             8 数组 hobbies 添加或删除组内元素 "$push" "$each"  "$pop" "$pull"
                 往数组内尾部添加元素:"$push" 不考虑重复
@@ -861,12 +882,17 @@
                         {"name":"yuanhao"},
                         {"$pop":{"hobbies":1}}
                     )
+                    db.user.update(
+                        {'name':'egon'},
+                        {'$pop':{'hobbies':2}}
+                    )
 
                     #4、{"$pop":{"key":-1}} 从头部删除
                     db.user.update(
                         {"name":"yuanhao"},
                         {"$pop":{"hobbies":-1}}
                     )
+                    db.user.update({'_id':5},{"$pop":{"hobbies":-1}})
                 把符合条件的统统删掉："$pull"
                     #5、按照条件删除元素,："$pull" 把符合条件的统统删掉，而$pop只能从两端删
                     db.user.update(
@@ -891,10 +917,9 @@
                             'http://www.baidu.com',
                             'http://www.xxxx.com'
                             ]
-                            }
                         }
                     }
-                )
+                })
 
             10 其他
                 #1、了解：限制大小"$slice"，只留最后n个
@@ -902,7 +927,7 @@
                     "$push":{"hobbies":{
                         "$each":["read",'music','dancing'],
                         "$slice":-2
-                    }
+                        }   
                     }
                 })
 
@@ -912,11 +937,18 @@
                         "$each":["read",'music','dancing'],
                         "$slice":-1,
                         "$sort":-1
-                    }
+                        }
                     }
                 })
-
-                #注意：不能只将"$slice"或者"$sort"与"$push"配合使用，且必须使用"$eah"
+                
+                db.user.update({"_id":5},{
+                    "$push":{"hobbies":{
+                        "$each":["read",'music','dancing'],
+                       
+                        }
+                    }
+                })
+                #注意：不能只将"$slice"或者"$sort"与"$push"配合使用，且必须使用"$each"
 
 
         # 删

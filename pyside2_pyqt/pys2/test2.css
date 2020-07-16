@@ -1,0 +1,96 @@
+/* 样式冲突
+一个控件受多个祖先控件影响，则会不同属性产生叠加，相同属性产生覆盖。
+
+覆盖：
+
+1. 先看特异性，特异性越明显越优先。
+
+子类和父类的特异性相同。
+
+2. 特异性相同，则靠后覆盖靠前的。
+
+
+*/
+
+
+/* 例1 特异性不同 */
+
+
+/* QPushButton#okButton {
+    color: red;
+}
+
+QPushButton {
+    color: white;
+} */
+
+
+/* 例2 特异性不同 */
+
+
+/* 
+QPushButton:hover {
+    color: red;
+}
+
+QPushButton {
+    color: white;
+} */
+
+
+/* 例3 特异性想同 */
+
+
+/* 3.1 特异性相同 
+看似都生效
+实际由于后一个是hover，那没有hover时，按钮需要一个默认值。
+前一个enable就是把red覆盖了按钮的默认值。
+
+*/
+
+
+/* QPushButton:enabled {
+    color: red;
+}
+
+QPushButton:hover {
+    color: white;
+} */
+
+
+/* 3.2  特异性相同 hover不生效 */
+
+
+/* QPushButton:hover {
+    color: white;
+}
+
+QPushButton:enabled {
+    color: red;
+} */
+
+
+/* 3.3  特异性不同
+ 给hover添加了特异性 即按钮有效并且鼠标在上
+*/
+
+
+/* QPushButton:enabled:hover {
+    color: white;
+}
+QPushButton:enabled {
+    color: red;
+} */
+
+
+/* 例4 特异性想同 
+父类和子类的特异性相同，靠后覆盖靠前
+*/
+
+QPushButton {
+    color: red;
+}
+
+QAbstractButton {
+    color: white;
+}
