@@ -1,0 +1,277 @@
+项目说明
+1. MVC 开发方式
+    M 与 数据库 打交道的部分 存取
+
+    v 与 界面   打交道的部分 输入与输出
+
+    C 联结 M与V 的控制部分 存取什么数据 与 输入与输出什么数据
+
+    1.1 开发步骤
+        1.1.1 建立目录结构
+        1.1.2 建立数据结构
+        1.1.3 建立model
+        1.1.4 建立界面文件
+        1.1.5 建立view
+        1.1.6 建立controller
+        
+
+2. 目录结构
+    login_register_calculate_case 项目文件夹
+        resouse 资源文件夹
+            images  图片文件夹
+            ui      界面文件夹
+
+        model   数据文件夹
+        view    视图文件夹
+        controller  控制文件夹
+
+        readme.text     项目说明文件
+
+
+3. 文件说明
+
+    3.1 界面设计师操作
+        给 QPushButton 按钮 添加圆角：
+            按钮要设置最小高度，
+            一定要设background-color,
+            border-radius 才有效。
+            原因在于有可能是设置了border-radius 则原来的background-color没了要重写。
+
+        lineEdit 有 clearButtonEnabled 一键清除按钮 选择打勾 才会有
+        将多个按钮外形变为圆形，一定要有选择器。
+
+        界面控件的命名objectname一定要 见文知义。
+
+        给 QPushButton 按钮 添加 可选择 checkable ，达到选中状态。
+
+        register界面的操作，练习：
+                控件的选择和摆放。
+                样式的添加和控制: 
+                    用选择器加伪状态进行样式变化控制；按钮必须有最小高度，才能设置边框圆角; 
+                    过滤器filet 用sty 可以快速定位到样式表。
+
+                命名：见文知义，功能_控件类型。
+
+        login界面的操作，练习：
+            1 布局
+            2 边距 控件距离 伸缩因子
+            3 控件的布局对齐方向    
+            
+        calculate界面的操作，练习：
+            1 设计师只是用来布局
+            2 自定义CalculateBtn类的使用
+                因为,设计师的样式无法实现QPushButton动态样式，
+                所以，用代码写出CalculateBtn自定义类，在设计师将QPushButton控件提升为CalculateBtn类，实现动态样式。
+            3 自定义CalculateBtn类的动态样式，在设计师界面看不出，要用转换为代码的文件才能看到，即在view_calculate.py才能看到。
+            4 在设计师界面设置按钮的属性和值，要和代码写出的自定义类中样式控制的属性和值相一致。
+            5 为所有按钮添加可以被选中checkable和自动排他性（互斥）autoExclusive，但是只给运算符按钮添加选中样式。
+            6 配合业务逻辑实现按功能定义四类角色
+                数字（num）、运算符（operator）、清空AC（clear）、计算=（calculate）    
+
+            7 在自定义CalculateBtn类中定义键值信号和发射该信号。
+                把每个键的text和角色的值发射出去。便于外部计算
+
+    3.2 调用转换后的py界面文件，碰到 背景图片打不开 
+        在类初始化时，加入下面这行代码，
+        #解决背景图片没有了的问题
+        self.setAttribute(Qt.WA_StyledBackground,True)
+
+    3.3 view文件：
+        使用ui和资源转换文件生成的界面文件。
+        view文件中的自定义信号：
+            是对外发射的信号，要在外部测试，那么可在本文件添加（__main__），即在（__main__）里面测试即可。
+            是main文件用来捕捉的信号。
+
+        3.3.1 register 文件
+            引入ui文件转换的py文件中的Ui_Form类 并继承。
+            调用该类的self.setupUi(self)方法并用self填充父类。
+            用装饰器方式定义槽函数自动连接控件。
+            解决背景图像问题。
+            动画的添加和控制：保存位置初始值，避免位置变化带来的错误。
+        
+            修改初始化，提供必须填写父对象的参数parent,确定从属关系。
+            不然在main文件中子界面填写父对象会造成闪退，
+            并且还决定了main文件相关中子界面对象的move中填写的位置是绝对位置还是相对位置。
+
+        3.3.2 login 文件
+            解决gif问题。
+            二维码图片按钮一键入群：
+                二维码图片按钮打开qq群链接，http://qun.qq.com/join.html，
+                用qq登录，选择该qq中的一个群，就会生成一键加入该群的网页代码、iphone代码、安卓代码、二维码。
+                把生成的 二维码图片 作为按钮背景。使得扫码即可以加入该群。
+                给按钮添加 网页代码中href中的http链接 就可以实现点击按钮加入该群。
+
+        3.3.3 calculate 文件
+            自定义工具类：
+                接收自定义CalculateBtn类发射的按键信号{键值,角色}，处理计算业务逻辑。
+
+    3.4 main文件 
+        是控制器controller文件，也是入口文件：
+            1 从view生成界面对象：  主界面show() 子界面hide()
+            2 界面对象捕捉信号：    完成界面切换 用槽函数控制界面切换
+
+
+4 打包 pyinstaller
+    将'代码+资源+依赖+环境'打包成一个单独的文件（夹），直接交付给没有任何安装环境的用户使用。
+
+    pyinstaller针对windows\Mac OS X 和 Linux进行了测试。
+
+    pyinstaller的安装环境应该与开发项目的环境相一致，这是正确打包的前提。
+    也就是说在什么环境开发就应该在该环境安装pyinstaller，并在该环境下打包。
+
+    常用形式：进入到项目目录 
+        执行如下命令
+            pyinstaller 选项 主入口文件
+            pyinstaller [opts] main.py 
+            选项：
+                -F 打包成一个exe文件
+                -D 默认 创建一个目录，包含exe，有很多依赖
+
+                -C 有控制台 有dos窗口 可以看到print的输出
+                -w 仅仅使用窗口
+        在项目目录下生成：
+            bulid和dist两个目录
+
+        根据spec配置文件打包：
+
+            spec文件中主要包含4个class: Analysis, PYZ, EXE和COLLECT.
+
+                Analysis以py文件为输入，它会分析py文件的依赖模块，并生成相应的信息
+
+                PYZ是一个.pyz的压缩包，包含程序运行需要的所有依赖
+
+                EXE根据上面两项生成
+
+                COLLECT生成其他部分的输出文件夹，COLLECT也可以没有
+
+5 根据配置打包 
+    添加资源（ui和rc转成的py文件和css样式文件。）将项目打成一个exe文件。
+        生成配置：
+            pyi-makespec -F main.py 在当前目录下得到 main.spec
+
+            (venv) D:\pyj\st\study\pyside2_pyqt\pys2\login_register_calculate_case>pyi-makespec -F main.py
+            wrote D:\pyj\st\study\pyside2_pyqt\pys2\login_register_calculate_case\main.spec
+            now run pyinstaller.py to build the executable
+
+            (venv) D:\pyj\st\study\pyside2_pyqt\pys2\login_register_calculate_case>
+
+            {
+            # -*- mode: python ; coding: utf-8 -*-
+
+            block_cipher = None
+            
+            
+            a = Analysis(['main.py'],
+                         pathex=['D:\\pyj\\st\\study\\pyside2_pyqt\\pys2\\login_register_calculate_case'],
+                         binaries=[],
+                         datas=[],
+                         hiddenimports=[],
+                         hookspath=[],
+                         runtime_hooks=[],
+                         excludes=[],
+                         win_no_prefer_redirects=False,
+                         win_private_assemblies=False,
+                         cipher=block_cipher,
+                         noarchive=False)
+            pyz = PYZ(a.pure, a.zipped_data,
+                         cipher=block_cipher)
+            exe = EXE(pyz,
+                      a.scripts,
+                      a.binaries,
+                      a.zipfiles,
+                      a.datas,
+                      [],
+                      name='main',
+                      debug=False,
+                      bootloader_ignore_signals=False,
+                      strip=False,
+                      upx=True,
+                      upx_exclude=[],
+                      runtime_tmpdir=None,
+                      console=True )
+
+            }
+        修改配置文件 
+            改动两处：
+            1 添加py文件
+                把ui界面和rc资源转换的py文件添加到入口文件后。
+            2 添加样式文件
+                到data字段，并放在当前目录'.'下。
+
+            {
+                a = Analysis([
+                            'main.py',
+                            'D:\\pyj\\st\\study\\pyside2_pyqt\\pys2\\login_register_calculate_case\\view\\calculate_btn_class.py',
+                            'D:\\pyj\\st\\study\\pyside2_pyqt\\pys2\\login_register_calculate_case\\view\\login_register_calculate_case_rc.py',
+                            'D:\\pyj\\st\\study\\pyside2_pyqt\\pys2\\login_register_calculate_case\\view\\Ui_calculate.py',
+                            'D:\\pyj\\st\\study\\pyside2_pyqt\\pys2\\login_register_calculate_case\\view\\Ui_login.py',
+                            'D:\\pyj\\st\\study\\pyside2_pyqt\\pys2\\login_register_calculate_case\\view\\Ui_register.py',
+                            'D:\\pyj\\st\\study\\pyside2_pyqt\\pys2\\login_register_calculate_case\\view\\view_calculate.py',
+                            'D:\\pyj\\st\\study\\pyside2_pyqt\\pys2\\login_register_calculate_case\\view\\view_login.py',
+                            'D:\\pyj\\st\\study\\pyside2_pyqt\\pys2\\login_register_calculate_case\\view\\view_register.py', 
+                            ],
+                            datas=[('D:\\pyj\\st\\study\\pyside2_pyqt\\pys2\\login_register_calculate_case\\view\\calculate_btn.css','.')],
+            }
+        按照配置文件打包:
+            pyinstaller -F main.spec
+
+
+
+6 问题
+    6.1 项目目录结构问题，解决：
+
+        1 把根目录导入系统环境变量
+        2 把要导入的文件夹导入系统环境变量
+        3 直接从文件引入类 
+            {
+                import sys,os
+
+                #找到项目根目录
+                BASE_DIR=os.path.dirname(__file__) # 取得父目录，即项目根目录
+                # 找到view目录
+                view_path=r'%s\view'%BASE_DIR 
+                # 把项目根目录加入环境变量 然后其它导入就有根了
+                sys.path.append(BASE_DIR)
+                # 把view目录导入sys
+                sys.path.append(view_path)
+
+
+
+                # from PyQt5.Qt import *
+                # 入口文件
+                # 引入view
+                from view_login import LoginUi
+                from view_register import RegisterUi
+                from view_calculate import CalculateUi
+
+
+            }
+
+    6.2 打包问题
+
+        1. 更换目标文件夹里面的plugs文件下的platforms文件夹。
+        2. 找不到资源veiw_login
+            把view中的资源复制到dist目录下（css样式文件、ui界面py文件和qrc资源py文件等）
+       
+        3. 在view文件中的css文件路径上要用os.path.dirname(__file__)拼接路径：避免找不到路径的问题。
+            import sys,os
+
+            #定位css文件
+            ss_dir=os.path.dirname(__file__)
+            ss_path='%s\calculate_btn.css'%css_dir
+        
+            
+        4. 界面切换 背景图片看不到 背景是透明的
+                这是因为打包的pyinstaller是全局的，而项目的开发是在venv虚拟环境开发的。
+                解决：
+                    在项目开发的虚拟环境安装pyinstaller后，在虚拟环境中使用pyinstaller打包该项目，成功看到背景。
+
+                    pyinstaller的安装环境应该与开发项目的环境相一致，这是正确打包的前提。
+
+                    这样打包就不用更换目标文件夹里面的plugs文件下的platforms文件夹。解决了1.
+
+
+
+        
+
+      

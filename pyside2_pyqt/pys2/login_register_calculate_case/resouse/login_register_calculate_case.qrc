@@ -1,0 +1,15 @@
+<RCC>
+  <qresource prefix="background">
+    <file>images/regsiter_background.jpg</file>
+    <file>images/background_regsiter.jpg</file>
+  </qresource>
+  <qresource prefix="login">
+    <file>images/background_regsiter.jpg</file>
+    <file>images/bd.png</file>
+    <file>images/safe1.png</file>
+    <file>images/safe2.png</file>
+    <file>images/bottom_btn.png</file>
+    <file>images/captain_america.png</file>
+    <file>images/login_bg.gif</file>
+  </qresource>
+</RCC>

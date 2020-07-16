@@ -1,0 +1,415 @@
+/* 一
+样式盒子模型
+    1 外边距    margin
+    2 边框      border
+    3 内边距    padding
+    4 内容区块  content
+    123默认=0
+    与html不同的是margin包含在控件尺寸内。
+
+常用单位：
+    一般 1em=16px
+
+边框 
+边框：粗细 样式 颜色。
+    样式 ： 
+        none 无
+        dotted    点状
+        dashed    虚线
+        solid     实线
+        double    双线
+        groove    3D凹槽
+        ridge     3D隆状
+        inset     3D内边框
+        outset    3D外边框
+
+*/
+
+
+/* 四条线统一设置
+四个值：
+border-style:(上,右,下,左)
+border-width:(上,右,下,左)
+两个值：
+border-width:(上和下,左和右)
+一个值：就是上下左右都一样
+
+
+
+
+边框图片：
+    （图片路径） 裁剪值 30 30 30 30  重复策略 repeat
+    border-image:url(../source/border_test.png) 30 30 30 30 repeat;
+    裁剪值：
+        上 右 下 左  画出九宫格，排除四个角。
+    重复策略：
+        round       平铺
+        repeat      重复
+        stretch     拉伸
+
+    注意：需要使用border-width辅助确定边框宽度
+
+
+*/
+
+
+/* 二 背景
+
+background：
+background-color：单词、rgb(),十六进制数。
+background-image：url(路径 注意路径分隔符‘/’，不能用‘\’)
+background-position：
+    背景图片位置，配合no-repeat模式。
+    background-position：right top; 右上对齐
+background-origin：
+    图片对齐参照位置，配合no-repeat模content式。
+    background-origin：border。以边框线为对齐基准。
+    background-origin：content。以内容区边界为对齐基准。
+background-clip：
+    背景裁剪，不光裁剪图片还裁剪背景色。
+    background-clip：content。超过内容区的背景图片和背景色被裁剪
+    background-clip：paddinging。超过内边距的背景图片和背景色被裁剪
+background-repeat：
+    重复策略 no-repeat 不重复 按重复方向重复 repeat-x repeat-y repeat-xy（默认）。
+background-attachment：
+    背景是否跟随控件多余部分滚动而滚动
+    background-attachment：scroll;滚动
+    background-attachment：fixed;固定
+
+
+渐变色：
+    线性渐变：qlineargradient(起始位置，结束位置,某颜色起始点在线段的比例位置) 可以有很多颜色断点
+        qlineargradient(x1:0,y1:0,x2:1,y2:1,stop:0 white,stop:0.4 gray,stop:1 green)
+   
+    辐射渐变：(中心比例位置，半径比例大小，光源比例位置，颜色断点)
+        qradialgradient(cx:0.7,cy:0.7,radius:0.5,fx:0.5,fy:0.5,stop:0 red,stop:1 orange)
+
+    角度渐变：(中心比例位置，起始角（颜色分界角），颜色断点角度比例)
+        qconicalgradient(cx:0.5,cy:0.5,angle:10,stop:0 red,stop:1 orange)
+
+
+
+*/
+
+
+/* 字体
+
+font.family
+font.size
+font.style
+font.weight:100\200\300... 900。400等于Normal,700等于bold。
+color
+
+
+*/
+
+
+/* 最大最小尺寸
+
+min-width:200px;
+min-height:200px;
+max-width:600px;
+max-height:600px;
+*/
+
+
+/* 直接设置给窗口父控件 */
+
+Window {
+    min-width: 200px;
+    min-height: 200px;
+    max-width: 600px;
+    max-height: 600px;
+}
+
+QLabel {
+    /* background-color: cyan; */
+    /* 线性 */
+    /* background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 red, stop: 0.4 gray, stop: 1 green); */
+    /* 辐射 */
+    /* background-color: qradialgradient(cx: 0.7, cy: 0.7, radius: 0.5, fx: 0.5, fy: 0.5, stop: 0 red, stop: 1 orange); */
+    /* 辐射 中心和光源重合 */
+    /* background-color: qradialgradient(cx: 0.5, cy: 0.5, radius: 0.5, fx: 0.5, fy: 0.5, stop: 0 red, stop: 1 orange); */
+    /* 角度 */
+    background-color: qconicalgradient(cx: 0.5, cy: 0.5, angle: 45, stop: 0 red, stop: 1 orangered);
+    /* border-width: 6px; */
+    /* border-style: dotted dashed double solid; */
+    /* border-width: 2px 4px 8px 16px; */
+    /* border-top-style: groove; */
+}
+
+
+/* 三 控制子控件
+
+Subcontrol
+Subcontrol-Origin:  子控件参考位置 border 或 padding(默认)
+Subcontrol-Position：水平 left right 垂直 top down center
+Top Bottom 和 Left Right:
+    position:relative;  相对定位
+    position:absolute;  绝对定位
+
+*/
+
+
+/* 把步长调节器向上的箭头移到最左侧 */
+
+QSpinBox {
+    font-size: 26px;
+    color: orange;
+    border: 10px double red;
+    border-radius: 10px;
+}
+
+QSpinBox::up-button,
+QSpinBox::down-button {
+    width: 40px;
+    height: 40px;
+}
+
+QSpinBox::up-button {
+    subcontrol-position: left center;
+    image: url(pyside2_pyqt/pys2/xxx.png);
+}
+
+QSpinBox::down-button {
+    subcontrol-position: right center;
+}
+
+
+/* 用伪状态添加 一点点动画 */
+
+QSpinBox::up-button:hover {
+    bottom: 10px;
+    /*添加10px距离 使得 该控件向上移动10px*/
+}
+
+QSpinBox::down-button:hover {
+    top: 10px;
+    /*添加10px距离 使得 该控件向上移动10px*/
+}
+
+QCheckBox {
+    color: gray;
+    border: 10px double rgb(76, 76, 76);
+    padding: 5px;
+}
+
+QCheckBox::indicator {
+    /* subcontrol-origin: border; */
+    subcontrol-origin: padding;
+    subcontrol-position: left center;
+    background: white;
+    border: 2px solid gray;
+}
+
+QCheckBox::indicator:checked {
+    background-color: gray;
+}
+
+
+/* 特殊样式 */
+
+QPushButton {
+    border: none;
+    border-bottom: 2px solid darkgray;
+    background-color: transparent;
+    /*穿越父控件 透明背景*/
+    border: 2px solid darkgray;
+    border-radius: 5px;
+    font-weight: 500;
+    max-width: 100px;
+}
+
+QPushButton:hover {
+    background-color: rgb(236, 177, 172);
+}
+
+QPushButton:pressed {
+    background-color: rgb(148, 23, 11);
+}
+
+QPushButton:disabled {
+    background-color: gray;
+}
+
+QCheckBox {
+    margin-left: 20px;
+    padding-left: 10px;
+    border: 1px solid black;
+}
+
+QRadioButton {
+    padding-left: 10px;
+    spacing: 60px;
+    color: red;
+    font-size: 20px;
+    border: 1px solid black;
+    border-radius: 40px;
+}
+
+
+/* 1 QLineEdit */
+
+QLineEdit {
+    min-width: 50px;
+    min-height: 50px;
+    border: 3px solid rgb(41, 57, 85);
+    border-radius: 10px;
+    background: white;
+    selection-background-color: green;
+    /*控制选中后的背景色 背景绿色块*/
+    selection-color: red;
+    /*控制选中后的前景色 比如文字会变红*/
+    font-size: 14px;
+}
+
+
+/* 当设置了密文模式 
+ascⅡ码 为65 表示字符 大写 A
+用大写字母A占位  但是在这里无效
+
+*/
+
+QLineEdit[echoMode='2'] {
+    background-color: gray;
+    /*这个有效，说明选择器有效*/
+    lineedit-password-character: 65;
+    /*这个在这里无效，当用设计师编辑时有效*/
+}
+
+
+/* 设置了只读 背景就变灰 */
+
+QLineEdit[readOnly='true'] {
+    background-color: gray;
+}
+
+QLineEdit:hover {
+    border: 4px solid blue;
+}
+
+
+/* 2 QTextEdit */
+
+QTextEdit {
+    border: 3px solid rgb(41, 57, 85);
+    border-radius: 20px;
+    padding-top: 10px;
+    padding-left: 30px;
+    /* border-image: url(pyside2_pyqt/pys2/xxx.png); */
+    selection-background-color: green;
+    selection-color: red;
+    font-size: 14px;
+}
+
+
+/* 3 QComboBox */
+
+QComboBox {
+    color: red;
+    selection-background-color: orange;
+    min-height: 40px;
+    min-width: 80px;
+}
+
+
+/* 这里是下拉框QComboBox的下拉文本框子控件QAbstractItemView */
+
+QComboBox QAbstractItemView {
+    font: 14px;
+    selection-color: white;
+    selection-background-color: rgb(80, 80, 80);
+    background-color: orange;
+}
+
+QComboBox QAbstractItemView::item {
+    color: green;
+}
+
+
+/* 下拉箭头按钮控件  */
+
+QComboBox::drop-down {
+    background-color: cyan;
+}
+
+
+/* 下拉箭头按钮中的箭头 */
+
+QComboBox::down-arrow {
+    margin-top: 15px;
+    image: url(pyside2_pyqt/pys2/xxx.png);
+    width: 20px;
+    height: 20px;
+}
+
+QComboBox:hover {
+    border-bottom: 2px solid lightskyblue;
+}
+
+
+/* 4 QSlider */
+
+
+/* 滑槽 指示条
+margin外边距设为负值，是扩大了内容区，方便滑块的滑动。
+也可以用内边距padding设置。
+margin-left: -10px;
+margin-right: -10px;
+margin-top: -5px;
+margin-bottom: -5px;
+*/
+
+QSlider::groover:Horizontal {
+    background: lightgray;
+    height: 16px;
+    /* padding-left: -15px; */
+    /* padding-right: -15px; */
+}
+
+
+/* 水平滑块 指示器 handle专指水平滑块*/
+
+QSlider::handle:Horizontal {
+    border-image: url(pyside2_pyqt/pys2/xxx.png);
+    height: 60px;
+    width: 30px;
+}
+
+
+/* add-page表示还没有滑过区的部分 */
+
+QSlider::add-page:Horizontal {
+    background-color: white;
+    height: 4px;
+}
+
+
+/* sub-page表示已经滑过了的部分 没有出效果*/
+
+
+/* QSlider::sub-page:Horizontal {
+    background-color: qlineargradient (x1: 0, y1: 0, x2: 1, y2: 0, stop: 0 cyan, stop: 1 blue);
+    height: 4px;
+} */
+
+
+/* 5 QProgressBar */
+
+QProgressBar {
+    border: 2px solid gray;
+    border-radius: 5px;
+    text-align: center;
+    color: yellow;
+    font-size: 20px;
+    background-color: orange;
+}
+
+
+/* 进度条是由很多chunk小方块组成的，每个小方块样式如下 */
+
+QProgressBar::chunk {
+    background-color: green;
+    width: 10px;
+    margin: 0.5px;
+}
