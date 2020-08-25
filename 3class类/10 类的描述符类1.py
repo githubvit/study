@@ -31,28 +31,28 @@ class Int:
 class People:
     name=Str() #定义成str描述符对象
     age=Int()
-    def __init__(self,name,age): #name被Str类代理,age被Int类代理,
-        self.name=name #设置时就会执行描述符的_set_()方法
-        self.age=age
+    def __init__(self,n,a): #name被Str类代理,age被Int类代理,
+        self.name=n #设置时就会执行描述符的_set_()方法
+        self.age=a
 
 p1=People('alex',18)
-# Str设置...
+# Str设置... <__main__.People object at 0x0000022C2A893408> alex
 # Int设置...
 
 
 # #描述符Str的使用
-p1.name         #Str调用
-p1.name='egon'  #Str设置...
+# p1.name         #Str调用 <__main__.People object at 0x000001E94CBA14C8> <class '__main__.People'>
+# p1.name='egon'  #Str设置...  <__main__.People object at 0x000001E94CBA14C8> egon 
 # del p1.name
 print(p1.name,p1.age) # None None
-
+print(People.name,People.age) # None None
 # #描述符Int的使用
 # p1.age
 # p1.age=18
 # del p1.age
 
 # #我们来瞅瞅到底发生了什么
-# print(p1.__dict__)
+print(p1.__dict__)
 #对象的名称空间为空 {} 里面的参数被类属性描述符代理了，所以为空
 # print(People.__dict__)
 #类的名称空间多了两个对象：即类属性描述符对象
@@ -67,6 +67,6 @@ print(p1.name,p1.age) # None None
 #type(obj)其实是查看obj是由哪个类实例化来的
 # print(type(p1).__dict__ == People.__dict__)
 
-print(People.name)#Str调用 None 还是调用了描述符的__get__
-People.name='egon'#更改了类的name属性，覆盖掉了描述符
-print(People.name)# 已经不会再调用描述符的__get__方法了。
+# print(People.name)#Str调用 None 调用了描述符的__get__
+# People.name='egon'#更改了类的name属性，覆盖掉了描述符
+# print(People.name)# 已经不会再调用描述符的__get__方法了。

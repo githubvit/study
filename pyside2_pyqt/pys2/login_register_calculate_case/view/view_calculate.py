@@ -56,9 +56,6 @@ class Calculator(QObject):
             self.show_content_signal.emit(self.calculate())
             return None
 
-        
-            
-
         # 剩下的角色就是 数字num 和 运算符operator 要加入计算列表
         # 当列表为空时，先加入的必须是数字角色
         if len(self.calculate_models)==0:
@@ -140,6 +137,7 @@ class CalculateUi(QWidget,Ui_Form):
         # self.setAttribute(Qt.WA_StyledBackground,True)
         # 3 导入界面类setupUi函数，填入self参数作为父类。
         self.setupUi(self)
+        
         # 计算器 引入定义的工具类 处理计算业务
         self.calculator=Calculator(self)
 

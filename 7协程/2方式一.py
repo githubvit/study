@@ -5,12 +5,14 @@ def consumer():
     while True:
         x=yield
         # time.sleep(1) #yield 不能处理阻塞
+        print('--consumer--',x)
 
 def producer():
     '''任务2:生产数据'''
     g=consumer()
     next(g)
-    for i in range(10000000):
+    for i in range(100000):
+        print('producer',i)
         g.send(i)
 
 start=time.time()

@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>selectpage_mwd</class>
+ <widget class="QMainWindow" name="selectpage_mwd">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>800</width>
+    <height>600</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QVBoxLayout" name="verticalLayout">
+    <property name="spacing">
+     <number>0</number>
+    </property>
+    <property name="leftMargin">
+     <number>0</number>
+    </property>
+    <property name="topMargin">
+     <number>0</number>
+    </property>
+    <property name="rightMargin">
+     <number>0</number>
+    </property>
+    <property name="bottomMargin">
+     <number>0</number>
+    </property>
+    <item>
+     <widget class="QStackedWidget" name="pages_skt">
+      <widget class="QWidget" name="word_page_wgt">
+       <property name="styleSheet">
+        <string notr="true">QWidget{background-color: rgb(54, 109, 27);}
+</string>
+       </property>
+      </widget>
+      <widget class="QWidget" name="text_page_wgt">
+       <property name="styleSheet">
+        <string notr="true">QWidget{background-color: rgb(190, 143, 78);}
+</string>
+       </property>
+      </widget>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QDockWidget" name="items_dwgt">
+   <property name="windowTitle">
+    <string>索引</string>
+   </property>
+   <attribute name="dockWidgetArea">
+    <number>1</number>
+   </attribute>
+   <widget class="QWidget" name="dockWidgetContents">
+    <layout class="QVBoxLayout" name="verticalLayout_2">
+     <property name="spacing">
+      <number>0</number>
+     </property>
+     <property name="leftMargin">
+      <number>0</number>
+     </property>
+     <property name="topMargin">
+      <number>0</number>
+     </property>
+     <property name="rightMargin">
+      <number>0</number>
+     </property>
+     <property name="bottomMargin">
+      <number>0</number>
+     </property>
+     <item>
+      <widget class="QLineEdit" name="filter_le">
+       <property name="styleSheet">
+        <string notr="true">QLineEdit{margin:3px;}</string>
+       </property>
+       <property name="placeholderText">
+        <string>检索</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QTreeWidget" name="item_tree_twgt">
+       <property name="headerHidden">
+        <bool>true</bool>
+       </property>
+       <column>
+        <property name="text">
+         <string>1</string>
+        </property>
+       </column>
+       <item>
+        <property name="text">
+         <string>单词</string>
+        </property>
+        <item>
+         <property name="text">
+          <string>a</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>b</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>c</string>
+         </property>
+        </item>
+       </item>
+       <item>
+        <property name="text">
+         <string>文章</string>
+        </property>
+        <item>
+         <property name="text">
+          <string>text1</string>
+         </property>
+        </item>
+       </item>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

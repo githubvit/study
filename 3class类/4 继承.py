@@ -22,8 +22,8 @@ class Goo:
 class Foo:
     def f2(self):
         print('Foo.f2')
-        self.f1() # Sub.f1 从对象空间出发 按就近原则搜索
-        super().f1() # Goo.f1 按类的mro列表路径方向搜索
+        self.f1() # 'Sub.f1' 从对象空间出发 按就近原则搜索
+        super().f1() # 'Goo.f1' 按类的mro列表路径方向搜索
 
 class Bar:
     def f1(self):

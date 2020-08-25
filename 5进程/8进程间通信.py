@@ -7,7 +7,7 @@
 
 from multiprocessing import Queue
 
-q=Queue(3) #生成队列对象，设置最多为3个元素。
+q=Queue(3) #生成队列对象，设置成 最多为3个元素。
 
 q.put('fist') 
 q.put({'a':2})

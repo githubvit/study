@@ -23,6 +23,13 @@
 #   并且转发 自动化程序的控制指令 给 手机，并且转发 手机给 自动化程序的响应消息。
 #   appium 客户端库 和 Appium Server 之间 通过http协议通信。
 
+#   Appium Server会在手机上安装 代理 appium setting
+#   自动化程序是通过pc上的Appium Server与手机上的代理appium setting之间的交互，来控制手机的。
+#   Appium Server与代理appium setting之间是通过自动化框架来实现自动化控制的。
+#   如果测试的是苹果手机，用的是苹果的 XCUITest 框架 （IOS9.3版本以后）
+#   如果测试的是安卓手机，用的是安卓的 UIAutomator 框架 (Android4.2以后)
+#   这些自动化框架提供了在手机设备上运行的库，可以让程序调用这些库，
+#   像人一样自动化操控设备和APP，比如：点击、滑动，模拟各种按键消息等。
 
 #  3. 移动客户端
 #   包括所有 苹果、安卓的移动设备，比如：手机、平板、智能手表等。
@@ -53,16 +60,21 @@
     # 3.2 安装 Android SDK 
         # 安装  androidsdk.zip 解压即可。
         # 设置 Android SDK环境变量：ANDROID_HOME 设置值为sdk包解压目录
-        # 把 Android SDK 中 adb 所在目录 。。\androidsdk\platform-tools\ 添加 到环境变量 path中。
+        # 把 Android SDK 中 adb 所在目录 。。\androidsdk\platform-tools 添加 到系统环境变量 path中。
 
 # 4 在 cmd 命令行中 输入 adb 命令，看是否成功返回。    
     # 如果手机已经用usb连上电脑，输入 设备查看命令 adb devices -l
-    # 输出如下：
+    # C:\Users\69598>adb devices -l
     # List of devices attached
-    # 4ee7dd3f               device product:z2_row model:ZUK_Z2121 device:z2_row transport_id:4
-
+    # 4ee7dd3f               device product:z2_row model:ZUK_Z2121 device:z2_row transport_id:2
+    # 说明环境的安装和设置都已经做好了
 
 # 三 scrcpy 投屏软件
+# 用usb线连接手机
+    # 在你运行程序的电脑上 用 USB线 连接上 你的安卓手机
+    # 进入 手机设置 -> 关于手机 ，不断点击 版本号 菜单（7次以上），
+    # 退出到上级菜单，在开发者模式中，启动USB调试
+
 # 安装
     # 软件：scrcpy-win64-v1.12.1.zip https://github.com/Genymobile/scrcpy/releases
     # 下载解压，将解压目录添加到path环境变量。

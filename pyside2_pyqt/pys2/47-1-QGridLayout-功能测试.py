@@ -168,7 +168,7 @@ class Window(QWidget):
         # grid_layout.setHorizontalSpacing(60)
 
         # 同时修改
-        grid_layout.setSpacing(60)
+        # grid_layout.setSpacing(60)
 
         # 10 布局方向——原点角
         # Qt.TopLeftCorner # 左上 默认
@@ -179,7 +179,7 @@ class Window(QWidget):
         # 原点 改为右下
         # 整个布局从右下开始 
         # 则 0行 0列 在右下  lb1就在右下。
-        grid_layout.setOriginCorner(Qt.BottomRightCorner)
+        # grid_layout.setOriginCorner(Qt.BottomRightCorner)
 
         # 11 获取布局参数
         # 共几行几列

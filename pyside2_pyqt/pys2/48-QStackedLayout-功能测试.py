@@ -52,9 +52,11 @@ class Window(QWidget):
         v_layout.addWidget(lb7)
 
         # 为stack_layout添加控件或布局
-        print(stack_layout.addWidget(lb1))
-        print(stack_layout.addWidget(lb2))
-        print(stack_layout.addWidget(lb3))
+        print(stack_layout.addWidget(lb1)) # 返回索引 0
+        print(stack_layout.addWidget(lb2)) # 返回索引 1
+        print(stack_layout.addWidget(lb3)) # 返回索引 2
+        # print(stack_layout.addChildLayout(v_layout))
+
 
         # 4 插入控件
         # print('插入前-当前索引',stack_layout.currentIndex()) #插入前-当前索引 0
@@ -93,7 +95,7 @@ class Window(QWidget):
         # QStackedLayout.StackOne
         # 在这种模式下 当把当前控件隐藏，则都不可见
         # 获取当前索引
-        idx=stack_layout.currentIndex()
+        # idx=stack_layout.currentIndex()
         
         # 获取当前索引控件 并隐藏
         # stack_layout.widget(idx).hide()
@@ -117,11 +119,11 @@ class Window(QWidget):
 
         # 8 移除控件
         # 移除当前控件 后面的控件会显示出来（即使是默认展示模式）
-        print('删前的当前标签',stack_layout.widget(idx).text())
-        lb1.destroyed.connect(lambda : print('标签1被释放'))
-        stack_layout.removeWidget(stack_layout.widget(idx))
+        # print('删前的当前标签',stack_layout.widget(idx).text())
+        # lb1.destroyed.connect(lambda : print('标签1被释放'))
+        # stack_layout.removeWidget(stack_layout.widget(idx))
         # 获取新的当前控件
-        print('删后的当前标签',stack_layout.widget(stack_layout.currentIndex()).text())
+        # print('删后的当前标签',stack_layout.widget(stack_layout.currentIndex()).text())
 
         
      

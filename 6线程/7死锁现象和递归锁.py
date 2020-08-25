@@ -8,40 +8,40 @@
 
 # 如下就是死锁
 
-# from threading import Thread,Lock
-# import time
-# mutexA=Lock()
-# mutexB=Lock()
+from threading import Thread,Lock
+import time
+mutexA=Lock()
+mutexB=Lock()
 
-# class MyThread(Thread):
-#     def run(self):
-#         self.func1()
-#         self.func2()
-#     def func1(self):
-#         mutexA.acquire()
-#         print('\033[41m%s 拿到A锁\033[0m' %self.name)
+class MyThread(Thread):
+    def run(self):
+        self.func1()
+        self.func2()
+    def func1(self):
+        mutexA.acquire()
+        print('\033[41m%s 拿到A锁\033[0m' %self.name)
 
-#         mutexB.acquire()
-#         print('\033[42m%s 拿到B锁\033[0m' %self.name)
-#         mutexB.release()
+        mutexB.acquire()
+        print('\033[42m%s 拿到B锁\033[0m' %self.name)
+        mutexB.release()
 
-#         mutexA.release()
+        mutexA.release()
 
-#     def func2(self):
-#         mutexB.acquire()
-#         print('\033[43m%s 拿到B锁\033[0m' %self.name)
-#         time.sleep(2)  # 模拟IO阻塞
+    def func2(self):
+        mutexB.acquire()
+        print('\033[43m%s 拿到B锁\033[0m' %self.name)
+        time.sleep(2)  # 模拟IO阻塞
 
-#         mutexA.acquire()
-#         print('\033[44m%s 拿到A锁\033[0m' %self.name)
-#         mutexA.release()
+        mutexA.acquire()
+        print('\033[44m%s 拿到A锁\033[0m' %self.name)
+        mutexA.release()
 
-#         mutexB.release()
+        mutexB.release()
 
-# if __name__ == '__main__':
-#     for i in range(10):
-#         t=MyThread()
-#         t.start()
+if __name__ == '__main__':
+    for i in range(10):
+        t=MyThread()
+        t.start()
 
 # Thread-1 拿到A锁
 # Thread-1 拿到B锁
@@ -67,46 +67,46 @@
 # 直到一个线程所有的acquire都被release，其他的线程才能获得资源。
 # 上面的例子如果使用RLock代替Lock，则不会发生死锁：
 
-from threading import Thread,RLock
-import time
-# mutexA=Lock()
-# mutexB=Lock()
+# from threading import Thread,RLock
+# import time
+# # mutexA=Lock()
+# # mutexB=Lock()
 
-# 变原来的两把互斥锁为一把递归锁，则不会发生死锁。
-# A锁和B锁就是同一把锁。
-mutexA=mutexB=RLock()
+# # 变原来的两把互斥锁为一把递归锁，则不会发生死锁。
+# # A锁和B锁就是同一把锁。
+# mutexA=mutexB=RLock()
 
-class MyThread(Thread):
-    def run(self):
-        self.func1()
-        self.func2()
-    def func1(self):
-        mutexA.acquire()
-        print('\033[41m%s 拿到A锁\033[0m' %self.name)
-        #一个线程拿到锁，counter加1,该线程内又碰到加锁的情况，
-        # 则counter继续加1，这期间所有其他线程都只能等待，
-        # 等待该线程释放所有锁，即counter递减到0为止
-        mutexB.acquire()
-        print('\033[42m%s 拿到B锁\033[0m' %self.name)
-        mutexB.release()
+# class MyThread(Thread):
+#     def run(self):
+#         self.func1()
+#         self.func2()
+#     def func1(self):
+#         mutexA.acquire()
+#         print('\033[41m%s 拿到A锁\033[0m' %self.name)
+#         #一个线程拿到锁，counter加1,该线程内又碰到加锁的情况，
+#         # 则counter继续加1，这期间所有其他线程都只能等待，
+#         # 等待该线程释放所有锁，即counter递减到0为止
+#         mutexB.acquire()
+#         print('\033[42m%s 拿到B锁\033[0m' %self.name)
+#         mutexB.release()
 
-        mutexA.release()
+#         mutexA.release()
 
-    def func2(self):
-        mutexB.acquire()
-        print('\033[43m%s 拿到B锁\033[0m' %self.name)
-        time.sleep(2)
+#     def func2(self):
+#         mutexB.acquire()
+#         print('\033[43m%s 拿到B锁\033[0m' %self.name)
+#         time.sleep(2)
 
-        mutexA.acquire()
-        print('\033[44m%s 拿到A锁\033[0m' %self.name)
-        mutexA.release()
+#         mutexA.acquire()
+#         print('\033[44m%s 拿到A锁\033[0m' %self.name)
+#         mutexA.release()
 
-        mutexB.release()
+#         mutexB.release()
 
-if __name__ == '__main__':
-    for i in range(10):
-        t=MyThread()
-        t.start()
+# if __name__ == '__main__':
+#     for i in range(10):
+#         t=MyThread()
+#         t.start()
 
 # 没有发生死锁 两次运行情况对比
         

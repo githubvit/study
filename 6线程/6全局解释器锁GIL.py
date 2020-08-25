@@ -52,51 +52,52 @@
     #     多进程用于计算密集型，如金融分析
 
 # 计算密集型：多进程效率高
-# from multiprocessing import Process
-# from threading import Thread
-# import os,time
-# def work():
-#     res=0
-#     for i in range(100000000):
-#         res*=i
-
-# if __name__ == '__main__':
-#     l=[]
-#     print('本机[%d]个cpu'%os.cpu_count()) #本机为4核
-#     start=time.time()
-#     for i in range(4):
-#         # 多进程
-#         p=Process(target=work) #耗时5.8s多
-#         # 多线程
-#         # p=Thread(target=work) #耗时19.9s多
-#         l.append(p)
-#         p.start()
-#     for p in l:
-#         p.join()
-#     stop=time.time()
-#     print('run time is %s' %(stop-start))
-
-# 计算密集型：多进程效率高
 from multiprocessing import Process
 from threading import Thread
-import threading
 import os,time
 def work():
-    time.sleep(2) #模拟IO
-    print('===>')
+    res=0
+    for i in range(100000000):
+    # for i in range(1000000):#运算量 减少 到这的时候已经看不太出来多进程和多线程的差异 0.19和0.20
+        res*=i
 
 if __name__ == '__main__':
     l=[]
-    print(os.cpu_count()) #本机为4核
+    print('本机[%d]个cpu'%os.cpu_count()) #本机为4核
     start=time.time()
-    for i in range(400):
+    for i in range(4):
         # 多进程
-        p=Process(target=work) #耗时13.01s多,大部分时间耗费在创建进程上
+        # p=Process(target=work) #耗时5.8s多
         # 多线程
-        # p=Thread(target=work) #耗时2.2s多
+        p=Thread(target=work) #耗时19.9s多
         l.append(p)
         p.start()
     for p in l:
         p.join()
     stop=time.time()
     print('run time is %s' %(stop-start))
+
+# 计算密集型：多进程效率高
+# from multiprocessing import Process
+# from threading import Thread
+# import threading
+# import os,time
+# def work():
+#     time.sleep(2) #模拟IO
+#     print('===>')
+
+# if __name__ == '__main__':
+#     l=[]
+#     print(os.cpu_count()) #本机为4核
+#     start=time.time()
+#     for i in range(400):
+#         # 多进程
+#         p=Process(target=work) #耗时13.01s多,大部分时间耗费在创建进程上
+#         # 多线程
+#         # p=Thread(target=work) #耗时2.2s多
+#         l.append(p)
+#         p.start()
+#     for p in l:
+#         p.join()
+#     stop=time.time()
+#     print('run time is %s' %(stop-start))

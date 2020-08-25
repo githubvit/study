@@ -31,7 +31,8 @@ def one():
                     #和上面的效果是一样的 都是 唤醒 generator 执行
                     # self.current.send(None) 
 
-                    if (self.current):
+                    # 把更新后的生成器对象又一次放入立即执行队列
+                    if self.current:
                         self.ready.append(self.current) # 又放入
 
                 except StopIteration: # 捕捉 next（）为空时抛的异常StopIteration
@@ -58,7 +59,7 @@ def one():
             x += 1
 
     start=time.time()
-    # 做线头
+    # 做线头 对于生成器函数*func，加括号不是执行，而是产生 生成器对象generator 
     scher.new_task(countdown(5))
     scher.new_task(countup(5))
     # 扯线头
@@ -99,7 +100,7 @@ def two():
                 try:
                     # next(self.current) # 报错：TypeError: 'coroutine' object is not an iterator
                     self.current.send(None) # 用了协程后，只能用send(None) 唤醒 就是 交出执行权
-                    if (self.current):
+                    if self.current:
                         self.ready.append(self.current)
                 except StopIteration:
                     pass 
@@ -454,7 +455,7 @@ def five():
     scher.run()
     print('[async/await]time{:.4}s'.format(time.time()-start))
 
-five()
+# five()
 
     # Down 5
     # Up 0

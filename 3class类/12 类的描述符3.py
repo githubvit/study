@@ -6,7 +6,7 @@ class Typed:
         # print(self.name,self.expected_type)
     def __get__(self, instance, owner):
         # print('get--->',instance,owner)
-        # 解决描述符用作为类属性调用时，保证给None，只有实例属性调用才可用。
+        # 解决描述符用作为类属性调用时，保证给None，只有实例属性调用才可用。比如pyside2(pyqt5)中的自定义信号的发射，定义用signal描述符，激发emit只能使用self实例对象，不能用类对象
         if instance is None:
             return None
         return instance.__dict__[self.name]

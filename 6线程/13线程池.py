@@ -46,3 +46,17 @@ if __name__ == "__main__":
 
     pool.shutdown()#关池
     print('主线程',current_thread().getName())
+
+# get [https://www.baidu.com]...thread name=[ThreadPoolExecutor-0_0]
+# get [https://www.python.org]...thread name=[ThreadPoolExecutor-0_1]
+# get [https://www.openstack.org]...thread name=[ThreadPoolExecutor-0_2]
+# url[https://www.baidu.com] parse result len = [2443] ,thread name=[ThreadPoolExecutor-0_0]
+# get [https://www.baidu.com]...thread name=[ThreadPoolExecutor-0_0]
+# url[https://www.baidu.com] parse result len = [2443] ,thread name=[ThreadPoolExecutor-0_0]
+# get [https://www.python.org]...thread name=[ThreadPoolExecutor-0_0]
+# url[https://www.openstack.org] parse result len = [36791] ,thread name=[ThreadPoolExecutor-0_2]
+# get [https://www.openstack.org]...thread name=[ThreadPoolExecutor-0_2]
+# url[https://www.python.org] parse result len = [48876] ,thread name=[ThreadPoolExecutor-0_1]
+# url[https://www.openstack.org] parse result len = [36602] ,thread name=[ThreadPoolExecutor-0_2]
+# url[https://www.python.org] parse result len = [48876] ,thread name=[ThreadPoolExecutor-0_0]
+# 主线程 MainThread

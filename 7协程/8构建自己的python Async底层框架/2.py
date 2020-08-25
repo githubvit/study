@@ -16,7 +16,7 @@ import queue
 # 1. 多线程
 
 import threading
-
+from concurrent.futures import ThreadPoolExecutor
 def one():
     # 生产
     def producer(q,count):
@@ -40,13 +40,20 @@ def one():
     q=queue.Queue()
 
     # 建立线程
-    t1=threading.Thread(target=producer,args=(q,10))
-    t2=threading.Thread(target=consumer,args=(q,))
-    t1.start()
-    t2.start()
+    # t1=threading.Thread(target=producer,args=(q,10))
+    # t2=threading.Thread(target=consumer,args=(q,))
+    # t1.start()
+    # t2.start()
 
-    # 等 消费者任务结束后 输出时间
-    t2.join()
+    # # 等 消费者任务结束后 输出时间
+    # t2.join()
+
+    # 用线程池
+    pool=ThreadPoolExecutor(2)
+    pool.submit(producer,q,10)
+    pool.submit(consumer,q)
+    pool.shutdown()
+
     print('[one]time',time.time()-start)
 
 # one()
@@ -199,6 +206,7 @@ def two():
             item=q.get()
             if item is None:
                 print('消费结束') 
+
             else:
                 print('消费了',item)
                 # 切函数 循环 添加到 准备执行列表 立即执行 

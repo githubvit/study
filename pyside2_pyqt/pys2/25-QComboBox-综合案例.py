@@ -42,7 +42,7 @@ class Window(QWidget):
         self.city_cbx.resize(100,25)
         self.city_cbx.move(200,50)
 
-        # 2 响应省级下拉菜单信号 注意信号要再增加条目前设置 这样就可以抓住早的信号
+        # 2 响应省级下拉菜单信号 注意信号要在增加条目前设置 这样就可以抓住早的信号
         self.pro_cbx.currentTextChanged.connect(self.city_changed)
 
         # 3 响应市级下拉菜单信号 输出编码

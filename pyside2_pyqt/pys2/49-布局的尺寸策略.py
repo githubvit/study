@@ -50,15 +50,20 @@ class Window(QWidget):
 
         # Fixed 保持名义尺寸 不放大和缩小
         # lb1.setSizePolicy(QSizePolicy.Fixed,QSizePolicy.Fixed)#(水平方向尺寸策略，垂直方向尺寸策略)
+        
         # 水平方向固定不动 垂直方向可以缩放 
         # lb1.setSizePolicy(QSizePolicy.Fixed,QSizePolicy.Minimum)
+        
         # 水平方向固定不动 垂直方向以名义尺寸为最大尺寸 以最小建议尺寸为最小尺寸
         # lb1.setSizePolicy(QSizePolicy.Fixed,QSizePolicy.Maximum) # 垂直方向 lb1的变化在100到200之间
+        
         # 水平方向固定不动 垂直方向以名义尺寸为第一级最小尺寸 ，当所有空白都归零，就继续压缩至最小尺寸。
         # lb1.setSizePolicy(QSizePolicy.Fixed,QSizePolicy.Preferred) # 垂直方向 lb1的变化在100到200之间
+        
         # 水平方向固定不动 垂直方向优先级高于Preferred, 垂直空白都被lb2给拿走。
         # 注意：当都被压缩至最小再拉大过程中，先被拉大的时lb1，因为空白要先给有名义尺寸的控件，当lb1达到名义尺寸后，然后再按优先级给lb2.
         # lb2.setSizePolicy(QSizePolicy.Fixed,QSizePolicy.Expanding) 
+        
         # 水平方向固定不动 垂直方向可以小到没有。
         # lb1.setSizePolicy(QSizePolicy.Fixed,QSizePolicy.Ignored) 
         

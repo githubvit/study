@@ -22,43 +22,43 @@ class Foo:
 #   3.5.找不到的属性触发__getattr__()
 
 # (1) 数据描述符>实例
-class Foo:
-    def __set__(self, instance, value):
-        print('set')
-    def __get__(self, instance, owner):
-        print('get')
-class Room:
-    name=Foo()
-    def __init__(self,name,width,length):
-        self.name=name
-        self.width=width
-        self.length=length
+# class Foo:
+    # def __set__(self, instance, value):
+        # print('set')
+    # def __get__(self, instance, owner):
+        # print('get')
+# class Room:
+    # name=Foo()
+    # def __init__(self,name,width,length):
+        # self.name=name
+        # self.width=width
+        # self.length=length
 
 
 #name是一个数据描述符,因为name=Foo()而Foo实现了get和set方法,因而比实例属性有更高的优先级
 #对实例的属性操作,触发的都是描述符的
-r1=Room('厕所',1,1)
-r1.name
-r1.name='厨房'
+# r1=Room('厕所',1,1)
+# r1.name
+# r1.name='厨房'
 
 # (2) 实例>非数据描述符
-class Foo:
-    def __get__(self, instance, owner):
-        print('get')
-class Room:
-    name=Foo()
-    def __init__(self,name,width,length):
-        self.name=name
-        self.width=width
-        self.length=length
-
+# class Foo:
+    # def __get__(self, instance, owner):
+        # print('get')
+# class Room:
+    # name=Foo()
+    # def __init__(self,name,width,length):
+        # self.name=name
+        # self.width=width
+        # self.length=length
+# 
 
 #name是一个非数据描述符,因为name=Foo()而Foo没有实现set方法,因而比实例属性有更低的优先级
 #对实例的属性操作,触发的都是实例自己的
-r1=Room('厕所',1,1)
-print(r1.name)
-r1.name='厨房'
-print(r1.name)
+# r1=Room('厕所',1,1)
+# print(r1.name)
+# r1.name='厨房'
+# print(r1.name)
 
 # (3) 非数据描述符>找不到 触发__getattr__()
 

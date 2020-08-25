@@ -33,7 +33,7 @@ class RegisterUi(QWidget,Ui_Form):
         self.target_pos=[target.pos() for target in self.target]
         
 
-    # 4 用slot装饰器添加槽函数
+    # 4 用slot装饰器添加槽函数 on_控件名称(id)_信号
     # @pyqtSlot() #pyqt5 的装饰器
     @Slot()
     def on_about_btn_clicked(self):

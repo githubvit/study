@@ -1,4 +1,5 @@
-# 主线程的生命周期=进程内所有线程运行完毕。
+# 主线程的生命周期=进程内除守护线程外所有线程运行完毕。
+# 主线程的生命周期结束，守护线程结束。
 
 from threading import Thread
 import time
@@ -19,7 +20,7 @@ if __name__ == "__main__":
     t2=Thread(target=bar)
     
     # 守护线程 t1
-    # t1.daemon=True
+    t1.daemon=True
 
     # 结果
     # 123

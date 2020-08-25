@@ -10,9 +10,13 @@ print(random.randint(1,50))
 print(random.randrange(0, 101, 2))
 
 # 随机浮点数：
-print(random.random())
+print(random.random().__round__(2))
+print(round(random.random(),2))
 print(random.uniform(1, 10))
+t1=random.randint(2,10)
+    
 
+print('t1',t1)
 # 随机字符：
 print(random.choice('abcdefghijklmnopqrstuvwxyz!@#$%^&*()'))
 
@@ -33,3 +37,25 @@ print(random.choice(['剪刀', '石头', '布']))
 items = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0]
 random.shuffle(items)
 print(items)
+
+# 文字截取
+
+text='今日第5笔收款，共计￥0.05'
+
+idx=int(text.split('第')[1][0])
+day_sum=text.split('￥')[1]
+print(idx,day_sum)
+re_list=[]
+re_list_item={
+    'day':'2017-08-12',
+    'idx':5,
+    'uuid':'3456',
+    'num':'10.00',
+    'day_sum':'11.00',
+    'account_time':'早上11:51',
+    'record_time':'465431214',
+}
+
+re_list.append(re_list_item)
+uuid='3456'
+print(uuid in re_list[0])

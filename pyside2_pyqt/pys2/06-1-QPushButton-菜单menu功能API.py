@@ -32,21 +32,22 @@ sub_menu.setTitle('最近打开')#设置子菜单标题，这里就不是setText
 # new_action.setIcon(QIcon(r'pyside2_pyqt\pys2\xxx.png'))
 # 简化写法
 new_action=QAction(QIcon(r'pyside2_pyqt\pys2\xxx.png'),'新建',menu)
-new_action.triggered.connect(lambda : print('新建'))
+new_action.triggered.connect(lambda : print(new_action.text()))
+
 open_action=QAction(QIcon(r'pyside2_pyqt\pys2\xxx.png'),'打开',menu)
-open_action.triggered.connect(lambda : print('打开'))
+open_action.triggered.connect(lambda : print(open_action.text()))
 exit_action=QAction('退出',menu)
-exit_action.triggered.connect(lambda : print('退出'))
+exit_action.triggered.connect(lambda : print(exit_action.text()))
 
 # 给sub_menu添加行为
-# 定义子菜单行为对象
-file1_action=QAction('XXXXX1.X',sub_menu)
+# 定义子菜单行为对象 不写父对象 因为父对象会把这些行为添加进去
+file1_action=QAction('XXXXX1.X')
 file1_action.triggered.connect(lambda : print('打开文件xxxx1.x'))
 
-file2_action=QAction('XXXXX2.X',sub_menu)
+file2_action=QAction('XXXXX2.X')
 file2_action.triggered.connect(lambda : print('打开文件xxxx2.x'))
 
-file3_action=QAction('XXXXX3.X',sub_menu)
+file3_action=QAction('XXXXX3.X')
 file3_action.triggered.connect(lambda : print('打开文件xxxx3.x'))
 # 把行为对象添加到子菜单
 sub_menu.addAction(file1_action)

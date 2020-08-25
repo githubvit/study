@@ -37,7 +37,7 @@ obj.get_y()
 
 '''
 #1 封装数据属性的目的：把数据属性封装起来，然后需要开辟接口给类外部的使用者使用，好处是
-# 我们可以在接口之上添加控制逻辑，从而严格空间访问者对属性的操作
+# 我们可以在接口之上添加控制逻辑，从而严格控制访问者对属性的操作
 # class People:
 #     def __init__(self,name,age):
 #         self.__name=name
@@ -97,7 +97,7 @@ obj.withdraw()
 
 
 
-#封装的终极奥义：明确地区分内外，对外是隐藏的，对内是开放的
+#封装的终极奥义：明确地 区分内外，对外是隐藏的，对内是开放的
 
 #封装的property属性
 
@@ -126,8 +126,8 @@ class People:
 
 obj=People('egon')
 
-# print(obj.name)
-# print(obj.name())
+print(obj.name)
+# print(obj.name()) # 报错 TypeError: 'str' object is not callable
 
 # print(obj.name)
 

@@ -6,6 +6,7 @@
 import queue
 import time
 from threading import Thread
+from concurrent.futures import ThreadPoolExecutor
 
 def one():
     # 生产者
@@ -29,11 +30,17 @@ def one():
 
     start=time.time()
     q=queue.Queue()
-    t1=Thread(target=prducer,args=(q,10))
-    t2=Thread(target=consumer,args=(q,))
-    t1.start()
-    t2.start()
-    t2.join()
+    # t1=Thread(target=prducer,args=(q,10))
+    # t2=Thread(target=consumer,args=(q,))
+    # t1.start()
+    # t2.start()
+    # t2.join()
+
+    pool=ThreadPoolExecutor(2)
+    pool.submit(prducer,q,10)
+    pool.submit(consumer,q)
+    pool.shutdown()
+
     print('[one Threa]time:{:.4}s'.format(time.time()-start))
 
 # one()
@@ -211,7 +218,7 @@ def two():
     scher.run()
     print('[two async]time:{:.4}'.format(time.time()-start))
 
-two()
+# two()
 
 # 优化的get 的结果：
     # 生产了 0

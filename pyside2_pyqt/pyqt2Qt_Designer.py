@@ -83,14 +83,6 @@
         # 要将该ui转成py，再执行，就可以看到效果，因为转成py时，自定义类已被成功引入。
 
 
-
-
-
-
-
-    
-
-
 # 2 对界面控件进行布局，白月黑羽的经验是 按照如下步骤操作
 
     # 先不使用任何Layout，把所有控件 按位置 摆放在界面上
@@ -127,23 +119,37 @@
     # dist目录下的程序文件目录可以压缩成zip文件，到处运行。
 
     # 打包过程中形成的build目录等文件，在打包完成后可以删除。
-     
-# from PySide2.QtWidgets import QApplication,QMessageBox
-from PySide2.QtWidgets import *
-from PySide2.QtUiTools import QUiLoader
-from PySide2.QtCore import QFile
 
+# 动态加载ui 
+
+# 薛蟠     4560 25
+# 薛蝌     4460 25
+# 薛宝钗   35776 23
+# 薛宝琴   14346 18
+# 王夫人   43360 45
+# 王熙凤   24460 25
+# 王子腾   55660 45
+# 王仁     15034 65
+# 尤二姐   5324 24
+# 贾芹     5663 25
+# 贾兰     13443 35
+# 贾芸     4522 25
+# 尤三姐   5905 22
+# 贾珍     54603 35
+     
+from PySide2.QtWidgets import QApplication,QMessageBox
+import sys,os
+# from PySide2.QtWidgets import *
+from PySide2.QtUiTools import QUiLoader
+
+#定位ui文件
+ui_dir=os.path.dirname(__file__)
+ui_path='%s\main.ui'%ui_dir
 class Stats():
     def __init__(self):
-        # 打开文件 动态加载ui定义
-        # qfile_stats=QFile('main.ui')
-        # qfile_stats.open(QFile.ReadOnly)
-        # qfile_stats.close()
+        # 打开文件 动态加载ui定义 不用转换为py
         
-        # self.ui=QUiLoader().load(qfile_stats)
-
-        # 不用上面这个QFile也可以，直接用QUiLoader打开
-        self.ui=QUiLoader().load('main.ui')
+        self.ui=QUiLoader().load(ui_path)
 
         # 连接 动作 signal connect slot
         self.ui.tonji.clicked.connect(self.handleCalc)

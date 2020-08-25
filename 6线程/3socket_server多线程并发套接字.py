@@ -16,7 +16,7 @@
 #         except ConnectionResetError:
 #             break
 #     # print('关闭来自[%s]的连接'%(cli_addr))  # 报错，元组作为一个元素要加‘，’
-#     # ypeError: not all arguments converted during string formatting
+#     # typeError: not all arguments converted during string formatting
 #     print('关闭来自[%s]的连接'%(cli_addr,))  # 加','，表示该元组作为一个元素，就解决了。  
 #     conn.close()
 # server.close()
