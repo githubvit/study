@@ -1,12 +1,24 @@
 import time,datetime
 a1=['a','b']
-print(a1[0])
-print(a1.index('b'))
-a2=[0.01,0.02,0.03]
-if a2:
-    print(sum(a2))
+b1=['c','d']
+if 'b' in a1 and 'd'==b1[a1.index('b')]:
+    print('ok')
 else:
-    print('keyi')
+    print('no')
+# for a in a1:
+#     b1.append(a)
+# a1=[]
+# print(b1)
+# 取下标
+# print(a1[0])
+# print(a1.index('b'))
+# a2=[0.01,0.02,0.03]
+# if a2:
+# 求和
+#     print(sum(a2))
+# else:
+#     print('keyi')
+# 取时间格式
 # time1=datetime.datetime.now()
 # y=str(time1.year)
 # m=str(time1.month)

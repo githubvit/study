@@ -79,10 +79,7 @@ today_sum=[]    # 从“今日第 笔收款，共计”中的“共计”后面�
 today_price=[]  # 记录 收款节点 的单笔金额。
 cnt=0   # 定时器 的 第几次 运行
 pd_node_finded=False    # 是否找到盘点节点
-end_point=[]    # 每次 定时器 开始时 第一次记录的最后一个 [“今日第 笔收款，共计”,uuid] 由收款节点的这两项组成
-                # 因此 只要知道 第一次记录的最后一个 在today_list中的序号即可。
-                # 这次定时任务结束，根据序号，取出today_list和 today_uuid中的值即可。
-screen_pixel=[] # 每次 定时器 开始时 画面 特定位置的 像素点 以便 下次 定时器开始时 捕捉 画面 对照 
+
 class WxPay():
     def __init__(self):
         # 连接手机 不打开任何app
@@ -109,7 +106,7 @@ class WxPay():
         self.is_swiped=False # 下滑过
         self.is_backed=False # 返回过
 
-        self.is_added=False # 新增过
+       
 
         # 连接 appium server
         self.wd = webdriver.Remote('http://localhost:4723/wd/hub', self.desired_caps)
@@ -139,18 +136,9 @@ class WxPay():
                 self.wd.quit()
                 return None
 
-    # 获取开始屏幕 像素点
-    def get_screen_pixel(self):
-        # 抓屏 并 保存
-        filename=r'D:\pyj\st\study\8爬虫\任务\test.png'
-        img=wd.get_screenshot_as_file(filename)
-        # 获取 屏幕 图片 特定 位置 的 像素点
-        
 
 
-        pass
-
-    # 一个页面找：
+    # 2 一个页面找：
         # 没有要找的（要记录的、要结束的）
             # 下滑
         # 找到要记录的
@@ -161,9 +149,7 @@ class WxPay():
             # 如果是下滑过来的，就要停止下滑并返回；
             # 否则，就静止（什么也不做）并退出。
      
-    def check_nodes(self):
-
-        pass
+    
     # 一次下滑 一次下滑并返回  退出结束一次流程
 
     # 在 wxzf 页面中
@@ -289,10 +275,10 @@ class WxPay():
         print('单个收款节点操作，找同一节点下的各个元素，同步各个列表')
         # 获取 今日 文本
         sk_text=sk_node.get_attribute('text')
+        
         if sk_text not in  today_list:
             
-            today_list.append(sk_text)
-
+            
             # 今天第几笔账
             sk_n=int(sk_text.split('第')[1].split('笔')[0])#取第和笔之间的值
             # 添加到序号列表
@@ -323,6 +309,8 @@ class WxPay():
             if today_price[today_list.index(sk_text)]=='no_find':
                 print(f'{sk_text}在今日列表中，备注列表也有，但金额列表没找到，找金额price')
                 self.price_node(sk_node)
+
+        
 
                 
 
@@ -451,7 +439,9 @@ class WxTimer():
         global today_notes
         global today_n
         global today_sum
-        global min_idx
+        global end_point
+        global screen_pixel
+        global coordinate_points
         cnt+=1
         st=time.time()
         print(f'开始-----第{cnt}次------>')
