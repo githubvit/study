@@ -56,9 +56,9 @@ class Window(QWidget):
         # |_lb3_|_____|
         # 
 
-        # grid_layout.addWidget(lb1,0,0)
-        # grid_layout.addWidget(lb2,0,1)
-        # grid_layout.addWidget(lb3,1,0,3,2) # 合并 起始位置 1,0,占据3行2列
+        grid_layout.addWidget(lb1,0,0)
+        grid_layout.addWidget(lb2,0,1)
+        grid_layout.addWidget(lb3,1,0,3,2) # 合并 起始位置 1,0,占据3行2列
 
         # 共4行2列
         #  ___________
@@ -79,12 +79,12 @@ class Window(QWidget):
 
         # 定义布局对象
         v_layout=QVBoxLayout()
-
+# 
         # 将5 6 7添加到水平布局中
         v_layout.addWidget(lb5)
         v_layout.addWidget(lb6)
         v_layout.addWidget(lb7)
-
+# 
         grid_layout.addWidget(lb1,0,0)
         grid_layout.addWidget(lb2,0,1)
         grid_layout.addWidget(lb3,1,0,3,3) # 合并 起始位置 1,0,占据3行3列
@@ -106,8 +106,8 @@ class Window(QWidget):
         # 获取索引号为0的条目的位置情况 即lb1的位置情况
         # print(grid_layout.getItemPosition(0))#(0, 0, 1, 1) 起始位置0，0 占据1行1列
         # 获取索引号为2的条目的位置情况 即lb3的位置情况
-        # print(grid_layout.getItemPosition(2))#(1, 0, 3, 3) 起始位置1, 0 占据3行3列
-
+        print(grid_layout.getItemPosition(2))#(1, 0, 3, 3) 起始位置1, 0 占据3行3列
+        
         # 5.2 获取某个位置的条目 
         # 获取0，0位置的条目 即 lb1
         # print(grid_layout.itemAtPosition(0,0)) #<PySide2.QtWidgets.QWidgetItem object at 0x0000015B969BB648>
@@ -130,28 +130,28 @@ class Window(QWidget):
         # 设置0行的拉伸系数为1 由于其他行没有设拉伸系数，相当于=0，所以，0行占据所有空白，其他行被压缩至最小名义尺寸。
         # 只有0行会随着窗口的大小变化而变化，直到压缩到最小列宽行高时。
         # 其他行不会变化。
-        grid_layout.setRowStretch(0,1)
+        # grid_layout.setRowStretch(0,1)
 
         # 列拉伸系数
         # 设置0列的拉伸系统为1
         # 由于其他列的拉伸系数=0，所以，0列占据所有空白。跟随窗口变化，直至最小。
         # 其他列保持最小名义尺寸，不随窗口变化。
-        grid_layout.setColumnStretch(0,1)
+        # grid_layout.setColumnStretch(0,1)
 
         # 8 案例 使得盒子布局中的标签5占据所有空白。
 
         # 8.1 修改标签5的伸缩因子或叫拉伸系数
 
-        v_layout.setStretchFactor(lb5,1)
+        # v_layout.setStretchFactor(lb5,1)
 
         # 8.2 修改盒子布局在网格布局中的拉伸系数
 
         # 设定盒子布局起始位置4，0占据所有空白
         # 设定行号4的拉伸系数为1
-        grid_layout.setRowStretch(4,1)
+        # grid_layout.setRowStretch(4,1)
         # 关闭前面0行的拉伸系数
         # 设定行号0的拉伸系数为0 
-        grid_layout.setRowStretch(0,0)
+        # grid_layout.setRowStretch(0,0)
 
         # 前面已经把0列的拉伸系数设为1，所以不用设了。
 
@@ -159,8 +159,8 @@ class Window(QWidget):
         # 查看默认的水平和垂直间距
         print(grid_layout.spacing()) # 6
         # 单独查看水平和垂直间距
-        print(grid_layout.horizontalSpacing()) # 6
-        print(grid_layout.verticalSpacing()) # 6
+        # print(grid_layout.horizontalSpacing()) # 6
+        # print(grid_layout.verticalSpacing()) # 6
 
         # 修改垂直间距
         # grid_layout.setVerticalSpacing(60)
@@ -169,6 +169,9 @@ class Window(QWidget):
 
         # 同时修改
         # grid_layout.setSpacing(60)
+
+        grid_layout.setSpacing(0)
+        grid_layout.setMargin(0)
 
         # 10 布局方向——原点角
         # Qt.TopLeftCorner # 左上 默认
@@ -179,18 +182,18 @@ class Window(QWidget):
         # 原点 改为右下
         # 整个布局从右下开始 
         # 则 0行 0列 在右下  lb1就在右下。
-        # grid_layout.setOriginCorner(Qt.BottomRightCorner)
+        grid_layout.setOriginCorner(Qt.BottomRightCorner)
 
         # 11 获取布局参数
         # 共几行几列
-        print(grid_layout.rowCount())    #5
-        print(grid_layout.columnCount()) #4
+        # print(grid_layout.rowCount())    #5
+        # print(grid_layout.columnCount()) #4
 
         # 0行1列 单元格 大小
         # 即lb2
         # print(grid_layout.cellRect(0,1)) # PySide2.QtCore.QRect(0, 0, 0, 0) 这里看不到的，要等到window.show()才可以。
 
-        print(grid_layout.itemAtPosition(0,1).widget().text()) #标签2
+        # print(grid_layout.itemAtPosition(0,1).widget().text()) #标签2
 
         
 
@@ -201,5 +204,5 @@ if __name__ == "__main__":
     wd=Window()
     wd.show()
     # 查看 0行1列 单元格 大小 要在窗口show()后
-    print(wd.layout().cellRect(0,1)) # PySide2.QtCore.QRect(339, 11, 30, 12)
+    # print(wd.layout().cellRect(0,1)) # PySide2.QtCore.QRect(339, 11, 30, 12)
     app.exec_()

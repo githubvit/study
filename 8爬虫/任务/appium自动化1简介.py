@@ -131,3 +131,24 @@
         # 启用/禁用 FPS 计数器（stdout）	Ctrl+i
         # 安装APK	将 apk 文件拖入投屏
         # 传输文件到设备	将文件拖入投屏（非apk）
+
+        # 保持电脑屏幕 关闭手机屏幕  Ctrl+o
+        # 开启手机屏幕  Ctrl+shift+o
+
+        # 问题解决
+            # 1 连不上 现象输入adb usb 报设备离线，可设备已经连上了
+                # C:\Users\69598>adb usb
+                # error: device offline
+
+                # 解决
+                # 先关闭adb，再重连，解决。
+                    # C:\Users\69598>adb kill-server
+                    # C:\Users\69598>adb usb
+                    # * daemon not running; starting now at tcp:5037
+                    # * daemon started successfully
+                    # restarting in USB mode
+                    # C:\Users\69598>scrcpy
+                    # INFO: scrcpy 1.12.1 <https://github.com/Genymobile/scrcpy>
+                    # D:\scrcpy\scrcpy-win64-v1.12.1\scrcpy-server: 1 file pushed. 0.7 MB/s (26202 bytes in 0.034s)
+                    # INFO: Initial texture: 1080x1920
+                    # 手机报是否允许这台计算机usb调式之类的，打勾就可以了。

@@ -39,6 +39,7 @@ class Window(QWidget):
         sex_layout.addWidget(sex_female)
 
         address_lt=QLineEdit()
+        address_lt.setObjectName('adr')
         address_lt.setPlaceholderText('请输入地址')
 
         submit_btn=QPushButton('提交')
@@ -127,7 +128,7 @@ class Window(QWidget):
         # 5 移除行
         # 看看是不是被销毁了
         test_lb2.destroyed.connect(lambda:print('行号7被删除了，行中的元素被销毁了'))
-        f_layout.removeRow(7) # 移除行号为7的行 行号7的所有元素都被销毁了
+        # f_layout.removeRow(7) # 移除行号为7的行 行号7的所有元素都被销毁了
         # f_layout.removeRow(test_lb)#移除该控件所在行
         # f_layout.removeRow(test2_layout)#移除该布局所在行
         # 用子布局下的控件作为参数无效
@@ -166,13 +167,22 @@ class Window(QWidget):
         # print(f_layout.takeAt(0)) #<PySide2.QtWidgets.QWidgetItem object at 0x0000013209259DC8>
         # print(f_layout.takeAt(0).widget()) #<PySide2.QtWidgets.QLabel(0x1410ac2b200) at 0x000001410A1F2548>
         # 隐藏取出的标签 最后一行没有出现姓名标签
-        # print(f_layout.takeAt(0).widget().hide()) 
+        # f_layout.takeAt(0).widget().hide() #隐藏后 
+        
         
         # 7 修改标签
         # 通过取FieldRole角色 修改该角色的标签文本
         # print(f_layout.labelForField(name_widget)) #<PySide2.QtWidgets.QLabel(0x1c3dbf8ae20) at 0x000001C3DB551908>
         # 修改地址标签
-        f_layout.labelForField(address_lt).setText('a&ddress_地址')
+        print(f_layout.labelForField(address_lt)) #<PySide2.QtWidgets.QLabel(0x25578f6a580) at 0x000002557A315208>
+        print(f_layout.children()) 
+        #[<PySide2.QtWidgets.QBoxLayout(0x24cf24f39f0) at 0x0000024CF2FFED08>, 
+        # <PySide2.QtWidgets.QHBoxLayout(0x24cf24f3c20) at 0x0000024CF2FFEEC8>, 
+        # <PySide2.QtWidgets.QHBoxLayout(0x24cf24f3cc0) at 0x0000024CF3005048>]
+        
+        # f_layout.labelForField(address_lt).setText('a&ddress_地址') #改动字段address_lt的标签label的文本
+        self.findChild(QLineEdit,'adr').setText('地址_地址')#改动name='adr',type=QLineEdit的控件的文本
+        
 
         # 8 设定标签列和控件列 换行排列 策略 
        

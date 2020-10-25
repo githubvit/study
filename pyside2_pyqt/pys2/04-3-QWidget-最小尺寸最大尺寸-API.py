@@ -18,5 +18,5 @@ window.resize(1000, 1000)
 
 window.show()
 print(window.geometry())
-# PySide2.QtCore.QRect(1030, 290, 500, 500)
+# PySide2.QtCore.QRect(1030, 290, 500, 500)# 没有wd.move(x,y)则取中间，屏幕宽度2060.
 app.exec_()

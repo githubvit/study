@@ -5,14 +5,13 @@ from PySide2.QtCore import *
 app=QApplication([])
 wd=QWidget()
 wd.resize(500,500)
-
 # 建立QPushButton按钮
 # QPushButton(图标,文本,父控件)
 btn=QPushButton(QIcon(r'pyside2_pyqt\pys2\xxx.png'),'按钮1',wd)
 
 # QPushButton按钮设置菜单 setMenu(QMenu()) 
-# 定义QMenu(btn)对象
-menu=QMenu(btn)
+# 定义QMenu()对象
+menu=QMenu(wd)
 
 # QMenu()功能
 # 添加加子菜单    menu.addMenu()
@@ -68,7 +67,9 @@ menu.addAction(exit_action)
 
 # 将menu设置为btn的下拉菜单
 btn.setMenu(menu)
-
+# 取消 tb.setMenu(menu)设置后 下拉菜单的角标 menu-indicator
+# btn.setStyleSheet("QPushButton::menu-indicator{image:none;}")
+# btn.click() #放在这里好玩了，先出现该下拉菜单，点击完成后，才出现窗口，这就是为什么要把点击放在wd.show()后面的关系了。
 wd.show()
 # 菜单展示  要 放在主窗口展示后 
 # btn.showMenu()# 等于 btn.click()

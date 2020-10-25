@@ -16,7 +16,6 @@ class Btn(QPushButton):
 
 app = QApplication([])
 
-
 window = Window()
 
 window.setWindowTitle("交互状态")
@@ -29,7 +28,7 @@ btn.setText("按钮")
 # setEnabled(bool) 状态 isEnabled()
 print(btn.isEnabled())
 
-btn.setEnabled(False)#设置不可用
+# btn.setEnabled(False)#设置不可用
 
 btn.destroyed.connect(lambda : print("按钮被释放了"))
 
@@ -40,7 +39,7 @@ btn.destroyed.connect(lambda : print("按钮被释放了"))
 #
 # 3 是否编辑 加* [*]
 window.setWindowTitle("交互状态[*]") 
-window.setWindowModified(True) 
+# window.setWindowModified(True) 
 print(window.isWindowModified())
 
 # 4 关闭
@@ -55,7 +54,7 @@ w2=QWidget()
 w2.show()
 
 window.show()
-# w2.raise_() #把w2放到前面
+w2.raise_() #把w2放到前面
 print(w2.isActiveWindow())# False 不是活动窗口，即使把w2放到前面，也是False。
 # 设定w2为活动窗口
 w2.setWindowState(Qt.WindowActive)

@@ -18,19 +18,20 @@ wd.setWindowTitle('定时器案例')
 class MyLabel(QLabel):
     def __init__(self,*args,**kwargs):
         super().__init__(*args,**kwargs)
-        self.setText('10')
-        # self.resize(100,50)
+        
+        self.resize(50,50)
         
         self.move(100,100)
         self.setStyleSheet('background-color: cyan;font-size:33px')
-        self.adjustSize() #自适应大小 要放在字体设置完后 不然会很小
+        # self.adjustSize() #自适应大小 要放在字体设置完后 不然会很小
+        # 设置初始值
+        # self.setText('10') #放在 self.adjustSize() 后面 就看不到'10' 只能看到'1' ,放在自适应前面没问题。
         # 设置定时器
         # self.t_id=self.startTimer(1000)
     
     # 设置定时器函数
     def setTime_ms(self,sec,ms):
         self.setText(str(sec))
-        
         self.t_id=self.startTimer(ms)   
         # print(self.t_id)
     
@@ -50,7 +51,7 @@ class MyLabel(QLabel):
 # 实例化对象
 lb=MyLabel(wd)
 # 设置 定时器 
-lb.setTime_ms(20,500)#（初始数值，启动时间）
+lb.setTime_ms(20,2000)#（初始数值，间隔时间）
 print(lb.t_id)
 
 wd.show()

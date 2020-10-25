@@ -48,6 +48,8 @@ coordinate_points=[(89,226),
 (342,280+1042),(355,280+1042),(389,280+1042),
 (101,1370+24),(101,1445+24),(101,1660),
 ]
+# 异常变量
+is_exception=False
 
 # appium 操作
 class WxPay():
@@ -66,28 +68,19 @@ class WxPay():
           # 'app': r'd:\apk\bili.apk',
         
         } 
+
+        # 开始画面
+        self.one_pixel=False # 同一画面
+
         # 两个开关 三种状态
-        
         self.go_swipe=False # 下滑
-        
         self.go_back=False   # 返回
 
         self.is_duplicate=False  # 找到上次流程的重复点 是结束下滑，进行返回或结束的一个标志
-
         self.is_swiped=False # 下滑过
         self.is_backed=False # 返回过
 
-        self.is_added=False # 新增过
-
-        self.one_pixel=False # 同一画面
-
-      
         # 次流程变量
-
-        self.add_node=0 #本次新增节点数 从0开始
-
-        
-
         self.c_list=[] #本次新增收款节点列表
         self.c_uuid=[] #本次新增uuid列表
         self.c_price=[]
@@ -101,8 +94,7 @@ class WxPay():
         self.wd = webdriver.Remote('http://localhost:4723/wd/hub', self.desired_caps)
         # 隐式等待
         # 设置缺省等待时间
-        self.wd.implicitly_wait(20)
-
+        self.wd.implicitly_wait(10)
 
     # 判断当前页面是否是微信支付页面
     def check_wxpay_page(self):
@@ -129,19 +121,32 @@ class WxPay():
                     
         except Exception as e:
             print('开始就异常,报错:',e)
+            print('标记本次异常，本次结束时，不执行同步总列表操作')
+            global is_exception
+            is_exception=True
             self.wd.quit()
                   
 
     #1 页面 主程序
     def page_main(self):
+        # 处理上一次流程是否异常，
+            # 如果异常，就去返回，让页面得到一次刷新，并关闭异常开关
+            # 这样，就把异常发生的次流程也处理了，不会遗漏uuid。
+        global is_exception
+        if is_exception:
+            print('上一次流程发生异常')
+            print('关闭异常开关') 
+            is_exception=False
+            print('用返回去刷新页面')
+            self.back_back()
+
         # 抓屏 获取像素点 和上一轮像素点 对比 
         self.get_pixel()
         if self.one_pixel:
             print(f'同一画面，退出，结束第{cnt}次流程')
             self.over_wd()
-        
         else:
-            print('开始轮流程，找节点')
+            print('开始 轮流程，找节点')
             self.check_nodes()
             pass
 
@@ -225,8 +230,11 @@ class WxPay():
                 
         except Exception as e:
             print('报错:',e)
-            print('报错也要执行结束动作...')
+            print('标记本次异常，本次结束时，不执行同步总列表操作')
+            global is_exception
+            is_exception=True
             self.over_wd()
+
     # 盘点节点 操作
     def pd_nodes_op(self,pd_nodes,sk_nodes):
         # 取出最下一个盘点节点的y
@@ -253,9 +261,7 @@ class WxPay():
             # self.wd.quit()
             # return
         
-        pass
-    # 一次下滑 一次下滑并返回  退出结束一次流程
-
+     
     # 在 wxzf 页面中 一轮操作
         # 看 两个节点
             # 一个是盘点节点
@@ -296,7 +302,6 @@ class WxPay():
         # 如果同位置的节点和uuid对应总列表同一位置的节点和uuid，就是重复了，出现重复就要退出，
         # 而不重复的点就要加入 本次节点列表 和 本次uuid列表。
     def find_duplicate_record(self):
-        
         if self.l_list:
             for l_text in self.l_list:
                 l_uuid=self.l_uuid[self.l_list.index(l_text)]
@@ -306,13 +311,10 @@ class WxPay():
                     global today_list
                     global today_uuid
                     if today_list:
-                        if l_text in today_list and l_uuid in today_uuid:
-                            idx1=today_list.index(l_text)
-                            idx2=today_uuid.index(l_uuid)
-                            if idx1==idx2:
-                                print('找到了重复的记录，本轮结束后就不能下滑了，要返回或结束本次流程')
-                                self.is_duplicate=True
-                                continue
+                        if l_text in today_list and l_uuid == today_uuid[today_list.index(l_text)]:
+                            print('找到了重复的记录，本轮结束后就不能下滑了，要返回或结束本次流程')
+                            self.is_duplicate=True
+                            continue
                     print('去记录')
                     if not l_price == 'no_find':
                         # 在列表里，并且同位置的uuid还相同
@@ -342,24 +344,46 @@ class WxPay():
             self.l_list=[]
             self.l_uuid=[]
             self.l_price=[] 
+    
     # 结束动作
     def over_wd(self):
         # print('次节点列表',self.c_list)
         # print('次uuid列表',self.c_uuid)
         # print('次price列表',self.c_price)
-        if self.c_list:
-            print('把次列表添加到总列表')
+        global is_exception
+        if not is_exception and self.c_list:
+            # 内部次列表会记录重复，比如在记录的过程中发生来了通知的时候，发生了位置替换。
+            # 记录过程中的位置替换：
+                # 正在记录的瞬间，11的位置被12替换，12被13替换，
+                # 这时记录的uuid是后面的uuid,11记录的uuid是12的.
+            # 因此在同步总列表前，要去重，但注意，这个去重不是简单的去重，而是要同时重（list和uuid）的才去。
+            print('次列表去重')
+            lup=[]
+            for i in range(len(self.c_list)):
+                item=[]
+                item.append(self.c_list[i])
+                item.append(self.c_uuid[i])
+                item.append(self.c_price[i])
+                if item not in lup:
+                    lup.append(item)
+
+            print('把去重后的次列表添加到总列表')
             global today_list
             global today_uuid
             global today_price
-            for i,v in enumerate(self.c_list):
+            for i,v in enumerate(lup):
                 # 在总列表里，并且同位置的uuid还相同 再一次 去重
-                if v in today_list and  self.c_uuid[i] == today_uuid[today_list.index(v)]:
+                if v[0] in today_list and  v[1] == today_uuid[today_list.index(v[0])]:
                     print('总列表已经记录')
                 else:
-                    today_list.append(v)
-                    today_uuid.append(self.c_uuid[i])
-                    today_price.append(self.c_price[i])
+                    today_list.append(v[0])
+                    today_uuid.append(v[1])
+                    today_price.append(v[2])
+        else:
+            if is_exception:
+                print('本次异常，不同步列表')
+            else:
+                print('次列表为空，不同步列表')
         time.sleep(2)
         print('总节点列表',today_list)
         print('总uuid列表',today_uuid)
@@ -375,7 +399,6 @@ class WxPay():
         uuid_code='//*[@resource-id="com.tencent.mm:id/aq3"][starts-with(@text,"uuid")]'
         uuid_node=self.find_node(sk_node,130,uuid_code,self.l_uuid)
         
-
     def price_node(self,sk_node):
         print('找price')
         time.sleep(2)
@@ -385,8 +408,9 @@ class WxPay():
 
     # 查找同一节点内 小节点 找到 同步 节点列表， 没找到 添加'no_find'到节点列表
     # m_node:主节点 根
-    # dh:距离主节点的距离 
-    # node_code:xpath 要找的小节点的xpath
+    # dh:距离主节点的距离、范围等实测边界
+    # node_code:xpath 要找的小节点的xpath，在范围内查找的节点类型
+    # t_list：需同步记录的列表
     def find_node(self,m_node,dh,node_code,t_list):
         y1=m_node.location['y'] 
         m_text=m_node.get_attribute('text')
@@ -511,7 +535,7 @@ class WxTimer():
         # 如果当前时间戳小于盘点时间戳，就运行定时任务 否则 就盘点
         t_n=time.time()
         if t_n < self.time_stamp:
-            self.timer=Timer(100,self.run_one)
+            self.timer=Timer(20,self.run_one)
             self.timer.start()
             self.kill_timer()
         else:
@@ -543,7 +567,7 @@ class WxTimer():
             cnt=0 #重新计数
             print(f'结束盘点,时间为: {self.get_format_time(time.time())}')
 
-            return
+            
 
 
     def kill_timer(self):
@@ -580,7 +604,7 @@ if __name__ == "__main__":
     time_stamp=get_time_stamp(pd_time)
     while True:
         WxTimer(time_stamp)
-        time.sleep(100)
+        time.sleep(30)
         # time_stamp += 3600
 
     pass

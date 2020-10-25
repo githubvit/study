@@ -1,0 +1,88 @@
+scrcpy 投屏软件
+# 用usb线连接手机
+    # 在你运行程序的电脑上 用 USB线 连接上 你的安卓手机
+    # 进入 手机设置 -> 关于手机 ，不断点击 版本号 菜单（7次以上），
+    # 退出到上级菜单，在开发者模式中，启动USB调试
+
+# 安装
+    # 软件：scrcpy-win64-v1.12.1.zip https://github.com/Genymobile/scrcpy/releases
+    # 下载解压，将解压目录添加到path环境变量。
+# 启动
+    # 1 先要把手机开发者模式打开，在开发者模式中要设置允许usb调式模式，一般连接手机客户端都早已经设好。
+    # 2 手机用usb连接电脑。
+    # 3 命令行中 输入 adb usb
+        # C:\Users\69598>adb usb
+        # 返回如下：
+        # restarting in USB mode
+
+
+    # 4 输入 scrcpy 则 手机屏幕成功在电脑中出现
+        # C:\Users\69598>scrcpy
+        # 返回如下：
+        # INFO: scrcpy 1.12.1 <https://github.com/Genymobile/scrcpy>
+        # D:\scrcpy\scrcpy-win64-v1.12.1\scrcpy-server: 1 file pushed. 1.3 MB/s (26202 bytes in 0.020s)
+        # INFO: Initial texture: 1080x1920
+
+# 使用
+    # 命令
+        # 关闭手机屏幕	    scrcpy -S
+        # 限制画面分辨率	scrcpy -m 1024 (比如限制为 1024)
+        # 修改视频码率	    scrcpy -b 4M (默认 8Mbps，改成 4Mbps)
+        # 裁剪画面	        scrcpy -c 1224:1440:0:0
+            # 表示分辨率 1224x1440 并且偏移坐标为 (0,0)
+        # 多设备切换	    scrcpy -s 设备ID (使用 adb devices 命令查看设备ID)
+        # 窗口置顶	        scrcpy -T
+        # 显示触摸点击	    scrcpy -t
+            # 在演示或录制教程时，可在画面上对应显示出点击动作
+        # 全屏显示	        scrcpy -f
+        # 文件传输默认路径	scrcpy --push-target /你的/目录
+            # 将文件拖放到 scrcpy 可以传输文件，此命令指定默认保存目录
+        # 只读模式(仅显示不控制)    scrcpy -n
+        # 屏幕录像	               scrcpy -r 视频文件名.mp4 或 .mkv
+        # 屏幕录像 (禁用电脑显示)	scrcpy -Nr 文件名.mkv
+        # 设置窗口标题	    scrcpy --window-title '异次元好棒！'
+        # 同步传输声音	可借助 USBaudio 这个开源项目实现，但仅支持 Linux 系统
+
+    # 快捷键
+        # 看到 Scrcpy 的投屏窗口和手机画面了，你可以直接用鼠标进行操作，它同时也有很多键盘快捷键可以使用。
+        # 切换全屏模式	                Ctrl+F
+        # 将窗口调整为1：1（完美像素）	 Ctrl+G
+        # 调整窗口大小以删除黑色边框	Ctrl+X | 双击黑色背景
+        # 设备 HOME 键	Ctrl+H | 鼠标中键
+        # 设备 BACK 键	Ctrl+B | 鼠标右键
+        # 设备 任务管理 键 (切换APP)	Ctrl+S
+        # 设备 菜单 键	Ctrl+M
+        # 设备音量+键	Ctrl+↑
+        # 设备音量-键	Ctrl+↓
+        # 设备电源键	Ctrl+P
+        # 点亮手机屏幕	鼠标右键
+        # 复制内容到设备	Ctrl+V
+        # 启用/禁用 FPS 计数器（stdout）	Ctrl+i
+        # 安装APK	将 apk 文件拖入投屏
+        # 传输文件到设备	将文件拖入投屏（非apk）
+
+        # 保持电脑屏幕 关闭手机屏幕  Ctrl+o
+        # 开启手机屏幕  Ctrl+shift+o
+
+        # 多任务	Ctrl+S
+        # 图片放大缩小 双击
+
+    # 问题解决
+        # 1 连不上 现象输入adb usb 报设备离线，可设备已经连上了
+            # C:\Users\69598>adb usb
+            # error: device offline
+            # 解决
+            # 先关闭adb，再重连，解决。
+                # C:\Users\69598>adb kill-server
+                # C:\Users\69598>adb usb
+                # * daemon not running; starting now at tcp:5037
+                # * daemon started successfully
+                # restarting in USB mode
+                # C:\Users\69598>scrcpy
+                # INFO: scrcpy 1.12.1 <https://github.com/Genymobile/scrcpy>
+                # D:\scrcpy\scrcpy-win64-v1.12.1\scrcpy-server: 1 file pushed. 0.7 MB/s (26202 bytes in 0.034s)
+                # INFO: Initial texture: 1080x1920
+                # 手机报是否允许这台计算机usb调式之类的，打勾就可以了。
+
+        # 2 Android5.1 华为手机 用快捷键 关闭手机屏幕后 用快捷键 Ctrl+shift+o 无法开启手机屏幕 
+        # 用一键锁屏软件锁屏后 再用鼠标右键开屏 手机屏幕点亮。

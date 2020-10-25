@@ -27,13 +27,13 @@ class Btn(QAbstractButton):
 
        
         # 2 定义一只笔（颜色，笔宽）
-        pen = QPen(QColor(111, 200, 20), 5)
+        pen = QPen(QColor(111, 200, 20), 3)
         # 3 用定义的画纸设置这只笔，就把纸笔连在一起了
         painter.setPen(pen)
 
         # 3 开始画
         # 先画一段文本，文本不受笔宽影响，无论怎么改笔宽，字体的粗细不变。
-        painter.drawText(40, 40, self.text()) #(x,y,str)x,y是边距
+        painter.drawText(20, 20, self.text()) #(x,y,str)x,y是边距
         # 再画一个椭圆 
         painter.drawEllipse(0, 0, 100, 100) #(x,y,width,heigt) x，y不是圆心，是左上角边距。
 

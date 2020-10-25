@@ -7,7 +7,7 @@ from PySide2.QtGui import *
 class MyLabel(QLabel):
     # 合适的尺寸建议大小 名义尺寸
     def sizeHint(self):
-        return QSize(300,200) #尺寸如果小于最小建议尺寸 就按最小建议尺寸 
+        return QSize(300,300) #尺寸如果小于最小建议尺寸 就按最小建议尺寸 
 
     # 最小尺寸的建议大小
     # layout 永远不会把一个控件的尺寸设置的比最小的建议尺寸小，
@@ -33,12 +33,14 @@ class Window(QWidget):
         lb4.setStyleSheet('background-color:orange')
 
         v_layout=QVBoxLayout()
-
-        self.setLayout(v_layout)
+        # v_layout=QHBoxLayout()
         v_layout.addWidget(lb1)
         v_layout.addWidget(lb2)
         v_layout.addWidget(lb3)
         v_layout.addWidget(lb4)
+
+        self.setLayout(v_layout)
+        
 
         
         # 尺寸策略 QSizePolicy
@@ -51,28 +53,28 @@ class Window(QWidget):
         # Fixed 保持名义尺寸 不放大和缩小
         # lb1.setSizePolicy(QSizePolicy.Fixed,QSizePolicy.Fixed)#(水平方向尺寸策略，垂直方向尺寸策略)
         
-        # 水平方向固定不动 垂直方向可以缩放 
+        # 水平方向固定不动 垂直方向可以缩放 垂直方向 lb1的变化在300往上拉伸。
         # lb1.setSizePolicy(QSizePolicy.Fixed,QSizePolicy.Minimum)
         
         # 水平方向固定不动 垂直方向以名义尺寸为最大尺寸 以最小建议尺寸为最小尺寸
-        # lb1.setSizePolicy(QSizePolicy.Fixed,QSizePolicy.Maximum) # 垂直方向 lb1的变化在100到200之间
+        # lb1.setSizePolicy(QSizePolicy.Fixed,QSizePolicy.Maximum) # 垂直方向 lb1的变化在100到300之间
         
-        # 水平方向固定不动 垂直方向以名义尺寸为第一级最小尺寸 ，当所有空白都归零，就继续压缩至最小尺寸。
-        # lb1.setSizePolicy(QSizePolicy.Fixed,QSizePolicy.Preferred) # 垂直方向 lb1的变化在100到200之间
+        # 水平方向固定不动 垂直方向以名义尺寸为第一级最小尺寸 ，当其余控件所有空白都归零，就开始压缩lb1至最小尺寸。
+        # lb1.setSizePolicy(QSizePolicy.Fixed,QSizePolicy.Preferred) # 垂直方向 lb1的变化在100到300之间
         
         # 水平方向固定不动 垂直方向优先级高于Preferred, 垂直空白都被lb2给拿走。
-        # 注意：当都被压缩至最小再拉大过程中，先被拉大的时lb1，因为空白要先给有名义尺寸的控件，当lb1达到名义尺寸后，然后再按优先级给lb2.
-        # lb2.setSizePolicy(QSizePolicy.Fixed,QSizePolicy.Expanding) 
+        # 注意：当都被压缩至最小再拉大过程中，先被拉大的是lb1，因为空白要先给有名义尺寸的控件，当lb1达到名义尺寸后，然后再按优先级给lb2.
+        lb2.setSizePolicy(QSizePolicy.Fixed,QSizePolicy.Expanding) 
         
         # 水平方向固定不动 垂直方向可以小到没有。
-        # lb1.setSizePolicy(QSizePolicy.Fixed,QSizePolicy.Ignored) 
+        lb1.setSizePolicy(QSizePolicy.Fixed,QSizePolicy.Ignored) 
         
         # 2 用尺寸策略对象设置尺寸策略
         # 定义尺寸策略对象 （水平策略，垂直策略）
-        sp=QSizePolicy(QSizePolicy.Fixed,QSizePolicy.Ignored)
-        # 设置把lb1隐藏也保留位置 必须放在尺寸策略设置之前，才有效
-        sp.setRetainSizeWhenHidden(True)
-        lb1.setSizePolicy(sp)
+        # sp=QSizePolicy(QSizePolicy.Fixed,QSizePolicy.Ignored)
+        # 设置 当lb1隐藏也保留位置 必须放在尺寸策略设置之前，才有效
+        # sp.setRetainSizeWhenHidden(True)
+        # lb1.setSizePolicy(sp)
         # lb1.hide()
 
         # 3 setFixedSize 

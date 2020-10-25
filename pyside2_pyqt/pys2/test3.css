@@ -10,6 +10,7 @@ QPushButton {
 QCheckBox {
     margin-left: 20px;
     padding-left: 10px;
+    /* spacing: 60px; */
     border: 1px solid black;
 }
 
@@ -19,7 +20,7 @@ QRadioButton {
     color: red;
     font-size: 20px;
     border: 1px solid black;
-    border-radius: 40px;
+    border-radius: 4px;
 }
 
 
@@ -97,25 +98,31 @@ QComboBox QAbstractItemView {
     background-color: orange;
 }
 
-QComboBox QAbstractItemView::item {
+
+/* 无效 */
+
+
+/* QComboBox QAbstractItemView::item {
     color: green;
-}
+} */
 
 
 /* 下拉箭头按钮控件  */
 
-QComboBox::drop-down {
+
+/* QComboBox::drop-down {
     background-color: cyan;
-}
+} */
 
 
 /* 下拉箭头按钮中的箭头 */
 
-QComboBox::down-arrow {
+
+/* QComboBox::down-arrow {
     image: url(pyside2_pyqt/pys2/xxx.png);
     width: 20px;
     height: 20px;
-}
+} */
 
 
 /* 4 QSlider */
@@ -142,7 +149,8 @@ QSlider::groover:Horizontal {
 
 QSlider::handle:Horizontal {
     border-image: url(pyside2_pyqt/pys2/xxx.png);
-    height: 60px;
+    /*没有这个 下面add-page 就无效*/
+    height: 10px;
     width: 30px;
 }
 
@@ -151,11 +159,11 @@ QSlider::handle:Horizontal {
 
 QSlider::add-page:Horizontal {
     background-color: white;
-    height: 4px;
+    /* height: 1px; */
 }
 
 
-/* sub-page表示已经滑过了的部分 没有出效果*/
+/* sub-page表示已经滑过了的部分 没有出效果 影响进度条的QProgressBar效果 都出不来*/
 
 
 /* QSlider::sub-page:Horizontal {
@@ -178,8 +186,9 @@ QProgressBar {
 
 /* 进度条是由很多chunk小方块组成的，每个小方块样式如下 */
 
-QProgressBar::chunk {
+
+/* QProgressBar::chunk {
     background-color: green;
     width: 10px;
     margin: 0.5px;
-}
+} */

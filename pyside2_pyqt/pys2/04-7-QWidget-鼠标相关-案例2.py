@@ -38,6 +38,9 @@ class MyLabel(QLabel):
         # 01
         # 11  == 3
         # ctrl+shift+A 监听
+        if kevt.modifiers() == Qt.ControlModifier | Qt.ShiftModifier and kevt.key()== Qt.Key_A:
+            print('用户点击了Ctrl+Shit+A')
+        # ctrl+Alt+A 监听
         if kevt.modifiers() == Qt.ControlModifier | Qt.AltModifier and kevt.key()== Qt.Key_A:
             print('用户点击了Ctrl+Alt+A')
 

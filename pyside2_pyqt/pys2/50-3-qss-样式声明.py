@@ -29,10 +29,11 @@ class Window(QWidget):
         sbx=QSpinBox()
         cbx=QCheckBox('样式测试')
         v_layout=QVBoxLayout()
-        self.setLayout(v_layout)
+        
         v_layout.addWidget(lb1)
         v_layout.addWidget(sbx)
         v_layout.addWidget(cbx)
+        self.setLayout(v_layout)
 
         pass
 if __name__ == "__main__":
@@ -41,7 +42,7 @@ if __name__ == "__main__":
     wd.show()
     # 用样式文件设置样式
     # 选择器[:伪状态]{
-            # 声明
+            # 声明 
         # } 
     filepath=r'D:\pyj\st\study\pyside2_pyqt\pys2\test1.css'
     get_stlye(filepath,app)

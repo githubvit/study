@@ -40,11 +40,11 @@ le3.move(150, 150)
 
 # setTabOrder仅仅是用来 调整 两个子控件的焦点顺序 因此只有两个参数
 # setTabOrder是类的静态方法，用类调用，不是用对象调用
-QWidget.setTabOrder(le1, le3)
+# QWidget.setTabOrder(le1, le3)
 # QWidget.setTabOrder(le3, le2) # 仅仅表示 le3 在 le2 前 或 le2在le3后
 
 # 获取焦点
-le2.setFocus()
+# le2.setFocus()
 # 设置焦点获取策略
 # le2.setFocusPolicy(Qt.TabFocus)#仅Tab键
 # le2.setFocusPolicy(Qt.ClickFocus)#仅单击
@@ -55,20 +55,21 @@ le2.setFocus()
 # 取消焦点
 # le2.clearFocus()
 
-
+print(window.focusWidget())
 window.show()
 
 # print(le1)
 # print(le2)
 # print(le3)
-#
+
 # le2.setFocus()
 
 # 没有人为设置获取焦点时，获取当前窗口内部-所有子控件当中获取焦点的那个控件 
 # 无论放在show()前或后面 都打印None 要放在某个事件里，事件响应后才可获取到
 # 说明焦点是绘制事件结束后加上去的
+
 # 如果在获取焦点控件前 人为 设置一个控件获取焦点，就可以获取到。
-print(window.focusWidget())
+# print(window.focusWidget())
 
 
 # le1.clearFocus()

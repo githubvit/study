@@ -3,7 +3,7 @@ from PySide2.QtWidgets import QApplication,QWidget,QLabel
 
 # 1. 创建应用程序对象
 app=QApplication(['1','3'])
-# print(app.arguments())
+print(app.arguments())
 
 # 2. 控件操作 界面的内容都在这
 

@@ -81,6 +81,7 @@ class Window(QWidget):
         animation_group.addAnimation(animation1)
         animation_group.addAnimation(animation2)
         
+        animation_group.setLoopCount(3)
 
         animation_group.start()
 

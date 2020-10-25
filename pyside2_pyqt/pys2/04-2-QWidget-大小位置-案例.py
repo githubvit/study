@@ -89,7 +89,11 @@ for i in range(0,w_num):
     w_y=i//cl_num*w_height
     # print(w_x,w_y)    
     w.move(w_x,w_y)
-    w.setStyleSheet('background-color:red; border:1px solid cyan')
+    # 奇数背景为红 偶数背景为绿 
+    if i%2:
+        w.setStyleSheet('background-color:red; border:1px solid cyan')
+    else:
+        w.setStyleSheet('background-color:green; border:1px solid cyan')
 
 
 wd.show()

@@ -43,3 +43,4 @@ if __name__ == "__main__":
     filepath=r'D:\pyj\st\study\pyside2_pyqt\pys2\test2.css'
     get_stlye(filepath,app)
     app.exec_()
+    

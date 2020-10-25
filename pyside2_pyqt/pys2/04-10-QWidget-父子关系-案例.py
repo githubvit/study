@@ -6,12 +6,13 @@ import sys
 # 案例：点击了哪个子控件则哪个子控件背景变化
 
 # 方案一 在标签点击事件中捕捉
-# class Label(QLabel):
-#     def mousePressEvent(self, QMouseEvent):
-#         if self.styleSheet()=="background-color: red;":
-#             self.setStyleSheet('background-color:cyan')
-#         else:
-#             self.setStyleSheet("background-color: red;")
+class Label(QLabel):
+    # def mousePressEvent(self, QMouseEvent):
+    #     if self.styleSheet()=="background-color: red;":
+    #         self.setStyleSheet('background-color:cyan')
+    #     else:
+    #         self.setStyleSheet("background-color: red;")
+    pass
 
 # 方案二 在窗口点击事件中捕捉
 class Window(QWidget):
@@ -33,8 +34,8 @@ app = QApplication(sys.argv)
 
 # 2. 控件的操作
 # 2.1 创建控件
-window = QWidget()
-# window = Window()
+# window = QWidget()
+window = Window()
 # 2.2 设置控件
 window.setWindowTitle("父子关系-子控件背景变化")
 window.resize(500, 500)

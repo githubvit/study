@@ -114,10 +114,13 @@ class Window(QWidget):
     def account_textchange(self):
         # 如果账号输入框有内容 则登录按钮可用 反之 不可用
         self.login_btn.setEnabled(len(self.account.text().strip()))
+        
     def account_pwd_textedit(self):    
         # 清除原有的提示
         for lb in self.findChildren(QLabel):
             lb.setText('')
+
+    # 密码框 状态切换行为 的slot函数
     def pwdstate_change(self):
         if self.pwd.echoMode() == QLineEdit.Password:#密文
             # 切换输出模式
@@ -145,7 +148,7 @@ class Window(QWidget):
         if login_state == AccountTool.ACCOUNT_ERROR:
             # 展示提示
             self.account_tip.setText('用户名错误！')
-            self.account_tip.adjustSize()
+            # self.account_tip.adjustSize()
             # 清空账号和密码输入框
             self.account.setText('')
             self.pwd.setText('')
@@ -165,6 +168,7 @@ class Window(QWidget):
         # 展示成功登录提示
         self.success_tip.setText('登录成功，即将跳转。。')
         self.success_tip.adjustSize()
+    
     def resizeEvent(self,evt):
         # 控件宽高 自适应窗口
         margin_x=150
@@ -186,9 +190,12 @@ class Window(QWidget):
         self.account_tip.move(self.account.x(),self.account.y()+widget_y+margin_tip)
         self.pwd_tip.move(self.pwd.x(),self.pwd.y()+widget_y+margin_tip)
         self.success_tip.move(self.login_btn.x(),self.login_btn.y()+widget_y+margin_tip)
+
         # 标签宽度
+        # adjustSize必须在有内容后设置，内容长度是变化的，因此在这里设置是无效的，反而会影响内容的显示
         # self.account_tip.adjustSize()
         # self.pwd_tip.adjustSize()
+        # self.success_tip.adjustSize()
 
         
 

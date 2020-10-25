@@ -78,7 +78,7 @@ background-attachment：
 
 
 渐变色：
-    线性渐变：qlineargradient(起始位置，结束位置,某颜色起始点在线段的比例位置) 可以有很多颜色断点
+    线性渐变：qlineargradient(起始比例位置，结束比例位置,某颜色起始点在线段的比例位置) 可以有很多颜色断点
         qlineargradient(x1:0,y1:0,x2:1,y2:1,stop:0 white,stop:0.4 gray,stop:1 green)
    
     辐射渐变：(中心比例位置，半径比例大小，光源比例位置，颜色断点)
@@ -124,8 +124,9 @@ Window {
 
 QLabel {
     /* background-color: cyan; */
-    /* 线性 */
-    /* background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 red, stop: 0.4 gray, stop: 1 green); */
+    /* 线性 y向和x向*/
+    /* background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 red,stop:0.4 gray, stop: 1 green); */
+    /* background-color: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 0, stop: 0 red, stop: 1 green); */
     /* 辐射 */
     /* background-color: qradialgradient(cx: 0.7, cy: 0.7, radius: 0.5, fx: 0.5, fy: 0.5, stop: 0 red, stop: 1 orange); */
     /* 辐射 中心和光源重合 */
@@ -133,7 +134,8 @@ QLabel {
     /* 角度 */
     background-color: qconicalgradient(cx: 0.5, cy: 0.5, angle: 45, stop: 0 red, stop: 1 orangered);
     /* border-width: 6px; */
-    /* border-style: dotted dashed double solid; */
+    /*上 右 下 左 */
+    /* border-style: dotted dashed double solid;*/
     /* border-width: 2px 4px 8px 16px; */
     /* border-top-style: groove; */
 }
@@ -156,52 +158,110 @@ Top Bottom 和 Left Right:
 QSpinBox {
     font-size: 26px;
     color: orange;
-    border: 10px double red;
-    border-radius: 10px;
+    /* border: 10px double red; */
+    /* border-radius: 10px; */
 }
 
-QSpinBox::up-button,
-QSpinBox::down-button {
+
+/*  */
+
+
+/* QSpinBox::up-button, */
+
+
+/* QSpinBox::down-button,
+QSpinBox::up-button {
     width: 40px;
     height: 40px;
-}
+} */
+
+
+/*  */
 
 QSpinBox::up-button {
     subcontrol-position: left center;
-    image: url(pyside2_pyqt/pys2/xxx.png);
+    /* image: url(pyside2_pyqt/pys2/xxx.png); */
 }
+
+
+/*  */
 
 QSpinBox::down-button {
     subcontrol-position: right center;
 }
 
 
+/*  */
+
+
+/*  */
+
+
 /* 用伪状态添加 一点点动画 */
 
 QSpinBox::up-button:hover {
     bottom: 10px;
-    /*添加10px距离 使得 该控件向上移动10px*/
+    /* 添加10px距离 使得 该控件向上移动10px */
 }
+
+
+/*  */
 
 QSpinBox::down-button:hover {
     top: 10px;
-    /*添加10px距离 使得 该控件向上移动10px*/
+    /* 添加10px距离 使得 该控件向上移动10px */
 }
 
-QCheckBox {
-    color: gray;
-    border: 10px double rgb(76, 76, 76);
-    padding: 5px;
-}
 
-QCheckBox::indicator {
-    /* subcontrol-origin: border; */
-    subcontrol-origin: padding;
-    subcontrol-position: left center;
-    background: white;
-    border: 2px solid gray;
-}
+/*  */
 
-QCheckBox::indicator:checked {
-    background-color: gray;
-}
+
+/* QCheckBox { */
+
+
+/* color: gray; */
+
+
+/* border: 10px double rgb(76, 76, 76); */
+
+
+/* padding: 5px; */
+
+
+/* } */
+
+
+/*  */
+
+
+/* QCheckBox::indicator { */
+
+
+/* subcontrol-origin: border; */
+
+
+/* subcontrol-origin: padding; */
+
+
+/* subcontrol-position: left center; */
+
+
+/* background: white; */
+
+
+/* border: 2px solid gray; */
+
+
+/* } */
+
+
+/*  */
+
+
+/* QCheckBox::indicator:checked { */
+
+
+/* background-color: gray; */
+
+
+/* } */

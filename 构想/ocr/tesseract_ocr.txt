@@ -1,0 +1,123 @@
+一 命令：
+  格式：
+  tesseract 识别的图片文件 输出的txt文件 -l 文本库 模式（比如 --psm 7 或 --oem 2 等 不写默认就是 --psm 3 和--oem 3）
+
+  C:\Users\69598\Desktop\uix>tesseract dump_1326232111351701349.png t1 -l chi_sim
+  Tesseract Open Source OCR Engine v5.0.0-alpha.20200223 with Leptonica
+  Warning: Invalid resolution 0 dpi. Using 70 instead.
+  Estimating resolution as 445
+
+  C:\Users\69598\Desktop\uix>tesseract test.png t3 -l chi_sim+chi_sim_vert+eng --psm 13
+  Tesseract Open Source OCR Engine v5.0.0-alpha.20200223 with Leptonica
+  Warning: Invalid resolution 0 dpi. Using 70 instead.
+
+
+
+二 文本库 6 种 
+C:\Users\69598>tesseract --list-langs
+List of available languages (6):
+chi_sim         简体中文
+chi_sim_vert    简体中文扩展
+chi_tra         繁体中文
+chi_tra_vert    繁体中文扩展
+eng             英文
+osd
+
+
+
+三 帮助：
+C:\Users\69598>tesseract --help-extra
+Usage:
+  tesseract --help | --help-extra | --help-psm | --help-oem | --version
+  tesseract --list-langs [--tessdata-dir PATH]
+  tesseract --print-parameters [options...] [configfile...]
+  tesseract imagename|imagelist|stdin outputbase|stdout [options...] [configfile...]
+用法：
+  tesseract--help |--help extra |--help psm |--帮助oem |--版本
+  tesseract—列出语言[--tessdata dir PATH]
+  tesseract—打印参数[选项…][配置文件…]
+  tesseract imagename | imagelist | stdin outputbase | stdout[选项…][配置文件…]
+
+OCR options:
+  --tessdata-dir PATH   Specify the location of tessdata path.
+  --user-words PATH     Specify the location of user words file.
+  --user-patterns PATH  Specify the location of user patterns file.
+  --dpi VALUE           Specify DPI for input image.
+  -l LANG[+LANG]        Specify language(s) used for OCR.
+  -c VAR=VALUE          Set value for config variables.
+                        Multiple -c arguments are allowed.
+  --psm NUM             Specify page segmentation mode.
+  --oem NUM             Specify OCR Engine mode.
+NOTE: These options must occur before any configfile.
+OCR选项：
+  --tessdata dir PATH指定tessdata PATH的位置。
+  --用户单词路径指定用户单词文件的位置。
+  --用户模式路径指定用户模式文件的位置。
+  --dpi值指定输入图像的dpi。
+  -l LANG[+LANG]指定用于OCR的语言。
+  -c VAR=配置变量的值设置值。
+  允许使用多个-c参数。
+  --指定页面分段模式。
+  --oem NUM指定OCR引擎模式。
+注意：这些选项必须出现在任何配置文件之前。
+
+Page segmentation modes:
+  0    Orientation and script detection (OSD) only.
+  1    Automatic page segmentation with OSD.
+  2    Automatic page segmentation, but no OSD, or OCR. (not implemented)
+  3    Fully automatic page segmentation, but no OSD. (Default)
+  4    Assume a single column of text of variable sizes.
+  5    Assume a single uniform block of vertically aligned text.
+  6    Assume a single uniform block of text.
+  7    Treat the image as a single text line.
+  8    Treat the image as a single word.
+  9    Treat the image as a single word in a circle.
+ 10    Treat the image as a single character.
+ 11    Sparse text. Find as much text as possible in no particular order.
+ 12    Sparse text with OSD.
+ 13    Raw line. Treat the image as a single text line,
+       bypassing hacks that are Tesseract-specific.
+页面分割模式：
+  仅0方向和脚本检测（OSD）。
+  1     个使用OSD的自动页面分割。
+  2     自动页面分割，但没有OSD或OCR。（未实施）
+  3     全自动页面分割，但没有OSD。（默认）
+  4     假设一列大小可变的文本。
+  5     假设一个统一的垂直对齐文本块。
+  6     假设一个统一的文本块。
+  7     将图像视为单个文本行。
+  8     将图像视为一个单词。
+  9     将图像视为圆圈中的单个单词。
+  10    将图像视为单个字符。
+  11    稀疏文本。尽可能多地查找文本，不要按特定顺序排列。
+  12    带OSD的稀疏文本。
+  13    生料线。将图像视为单个文本行，
+        绕过特定于Tesseract的黑客。
+
+OCR Engine modes:
+  0    Legacy engine only.
+  1    Neural nets LSTM engine only.
+  2    Legacy + LSTM engines.
+  3    Default, based on what is available.
+OCR引擎模式：
+  仅0旧引擎。
+  仅1个神经网络LSTM发动机。
+  2台传统+LSTM发动机。
+  3默认值，基于可用内容。
+
+Single options:
+  -h, --help            Show minimal help message.
+  --help-extra          Show extra help for advanced users.
+  --help-psm            Show page segmentation modes.
+  --help-oem            Show OCR Engine modes.
+  -v, --version         Show version information.
+  --list-langs          List available languages for tesseract engine.
+  --print-parameters    Print tesseract parameters.
+单一选项：
+  -h、 --help显示最小的帮助消息。
+  --帮助额外显示高级用户的额外帮助。
+  --帮助psm显示页面分段模式。
+  --帮助oem显示OCR引擎模式。
+  -v、 --版本显示版本信息。
+  --列出语言列出tesseract引擎的可用语言。
+  --打印参数打印镶嵌参数。

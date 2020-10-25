@@ -18,9 +18,9 @@ cb1.move(50,50)
 
 # 设置三态
 # 选中 勾  未选中 空  半选中 方
-cb1.setTristate(True) # 点一下 是方 半选中 再点 是 勾 全选
+# cb1.setTristate(True) # 点一下 是方 半选中 再点 是 勾 全选
 # 设置半选中
-cb1.setCheckState(Qt.PartiallyChecked)
+# cb1.setCheckState(Qt.PartiallyChecked)
 
 # 设置了三态 的 信号 用 stateChanged
 cb1.stateChanged.connect(lambda state: print(state))# 0 空 1 半选中 2 选中

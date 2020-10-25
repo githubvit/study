@@ -54,8 +54,11 @@ frame.setStyleSheet('background-color:cyan')
 from PySide2.QtCore import QRect 
 frame.setFrameRect(QRect(20, 20, 60, 60))
 
-frame.setFrameStyle(QFrame.Panel | QFrame.Sunken)	# 面板类型就没有中线
-frame.setLineWidth(2)
+# frame.setFrameStyle(QFrame.Panel | QFrame.Sunken)	# 面板类型就没有中线
+# frame.setFrameStyle(QFrame.Panel | QFrame.Raised)	# 面板类型就没有中线
+# frame.setFrameStyle(QFrame.Box | QFrame.Raised)	# 面板类型就没有中线
+frame.setFrameStyle(QFrame.Box | QFrame.Sunken)	# 面板类型就没有中线
+frame.setLineWidth(5)
 
 
 wd.show()

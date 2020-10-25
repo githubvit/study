@@ -61,15 +61,21 @@ def startTimer():
     global timer
     if timer != None:
         timer.finished.wait(5)
-        timer.function()   
-    else:
-        timer = threading.Timer(5, countup)
-        timer.start()
+        
+        # timer.function()
+        if timer.finished.is_set:
+            timer.function()
+        else:
+            timer.finished.clear()
+    # else:
+    #     timer = threading.Timer(3, countup)
+    #     timer.start()
 def kill_timer():
     print('输入q，退出定时器')
     inp=input('>>: ').strip()
     if inp=='q':
-        timer.cancel()
+        timer.finished.clear()
+        # timer.cancel()
 
 def countup():
     global cnt
@@ -77,11 +83,14 @@ def countup():
     print(cnt)
     print("threading active = {} \n   \n".format(threading.enumerate())) 
     timer = Timer(5, countup)
+    kill_timer()
     startTimer()
+    # timer.start()
     
+ 
 
 # countup() # 报错 NameError: name 'timer' is not defined
-timer = Timer(5, countup)    
+timer = Timer(3, countup)    
 timer.start()
 
 # 始终只有一个线程且重复调用函数方法~End~

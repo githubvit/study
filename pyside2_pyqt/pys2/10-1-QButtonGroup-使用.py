@@ -56,7 +56,7 @@ m_fgrp.addButton(f_btn)
 # y_ngrp.setExclusive(False)
 
 # 2.3.3 为y_ngrp组，删除按钮, 就是把该按钮踢出群了，是移除关系，不是把按钮真的删除了。
-y_ngrp.removeButton(no_btn)
+# y_ngrp.removeButton(no_btn)
 
 # 2.3.4 获取该组中的按钮
 print(y_ngrp.buttons()) 
@@ -67,18 +67,18 @@ print(y_ngrp.buttons())
 # 为区分，我们自己设定id一般用正号，即1、2、3....
 
 # (1)为y_ngrp按钮组中的按钮设置ID
-y_ngrp.setId(y_btn,4)  #后面设置的id会覆盖之前设置的id 
+# y_ngrp.setId(y_btn,4)  #后面设置的id会覆盖之前设置的id 
 
 # (2)获取按钮组中某按钮的id 
-print(y_ngrp.id(y_btn)) #4
-print(y_ngrp.id(n_btn)) #4 id可以重 
+# print(y_ngrp.id(y_btn)) #4
+# print(y_ngrp.id(n_btn)) #4 id可以重 
 
 # (3)获取按钮组中某id的按钮
 print(y_ngrp.button(4)) # 如果有重复,只获取定义按钮靠前的一个。没有，返回None
 
 # (4)查看该组中选中按钮的id
 yes_btn.setChecked(True)
-print(y_ngrp.checkedId())
+print(y_ngrp.checkedId()) # 1
 
 # 2.3.6 按钮组信号
     # buttonClicked(int/QAbstractButton)
@@ -94,11 +94,13 @@ print(y_ngrp.checkedId())
 def cao(val):
     if isinstance(val,int):#如果传过来的是id，就直接打印，
         print(val)
-    else:                  #否则传过来的是按钮对象，就用 按钮组.id(按钮对象) 获取id
-        print(y_ngrp.id(val))#对于buttonToggled信号，每次有两行值 一行是 选中 的是谁，还有一行是 取消选中 的是谁
-y_ngrp.buttonToggled.connect(cao)
+    else: 
+        print(val)      #否则传过来的是按钮对象，对于buttonToggled信号，每次有两行值 一行是 选中 的是谁(在后)，还有一行是 取消选中 的是谁(在先)
+  
+        print(y_ngrp.id(val)) #用 按钮组.id(按钮对象) 获取id
+# y_ngrp.buttonToggled.connect(cao)
 # 对于可以发射不同类型的信号，用[]进行信号类型选择
-# y_ngrp.buttonClicked[int].connect(cao)
+y_ngrp.buttonClicked[int].connect(cao)
 
 wd.show()
 app.exec_()

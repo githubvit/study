@@ -20,11 +20,11 @@ wd.resize(500,500)
 # 1 创建按钮
 tb=QToolButton(wd)
 tb.setText("工具")
-# tb.setIcon(QIcon(r'pyside2_pyqt\pys2\xxx.png'))
+tb.setIcon(QIcon(r'pyside2_pyqt\pys2\xxx.png'))
 # tb.setIconSize(QSize(60,60))#会影响箭头
 # tb.adjustSize()
 # 设置工具按钮样式风格
-# setToolButtonStyle(Qt.ToolButtonStyle)
+# tb.setToolButtonStyle(Qt.ToolButtonTextOnly)
     # Qt.ToolButtonIconOnly #默认
     	# 仅显示图标
     # Qt.ToolButtonTextOnly
@@ -56,6 +56,7 @@ tb.setToolTip('这是一个新建按钮')
     		# 向左箭头
     	# Qt.RightArrow
     		# 向右箭头
+# tb.setArrowType(Qt.NoArrow) 
 tb.setArrowType(Qt.RightArrow) 
 tb.setToolButtonStyle(Qt.ToolButtonTextBesideIcon) #文字在图标的右边
 tb.adjustSize()
@@ -90,6 +91,8 @@ menu.addAction(action1)
 menu.addAction(action2)
 # 添加菜单
 tb.setMenu(menu)
+# 取消 tb.setMenu(menu)设置后 下拉菜单的角标 menu-indicator
+# tb.setStyleSheet("QToolButton::menu-indicator{image:none;}")
 
 # 5 设置菜单弹出模式
 # 不设置默认是按住一会才弹出
@@ -105,6 +108,7 @@ tb.setMenu(menu)
     	# 点了按钮就显示 无延迟 
         # tb的cliked信号无效
 
+# tb.setPopupMode(QToolButton.InstantPopup)
 tb.setPopupMode(QToolButton.MenuButtonPopup)
 tb.clicked.connect(lambda : print('点击有效'))
 

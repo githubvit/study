@@ -25,14 +25,15 @@ class Window(QWidget):
         self.setup_ui()
         
     def setup_ui(self):
-        te=MyTextEdit(self)
+        # te=MyTextEdit(self)
+        te=QTextEdit(self)
         self.te=te
         te.resize(300,300)
         te.move(20,20)
         te.setPlaceholderText('请输入个人简历')
-        te.setText('xxx')
+        # te.setText('xxx')
         # self.文本内容的设置()
-        # self.文本光标插入操作()
+        self.文本光标插入操作()
         # self.文本格式设置和合并()
         # self.内容和格式的获取()
         # self.文本选中()
@@ -53,7 +54,7 @@ class Window(QWidget):
         # self.只读设置()
         # self.tab功能测试()
         # self.打开超链接()
-        self.信号测试()
+        # self.信号测试()
         pass
     def 信号测试(self):
         self.te.textChanged.connect(lambda:print('文本内容发生改变时, 发射的信号'))
@@ -528,14 +529,15 @@ class Window(QWidget):
         
         # 获取文本光标对象
         tc=self.te.textCursor()
-
+        
         # 1 设置 块内字符格式
         # 文本块内的字符格式
         tcf=QTextCharFormat()#z字符格式对象
         tcf.setFontFamily('幼圆')
         tcf.setFontPointSize(30)
         tcf.setFontItalic(True)
-        tc.setBlockCharFormat(tcf)
+        tc.setCharFormat(tcf)
+        tc.insertText('光标文本')
         # 代码输入的字体不受光标对象文本格式影响，但会覆盖光标文本格式，导致光标文本格式无用
         # self.te.setText('中文字体') 
         
@@ -543,8 +545,8 @@ class Window(QWidget):
         # 文本块的格式
         # 一个块就是一个段落 对齐方式、行高、缩进等段落格式
         tbf=QTextBlockFormat()
-        tbf.setAlignment(Qt.AlignCenter)
-        tbf.setIndent(2)
+        tbf.setAlignment(Qt.AlignCenter)#居中
+        # tbf.setIndent(2)#设置了两个tab后，就不是居中了
         tc.setBlockFormat(tbf)
 
         # 3 设置 光标选中字符格式
@@ -560,8 +562,9 @@ class Window(QWidget):
         c_btn.adjustSize()
         c_btn.move(20,340)
         def set_charFormat():
+            tc.setCharFormat(ccf)
             # tc.setCharFormat(ccf)#这个是没有效果的
-            self.te.textCursor().setCharFormat(ccf)
+            # self.te.textCursor().setCharFormat(ccf)
             
         c_btn.clicked.connect(set_charFormat)
         
@@ -590,22 +593,22 @@ class Window(QWidget):
         
         # 获取文档 操作文本对象
         # print(self.te.document()) # <PySide2.QtGui.QTextDocument(0x1af1081ba50) at 0x000001AF10C57888>
-        
+       
         # QTextDocument 这个文档类上有一堆操作方法
         
         # 获取文本光标 操作文本对象
-        # print(self.te.textCursor()) #<PySide2.QtGui.QTextCursor object at 0x000002400D1E7948>
+        print(self.te.textCursor()) #<PySide2.QtGui.QTextCursor object at 0x000002400D1E7948>
+
         # QTextCursor 这个文本光标类上有一堆操作方法
 
 
         # 1 插入文本
         # 获取文本光标 得到文本光标对象
         tc=self.te.textCursor()
-        # 设置文本格式对象
-       
 
+        # 设置文本格式对象
         tcf=QTextCharFormat()
-        tcf.setToolTip('提示')
+        tcf.setToolTip('提示') #放在使用了tcf格式的字符上有提示
         tcf.setFontFamily('微软雅黑')
         tcf.setFontPointSize(66)
 
@@ -677,14 +680,14 @@ class Window(QWidget):
 
         # 4.2 用 列表对象 插入或创建
         # 定义列表对象
-        ltc2=QTextListFormat( )
-        # ltc2.setStyle(QTextListFormat.ListDisc )
+        ltc2=QTextListFormat()
+        # ltc2.setStyle(QTextListFormat.ListDisc)
         ltc2.setStyle(QTextListFormat.ListDecimal)
         ltc2.setIndent(2)           #缩进2个Tab键
-        ltc2.setNumberPrefix("<")  #前缀 Style是数字才有用
-        ltc2.setNumberSuffix(">")  #后缀
+        # 用前后缀方法 给数字 添加 了 尖括号 形如 <1> <2> ...<n>
+        ltc2.setNumberPrefix("<")  #前缀 Style是数字才有用 即 QTextListFormat.ListDecimal才有用
+        ltc2.setNumberSuffix(">")  #后缀 
         tc.insertList(ltc2)
-
 
         # 5 插入表格
         # 表格：由行和列组成的单元格。
@@ -708,15 +711,15 @@ class Window(QWidget):
         # QTextLength(QTextLength.PercentageLength,30) 
             # QTextLength.PercentageLength 是说明按整个表格宽度的百分比设置宽度
             # 30 说明该列占整个列表宽度的30%。
-    
+        # tc.insertTable(5,3,ttf)
+
         btn=QPushButton(self)
         btn.setText('插入列表5行3列')
-        # btn.setText('追加行和列')
         btn.adjustSize()
         btn.move(20,340)
         def insertTable():
             self.ttb=self.te.textCursor().insertTable(5,3,ttf)# 返回QTextTable文本表格对象
-            #ttb 是 QTextTable对象 该对象可以追加行和列
+            # ttb 是 QTextTable对象 该对象可以追加行和列
             
         btn.clicked.connect(insertTable)
 
@@ -739,8 +742,8 @@ class Window(QWidget):
         # tbf.setAlignment(Qt.AlignRight) #右对齐
         tbf.setAlignment(Qt.AlignLeft) #左对齐
         tbf.setRightMargin(100) #右边距
-        tbf.setIndent(1) #缩进1个Tab
-        
+        # tbf.setIndent(1) #缩进1个Tab
+        # 
         # 设置字体格式对象
         ccf=QTextCharFormat()
         ccf.setFontFamily('微软雅黑')
@@ -757,7 +760,7 @@ class Window(QWidget):
             self.te.textCursor().insertBlock(tbf,ccf) #带文本块格式和字符格式
             # 看不出来
             self.te.setFocus()
-            
+            # 
         btn1.clicked.connect(insertTextBlock)
 
 
@@ -767,9 +770,9 @@ class Window(QWidget):
         # tff 可以设置边框 宽高 边距等等
         tff.setBorder(3)#设定边框宽度
         tff.setBorderBrush(QColor(255,0,0))#设定边框颜色
-        tff.setRightMargin(50)
-        # tff.setWidth(300)
-        # tff.setHeight(20)
+        # tff.setRightMargin(150)#设定了外边距 优先于宽度 
+        tff.setWidth(300)#如果大于te te会有横向滚动条
+        tff.setHeight(20)
         
         # 插入文本框架
         f_btn=QPushButton(self)
@@ -781,10 +784,10 @@ class Window(QWidget):
         f_btn.clicked.connect(insertTextFrame)
 
         # 文档QTextDocument对象的根框架rootFrame就是QTextFrame对象。
-        doc=self.te.document()
+        # doc=self.te.document()
         # print(doc.rootFrame()) # <PySide2.QtGui.QTextFrame(0x1b87fc4c150) at 0x000001B8014CE1C8>
-        root_frame=doc.rootFrame()
-        root_frame.setFrameFormat(tff)
+        # root_frame=doc.rootFrame()
+        # root_frame.setFrameFormat(tff)
         pass
         
         
@@ -792,7 +795,7 @@ class Window(QWidget):
     def 文本内容的设置(self):
         # 设置普通文本内容
         # self.te.setPlainText("<h1>ooo</h1>")      # 代码set文本的 光标 在 最前
-        # self.te.insertPlainText("<h1>ooo</h1>")   # 代码 insert 文本的 光标 在 insert文本的 最后
+        # self.te.insertPlainText("<h1>oooo</h1>")   # 代码 insert 文本的 光标 在 insert文本的 最后
         # print(self.te.toPlainText())
 
         # 富文本的操作
@@ -804,10 +807,11 @@ class Window(QWidget):
         self.te.setText("<h1>ooo</h1>")  # setText(str) 自动判定 普通文本 富文本
         # 追加
         self.te.append("<h3>oooxxx</h3>") # 在老文本最后 另起一行输入append的文本 光标不动 即 append前光标在哪还在哪
-        print(self.te.toPlainText())
+    
+        # print(self.te.toPlainText())
         # ooo
         # oooxxx
-        print(self.te.toHtml())
+        # print(self.te.toHtml())
         # <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd">
         # <html>....</html>
 

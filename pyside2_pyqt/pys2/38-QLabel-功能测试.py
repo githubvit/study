@@ -14,14 +14,14 @@ class Window(QWidget):
     def setup_ui(self):
         # 添加标签内容
         # 1 添加文本
-        lb1=QLabel('构造函数文本',self)
+        lb1=QLabel('构造函数文本聚焦(&le)',self)
         self.lb1=lb1
         lb1.resize(100,100)
         lb1.move(10,10)
         lb1.setStyleSheet('background-color:#ddd')
         
         # 1.1 设置对齐
-        # lb1.setAlignment(Qt.AlignCenter)  # 居中
+        lb1.setAlignment(Qt.AlignCenter)  # 居中
         # lb1.setAlignment(Qt.AlignLeft)    # 左上角
         # lb1.setAlignment(Qt.AlignBaseline)# 左上角 把所有文本变成一行
         # lb1.setAlignment(Qt.AlignHCenter) # 水平居中
@@ -33,7 +33,7 @@ class Window(QWidget):
         # 多个选项叠加 按位或 
         # lb1.setAlignment(Qt.AlignHCenter|Qt.AlignVCenter) #= Qt.AlignCenter
         # lb1.setAlignment(Qt.AlignRight|Qt.AlignVCenter)   # 水平靠右+垂直居中
-        # lb1.setAlignment(Qt.AlignRight)   # 水平靠右+垂直居中
+        # lb1.setAlignment(Qt.AlignRight)   # 水平靠右
 
         # 1.2 设置缩进和边距
         # lb1.setIndent(10) # 缩进10
@@ -48,6 +48,7 @@ class Window(QWidget):
         # lb1.setTextInteractionFlags(Qt.TextSelectableByMouse)#可以用鼠标选中
         # lb1.setTextInteractionFlags(Qt.TextSelectableByMouse|Qt.TextSelectableByKeyboard|Qt.TextEditable)#可以用鼠标选中 也可以用键盘选中 还可以编辑
         # lb1.setTextInteractionFlags(Qt.TextEditorInteraction)#这一个选项（文本编辑器的默认值）就等于上面三个选项
+        
         # 交换选项
             # Qt.NoTextInteraction	
 	            # 不可能与文本进行交互。 默认
@@ -72,7 +73,7 @@ class Window(QWidget):
 
         btn1=QPushButton(self)
         self.btn1=btn1
-        btn1.setText('文本')
+        btn1.setText('改变标签文本')
         btn1.adjustSize()
         btn1.move(10,120)
         
@@ -100,17 +101,20 @@ class Window(QWidget):
         # 1.7 设置可以打开/链接
         # 在标签中如有链接，可以设置可以打开/链接,要可以打开 还要把前面设置的文本可选中选项关闭（因为它会拦截点击行为），同样的原因，当然还要把选中文本关闭，不然还是打不开浏览器。
        
+        # lb1.setTextInteractionFlags(Qt.LinksAccessibleByMouse) # 必须设置 可以使用鼠标突出显示和激活链接。
         # lb1.setOpenExternalLinks(True)#默认是False 不能打开
         # 链接有关 信号
+
         # lb1.linkHovered.connect(lambda link: print(link))
         # lb1.linkActivated.connect(lambda link: print(link)) # 必须关闭打开链接设置，否则不会打印，因为该信号被拦截了
 
         # 1.8 文本换行
         # 多行文本换行，保证完整单词 换行
-        # lb1.setText('123 456 789'*10)
+        
         lb1.setWordWrap(True) #不设置，则标签就是一行，不会自动换行。
+        # lb1.setText('123 456 789'*10)
         # 竖着排标签文本
-        # lb1.setText(' \n'.join('竖着排标签文本 '))
+        # lb1.setText(' \n'.join('竖着排标签文本123456 ')) # 自动换行无效
 
     
         # 打字软件
@@ -120,6 +124,7 @@ class Window(QWidget):
         # le1=QTextEdit(self)
         self.le1=le1
         le1.resize(100,25)
+        # le1.move(le.x(),le.y()) #覆盖在le上 配合后面的背景透明设置
         le1.move(le.x(),le.y()+le.height())
         
         le1.setText('tes')
@@ -131,6 +136,7 @@ class Window(QWidget):
         te.resize(100,100)
         te.move(10,200)
 
+        # 改变标签文本
         btn1.clicked.connect(lambda : lb1.setText(le.text().strip()+'\n'+te.toPlainText().strip()))
         
         # 1.9 清除
@@ -226,7 +232,7 @@ class Window(QWidget):
 
         # 4 直接输入数值 整型或浮点型
         # 设置这个功能是为了让数值不用转换成字符串，可以直接使用，方便程序员。
-        # lb1.setNum(888.88)
+        lb1.setNum(888.88)
         pass
     # 获取图片地址
     def get_picture(self):
@@ -249,7 +255,7 @@ class Window(QWidget):
             # 定义QMovie()对象
             mov=QMovie(path)
              # 大小
-            # mov.setScaledSize(QSize(100,100))
+            # mov.setScaledSize(QSize(200,100))
 
             # 开始 不然看不见
             self.start_btn.setEnabled(True)
@@ -266,6 +272,7 @@ class Window(QWidget):
             # 加速
             self.speed_btn.setEnabled(True)
             self.speed_btn.clicked.connect(lambda : mov.setSpeed(200))#两倍数
+            # self.speed_btn.clicked.connect(lambda : mov.setSpeed(10))#减速到原来的1/10.
             
             
             # 设置动图

@@ -5,7 +5,7 @@ from PySide2.QtGui import *
 import sys
 
 class Window(QWidget):
-    # 监听点击 在最大和还原之间切换
+    # 监听点击 相应鼠标点击 在最大和还原之间切换
     def mousePressEvent(self, QMouseEvent):
 
         if self.isMaximized():
@@ -59,12 +59,12 @@ w2.setWindowTitle("w2")
 
 window.show()
 w2.show()
-
+# 
 # 5 最大最小化全屏显示
-# window.showMaximized()
+# window.showMaximized() # == window.setWindowState(Qt.WindowMaximized)  + window.show()
 # window.showFullScreen()
 # window.showMinimized()
 
-window.setWindowState(Qt.WindowActive)        #活动状态 当有多个窗口时 设为当前窗口 
+# window.setWindowState(Qt.WindowActive)        #活动状态 当有多个窗口时 设为当前窗口 
 
 sys.exit(app.exec_())

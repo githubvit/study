@@ -84,6 +84,7 @@ class MyIntValidator(QIntValidator):
         if len(input_text) == 0 or int(input_text)<=self.bottom()-1:
             return str(self.bottom()) #返回修复后的字符串数据
         return str(self.top())
+
 app=QApplication([])
 wd=QWidget()
 wd.resize(500,500)

@@ -15,21 +15,19 @@
 
 /* 例1 特异性不同 */
 
-
-/* QPushButton#okButton {
+QPushButton#okButton {
     color: red;
 }
 
 QPushButton {
     color: white;
-} */
+}
 
 
 /* 例2 特异性不同 */
 
 
-/* 
-QPushButton:hover {
+/* QPushButton:hover {
     color: red;
 }
 
@@ -49,7 +47,8 @@ QPushButton {
 */
 
 
-/* QPushButton:enabled {
+/* 
+QPushButton:enabled {
     color: red;
 }
 
@@ -78,6 +77,7 @@ QPushButton:enabled {
 /* QPushButton:enabled:hover {
     color: white;
 }
+
 QPushButton:enabled {
     color: red;
 } */
@@ -87,10 +87,12 @@ QPushButton:enabled {
 父类和子类的特异性相同，靠后覆盖靠前
 */
 
-QPushButton {
-    color: red;
-}
 
-QAbstractButton {
+/* QPushButton {
+    color: red;
+} */
+
+
+/* QAbstractButton {
     color: white;
-}
+} */

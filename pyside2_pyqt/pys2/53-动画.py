@@ -129,26 +129,26 @@ class Window(QWidget):
         # animation.setPropertyName(b'pos')#bytes类型
 
         # 构造函数2 上面三步并一步
-        animation=QPropertyAnimation(btn,b'pos',self)     #位置
+        # animation=QPropertyAnimation(btn,b'pos',self)     #位置
         # animation=QPropertyAnimation(btn,b'size',self)    #尺寸
-        # animation=QPropertyAnimation(btn,b'geometry',self)  #位置+尺寸
-        animation1=QPropertyAnimation(self,b'windowOpacity',self)  #创建新对象 窗口透明度
+        animation=QPropertyAnimation(btn,b'geometry',self)  #位置+尺寸
+        # animation1=QPropertyAnimation(self,b'windowOpacity',self)  #创建新对象 窗口透明度
 
         # 2 设置属性值 开始值 插值 结束值 
-        animation.setStartValue(QPoint(0,0))
-        animation.setEndValue(QPoint(300,300))
+        # animation.setStartValue(QPoint(0,0))
+        # animation.setEndValue(QPoint(300,300))
 
         # animation.setStartValue(QSize(0,0))
         # animation.setEndValue(QSize(300,300))
 
-        # animation.setStartValue(QRect(0,0,0,0))
-        # animation.setEndValue(QRect(300,300,300,300))
+        animation.setStartValue(QRect(0,0,0,0))
+        animation.setEndValue(QRect(300,300,300,300))
 
         # 窗口透明度
-        animation1.setStartValue(1)
-        animation1.setKeyValueAt(0.25,0) # 在动画时长 0.25 即1/4时，属性值变为0
-        animation1.setKeyValueAt(0.5,1)  # 在动画时长 0.5 即1/2时，属性值变为1
-        animation1.setEndValue(0.3)
+        # animation1.setStartValue(1)
+        # animation1.setKeyValueAt(0.25,0) # 在动画时长 0.25 即1/4时，属性值变为0
+        # animation1.setKeyValueAt(0.5,1)  # 在动画时长 0.5 即1/2时，属性值变为1
+        # animation1.setEndValue(0.3)
 
         # 3 设置动画时长
         animation.setDuration(5000)
@@ -161,22 +161,24 @@ class Window(QWidget):
         animation.setEasingCurve(QEasingCurve.OutBounce) # 结束有弹簧效果 这个有质感
 
         # 7 设置方向 倒放 必须在start()前
-        # animation.setDirection(QAbstractAnimation.Backward)#循环
+        # animation.setDirection(QAbstractAnimation.Backward)#倒放
 # 
+        
+  
+        # 6 循环操作
+        # 设定循环次数 可以在start之后设置
+        # animation.setLoopCount(3)
+
         # 5 启动动画
         animation.start()
         # animation1.start()#窗口透明度
 
-        # 6 循环操作
-        # 设定循环次数
-        animation.setLoopCount(3)
-
         # 获取循环次数、总时长和单次时长
-        print(animation.loopCount(),animation.totalDuration(),animation.duration())
+        # print(animation.loopCount(),animation.totalDuration(),animation.duration())
         # 3 15000 5000
 
         # 获取当前次数、时长
-        btn.clicked.connect(lambda : print('当前循环次数',animation.currentLoop(),'当前循环时间',animation.currentLoopTime(),'当前时间',animation.currentTime()))
+        # btn.clicked.connect(lambda : print('当前循环次数',animation.currentLoop(),'当前循环时间',animation.currentLoopTime(),'当前时间',animation.currentTime()))
         # 当前循环次数 0 当前循环时间 4303 当前时间 4303
         # 当前循环次数 1 当前循环时间 1479 当前时间 6479
         # 当前循环次数 1 当前循环时间 3063 当前时间 8063
@@ -198,16 +200,19 @@ class Window(QWidget):
                 # animation.start(QAbstractAnimation.DeleteWhenStopped)#停止时删除 动画，
                 # 
             elif animation.state()==QAbstractAnimation.Paused:
-                animation.resume()
+                animation.resume() # 是resume 不是start
             else:
                 animation.stop()
 
-        btn.clicked.connect(animation_operation)
+        # btn.clicked.connect(animation_operation)
 
-        # 循环信号
-        animation.currentLoopChanged.connect(lambda val: print('改变了当前循环次数——',val))
-        animation.finished.connect(lambda : print('动画结束'))
-        animation.stateChanged.connect(lambda ns,os: print(f'状态改变，从 {os} 变为 {ns}'))
+        # 9 信号
+        # 循环次数变化
+        # animation.currentLoopChanged.connect(lambda val: print('改变了当前循环次数——',val))
+        # 结束
+        # animation.finished.connect(lambda : print('动画结束'))
+        # 状态变更
+        # animation.stateChanged.connect(lambda ns,os: print(f'状态改变，从 {os} 变为 {ns}'))
                 
         pass
 

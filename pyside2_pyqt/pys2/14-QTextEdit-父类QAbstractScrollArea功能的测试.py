@@ -27,8 +27,8 @@ te.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOn)
 from PySide2.QtGui import QIcon
 btn = QPushButton(wd)
 btn.setIcon(QIcon(r"D:\pyj\st\study\pyside2_pyqt\pys2\xxx.png"))
-btn.pressed.connect(lambda :print("xxx"))
-
+btn.pressed.connect(lambda :print("xxx",te.toPlainText()))# 没有 te.text()
+# 角落控件 当有滚动条时才会有
 te.setCornerWidget(btn)
 
 wd.show()

@@ -10,6 +10,7 @@ class Window(QWidget):
     def setup_ui(self):
         # 快捷键录制 可以捕捉键盘输入的快捷键
         kse = QKeySequenceEdit(self)
+        kse.move(50,50)
 
         # ks = QKeySequence("Ctrl+C") # 使用字符组合生成组合键对象
         # ks = QKeySequence(QKeySequence.Copy) # 使用标准组合键生成组合键对象 
@@ -26,6 +27,7 @@ class Window(QWidget):
         btn.clicked.connect(lambda :print(kse.keySequence().toString(), kse.keySequence().count()))#组合键及个数
 
         kse.editingFinished.connect(lambda :print("结束编辑"))#改变 停顿1秒后 会自动结束 
+        kse.keySequenceChanged.connect(lambda key_val:print("键位序列发生改变", key_val))#读出当前按下的键
         kse.keySequenceChanged.connect(lambda key_val:print("键位序列发生改变", key_val.toString()))#读出当前按下的键
         pass
 if __name__ == "__main__":

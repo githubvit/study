@@ -23,6 +23,6 @@ print(btn.description())
 # 看起来像扁平 但是 不是扁平化 天生就是平面按钮
 print(btn.isFlat())#False
 # 信号和QPushButton一致
-btn.clicked.connect(lambda : print('获取成功',btn.description()))
+btn.clicked.connect(lambda : print('获取成功',btn.description(),btn.text()))
 wd.show()
 app.exec_()

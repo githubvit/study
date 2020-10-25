@@ -43,8 +43,8 @@ class Window(QWidget):
 
         # 由于  QLayout 是抽象类，必须子类化才能使用，因此用盒式布局 QBoxLayout子类来测试QLayout功能
         
-        v_layout=QBoxLayout(QBoxLayout.TopToBottom)
-        # v_layout=QVBoxLayout()
+        # v_layout=QBoxLayout(QBoxLayout.BottomToTop) #默认是QBoxLayout.TopToBottom
+        v_layout=QVBoxLayout()
         
 
         # 三 窗口控件设置布局  为 刚定义的布局对象v_layout
@@ -55,29 +55,34 @@ class Window(QWidget):
         v_layout.addWidget(lb2)
         v_layout.addWidget(lb3)
 
+
+        #自动填充
+        # lb2.hide() 
+
         # 给lb1 添加文本 随着文本的添加会不断增加lb1的高度，压缩lb2和lb3的高度，父控件窗口的总高度不变；
-        # 当lb2和lb3已被压为最低，lb1还在继续添加，lb1继续增高，lb2和lb3不变，父控件窗口的总高度在不断增加
-        timer=QTimer(lb1)
-        timer.timeout.connect(lambda : lb1.setText(lb1.text()+'\n'+'123'))
-        timer.start(500)
+        # 当lb2和lb3已被压到极限（为最低），lb1还在继续添加，这时lb1继续增高，lb2和lb3不变，导致父控件窗口的总高度在不断增加
+        # timer=QTimer(lb1)
+        # timer.timeout.connect(lambda : lb1.setText(lb1.text()+'\n'+'123'))
+        # timer.start(500)
+
 
         # 五 调整布局参数   
         
         # 布局对象参数：方向、边距、子控件项目距离
         # 默认布局边距 11 控件距离 6
-        print(v_layout.margin(),v_layout.spacing())#11 6
+        # print(v_layout.margin(),v_layout.spacing())#11 6
 
         # 设置单一边距
-        # v_layout.setMargin(20)
+        v_layout.setMargin(0)
         # 设置多个不同边距
-        v_layout.setContentsMargins(20,30,40,50)#(左、上、右、下)
+        # v_layout.setContentsMargins(20,30,40,50)#(左、上、右、下)
         # 设置子控件间的距离
-        v_layout.setSpacing(20)
+        v_layout.setSpacing(0)
         
         # 布局对象调整布局方向 非常方便
-        v_layout.setDirection(QBoxLayout.LeftToRight) #必须有方向参数
-        # 也可以用父控件调整布局方向
-        self.setLayoutDirection(Qt.RightToLeft)
+        # v_layout.setDirection(QBoxLayout.LeftToRight) #必须有方向参数
+        # 接着可以用父控件调整布局方向 只有在布局调整为横向时，下面的才有效
+        # self.setLayoutDirection(Qt.RightToLeft)
 
 
         # 六 子控件

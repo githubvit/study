@@ -7,12 +7,12 @@
 # 消息循环
     # 当执行 app.exec_() 就进入消息循环
     # 不停的顺序监听两个队列是否有消息 
-    # 一旦有消息，就把消息通知应用程序的notify函数，由该函数进行信号分发。
+    # 一旦有消息，系统就会把消息通知应用程序的notify函数，由该函数进行信号分发。
 
 # 信号分发 
     # 层层分发 app.notify→recevier.event→recevier.evtfunc→signal
     # 第一层应用程序的notify(recevier,evt)：队列中一旦有消息，就会由QApplication中的notify(recevier,evt)接收
-    # recevier:接收控件QObject，evt：事件对象QEvent
+        # recevier:接收控件QObject，evt：事件对象QEvent
     # 第二层接收控件的event(evt)：最终要根据evt的事件类型，由recevier的event(evt)方法来分发 给该事件类型的具体函数evtfunc(*args,**kwargs)
     # 第三层接收控件的evtfunc(*args,**kwargs)：由这个具体函数产生相应的发射信号pressed、clicked...。
 
@@ -26,7 +26,7 @@ class App(QApplication):
         # 过滤出 recevier控件是继承自Qpushbutton 并且 事件类型是 鼠标按下pressed
         if recevier.inherits("QPushButton") and evt.type() == QEvent.MouseButtonPress:
             print(recevier,evt)
-            print('按钮被点击了...')
+            print('1 程序通知事件 按钮 被 鼠标点击了...')
             # <PySide2.QtWidgets.QPushButton(0x1ae2cba0210) at 0x000001AE2C1809C8> <PySide2.QtGui.QMouseEvent object at 0x000001AE2CF16448>
             # 按钮被点击了
         # else:
@@ -44,12 +44,13 @@ class Btn(QPushButton):
         # 筛选出 鼠标按下事件类型
         if evt.type()==QEvent.MouseButtonPress:
             print(evt)
+            print('2 按钮控件 接到 程序通知事件 鼠标点击了我......')
         return super().event(evt)
     # 第三层 具体函数
     def mousePressEvent(self, *args, **kwargs):
-        print("鼠标被按下了......")
+        print("3 按钮控件启动 鼠标点击事件应用程序 发射 pressed 信号......")
         return super().mousePressEvent(*args, **kwargs)
-
+ 
 app=App([])
 wd=QWidget()
 wd.setWindowTitle('事件机制')
@@ -57,6 +58,6 @@ wd.setWindowTitle('事件机制')
 btn=Btn(wd)
 btn.setText('按钮')
 btn.move(100,100)
-btn.pressed.connect(lambda: print('按钮被点击了'))
+btn.pressed.connect(lambda: print('4 接到 pressed信号 后启动的 程序....'))
 wd.show()
 app.exec_()

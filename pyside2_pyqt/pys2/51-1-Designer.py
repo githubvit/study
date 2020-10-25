@@ -5,7 +5,14 @@
 
 # C 联结 M与V 的控制部分 存取什么数据 与 输入与输出什么数据
 
-# 
+# 为了在vscode界面直接用右击就可以用designer界面设计师工具打开ui文件，
+# 要设置designer界面设计师的搜索路径，
+    # 1 用快捷键 ‘ctrl+,’打开 vscode 搜索设置 界面
+    # 2 输入'qt',
+    # 3 找到 ‘Qt For Python > Path: Designer ’修改路径为designer所在路径
+        # 	D:\pyj\st\venv\Lib\site-packages\PySide2\designer
+        # 即可，注意去掉 '.exe' 后缀。
+
 
 from PySide2.QtWidgets import *
 from PySide2.QtCore import *
@@ -52,3 +59,4 @@ if __name__ == "__main__":
     wd=Window()
     wd.show()
     app.exec_()
+    

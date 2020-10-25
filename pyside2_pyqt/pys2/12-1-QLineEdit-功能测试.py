@@ -41,7 +41,7 @@ q_btn.clicked.connect(lambda : le.clear()) # 正统方法
 	# NoEcho = 1
 	    # 不输出 设置为不输出，依然能够获取输入的text
         # 用按钮和鼠标无法删除文本框的内容
-        # 输入的内容永远在最前
+        # 输入的内容依然存在并永远在最前
 	# Normal = 0
 	    # 正常输出
 	# Password = 2
@@ -54,7 +54,10 @@ s_btn1.setToolTip('设置le2的输出模式 NoEcho = 1')
 s_btn1.move(50,150)
 def Set_NoEcho():
     le2.setEchoMode(QLineEdit.NoEcho)
+	# print(le2.text())
     print(le2.echoMode())
+    text=le2.text()
+    print(text)
 s_btn1.clicked.connect(Set_NoEcho)
 
 s_btn2=QPushButton('正常输出',wd)
@@ -92,9 +95,10 @@ le3=QLineEdit(wd)
 le3.setPlaceholderText('输入长度限制3字符')
 le3.move(50,200)
 le3.adjustSize()
-le3.setMaxLength(3) #最长只能3个英文或中文字符。
-le3.setText('4个字符') #只能显示 4个字，符 字不能显示 通过代码不能改变
-print('长度限制',le3.text())# 获取的文本也就是 4个字。
+le3.setMaxLength(3) #设置最长只能3个英文或中文字符。
+le3.setText('4个字符') #只能显示 '4个字'，'符' 字不能显示 通过代码不能改变
+print('长度限制',le3.text())# 获取的文本 是 '4个字符'。
+
 
 # 2 只读限制 
 	# setReadOnly(bool)
@@ -105,8 +109,14 @@ le4.move(200,200)
 le4.adjustSize()
 print('是否只读',le4.isReadOnly())
 le4.setText('只读限制123')
-le4.setReadOnly(True)
-le4.setText('改变只读限制') # 通过代码可以改变
+le4.setReadOnly(True) # 设置只读 QLineEdit就无法输入了
+
+
+s_btn5=QPushButton('改变只读限制',wd)
+s_btn5.setToolTip('设置le4的text')
+s_btn5.move(350,200)
+s_btn5.clicked.connect(lambda : le4.setText('改变只读限制')) # 通过代码可以改变
+
 
 # 3 规则限制之掩码验证
 # 用来控制输入的格式
@@ -123,7 +133,7 @@ le5.adjustSize()
 # 设置座机号码掩码
 # le5.setInputMask('9999-9999999;0')
 # 设置Ip地址
-le5.setInputMask('999.999.999.999;x')#可以结合验证器限制每段在255以内
+# le5.setInputMask('999.999.999.999;x')#可以结合验证器限制每段在255以内
 # le5.setInputMask('000.000.000.000;_')  #"数字掩码"
 # 
 # le5.setInputMask('HH:HH:HH:HH:HH:HH;_') #"MAC掩码" 

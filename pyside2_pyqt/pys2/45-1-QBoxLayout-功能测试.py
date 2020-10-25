@@ -46,10 +46,10 @@ class Window(QWidget):
         # 一 每秒调整一次布局 
         # 通过该例 明白 对于pyqt5 方向QBoxLayout.LeftToRight只是QBoxLayout的枚举值（0-3）
         # 知道后期可以不断调整布局方向
-        timer=QTimer(self)
-        def change_layout():
+        # timer=QTimer(self)
+        # def change_layout():
             # 让其加1对4取余
-            h_layout.setDirection((h_layout.direction()+1)%4) # pyqt5支持 pyside2不支持
+            # h_layout.setDirection((h_layout.direction()+1)%4) # pyqt5支持 pyside2不支持
 
         # timer.timeout.connect(change_layout)
 
@@ -71,26 +71,31 @@ class Window(QWidget):
         lb6.setStyleSheet('background-color:green')
         lb7=QLabel('标签7')
         lb7.setStyleSheet('background-color:pink')
-
+# 
         new_layout=QBoxLayout(QBoxLayout.TopToBottom)
         new_layout.addWidget(lb6)
         new_layout.addWidget(lb7)
-
+# 
         h_layout.insertLayout(1,new_layout)#(位置索引,插入的布局)
 
         # 三 移除控件
-        # 移除标签1
-        # h_layout.removeWidget(lb1) # 第一步
-        # 处理移除的标签1 
+        # 移除标签1 彻底删除
+        # h_layout.removeWidget(lb1) # 这一步 只是把lb1剔除出h_layout布局，lb1还在。
+        # 查看lb1是否被删除
+        # lb1.destroyed.connect(lambda:print('lb1被删除无法通过show还原'))
+        # 用这种方法删除lb1
+        # lb1.setParent(None) # lb1无法通过show还原。
+
+        # 移除标签1 暂时隐藏
         # 当然也可以直接隐藏，不用removeWidge，看上去就没了
         # lb1.hide()
         # show出来，就还原了
         # lb1.show()
-
+# 
         # 四 添加和插入空白 
         # 空白：占据一定大小尺寸的空白，并且不会随着窗口的大小而变。
         # 可以用来加大控件之间的距离，因为，控件之间的距离本来就不会随着窗口大小的改变而改变
-        # h_layout.addSpacing(20)#（尺寸）加在后面看不清楚
+        h_layout.addSpacing(20)#（尺寸）加在后面看不清楚
         # 插入在标签1后 希望加大标签1和后面的标签或布局之间的距离到20
         h_layout.insertSpacing(1,20)#(位置索引,空白的尺寸) 这个20已经包含了原来控件之间的距离。
        

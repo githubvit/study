@@ -26,7 +26,8 @@ class Window(QWidget):
         # 设置大步长 会调整滑块宽度
         sb.setPageStep(50) # 默认的范围是(0,99),大步长设为50，则按两次pageUp,就到顶了，所以，滑块宽度是空白部分的一半。
         # 当前有两个滚动条，用垂直滚动条设置捕捉键盘，则保证键盘会驱动sb，否则，键盘不会驱动任何滚动条。
-        sb.grabKeyboard()
+        sb.grabKeyboard() 
+        # sb2.grabKeyboard() #只能设置1个滚动条，如果设置了多个，则后面的会覆盖前面的设置
         pass
         
 

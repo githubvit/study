@@ -69,7 +69,8 @@ class Window(QWidget):
         lb7.setStyleSheet('background-color:pink')
 
         # 定义水平布局对象
-        h_layout=QBoxLayout(QBoxLayout.LeftToRight)
+        h_layout=QHBoxLayout() # 默认从左到右
+        # h_layout=QVBoxLayout() #默认从上到下
 
         # 将5 6 7添加到水平布局中
         h_layout.addWidget(lb5)
@@ -78,14 +79,18 @@ class Window(QWidget):
 
         # 在垂直布局中添加水平布局
         v_layout.addLayout(h_layout)
-
+        h_layout.setSpacing(5)
+        h_layout.setMargin(5)
+        v_layout.setSpacing(0) # 如果子布局没有进行spacing设置，就会margin直接成为子布局的spacing，如果设置过就不会。
+        v_layout.setMargin(0)  # 如果子布局没有进行margin设置，就会直接成为子布局的margin，如果设置过就不会。
+        
 
 
         # 设置对象
         self.setLayout(v_layout)
 
         # 调整布局
-        # v_layout.setDirection(QBoxLayout.LeftToRight)
+        # v_layout.setDirection(QBoxLayout.LeftToRight) # 不会影响子布局的布局，子布局保持原来的方向。
         
 
 

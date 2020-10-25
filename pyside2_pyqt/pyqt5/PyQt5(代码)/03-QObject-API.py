@@ -11,7 +11,7 @@ class Window(QWidget):
         # self.QObject继承结构测试()
         # self.QObject对象名称和属性的操作()
         # self.QObject对象的父子关系操作()
-        # self.QObject信号的操作()
+        self.QObject信号的操作()
         # self.QObject类型判定()
         # self.QObject对象删除()
         pass
@@ -127,18 +127,18 @@ class Window(QWidget):
         def obj_name_cao(name):
             print("对象名称发生了改变", name)
         #
-        # def obj_name_cao2(name):
-        #     print("对象名称发生了改变2", name)
+        def obj_name_cao2(name):
+            print("对象名称发生了改变2", name)
         #
         self.obj.objectNameChanged.connect(obj_name_cao)
         # self.obj.objectNameChanged.connect(obj_name_cao2)
         
         # 返回连接到信号signal的槽slot的数量
         # print(self.obj.receivers("objectNameChanged"))# 报错
-        # print(self.obj.receivers(self.obj.objectNameChanged))
+        print(self.obj.receivers(objectNameChanged))
         
         self.obj.setObjectName("xxx")
-
+                             
         # 信号屏蔽
         # 1 屏蔽某个控件的某个信号 控件.信号.disconnect()
         # 2 屏蔽和释放某个控件的所有信号 
@@ -296,11 +296,11 @@ if __name__ == '__main__':
     import sys
     app = QApplication(sys.argv)
 
-    QWidget控件的父子关系()
-    # window = Window()
+   
+    window = Window()
     # window = QWidget()
 
-    # window.show()
-
+    window.show()
+    
 
     sys.exit(app.exec_())

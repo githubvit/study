@@ -14,7 +14,7 @@ window.setWindowTitle("顶层窗口")
 window.resize(500, 500)
 
 # 2 设定窗口半透明
-window.setWindowOpacity(0.8)
+# window.setWindowOpacity(0.8)
 
 # 3 设定关闭
 btn=QPushButton(window)

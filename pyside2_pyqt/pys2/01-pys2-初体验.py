@@ -1,3 +1,7 @@
+# pyqt或pyside2的优点 或称为什么采用该GUI框架，是因为该框架
+    # 面向对象
+    # 信号与槽的机制
+    # 界面设计与业务代码完全隔离
 from PySide2.QtWidgets import QApplication,QWidget,QLabel
 
 app=QApplication([])

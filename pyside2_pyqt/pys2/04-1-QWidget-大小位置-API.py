@@ -34,19 +34,19 @@ wd.move(100,100)
 wd.resize(500,500)
 # 1 正确获取和设置大小位置应在wd.show()以后
 # print(wd.geometry())#PySide2.QtCore.QRect(100, 100, 500, 500)
-wd.setGeometry(0, 0, 150, 150)
+# wd.setGeometry(0, 0, 150, 150)
 # 
 # 2 案例 自适应大小
 label = QLabel(wd)
 label.setText("社会顺")
 label.move(100, 100)
 label.setStyleSheet("background-color: cyan;")
-
+label.adjustSize()
 def changeCao():
     new_content = label.text() + "社会顺"
     label.setText(new_content)
-    #设置为自适应大小
     # label.resize(label.width() + 100, label.height())
+    #设置为自适应大小
     label.adjustSize()
 
 
@@ -60,5 +60,6 @@ wd.show()
 # print(wd.geometry()) #PySide2.QtCore.QRect(101, 131, 500, 500)
 # 控件显示完毕之后,setGeometry设置的具体位置或者尺寸数据才会正确
 # wd.setGeometry(0, 0, 150, 150)
+# wd.setGeometry(100, 100, 150, 150)
 
 app.exec_()

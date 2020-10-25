@@ -55,20 +55,20 @@ class Window(QWidget):
         print(stack_layout.addWidget(lb1)) # 返回索引 0
         print(stack_layout.addWidget(lb2)) # 返回索引 1
         print(stack_layout.addWidget(lb3)) # 返回索引 2
-        # print(stack_layout.addChildLayout(v_layout))
+        print(stack_layout.addChildLayout(v_layout))
 
 
         # 4 插入控件
-        # print('插入前-当前索引',stack_layout.currentIndex()) #插入前-当前索引 0
-        # print(stack_layout.insertWidget(0,lb4)) # 插入当前索引位置 是看不到效果的 但是已经插入 从前后的打印结果看出来
-        # print('插入后-当前索引',stack_layout.currentIndex()) #插入后-当前索引 1
+        print('插入前-当前索引',stack_layout.currentIndex()) #插入前-当前索引 0
+        print(stack_layout.insertWidget(0,lb4)) # 插入当前索引位置 是看不到效果的 但是已经插入 从前后的打印结果看出来
+        print('插入后-当前索引',stack_layout.currentIndex()) #插入后-当前索引 1
 
         # 插入的位置不存在，就插在最后，并返回插入的位置索引。
-        print(stack_layout.insertWidget(10,lb4)) # 3
+        # print(stack_layout.insertWidget(10,lb4)) # 3
 
         # 5 从索引号获取控件
         # print(stack_layout.widget(3)) #<PySide2.QtWidgets.QLabel(0x217448d9710) at 0x0000021744C4A508>
-        print(stack_layout.widget(3).text()) # 标签4
+        # print(stack_layout.widget(3).text()) # 标签4
 
         # 6 切换堆叠控件
         # 6.1 通过索引
@@ -79,15 +79,14 @@ class Window(QWidget):
 
         # 信号
         # 当前控件索引变化
-        stack_layout.currentChanged.connect(lambda idx: print(idx))
+        # stack_layout.currentChanged.connect(lambda idx: print(idx))
 
-        # 移除控件信号
-        stack_layout.widgetRemoved.connect(lambda idx: print('移除了',idx))
+        
 
         # 6.3 案例 每秒切换一次
-        timer=QTimer(self)
+        # timer=QTimer(self)
         # timer.timeout.connect(lambda : (stack_layout.setCurrentIndex((stack_layout.currentIndex()+1)%stack_layout.count())))
-        timer.start(1000)
+        # timer.start(1000)
         
         # 7 展示模式
         # 7.1 默认模式 
@@ -110,7 +109,7 @@ class Window(QWidget):
         # stack_layout.setStackingMode(QStackedLayout.StackAll)
         # 隐藏当前控件，则 可以看到后面的控件。
         # 获取当前索引
-        # idx=stack_layout.currentIndex()
+        idx=stack_layout.currentIndex()
         # 获取当前索引控件 并隐藏
         # stack_layout.widget(idx).hide()
 
@@ -119,11 +118,16 @@ class Window(QWidget):
 
         # 8 移除控件
         # 移除当前控件 后面的控件会显示出来（即使是默认展示模式）
-        # print('删前的当前标签',stack_layout.widget(idx).text())
-        # lb1.destroyed.connect(lambda : print('标签1被释放'))
-        # stack_layout.removeWidget(stack_layout.widget(idx))
+        print('删前的当前标签',stack_layout.widget(idx).text())
+        # 移除控件信号
+        stack_layout.widgetRemoved.connect(lambda idx: print('移除了',idx))
+        lb1.destroyed.connect(lambda : print('标签1被释放')) 
+        lb4.destroyed.connect(lambda : print('标签4被释放'))
+        
+        stack_layout.removeWidget(stack_layout.widget(idx))
+       
         # 获取新的当前控件
-        # print('删后的当前标签',stack_layout.widget(stack_layout.currentIndex()).text())
+        print('删后的当前标签',stack_layout.widget(stack_layout.currentIndex()).text())
 
         
      

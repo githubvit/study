@@ -21,7 +21,7 @@
         不同于html，qt的id不是唯一的，不同的控件可以有相同的objectname。
         注意：尽管qt没有限制，但是，我们要养成习惯，objectname不重，也就是不同的控件使用不同的objectname。
     属性选择器：
-        对应控件使用'.setProperty('key'='value')设置的属性来匹配控件
+        对应控件使用'.setProperty('key'，'value')设置的属性来匹配控件
         用案例来说明：
             标签背景统一为粉色，
             如果是标签的notice属性值为error，添加红色边框。
@@ -191,7 +191,9 @@ checkbox 选中 方框子控件 是一张xxxx图片
 
 QCheckBox::indicator {
     width: 20px;
+    /*影响图片大小*/
     height: 20px;
+    /*无影响*/
 }
 
 QCheckBox::indicator:checked {
@@ -228,9 +230,10 @@ QPushButton:hover {
 
 /* 给所有控件添加黑色聚焦方框 */
 
-*:focus {
+
+/* *:focus {
     border: 3px solid rgb(0, 0, 0);
-}
+} */
 
 
 /* #label_1 {

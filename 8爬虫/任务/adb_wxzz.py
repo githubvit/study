@@ -89,18 +89,18 @@ def wxzz(p_num,price,time_code,pwd):
     os.popen('adb shell input tap 551 1608')
 
     # 六 进入 转账给  页面
-    time.sleep(2)
+    time.sleep(3)
     print('填写 转账金额')
     os.popen(f'adb shell input text {price}')
-    time.sleep(1)
+    time.sleep(2)
     print('点击 添加转账说明') #[86,882][314,926]
     os.popen('adb shell input tap 201 904')
 
     # 七 弹出 添加转账说明 模态框
-    time.sleep(1)
+    time.sleep(2)
     print('填写 转账说明')
     os.popen(f'adb shell input text {time_code}')
-    time.sleep(1)
+    time.sleep(2)
     print('点击 确定') #[541,1093][972,1244]
     os.popen('adb shell input tap 756 1163')
 
@@ -108,7 +108,7 @@ def wxzz(p_num,price,time_code,pwd):
 
     # 八 返回 转账给 页面
     
-    time.sleep(1)
+    time.sleep(2)
     # 必须点击金额输入框 才能出现转账按钮
     print('点击 金额输入框')#[161,665][962,805]
     os.popen('adb shell input tap 951 725')

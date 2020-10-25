@@ -32,15 +32,16 @@ class Window(QWidget):
         # box1.setStyleSheet('QPushButton { background-color:orange;}')
         
         # 1.2 如果想作用在整个窗口的按钮上 不作用在另一个窗口的按钮3上
-        # self.setStyleSheet('QPushButton { background-color:orange;}')
+        self.setStyleSheet('QPushButton { background-color:orange;}')
         
         
 
         v_layout=QVBoxLayout()
-        self.setLayout(v_layout)
+        
 
         v_layout.addWidget(box1)
         v_layout.addWidget(box2)
+        self.setLayout(v_layout)
 
         
         lb1=QLabel('标签1',box1) 
@@ -55,7 +56,8 @@ class Window(QWidget):
         lb2.move(50,50)
         btn2=QPushButton('按钮2',box2)
         btn2.move(150,50)
- 
+
+        
     
       
         pass

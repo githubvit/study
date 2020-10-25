@@ -22,7 +22,7 @@ def check_modify():
 	# 再还原 编辑状态 即设置编辑状态为False
 	le.setModified(False)
 # 有输入 就为True 
-le.textChanged.connect(check_modify)
+# le.textChanged.connect(check_modify)
 # 没有输入 则为False
 m_btn=QPushButton(wd)
 m_btn.setText('验证编辑')
@@ -60,23 +60,32 @@ c_btn.move(200,100)
 def control_cursor():
     # 向后移动
     # le2.cursorBackward(False,2) #无光标闪动
+
     # 要看到光标 需要设置焦点
-    le2.setFocus() #看到光标闪动，文本框周围有选中光圈作为当前活动控件
+    le2.setFocus() #看到光标闪动，文本框周围有选中光圈作为当前活动控件 ******
+
     # le2.cursorBackward(True,2) #向后选中两个文本字符 变蓝 无光标闪动
+    # le2.cursorBackward(False,2) #向后移动两个光标 光标闪动
     
     # 向后移动一个单词(按空格算单词),即向后移动到一个空格 不选中到空格
     # le2.cursorWordBackward(False)
+
     # 移动到行首 从当前光标到行首全选中
     # le2.home(True)
+
     # 设置光标在第三个位置闪烁 初始状态是无法成功的
     # le2.setCursorPosition(2)
+
     # 获取当前光标位置 文本框光标位置是从0开始的
     # print('文本框le2当前光标位置',le2.cursorPosition())
+
     # 获取指定坐标位置对应文本光标位置
     # le2.setText('0123456789')
+    # le2.setText('abc defg')
     # print(le2.cursorPositionAt(QPoint(10,10))) #获取文本框相对坐标为10px,10px的光标位置 1
     # print(le2.cursorPositionAt(QPoint(10,100))) #y的坐标到外面了，还是可以获取到 1
     # print(le2.cursorPositionAt(QPoint(1000,100))) #x\y的坐标都到外面了，还是可以获取到 10 这就是光标结尾的位置
+
     # 小案例
     # 输入一堆文本结束时，让光标停在左侧起始位置
     le2.setText('0123456789'*3)
@@ -100,7 +109,7 @@ b_btn.setText('文本边距')
 b_btn.adjustSize()
 b_btn.move(200,150)
 def text_margin():
-    # 设置文本边距
+    # 设置文本边距 会依据光标位置裁剪
     le3.setTextMargins(50,50,10,10)
     # 获取文本边距
     print(le3.getTextMargins())
@@ -147,14 +156,14 @@ le5.adjustSize()
 le5.move(50,300)
     # QLineEdit文本框的右键菜单提供撤销、重复、复制、剪切、拷贝等常用功能，并支持快捷键的操作。
     # 退格
-    	# backspace() 删除选中文本（如果有）或 删除光标左侧一个字符 
+    	# backspace() 删除选中文本（如果有）或 删除光标 左侧 一个字符 
 btn1=QPushButton(wd)
 btn1.setText('退格 backspace')	
 btn1.adjustSize()
 btn1.move(200,300)
 btn1.clicked.connect(lambda :(le5.backspace(),le5.setFocus())) # lambda :(语句1,语句2)
     # 删除
-    	# del_() 删除选中文本（如果有）或 删除光标右侧一个字符 
+    	# del_() 删除选中文本（如果有）或 删除光标 右侧 一个字符 
 btn2=QPushButton(wd)
 btn2.setText('删除 del')	
 btn2.adjustSize()
@@ -172,46 +181,50 @@ btn4=QPushButton(wd)
 btn4.setText('复制 copy')	
 btn4.adjustSize()
 btn4.move(50,350)
-btn4.clicked.connect(lambda : (le5.copy(),le5.setFocus()))
+btn4.clicked.connect(lambda : (le5.cursorBackward(True,4),print(le5.copy())))
     # 剪切 cut()
 btn5=QPushButton(wd)
 btn5.setText('剪切 cut')	
 btn5.adjustSize()
 btn5.move(150,350)
-btn5.clicked.connect(lambda : (le5.cut(),le5.setFocus()))
+btn5.clicked.connect(lambda : (le5.cursorBackward(True,2),le5.cut()))
     # 粘贴 paste()
 btn6=QPushButton(wd)
 btn6.setText('粘贴 paste')	
 btn6.adjustSize()
 btn6.move(250,350)
-btn6.clicked.connect(lambda : (le5.paste(),le5.setFocus()))
+btn6.clicked.connect(lambda : le3.paste())
     # 撤消 undo()
         # isUndoAvailable() 
 btn7=QPushButton(wd)
 btn7.setText('撤消 undo')	
 btn7.adjustSize()
 btn7.move(50,400)
-btn7.clicked.connect(lambda : (le5.undo(),le5.setFocus()))
+btn7.clicked.connect(lambda : le5.undo())
     # 重做 redo()
     	# isRedoAvailable()
 btn8=QPushButton(wd)
 btn8.setText('重做 redo')	
 btn8.adjustSize()
 btn8.move(150,400)
-btn8.clicked.connect(lambda : (le5.redo(),le5.setFocus()))
+btn8.clicked.connect(lambda : le5.redo())
     # 拖放
-    	# 设置选中文本后是否可以拖拽 setDragEnabled(bool)
+    	# 设置是否可以拖拽 setDragEnabled(bool)
+        # 用法 
+            # 先设置可以拖拽
+            # 再选中字符 变蓝
+
 btn9=QPushButton(wd)
 btn9.setText('设置拖放')	
 btn9.adjustSize()
 btn9.move(250,400)
-btn9.clicked.connect(lambda : (le5.setDragEnabled(True),le5.setFocus()))
+btn9.clicked.connect(lambda : le5.setDragEnabled(True))
 
 btn10=QPushButton(wd)
 btn10.setText('取消拖放')	
 btn10.adjustSize()
 btn10.move(350,400)
-btn10.clicked.connect(lambda : (le5.setDragEnabled(False),le5.setFocus()))
+btn10.clicked.connect(lambda : le5.setDragEnabled(False))
 
     # 文本选择 
         # 选中指定区间的文本      setSelection(start_pos, length)
@@ -219,19 +232,19 @@ btn11=QPushButton(wd)
 btn11.setText('选择文本位置2长度5')	
 btn11.adjustSize()
 btn11.move(50,450)
-btn11.clicked.connect(lambda : (le5.setSelection(2, 5),le5.setFocus()))
+btn11.clicked.connect(lambda : le5.setSelection(2, 5))
         # 选中所有文本            selectAll()
 btn12=QPushButton(wd)
 btn12.setText('选择所有文本')	
 btn12.adjustSize()
 btn12.move(200,450)
-btn12.clicked.connect(lambda : (le5.selectAll(),le5.setFocus()))
+btn12.clicked.connect(lambda : le5.selectAll())
         # 取消选中已选择文本      deselect()
 btn13=QPushButton(wd)
 btn13.setText('取消选中文本')	
 btn13.adjustSize()
 btn13.move(300,450)
-btn13.clicked.connect(lambda : (le5.deselect(),le5.setFocus()))
+btn13.clicked.connect(lambda :le5.deselect())
         # 是否有选中文本          hasSelectedText()
         # 获取选中的文本          selectedText()
         # 选中的开始位置          selectionStart()
@@ -251,6 +264,9 @@ le5.textEdited.connect(lambda text:print('触发了textEdited',text))
 le5.textChanged.connect(lambda text:print('触发了textChanged',text))
 # 当采用代码方式输入的时候，textEdited是无法响应的
 le5.setText('只触发了textChanged')
+def change_select():
+    print('改变了选中的文字,获取选中的文本',le5.selectedText())
+le5.selectionChanged.connect(change_select)
 wd.show()
 
 app.exec_()

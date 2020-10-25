@@ -55,7 +55,7 @@ class Window(QWidget):
         
         # 2 添加空白伸缩因子
         h_layout.addWidget(lb1,1) # 有空白就占据1份 压缩到最小时则保持最小建议尺寸
-        h_layout.addStretch(2) # 有空白就占据2份 压缩到最小时则保持和标签控件同样大小。
+        h_layout.addStretch(2) # 有空白就占据2份 压缩到最小时则保持和标签控件同样大小,没有则为0。
         h_layout.addWidget(lb2,3) # 有空白就占据3份 压缩到最小时则保持最小建议尺寸
 
         # 设置布局
@@ -74,14 +74,15 @@ class Window(QWidget):
         lb6.setStyleSheet('background-color:green')
         lb7=QLabel('标签7')
         lb7.setStyleSheet('background-color:pink')
-
+ 
         new_layout=QBoxLayout(QBoxLayout.TopToBottom)
         new_layout.addWidget(lb6)
         new_layout.addWidget(lb7)
-
-        h_layout.insertLayout(3,new_layout)#(位置索引,插入的布局)
+ 
+        h_layout.insertLayout(3,new_layout)#(位置索引,插入的布局) 没有设置伸缩因子 保持最小建议尺寸
+        # h_layout.insertLayout(3,new_layout,5)#(位置索引,插入的布局,伸缩因子)
         # 修改布局的伸缩因子
-        h_layout.setStretchFactor(new_layout,5)
+        # h_layout.setStretchFactor(new_layout,5)
 
 
         pass

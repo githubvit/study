@@ -19,17 +19,19 @@ class Window(QWidget):
         # self.QObject继承结构测试()
         # self.QObject对象名称和属性的操作()
         # self.QObject对象的父子关系操作()
-        # self.QObject信号的操作()
-        # self.QObject类型判定()
+        self.QObject信号的操作()
+        # self.QObject对象类判定()
         # self.QObject对象删除()
         pass
         
     
     def QObject继承结构测试(self):
         print(QObject.__subclasses__())
+        # print(QWidget.__subclasses__())
         # mros = QWidget.mro()
         # mro()查找继承类，会一直追溯到python的原始类object。
         mros = QObject.mro()
+        # mros = QWidget.mro()
         for mro in mros:
             print(mro)
 
@@ -53,9 +55,9 @@ class Window(QWidget):
         with open("pyside2_pyqt\pys2\QObject.css", "r") as f:
             # qApp.setStyleSheet(f.read())
             self.setStyleSheet(f.read())
-            # vscode不识别.qss文件，报错：
-                #   FileNotFoundError: [Errno 2] No such file or directory: 'QObject.qss'
-            # 解决 使用 vscode 的相对路径或绝对路径即可，右击就可以复制绝对或相对路径
+        #     # vscode不识别.qss文件，报错：
+        #         #   FileNotFoundError: [Errno 2] No such file or directory: 'QObject.qss'
+        #     # 解决 使用 vscode 的相对路径或绝对路径即可，右击就可以复制绝对或相对路径
 
         label = QLabel(self)
         label.setObjectName("notice")
@@ -64,7 +66,7 @@ class Window(QWidget):
 
         label2 = QLabel(self)
         label2.move(100, 100)
-        # label2.setObjectName("notice")
+        label2.setObjectName("notice")
         label2.setProperty("notice_level", "error")
         label2.setText("人狠话不多")
 
@@ -82,7 +84,7 @@ class Window(QWidget):
         # label label2 btn 都setObjectName("notice")
         # 显然这是个错误的示范， */
 
-        # label.setStyleSheet("font-size: 20px; color: red;")
+        label.setStyleSheet("font-size: 20px; color: red;")
 
         # *************案例演示***************结束
 
@@ -101,27 +103,27 @@ class Window(QWidget):
         # print("obj3", obj3)
         # print("obj4", obj4)
         # print("obj5", obj5)
-        # #
+        # # #
         # obj1.setParent(obj0)
         # obj2.setParent(obj0)
         # # obj2.setObjectName("2")
         # label = QLabel()
-        # label.setParent(obj0) # 可视化控件的父对象只能是QWidget类型
-        # #
-        # #
+        # label.setParent(obj0) # 可视化控件的父对象只能是QWidget类型 所以当obj0 = QObject()报错
+        # # #
+        # # #
         # obj3.setParent(obj1)
         # obj3.setObjectName("3")
-        # #
+        # # #
         # obj4.setParent(obj2)
         # obj5.setParent(obj2)
-        # #
+        # # #
         # print(obj1.parent())
         # # 获取直接子对象
         # print(obj0.children())
         # # 找一个 只能获取1个直接子对象
         # print(obj0.findChild(QObject))
         # # 查找子对象(类型，名称) 结果只有1个
-        # print(obj0.findChild(QObject, "3")) #递归查找，会在子子孙孙中一查到底
+        print(obj0.findChild(QObject, "3")) # 类型 QObject, 名字 '3'
         # # print(obj0.findChild(QObject, "3", Qt.FindDirectChildrenOnly)) #不支持第三个参数查找方式，qt5可以
         
         # # 找多个 查找是QObject的子孙
@@ -167,10 +169,16 @@ class Window(QWidget):
             print("对象名称发生了改变2", name)
         #
         self.obj.objectNameChanged.connect(obj_name_cao)
-        # self.obj.objectNameChanged.connect(obj_name_cao2)
+        self.obj.objectNameChanged.connect(obj_name_cao2)
+        # PySide2.QtCore.SignalInstance()
+    
         # 返回连接到信号signal的槽slot的数量
-        # print(self.obj.receivers("objectNameChanged")) #X
-        # print(self.obj.receivers(self.obj.objectNameChanged)) #报错
+        # print('slot数量',self.obj.receivers("objectNameChanged")) # 错误的示范X
+        # print(self.obj.objectNameChanged) #<PySide2.QtCore.SignalInstance object at 0x0000023874A4F750>
+        # print(type(self.obj.objectNameChanged))#<class 'PySide2.QtCore.SignalInstance'>
+        # print('slot数量',self.obj.receivers(self.obj.objectNameChanged)) # pyqt5可以，pyside2报 TypeError 参数必须是receivers(bytes)
+        
+        
         self.obj.setObjectName("xxx")
         
         # 信号屏蔽
@@ -181,25 +189,26 @@ class Window(QWidget):
         #   查看 控件.signalsBlocked()
 
         # 屏蔽  self.obj.setObjectName("ooo") 这次名称改变
-        # self.obj.objectNameChanged.disconnect()
+        self.obj.objectNameChanged.disconnect()
         print(self.obj.signalsBlocked(), "1")
         self.obj.blockSignals(True)
         print(self.obj.signalsBlocked(), "2")
         self.obj.setObjectName("ooo")
-        # #
+       
+        # 解除屏蔽
         self.obj.blockSignals(False)
         print(self.obj.signalsBlocked(), "3")
-        # self.obj.objectNameChanged.connect(obj_name_cao)
-        # #
+        self.obj.objectNameChanged.connect(obj_name_cao)
+        #
         self.obj.setObjectName("xxoo")
 
         # *************信号与槽案例***************开始
-        # btn = QPushButton(self)
-        # btn.setText("点击我")
-        # def cao():
-        #     print("点我嘎哈?")
-        #
-        # btn.clicked.connect(cao)
+        btn = QPushButton(self)
+        btn.setText("点击我")
+        def cao():
+            print("点我嘎哈?")
+        
+        btn.clicked.connect(cao)
 
 
         # *************信号与槽案例***************结束
@@ -266,8 +275,8 @@ class Window(QWidget):
         # del删除的是变量，而不是数据
         # 所以当前删除的是 obj2临时变量和真正数据对象的引用
         # 该数据对象还被obj1引用着。而obj1还被self.obj1挂着，所以没有被删除
-        
-        obj2.deleteLater()
+        obj1.deleteLater()
+        # obj2.deleteLater()
         # deleteLater()会在 稍后 切除和obj1的关系，从而实现销毁obj2.
         print(obj1.children())
         print(obj2)
@@ -322,9 +331,11 @@ def 信号与槽():
     def cao(title):
         # print("窗口标题变化了", title)
         # window.windowTitleChanged.disconnect()
-        window.blockSignals(True)
-        window.setWindowTitle("撩课-" + title)
-        window.blockSignals(False)
+        window.blockSignals(True) # 先禁掉title
+        print('是否屏蔽信号',window.signalsBlocked())
+        window.setWindowTitle("撩课-" + title) # 加前缀
+        # window.blockSignals(True) # 后禁掉title  不行 必须加在前面 
+        # window.blockSignals(False) # 再打开
         # window.windowTitleChanged.connect(cao)
     window.windowTitleChanged.connect(cao)
     window.setWindowTitle("Hello Sz")
@@ -334,8 +345,8 @@ def 信号与槽():
 
 if __name__ == "__main__":
     app=QApplication([])
-    
+    # QWidget控件的父子关系()
     # wd=Window()
     # wd.show()
-
+    信号与槽()
     app.exec_()
