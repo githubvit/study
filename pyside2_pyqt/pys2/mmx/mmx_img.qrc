@@ -1,0 +1,6 @@
+<RCC>
+  <qresource prefix="btn">
+    <file>resource/img/closed folder yellow.ico</file>
+    <file>resource/img/open folder yellow.ico</file>
+  </qresource>
+</RCC>

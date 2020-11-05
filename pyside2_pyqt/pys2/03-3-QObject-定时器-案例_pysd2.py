@@ -35,7 +35,7 @@ class MyLabel(QLabel):
         self.t_id=self.startTimer(ms)   
         # print(self.t_id)
     
-    # 定时器 响应事件
+    # 定时器 响应事件 （一定要加 *args,**kwargs 不然会报参数错误）
     def timerEvent(self,*args,**kwargs):
         # print('xx')
         # 获取当前标签内容 

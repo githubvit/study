@@ -70,13 +70,13 @@ class Window(QWidget):
         # 多类型、多参数的接收
         # btn.rightPressed[int,str].connect(test_solt)
         # btn.rightPressed.connect(lambda v: print('默认',v))
-        btn.rightPressed[int].connect(lambda v: print('非默认',v))
+        
 
 
         # 装饰器 根据id即objectName定义 槽函数 
         # 用于设计师Designer设计ui时，解耦界面和槽函数 
         # 在把ui转成py时，这行代码会生成在最后。
-        # QMetaObject.connectSlotsByName(self) #必须放在最后，即所有控件创建完毕后执行，才有效果。
+        QMetaObject.connectSlotsByName(self) #必须放在最后，即所有控件创建完毕后执行，才有效果。
        
         # 因此，在使用该ui转成的py文件时，如果要定义槽函数，就只要知道发射控件的objectName，
         # 按如下方式，使用装饰器就可以定义槽函数。槽函数会自动链接控件信号。
@@ -89,9 +89,9 @@ class Window(QWidget):
     def on_zsqbtn_pressed(self):
         print('装饰器效果')
 
-    # @Slot(int,str)    #多类型、多参数 
-    # def on_zsqbtn_rightPressed(self,val,text):
-    #     print('装饰器效果-右击',val,text)
+    @Slot(int,str)    #多类型、多参数 
+    def on_zsqbtn_rightPressed(self,val,text):
+        print('装饰器效果-右击',val,text)
 
 if __name__ == "__main__":
     app=QApplication([])

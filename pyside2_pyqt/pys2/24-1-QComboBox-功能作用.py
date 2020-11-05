@@ -30,7 +30,7 @@ class Window(QWidget):
         # btn.clicked.connect(lambda :print(cb.count()))#总条目
         # btn.clicked.connect(lambda :print(cb.currentIndex())) #获取当前条目索引
         # btn.clicked.connect(lambda :print(cb.currentText()))  #获取当前条目文本
-        # btn.clicked.connect(lambda :print(cb.currentData()))  #获取当前条目数据
+        btn.clicked.connect(lambda :print(cb.currentData()))  #获取当前条目数据
         # btn.clicked.connect(lambda : btn.setIcon(cb.itemIcon(cb.currentIndex()))) #获取当前索引图标，将获取的图标设置给按钮，当前没有图标不报错。
         
         # 获取最后一个条目的图标、文本、数据
@@ -49,7 +49,7 @@ class Window(QWidget):
         
         # btn.clicked.connect(lambda :cb.addItem("it"))     #增加条目  代码可以重复增加 输入框不行
         # btn.clicked.connect(lambda :cb.clear())           #清空条目
-        cb.setEditable(True)
+        # cb.setEditable(True)
         # btn.clicked.connect(lambda :cb.clearEditText())   #清空可编辑文本框 前提要设 可编辑 
         # btn.clicked.connect(lambda :cb.showPopup())       #弹出下拉菜单
         # btn.clicked.connect(lambda :cb.setCurrentIndex(2))  #设置当前索引

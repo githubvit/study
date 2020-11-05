@@ -204,15 +204,15 @@ class Window(QWidget):
             else:
                 animation.stop()
 
-        # btn.clicked.connect(animation_operation)
+        btn.clicked.connect(animation_operation)
 
         # 9 信号
         # 循环次数变化
-        # animation.currentLoopChanged.connect(lambda val: print('改变了当前循环次数——',val))
+        animation.currentLoopChanged.connect(lambda val: print('改变了当前循环次数——',val))
         # 结束
-        # animation.finished.connect(lambda : print('动画结束'))
+        animation.finished.connect(lambda : print('动画结束'))
         # 状态变更
-        # animation.stateChanged.connect(lambda ns,os: print(f'状态改变，从 {os} 变为 {ns}'))
+        animation.stateChanged.connect(lambda ns,os: print(f'状态改变，从 {os} 变为 {ns}'))
                 
         pass
 

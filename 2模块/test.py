@@ -46,10 +46,18 @@ else:
 # t_c=time.mktime(time.strptime(t_f,'%Y-%m-%d %X'))
 # t_n=time.time()
 # 
-# dt=t_c-t_n
-# h,ys=divmod(dt,3600)
-# m,s=divmod(ys,60)
+# dt=t_c-t_n#时间戳的差即秒差
+# h,ys=divmod(dt,3600)#用秒差求 小时h 商， ys秒余数
+# m,s=divmod(ys,60)#用同样的方式 再用多余的秒余数求分和秒
 # print(f'当前距离23:45分 还有{h:.0f}小时{m:.0f}分钟{s:.0f}秒')
+
+import os,sys
+# 求盘符
+t_path=os.path.dirname(__file__)
+print(t_path.split('/'))
+
+print(os.path.exists('d:/'))
+print(os.path.exists('e:/'))
 
 
 

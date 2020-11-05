@@ -1,0 +1,386 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Form</class>
+ <widget class="QWidget" name="Form">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>500</width>
+    <height>500</height>
+   </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>0</width>
+    <height>0</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>16777215</width>
+    <height>16777215</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <layout class="QHBoxLayout" name="horizontalLayout">
+   <property name="spacing">
+    <number>0</number>
+   </property>
+   <property name="leftMargin">
+    <number>0</number>
+   </property>
+   <property name="topMargin">
+    <number>0</number>
+   </property>
+   <property name="rightMargin">
+    <number>0</number>
+   </property>
+   <property name="bottomMargin">
+    <number>0</number>
+   </property>
+   <item>
+    <widget class="QWidget" name="r_bgd_wgt" native="true">
+     <property name="minimumSize">
+      <size>
+       <width>500</width>
+       <height>500</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>500</width>
+       <height>500</height>
+      </size>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">#r_bgd_wgt{border-image: url(:/r_background/resource/img/background_regsiter.jpg) 0 0 0 310;}</string>
+     </property>
+     <widget class="QPushButton" name="mn_btn">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>10</y>
+        <width>40</width>
+        <height>40</height>
+       </rect>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>40</width>
+        <height>40</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>40</width>
+        <height>40</height>
+       </size>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QPushButton{
+	color: white;
+    font-size:12pt; 
+	background-color: rgb(100, 200, 50);
+	border-radius: 20px;
+
+}
+QPushButton:hover{
+	border:2px solid rgb(62, 105, 223);   
+}
+QPushButton:checked{	
+	background-color: rgb(81, 162, 40);
+
+}
+</string>
+      </property>
+      <property name="text">
+       <string>菜单</string>
+      </property>
+      <property name="checkable">
+       <bool>true</bool>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="au_btn">
+      <property name="geometry">
+       <rect>
+        <x>70</x>
+        <y>10</y>
+        <width>40</width>
+        <height>40</height>
+       </rect>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>40</width>
+        <height>40</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>40</width>
+        <height>40</height>
+       </size>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QPushButton{
+	color: white;
+    font-size:12px;
+	background-color: rgb(100, 200, 50);
+	border-radius: 20px;
+
+}
+QPushButton:hover{
+	border:2px solid rgb(62, 105, 223);   
+}
+</string>
+      </property>
+      <property name="text">
+       <string>关于</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="rst_btn">
+      <property name="geometry">
+       <rect>
+        <x>60</x>
+        <y>60</y>
+        <width>40</width>
+        <height>40</height>
+       </rect>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>40</width>
+        <height>40</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>40</width>
+        <height>40</height>
+       </size>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QPushButton{
+	color: white;
+    font-size:12px;
+	background-color: rgb(100, 200, 50);
+	border-radius: 20px;
+
+}
+QPushButton:hover{
+	border:2px solid rgb(62, 105, 223);   
+}
+</string>
+      </property>
+      <property name="text">
+       <string>重置</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="ex_btn">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>70</y>
+        <width>40</width>
+        <height>40</height>
+       </rect>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>40</width>
+        <height>40</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>40</width>
+        <height>40</height>
+       </size>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QPushButton{
+	color: white;
+    font-size:12px;
+	background-color: rgb(100, 200, 50);
+	border-radius: 20px;
+
+}
+QPushButton:hover{
+	border:2px solid rgb(62, 105, 223);   
+}
+</string>
+      </property>
+      <property name="text">
+       <string>退出</string>
+      </property>
+     </widget>
+     <widget class="QWidget" name="widget" native="true">
+      <property name="geometry">
+       <rect>
+        <x>180</x>
+        <y>230</y>
+        <width>251</width>
+        <height>181</height>
+       </rect>
+      </property>
+      <layout class="QFormLayout" name="formLayout">
+       <property name="verticalSpacing">
+        <number>20</number>
+       </property>
+       <property name="leftMargin">
+        <number>0</number>
+       </property>
+       <property name="topMargin">
+        <number>0</number>
+       </property>
+       <property name="rightMargin">
+        <number>0</number>
+       </property>
+       <property name="bottomMargin">
+        <number>0</number>
+       </property>
+       <item row="0" column="0">
+        <widget class="QLabel" name="u_lb">
+         <property name="styleSheet">
+          <string notr="true">font:16px '微软雅黑';
+color: rgb(150, 150, 150);</string>
+         </property>
+         <property name="text">
+          <string>账      号(&amp;u)：</string>
+         </property>
+         <property name="buddy">
+          <cstring>u_le</cstring>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="1">
+        <widget class="QLineEdit" name="u_le">
+         <property name="styleSheet">
+          <string notr="true">border:none;
+background-color:transparent;
+border-bottom: 1px solid;
+border-color: rgb(188, 188, 188);
+font:12px '微软雅黑';
+</string>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+         <property name="clearButtonEnabled">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="0">
+        <widget class="QLabel" name="p_lb">
+         <property name="styleSheet">
+          <string notr="true">font:16px '微软雅黑';
+color: rgb(150, 150, 150);</string>
+         </property>
+         <property name="text">
+          <string>密      码(&amp;p)：</string>
+         </property>
+         <property name="buddy">
+          <cstring>p_le</cstring>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="1">
+        <widget class="QLineEdit" name="p_le">
+         <property name="styleSheet">
+          <string notr="true">border:none;
+background-color:transparent;
+border-bottom: 1px solid;
+border-color: rgb(188, 188, 188);
+font:12px '微软雅黑';
+</string>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+         <property name="clearButtonEnabled">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="0">
+        <widget class="QLabel" name="c_lb">
+         <property name="styleSheet">
+          <string notr="true">font:16px '微软雅黑';
+color: rgb(150, 150, 150);</string>
+         </property>
+         <property name="text">
+          <string>确认密码(&amp;c)：</string>
+         </property>
+         <property name="buddy">
+          <cstring>c_le</cstring>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="1">
+        <widget class="QLineEdit" name="c_le">
+         <property name="styleSheet">
+          <string notr="true">border:none;
+background-color:transparent;
+border-bottom: 1px solid;
+border-color: rgb(188, 188, 188);
+font:12px '微软雅黑';
+</string>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+         <property name="clearButtonEnabled">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="0" colspan="2">
+        <widget class="QPushButton" name="reg_btn">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>45</height>
+          </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QPushButton{
+	background-color: rgb(0, 85, 255);
+	border-radius:10px;
+	font: 12pt &quot;微软雅黑 Light&quot;;
+	color: rgb(255, 255, 255);
+	font-weight:500 ;
+	
+}
+QPushButton:disabled{
+	background-color: rgb(124, 175, 252);
+	
+}</string>
+         </property>
+         <property name="text">
+          <string>注册</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <zorder>au_btn</zorder>
+     <zorder>rst_btn</zorder>
+     <zorder>ex_btn</zorder>
+     <zorder>widget</zorder>
+     <zorder>mn_btn</zorder>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources>
+  <include location="../../r_l_c.qrc"/>
+ </resources>
+ <connections/>
+</ui>

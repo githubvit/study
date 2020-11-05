@@ -1,7 +1,7 @@
 from PySide2.QtWidgets import *
 from PySide2.QtCore import *
 from PySide2.QtGui import *
-
+import os
 # from PyQt5.Qt import *
 
 class Window(QWidget):
@@ -17,7 +17,9 @@ class Window(QWidget):
         btn.move(50,50)
         # 用静态方法 方便 快捷 打开 不用生成文件对话框对象  弹出模式为 模态级别 ，即阻塞。
         def FileDialog_handle():
+
             # 静态方法 快速 方便
+
             # result = QFileDialog.getOpenFileName(self, "", "./", "All(*.*);;Images(*.png *.jpg);;Python文件(*.py)", "Python文件(*.py)")
             # 打开一个文件(父控件，文件对话框标题，打开的路径，过滤菜单，选中的过滤菜单项) 输出是 （路径字符串，过滤项）
             # 当  文件对话框标题 为空 则显示标题为 “打开”   
@@ -37,7 +39,7 @@ class Window(QWidget):
             # 与getOpenFileName效果是一样的，差别在于输出的一个是路径字符串，一个是路径url对象。
                 # getOpenFileUrls(parent: QWidget = None, caption: str = '', directory: str = '', filter: str = '', initialFilter: str = '', options: Union[QFileDialog.Options, QFileDialog.Option] = 0, supportedSchemes: Iterable[str] = []) -> Tuple[List[QUrl], str]
 
-            result = QFileDialog.getSaveFileName(self, "保存一个py文件", "./", "All(*.*);;Images(*.png *.jpg);;Python文件(*.py)", "Python文件(*.py)")
+            # result = QFileDialog.getSaveFileName(self, "保存一个py文件", "./", "All(*.*);;Images(*.png *.jpg);;Python文件(*.py)", "Python文件(*.py)")
             # 保存一个文件 -> Tuple[str, str]
                 # getSaveFileUrl(parent: QWidget = None, caption: str = '', directory: str = '', filter: str = '', initialFilter: str = '', options: Union[QFileDialog.Options, QFileDialog.Option] = 0, supportedSchemes: Iterable[str] = []) -> Tuple[QUrl, str]
             # 输出
@@ -45,7 +47,7 @@ class Window(QWidget):
 
             # 获取文件夹
 
-            # result = QFileDialog.getExistingDirectory(self, "打开一个文件夹", "./")
+            result = QFileDialog.getExistingDirectory(self, "打开一个文件夹", "./")
             # 打开文件夹（父控件，文件对话框标题，打开的路径） -> str
             # 选定文件夹后 点击 选择文件夹 输出 D:/pyj/st/study/ctj
 
@@ -66,3 +68,4 @@ if __name__ == "__main__":
     wd=Window()
     wd.show()
     app.exec_()
+    

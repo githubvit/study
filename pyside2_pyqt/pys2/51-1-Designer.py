@@ -53,6 +53,16 @@ class Window(QWidget,Ui_ctj):
     @Slot()
     def on_pushButton_4_clicked(self):
         print('刷卷')
+    
+    # 5 解除父子关系保持位置的办法（比如外包控件Qwidget和里面的QPushButton）：
+    
+        # 先在界面上移出来，就不会有父子关系了。
+    
+        # 再选择原来的子控件，用属性选择器选择geometry属性，手动输入x和y到原来的位置，即可。
+    
+    # 6 当选中一个控件使用属性编辑器 编辑某个属性 时，要避免操作过程中选择了其他的控件。
+    
+    # 7 如果一个控件明明enable属性是打勾的，如果发现还是不可用，这时，有可能是其父控件的enable没打勾。
 
 if __name__ == "__main__":
     app=QApplication([])

@@ -151,6 +151,11 @@ QLabel[notice_leve='warning'] {
 
 #box2 QPushButton {
     background-color: green;
+    border-radius: 20px;
+}
+
+QPushButton:hover {
+    border: 1px solid rgb(62, 105, 223);
 }
 
 
@@ -162,7 +167,8 @@ QLabel[notice_leve='warning'] {
 
 #box2>QPushButton,
 #lb3 {
-    color: red;
+    color: ;
+    font-size: 11px;
 }
 
 
@@ -239,3 +245,15 @@ QPushButton:hover {
 /* #label_1 {
     background-color: red;
 } */
+
+QPushButton {
+    border-radius: 5px;
+}
+
+QPushButton:disabled {
+    border: 1px solid rgb(62, 105, 223);
+}
+
+QPushButton:hover {
+    border: 1px solid rgb(62, 105, 223);
+}

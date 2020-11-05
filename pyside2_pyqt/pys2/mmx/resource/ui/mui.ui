@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Form</class>
+ <widget class="QWidget" name="Form">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>336</width>
+    <height>50</height>
+   </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>300</width>
+    <height>50</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>336</width>
+    <height>50</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>加解密</string>
+  </property>
+  <layout class="QHBoxLayout" name="horizontalLayout">
+   <item>
+    <widget class="QPushButton" name="m_key_btn">
+     <property name="text">
+      <string>制作密钥</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QPushButton" name="encrypt_btn">
+     <property name="text">
+      <string>加密</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QPushButton" name="decrypt_btn">
+     <property name="text">
+      <string>解密</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QPushButton" name="exit_btn">
+     <property name="text">
+      <string>退出(&amp;x)</string>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

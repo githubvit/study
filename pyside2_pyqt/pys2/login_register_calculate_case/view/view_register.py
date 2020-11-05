@@ -59,7 +59,7 @@ class RegisterUi(QWidget,Ui_Form):
     # @pyqtSlot(bool)
     @Slot(bool)
     def on_Menu_btn_clicked(self,val):
-        # print('菜单',val)
+        print('菜单',val)
         
         # 定义动画组
         animation_group=QSequentialAnimationGroup(self)
@@ -67,8 +67,8 @@ class RegisterUi(QWidget,Ui_Form):
         for idx,target in enumerate(self.target):
             animation=QPropertyAnimation(target,b'pos',self)
             # 设置值
-            animation.setStartValue(self.Menu_btn.pos())
-            animation.setEndValue(self.target_pos[idx])
+            animation.setStartValue(self.Menu_btn.pos())#开始的值就是菜单按钮的位置
+            animation.setEndValue(self.target_pos[idx])#当前ui中各个按钮的位置
         
             # 设置时长
             animation.setDuration(500)
