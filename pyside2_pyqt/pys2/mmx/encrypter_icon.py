@@ -117,17 +117,17 @@ class SIcon(QSystemTrayIcon):
     def open_key_dir_fc(self):
         key_dir=m_encrypter.smt_key_dir()
         print(f'右键打开密钥目录{key_dir}')
-        os.system(f'start {key_dir}')
+        os.startfile(key_dir)
 
     def open_encrypt_dir_fc(self):
         encrypt_dir=m_encrypter.smt_encrypt_dir()
         print(f'右键打开加密文件目录{encrypt_dir}')
-        os.system(f'start {encrypt_dir}')
+        os.startfile(encrypt_dir)
 
     def open_decrypt_dir_fc(self):
         decrypt_dir=m_encrypter.smt_decrypt_dir()
         print(f'右键打开解密文件目录{decrypt_dir}')
-        os.system(f'start {decrypt_dir}')
+        os.startfile(decrypt_dir)
        
 if __name__ == "__main__":
 

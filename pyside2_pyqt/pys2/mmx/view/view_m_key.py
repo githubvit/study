@@ -54,7 +54,8 @@ class MKeyUi(QWidget,Ui_Form):
         # 获取目录
         key_dir=m_encrypter.smt_key_dir()
         print(f'打开密钥目录 {key_dir}')
-        os.system(f'start {key_dir}')
+        os.startfile(key_dir)
+        # os.system(f'start {key_dir}') # 不要用这个 不打包没问题 打包后会有闪烁 用上面这个
     # 制作密钥   
     def make_key(self):
         # 取得密钥名称

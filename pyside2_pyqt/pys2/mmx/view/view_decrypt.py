@@ -139,7 +139,7 @@ class DecryptUi(QWidget,Ui_Form):
         # 获取目录
         decrypt_dir=m_encrypter.smt_decrypt_dir()
         print(f'打开解密文件目录 {decrypt_dir}')
-        os.system(f'start {decrypt_dir}')
+        os.startfile(decrypt_dir)
 
 if __name__ == "__main__":
     

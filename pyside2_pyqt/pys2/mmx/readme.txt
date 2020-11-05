@@ -47,8 +47,8 @@
     解密 view 文件
         链接 到 主逻辑文件的 解密 特定功能
 
-打包：
-    问题：
+问题：
+    问题1：打包后 退出时 报 'Failed to execute script encrypter_icon' 即 encrypter_icon文件退出时产生了错误。 
         开始的打包采用了 依据配置文件打包的方案 分成两部：
             1 先生成配置文件 (一个exe -F 没有console -w小写)
                 pyi-makespec -F main.py -w 在当前目录下得到 main.spec
@@ -77,21 +77,41 @@
 
             
         
-    解决：    
-        直接在虚拟环境下用：
-            pyinstaller -F main.py -w 
-                -F 打包成一个.exe文件
-                main.py 是入口文件
-                -w (w小写)表示没有dos命令,即 = --noconsole
+        解决：    
+            直接在虚拟环境下用：
+                pyinstaller -F main.py -w 
+                    -F 打包成一个.exe文件
+                    main.py 是入口文件
+                    -w (w小写)表示没有dos命令,即 = --noconsole
 
-           ' (venv) D:\pyj\st\study\pyside2_pyqt\pys2\mmx>pyinstaller -F main.py -w '
+               ' (venv) D:\pyj\st\study\pyside2_pyqt\pys2\mmx>pyinstaller -F main.py -w '
 
-        结果：ok
+            结果：ok
 
-            什么都没动，没有出现任何问题，退出正常。
+                什么都没动，没有出现任何问题，退出正常。
     
+    ————————————————————————————————————————————————————————————————————————————————————————————
 
+    问题2：打包后打开文件夹闪烁问题
+        打包后打开文件夹闪烁问题：
+        原来打开文件夹用的命令：
+            os.system(f'start {key_dir}') # 不要用这个 不打包没问题 打包后会有闪烁 用上面这个
+        解决：
+            不用start,因为start是命令行命令，需要用os.system()去执行。因此带来闪烁。
+            直接用os的startfile命令即可。
+            os.startfile(key_dir)
 
+    ————————————————————————————————————————————————————————————————————————————————————————————
 
+    问题3：打开的窗口最小化后怎么打开？后面被挡住的窗口怎么提到前面来？
+        
+        解决：
+            打开的窗口最小化后怎么打开？不要用 show 用showNormal
+            后面被挡住的窗口怎么提到前面来？用 raise_ 保证在最前
+        示例：    
+            def mkey_show(self):
+                # self.mkey.show() # 当放小到任务栏的时候 不会被唤起
+                self.mkey.showNormal() # 保证即使在工具栏也会被唤起
+                self.mkey.raise_() #保证在最前
     
 

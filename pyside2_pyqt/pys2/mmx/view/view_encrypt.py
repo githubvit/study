@@ -131,7 +131,7 @@ class EncryptUi(QWidget,Ui_Form):
         # 获取目录
         encrypt_dir=m_encrypter.smt_encrypt_dir()
         print(f'打开加密文件目录 {encrypt_dir}')
-        os.system(f'start {encrypt_dir}')
+        os.startfile(encrypt_dir)
        
 
 if __name__ == "__main__":
