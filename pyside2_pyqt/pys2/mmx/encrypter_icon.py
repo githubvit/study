@@ -28,7 +28,7 @@ class SIcon(QSystemTrayIcon):
         super().__init__()
 
         # 1 挂载图标
-        self.setIcon(QIcon(r'D:\pyj\st\study\pyside2_pyqt\pys2\mmx\resource\img\safe2-removebg-preview.png'))
+        self.setIcon(QIcon(r'D:\pyj\st\study\pyside2_pyqt\pys2\mmx\6.ico'))
 
         # 2 信号与槽
         self.activated.connect(self.clickedIcon)  # 点击信号

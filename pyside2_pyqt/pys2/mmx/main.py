@@ -1,5 +1,6 @@
 from PySide2.QtWidgets import QApplication
 from PySide2.QtCore import Qt
+from PySide2.QtGui import QIcon
 import sys,os
 
 # 找到项目根目录
@@ -22,7 +23,7 @@ class App(QApplication):
         # 1 设置窗口关闭 并不退出程序  
         # 默认是True  就会导致关闭界面时退出程序。
         self.setQuitOnLastWindowClosed(False)   # *******  很重要 对于系统托盘应用    ***********
-       
+        
         # 2 系统托盘图标
         self.sicon=SIcon()
         self.sicon.setToolTip('加解密')

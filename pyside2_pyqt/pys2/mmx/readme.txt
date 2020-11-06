@@ -46,6 +46,17 @@
         链接 到 主逻辑文件的 加密 特定功能
     解密 view 文件
         链接 到 主逻辑文件的 解密 特定功能
+注意：
+    在什么环境下开发的程序，就用什么环境下的pyinstaller打包，
+    如果用其他环境下的pyinstaller打包就会带来很多想不到的问题。
+
+    比如：
+        在虚拟环境下开发的，就必须在虚拟环境 (venv)下去打包：✔
+        (venv) D:\pyj\st\study\pyside2_pyqt\pys2\mmx>pyinstaller -F main.py -w
+        打包过程非常顺利，没有出现原来的要打什么补丁，设置什么东西等等。。。这样那样的问题。
+
+        如果退出虚拟环境 没有(venv) 打包就会出现意想不到的问题： X
+        D:\pyj\st\study\pyside2_pyqt\pys2\mmx>pyinstaller -F main.py -w
 
 问题：
     问题1：打包后 退出时 报 'Failed to execute script encrypter_icon' 即 encrypter_icon文件退出时产生了错误。 
@@ -89,6 +100,8 @@
             结果：ok
 
                 什么都没动，没有出现任何问题，退出正常。
+        
+        
     
     ————————————————————————————————————————————————————————————————————————————————————————————
 
@@ -115,3 +128,4 @@
                 self.mkey.raise_() #保证在最前
     
 
+    

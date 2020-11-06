@@ -1,0 +1,24 @@
+应用程序图标：
+    1 打包 时设置 应用程序图标  '-i 图标文件'
+        (venv) D:\pyj\st\study\pyside2_pyqt\pys2\mmx>pyinstaller -F main.py -w -i 6.ico  
+
+        注意：
+            windows系统本身记忆一些使用过的程序名字的图标。
+            比如，
+                1 原来程序叫main.exe,没有设置图标，那么就使用pyinstaller原有的默认图标。
+                2 把main.exe改个名字叫mmx.exe，一切ok，没什么问题。
+
+                3 删除打包和改名的main.exe和mmx.exe.
+
+                4 重新打包main.exe，设置自己的图标，ok。
+                5 把main.exe改个名字叫mmx.exe，奇怪的事情发生，图标变回 pyinstaller原有的默认图标。
+
+                6 把main.exe改个名字叫mmx1.exe, 图标没有变回 pyinstaller原有的默认图标，而是保持自己设置的图标。
+
+某窗口的 标题栏和在任务栏的图标：
+    2 pyqt 设置 某窗口的 标题栏和在任务栏的图标
+        # 设置图标
+        # 窗口 标题栏和在任务栏的图标
+        self.setWindowIcon(QIcon(r'D:\pyj\st\study\pyside2_pyqt\pys2\mmx\6.ico'))
+        # 任务栏的效果要打包之后，独立运行才可以看出来。
+        # 开发阶段，用的是py解释器环境的值。看不出效果的。
