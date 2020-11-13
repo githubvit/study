@@ -43,7 +43,7 @@ from resource.ui.Ui_r_1 import Ui_Form
 class R1Ui(QWidget,Ui_Form):
     # 对外信号
     # 定义退出信号
-    registerExit=Signal()
+    registerExit_signal=Signal()
     # 定义注册信号 传递用户名和密码
     registerSignal=Signal([str,str])
     def __init__(self):
@@ -117,7 +117,7 @@ class R1Ui(QWidget,Ui_Form):
     def on_ex_btn_clicked(self):
         print('退出')
         # 向外发射register_exit信号
-        self.registerExit.emit()
+        self.registerExit_signal.emit()
 
     # 注册按钮默认是不可用的，当三个输入框都有值，并且两个密码框的值完全相等后，才可以变成enable
     def reg__btn_enable(self):
@@ -152,6 +152,7 @@ if __name__ == "__main__":
     wd=R1Ui()
     wd.show()
     # 监测自定义向外发射的信号
-    wd.registerExit.connect(lambda : print('收到registerExit注册退出信号'))
+    wd.registerExit_signal.connect(lambda : print('收到registerExit注册退出信号'))
     wd.registerSignal.connect(lambda u,p: print(f'收到registerSignal注册信号，传递用户名{u}和密码{p}'))
     app.exec_()
+    

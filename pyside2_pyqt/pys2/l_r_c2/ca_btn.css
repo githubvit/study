@@ -1,0 +1,32 @@
+QPushButton[bg='gray'] {
+    background-color: gray;
+    color: white;
+}
+
+QPushButton[bg='gray']:hover {
+    background-color: rgb(150, 150, 150);
+    color: white;
+}
+
+QPushButton[bg='lightgray'] {
+    background-color: lightgray;
+}
+
+QPushButton[bg='lightgray']:hover {
+    background-color: rgb(220, 220, 220);
+}
+
+QPushButton[bg='orange'] {
+    background-color: orange;
+    color: white;
+}
+
+QPushButton[bg='orange']:hover {
+    background-color: rgb(250, 180, 0);
+    color: white;
+}
+
+QPushButton[role='op']:checked {
+    background-color: white;
+    color: orange;
+}

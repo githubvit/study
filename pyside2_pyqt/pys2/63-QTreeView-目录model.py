@@ -35,7 +35,7 @@ class Window(QWidget):
     def setup_ui(self):
         # 1 定义目录树model
         # dir_model=QDirModel() #不设置，默认显示整个电脑的根目录 列出所有盘符
-        dir_model=QFileSystemModel()
+        dir_model=QFileSystemModel()#主要用这个模型 而不是上面的QDirModel
         self.dir_model=dir_model
           
         # 2 定义view

@@ -1,5 +1,6 @@
 from PySide2.QtWidgets import QApplication,QWidget,QPushButton,QLabel,QFileDialog
 from PySide2.QtCore import Signal,Slot
+from PySide2.QtGui import QIcon
 
 import os,sys
 
@@ -19,6 +20,7 @@ from resource.ui.Ui_m_key import Ui_Form
 # 3.1 导入主逻辑程序
 import m_encrypter
 
+
 class MKeyUi(QWidget,Ui_Form):
     
     def __init__(self,parent=None):
@@ -27,10 +29,17 @@ class MKeyUi(QWidget,Ui_Form):
       
         # 2.3 导入界面类setupUi函数，填入 self 参数作为父类。
         self.setupUi(self)
+        self.setWindowIcon(QIcon(r'D:\pyj\st\study\pyside2_pyqt\pys2\mmx\resource\img\safe2-removebg-preview.png'))
         # 隐藏提示标签
         self.tip_lb.setText('')
-       
-
+    
+    # 关闭时 隐藏提示标签
+    def closeEvent(self, *args, **kwargs):
+        super().closeEvent( *args, **kwargs)
+        # 隐藏提示标签
+        self.tip_lb.setText('')
+        # print('关闭制作密钥窗口')
+        
     # 2.4 信号 槽
     @Slot()
     def on_key_name_le_textChanged(self):

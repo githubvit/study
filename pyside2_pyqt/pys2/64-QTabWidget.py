@@ -36,20 +36,29 @@ class Window(QWidget):
         # 布局
         layout=QVBoxLayout(self)
         layout.addWidget(tab)
-
+        
+        # 加载每个tab页面
         self.tab1_ui()
         self.tab2_ui()
         self.tab3_ui()
+
+        # 根据索引改变选项页名称 
+        # 从 选项页1 变为 联系方式
+        # self.tab.setTabText(0,'联系方式')
+        # # 从 选项页2 变为 个人详细信息
+        # self.tab.setTabText(1,'个人详细信息')
+        # # 从 选项页3 变为 教育程度
+        # self.tab.setTabText(2,'教育程度')
+
     # 为每一个选项页定制一个方法
     def tab1_ui(self):
         # 放个表单
         layout=QFormLayout()
         layout.addRow('姓名',QLineEdit())
         layout.addRow('地址',QLineEdit())
-        # 根据索引改变选项页名称
-        self.tab.setTabText(0,'联系方式')
         self.tab1.setLayout(layout)
         pass 
+
     def tab2_ui(self):
         # 表单
         layout=QFormLayout()
@@ -58,8 +67,6 @@ class Window(QWidget):
         sex.addWidget(QRadioButton('女'))
         layout.addRow('性别',sex)
         layout.addRow('生日',QLineEdit())
-        # 根据索引改变选项页名称
-        self.tab.setTabText(1,'个人详细信息')
         self.tab2.setLayout(layout)
         
     def tab3_ui(self):
@@ -68,8 +75,6 @@ class Window(QWidget):
         layout.addWidget(QCheckBox('物理'))
         layout.addWidget(QCheckBox('高数'))
         layout.addWidget(QCheckBox('英语'))
-        # 根据索引改变选项页名称
-        self.tab.setTabText(2,'教育程度')
         self.tab3.setLayout(layout)
         pass 
         

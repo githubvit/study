@@ -17,6 +17,7 @@ class CalculateBtn(QPushButton):
     # keypressed_signal=pyqtSignal(str,str) #pyqt5
     keypressed_signal=Signal(str,str)
 
+    # 动作：当按下时  发射自定义信号
     def mousePressEvent(self,evt):
         super().mousePressEvent(evt)
         # 发射信号

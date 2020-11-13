@@ -54,6 +54,7 @@ class Window(QWidget):
         
         # 3 关联 view和model
         tv.setModel(md)
+        tv.setShowGrid(False)
 
         # 4 布局
         # 采用布局就没有滚动条，可以看到全貌

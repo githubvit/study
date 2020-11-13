@@ -1,0 +1,392 @@
+
+D:\pyj\st\study>pyinstaller -h
+usage: pyinstaller [-h] [-v] [-D] [-F] [--specpath DIR] [-n NAME]
+                   [--add-data <SRC;DEST or SRC:DEST>]
+                   [--add-binary <SRC;DEST or SRC:DEST>] [-p DIR]
+                   [--hidden-import MODULENAME]
+                   [--additional-hooks-dir HOOKSPATH]
+                   [--runtime-hook RUNTIME_HOOKS] [--exclude-module EXCLUDES]
+                   [--key KEY] [-d {all,imports,bootloader,noarchive}] [-s]
+                   [--noupx] [--upx-exclude FILE] [-c] [-w]
+                   [-i <FILE.ico or FILE.exe,ID or FILE.icns>]
+                   [--version-file FILE] [-m <FILE or XML>] [-r RESOURCE]
+                   [--uac-admin] [--uac-uiaccess] [--win-private-assemblies]
+                   [--win-no-prefer-redirects]
+                   [--osx-bundle-identifier BUNDLE_IDENTIFIER]
+                   [--runtime-tmpdir PATH] [--bootloader-ignore-signals]
+                   [--distpath DIR] [--workpath WORKPATH] [-y]
+                   [--upx-dir UPX_DIR] [-a] [--clean] [--log-level LEVEL]
+                   scriptname [scriptname ...]
+
+positional arguments:
+  scriptname            name of scriptfiles to be processed or exactly one
+                        .spec-file. If a .spec-file is specified, most options
+                        are unnecessary and are ignored.
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -v, --version         Show program version info and exit.
+  --distpath DIR        Where to put the bundled app (default: .\dist)
+  --workpath WORKPATH   Where to put all the temporary work files, .log, .pyz
+                        and etc. (default: .\build)
+  -y, --noconfirm       Replace output directory (default:
+                        SPECPATH\dist\SPECNAME) without asking for
+                        confirmation
+  --upx-dir UPX_DIR     Path to UPX utility (default: search the execution
+                        path)
+  -a, --ascii           Do not include unicode encoding support (default:
+                        included if available)
+  --clean               Clean PyInstaller cache and remove temporary files
+                        before building.
+  --log-level LEVEL     Amount of detail in build-time console messages. LEVEL
+                        may be one of TRACE, DEBUG, INFO, WARN, ERROR,
+                        CRITICAL (default: INFO).
+
+What to generate:
+  -D, --onedir          Create a one-folder bundle containing an executable
+                        (default)
+  -F, --onefile         Create a one-file bundled executable.
+  --specpath DIR        Folder to store the generated spec file (default:
+                        current directory)
+  -n NAME, --name NAME  Name to assign to the bundled app and spec file
+                        (default: first script's basename)
+
+What to bundle, where to search:
+  --add-data <SRC;DEST or SRC:DEST>
+                        Additional non-binary files or folders to be added to
+                        the executable. The path separator is platform
+                        specific, ``os.pathsep`` (which is ``;`` on Windows
+                        and ``:`` on most unix systems) is used. This option
+                        can be used multiple times.
+  --add-binary <SRC;DEST or SRC:DEST>
+                        Additional binary files to be added to the executable.
+                        See the ``--add-data`` option for more details. This
+                        option can be used multiple times.
+  -p DIR, --paths DIR   A path to search for imports (like using PYTHONPATH).
+                        Multiple paths are allowed, separated by ';', or use
+                        this option multiple times
+  --hidden-import MODULENAME, --hiddenimport MODULENAME
+                        Name an import not visible in the code of the
+                        script(s). This option can be used multiple times.
+  --additional-hooks-dir HOOKSPATH
+                        An additional path to search for hooks. This option
+                        can be used multiple times.
+  --runtime-hook RUNTIME_HOOKS
+                        Path to a custom runtime hook file. A runtime hook is
+                        code that is bundled with the executable and is
+                        executed before any other code or module to set up
+                        special features of the runtime environment. This
+                        option can be used multiple times.
+  --exclude-module EXCLUDES
+                        Optional module or package (the Python name, not the
+                        path name) that will be ignored (as though it was not
+                        found). This option can be used multiple times.
+  --key KEY             The key used to encrypt Python bytecode.
+
+How to generate:
+  -d {all,imports,bootloader,noarchive}, --debug {all,imports,bootloader,noarchive}
+                        Provide assistance with debugging a frozen
+                        application. This argument may be provided multiple
+                        times to select several of the following options.
+
+                        - all: All three of the following options.
+
+                        - imports: specify the -v option to the underlying
+                          Python interpreter, causing it to print a message
+                          each time a module is initialized, showing the
+                          place (filename or built-in module) from which it
+                          is loaded. See
+                          https://docs.python.org/3/using/cmdline.html#id4.
+
+                        - bootloader: tell the bootloader to issue progress
+                          messages while initializing and starting the
+                          bundled app. Used to diagnose problems with
+                          missing imports.
+
+                        - noarchive: instead of storing all frozen Python
+                          source files as an archive inside the resulting
+                          executable, store them as files in the resulting
+                          output directory.
+
+  -s, --strip           Apply a symbol-table strip to the executable and
+                        shared libs (not recommended for Windows)
+  --noupx               Do not use UPX even if it is available (works
+                        differently between Windows and *nix)
+  --upx-exclude FILE    Prevent a binary from being compressed when using upx.
+                        This is typically used if upx corrupts certain
+                        binaries during compression. FILE is the filename of
+                        the binary without path. This option can be used
+                        multiple times.
+
+Windows and Mac OS X specific options:
+  -c, --console, --nowindowed
+                        Open a console window for standard i/o (default). On
+                        Windows this option will have no effect if the first
+                        script is a '.pyw' file.
+  -w, --windowed, --noconsole
+                        Windows and Mac OS X: do not provide a console window
+                        for standard i/o. On Mac OS X this also triggers
+                        building an OS X .app bundle. On Windows this option
+                        will be set if the first script is a '.pyw' file. This
+                        option is ignored in *NIX systems.
+  -i <FILE.ico or FILE.exe,ID or FILE.icns>, --icon <FILE.ico or FILE.exe,ID or FILE.icns>
+                        FILE.ico: apply that icon to a Windows executable.
+                        FILE.exe,ID, extract the icon with ID from an exe.
+                        FILE.icns: apply the icon to the .app bundle on Mac OS
+                        X
+
+Windows specific options:
+  --version-file FILE   add a version resource from FILE to the exe
+  -m <FILE or XML>, --manifest <FILE or XML>
+                        add manifest FILE or XML to the exe
+  -r RESOURCE, --resource RESOURCE
+                        Add or update a resource to a Windows executable. The
+                        RESOURCE is one to four items,
+                        FILE[,TYPE[,NAME[,LANGUAGE]]]. FILE can be a data file
+                        or an exe/dll. For data files, at least TYPE and NAME
+                        must be specified. LANGUAGE defaults to 0 or may be
+                        specified as wildcard * to update all resources of the
+                        given TYPE and NAME. For exe/dll files, all resources
+                        from FILE will be added/updated to the final
+                        executable if TYPE, NAME and LANGUAGE are omitted or
+                        specified as wildcard *.This option can be used
+                        multiple times.
+  --uac-admin           Using this option creates a Manifest which will
+                        request elevation upon application restart.
+  --uac-uiaccess        Using this option allows an elevated application to
+                        work with Remote Desktop.
+
+Windows Side-by-side Assembly searching options (advanced):
+  --win-private-assemblies
+                        Any Shared Assemblies bundled into the application
+                        will be changed into Private Assemblies. This means
+                        the exact versions of these assemblies will always be
+                        used, and any newer versions installed on user
+                        machines at the system level will be ignored.
+  --win-no-prefer-redirects
+                        While searching for Shared or Private Assemblies to
+                        bundle into the application, PyInstaller will prefer
+                        not to follow policies that redirect to newer
+                        versions, and will try to bundle the exact versions of
+                        the assembly.
+
+Mac OS X specific options:
+  --osx-bundle-identifier BUNDLE_IDENTIFIER
+                        Mac OS X .app bundle identifier is used as the default
+                        unique program name for code signing purposes. The
+                        usual form is a hierarchical name in reverse DNS
+                        notation. For example:
+                        com.mycompany.department.appname (default: first
+                        script's basename)
+
+Rarely used special options:
+  --runtime-tmpdir PATH
+                        Where to extract libraries and support files in
+                        `onefile`-mode. If this option is given, the
+                        bootloader will ignore any temp-folder location
+                        defined by the run-time OS. The ``_MEIxxxxxx``-folder
+                        will be created here. Please use this option only if
+                        you know what you are doing.
+  --bootloader-ignore-signals
+                        Tell the bootloader to ignore signals rather than
+                        forwarding them to the child process. Useful in
+                        situations where e.g. a supervisor process signals
+                        both the bootloader and child (e.g. via a process
+                        group) to avoid signalling the child twice.
+
+
+
+D：\ pyj \ st \ study> pyinstaller -h
+用法：pyinstaller [-h] [-v] [-D] [-F] [--specpath DIR] [-n NAME]
+                   [--add-data <SRC; DEST或SRC：DEST>]
+                   [--add-binary <SRC; DEST或SRC：DEST>] [-p DIR]
+                   [--hidden-import MODULENAME]
+                   [--add-hooks-dir HOOKSPATH]
+                   [--runtime-hook RUNTIME_HOOKS] [--exclude-module EXCLUDES]
+                   [--key KEY] [-d {all，imports，bootloader，noarchive}] [-s]
+                   [--noupx] [--upx排除文件] [-c] [-w]
+                   [-i <FILE.ico或FILE.exe，ID或FILE.icns>]
+                   [--version-file FILE] [-m <FILE或XML>] [-r资源]
+                   [--uac-admin] [--uac-uiaccess] [--win-private-assemblys]
+                   [--win-prefer-redirects]
+                   [--osx-bundle-identifier BUNDLE_IDENTIFIER]
+                   [--runtime-tmpdir PATH] [--bootloader-ignore-signals]
+                   [--distpath DIR] [--workpath WORKPATH] [-y]
+                   [--upx-dir UPX_DIR] [-a] [--clean] [--log-level LEVEL]
+                   脚本名称[脚本名称...]
+
+位置参数：
+  脚本名要处理的脚本文件的名称或正好一个
+                        .spec文件。如果指定了.spec文件，则大多数选项
+                        是不必要的，将被忽略。
+
+可选参数：
+  -h，--help显示此帮助消息并退出
+  -v，--version显示程序版本信息并退出。
+  --distpath DIR放置捆绑的应用程序的位置（默认值：。\ dist）
+  --workpath WORKPATH将所有临时工作文件，.log，.pyz放在哪里
+                        等（默认值：。\ build）
+  -y，--noconfirm替换输出目录（默认值：
+                        SPECPATH \ dist \ SPECNAME）而不要求
+                        确认
+  --upx-dir UPX_DIR UPX实用程序的路径（默认值：搜索执行）
+                        路径）
+  -a，-ascii不包括unicode编码支持（默认值：
+                        包括（如果有）
+  --clean清理PyInstaller缓存并删除临时文件
+                        在建造之前。
+  --log-level LEVEL生成时控制台消息中的详细信息量。水平
+                        可能是TRACE，DEBUG，INFO，WARN，ERROR，
+                        严重（默认：INFO）。
+
+产生什么：
+  -D，--onedir创建一个包含可执行文件的单文件夹捆绑包
+                        （默认）
+  -F，--onefile创建一个文件捆绑可执行文件。
+  --specpath DIR文件夹，用于存储生成的规范文件（默认值：
+                        当前目录）
+  -n NAME，--name NAME分配给捆绑的应用程序和规范文件的名称
+                        （默认值：第一个脚本的基本名称）
+
+捆绑内容，搜索位置：
+  --add-data <SRC; DEST或SRC：DEST>
+                        要添加到的其他非二进制文件或文件夹
+                        可执行文件。路径分隔符是平台
+                        特定的`os.pathsep``（在Windows上是``;``
+                        和``：``在大多数Unix系统上）。这个选项
+                        可以多次使用。
+  --add-binary <SRC; DEST或SRC：DEST>
+                        要添加到可执行文件的其他二进制文件。
+                        有关更多详细信息，请参见--add-data选项。这个
+                        该选项可以多次使用。
+  -p DIR，--paths DIR搜索导入的路径（例如使用PYTHONPATH）。
+                        允许使用多个路径，以“;”分隔，或使用
+                        此选项多次
+  --hidden-import MODULENAME，-hiddenimport MODULENAME
+                        命名在代码中不可见的导入
+                        脚本。此选项可以多次使用。
+  --additional-hooks-dir HOOKSPATH
+                        搜索钩子的其他路径。这个选项
+                        可以多次使用。
+  --runtime-hook RUNTIME_HOOKS
+                        定制运行时挂钩文件的路径。运行时挂钩是
+                        与可执行文件捆绑在一起的代码是
+                        在设置任何其他代码或模块之前执行
+                        运行时环境的特殊功能。这个
+                        该选项可以多次使用。
+  --exclude-module排除
+                        可选模块或软件包（Python名称，而不是
+                        路径名）将被忽略（好像不是）
+                        找到）。此选项可以多次使用。
+  --key KEY用于加密Python字节码的密钥。
+
+如何产生：
+  -d {all，imports，bootloader，noarchive}，--debug {all，imports，bootloader，noarchive}
+                        提供调试冻结的协助
+                        应用。可以多次提供此参数
+                        时间选择以下几个选项。
+
+                        -全部：以下所有三个选项。
+
+                        -导入：为基础指定-v选项
+                          Python解释器，导致其打印消息
+                          每次模块初始化时，显示
+                          来源（文件名或内置模块）
+                          已加载。看到
+                          https://docs.python.org/3/using/cmdline.html#id4。
+
+                        -自举程序：告诉自举程序发出进度
+                          初始化并启动
+                          捆绑的应用。用于诊断问题
+                          缺少进口。
+
+                        -存档：而不是存储所有冻结的Python
+                          源文件作为结果中的存档
+                          可执行文件，将它们存储为文件
+                          输出目录。
+
+  -s，--strip将符号表条应用于可执行文件并
+                        共享库（不建议用于Windows）
+  --noupx即使可用，也不要使用UPX（有效
+                        Windows和* nix之间有所不同）
+  --upx-exclude FILE防止在使用upx时压缩二进制文件。
+                        通常在upx破坏某些内容时使用
+                        压缩期间的二进制文件。 FILE是的文件名
+                        没有路径的二进制文件。可以使用此选项
+                        多次。
+
+Windows和Mac OS X特定选项：
+  -c，--console，--nowindowed
+                        打开用于标准I / O的控制台窗口（默认）。上
+                        Windows，如果第一个
+                        脚本是一个“ .pyw”文件。
+  -w，--windowed，--noconsole
+                        Windows和Mac OS X：不提供控制台窗口
+                        用于标准I / O。在Mac OS X上，这也会触发
+                        构建OS X .app捆绑包。在Windows上，此选项
+                        如果第一个脚本是“ .pyw”文件，则将设置。这个
+                        在* NIX系统中，该选项被忽略。
+  -i <FILE.ico或FILE.exe，ID或FILE.icns>，--icon <FILE.ico或FILE.exe，ID或FILE.icns>
+                        FILE.ico：将该图标应用于Windows可执行文件。
+                        FILE.exe，ID，从exe中提取具有ID的图标。
+                        FILE.icns：将图标应用于Mac OS上的.app捆绑包
+                        X
+
+Windows特定选项：
+  --version-file FILE将版本资源从FILE添加到exe
+  -m <文件或XML>，--manifest <文件或XML>
+                        将清单文件或XML添加到exe
+  -r资源，-资源
+                        向Windows可执行文件添加或更新资源。的
+                        资源是一到四个项目，
+                        FILE [，TYPE [，NAME [，LANGUAGE]]]。 FILE可以是数据文件
+                        或exe / dll。对于数据文件，至少TYPE和NAME
+                        必须指定。 LANGUAGE默认为0或可能是
+                        指定为通配符*以更新
+                        给定TYPE和NAME。对于exe / dll文件，所有资源
+                        来自FILE的文件将被添加/更新到最终文件
+                        如果省略TYPE，NAME和LANGUAGE则为可执行文件，或者
+                        指定为通配符*。可以使用此选项
+                        多次。
+  --uac-admin使用此选项创建清单，该清单将
+                        重新启动应用程序时请求提升权限。
+  --uac-uiaccess使用此选项可使提升权限的应用程序
+                        与远程桌面一起使用。
+
+Windows并排程序集搜索选项（高级）：
+  --win-private-assemblys
+                        捆绑到应用程序中的所有共享装配
+                        将被更改为私人大会。这意味着
+                        这些程序集的确切版本将始终是
+                        已使用，并且用户安装了任何较新的版本
+                        系统级别的计算机将被忽略。
+  --win-prefer-redirects
+                        在搜索共享或专用程序集时
+                        捆绑到应用程序中，PyInstaller将更喜欢
+                        不遵循重定向到较新版本的策略
+                        版本，并将尝试捆绑确切的版本
+                        大会。
+
+Mac OS X的特定选项：
+  --osx-bundle-identifier BUNDLE_IDENTIFIER
+                        Mac OS X .app捆绑包标识符用作默认值
+                        用于代码签名的唯一程序名称。的
+                        通常的形式是反向DNS中的层次结构名称
+                        符号。例如：
+                        com.mycompany.department.appname（默认值：第一
+                        脚本的基本名称）
+
+很少使用的特殊选项：
+  --runtime-tmpdir路径
+                        在哪里提取库和支持文件
+                        onefile模式。如果提供此选项，则
+                        引导程序将忽略任何临时文件夹位置
+                        由运行时操作系统定义。 ``_MEIxxxxxx''文件夹
+                        将在此处创建。请仅在以下情况下使用此选项
+                        你知道你在做什么。
+  --bootloader-ignore-signals
+                        告诉引导加载程序忽略信号，而不是忽略
+                        将它们转发给子进程。有用的
+                        例如主管处理信号
+                        引导加载程序和子加载程序（例如通过进程
+                        组）以避免两次向孩子发出信号。

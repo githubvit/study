@@ -161,7 +161,7 @@ class Ui_Form(object):
 "}\n"
 "QPushButton:disabled{\n"
 "    \n"
-"    \n"
+"    color:gray;\n"
 "	background-color: rgb(98, 92, 127);\n"
 "    \n"
 "    \n"

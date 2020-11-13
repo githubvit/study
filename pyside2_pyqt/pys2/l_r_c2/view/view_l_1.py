@@ -28,12 +28,12 @@ class L1Ui(QWidget,Ui_Form):
         self.setupUi(self)
 
         # 4 添加动图
-        # 使用qrc中的gif图像生成qmovie对象。注意写法(':/资源管理器中的文件路径')
+        # 使用qrc中的gif图像生成qmovie对象。注意写法(设计师designer 里面 ':/资源浏览器中的该资源的索引路径')
         movie=QMovie(':/l_1/resource/img/login_bg.gif')
         # 设定动图大小自动适应标签
         self.an_lb.setScaledContents(True)
         # movie.setScaledSize(QSize(500,250))
-        # 将movie对象设置给动画标签
+        # 将movie对象设置给动图标签
         self.an_lb.setMovie(movie)
         # 启动movie
         movie.start()

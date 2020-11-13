@@ -58,29 +58,32 @@ class Window(QWidget):
         
         # 水平方向固定不动 垂直方向以名义尺寸为最大尺寸 以最小建议尺寸为最小尺寸
         # lb1.setSizePolicy(QSizePolicy.Fixed,QSizePolicy.Maximum) # 垂直方向 lb1的变化在100到300之间
-        
-        # 水平方向固定不动 垂直方向以名义尺寸为第一级最小尺寸 ，当其余控件所有空白都归零，就开始压缩lb1至最小尺寸。
-        # lb1.setSizePolicy(QSizePolicy.Fixed,QSizePolicy.Preferred) # 垂直方向 lb1的变化在100到300之间
+        # 
+        # 水平方向固定不动 垂直方向以名义尺寸为第一级最小尺寸 ，当其余控件所有空白都归零，就开始压缩lb1至最小尺寸。拉伸刚好相反。
+        # lb1.setSizePolicy(QSizePolicy.Fixed,QSizePolicy.Preferred) 
         
         # 水平方向固定不动 垂直方向优先级高于Preferred, 垂直空白都被lb2给拿走。
         # 注意：当都被压缩至最小再拉大过程中，先被拉大的是lb1，因为空白要先给有名义尺寸的控件，当lb1达到名义尺寸后，然后再按优先级给lb2.
-        lb2.setSizePolicy(QSizePolicy.Fixed,QSizePolicy.Expanding) 
+        # lb2.setSizePolicy(QSizePolicy.Fixed,QSizePolicy.Expanding) 
         
         # 水平方向固定不动 垂直方向可以小到没有。
+    
         lb1.setSizePolicy(QSizePolicy.Fixed,QSizePolicy.Ignored) 
         
         # 2 用尺寸策略对象设置尺寸策略
         # 定义尺寸策略对象 （水平策略，垂直策略）
-        # sp=QSizePolicy(QSizePolicy.Fixed,QSizePolicy.Ignored)
+        sp=QSizePolicy(QSizePolicy.Fixed,QSizePolicy.Ignored)
+        
         # 设置 当lb1隐藏也保留位置 必须放在尺寸策略设置之前，才有效
         # sp.setRetainSizeWhenHidden(True)
         # lb1.setSizePolicy(sp)
         # lb1.hide()
+        
 
         # 3 setFixedSize 
         # 不管设置了什么尺寸策略，固定尺寸设置是最高优先级
-        lb1.setFixedSize(100,100)
-        lb2.setFixedSize(400,100)
+        # lb1.setFixedSize(100,100)
+        # lb2.setFixedSize(400,100)
 
 
         pass

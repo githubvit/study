@@ -84,10 +84,10 @@ class Window(QWidget):
         # 2 查找
         if len(value):
             # 获取列表
-            # itemlist=self.tw.findItems(value,Qt.MatchExactly) #精确查找模式 全匹配
+            itemlist=self.tw.findItems(value,Qt.MatchExactly) #精确查找模式 全匹配
             # itemlist=self.tw.findItems(value,Qt.MatchStartsWith) #查找模式 以...开头
             # itemlist=self.tw.findItems(value,Qt.MatchExactly) #查找模式 以...结尾
-            itemlist=self.tw.findItems(value,Qt.MatchContains) #查找模式 包含
+            # itemlist=self.tw.findItems(value,Qt.MatchContains) #查找模式 包含
             self.itemlist=itemlist
             # 设置样式
             if len(itemlist):
@@ -100,7 +100,7 @@ class Window(QWidget):
                 self.previous_list=[]
                 # 设置本次查询列表样式
                 for item in itemlist:
-                    # 加入 上次查询列表 获取原来样式
+                    # 加入 上次查询列表 获取原来样式 item,item背景、item前景
                     self.previous_list.append((item,item.background(),item.foreground()))
                     # 设置新样式
                     item.setBackground(QBrush(QColor(0,255,255)))

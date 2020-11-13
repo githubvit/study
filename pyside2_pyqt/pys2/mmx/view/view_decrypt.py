@@ -38,6 +38,12 @@ class DecryptUi(QWidget,Ui_Form):
         # self.tip_lb
         # self.path_btn
 
+    # 关闭时 隐藏提示标签
+    def closeEvent(self, *args, **kwargs):
+        super().closeEvent( *args, **kwargs)
+        # 隐藏提示标签
+        self.tip_lb.setText('')
+        # print('关闭解密文件窗口')
 
     def decrypt_file(self):
         encrypt_file=self.encrypt_file_le.text().strip()

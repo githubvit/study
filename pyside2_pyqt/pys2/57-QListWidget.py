@@ -24,7 +24,6 @@ from PySide2.QtWidgets import QApplication, QWidget,  QListWidget, QVBoxLayout,Q
 from PySide2.QtCore import  QStringListModel
 
 
-
 class Window(QWidget):
     def __init__(self):
         super().__init__()
@@ -53,7 +52,7 @@ class Window(QWidget):
         lw.itemClicked.connect(self.showText)
 
     def showText(self,idx):
-        QMessageBox.information(self,'QListWidget','您选择了'+self.lw.item(self.lw.row(idx)).text()) #item.rw()可以获取行号，即是在lst中的索引
+        QMessageBox.information(self,'QListWidget','您选择了'+self.lw.item(self.lw.row(idx)).text()) #item.row()可以获取行号，即是在lst中的索引
 
 
 if __name__ == "__main__":

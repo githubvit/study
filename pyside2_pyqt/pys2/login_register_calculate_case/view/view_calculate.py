@@ -10,7 +10,11 @@ from PySide2.QtCore import QObject,Signal,Slot,Qt
 from Ui_calculate import Ui_Form
 
 
-# 定义工具类 处理计算业务
+# 定义工具类 处理计算业务 虚拟object类
+
+#  让其继承QObject  
+# 就可以 自定义信号和发射信号 
+# 可以和 其他控件很好的配合
 class Calculator(QObject):
     # 自定义信号
     # show_content_signal=pyqtSignal(str)#pyqt5
@@ -18,23 +22,26 @@ class Calculator(QObject):
     def __init__(self,parent=None):
         super().__init__(parent)
         # 要计算的列表
-        self.calculate_models=[]
+        self.calculate_models=[] # 就是 计算器 显示屏le 计算前的内容
 
-    # 定义计算处理方法
+    # 计算
     def calculate(self):
-        # 列表不为空且最后是运算符 就取出来
+        # 列表不为空且最后角色是运算符 就取出来
         if len(self.calculate_models)>0 and self.calculate_models[-1]['role']=='operator':
             self.calculate_models.pop(-1)
+
         # 取出title的值拼接成表达式
         exprice=''
         for i in self.calculate_models:
             exprice += i['title']
+
+        # 执行表达式 取得结果
         res=eval(exprice)
         print(exprice,'=',res)
         return str(res)
 
 
-
+    # 解析 按钮
     def parse_key(self,calculate_dic):
         # 先解析接收的的数字和角色
         # print(calculate_dic)
@@ -47,6 +54,8 @@ class Calculator(QObject):
             print(self.calculate_models)
             self.show_content_signal.emit('0.0')
             return None
+
+        # 当点击了'='号 就调用计算功能，并发射结果
         if calculate_dic['role']=='calculate':
             # 列表为空 就不理
             if not len(self.calculate_models):
@@ -57,6 +66,7 @@ class Calculator(QObject):
             return None
 
         # 剩下的角色就是 数字num 和 运算符operator 要加入计算列表
+
         # 当列表为空时，先加入的必须是数字角色
         if len(self.calculate_models)==0:
             if calculate_dic['role']=='num':
@@ -86,6 +96,7 @@ class Calculator(QObject):
             # 数字角色就激发title 运算符就激发self.calculate()
             self.show_content_signal.emit(self.calculate_models[-1]['title'])
             return None
+
         # 如果列表中的最后的角色==加入的角色
         # 1 如果是num ,如果title 不是 0 就拼接title，title是0就覆盖
         # 2 如果是operator 就覆盖
@@ -141,8 +152,8 @@ class CalculateUi(QWidget,Ui_Form):
         # 计算器 引入定义的工具类 处理计算业务
         self.calculator=Calculator(self)
 
-        # 链接信号 显示计算内容
-        self.calculator.show_content_signal.connect(self.show_content)
+        # 链接信号 显示计算内容 
+        self.calculator.show_content_signal.connect(self.show_content) # 捕捉 虚拟类的 显示内容信号 调用该信号参数(传递的内容） 展示显示屏内容
 
         
         # 这样写不管是pyqt5还是pyside2，都可以。
@@ -168,14 +179,19 @@ class CalculateUi(QWidget,Ui_Form):
         self.division_btn.keypressed_signal.connect(self.get_key)
         self.equal_btn.keypressed_signal.connect(self.get_key)
     
-    # 显示计算内容
+    # 显示计算内容 
+    # 是 虚拟计算工具类Calculator对象 即self.calculator 的 自定义信号显示内容show_content_signal 的槽函数，
+    # 接收该信号的一个参数 
+    # 用其参数展示计算器显示屏self.lineEdit
     def show_content(self,content):
         self.lineEdit.setText(content)
 
     # 获取键值和角色
+    # 是 本自定义按钮类CalculateBtn对象 即self 的 自定义信号keypressed_signal 的槽函数
+    # 接收该信号的两个参数
     def get_key(self,key_value,role):
         calculate_dic={'title':key_value,'role':role}
-        self.calculator.parse_key(calculate_dic)
+        self.calculator.parse_key(calculate_dic) # 调用虚拟类对象self.calculator的按钮解析功能
 
        
     # 4 用slot装饰器添加槽函数

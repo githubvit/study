@@ -18,7 +18,7 @@ class Window(QWidget):
     def __init__(self):
         super().__init__()
         self.setWindowTitle('QTableWidget的学习')
-        self.resize(500,500)
+        # self.resize(500,500)#采用布局不用设置大小
         self.setup_ui()
 
     def setup_ui(self):
@@ -57,7 +57,7 @@ class Window(QWidget):
 
         # 7 关闭表头
         tw.horizontalHeader().setVisible(False) #关闭水平表头
-        tw.verticalHeader().setVisible(False) #关闭竖直表头
+        # tw.verticalHeader().setVisible(False) #关闭竖直表头
 
         # 8 隐藏表格线条
         tw.setShowGrid(False)

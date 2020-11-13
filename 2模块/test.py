@@ -1,6 +1,7 @@
 import time,datetime
 a1=['a','b']
 b1=['c','d']
+# b 在列表a1中 并且 d在列表b1中（并且位置和b在列表a1中的位置相同）
 if 'b' in a1 and 'd'==b1[a1.index('b')]:
     print('ok')
 else:
@@ -51,14 +52,22 @@ else:
 # m,s=divmod(ys,60)#用同样的方式 再用多余的秒余数求分和秒
 # print(f'当前距离23:45分 还有{h:.0f}小时{m:.0f}分钟{s:.0f}秒')
 
-import os,sys
-# 求盘符
-t_path=os.path.dirname(__file__)
-print(t_path.split('/'))
+# import os,sys
+# # 求盘符
+# t_path=os.path.dirname(__file__)
+# print(t_path.split('/'))
 
-print(os.path.exists('d:/'))
-print(os.path.exists('e:/'))
+# print(os.path.exists('d:/'))
+# print(os.path.exists('e:/'))
 
+li=['1','/','2','=']
+li.pop()
+print(li)
 
+ex=''.join(['1','/','2'])
+print(ex)
+print(eval(ex))
 
-
+n1='314'
+if '.' not in n1:
+    print(n1)

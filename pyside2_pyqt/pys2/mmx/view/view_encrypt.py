@@ -29,7 +29,13 @@ class EncryptUi(QWidget,Ui_Form):
 
         # 隐藏提示标签
         self.tip_lb.setText('')
-        
+    
+    # 关闭时 隐藏提示标签
+    def closeEvent(self, *args, **kwargs):
+        super().closeEvent( *args, **kwargs)
+        # 隐藏提示标签
+        self.tip_lb.setText('')
+        # print('关闭加密文件窗口')
     
     # 调用主逻辑 程序 加密文件
     def encrypt_file(self):

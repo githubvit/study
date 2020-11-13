@@ -6,7 +6,7 @@
 
 '''
 from PySide2.QtWidgets import QApplication, QWidget, QTreeView,QTreeWidget,QPushButton,QLineEdit,\
-    QHBoxLayout,QVBoxLayout,QTableWidgetItem,QAbstractItemView,QComboBox,QTreeWidgetItem
+    QHBoxLayout,QVBoxLayout,QTableWidgetItem,QAbstractItemView,QComboBox,QTreeWidgetItem,QMessageBox
 from PySide2.QtCore import *
 from PySide2.QtGui import *
 
@@ -167,8 +167,12 @@ class Window(QWidget):
         for item in self.tree.selectedItems():
             # 获取父节点，用父节点的removeChild(item)删除该节点
             # 当根节点的item.parent()不存在，就会用root_parent来删除，否则无法删除根
-            (item.parent() or root_parent).removeChild(item)
-    
+            # (item.parent() or root_parent).removeChild(item)
+            try:
+                # 一般情况下是不允许删除根节点的
+                item.parent().removeChild(item)
+            except Exception as e:
+                QMessageBox.about(self,'产生异常',e.__str__())
 
 if __name__ == "__main__":
     app=QApplication([])

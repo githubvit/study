@@ -277,7 +277,7 @@ QComboBox:focus{
 }
 QPushButton:disabled{
     
-    
+    color:gray;
 	background-color: rgb(98, 92, 127);
     
     
