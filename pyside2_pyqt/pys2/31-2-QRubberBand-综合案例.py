@@ -46,8 +46,12 @@ class Window(QWidget):
         # 用QRect的（开始点、大小）设置
         # 初始大小为一个空的QSize对象，即无大小
         self.rb.setGeometry(QRect(self.start_point,QSize())) 
+        
         # 3 显示橡皮筋
         self.rb.show()
+        
+        # 光标 为十字
+        self.setCursor(Qt.CrossCursor)
         
         pass   
     def mouseMoveEvent(self,evt):
@@ -73,6 +77,8 @@ class Window(QWidget):
                 child_widget.toggle()
         # 3 隐藏橡皮筋
         self.rb.hide()
+        # 光标 还原
+        self.setCursor(Qt.ArrowCursor)
 
         pass
 

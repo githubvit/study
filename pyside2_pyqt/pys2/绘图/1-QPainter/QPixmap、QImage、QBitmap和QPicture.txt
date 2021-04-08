@@ -1,0 +1,131 @@
+总结：QPixmap、QImage、QBitmap和QPicture
+2012-07-17  寂静如河   阅 3904  转 8
+
+一句话总结：QImage保存用的 QPixmap屏幕显示用的 QBitmap是QPixmap的单色位图 QPicture是画图用的
+
+一·QImage与Qpixmap的区别
+
+   1、QPixmap主要是用于绘图，针对屏幕显示而最佳化设计，QImage主要是为图像I/O、图片访问和像素修改而设计的
+
+   2、QPixmap依赖于所在的平台的绘图引擎，故例如反锯齿等一些效果在不同的平台上可能会有不同的显示效果，
+    QImage使用Qt自身的绘图引擎，可在不同平台上具有相同的显示效果
+
+   3、目前的Qt会把QPixmap都存储在graphics memory中，QImage是存储在客户端的，是独立于硬件的。
+   在 X11, Mac 以及 Symbian平台上，QPixmap 是存储在服务器端，而QImage则是存储在客户端，
+   在Windows平台上，QPixmap和QImage都是存储在客户端，并不使用任何的GDI资源。
+
+   4、由于QImage是独立于硬件的，也是一种QPaintDevice，因此我们可以在另一个线程中对其进行绘制，而不需要在GUI线程中处理，
+   使用这一方式可以很大幅度提高UI响应速度。
+
+   5、QImage可通过setPixpel()和pixel()等方法直接存取指定的像素，Qt的文档中有如下例程：
+
+                QImage image(3, 3, QImage::Format_RGB32);
+
+                QRgb value;
+
+                value = qRgb(189, 149, 39);
+
+                image.setPixel(1, 1, value);
+
+                value = qRgb(122, 163, 39);
+
+                image.setPixel(0, 1, value);
+
+                image.setPixel(1, 0, value);
+
+                value = qRgb(237, 187, 51);
+
+                image.setPixel(2, 1, value);
+
+                QPixmap、QImage、QBitmap和QPicture - Elerao - Static Elerao
+ 
+
+二·QImage的显示  
+ 
+    1·QPainter中绘制QImage的接口原型：
+
+        void QPainter::drawImage ( int x, int y,
+
+          const QImage & image,
+
+          int sx = 0, int sy = 0,
+
+          int sw = -1, int sh = -1,
+
+          Qt::ImageConversionFlags flags = Qt::AutoColor )
+
+ 
+
+        其中x和y为绘制位置，sx和sy是指图像左上角的坐标，sw和sh是指定了图像的大小，如果都为0或负数，就显示完整个图像。
+
+            QImage image;
+
+            image.load( ":/pics/earth.png" );
+
+            QPainter painter(this);
+
+            painter.drawImage(0,0, image);
+
+ 
+
+    2·当图片较大时，我们可以先通过QImage将图片加载进来，然后把图片缩放成需要的尺寸，最后转换成QPixmap 进行显示。
+
+        QImage image;
+
+        image.load( ":/pics/earth.png" );
+
+
+        QPainter painter(this);
+
+        QPixmap pixmapToShow = QPixmap::fromImage( image.scaled(size(), Qt::KeepAspectRatio) );
+
+        painter.drawPixmap(0,0, pixmapToShow);
+
+
+三·QBitmap与QPixmap
+
+    ·QBitmap是QPixmap的一个子类，主要用于显示单色位图。用于制作游标QCursor或笔刷QBrush等，图像显示对比如下
+
+        QPixmap pixImg("caterpillar.jpg");
+
+        QBitmap bitImg("caterpillar.jpg");
+
+        QPainter painter(this);
+
+        painter.drawPixmap(0, 0, pixImg);
+
+        painter.drawPixmap(200, 0, bitImg);
+
+
+四·QPicture 画图用的
+
+  1·QPicture则是一个绘图装置，用于记录和重播Qpainter的绘图指令。
+
+  2·使用begin()方法在QPicture上进行绘图，使用end()结束绘图，使用save()保存至档案
+
+      QPicture picture;
+
+      QPainter painter;
+
+      painter.begin(&picture); 
+
+      painter.drawRect(10, 20, 100, 50);
+
+      painter.end();
+
+      picture.save("draw_record.pic");
+
+
+  需重播绘图指令的话，新建一个QPicture对象，使用load()重新载入保存的档案，然后再在指定的绘图设备QDevice上绘制QPicture：
+
+    QPicture picture;
+
+    picture.load("draw_record.pic");  
+
+    QPainter painter;
+
+    painter.begin(this);
+
+    painter.drawPicture(0, 0, picture); 
+
+    painter.end(); 

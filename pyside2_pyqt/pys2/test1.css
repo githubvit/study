@@ -1,4 +1,4 @@
-/* 一
+    /* 一
 样式盒子模型
     1 外边距    margin
     2 边框      border
@@ -160,108 +160,53 @@ QSpinBox {
     color: orange;
     /* border: 10px double red; */
     /* border-radius: 10px; */
-}
-
-
-/*  */
-
-
-/* QSpinBox::up-button, */
-
-
-/* QSpinBox::down-button,
+    border: 1px solid gray;
+    border-left: none;
+    background-color: rgb(218, 218, 218);
+    border:
+    /*  */
+    /* QSpinBox::up-button, */
+    /* QSpinBox::down-button,
 QSpinBox::up-button {
     width: 40px;
     height: 40px;
 } */
-
-
-/*  */
-
-QSpinBox::up-button {
-    subcontrol-position: left center;
-    /* image: url(pyside2_pyqt/pys2/xxx.png); */
-}
-
-
-/*  */
-
-QSpinBox::down-button {
-    subcontrol-position: right center;
-}
-
-
-/*  */
-
-
-/*  */
-
-
-/* 用伪状态添加 一点点动画 */
-
-QSpinBox::up-button:hover {
-    bottom: 10px;
-    /* 添加10px距离 使得 该控件向上移动10px */
-}
-
-
-/*  */
-
-QSpinBox::down-button:hover {
-    top: 10px;
-    /* 添加10px距离 使得 该控件向上移动10px */
-}
-
-
-/*  */
-
-
-/* QCheckBox { */
-
-
-/* color: gray; */
-
-
-/* border: 10px double rgb(76, 76, 76); */
-
-
-/* padding: 5px; */
-
-
-/* } */
-
-
-/*  */
-
-
-/* QCheckBox::indicator { */
-
-
-/* subcontrol-origin: border; */
-
-
-/* subcontrol-origin: padding; */
-
-
-/* subcontrol-position: left center; */
-
-
-/* background: white; */
-
-
-/* border: 2px solid gray; */
-
-
-/* } */
-
-
-/*  */
-
-
-/* QCheckBox::indicator:checked { */
-
-
-/* background-color: gray; */
-
-
-/* } */
+    /*  */
+    QSpinBox::up-button {
+        subcontrol-position: left center;
+        /* image: url(pyside2_pyqt/pys2/xxx.png); */
+    }
+    /*  */
+    QSpinBox::down-button {
+        subcontrol-position: right center;
+    }
+    /*  */
+    /*  */
+    /* 用伪状态添加 一点点动画 */
+    QSpinBox::up-button:hover {
+        bottom: 10px;
+        /* 添加10px距离 使得 该控件向上移动10px */
+    }
+    /*  */
+    QSpinBox::down-button:hover {
+        top: 10px;
+        /* 添加10px距离 使得 该控件向上移动10px */
+    }
+    /*  */
+    /* QCheckBox { */
+    /* color: gray; */
+    /* border: 10px double rgb(76, 76, 76); */
+    /* padding: 5px; */
+    /* } */
+    /*  */
+    /* QCheckBox::indicator { */
+    /* subcontrol-origin: border; */
+    /* subcontrol-origin: padding; */
+    /* subcontrol-position: left center; */
+    /* background: white; */
+    /* border: 2px solid gray; */
+    /* } */
+    /*  */
+    /* QCheckBox::indicator:checked { */
+    /* background-color: gray; */
+    /* } */

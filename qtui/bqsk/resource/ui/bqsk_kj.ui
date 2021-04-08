@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>800</width>
+    <height>615</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>博骞上课</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QHBoxLayout" name="horizontalLayout">
+    <property name="spacing">
+     <number>0</number>
+    </property>
+    <property name="leftMargin">
+     <number>0</number>
+    </property>
+    <property name="topMargin">
+     <number>0</number>
+    </property>
+    <property name="rightMargin">
+     <number>0</number>
+    </property>
+    <property name="bottomMargin">
+     <number>0</number>
+    </property>
+    <item>
+     <widget class="QTabWidget" name="text_twgt">
+      <property name="tabsClosable">
+       <bool>true</bool>
+      </property>
+      <property name="movable">
+       <bool>true</bool>
+      </property>
+      <property name="tabBarAutoHide">
+       <bool>true</bool>
+      </property>
+      <widget class="QWidget" name="text_start_wgt">
+       <attribute name="title">
+        <string>start</string>
+       </attribute>
+       <attribute name="toolTip">
+        <string>start</string>
+       </attribute>
+      </widget>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QDockWidget" name="tl_dwgt">
+   <property name="features">
+    <set>QDockWidget::DockWidgetMovable</set>
+   </property>
+   <property name="windowTitle">
+    <string>目录</string>
+   </property>
+   <attribute name="dockWidgetArea">
+    <number>1</number>
+   </attribute>
+   <widget class="QWidget" name="tl_wgt"/>
+  </widget>
+  <widget class="QDockWidget" name="media_dwgt">
+   <property name="windowTitle">
+    <string>播放器</string>
+   </property>
+   <attribute name="dockWidgetArea">
+    <number>2</number>
+   </attribute>
+   <widget class="QWidget" name="media_wgt"/>
+  </widget>
+  <widget class="QDockWidget" name="mark_dwgt">
+   <property name="windowTitle">
+    <string>笔记</string>
+   </property>
+   <attribute name="dockWidgetArea">
+    <number>8</number>
+   </attribute>
+   <widget class="QWidget" name="mark_wgt"/>
+  </widget>
+  <widget class="QToolBar" name="toolBar">
+   <property name="windowTitle">
+    <string>toolBar</string>
+   </property>
+   <attribute name="toolBarArea">
+    <enum>TopToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>false</bool>
+   </attribute>
+   <addaction name="action_onoff_tl"/>
+   <addaction name="action_start_page"/>
+   <addaction name="action_onoff_mark"/>
+   <addaction name="action_Learning_situation"/>
+   <addaction name="action_setting"/>
+   <addaction name="separator"/>
+   <addaction name="action_login"/>
+  </widget>
+  <action name="action_onoff_tl">
+   <property name="text">
+    <string>打开/关闭目录</string>
+   </property>
+   <property name="toolTip">
+    <string>打开/关闭目录</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+L</string>
+   </property>
+  </action>
+  <action name="action_Learning_situation">
+   <property name="text">
+    <string>学情</string>
+   </property>
+   <property name="toolTip">
+    <string>打开学情报告</string>
+   </property>
+  </action>
+  <action name="action_setting">
+   <property name="text">
+    <string>设置</string>
+   </property>
+   <property name="toolTip">
+    <string>设置</string>
+   </property>
+  </action>
+  <action name="action_login">
+   <property name="text">
+    <string>登录/注销</string>
+   </property>
+   <property name="toolTip">
+    <string>登录/注销</string>
+   </property>
+  </action>
+  <action name="action_onoff_mark">
+   <property name="text">
+    <string>打开/关闭笔记</string>
+   </property>
+   <property name="toolTip">
+    <string>打开/关闭笔记</string>
+   </property>
+  </action>
+  <action name="action_start_page">
+   <property name="text">
+    <string>打开/关闭开始页</string>
+   </property>
+   <property name="toolTip">
+    <string>打开/关闭开始页</string>
+   </property>
+   <property name="shortcut">
+    <string>S</string>
+   </property>
+  </action>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

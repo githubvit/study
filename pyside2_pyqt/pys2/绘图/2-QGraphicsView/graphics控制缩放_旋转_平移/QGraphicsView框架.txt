@@ -1,0 +1,48 @@
+QGraphicsView框架
+
+通过handle.py 实现 图元 缩放、旋转、平移 这个案例，可以看到：
+
+1. 该绘图框架 是 基于 面向对象 的开发 范式。
+
+    要  实现 图元 缩放、旋转、平移的功能，
+
+    图元 除了本身具有平移开关，并没有缩放和旋转的功能。
+
+    那 我们 就要 先定义 基础的功能单元 即基础图元 class BaseItem(QGraphicsItem) → 让其 实现 绘图区域的缩放，图元坐标的变换（平移、旋转）。
+
+        在基础图元 中 要定义控制节点，点击这些 控制节点 或 空白区域 ，根据点击节点类型的不同 来实现 绘图区域的拉伸、旋转、平移功能。
+
+    然后，让其他的应用图元来继承该图元class AppItem(BaseItem)，就都具备 绘图区域的缩放，图元坐标的变换（平移、旋转）功能。
+
+        让应用图元 再根据 具体的图元类型 ，按情况 分别实现 图元中图形的编辑功能，和 跟随绘图区域缩放、旋转和平移的功能。
+
+
+
+2. 该框架 的 view scene item 三层 坐标体系：
+
+    在每层操作 都是基于 本层 坐标体系 ，
+    可以通过 self.mapToScene(self.origin) 或 .mapFromItem(Qpoint)等map方式实现三层坐标之间的转换。
+
+    view  的 原点 始终都是 左上，scene  的原点 是会变化的：
+    当scene 小于 view 时，默认在 视图的中心，item的原点也会在item的中心 。
+    当scene 大于（超过）view 时，默认和视图保持一致，在左上，item的原点也会在item的左上。
+
+    scene可以通过.setSceneRect(0,0,1024,1024)设置原点、宽、高。
+    像这样设置好像把scene的原点设置为视图view的原点。实现了scene和view原点的重合。
+    实际不一定，因为view有默认边距的存在，导致如此设置的原点往往有偏差，本例中scene和view的x坐标偏差8。
+
+3. 注意点：
+
+    拖尾和残留，用场景刷新解决:self.scene.update()。 *****
+
+    当有可能改变图元的大小和形状时，必须首先调用 self.prepareGeometryChange() 预加载功能,
+    以保证 QGraphicsScene 中的索引是最新的，否则容易产生意想不到的错误，甚至崩溃，
+    该功能放置的位置不当（比如放在boundingRect中），也会导致崩溃，
+    一般放在 itemChange 图元变化函数中，用'if change == QGraphicsItem.ItemSelectedChange:' 选择切换开关 控制。         *****
+
+4. 知识点:
+
+    自定义图元 中 的boundingRect 用来 确定 绘制的区域
+
+    自定义图元 中 的shape 用来 确定 图元的可被选择区域 如果没有 则以 boundingRect返回的绘制区域 作为 选择区域。
+

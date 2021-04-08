@@ -1,0 +1,260 @@
+依赖google语音识别 不一定有用
+
+
+生成字幕
+假设我们已经剪辑好了视频文件test.mp4，我们可以通过下面命令得到字幕文件
+
+autosub.exe -i test.mp4 -S cmn-hans-cn -D zh-cn
+其中-S代表语音语言代号，选项可以通过autosub.exe -lsc来查看
+
+    $ autosub.exe -lsc
+    List of all lang codes for speech-to-text:
+
+    Lang code         Description
+    af-za             Afrikaans (South Africa)
+    am-et             Amharic (Ethiopia)
+    ar-ae             Arabic (United Arab Emirates)
+    ar-bh             Arabic (Bahrain)
+    ar-dz             Arabic (Algeria)
+    ar-eg             Arabic (Egypt)
+    ar-il             Arabic (Israel)
+    ar-iq             Arabic (Iraq)
+    ar-jo             Arabic (Jordan)
+    ar-kw             Arabic (Kuwait)
+    ar-lb             Arabic (Lebanon)
+    ar-ma             Arabic (Morocco)
+    ar-om             Arabic (Oman)
+    ar-ps             Arabic (State of Palestine)
+    ar-qa             Arabic (Qatar)
+    ar-sa             Arabic (Saudi Arabia)
+    ar-tn             Arabic (Tunisia)
+    az-az             Azerbaijani (Azerbaijan)
+    bg-bg             Bulgarian (Bulgaria)
+    bn-bd             Bengali (Bangladesh)
+    bn-in             Bengali (India)
+    ca-es             Catalan (Spain)
+    cmn-hans-cn       Chinese, Mandarin (Simplified, China)
+    cmn-hans-hk       Chinese, Mandarin (Simplified, Hong Kong)
+    cmn-hant-tw       Chinese, Mandarin (Traditional, Taiwan)
+    cs-cz             Czech (Czech Republic)
+    da-dk             Danish (Denmark)
+    de-de             German (Germany)
+    el-gr             Greek (Greece)
+    en-au             English (Australia)
+    en-ca             English (Canada)
+    en-gb             English (United Kingdom)
+    en-gh             English (Ghana)
+    en-ie             English (Ireland)
+    en-in             English (India)
+    en-ke             English (Kenya)
+    en-ng             English (Nigeria)
+    en-nz             English (New Zealand)
+    en-ph             English (Philippines)
+    en-sg             English (Singapore)
+    en-tz             English (Tanzania)
+    en-us             English (United States)
+    en-za             English (South Africa)
+    es-ar             Spanish (Argentina)
+    es-bo             Spanish (Bolivia)
+    es-cl             Spanish (Chile)
+    es-co             Spanish (Colombia)
+    es-cr             Spanish (Costa Rica)
+    es-do             Spanish (Dominican Republic)
+    es-ec             Spanish (Ecuador)
+    es-es             Spanish (Spain)
+    es-gt             Spanish (Guatemala)
+    es-hn             Spanish (Honduras)
+    es-mx             Spanish (Mexico)
+    es-ni             Spanish (Nicaragua)
+    es-pa             Spanish (Panama)
+    es-pe             Spanish (Peru)
+    es-pr             Spanish (Puerto Rico)
+    es-py             Spanish (Paraguay)
+    es-sv             Spanish (El Salvador)
+    es-us             Spanish (United States)
+    es-uy             Spanish (Uruguay)
+    es-ve             Spanish (Venezuela)
+    eu-es             Basque (Spain)
+    fa-ir             Persian (Iran)
+    fi-fi             Finnish (Finland)
+    fil-ph            Filipino (Philippines)
+    fr-ca             French (Canada)
+    fr-fr             French (France)
+    gl-es             Galician (Spain)
+    gu-in             Gujarati (India)
+    he-il             Hebrew (Israel)
+    hi-in             Hindi (India)
+    hr-hr             Croatian (Croatia)
+    hu-hu             Hungarian (Hungary)
+    hy-am             Armenian (Armenia)
+    id-id             Indonesian (Indonesia)
+    is-is             Icelandic (Iceland)
+    it-it             Italian (Italy)
+    ja-jp             Japanese (Japan)
+    jv-id             Javanese (Indonesia)
+    ka-ge             Georgian (Georgia)
+    km-kh             Khmer (Cambodia)
+    kn-in             Kannada (India)
+    ko-kr             Korean (South Korea)
+    lo-la             Lao (Laos)
+    lt-lt             Lithuanian (Lithuania)
+    lv-lv             Latvian (Latvia)
+    ml-in             Malayalam (India)
+    mr-in             Marathi (India)
+    ms-my             Malay (Malaysia)
+    nb-no             Norwegian Bokmal (Norway)
+    ne-np             Nepali (Nepal)
+    nl-nl             Dutch (Netherlands)
+    pl-pl             Polish (Poland)
+    pt-br             Portuguese (Brazil)
+    pt-pt             Portuguese (Portugal)
+    ro-ro             Romanian (Romania)
+    ru-ru             Russian (Russia)
+    si-lk             Sinhala (Sri Lanka)
+    sk-sk             Slovak (Slovakia)
+    sl-si             Slovenian (Slovenia)
+    sr-rs             Serbian (Serbia)
+    su-id             Sundanese (Indonesia)
+    sv-se             Swedish (Sweden)
+    sw-ke             Swahili (Kenya)
+    sw-tz             Swahili (Tanzania)
+    ta-in             Tamil (India)
+    ta-lk             Tamil (Sri Lanka)
+    ta-my             Tamil (Malaysia)
+    ta-sg             Tamil (Singapore)
+    te-in             Telugu (India)
+    th-th             Thai (Thailand)
+    tr-tr             Turkish (Turkey)
+    uk-ua             Ukrainian (Ukraine)
+    ur-in             Urdu (India)
+    ur-pk             Urdu (Pakistan)
+    vi-vn             Vietnamese (Vietnam)
+    yue-hant-hk       Chinese, Cantonese (Traditional, Hong Kong)
+    zu-za             Zulu (South Africa)
+
+    All works done.
+而-D代表翻译后的语言代号，可以通过autosub.exe -ltc来查看
+
+    $ autosub.exe -ltc
+    List of all lang codes for translation:
+    
+    Lang code         Description
+    af                Afrikaans
+    am                Amharic
+    ar                Arabic
+    az                Azerbaijani
+    be                Belarusian
+    bg                Bulgarian
+    bn                Bengali
+    bs                Bosnian
+    ca                Catalan
+    ceb               Cebuano
+    co                Corsican
+    cs                Czech
+    cy                Welsh
+    da                Danish
+    de                German
+    el                Greek
+    en                English
+    eo                Esperanto
+    es                Spanish
+    et                Estonian
+    eu                Basque
+    fa                Persian
+    fi                Finnish
+    fr                French
+    fy                Frisian
+    ga                Irish
+    gd                Scots Gaelic
+    gl                Galician
+    gu                Gujarati
+    ha                Hausa
+    haw               Hawaiian
+    he                Hebrew
+    hi                Hindi
+    hmn               Hmong
+    hr                Croatian
+    ht                Haitian Creole
+    hu                Hungarian
+    hy                Armenian
+    id                Indonesian
+    ig                Igbo
+    is                Icelandic
+    it                Italian
+    iw                Hebrew
+    ja                Japanese
+    jw                Javanese
+    ka                Georgian
+    kk                Kazakh
+    km                Khmer
+    kn                Kannada
+    ko                Korean
+    ku                Kurdish
+    ky                Kyrgyz
+    la                Latin
+    lb                Luxembourgish
+    lo                Lao
+    lt                Lithuanian
+    lv                Latvian
+    mg                Malagasy
+    mi                Maori
+    mk                Macedonian
+    ml                Malayalam
+    mn                Mongolian
+    mr                Marathi
+    ms                Malay
+    mt                Maltese
+    my                Myanmar(Burmese)
+    ne                Nepali
+    nl                Dutch
+    no                Norwegian
+    ny                Nyanja(Chichewa)
+    pa                Punjabi
+    pl                Polish
+    ps                Pashto
+    pt                Portuguese(Portugal,Brazil)
+    ro                Romanian
+    ru                Russian
+    sd                Sindhi
+    si                Sinhala(Sinhalese)
+    sk                Slovak
+    sl                Slovenian
+    sm                Samoan
+    sn                Shona
+    so                Somali
+    sq                Albanian
+    sr                Serbian
+    st                Sesotho
+    su                Sundanese
+    sv                Swedish
+    sw                Swahili
+    ta                Tamil
+    te                Telugu
+    tg                Tajik
+    th                Thai
+    tl                Tagalog(Filipino)
+    tr                Turkish
+    uk                Ukrainian
+    ur                Urdu
+    uz                Uzbek
+    vi                Vietnamese
+    xh                Xhosa
+    yi                Yiddish
+    yo                Yoruba
+    zh                Chinese (Simplified)
+    zh-cn             Chinese (Simplified)
+    zh-tw             Chinese (Traditional)
+    zu                Zulu
+    
+    All works done.
+等到autosub.exe处理完毕后，在视频的同目录下就会生成test.cmn-hans-cn.srt文件，这时候我们就可以使用subtitleedit来修正字幕文件了，就目前的AI水平来说，错误是不可避免的。
+
+关于subtitleedit软件的具体使用，这里就不讲了，记得编辑后保存。这时候的字幕文件就是我们想要的了，对于像youtube这样支持外挂字幕的平台，这时候我们就可以上传到平台了。如果目标平台不支持外挂字幕的话，我们就需要进行最后一步，将字幕压回到视频当中。
+
+字幕压回视频
+我们利用ffmpeg来完成，命令如下
+
+ffmpeg -i test.mp4 -vf subtitles=test.cmn-hans-cn.srt test_with_subtitle.mp4
+在得到最终带有内嵌字幕的视频文件test_with_subtitle.mp4后，我们就可以将它上传到平台了。
+
+

@@ -93,7 +93,12 @@ class Window(QWidget):
         # <PySide2.QtWidgets.QLabel(0x25d781fe8d0) at 0x0000025D78B9C288>, 
         # <PySide2.QtWidgets.QLabel(0x25d781fe940) at 0x0000025D78B9C248>, 
         # <PySide2.QtWidgets.QLabel(0x25d781fe0f0) at 0x0000025D78B9C2C8>]
-
+        
+        # 七 改变控件大小
+        # 在布局中改变控件尺寸，不是resize，
+        # 而是设定最小宽度和最小高度、或 最大宽度和最大高度。
+        # 
+        lb1.setMaximumHeight(100)
         
         pass
 if __name__ == "__main__":

@@ -107,8 +107,9 @@ class Window(QWidget):
 
         # 用 colorSelected 改变
         # cd1.colorSelected.connect(btn_text_color)
+        
         # 用 currentColorChanged 实时改变
-        cd1.setOption(QColorDialog.NoButtons)
+        cd1.setOption(QColorDialog.NoButtons) # 实时改变 就不要按钮了
         cd1.currentColorChanged.connect(btn_text_color)
 
         

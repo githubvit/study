@@ -39,6 +39,7 @@ class Window(QWidget):
 
     def setup_ui(self):
         rb = QRubberBand(QRubberBand.Rectangle, self)#(形状，父控件)
+        # 
 		# 统一定义 位置和大小
         rb.setGeometry(10, 10, 60, 60)
         print(rb.isVisible()) # False 默认看不见

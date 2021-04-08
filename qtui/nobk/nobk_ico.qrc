@@ -1,0 +1,8 @@
+<RCC>
+  <qresource prefix="16x16">
+    <file>resource/img/cil-window-maximize.png</file>
+    <file>resource/img/cil-window-minimize.png</file>
+    <file>resource/img/cil-window-restore.png</file>
+    <file>resource/img/cil-x.png</file>
+  </qresource>
+</RCC>

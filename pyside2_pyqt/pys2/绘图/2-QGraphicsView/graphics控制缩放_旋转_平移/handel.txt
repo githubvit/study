@@ -1,0 +1,354 @@
+
+一，一个bug：
+  现象：
+    图元在放大到新区域后，图元新区域部分怎么都不能被选择；
+    图元老区域部分可以选择，选择后，轻轻移动，原来不能被选择的新区域又可以选择；
+  解决：
+    知识点：
+      在可能改变QGraphicsItem大小或者形状的时候，
+      QGraphicsItem子类函数中要先调用prepareGeometryChange()，实现预加载; *****
+      # 根据Qt文档,
+            # 在更改项目的边界之前调用此函数,以使QGraphicsScene的索引保持最新,
+            # 如果需要,则prepareGeometryChange()将调用update().
+
+      无论以任何方式更改 item 的几何形状，
+      必须首先调用prepareGeometryChange()，
+      以保证 QGraphicsScene 中的索引是最新的。
+
+      在 itemChange函数中 利用 ItemSelectedChange开关 实现预加载
+      def itemChange(self,change,value):
+        if change == QGraphicsItem.ItemSelectedChange:
+          self.prepareGeometryChange() 
+
+二，拖尾和场景刷新：
+  在mouseReleseEvent事件中加入 场景刷新 ，不能解决缩放时拖尾，可以让拖尾现象在鼠标释放时消失。
+  在mouseMoveEvent事件中加入 场景刷新 解决缩放拖尾的现象。
+      def mouseMoveEvent(self,evt):
+        if evt.buttons() == Qt.LeftButton:
+            if self.CurrentHandle:
+                # 缩放或旋转
+                # print('changesize:')
+               
+              self.scene.update() # 手动刷新 场景 没有就会出现拖尾 *****
+
+        
+
+      # 将当前句柄复位归零 为None
+      def mouseReleaseEvent(self,evt):
+        self.CurrentHandle=None
+        self.scene.update() #不能解决缩放时拖尾，可以让拖尾现象在鼠标释放时消失。
+        return super().mouseReleaseEvent(evt)
+            
+  最终 在 绘制事件 末尾 加入场景刷新 就没有了拖尾 ，每次重绘 就进行场景刷新 
+    # 绘制 外框 和 句柄
+    def paint(self,painter,option,widget):
+        if self.isSelected():
+          。。。
+
+          self.scene.update() # 加入场景刷新 反拖尾
+
+三，基础图元实现绘图区域的拉伸和旋转的算法：
+  缩放算法：
+    绘图区域的拉伸：
+      在不同的句柄拉伸，有些边是固定不动的，称为固定边。
+      在mousePressEvent中根据每个句柄的类型，确定固定边，
+      在mouseMoveEvent中根据当前鼠标的位置、固定边和最小外形，确定移动边的位置和边界。
+      在mouseRelseEvent中状态还原。
+
+
+
+    旋转中心self.origin 的确定：
+      不管怎么拉伸缩放，旋转中心 到 图元中心 的 宽高等效比 是 不变的，以此 确定 旋转中心 在拉伸过程中 的 新位置。
+
+      # self.origin到self.rect.center的x、y宽、高等效比dx dy在缩放过程中是不变的，是常量。
+      通过dx dy 不变 推出 当前 旋转中心位置
+      dx=(self.origin.x()-self.rect.center().x())/self.rect.width()
+      dy=(self.origin.y()-self.rect.center().y())/self.rect.height()
+
+      self.origin.setX((dx*self.rect.width())+self.rect.center().x())
+      self.origin.setY((dy*self.rect.height())+self.rect.center().y())
+
+  旋转算法：
+    #  绕 旋转中心 self.origin 旋转
+    elif self.CurrentHandle.htype == HandleType.HANDLE_TYPE_ROTATE:
+        # 坐标 变换
+        # self.setTransform(QTransform().translate(self.origin.x(),self.origin.y()).rotate(-QLineF(evt.scenePos(),mapToScene(self.origin)).angle() + QLineF(evt.lastScenePos(),mapToScene(self.origin)).angle()).translate(-self.origin.x(),-self.origin.y()),True)
+        # self.setTransform(QTransform().translate(self.origin.x(),self.origin.y()).rotate(-QLineF(evt.scenePos(),self.mapToScene(self.origin)).angle()+ QLineF(evt.lastScenePos(),self.mapToScene(self.origin)).angle()).translate(-self.origin.x(),-self.origin.y()),True)
+        self.setTransform(QTransform().translate(self.origin.x(),self.origin.y()).rotate(-QLineF(evt.pos(),self.origin).angle()+ QLineF(evt.lastPos(),self.origin).angle()).translate(-self.origin.x(),-self.origin.y()),True)
+
+        # 图元 坐标变换 
+        # 实际上 图元的旋转 就是 旋转图元坐标轴
+        # self.setTransform(变换矩阵matrix:PySide2.QtGui.QTransform,布尔值 bool)
+
+        # 1. 原点平移到 self.origin 
+            # QTransform().translate(self.origin.x(),self.origin.y()) 坐标  默认坐标原点是左上
+        # 2. 绕 self.origin 旋转  坐标轴
+            # .rotate(-QLineF(evt.scenePos(),self.mapToScene(self.origin)).angle()+ QLineF(evt.lastScenePos(),self.mapToScene(self.origin)).angle())
+                # 起点和原点连线 的角度 QLineF(evt.lastScenePos(),self.mapToScene(self.origin)).angle()  
+                # 减去 终点和原点连线 的角度 -QLineF(evt.scenePos(),self.mapToScene(self.origin)).angle() 
+        # 3. 原点 还原 回到 旋转后的 左上
+            # 移动了多少 就还原多少 .translate(-self.origin.x(),-self.origin.y())
+        # 下一次旋转时，又来一遍123循环
+
+四，应用图元图形编辑功能的实现和跟随绘图区域拉伸而拉伸的算法：
+  在应用图元初始化，根据图元类型定义不同的量。
+    class AppItem(BaseItem):
+      def __init__(self):
+        ...
+        elif self.mType == ItemType.ITEM_WRITE: # 手写图元
+          # 手写图元
+          self.write_item=QGraphicsPathItem(self)
+          # 手写开关 双击打开或关闭
+          self.write_edit=False 
+          # 手写对象
+          self.write_path=QPainterPath()
+          # 程序容器
+          self.a_press=self.mousePressEvent 
+          self.b_move=self.mouseMoveEvent
+          self.c_release=self.mouseReleaseEvent
+          
+          
+          # 手写图元外框 用 笔
+          self.write_item_pen_wk=QPen(Qt.DashDotDotLine)
+          # 手写图元 线条 用 笔
+          self.write_item_pen_line=QPen(Qt.black,3,Qt.SolidLine,Qt.RoundCap,Qt.RoundJoin)
+          # QPen(颜色,宽度,线条样式,笔端样式,线条连接样式)
+          # 为手写图元 设置 线条 用笔
+          self.write_item.setPen(self.write_item_pen_line)
+
+        elif self.mType == ItemType.ITEM_POLYGON: #封闭多边形
+          self.polygon_item=QGraphicsPathItem(self) # 图元
+          self.polygon_edit=False # 编辑 开关
+          self.polygon_path=QPainterPath() # 路径对象
+          # 封闭多边形 顶点列表
+          self.polygon_list=[]
+          self.current_polygon_handle=None # 当前顶点
+          # 多边形 顶点 等效比 列表
+          self.polygon_point_dx_list=[]
+          self.polygon_point_dy_list=[]
+          # 程序容器
+          self.a_press=self.mousePressEvent 
+          self.b_move=self.mouseMoveEvent
+          self.c_release=self.mouseReleaseEvent
+          # 封闭多边形 图元 外框 用 笔
+          self.polygon_item_pen_wk=QPen(Qt.DashDotDotLine)
+          # 列表开关 为 False 就关闭了 列表开关，就不能再往列表里添加节点
+          self.polygon_list_onoff=True  # 添加该开关，就使得 只能 添加1个多边形
+          # 手写图元 线条 用 笔
+          self.polygon_item_pen_line=QPen(Qt.black,3,Qt.SolidLine,Qt.RoundCap,Qt.RoundJoin)
+          # QPen(颜色,宽度,线条样式,笔端样式,线条连接样式)
+          # 为手写图元 设置 线条 用笔
+          self.polygon_item.setPen(self.polygon_item_pen_line)
+
+  
+  初始化时定义编辑开关：手写图元 编辑开关 self.write_edit=False ,封闭多边形编辑开关 self.polygon_edit=False 
+
+  定义编辑功能：def edit_write(self),def edit_polygon(self)
+    def edit_write(self):
+        def start(evt):
+            if evt.button()==Qt.LeftButton: 
+                # 设定 对象 起点
+                self.write_path.moveTo(evt.pos()) # 场景坐标 evt.scenePos() 路径开始于  1 路径对象起点
+
+                pass
+        
+        def process(evt):
+            
+            if self.write_path:
+                self.write_path.lineTo(evt.pos()) #       2 连接到点
+                self.write_item.setPath(self.write_path)
+                
+
+            pass
+        def end(evt):
+            if self.write_path:
+                pass
+                
+
+        return [start,process,end]
+
+    def edit_polygon(self):
+        def start(evt):
+            if evt.button()==Qt.LeftButton:
+                for polygon_handle in self.polygon_list:
+                    if polygon_handle.rect.contains(evt.pos()):
+                        self.current_polygon_handle=polygon_handle
+
+            if self.current_polygon_handle:
+                # 填充 变色
+                print('移动顶点')
+            else:
+                if evt.button()==Qt.LeftButton:
+                    if self.polygon_list_onoff:
+                        print('添加节点，绘制线条')
+                        # print('press',self.polygon_list)
+                        # 生成控制节点
+                        point=Handle(evt.pos(),HandleShape.HANDLE_SHAPE_RECT,HandleType.HANDLE_TYPE_CTRL)
+                        # 将该点加入列表
+                        self.polygon_list.append(point)
+                        if len(self.polygon_list)==1:
+                            # 设定 对象 起点
+                            self.polygon_path.moveTo(evt.pos()) # 场景坐标 evt.scenePos() 路径开始于  1 路径对象起点
+                            self.polygon_item.setPath(self.polygon_path)
+                        else:
+                            # 不是起点 就用来连接上一个点
+                            self.polygon_path.lineTo(self.polygon_list[-1].pos)
+                            self.polygon_item.setPath(self.polygon_path)
+                        pass
+                
+                if evt.button()==Qt.RightButton: # 右键 结束
+                    print('关闭绘制，或清空列表')
+                    if self.polygon_list_onoff:
+                        self.polygon_path.closeSubpath() # 封闭图形 
+                        self.polygon_item.setPath(self.polygon_path)
+                        if len(self.polygon_list) >= 2:
+                            # 关闭 列表
+                            self.polygon_list_onoff=False 
+                            # 此时 列表 有值 且 不止一个点
+                            # 计算 每个 点的 中心 宽高等效比 self.polygon_point_dx,self.polygon_point_dy
+                            for polygon_handle in self.polygon_list:
+                                dx=(polygon_handle.pos.x()-self.rect.center().x())/self.rect.width()
+                                self.polygon_point_dx_list.append(dx)
+                                dy=(polygon_handle.pos.y()-self.rect.center().y())/self.rect.height()
+                                self.polygon_point_dy_list.append(dy)
+                        else:
+                            self.polygon_list=[] #清空列表 结束
+                    else:
+                        print('已经关闭列表')
+
+        def process(evt):
+            # 实现 移动节点 线条跟随 的效果
+            if self.current_polygon_handle and self.isSelected():
+                
+                # print('实现移动节点，线条也跟随')
+
+                # 1 设定当前多边形控制节点handle的 新位置
+                self.current_polygon_handle.set_pos(evt.pos()) # 但这样只能移动节点 而 多边形 线条 没跟随
+                # print('当前点的下标',self.polygon_list.index(self.current_polygon_handle))
+                
+                # 2  设定 path对象 节点元素的新位置 api : setElementPositionAt(self, i:int, x:float, y:float):
+                # 用该api 设置 多边形 节点 的位置 则多边形 的线条 会 跟着移动 ，但 控制节点handle 不动，所以 上面也必须移动
+                # 让path对象的 同下标节点 跟随 当前控制节点 handle 的 移动
+                x=self.current_polygon_handle.pos.x()
+                y=self.current_polygon_handle.pos.y()
+                list_index=self.polygon_list.index(self.current_polygon_handle)
+                self.polygon_path.setElementPositionAt(list_index,x,y)
+                
+                # 3 如果是起点 也就是终点
+                if self.polygon_list.index(self.current_polygon_handle)==0:
+                    # print('0')
+                    # 就把 最后一点 也设为 x，y
+                    self.polygon_path.setElementPositionAt(len(self.polygon_list),x,y)
+                    
+                # 4 重设 item 的 path对象 
+                self.polygon_item.setPath(self.polygon_path) 
+
+                # 5 重设 该点 的 宽高等效比 
+                if len(self.polygon_point_dx_list):
+                    
+                    dx=(x-self.rect.center().x())/self.rect.width()
+                    self.polygon_point_dx_list[list_index]=dx
+                    dy=(y-self.rect.center().y())/self.rect.height()
+                    self.polygon_point_dy_list[list_index]=dy
+
+                self.update()
+
+            pass # 什么都不做 即可
+
+        def end(evt):
+            # 状态复原
+            self.current_polygon_handle=None
+            pass
+
+        return [start,process,end]
+  
+  用双击来切换编辑开关：
+    def mouseDoubleClickEvent(self,evt):
+        if evt.buttons() == Qt.LeftButton:
+            self.setZValue(self.zValue() + 1)
+            # print('左键')
+            if self.mType == ItemType.ITEM_WRITE: # 手写
+                print('double_click',self.write_edit)
+                self.write_edit=not self.write_edit
+                if self.write_edit:
+                    self.write_item_pen_wk.setStyle(Qt.DotLine) # 绘图区域外框 
+                    # 覆盖三大鼠标事件
+                    self.mousePressEvent,self.mouseMoveEvent,self.mouseReleaseEvent=self.edit_write()
+                    
+                else:
+                    self.write_item_pen_wk.setStyle(Qt.DashDotDotLine) # 绘图区域外框 
+                    # 还原三大鼠标事件
+                    self.mousePressEvent,self.mouseMoveEvent,self.mouseReleaseEvent=self.a_press,self.b_move,self.c_release
+                    
+            elif self.mType == ItemType.ITEM_POLYGON: # 封闭多边形
+                print('封闭多边形开关',self.polygon_edit)
+                self.polygon_edit = not self.polygon_edit
+                if self.polygon_edit:
+                    self.polygon_item_pen_wk.setStyle(Qt.DotLine)
+                    self.polygon_item_pen_wk.setColor(Qt.red)
+                    self.mousePressEvent,self.mouseMoveEvent,self.mouseReleaseEvent=self.edit_polygon()
+                    
+                else:
+                    self.polygon_item_pen_wk.setStyle(Qt.DashDotDotLine)
+                    self.polygon_item_pen_wk.setColor(QColor(0x00ffffff)) #设置 笔的颜色 为透明
+                    self.mousePressEvent,self.mouseMoveEvent,self.mouseReleaseEvent=self.a_press,self.b_move,self.c_release
+    
+    当打开编辑开关，鼠标三大事件（press\move\relese） 被 定义的编辑功能 覆盖，
+
+    当编辑开关关闭时，鼠标三大事件（press\move\relese） 被 还原 为 继承的基础图元的三大功能（绘图区域的拉伸、旋转、平移）。
+       
+  当编辑开关关闭时,可在paint函数中，定义 图形 跟随 绘图区域的拉伸、旋转、平移 而实现 想要的功能。
+      def paint(self,painter,option,widget):
+        ...
+        elif self.mType ==ItemType.ITEM_WRITE: # 手写图元
+            #绘制 外框 
+            painter.setPen(self.write_item_pen_wk)
+            painter.drawRect(self.rect)
+            pass
+
+        elif self.mType == ItemType.ITEM_POLYGON: # 封闭多边形
+            # 绘制 外框
+            painter.setPen(self.polygon_item_pen_wk)
+            painter.drawRect(self.rect)
+
+            
+            if self.isSelected():
+                # 绘制 多边形顶点
+                if len(self.polygon_list):
+                    for polygon_handle in self.polygon_list:
+                        if polygon_handle.hshape==HandleShape.HANDLE_SHAPE_RECT:
+                            painter.drawRect(polygon_handle.rect)
+                        elif polygon_handle.hshape==HandleShape.HANDLE_SHAPE_CIRCLE:
+                            painter.drawEllipse(polygon_handle.rect)
+
+                # 填充  变色
+                if self.current_polygon_handle:
+                    # print('填充 变色')
+                    painter.save()
+                    painter.setBrush(Qt.green)
+                    painter.drawRect(self.current_polygon_handle.rect)
+                    painter.restore()
+
+            # 如果 多边形 处于 非编辑状态 即 缩放状态 ，
+            # 且 宽高等效比 存在 ，
+            # 那 就用 等效比 处理 每个点 的 位置，即让图形 实现缩放。
+            if not self.polygon_edit:
+                if len(self.polygon_point_dx_list):
+                    for i,polygon_handle in enumerate(self.polygon_list):
+                        pos_x=self.polygon_point_dx_list[i]*self.rect.width()+self.rect.center().x()
+                        pos_y=self.polygon_point_dy_list[i]*self.rect.height()+self.rect.center().y()
+                        pos=QPointF(pos_x,pos_y)
+                        polygon_handle.set_pos(pos)
+                        # 多边形 path 节点 跟随 同下标控制节点
+                        self.polygon_path.setElementPositionAt(i,pos_x,pos_y)
+                        # 开始点 就是 结束点
+                        if i==0:
+                            self.polygon_path.setElementPositionAt(len(self.polygon_list),pos_x,pos_y)
+                        # 重设 item 的 path对象 
+                        self.polygon_item.setPath(self.polygon_path) 
+                    pass
+                pass
+
+        self.update()
+
+        super().paint(painter,option,widget)

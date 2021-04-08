@@ -1,0 +1,154 @@
+
+1. 从 三体（01-03）科学边界【无删减完整版】.mp4 中 提取音频 命名为 santi(01-03).mp3 :
+    
+    1. ffmpeg -i 三体（01-03）科学边界【无删减完整版】.mp4 -vn -c:a copy santi(01-03).mp3
+
+        -vn 关闭视频 -c:a copy拷贝音频
+        ffmpeg -i 三体（01-03）科学边界【无删减完整版】.mp4 -vn -c:a libmp3lame -y  三体（01-03）科学边界【无删减完整版.mp3
+
+    报错：
+        [NULL @ 000002da300fd380] Unable to find a suitable output format for 'santi'
+        santi: Invalid argument
+
+    原因：不支持 santi(01-03).mp3 有(01-03)的命名方式，导致不符合格式。
+
+    2. 改文件名：
+     ffmpeg -i 三体（01-03）科学边界【无删减完整版】.mp4 -vn -c:a copy santi.mp3
+
+    报错：
+        [mp3 @ 00000184ec0bd1c0] Invalid audio stream. Exactly one MP3 audio stream is required.
+        Could not write header for output file #0 (incorrect codec parameters ?): Invalid argument
+
+    原因：
+        源文件 音频 不是 mp3 编码 ，所以要保存为mp3封装格式，就会报错。
+        要将音频转换为mp3格式，就不能用 -c:a copy：
+            可用 
+
+    3. 加编码器 -c:a libmp3lame 
+     ffmpeg -i 三体（01-03）科学边界【无删减完整版】.mp4 -vn -c:a libmp3lame -y santi.mp3 
+     成功。
+     用 ffmpeg -i .\santi.mp3 -hide_banner 查看转换后的文件信息
+
+     -hide_banner 加该参数 可以 屏蔽 一大堆ffmpeg的介绍信息
+     返回的格式信息为：
+     Audio: mp3, 44100 Hz, stereo, fltp, 128 kb/s
+     音频格式为mp3 采样率 44100Hz 立体声stereo  音频码率为 128 kb/s
+
+     文件大小为：37.6MB
+
+    4. 不进行转码，提取音频
+
+     先查看源音频
+     ffmpeg -i 三体（01-03）科学边界【无删减完整版】.mp4 -hide_banner
+     发现其音频编码为 aac
+
+      Stream #0:1(und): Audio: aac (LC) (mp4a / 0x6134706D), 44100 Hz, stereo, fltp, 95 kb/s (default)
+
+     直接用aac封装格式既可
+
+        ffmpeg -i 三体（01-03）科学边界【无删减完整版】.mp4 -vn -c:a copy santi.aac -hide_banner
+    
+     成功 非常快。
+    
+     查看转换后的文件
+      Stream #0:0: Audio: aac (LC), 44100 Hz, stereo, fltp, 96 kb/s
+
+     文件大小：28.9MB
+     比转码的体积要小。
+
+    
+    通过以上对比发现，不转码，抓取音频快。但要注意封装的格式要可以承载源音频格式。
+
+
+2. 给从b站下载的视频和音频合二为一。
+
+    从音频mp4文件中提取音频，然后 和下载的视频mp4文件合为一个文件。
+
+    由于源音频文件的音频格式为aac，所以容器格式为aac， 321music.aac
+
+    ffmpeg -i '.\321行代码，来做一个网易云音乐吧(上)_哔哩哔哩 (゜-゜)つロ 干杯~-bilibili_2.mp4' -vn -c:a copy  321music.aac  -hide_banner
+
+    合二为一
+
+    ffmpeg -i 321music.aac -i 3212.mp4  321行.mp4
+
+    文件大小：
+        音频源mp4文件： 5.11MB  
+        提取后的音频文件 321music.aac 大小为：  5.13MB
+
+        视频源mp4文件：16.8MB
+        合二为一的mp4文件321行.mp4大小：16.4MB
+
+    可见：
+    经过合二为一的视频还没有视频源mp4文件大，查看ffmpeg的压制过程，使用了libx264编码的压缩功能，大大节约了体积。
+    我们没有输入任何视频的编解码参数，ffmpeg照样能压缩的非常好，看不出任何画质的损失。
+
+    合并的音频（321music.aac）会取代原来视频(3212.mp4)里的音频。
+
+
+
+3. 截取片段
+    截取".\1八卦这么神奇，它到底是什么.mp4"的1分到2分20秒的片段
+     ffmpeg -ss 0:1:0 -to 0:3:20 -i ".\1八卦这么神奇，它到底是什么.mp4" -c copy ok.mkv
+     ffmpeg -ss 0:1:0 -to 0:3:20 -i ".\1八卦这么神奇，它到底是什么.mp4" -c copy ok.mp4
+     mkv封装格式能支持大多数的视频编码和音频编码，并且大多数播放器都支持该封装格式，
+     因此网站还有很多视频软件都支持mkv格式。
+     ok.mkv 47.2MB
+     ok.mp4 47.3MB
+
+    截取的时间 前面都提前了两秒即 -ss 0:0:58 
+    结束的时间 是对的 -to 0:3:20
+
+    ffmpeg -ss 0:1:0 -to 0:3:20 -i ".\1八卦这么神奇，它到底是什么.mp4" -c copy -copyts ok1.mp4 -hide_banner
+    ffmpeg -ss 0:1:0 -i ".\1八卦这么神奇，它到底是什么.mp4" -to 0:3:20  -c copy -copyts ok2.mp4 -hide_banner
+
+    加了 -copyts 和不加 没有什么不同，没有让时间更精准。
+
+    参考
+    1 使用开始和停止时间剪下一段媒体文件
+        可以使用开始和停止时间来剪下一段视频为小段剪辑，我们可以使用下面的命令。
+
+        $ ffmpeg -i input.mp4 -ss 00:00:50 -codec copy -t 50 output.mp4
+        在这里，
+
+        –s – 表示视频剪辑的开始时间。在我们的示例中，开始时间是第 50 秒。
+        -t – 表示总的持续时间。
+        当你想使用开始和结束时间从一个音频或视频文件剪切一部分时，它是非常有用的。
+
+        类似地，我们可以像下面剪下音频。
+
+        $ ffmpeg -i audio.mp3 -ss 00:01:54 -to 00:06:53 -c copy output.mp3
+
+    实践截取音频：
+        1. 按时间点截取 -ss 开始时间点 -to 结束时间点
+            C:\Users\69598\Downloads\Video>ffmpeg -i  santi.aac -ss 00:00:00 -to 00:03:20 -c copy -y st2.aac
+            [aac @ 0000029a4885d740] Estimating duration from bitrate, this may be inaccurate
+            Input #0, aac, from 'santi.aac':
+              Duration: 00:41:50.17, bitrate: 96 kb/s
+                Stream #0:0: Audio: aac (LC), 44100 Hz, stereo, fltp, 96 kb/s
+            Output #0, adts, to 'st2.aac':
+              Metadata:
+                encoder         : Lavf58.45.100
+                Stream #0:0: Audio: aac (LC), 44100 Hz, stereo, fltp, 96 kb/s
+            Stream mapping:
+              Stream #0:0 -> #0:0 (copy)
+            Press [q] to stop, [?] for help
+            size=    2403kB time=00:03:19.99 bitrate=  98.4kbits/s speed=6.94e+03x
+            video:0kB audio:2403kB subtitle:0kB other streams:0kB global headers:0kB muxing overhead: 0.000000%
+    
+        2. 按持续时间截取  -ss 开始时间点 -t 持续时间
+            C:\Users\69598\Downloads\Video>ffmpeg -i  santi.aac -ss 00:00:00 -t 60  -c copy -y st.aac
+            [aac @ 000001f2b9e5d740] Estimating duration from bitrate, this may be inaccurate
+            Input #0, aac, from 'santi.aac':
+              Duration: 00:41:50.17, bitrate: 96 kb/s
+                Stream #0:0: Audio: aac (LC), 44100 Hz, stereo, fltp, 96 kb/s
+            Output #0, adts, to 'st.aac':
+              Metadata:
+                encoder         : Lavf58.45.100
+                Stream #0:0: Audio: aac (LC), 44100 Hz, stereo, fltp, 96 kb/s
+            Stream mapping:
+              Stream #0:0 -> #0:0 (copy)
+            Press [q] to stop, [?] for help
+            size=     721kB time=00:00:59.97 bitrate=  98.5kbits/s speed=6.27e+03x
+            video:0kB audio:721kB subtitle:0kB other streams:0kB global headers:0kB muxing overhead: 0.000000%
+

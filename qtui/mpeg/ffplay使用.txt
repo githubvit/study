@@ -1,0 +1,38 @@
+ffplay 是一款很牛的播放器，能解码大多数的音视频。
+ FFplay使用指南 https://blog.csdn.net/wishfly/article/details/44222297
+While playing:
+q, ESC              quit
+f                   toggle full screen
+p, SPC              pause
+m                   toggle mute
+9, 0                decrease and increase volume respectively
+/, *                decrease and increase volume respectively
+a                   cycle audio channel in the current program
+v                   cycle video channel
+t                   cycle subtitle channel in the current program
+c                   cycle program
+w                   cycle video filters or show modes
+s                   activate frame-step mode
+left/right          seek backward/forward 10 seconds or to custom interval if -seek_interval is set
+down/up             seek backward/forward 1 minute
+page down/page up   seek backward/forward 10 minutes
+right mouse click   seek to percentage in file corresponding to fraction of width
+left double-click   toggle full screen
+
+播放快捷键：
+    q, ESC              退出
+    f,左键双击          全屏切换
+    p, 空格             暂停
+    m                   静音切换
+    9,0                 音量加减 （数字键盘不行）
+    左右箭头             快进/退 10 秒
+    上下箭头             快进/退 1  分钟
+    翻页                快进/退 到下或上一章 如果只有一章，则 快进/退 10  分钟
+    右键                到鼠标右击位置
+    
+1. 以 320 x 240 的大小播放 test.mp4
+ffplay .\ok.mp4 -x 320 -y 240 
+
+2. 播放完成后自动退出
+ffplay .\ok.mp4 -autoexit -x 320 -y 240 
+

@@ -1,0 +1,5 @@
+<RCC>
+  <qresource prefix="start_fm">
+    <file>resource/img/fm1.png</file>
+  </qresource>
+</RCC>

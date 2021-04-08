@@ -33,7 +33,7 @@ class Window(QWidget):
         te.setPlaceholderText('请输入个人简历')
         # te.setText('xxx')
         # self.文本内容的设置()
-        self.文本光标插入操作()
+        # self.文本光标插入操作()
         # self.文本格式设置和合并()
         # self.内容和格式的获取()
         # self.文本选中()
@@ -53,7 +53,7 @@ class Window(QWidget):
         # self.滚动到锚点()
         # self.只读设置()
         # self.tab功能测试()
-        # self.打开超链接()
+        self.打开超链接()
         # self.信号测试()
         pass
     def 信号测试(self):

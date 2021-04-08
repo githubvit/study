@@ -5,6 +5,12 @@ app=QApplication([])
 
 # 鼠标跟踪
 class MyWidget(QWidget):
+    def __init__(self,parent=None):
+        # 2.2 继承父类初始化
+        super().__init__(parent) 
+        #设定鼠标跟踪
+        # self.setMouseTracking(True)
+        # self.setWindowFlag(Qt.FramelessWindowHint)#无边框
     # 定义鼠标移动具体函数
     def mouseMoveEvent(self,mv):
         # QMouseEvent
@@ -23,7 +29,7 @@ window.resize(500,500)
 window.move(600,300)
 
 # 3 鼠标跟踪
-# window.setMouseTracking(True) #设定鼠标跟踪
+ 
 # 查看是否设置了鼠标跟踪
 print(window.hasMouseTracking())
 # 设定了鼠标跟踪，则不用按住鼠标移动，只要鼠标在窗体内移动，mouseMoveEvent移动事件就会响应
@@ -31,7 +37,19 @@ print(window.hasMouseTracking())
 
 
 # 1 设定鼠标形状 WaitCursor\BusyCursor\UpArrowCursor\PointingHandCursor
-# 默认是ArrowCursor
+
+# 窗口拉伸鼠标形状
+# 精确选择 Qt.CrossCursor 
+# 水平分割 Qt.SplitHCursor 即左右拉伸
+# 垂直分割 Qt.SplitVCursor 即上下拉伸
+# 水平拉伸 Qt.SizeHorCursor
+# 垂直拉伸 Qt.SizeVerCursor
+# 左上右下拉伸 Qt.SizeFDiagCursor
+# 右上左下拉伸 Qt.SizeBDiagCurso
+# 移动光标  Qt.SizeAllCursor
+# 默认是 Qt.ArrowCursor
+# 常用鼠标形状 http://blog.sina.com.cn/s/blog_a6fb6cc90101fsoe.html
+
 # window.setCursor(Qt.WaitCursor)
 
 # 设定控件鼠标形状
@@ -40,7 +58,8 @@ lb.setText('鼠标变禁止')
 lb.resize(300,300)
 lb.setStyleSheet('background-color:cyan')
 lb.setContentsMargins(100,0,0,0)
-lb.setCursor(Qt.ForbiddenCursor)
+# lb.setCursor(Qt.ForbiddenCursor)
+lb.setCursor(Qt.CrossCursor)
 
 # 用图片自定义鼠标形状
 # 获取图片

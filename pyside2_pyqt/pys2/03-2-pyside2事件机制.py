@@ -4,6 +4,9 @@
 # 每个程序app，有两个消息队列
     # 系统产生的消息队列：接收系统产生的消息，比如 鼠标点击、键盘输入等产生的消息。
     # 程序内部的消息队列：接收程序内部产生的消息，比如 定时器、绘屏事件等。
+
+    # 事件传递顺序 os→app→子控件→父控件→...
+    
 # 消息循环
     # 当执行 app.exec_() 就进入消息循环
     # 不停的顺序监听两个队列是否有消息 
@@ -15,6 +18,7 @@
         # recevier:接收控件QObject，evt：事件对象QEvent
     # 第二层接收控件的event(evt)：最终要根据evt的事件类型，由recevier的event(evt)方法来分发 给该事件类型的具体函数evtfunc(*args,**kwargs)
     # 第三层接收控件的evtfunc(*args,**kwargs)：由这个具体函数产生相应的发射信号pressed、clicked...。
+
 
 from PySide2.QtWidgets import *
 from PySide2.QtCore import * #QEvent对象

@@ -50,6 +50,20 @@ class Window(QWidget):
         # # 从 选项页3 变为 教育程度
         # self.tab.setTabText(2,'教育程度')
 
+        # 选项页的关闭
+
+        # 为选项页添加 可关闭按钮
+        tab.setTabsClosable(True)
+        # 点击关闭按钮 
+        # 会发出 tabCloseRequested信号 并 传递 int 参数，int 是选项页的索引，从右从0开始，移动选项卡则选项页的索引会变
+        # 利用该信号 调用 removeTab(int) 方法 即可关闭 该选项页
+        # tab.tabCloseRequested.connect(self.close_tab)
+        tab.tabCloseRequested.connect(lambda v: self.tab.removeTab(v)) # 用匿名函数更方便
+
+    # 关闭选项页
+    def close_tab(self,v):
+        self.tab.removeTab(v)
+        
     # 为每一个选项页定制一个方法
     def tab1_ui(self):
         # 放个表单

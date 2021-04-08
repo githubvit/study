@@ -1,0 +1,318 @@
+⭐ 要安装解码器 
+详见：音乐播放器-多媒体基础m_play.py  file:///d:/pyj/st/study/qtui/mpeg/多媒体基础1-音乐播放器m_play.py
+
+file协议的基本格式如下：
+
+file:///文件路径
+
+# 播放 aac 文件遇到如下错误 
+# DirectShowPlayerService::doRender: Unknown error 0x80040266.
+# 原因：没有解码插件 
+# 解决：
+#   下载并安装万能解码器 下载并安装  LAVFilters：https://github.com/Nevcairiel/LAVFilters/releases
+#   下载了.exe版本，直接按步骤安装，即可，不需要重启电脑。
+
+解码器路径：D:\pyj\st\study\qtui\mpeg\resource\util\LAVFilters-0.74.1-Installer.exe
+
+
+参考1：----------------------------------------------------------------------------------------------------------
+
+【Qt Multimedia】用QMediaPlayer实现简易播放器（1）总览Qt Multimedia
+
+    当初找的时候可真是费了番功夫……找了n天博客没找到几篇详细说的，都语焉不详再或者就啥都不说直接上代码。。。于是恶补英文官方文档，
+    才多少入了点Qt多媒体编程的门。如果后来的人看了这篇博客能更方便地去使用Qt，幸甚至哉。
+
+    Qt Multimedia是Qt的一个重要模块，它提供了许多c++类和QML模块来进行多媒体内容的展示和处理，还提供了一些访问录音机和摄像头的必要的api。
+    本篇中，主要讲述的是C++的实现，而不是QML。
+
+
+    想要使用Qt Multimedia模块，必须要先在项目的.pro文件中加入下面一行代码
+
+        1 QT += multimedia multimediawidgets
+
+    代表在项目中导入该模块。
+
+    之后，要使用具体的类时，只需要在头文件中加上声明
+
+        1 #include <QtMultimedia>
+        2 #include <QtMultimediaWidgets>
+    即可。
+
+    本教程中，主要使用下面的类：
+
+        类名	            主要作用
+
+        QMediaPlayer	    从源文件播放媒体。最常用的类，如果你想实现一个播放器，这会是你理想的内核。
+                            它可以非常非常方便地播放指定的文件，并提供了很多设置和获取信息的接口。
+
+        QMediaPlaylist	    它是一个封装好的列表类。储存着每一个媒体文件的信息，并且提供了添加，删除，储存，读取媒体的方法，
+                            甚至是播放方式都可以指定，非常方便。
+
+        QVideoWidget	    用来播放视频的控件，可以理解为是QMediaPlayer的一个输出端。
+
+    在下一篇博客中，我们将对这三个类分别进行解析。
+
+
+【Qt Multimedia】用QMediaPlayer实现简易播放器（2）详解QMediaPlayer、QVideoWidget、QMediaPlaylist
+
+    一.QMediaPlayer
+        QMediaPlayer集成了底部包括音频输出和音频文件读取等等操作，是一个高层次的，封装好的播放器内核，通过调用它，你可以实现输入任意格式的视频、音频播放，并实现对其播放状态的调整。
+
+        下面我们用QMediaPlayer来播放一段音乐，顺便体会一下它有多么方便。
+
+            1 player = new QMediaPlayer;
+            2 player->setMedia(QMediaContent(QUrl::fromLocalFile("/Users/me/Music/coolsong.mp3")));
+            3 player->play();
+        
+        第一步：创建QMediaplayer对象；第二步：设置当前播放的媒体文件；第三步：播放。
+        三行代码足矣。
+
+        可能有细心的朋友发现QUrl后面跟着fromLocalFile，对的，这是本地的媒体文件。那么网络上的呢？
+        答案是：也可以！而且不需要去考虑诸如音频流的输入和处理问题，QMediaPlayer已经帮我们做好了。
+
+        下面我们就来详细的看一下QMediaPlayer能够帮助我们做什么。
+        首先，看一下QMediaPlayer中的几个重要属性
+
+            属性	        类型	            说明
+            duration	    qint64	            当前播放媒体对象的持续时间（毫秒）
+            mediaStatus	    MediaStatus	        当前媒体的状态，枚举类型，之后说明
+            state	        State	            当前的播放状态，枚举类型，之后说明
+            muted	        bool	            是否静音
+            playlist	    QMediaPlaylist	    当前的播放列表，之后说明
+            position	    qint64	            保存当前播放的进度（毫秒）
+            volume	        int	                当前的音量
+
+        这些属性都可以通过get和set方法来进行设置和获取。例如获取媒体对象播放进度的方法是QMediaPlayer::position()。
+        该方法返回一个qint64（64位整数，可以近似理解为int）类型。设置进度的方法是QMediaPlayer::setPosition(qint64 position)。
+
+        设置当前播放媒体的方法是QMediaPlayer::setMedia(QMediaContent &media,QIODevice *stream = QNULLPTR)。
+        第二个参数默认即可。第一个参数是一个QMediaContent对象，封装了媒体文件信息。这个对象可以通过QMediaContent(QUrl url)来创建。
+        QUrl可以是一个本地的文件，也可以是网络上的文件。
+
+        切换播放状态的的方法有QMediaPlayer::play(),QMediaPlayer::pause,QMediaPlayer::stop();三个，看名字就能知道什么意思对吧。
+
+        再说说QMediaPlayer中定义的两个重要的枚举类型State和MediaStatus
+        State包含着当前的播放状态，有 { StoppedState, PlayingState, PausedState }三种状态，可以通过state()函数获取。
+        MediaStatus包含当前媒体文件的有效性，有 { UnknownMediaStatus, NoMedia, LoadingMedia, LoadedMedia, …, InvalidMedia }等状态，
+        可以通过mediaStatus()方法获取。
+        
+
+        
+        
+    
+    二.QVideoWidget
+        QVideoWidget是一个用来展示视频的控件。
+        要使用它，需要先定义一个QMediaPlayer，然后将QMediaPlayer的VideoOutput设置为QVideoWidget对象即可。
+
+            1 player = new QMediaPlayer;
+            2 
+            3 player->setMedia(QMediaContent(QUrl("http://example.com/myclip2.mp4")));
+            4 videoWidget = new QVideoWidget;
+            5 player->setVideoOutput(videoWidget);
+            6 
+            7 videoWidget->show();
+            8 player->play();
+
+        同样从属性去解读这个类
+
+            属性	        类型	    说明
+            brightness	    int	        亮度
+            hue	            int	        色调
+            contrast	    int	        对比度
+            fullScreen	    bool	    是否全屏
+            saturation	    int	        饱和度
+
+        和QMediaPlayer一样，通过设置这些属性就可以实现相应的功能……
+        好的解读完成……
+
+        没错就那么简单
+    
+    三.QMediaPlaylist
+        QMediaPlaylist是一个列表，它可以保存媒体文件，包括媒体路径等信息，它具有着列表的性质，
+        比如添加删除插入等，但它能做的，比单纯的储存要多得多。
+        设置播放顺序，对播放的控制，保存到本地，从本地读取，都可以很方便地实现。
+
+        用QMediaPlaylist添加媒体文件可以使用addMedia方法。方法接收一个QMediaContent的对象引用。
+
+            1 playlist->addMedia(QMediaContent(QUrl("http://example.com/movie1.mp4")));
+            2 playlist->addMedia(QMediaContent(QUrl("http://example.com/movie2.mp4")));
+            3 playlist->addMedia(QMediaContent(QUrl("http://example.com/movie3.mp4")));
+
+        此时新添加的媒体被插入到列表的最后。
+
+        同样的也有指定位置的插入方法。除了QMediaContent对象引用，还需要指定插入位置。
+
+            1 playlist->insertMedia(2,QMediaContent(QUrl("http://example.com/movie4.mp4")));
+
+
+        方法clear()可以清除所有的媒体对象。
+        而希望精确地删除媒体，就要用到removeMedia方法。方法有两个版本，第一个版本接收一个int变量作为被删除媒体的位置，另一个版本接收两个int变量，删除这两个索引之间的所有媒体对象。
+
+            1 playlist->removeMedia(3);//删除位置索引为3的媒体对象
+            2 playlist->removeMedia(0,2);//删除位置索引为0,1,2的媒体对象;
+            3 playlist->clear();//清空列表
+
+        这是一些很简单的list的操作。下面讲讲身为Playlist的高级操作。
+        我们知道，现在的播放器一般都有选择播放顺序的功能，除了最基本的顺序播放，还有单曲循环、随机播放等模式。
+        现在只需要调用setPlaybackMode(PlaybackMode mode)这个方法，就可以设置播放顺序。
+        方法接收枚举类型PlaybackMode作为播放顺序。
+       
+
+            名称	                            枚举值	    说明
+            QMediaPlaylist::CurrentItemOnce	    0	        单曲播放
+            QMediaPlaylist::CurrentItemInLoop	1	        单曲循环
+            QMediaPlaylist::Sequential	        2	        顺序播放
+            QMediaPlaylist::Loop	            3	        列表循环
+            QMediaPlaylist::Random	            4	        随机播放
+
+        调用next()和previous()方法，可以实现按照播放模式进行当前播放的手动切换。
+        当一个媒体播放完毕时，会自动地调用next()方法。
+
+        将一个QMediaPlaylist设置进QMediaPlayer
+
+            1 player.setPlaylist(playlist);
+            2 player.play();//播放playlist当前媒体
+
+
+参考2： ----------------------------------------------------------------------------------------------------------
+Qt 之QMediaPlayer类详解 查询用
+
+    来自 https://blog.csdn.net/zwlq1314521/article/details/41279001/ 的资料
+
+    属性Properties：
+            
+        .audioAvailable : const bool     音频是否有效   notifier信号 void audioAvailableChanged(bool available)
+        
+        .bufferStatus : const int     This property holds the percentage of the temporary buffer filled before playback begins or resumes, from (empty) to (full)
+        
+        .currentMedia : const QMediaContent  当前正在播放的媒体的内容
+        
+        .duration : const qint64    当前媒体的duration  notifier信号   void durationChanged(qint64 duration)
+        
+        .error : const QString    a string describing the last error condition
+        
+        .media : QMediaContent   a string describing the last error condition
+        
+        .mediaStatus : const MediaStatus 当前媒体流的状态   notifier信号 void mediaStatusChanged(QMediaPlayer::MediaStatus status)
+        
+        .muted : bool    是否静音 isMuted();setMuted()  notifier信号  void mutedChanged(bool muted)
+        
+        .playbackRate : qreal  播放速率；1是正常速率，大于1加快播放  void setPlaybackRate(qreal rate)；notifier信号 void playbackRateChanged(qreal rate)
+        
+        .position : qint64  决定当前视频的播放位置（ms） void setPosition(qint64 position) notifier信号 void positionChanged(qint64 position)
+        
+        .seekable : const bool may change across the life time of the QMediaPlayer object, use the seekableChanged() signal to monitor changes.
+        
+        .state : const State 播放器的播放状态  notifer signal void stateChanged(QMediaPlayer::State state)
+        
+        .videoAvailable : const bool
+        
+        .volume : int  The playback volume is linear in effect and the value can range from 0 - 100  notifer signal void volumeChanged(int volume)
+
+
+    公有成员函数
+
+            
+         	                    QMediaPlayer(QObject * parent = 0, Flags flags = 0)
+        
+         	                    ~QMediaPlayer()
+        
+        int	                    bufferStatus() const
+        
+        QMediaContent	        currentMedia() const
+        
+        QNetworkConfiguration	currentNetworkConfiguration() const
+        
+        qint64	                duration() const
+        
+        Error	                error() const
+        
+        QString	                errorString() const
+        
+        bool	                isAudioAvailable() const
+        
+        bool	                isMuted() const
+        
+        bool	                isSeekable() const
+        
+        bool	                isVideoAvailable() const
+        
+        QMediaContent	        media() const
+        
+        MediaStatus	            mediaStatus() const
+        
+        const                   QIODevice *	mediaStream() const
+        
+        qreal	                playbackRate() const
+        
+        QMediaPlaylist *	    playlist() const
+        
+        qint64	                position() const
+        
+        void	                setVideoOutput(QVideoWidget * output) Attach a QVideoWidget video output to the media player ，可替换新
+        
+        void	                setVideoOutput(QGraphicsVideoItem * output)
+        
+        void	                setVideoOutput(QAbstractVideoSurface * surface) Sets a video surface as the video output of a media player
+        
+        State	                state() const
+        
+        int	                    volume() const
+
+        
+    QMediaPlayer类中的公有槽：
+        	
+        pause()
+        
+        play() 开始或重新开始播放当前媒体流
+        
+        setMedia(const QMediaContent & media, QIODevice * stream = 0)
+        
+        setMuted(bool muted)
+        
+        setNetworkConfigurations(const QList<QNetworkConfiguration> & configurations)
+        
+        setPlaybackRate(qreal rate)
+        
+        setPlaylist(QMediaPlaylist * playlist)
+        
+        setPosition(qint64 position)
+        
+        setVolume(int volume)
+        
+        stop() Stop playing, and reset the play position to the beginning.
+
+
+    QMediaPlayer类中的信号
+        通过绑定信号，就可以实现对QMediaPlayer状态的监控，比如进度条自动移动等。
+        
+        audioAvailableChanged(bool available)
+        
+        bufferStatusChanged(int percentFilled)
+        
+        currentMediaChanged(const QMediaContent & media)
+        
+        durationChanged(qint64 duration)
+        
+        error(QMediaPlayer::Error error)
+        
+        mediaChanged(const QMediaContent & media)
+        
+        mediaStatusChanged(QMediaPlayer::MediaStatus status)
+        
+        mutedChanged(bool muted)
+        
+        networkConfigurationChanged(const QNetworkConfiguration & configuration)
+        
+        playbackRateChanged(qreal rate)
+        
+        positionChanged(qint64 position)
+        
+        seekableChanged(bool seekable)
+        
+        stateChanged(QMediaPlayer::State state)
+        
+        videoAvailableChanged(bool videoAvailable)
+        
+        volumeChanged(int volume)
+      

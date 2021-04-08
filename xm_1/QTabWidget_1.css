@@ -1,0 +1,64 @@
+/* 网上视频的用法 */
+
+QTabWidget::pane {
+    border-top-width: 1px;
+    border-style: solid;
+    border-color: rgba(69, 104, 220, 0.3);
+    background: transparent;
+}
+
+QTabWidget::tab-bar {
+    background: transparent;
+    subcontrol-position: left;
+}
+
+QTabBar::tab {
+    min-width: 70px;
+    min-height: 30px;
+    background: transparent;
+}
+
+QTabBar::tab:selected {
+    color: rgb(69, 104, 220);
+    background-color: rgba(240, 245, 255, 0.8);
+}
+
+QTabBar::tab:!selected {
+    color: blank;
+    background: transparent;
+}
+
+QTabBar::tab:hover {
+    color: : rgb(69, 104, 220);
+    background-color: rgba(240, 245, 255, 0.8);
+}
+
+
+/* 最后实际的用法 */
+
+
+/* 主窗体保留上边框线 */
+
+QTabWidget::pane {
+    border-top: 1px solid rgba(69, 104, 220, 0.3);
+    background: transparent;
+}
+
+
+/* 窗体标签样式 */
+
+QTabBar::tab {
+    min-width: 70px;
+    min-height: 30px;
+    background: transparent;
+    color: blank;
+}
+
+QTabBar::tab:selected {
+    color: rgb(69, 104, 220);
+    background-color: rgba(240, 245, 255, 0.8);
+}
+
+QTabBar::tab:hover {
+    background-color: rgba(240, 245, 255, 0.8);
+}
