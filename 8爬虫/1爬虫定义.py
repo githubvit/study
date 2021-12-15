@@ -102,9 +102,9 @@
 
 # requests模块 http://www.python3.vip/doc/tutorial/apitest/03/#requests库简介
 
-    requests是代替浏览器客户端用http协议向服务器发送请求和获取响应的模块。
+    requests是 代替浏览器客户端 用http协议向服务器发送请求和获取响应的模块。
     
-    selenium是用程序控制浏览器用http协议向服务器发送请求和获取响应的模块。
+    selenium是 用程序控制浏览器 用http协议向服务器发送请求和获取响应的模块。
 
     requests不需要浏览器。只能模拟浏览器发送http请求，不能模拟人操作浏览器的动作点击、拖拽等等，
     selenium必须要有浏览器，模拟人操作浏览器就用selenium模块。

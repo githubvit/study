@@ -57,7 +57,7 @@ btn.clicked.connect(changeCao)
 
 wd.show()
 # 控件显示完毕之后, 获取的具体位置或者尺寸数据才会正确
-# print(wd.geometry()) #PySide2.QtCore.QRect(101, 131, 500, 500)
+print(wd.geometry()) #PySide2.QtCore.QRect(101, 131, 500, 500)
 # 控件显示完毕之后,setGeometry设置的具体位置或者尺寸数据才会正确
 # wd.setGeometry(0, 0, 150, 150)
 # wd.setGeometry(100, 100, 150, 150)

@@ -18,19 +18,22 @@ import time
 def split_music(input_file,code='copy',output_dir=None):
     # 如果文件存在
     if os.path.exists(input_file):
-        filename=input_file.split('/')[-1].split('.')[0] 
-        filename_suffix=input_file.split('/')[-1].split('.')[-1] 
+        filename=input_file.split('/')[-1].split('.')[0] # 文件名
+        filename_suffix=input_file.split('/')[-1].split('.')[-1] # 后缀名
         # print(filename)
-        if not output_dir:
+        # 输出文件夹
+        if not output_dir: #如果没有指定输出文件夹，那么输入文件的文件夹就是输出文件夹
             output_dir=os.path.dirname(input_file)
+        # 输出的编码格式和封装格式
         if 'mp3' in code:
             output_file=f'{output_dir}/{filename}.mp3'
         elif 'aac' in code:
             output_file=f'{output_dir}/{filename}.aac'
         else:
-            # 使用源文件扩展名
+            # 使用源文件扩展名封装格式
             output_file=f'{output_dir}/{filename}_music.{filename_suffix}'
         # print(output_file)
+        # 最后 用ffmpeg分割 ∴ 必须装好了ffmpeg，否则用不了
         os.system(f'ffmpeg -i "{input_file}" -vn -c:a {code} -y "{output_file}" -hide_banner')
     else:
         print('文件不存在')

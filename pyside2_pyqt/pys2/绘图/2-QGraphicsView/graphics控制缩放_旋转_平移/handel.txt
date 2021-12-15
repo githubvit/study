@@ -140,10 +140,9 @@
           # 为手写图元 设置 线条 用笔
           self.polygon_item.setPen(self.polygon_item_pen_line)
 
-  
-  初始化时定义编辑开关：手写图元 编辑开关 self.write_edit=False ,封闭多边形编辑开关 self.polygon_edit=False 
+  初始化时定义的不同图元的编辑开关：手写图元 编辑开关 self.write_edit=False ,封闭多边形编辑开关 self.polygon_edit=False 
 
-  定义编辑功能：def edit_write(self),def edit_polygon(self)
+  不同的图元有不同的编辑功能：def edit_write(self),def edit_polygon(self)
     def edit_write(self):
         def start(evt):
             if evt.button()==Qt.LeftButton: 
@@ -262,7 +261,7 @@
 
         return [start,process,end]
   
-  用双击来切换编辑开关：
+  用双击来切换图元编辑开关：
     def mouseDoubleClickEvent(self,evt):
         if evt.buttons() == Qt.LeftButton:
             self.setZValue(self.zValue() + 1)

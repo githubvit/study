@@ -13,7 +13,7 @@ def open_page(url):
     # 产生会话对象 即携带cookie
     s=requests.Session()
     print("session",)
-    # 请求头 都必须是str
+    # 请求头 用字典构造请求头 则requests库会将该字典转换为urlencoded编码（?key1=v1&key2=v2...）写在请求地址后面
     response=s.get(url,headers={
         'User-Agent':'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.100 Safari/537.36'
     })

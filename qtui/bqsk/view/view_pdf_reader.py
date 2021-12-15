@@ -41,7 +41,7 @@ class PdfReaderUi(QWidget,Ui_Form):
 
         # 用快捷键 进行缩放
         # 注意 ： 一定要把designer定义的QSCrollArea 中 的属性 widgetTesizable 默认的勾 取消
-        # self.pdf_sca.setWidgetResizable(False)
+        self.pdf_sca.setWidgetResizable(False)
         # 定义缩放快捷键
         self.minus_shortcut=QShortcut(QKeySequence('Ctrl+-'),self) # 快捷键 父对象 缩小
         self.minus_shortcut.activated.connect(self.zoom_out)

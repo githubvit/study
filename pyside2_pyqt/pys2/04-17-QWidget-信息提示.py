@@ -26,6 +26,14 @@ lb.setToolTipDuration(2000)
 # 3 帮助提示 这是啥提示
 window.setWindowFlags(Qt.WindowContextHelpButtonHint)#首先设置样式 出现“❓”
 lb.setWhatsThis('帮助提示')#再设置帮助提示。 使用方式为：点击“❓”，移动到有帮助提示的标签（光标样式会变成 箭头+“❓”），点击。弹出 帮助提示
+
+btn=QPushButton(window)
+btn.setText('关闭')
+btn.move(50,100)
+btn.setStatusTip('点击关闭-按钮状态栏提示')
+btn.clicked.connect(window.close)
+
+
 window.show()
 
 app.exec_()

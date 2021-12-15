@@ -46,7 +46,7 @@
                 
                 libvpx：谷歌的 VP8 和 VP9 编码器
                 
-                libaom：AV1 编码器
+                libaom：AVI 编码器
                 
             音频编码器如下：
 
@@ -224,7 +224,7 @@
                 ◼ -ar 设定采样率
                 ◼ -ac 设定声音的Channel数 声道 -ac 1 单声道 人声用单声道就够了， -ac 2 立体声
                 ◼ -c:a  设定声音编解码器，如果用copy表示原始编解码数据必须被拷贝。
-                ◼ -an 不处理音频
+                ◼ -an 去除音频
                 ◼ -af 音频过滤器
 
             三、视频参数：
@@ -233,7 +233,7 @@
                 ◼ -b:v 视频码率
                 ◼ -r 设定帧速率
                 ◼ -s 设定画面的宽与高
-                ◼ -vn 不处理视频
+                ◼ -vn 去除视频
                 ◼ -aspect aspect 设置横纵比 4:3 16:9 或 1.3333 1.7777
                 ◼ -vcodec 设定视频编解码器，如果用copy表示原始编解码数据必须被拷贝。
                 ◼ -vf 视频过滤器 滤镜 有上百种 比如 裁剪画面 缩放画面
@@ -245,6 +245,7 @@
 四、常见用法
 
     下面介绍 FFmpeg 几种常见用法。
+    参考：https://www.youtube.com/channel/UCAxM536O_1ls-nNnO8I0HOA
 
         a. 把大体积的视频压小：
             节约存储、节约带宽
@@ -426,8 +427,6 @@
 
                     ffmpeg -i in.mkv -c:v libx264 -crf 17 -preset 2 -c:a aac -b:a 320k out.mp4
 
-
-
         b. 改变格式：
             以便满足其他软件、硬件的需要；
             或是使用新的编解码器，以获得更高的压缩比，达到减小体积，节约存储和带宽的目的。
@@ -447,7 +446,7 @@
 
 
                 比如：
-                    把一段1980*800的h264的mkv片子（source.mkv），高度方向去掉140的黑边，再缩放到高度480，宽度自动。
+                    把一段1920*1050的h264的mkv片子（source.mkv），高度方向去掉140的黑边，再缩放到高度480，宽度自动-2。
                     然后转换为视频编码为h265,音频编码为mp3，容器格式还是mkv的视频(ok.mkv)。
 
                     ffmpeg -i source.mkv -vf crop=1920:800:0:140,scale=-2:480 -c:v libx265 -c:a libmp3lame -y ok.mkv
@@ -543,8 +542,49 @@
                   ffmpeg -i source.mp4 -ss 0:4:30  -to 0:10:30  -c copy ok.mkv 
 
             合并文件：
-                将多个文件合为一个
-                ffmpeg -i "concat:01.mp4|02.mp4|03.mp4" -c copy out.mp4
+                方法一：FFmpeg concat 协议，文件分隔符 ‘|’ 前后不能有空格*****。
+                    ffmpeg -i "concat:01.mp4|02.mp4|03.mp4" -c copy out.mp4
+                
+                方法二：FFmpeg concat 分离器
+                    需要 FFmpeg 1.1 以上版本。先创建一个文本文件filelist.txt：文件名不用引号。
+                        file input1.mkv
+                        file input2.mkv
+                        file input3.mkv
+                    然后：
+                        ffmpeg -f concat -i filelist.txt -c copy output.mkv
+
+                    如果文件名有奇怪的字符，就要用 英文单引号“'”,而不能用英文双引号，否则在合并时报错：]Impossible to open。
+                        file 'input1.mkv'
+                        file 'input2.mkv'
+                        file 'input3.mkv'
+                    并且在合并时要加参数 -safe 0, 不然会报错： Unsafe file name
+                        ffmpeg -f concat -safe 0 -i filelist.txt -c copy output.mkv
+
+                方法三：转码+合并 使用 FFmpeg concat 过滤器重新编码（有损）
+                    ffmpeg -i input1.mp4 -i input2.webm -i input3.avi -filter_complex '[0:0] [0:1] [1:0] [1:1] [2:0] [2:1] concat=n=3:v=1:a=1 [v] [a]' -map '[v]' -map '[a]' <编码器选项> output.mkv
+
+                    如你所见，上面的命令合并了三种不同格式的文件，FFmpeg concat 过滤器会重新编码它们。注意这是有损压缩。
+                    [0:0] [0:1] [1:0] [1:1] [2:0] [2:1] 
+                        分别表示第一个输入文件的视频、音频、第二个输入文件的视频、音频、第三个输入文件的视频、音频。
+                    concat=n=3:v=1:a=1 
+                        表示有三个输入文件，输出一条视频流和一条音频流。
+                    [v] [a] 就是得到的视频流和音频流的名字，
+                    注意在 bash 等 shell 中需要用引号，防止通配符扩展。
+
+                    实例：
+                        对四个输入的音频使用concat过滤器进行转码+合并。
+
+                        ffmpeg -i sbq419.m4a -i sbq420.m4a -i sbq421.m4a -i sbq422.m4a -filter_complex '[0:0] [1:0] [2:0] [3:0] concat=n=4:v=0:a=1 [a]' -map '[a]' -vn -c:a libmp3lame -y sbq19_22_1.mp3
+                    
+                        ffmpeg -i sbq419.m4a -i sbq420.m4a -i sbq421.m4a -i sbq422.m4a      ## 四个输入文件
+                        -filter_complex '[0:0] [1:0] [2:0] [3:0] concat=n=4:v=0:a=1 [a]'    ## 使用concat过滤器合并成0个视频1个音频:只选择四个输入文件的0#音轨 不需要视频
+                        -map '[a]'          ## 只选择音轨
+                        -vn -c:a libmp3lame ## 转码： 编码器选项 去掉视频 -vn 音频编码使用mp3编码器 -c:a libmp3lame 进行转码
+                        -y sbq19_22_1.mp3   ## 输出 并覆盖
+
+                    对比转码后再合并：大小几乎一致，略小一点。并没有感觉有损。
+
+
 
             轨道选择 -map
                 比如某部电影有国/粤/英三条音轨。
@@ -591,7 +631,7 @@
                     只能录制视频 没有声音，声音要后期加上。
                     -f 指录屏的格式，对于windows 默认就是gdigrab这个格式。
 
-                    
+               
 
                 直播：
                     利用推流，实现录播，边录边播
@@ -602,7 +642,6 @@
 
 
                 更好的录屏和直播推荐 OBS  Studio 免费开源稳定功能强大。
-
 
     4.1 查看文件信息
         

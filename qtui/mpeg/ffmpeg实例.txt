@@ -152,3 +152,39 @@
             size=     721kB time=00:00:59.97 bitrate=  98.5kbits/s speed=6.27e+03x
             video:0kB audio:721kB subtitle:0kB other streams:0kB global headers:0kB muxing overhead: 0.000000%
 
+
+4. 手机录音的3gpp 音频文件 转换 成 mp3文件 
+    切换到目录：D:\Desktop\转mp3
+    关闭视频 -vn 指定音频编码器为 -c:a libmp3lame  覆盖同名输出文件 -y  
+
+    ffmpeg -i 209.3gpp -vn -c:a libmp3lame -y  1.mp3
+    ffmpeg -i sbq211.3gpp -vn -c:a libmp3lame -y  sbq211.mp3
+
+5. 合并音频、视频 
+    '''
+    从B站下载下来的MP4（dash-flv）格式的视频，音、视频是分开的两个文件，可以用ffmpeg合并。命令如下：
+
+    ffmpeg -i D:\Downloads\video.mp4 -i D:\Downloads\audio.mp4 -c:v copy -c:a aac -strict experimental D:\Downloads\output.mp4
+
+    合并得很快，1小时的视频也就两三分钟。
+    '''
+    参数-c:v copy -c:a aac -strict experimental  
+    -strict experimental：AAC编码器相关
+
+    实例：加参数后 很快 几分钟  比 不加参数快很多 不叫参数 感觉 至少要1小时   
+        F:\sbq\美国小学生> ffmpeg -i '.\1.1【英文字幕】美国小学课堂-Family and Home - 西瓜视频.mp4' -i '.\1.1【英文字幕】美国小学课堂-Family and Home - 西瓜视频_2.mp4' -c:v copy -c:a aac -strict experimental '.\1.1【英文字幕】美国小学课堂-Family and Home.mp4'
+        合并前 视频文件 861MB 音频文件 96MB
+
+        合成后 文件 902MB 几分钟
+        画质 音质 保持和原来一致。
+
+        剪映 文件 1.06GB  60分钟 
+        画质 音质 保持和原来一致。
+
+        万兴喵影 文件 333MB 至少30分钟
+        画质 调低 音质 没动
+
+6. 去除音频 -an 
+    PS F:\dh\AE-90素材\实景合成素材> ffmpeg -i .\跳崖.mp4 -an -c:v copy -y 1.mp4
+
+    去除前 跳崖.mp4 大小3.7M    去除后 1.mp4 3.6M

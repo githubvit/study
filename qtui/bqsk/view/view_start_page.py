@@ -44,7 +44,7 @@ class StartPageUi(QWidget,Ui_Form):
         self.mc_player.setVolume(val)
 
         # 设定要播放的内容
-        m_file=r'C:\Users\69598\Downloads\Video\study1-纯净.aac'
+        m_file=r'F:\song\study1-纯净.aac'
         mc_file=QMediaContent(QUrl.fromLocalFile(m_file))
         # 交给播放器
         self.mc_player.setMedia(mc_file)

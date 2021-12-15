@@ -27,7 +27,7 @@ app.exec_()
 
 # 5. 程序结束后操作 如果有
 # 程序关闭后 阻塞结束 执行如下代码
-if app.arguments()[1]=='2':
+if app.arguments()[1]=='3':
     print('xx')
 else:
     print('oo')

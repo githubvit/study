@@ -19,8 +19,8 @@ from PySide2.QtCore import Qt
     # Qt.ScrollBarAlwaysOff
 
 # te.setVerticalScrollBarPolicy(Qt.ScrollBarAsNeeded) # 默认 需要才显示
-te.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOn)
-te.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOn)
+# te.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOn)
+# te.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOn)
 # te.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
 
 # 2 设置角落控件

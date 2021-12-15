@@ -10,8 +10,8 @@ speech
         1. python之语音识别（speech模块） 
         https://www.cnblogs.com/uniquefu/p/9336793.html
 
-        2. 说说python自带的speech和speech_recognition的使用以及效果 
-        https://www.cnblogs.com/zhe-hello/p/13273523.html
+        2. 干货收藏 | Python语音识别终极指南 
+        https://zhuanlan.zhihu.com/p/92604225
 
         3. 微软SAPI（The Microsoft Speech API）：让你的软件能说会道
         http://www.jizhuomi.com/software/614.html

@@ -1,0 +1,108 @@
+与ffmpeg-readme.txt中的录屏不同 
+一 来自简书
+录屏命令:
+
+        ffmpeg -f avfoundation -i 1 -r 30 out.yuv
+
+        注释：使用avfoundation以30帧的频率进行录屏输出为out.yuv文件
+
+            -f : 指定使用avfoundation采集数据
+            -i ： 指定从哪采集数据，它是一个文件索引号，在MAC上，1代表桌面
+            -r : 指定帧率
+
+        要正确播放需要指定对应的像素格式
+
+            ffplay -s 2880x1800 -pix_fmt uyvy422 out.yuv
+                    
+
+录音：
+        与录屏命令类似：
+
+            ffmpeg -f avfoundation -i :0 out.wav
+                :后的0代表音频设备
+                注释：比如同时录制音视频， -i 1:0，视频设备在:号前指定，音频设备在:后指
+
+
+
+MAC上查询设备索引号：
+    例如查询avfoundation支持的设备列表
+
+        ffmpeg -f avfoundation -list_devices true -i ""
+    
+    执行结果：
+
+        [AVFoundation input device @ 0x0] AVFoundation video devices:
+        [AVFoundation input device @ 0x0] [0] FaceTime HD Camera
+        [AVFoundation input device @ 0x0] [1] Capture screen 0
+
+        [AVFoundation input device @ 0x0] AVFoundation audio devices:
+        [AVFoundation input device @ 0x0] [0] Built-in Microphone
+        : Input/output error
+
+
+作者：张开V
+链接：https://www.jianshu.com/p/894af7c13569
+来源：简书
+著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
+
+二 来自YouTube
+
+最适合我的录屏方式-ffmpeg
+
+https://www.youtube.com/watch?v=DfkjOoC1pMI
+
+因为占用资源极少 cpu 一般 5-6%；使用mkv格式输出，使用显卡硬解码，显卡占用3-4%。 
+
+录制windows 画面 外加外置 usb 麦克风的声音，麦克风名称需要谨慎使用utf-8,
+
+    ffmpeg -list_devices true -f dshow -i dummy 
+
+    使用该命令可以查看麦克风名称。
+
+    录屏原格式mkv高鲁棒性，使用显卡硬解码h264_nvenc，降低cpu占用率。
+
+在想存放视频的文件夹下，新建一个脚本比如叫record.sh脚本：
+
+#!/usr/bin/bash
+video=$RANDOM
+
+for t in {0..9}; do
+    (
+        sleep $((t*60))
+        echo -ne'\007'
+    )&
+
+done
+
+ffmpeg -f gdigrab -i desktop -f dshow \
+    -i audio="麦克风的名称 如果是中文 要注意用utf8编码，否则乱码" \
+    -c:v h264_nvenc \
+    -qp 0 \
+    -vf "drawtext=text='Video only on youtube,teamviewer assistence visit https\://none.blue！'
+        fontsize=50:fontcolor=FFBF00: box=1: boxcolor=red@0.8" \
+    -t 00:09:00 \
+    $video.mkv
+
+ffmpeg -i $video.mkv -c copy $video.mp4
+echo -ne '\007'
+
+每分钟在 画面的随机位置 出现红底黄字警告水印条 "Video only on youtube,teamviewer assistence visit https\://none.blue！"
+输出为mkv格式 然后转为mp4.
+
+因为mkv格式 在出现卡壳、断电的意外时，容易恢复。
+
+文件名为随机数字，定时录制，每期视频时长为9mins，9mins到了自动结束录制，并将mkv转为mp4.
+
+win11 录制 脚本
+#!/usr/bin/bash
+#-t 00:15:00 \
+
+ffmpeg -f gdigrab -i desktop -f dshow \
+-r 60 \
+-i audio="Microphone (NVIDIA RTX Voice)" \
+-c:v h264_nvenc \
+-qp 0 \
+-vf "drawtext=text='https\://none.blue':x=if(eq(mod(n\,1200)\,0)\,rand(0\,(w-text_w))\,x):
+y=if(eq(mod(n\,1200)\,0)\,rand(0\,(h-text_h))\,y):enable=lt(mod(n\,1200)\,200):
+fontsize=50:fontcolor=FFBF00: box=1: boxcolor=red@0.8" \
+$RANDOM.mkv

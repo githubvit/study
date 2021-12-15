@@ -1,8 +1,17 @@
+# 图片 OCR
+
+# 1 首先用pillow（PIL）的 Image 打开 图像
+# 2 对图像进行二值化处理：（a 将图像模式先转为灰度模式，b 根据阈值确定图片每个像素点的黑白，c 输出为黑白图像。）
+# 3 用OCR识别软件 pytesseract 使用 中英文识别 将 图像 转换为  字符
+
+# 复杂图像处理
+# 使用Pillow对图片进行滤色 https://huanghaozi.cn/index.php/archives/112/
 from PIL import Image
 import pytesseract as pyt # ocr
 
 # path=r'D:\pyj\st\study\8爬虫\任务\test.png'
-path=r'C:\Users\69598\OneDrive - 中国加油！武汉加油！\Desktop\2020一中选拔\初一数学上学期期末（上）1.jpg'
+# path=r'D:\Desktop\桌面\2020一中选拔\初一\一中2021初一一班下学期【期末】数学考试_1.jpg '
+path=r'D:\Desktop\二值化.jpg '
 img=Image.open(path)
 #二值化图像传入图像和阈值
 '''
@@ -14,7 +23,8 @@ img=Image.open(path)
 
 阈值: 自定义灰度界限，大于这个值为黑色，小于这个值为白色
 
-'''
+''' 
+# 二值化
 def erzhihua(image,threshold):
     # 模式L”为灰色图像，它的每个像素用8个bit表示，0表示黑，255表示白，其他数字表示不同的灰度。
     image=image.convert('L')
@@ -25,11 +35,29 @@ def erzhihua(image,threshold):
       else:
         table.append(1)
     return image.point(table,'1')
+
+# 区间 二值化 去掉大的和小的，只留中间
+def qzerzhihua(image,max,min):
+    # 模式L”为灰色图像，它的每个像素用8个bit表示，0表示黑，255表示白，其他数字表示不同的灰度。
+    image=image.convert('L')
+    table=[]
+    for i in range(256):
+      if i < max:
+        if i > min:
+          table.append(0)
+        else:
+          table.append(1)
+      else:
+        table.append(1)
+    return image.point(table,'1')
  
-image=erzhihua(img,127)
+image=erzhihua(img,135) #阈值为150
+# image=erzhihua(img,127) #阈值为127
+# image=erzhihua(img,80) #阈值为50
+# image=qzerzhihua(img,40,30) #阈值为50
 image.show()
-t=pyt.image_to_string(image,lang='chi_sim+eng')
-print(t)
+# t=pyt.image_to_string(image,lang='chi_sim+eng')
+# print(t)
 
 '''
 

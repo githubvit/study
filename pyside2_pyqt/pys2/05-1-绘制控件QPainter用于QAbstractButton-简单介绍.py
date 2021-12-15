@@ -5,7 +5,6 @@ import sys
 
 app = QApplication(sys.argv)
 
-
 window = QWidget()
 
 window.setWindowTitle("QAbstractButton")

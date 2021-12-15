@@ -6,16 +6,17 @@ from PySide2.QtGui import QPainter,QPainterPath,QPen,QBrush,QTransform,QPixmap,Q
 
 from enum import Enum # 枚举类
 
-
 handle_size=15 # 句柄大小
 grid_size=10 # 网格大小
 grid_enabled=False # 网格控制
+
 # grid_enabled=True # 网格控制
 class HandleShape(Enum): #外形
     HANDLE_SHAPE_RECT='HANDLE_SHAPE_RECT'
     HANDLE_SHAPE_CIRCLE='HANDLE_SHAPE_CIRCLE'
     HANDLE_SHAPE_TRIANGLE='HANDLE_SHAPE_TRIANGLE'
     pass
+
 class HandleType(Enum): #类型
     HANDLE_TYPE_TOPLEFT='HANDLE_TYPE_TOPLEFT'
     HANDLE_TYPE_TOP='HANDLE_TYPE_TOP'
@@ -492,7 +493,6 @@ class BaseItem(QGraphicsItem):
         else:
             super().keyPressEvent(evt)
     
-
 # 应用图元 类型
 class ItemType(Enum):
     ITEM_LINE=0
@@ -508,6 +508,7 @@ class ItemType(Enum):
     ITEM_POLYGON=10
     
     pass
+
 # 应用图元
 class AppItem(BaseItem):
     def __init__(self,rect,itemType,scene,parent=None):
@@ -942,8 +943,6 @@ class AppItem(BaseItem):
 
         return [start,process,end]
     
-
-
 # 场景
 class CustomGraphicsScene(QGraphicsScene):
     def __init__(self):
@@ -971,6 +970,7 @@ class CustomGraphicsScene(QGraphicsScene):
         return super().keyPressEvent(evt) # 如果没有继承，就会阻断图元响应keyEvent事件。
     
     pass
+
 # 视图
 class CustomGraphicsView(QGraphicsView):
     def __init__(self):

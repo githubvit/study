@@ -12,7 +12,7 @@ class Window(QWidget):
         # self.focusPreviousChild()#切换到前一个
         # self.focusNextPrevChild(True) #就是 self.focusNextChild()
         # self.focusNextPrevChild(False) #就是 self.focusPreviousChild()
-
+    pass
 
 app = QApplication(sys.argv)
 
@@ -55,7 +55,7 @@ le3.move(150, 150)
 # 取消焦点
 # le2.clearFocus()
 
-print(window.focusWidget())
+# print(window.focusWidget())
 window.show()
 
 # print(le1)
@@ -69,7 +69,7 @@ window.show()
 # 说明焦点是绘制事件结束后加上去的
 
 # 如果在获取焦点控件前 人为 设置一个控件获取焦点，就可以获取到。
-# print(window.focusWidget())
+print(window.focusWidget())
 
 
 # le1.clearFocus()

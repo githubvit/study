@@ -25,15 +25,16 @@ le2.move(50,100)
 # 在文本框1，2中设置内容文本，点击插入按钮在文本框1插入文本框2中输入的内容
 le.setText('只在此山中')
 le2.setText('云深不知处')
-c_btn=QPushButton('插入1',wd)
-c_btn.move(200,100)
-c_btn.clicked.connect(lambda : le.insert(le2.text()))
 
 # 清空文本框
 q_btn=QPushButton('清空1',wd)
 q_btn.move(200,50)
 # q_btn.clicked.connect(lambda : le.setText('')) # 设置空字符串 即可
 q_btn.clicked.connect(lambda : le.clear()) # 正统方法
+
+c_btn=QPushButton('插入1',wd)
+c_btn.move(200,100)
+c_btn.clicked.connect(lambda : le.insert(le2.text()))
 
 # 二 文本的输出模式
 
@@ -128,10 +129,26 @@ le5.setPlaceholderText('规则验证之掩码限制')
 le5.move(50,250)
 le5.adjustSize()
 # 设置 两位大写字母+'-'分隔符+两位数字 掩码 这样 不符合掩码规则的就输入不了
+m_btn1=QPushButton(wd)
+m_btn1.setText('掩码 >AA-99')
+m_btn1.move(200,250)
+m_btn1.clicked.connect(lambda:le5.setInputMask('>AA-99'))
 # le5.setInputMask('>AA-99')
+
+m_btn2=QPushButton(wd)
+m_btn2.setText('掩码 >AA-99;#')
+m_btn2.move(280,250)
+m_btn2.clicked.connect(lambda:le5.setInputMask('>AA-99;#'))
 # le5.setInputMask('>AA-99;#') # 分号后是空白占位符
+
+m_btn3=QPushButton(wd)
+m_btn3.setText('掩码 9999-9999999;0')
+m_btn3.move(370,250)
+m_btn3.clicked.connect(lambda:le5.setInputMask('9999-9999999;0'))
 # 设置座机号码掩码
 # le5.setInputMask('9999-9999999;0')
+
+
 # 设置Ip地址
 # le5.setInputMask('999.999.999.999;x')#可以结合验证器限制每段在255以内
 # le5.setInputMask('000.000.000.000;_')  #"数字掩码"

@@ -5,7 +5,6 @@ from PySide2.QtGui import *
 import sys
 
 
-
 app = QApplication(sys.argv)
 
 window = QWidget()

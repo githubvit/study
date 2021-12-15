@@ -181,7 +181,7 @@ class MediaPlayerUi(QWidget,Ui_Form):
 
 if __name__ == "__main__":
     app=QApplication([])
-    media_file=r'F:\OneDrive - 中国加油！武汉加油！\02初中\数学\初中数学朱韬\人教版 初中数学\初一\1. 第01讲 有理数初步（一）.flv'
+    media_file=r'F:\sbq\02初中\数学\初中数学朱韬\人教版 初中数学\初一\1. 第01讲 有理数初步（一）.flv'
     wd=MediaPlayerUi()
     wd.load_media_file(media_file)
     wd.show()

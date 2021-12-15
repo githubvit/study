@@ -9,13 +9,13 @@ from PySide2.QtCore import *
 
 # 覆盖mousePressEvent 利用锚点方法获取按下位置的超链接
 class MyTextEdit(QTextEdit):
-    def mousePressEvent(self,mp):
+    def mousePressEvent(self,evt):
         # 用锚点方法anchorAt(QPoint())获取点击位置的超链接
         # print(self.anchorAt(self.pos())) # https://www.baidu.com 没有超链接 则为空
         url=self.anchorAt(self.pos())
         if len(url):
             QDesktopServices.openUrl(QUrl(url)) #用桌面浏览器打开超链接
-        return super().mousePressEvent(mp)
+        return super().mousePressEvent(evt)
 
 class Window(QWidget):
     def __init__(self):
@@ -25,8 +25,8 @@ class Window(QWidget):
         self.setup_ui()
         
     def setup_ui(self):
-        # te=MyTextEdit(self)
-        te=QTextEdit(self)
+        te=MyTextEdit(self)
+        # te=QTextEdit(self)
         self.te=te
         te.resize(300,300)
         te.move(20,20)
@@ -42,45 +42,51 @@ class Window(QWidget):
         # self.选中文本的移除()
         # self.位置相关操作()
         # self.开始和结束标识()
+
         # self.自动格式化() # 上述操作都是先获取文本光标的操作，是二级操作，从现在开始是一级操作，直接快速
         # self.软换行模式()
         # self.覆盖模式()
         # self.对齐模式()
-        # self.字体格式()
+        self.字体格式()
         # self.颜色设置()
         # self.当前的字符格式()
         # self.常用编辑操作()
         # self.滚动到锚点()
         # self.只读设置()
         # self.tab功能测试()
-        self.打开超链接()
-        # self.信号测试()
+        # self.打开超链接()
+        self.信号测试()
         pass
     def 信号测试(self):
-        self.te.textChanged.connect(lambda:print('文本内容发生改变时, 发射的信号'))
-        self.te.selectionChanged.connect(lambda:print('选中内容发生改变时, 发射的信号'))
-        self.te.cursorPositionChanged.connect(lambda:print('光标位置发生改变时, 发射的信号'))
+        # self.te.textChanged.connect(lambda:print('文本内容发生改变时, 发射的信号'))
+        # self.te.selectionChanged.connect(lambda:print('选中内容发生改变时, 发射的信号'))
+        # self.te.cursorPositionChanged.connect(lambda:print('光标位置发生改变时, 发射的信号'))
         self.te.currentCharFormatChanged.connect(lambda tcf:print('当前字符格式发生改变时, 发射的信号',tcf))
-        self.te.copyAvailable.connect(lambda val:print('复制可用时',val))
-        self.te.redoAvailable.connect(lambda val:print('重做可用时',val))
-        self.te.undoAvailable.connect(lambda val:print('撤销可用时',val))
+        # self.te.copyAvailable.connect(lambda val:print('复制可用时',val))
+        # self.te.redoAvailable.connect(lambda val:print('重做可用时',val))
+        # self.te.undoAvailable.connect(lambda val:print('撤销可用时',val))
         pass
     def 打开超链接(self):
-        # 1 获取超链接
-        # 获取鼠标按下位置的超链接 anchorAt(QPoint) -> str
-
-        # 2 打开超链接
-        # QDesktopServices.openUrl(QUrl(urlString)) 用桌面浏览器打开指定链接地址
-
-        # 3 定义自己的类 
-        # QTextEdit并没有pressed或clicked信号，定义自己的QTextEdit，覆盖mousePressEvent方法
         
-        # 4 设置文本
+        # 定义自己的类 打开超链接
+            # QTextEdit并没有pressed或clicked信号，需要定义自己的QTextEdit类 class MyTextEdit(QTextEdit):，
+            # 覆盖mousePressEvent方法，当按下超链接时刻：
+
+                # 1 获取超链接
+                # 获取鼠标按下位置的超链接 anchorAt(QPoint) -> str
+                # 2 打开超链接
+                # QDesktopServices.openUrl(QUrl(urlString)) 用桌面浏览器打开指定链接地址
+
+        
+        # 设置超链接
         self.te.insertHtml('xxx'*300+'<a name="bd" href="https://www.baidu.com"> 百度 </a>'+'aa '*400)
+        
+        # 定义按钮
         btn=QPushButton(self)
         btn.setText('滚动到锚点,打开超链接')
         btn.adjustSize()
         btn.move(20,340)
+        # 滚动到锚点函数
         def test():
             self.te.scrollToAnchor("bd")
         btn.clicked.connect(test)
@@ -117,7 +123,7 @@ class Window(QWidget):
         btn.adjustSize()
         btn.move(20,340)
         def test():
-            self.te.scrollToAnchor("bd")
+            self.te.scrollToAnchor("bd") # 
         btn.clicked.connect(test)
         pass
     def 常用编辑操作(self):
@@ -133,7 +139,7 @@ class Window(QWidget):
             # QTextDocument.FindBackward            向后查找
             # QTextDocument.FindCaseSensitively     区分大小写查找
             # QTextDocument.FindWholeWords          完整匹配单词查找
-            print(self.te.find("xx", QTextDocument.FindBackward | QTextDocument.FindCaseSensitively | QTextDocument.FindWholeWords)) # False
+            print(self.te.find("she", QTextDocument.FindBackward | QTextDocument.FindCaseSensitively | QTextDocument.FindWholeWords)) # False
             self.te.setFocus()
         btn.clicked.connect(test)
         
@@ -150,7 +156,11 @@ class Window(QWidget):
             tcf.setFontFamily('宋体')
             tcf.setFontPointSize(20)
             tcf.setFontCapitalization(QFont.Capitalize) # 首字符大写
-            tcf.setForeground(QColor(100, 200, 150))    # 设置前景色
+            # tcf.setForeground(QColor(100, 200, 150))    # 设置前景色
+            tcf.setForeground(QColor(250,250, 0))    # 设置前景色 即 字体颜色
+           
+            tcf.setBackground(QColor(250,0,0))    # 设置背景色
+         
             self.te.setCurrentCharFormat(tcf)
             # 2 合并当前字符格式
             # 再设置一个字符格式对象
@@ -206,10 +216,11 @@ class Window(QWidget):
         btn.adjustSize()
         btn.move(20,340)
         def test():
-            # 改变光标字符的背景颜色，并不是整个文本框，或整行的背景颜色，
-            self.te.setTextBackgroundColor(QColor(255,0,0))
+            # 改变光标 选中字符 的背景颜色，并不是整个文本框，或整行的背景颜色，
+            self.te.setTextBackgroundColor(QColor(255,0,0)) # 红底
+            # self.te.setTextBackgroundColor(QColor(255,255,0)) # 黄底
             # 字体颜色
-            self.te.setTextColor(QColor(255, 255, 255))
+            self.te.setTextColor(QColor(255, 255, 255)) # 白字
             self.te.setFocus()   
         btn.clicked.connect(test)
         pass
@@ -220,17 +231,22 @@ class Window(QWidget):
         btn.move(20,340)
         def test():
             # 获取字体设置对话框
-            # QFontDialog.getFont()    
+            # QFontDialog.getFont() 
+
             # 设置字体
             # self.te.setFontFamily("幼圆")
             # self.te.setFontWeight(QFont.Black)
             # self.te.setFontItalic(True)
             # self.te.setFontPointSize(30)
             # self.te.setFontUnderline(True)
+
             # 用字体对象QFont() 设置字体  更细，比上面更全面，比如删除线，上面就没有
             font = QFont()
+            font.setFamily('微软雅黑')
+            font.setPointSize(60)
             font.setStrikeOut(True)
             self.te.setCurrentFont(font) 
+
             self.te.setFocus()       
         btn.clicked.connect(test)
        
@@ -246,6 +262,7 @@ class Window(QWidget):
             # print('默认对齐模式',self.te.alignment()) 
             # 设置对齐模式
             self.te.setAlignment(Qt.AlignCenter) # 作用于段落 不是整个文档 也不是单行
+            self.te.setFocus()
         btn.clicked.connect(test)
     def 覆盖模式(self):
         btn=QPushButton(self)
@@ -254,6 +271,7 @@ class Window(QWidget):
         btn.move(20,340)
         def test():
             # 指在光标处输入的内容 是新增 还是 覆盖
+
             # 获取默认
             print('覆盖模式',self.te.overwriteMode()) #False
             # 获取光标宽度
@@ -279,13 +297,15 @@ class Window(QWidget):
         btn.move(20,340)
         def test():
             # 1 设置软换行模式
-            # self.te.setLineWrapMode(QTextEdit.WidgetWidth) # 到达宽度，自动换行，单词默认整体换行。这就是默认设置
+            self.te.setLineWrapMode(QTextEdit.WidgetWidth) # 到达宽度，自动换行，单词默认整体换行。这就是默认设置
             # self.te.setLineWrapMode(QTextEdit.NoWrap) # 超过宽度不换行，产生水平滚动条
+           
             # self.te.setLineWrapMode(QTextEdit.FixedPixelWidth) # 到达一定的像素宽度后自动换行，保持单词的完整性
             # 设置换行的像素宽度或换行列数 
-            # self.te.setLineWrapColumnOrWidth(100)#与FixedPixelWidth搭配就是像素
-            self.te.setLineWrapMode(QTextEdit.FixedColumnWidth) # 到达一定的列数宽度后自动换行 不保持单词的完整性。
-            self.te.setLineWrapColumnOrWidth(10)#与FixedColumnWidth搭配就是列数
+            # self.te.setLineWrapColumnOrWidth(100) #与FixedPixelWidth搭配就是像素
+
+            # self.te.setLineWrapMode(QTextEdit.FixedColumnWidth) # 到达一定的列数宽度后自动换行 不保持单词的完整性。
+            # self.te.setLineWrapColumnOrWidth(10)#与FixedColumnWidth搭配就是列数
 
             # 2 设置单词换行模式 就是设置换行时 单词是否整体换行
             # self.te.setWordWrapMode(QTextOption.WrapAnywhere) #宽度够了之后, 随意在任何位置换行，不保持单词完整性 
@@ -297,16 +317,13 @@ class Window(QWidget):
         pass
     def 自动格式化(self):
         btn=QPushButton(self)
-        btn.setText('自动格式化')
+        btn.setText('自动格式化-列表')
         btn.adjustSize()
         btn.move(20,340)
         def test():
             # 输入一些特定字符, 会转换成为对应的效果
-            # 自动创建项目符号列表（例如，当用户在最左侧列中输入星号（'*'）时，或在现有列表项中按Enter键。
+            # 自动创建项目符号列表（例如，设置完成后，当用户在最左侧列中输入星号（'*'）时，会产生列表及标识符，按Enter键，会转入列表的下一项。
             self.te.setAutoFormatting(QTextEdit.AutoBulletList)
-            # 输入*abc 
-            # 回车 点击自动格式化按钮 
-            # 再输入* ，就产生了制表符为‘.’的列表
             self.te.setFocus()
         btn.clicked.connect(test)
 
@@ -314,7 +331,10 @@ class Window(QWidget):
         pass
 
     def 开始和结束标识(self):
-        # 通过右击Undo撤销，发现设置了开始和结束标识的可以将多步撤销操作变成一步撤销操作
+        # 设置 开始和结束标识 方便 Undo撤销 和 Redo恢复 操作
+        # 通过 右击选择 Undo撤销，发现设置了 开始和结束标识的可以将 多步撤销操作 变成 一步撤销 操作
+        # 通过 右击选择 Redo恢复，发现设置了 开始和结束标识的可以将 多步恢复操作 变成 一步恢复 操作
+    
         tc=self.te.textCursor()
         tc.insertText('123')
         tc.insertBlock()
@@ -322,12 +342,14 @@ class Window(QWidget):
 
         # 设置开始标识
         tc.beginEditBlock()
+
         tc.insertText('456')
         tc.insertBlock()
         tc.insertBlock()
         tc.insertText('789')
         tc.insertBlock()
         tc.insertBlock()
+
         # 设置结束标识
         tc.endEditBlock()
 
@@ -375,11 +397,11 @@ class Window(QWidget):
             # 获取光标对象
             tc=self.te.textCursor()
             # 1 移除选中的文本，没有选中的文本，不动作
-            # tc.removeSelectedText()
+            tc.removeSelectedText()
             # 2 移除选中的文本，没有选中的文本，删除后面一个
             # tc.deleteChar()
             # 3 移除选中的文本，没有选中的文本，删除前面一个
-            tc.deletePreviousChar()
+            # tc.deletePreviousChar()
             self.te.setFocus()
         btn.clicked.connect(test)
         pass
@@ -419,12 +441,13 @@ class Window(QWidget):
             # 2 获取选中的文本片段
             # print(tc.selection())
             # 将  获取选中的文本片段 按纯文本输出
-            print(tc.selection().toPlainText())
+            # print(tc.selection().toPlainText())
             # 3 获取选中表格单元数 结果是元组(起始行，总行，起始列，总列)
             print(tc.selectedTableCells())#(0, 2, 0, 3)
+            # print(self.te.textCursor().selectedTableCells())#(0, 2, 0, 3)
             # 4 选中位置的获取
-            # print(tc.selectionStart())
-            # print(tc.selectionEnd())
+            print(tc.selectionStart())
+            print(tc.selectionEnd())
             self.te.setFocus()
         btn.clicked.connect(test)
         pass
@@ -440,12 +463,15 @@ class Window(QWidget):
             # 1 设置光标位置
             # 获取光标对象
             tc=self.te.textCursor()
-            # 改变光标对象位置 setPosition(光标位置，锚点位置)
+
+            # 2 操作光标对象
+            # 2.1 改变光标对象位置 setPosition(光标位置，锚点位置)
             # tc.setPosition(6) #锚点位置默认是移动 实现光标移动
-            # 设置锚点位置保持不动 实现从改变后的位置6到锚点位置（即改变前的位置）的选中
+
+            # 2.2 设置锚点位置保持不动 实现从改变后的位置6到锚点位置（即改变前的位置）的选中
             # tc.setPosition(6,QTextCursor.KeepAnchor) 
 
-            # 2 移动光标
+            # 2.3 移动光标
             # movePosition（光标移动选项，锚点移动模式，移动值）
             # 光标移动选项有移动到行首、段首、上一行、下一行。。。
                 # QTextCursor.NoMove              将光标保持在原位
@@ -475,21 +501,23 @@ class Window(QWidget):
                 # QTextCursor.PreviousRow         移动到当前表中上一行的最后一个单元格。
             
             # tc.movePosition(QTextCursor.StartOfLine,QTextCursor.MoveAnchor) #移动到行首
+            # tc.movePosition(QTextCursor.StartOfBlock,QTextCursor.MoveAnchor)  #移动到段首
             # tc.movePosition(QTextCursor.StartOfBlock,QTextCursor.KeepAnchor)  #移动到段首 选中
             # tc.movePosition(QTextCursor.PreviousBlock,QTextCursor.KeepAnchor)  #移动到上一段首 选中
             # tc.movePosition(QTextCursor.Up,QTextCursor.KeepAnchor)  #移动到上一行 选中
 
-            # 3 选中 select
+            # 2.4 选中 select
                 # QTextCursor.Document            选择整个文档。
                 # QTextCursor.BlockUnderCursor    选择当前光标的文本段落。
                 # QTextCursor.LineUnderCursor     选择当前光标的文本行。
                 # QTextCursor.WordUnderCursor     选择当前光标的单词（按空格）。如果光标未定位在可选字符串中，则不选择任何文本。
             tc.select(QTextCursor.WordUnderCursor)
 
-            # 将改变了位置的光标对象 设为当前光标对象
-            self.te.setTextCursor(tc)
-            # 看不见 设置聚焦
-            self.te.setFocus()
+            # 3 将 操作后的光标对象 设置为 当前光标对象          *****
+            self.te.setTextCursor(tc)     # 没有这一步，上面的操作都没有结果
+
+            # 4 设置聚焦
+            self.te.setFocus() # 没有这一步 看不见 操作效果
 
         btn.clicked.connect(test)
 
@@ -518,8 +546,8 @@ class Window(QWidget):
             print(self.te.textCursor().blockNumber())
 
             # 获取文本列表
-            print(self.te.textCursor().currentList()) # pyside2 不支持 只能用pyqt5
-            print(self.te.textCursor().currentList().count()) # 统计列表数量
+            # print(self.te.textCursor().currentList()) # pyside2 不支持 只能用pyqt5
+            # print(self.te.textCursor().currentList().count()) # 统计列表数量
 
         btn.clicked.connect(test)
        
@@ -552,7 +580,7 @@ class Window(QWidget):
         # 3 设置 光标选中字符格式
         # 将光标的当前字符格式设置为给定格式。如果光标有选择，则给定格式应用于当前选择
         ccf=QTextCharFormat()
-        ccf.setFontFamily('幼圆')
+        ccf.setFontFamily('仿宋')
         ccf.setFontPointSize(50)
         ccf.setFontOverline(True) #上划线
         ccf.setFontUnderline(True) #下划线
@@ -562,9 +590,9 @@ class Window(QWidget):
         c_btn.adjustSize()
         c_btn.move(20,340)
         def set_charFormat():
-            tc.setCharFormat(ccf)
-            # tc.setCharFormat(ccf)#这个是没有效果的
-            # self.te.textCursor().setCharFormat(ccf)
+            # tc.setCharFormat(ccf)#这个是没有效果的 要重新获取光标对象
+            self.te.textCursor().setCharFormat(ccf)
+           
             
         c_btn.clicked.connect(set_charFormat)
         
@@ -583,6 +611,7 @@ class Window(QWidget):
             self.te.textCursor().setCharFormat(ccf)
             # 再把当前格式合并上
             self.te.textCursor().mergeCharFormat(ccf2)
+            
         c_btn2.clicked.connect(merge_charFormat)
 
 
@@ -592,8 +621,8 @@ class Window(QWidget):
         # 整个文本编辑器, 其实就是为编辑 这个文本文档 提供了一个可视化的界面
         
         # 获取文档 操作文本对象
-        # print(self.te.document()) # <PySide2.QtGui.QTextDocument(0x1af1081ba50) at 0x000001AF10C57888>
-       
+        print(self.te.document()) # <PySide2.QtGui.QTextDocument(0x1af1081ba50) at 0x000001AF10C57888>
+        
         # QTextDocument 这个文档类上有一堆操作方法
         
         # 获取文本光标 操作文本对象
@@ -620,6 +649,8 @@ class Window(QWidget):
         tc.insertText("文本2",tcf)
 
         # 插入 富文本（HTML字符串）
+        # tc.insertText("<a href='http://www.baidu.com'>百度</a>")
+        # self.te.append("<a href='http://www.baidu.com'>百度</a>")
         tc.insertHtml("<a href='http://www.baidu.com'>百度</a>")
 
 
@@ -681,8 +712,8 @@ class Window(QWidget):
         # 4.2 用 列表对象 插入或创建
         # 定义列表对象
         ltc2=QTextListFormat()
-        # ltc2.setStyle(QTextListFormat.ListDisc)
-        ltc2.setStyle(QTextListFormat.ListDecimal)
+        # ltc2.setStyle(QTextListFormat.ListDisc)#小圆点格式 1. 2. 3.
+        ltc2.setStyle(QTextListFormat.ListDecimal)# 前后缀格式
         ltc2.setIndent(2)           #缩进2个Tab键
         # 用前后缀方法 给数字 添加 了 尖括号 形如 <1> <2> ...<n>
         ltc2.setNumberPrefix("<")  #前缀 Style是数字才有用 即 QTextListFormat.ListDecimal才有用
@@ -794,7 +825,7 @@ class Window(QWidget):
 
     def 文本内容的设置(self):
         # 设置普通文本内容
-        # self.te.setPlainText("<h1>ooo</h1>")      # 代码set文本的 光标 在 最前
+        self.te.setPlainText("<h1>ooo</h1>")      # 代码set文本的 光标 在 最前
         # self.te.insertPlainText("<h1>oooo</h1>")   # 代码 insert 文本的 光标 在 insert文本的 最后
         # print(self.te.toPlainText())
 
@@ -804,11 +835,12 @@ class Window(QWidget):
         # print(self.te.toHtml())
 
         # 自动判定
-        self.te.setText("<h1>ooo</h1>")  # setText(str) 自动判定 普通文本 富文本
+        # self.te.setText("<h1>ooo</h1>")  # setText(str) 自动判定 普通文本 富文本
         # 追加
         self.te.append("<h3>oooxxx</h3>") # 在老文本最后 另起一行输入append的文本 光标不动 即 append前光标在哪还在哪
     
-        # print(self.te.toPlainText())
+        print(self.te.toPlainText())
+        
         # ooo
         # oooxxx
         # print(self.te.toHtml())

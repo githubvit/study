@@ -52,7 +52,8 @@ class BqskUi(QMainWindow,Ui_MainWindow):
         # 资源管理器 导入
 
         # 1 建立要引入的控件
-        self.file_folder=r'F:\OneDrive - 中国加油！武汉加油！\02初中\数学\初中数学朱韬\人教版 初中数学'
+        # self.file_folder=r'F:\sbq\02初中\数学\初中数学朱韬\人教版 初中数学'
+        self.file_folder=r'F:\sbq\02初中\数学\初中数学朱韬\【39370】 新初二数学年卡（超常班）朱韬【64讲】'
 
         self.tl_fe=FileExplorerUi(self.file_folder)
 

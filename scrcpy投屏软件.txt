@@ -86,3 +86,25 @@ scrcpy 投屏软件
 
         # 2 Android5.1 华为手机 用快捷键 关闭手机屏幕后 用快捷键 Ctrl+shift+o 无法开启手机屏幕 
         # 用一键锁屏软件锁屏后 再用鼠标右键开屏 手机屏幕点亮。
+
+        # 3 报 ERROR: Exception on thread Thread[main,5,main]
+            C:\Users\69598>scrcpy
+            INFO: scrcpy 1.12.1 <https://github.com/Genymobile/scrcpy>
+            D:\scrcpy\scrcpy-win64-v1.12.1\scrcpy-server: 1 file pushed. 2.1 MB/s (26202 bytes in 0.012s)
+            INFO: Initial texture: 1080x1920
+            WARN: Device disconnected
+            [server] ERROR: Exception on thread Thread[main,5,main]
+            android.media.MediaCodec$CodecException: Error 0xfffffc0e
+                    at android.media.MediaCodec.native_configure(Native Method)
+                    at android.media.MediaCodec.configure(MediaCodec.java:577)
+                    at com.genymobile.scrcpy.ScreenEncoder.configure(ScreenEncoder.java:167)
+                    at com.genymobile.scrcpy.ScreenEncoder.streamScreen(ScreenEncoder.java:68)
+                    at com.genymobile.scrcpy.Server.scrcpy(Server.java:34)
+                    at com.genymobile.scrcpy.Server.main(Server.java:163)
+                    at com.Press any key to continue...
+
+          原因为:手机不兼容 scrcpy 默认分辨率设置。
+            解决方法：
+            启动scrcpy时使用较低的分辨率。
+            
+            scrcpy -m 1024

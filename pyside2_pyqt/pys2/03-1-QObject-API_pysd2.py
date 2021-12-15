@@ -26,29 +26,31 @@ class Window(QWidget):
         
     
     def QObject继承结构测试(self):
-        print(QObject.__subclasses__())
-        # print(QWidget.__subclasses__())
+        # print(QObject.__subclasses__())
+        print(QWidget.__subclasses__())
         # mros = QWidget.mro()
         # mro()查找继承类，会一直追溯到python的原始类object。
-        mros = QObject.mro()
-        # mros = QWidget.mro()
+        # mros = QObject.mro()
+        
+        mros = QWidget.mro()
+        # print(mros)
         for mro in mros:
             print(mro)
 
     def QObject对象名称和属性的操作(self):
 
         # ************名称和属性测试API***************开始
-        # obj = QObject()
-        # # 设定名称
-        # obj.setObjectName("notice")
-        # print(obj.objectName())
-        # # 设定属性
-        # obj.setProperty("notice_level", "error")
-        # obj.setProperty("notice_level2", "warning")
-        # # 获取属性值
-        # print(obj.property("notice_level"))
-        # # 查看属性名
-        # print(obj.dynamicPropertyNames())
+        obj = QObject()
+        # 设定名称
+        obj.setObjectName("notice")
+        print(obj.objectName())
+        # 设定属性
+        obj.setProperty("notice_level", "error")
+        obj.setProperty("notice_level2", "warning")
+        # 获取属性值
+        print(obj.property("notice_level"))
+        # 查看属性名
+        print(obj.dynamicPropertyNames())
         # **************名称和属性测试API**************结束
 
         # *************案例演示***************开始
@@ -84,7 +86,7 @@ class Window(QWidget):
         # label label2 btn 都setObjectName("notice")
         # 显然这是个错误的示范， */
 
-        label.setStyleSheet("font-size: 20px; color: red;")
+        label.setStyleSheet("font-size: 16px; color: red;")
 
         # *************案例演示***************结束
 
@@ -106,7 +108,7 @@ class Window(QWidget):
         # # #
         # obj1.setParent(obj0)
         # obj2.setParent(obj0)
-        # # obj2.setObjectName("2")
+        # obj2.setObjectName("2")
         # label = QLabel()
         # label.setParent(obj0) # 可视化控件的父对象只能是QWidget类型 所以当obj0 = QObject()报错
         # # #
@@ -119,15 +121,16 @@ class Window(QWidget):
         # # #
         # print(obj1.parent())
         # # 获取直接子对象
-        # print(obj0.children())
+        # print("获取直接子对象",obj0.children())
         # # 找一个 只能获取1个直接子对象
-        # print(obj0.findChild(QObject))
-        # # 查找子对象(类型，名称) 结果只有1个
-        print(obj0.findChild(QObject, "3")) # 类型 QObject, 名字 '3'
+        # print("找一个 只能获取1个直接子对象",obj0.findChild(QObject))
+        # # 查找子对象(类型，名称) 
+        # print("查找子对象(类型，名称) ",obj0.findChild(QObject, "3")) # 类型 QObject, 名字 '3'
+        # print("查找子对象(类型，名称) ",obj0.findChild(QObject, "1")) # 类型 QObject, 名字 '1' 找不到 返回 None
         # # print(obj0.findChild(QObject, "3", Qt.FindDirectChildrenOnly)) #不支持第三个参数查找方式，qt5可以
         
         # # 找多个 查找是QObject的子孙
-        # print(obj0.findChildren(QObject))
+        # print("看到所有的子孙",obj0.findChildren(QObject))
         # # 会看到所有的子孙包括label,因为QObject是所有控件的基类
        
         # print(obj0.findChildren(QWidget))
@@ -167,6 +170,7 @@ class Window(QWidget):
         #
         def obj_name_cao2(name):
             print("对象名称发生了改变2", name)
+    
         #
         self.obj.objectNameChanged.connect(obj_name_cao)
         self.obj.objectNameChanged.connect(obj_name_cao2)
@@ -181,6 +185,8 @@ class Window(QWidget):
         
         self.obj.setObjectName("xxx")
         
+
+        
         # 信号屏蔽
         # 1 屏蔽某个控件的某个信号 x控件.x信号.disconnect()
         # 2 屏蔽和释放某个控件的所有信号 
@@ -189,16 +195,15 @@ class Window(QWidget):
         #   查看 控件.signalsBlocked()
 
         # 屏蔽  self.obj.setObjectName("ooo") 这次名称改变
-        self.obj.objectNameChanged.disconnect()
-        print(self.obj.signalsBlocked(), "1")
+        # self.obj.objectNameChanged.disconnect()
+        # print(self.obj.signalsBlocked(), "1")
         self.obj.blockSignals(True)
         print(self.obj.signalsBlocked(), "2")
         self.obj.setObjectName("ooo")
        
         # 解除屏蔽
-        self.obj.blockSignals(False)
-        print(self.obj.signalsBlocked(), "3")
-        self.obj.objectNameChanged.connect(obj_name_cao)
+        # self.obj.blockSignals(False)
+        # print(self.obj.signalsBlocked(), "3")
         #
         self.obj.setObjectName("xxoo")
 
@@ -220,7 +225,7 @@ class Window(QWidget):
         # w = QWidget()
         # btn = QPushButton()
         # label = QLabel()
-        
+        # 
         # objs = [obj, w, btn, label]
         # for o in objs:
             # print(o.isWidgetType())
@@ -237,23 +242,23 @@ class Window(QWidget):
         label2.setText("人狠话不多")
         label2.move(150, 150)
 
-        # # del label2
+        # del label2
         # label2.deleteLater()
-
+ 
         btn = QPushButton(self)
         btn.setText("点我")
         btn.move(200, 200)
+ 
+ 
+ 
+        # for widget in self.findChildren(QLabel):
+            # widget.setStyleSheet("background-color: cyan;")
 
-
-
-        for widget in self.findChildren(QLabel):
-            widget.setStyleSheet("background-color: cyan;")
-
-        # for widget in self.children():
-        #     # print(widget)
-        #     # if widget.isWidgetType():
-            # if widget.inherits("QLabel"): #如果是QLabel类
-                # widget.setStyleSheet("background-color: cyan;")
+        for widget in self.children():
+            print(widget)
+            # if widget.isWidgetType():
+            if widget.inherits("QLabel"): #如果是QLabel类
+                widget.setStyleSheet("background-color: cyan;")
         # *************案例***************结束
 
     def QObject对象删除(self):
@@ -275,10 +280,11 @@ class Window(QWidget):
         # del删除的是变量，而不是数据
         # 所以当前删除的是 obj2临时变量和真正数据对象的引用
         # 该数据对象还被obj1引用着。而obj1还被self.obj1挂着，所以没有被删除
-        obj1.deleteLater()
-        # obj2.deleteLater()
+        # obj1.deleteLater()
+        obj2.deleteLater()
         # deleteLater()会在 稍后 切除和obj1的关系，从而实现销毁obj2.
-        print(obj1.children())
+        print(obj1.children()) # 只能获取直接子对象
+        print(obj1.findChildren(QObject)) # 获取符合 该类型要求 的所有子孙对象
         print(obj2)
         # 会先执行上面两行打印，再去销毁，真正的去释放相关的对象
         # 以后控件的删除都要使用deleteLater()，而不能使用del ,
@@ -288,11 +294,11 @@ class Window(QWidget):
 
 def QWidget控件的父子关系():
     # 1 父控件裁剪子控件
-    win1 = QWidget()
-    win1.setWindowTitle("红色")
-    win1.resize(500, 500)
-    win1.setStyleSheet("background-color: red;")
-    win1.show()
+    # win1 = QWidget()
+    # win1.setWindowTitle("红色")
+    # win1.resize(500, 500)
+    # win1.setStyleSheet("background-color: red;")
+    # win1.show()
     
     # win2 = QWidget()
     # win2.setWindowTitle("绿色")
@@ -302,6 +308,50 @@ def QWidget控件的父子关系():
     # win2.show()
     
     # 2 统一修改子控件背景 .findChildren(QLabel)
+    win_root = QWidget()
+    label1 = QLabel()
+    label1.setText("label1")
+    label1.setParent(win_root)
+    label2 = QLabel()
+    label2.move(50, 50)
+    label2.setText("label2")
+    label2.setParent(win_root)
+    label3 = QLabel()
+    label3.move(80, 80)
+    label3.setText("label3")
+    label3.setParent(win_root)
+    btn = QPushButton(win_root)
+    btn.move(100, 100)
+    btn.setText("btn")
+    win_root.show()
+    # 统一修改子控件背景 .findChildren(QLabel)
+    for sub_widget in win_root.findChildren(QLabel):
+        print(sub_widget)
+        sub_widget.setStyleSheet("background-color: cyan;")
+
+
+# 不管怎么改标题，都加上前缀 撩课
+def 信号与槽():
+    window=QWidget()
+    # 连接窗口标题变化的信号  与  槽
+    def cao(title):
+        # print("窗口标题变化了", title)
+        # window.windowTitleChanged.disconnect()
+        window.blockSignals(True) # 先禁掉title
+        print('是否屏蔽信号',window.signalsBlocked())
+        window.setWindowTitle("撩课-" + title) # 加前缀
+        # window.blockSignals(True) # 后禁掉title  不行 必须加在前面 
+        window.blockSignals(False) # 再打开
+        # window.windowTitleChanged.connect(cao)
+    window.windowTitleChanged.connect(cao)
+    window.setWindowTitle("Hello Sz")
+    window.setWindowTitle("Hello Sz2")
+    # window.setWindowTitle("Hello Sz3")
+    window.show()
+
+if __name__ == "__main__":
+    app=QApplication([])
+    # QWidget控件的父子关系()
     # win_root = QWidget()
     # label1 = QLabel()
     # label1.setText("label1")
@@ -320,32 +370,8 @@ def QWidget控件的父子关系():
     # win_root.show()
     # 统一修改子控件背景 .findChildren(QLabel)
     # for sub_widget in win_root.findChildren(QLabel):
-    #     print(sub_widget)
-    #     sub_widget.setStyleSheet("background-color: cyan;")
-
-
-# 不管怎么改标题，都加上前缀 撩课
-def 信号与槽():
-    window=QWidget()
-    # 连接窗口标题变化的信号  与  槽
-    def cao(title):
-        # print("窗口标题变化了", title)
-        # window.windowTitleChanged.disconnect()
-        window.blockSignals(True) # 先禁掉title
-        print('是否屏蔽信号',window.signalsBlocked())
-        window.setWindowTitle("撩课-" + title) # 加前缀
-        # window.blockSignals(True) # 后禁掉title  不行 必须加在前面 
-        # window.blockSignals(False) # 再打开
-        # window.windowTitleChanged.connect(cao)
-    window.windowTitleChanged.connect(cao)
-    window.setWindowTitle("Hello Sz")
-    # window.setWindowTitle("Hello Sz2")
-    # window.setWindowTitle("Hello Sz3")
-    window.show()
-
-if __name__ == "__main__":
-    app=QApplication([])
-    # QWidget控件的父子关系()
+        # print(sub_widget)
+        # sub_widget.setStyleSheet("background-color: cyan;")
     # wd=Window()
     # wd.show()
     信号与槽()

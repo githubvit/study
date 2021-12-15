@@ -1,9 +1,11 @@
+'''
 Python3 使用you-get,youtube-dl,ffmpeg 下载全网视频并剪切视频
 
 lnmp技术爱好者
 
 发布时间：03-1115:54
-现在视频网站很多，我们看的视频也越来越多了。有时候看到某些视频的片段非常的不错，想要剪切下来的冲动的次数也越来越多。一个视频剪切倒还好，但是多个视频的情况下，就比较麻烦了。
+现在视频网站很多，我们看的视频也越来越多了。有时候看到某些视频的片段非常的不错，想要剪切下来的冲动的次数也越来越多。
+一个视频剪切倒还好，但是多个视频的情况下，就比较麻烦了。
 
 所以本人用python写了个脚本，只需要以下两个步骤就可以按你所需要的下载并剪切视频：(需自己安装python3.6,ffmpeg,you-get,youtube-dl)
 
@@ -16,6 +18,9 @@ lnmp技术爱好者
 
 需要源码或者不懂的可以私信我
 附上源码：
+
+'''
+
 
 import youtube_dl
 
@@ -87,6 +92,7 @@ if __name__ == '__main__':
 
 
 # you-get 使用命令行
+'''
 C:\Users\69598>you-get -o F:\video https://www.bilibili.com/video/BV19441127ba?p=209
 you-get: This is a multipart video. (use --playlist to download all parts.)
 site:                Bilibili
@@ -101,7 +107,8 @@ stream:
 Downloading 人教版 初中数学 (P209. 第74讲 代数综合).flv ...
 10.5% ( 14.2/135.3MB) ├█████───────────────────────────────────┤[1/1]  102 kB/s
 
-# youtub-dl 使用命令行
+
+youtub-dl 使用命令行
 C:\Users\69598>youtube-dl -o 'F:\\video' https://www.bilibili.com/video/BV19441127ba?p=203
 [BiliBili] 19441127ba: Downloading webpage
 [BiliBili] 19441127ba: Downloading video info page
@@ -109,3 +116,12 @@ C:\Users\69598>youtube-dl -o 'F:\\video' https://www.bilibili.com/video/BV194411
 [download]  47.2% of 139.71MiB at 130.31KiB/s ETA 09:40
 
 在当前目录下产生目录 'F# 点开后里面有个文件叫 video'
+'''
+
+
+
+
+
+
+
+

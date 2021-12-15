@@ -26,9 +26,10 @@ btn = Btn(window)
 btn.setText("按钮")
 # 1 是否可用 
 # setEnabled(bool) 状态 isEnabled()
-print(btn.isEnabled())
 
 # btn.setEnabled(False)#设置不可用
+
+# print(btn.isEnabled())
 
 btn.destroyed.connect(lambda : print("按钮被释放了"))
 
@@ -38,9 +39,9 @@ btn.destroyed.connect(lambda : print("按钮被释放了"))
 # btn.hide()
 #
 # 3 是否编辑 加* [*]
-window.setWindowTitle("交互状态[*]") 
 # window.setWindowModified(True) 
-print(window.isWindowModified())
+# window.setWindowTitle("交互状态[*]")
+# print(window.isWindowModified())
 
 # 4 关闭
 # btn.deleteLater()
@@ -50,12 +51,11 @@ print(window.isWindowModified())
 
 # 5 活动窗口 (当有两个同级窗口，比如两个顶层窗口)
 w2=QWidget()
-
 w2.show()
 
 window.show()
-w2.raise_() #把w2放到前面
-print(w2.isActiveWindow())# False 不是活动窗口，即使把w2放到前面，也是False。
+# w2.raise_() #把w2放到前面
+# print(w2.isActiveWindow())# False 不是活动窗口，即使把w2放到前面，也是False。
 # 设定w2为活动窗口
 w2.setWindowState(Qt.WindowActive)
 print(w2.isActiveWindow())# True

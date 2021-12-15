@@ -18,9 +18,9 @@ le.move(50,50)
 
 def check_modify():
 	# 先获取 编辑状态
-	print('le6的编辑状态',le.isModified())
+	print('le的编辑状态',le.isModified())
 	# 再还原 编辑状态 即设置编辑状态为False
-	le.setModified(False)
+	# le.setModified(False)
 # 有输入 就为True 
 # le.textChanged.connect(check_modify)
 # 没有输入 则为False
@@ -73,25 +73,36 @@ def control_cursor():
     # 移动到行首 从当前光标到行首全选中
     # le2.home(True)
 
+    le2.setText('0123456789')
     # 设置光标在第三个位置闪烁 初始状态是无法成功的
-    # le2.setCursorPosition(2)
+    le2.setCursorPosition(2)
 
     # 获取当前光标位置 文本框光标位置是从0开始的
-    # print('文本框le2当前光标位置',le2.cursorPosition())
+    print('文本框le2当前光标位置',le2.cursorPosition())
 
-    # 获取指定坐标位置对应文本光标位置
-    # le2.setText('0123456789')
+    # 获取 相对文本框的坐标位置 对应的 文本框光标位置 的值
+    
     # le2.setText('abc defg')
-    # print(le2.cursorPositionAt(QPoint(10,10))) #获取文本框相对坐标为10px,10px的光标位置 1
+
+    # 针对 数字 英文 光标文字一个字符约为 5px 中文不一样
+    # print(le2.cursorPositionAt(QPoint(10,10)))  #获取文本框相对坐标为10px,10px的光标位置 1
+    # print(le2.cursorPositionAt(QPoint(11,10)))  #获取文本框相对坐标为10px,10px的光标位置 1
+    # print(le2.cursorPositionAt(QPoint(14,10)))  #获取文本框相对坐标为10px,10px的光标位置 2
+    # print(le2.cursorPositionAt(QPoint(15,10)))  #获取文本框相对坐标为15px,10px的光标位置 2
+    # print(le2.cursorPositionAt(QPoint(20,10)))  #获取文本框相对坐标为15px,10px的光标位置 3
+    # print(le2.cursorPositionAt(QPoint(25,10)))  #获取文本框相对坐标为15px,10px的光标位置 4
+    # print(le2.cursorPositionAt(QPoint(30,10)))  #获取文本框相对坐标为15px,10px的光标位置 4
+    # print(le2.cursorPositionAt(QPoint(31,10))) #获取文本框相对坐标为31px,10px的光标位置 5
+    # print(le2.cursorPositionAt(QPoint(35,10))) #获取文本框相对坐标为31px,10px的光标位置 5
+
     # print(le2.cursorPositionAt(QPoint(10,100))) #y的坐标到外面了，还是可以获取到 1
     # print(le2.cursorPositionAt(QPoint(1000,100))) #x\y的坐标都到外面了，还是可以获取到 10 这就是光标结尾的位置
 
     # 小案例
     # 输入一堆文本结束时，让光标停在左侧起始位置
-    le2.setText('0123456789'*3)
-    # le2.home(True)
-    le2.home(False)
-
+    # le2.setText('0123456789'*3)
+    # le2.home(True) # 全选
+    # le2.home(False) # 光标 在行首
 c_btn.clicked.connect(control_cursor)
 
 # 3 文本边距 
@@ -101,7 +112,7 @@ le3=QLineEdit(wd)
 le3.setPlaceholderText('文本边距')
 le3.resize(le2.width(),le2.width())
 le3.move(50,150)
-# 用QWidget内容边距 会改变输入框的外形
+# 用QWidget内容边距 会改变输入框的外形大小
 # le3.setContentsMargins(100,100,0,0)
 # 用文本边距 
 b_btn=QPushButton(wd)
@@ -187,7 +198,7 @@ btn5=QPushButton(wd)
 btn5.setText('剪切 cut')	
 btn5.adjustSize()
 btn5.move(150,350)
-btn5.clicked.connect(lambda : (le5.cursorBackward(True,2),le5.cut()))
+btn5.clicked.connect(lambda : (le5.setFocus(),le5.cursorBackward(True,2),le5.cut()))
     # 粘贴 paste()
 btn6=QPushButton(wd)
 btn6.setText('粘贴 paste')	

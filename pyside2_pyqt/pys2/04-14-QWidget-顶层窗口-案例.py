@@ -12,7 +12,7 @@ class Window(QWidget):
         self.resize(500,500)
         self.setWindowFlags(Qt.FramelessWindowHint) #设定无边框样式
         self.setWindowTitle('顶层窗口——无边框样式')
-        self.setWindowOpacity(0.8)#设定窗口半透明
+        # self.setWindowOpacity(0.8)#设定窗口半透明
         
         # 设定按钮宽高及边距
         self.btn_width=40
@@ -108,9 +108,10 @@ class Window(QWidget):
             print('鼠标移动...')
       
     def mouseReleaseEvent(self,evt):
-        # 将标志还原 保证鼠标可以释放
-        self.move_flag=False
-        print('鼠标释放了')  
+        if self.move_flag:
+            # 将标志还原 保证鼠标可以释放
+            self.move_flag=False
+            print('鼠标释放了')  
 
 if __name__ == "__main__":
 

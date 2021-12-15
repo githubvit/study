@@ -58,8 +58,8 @@ lb.setText('鼠标变禁止')
 lb.resize(300,300)
 lb.setStyleSheet('background-color:cyan')
 lb.setContentsMargins(100,0,0,0)
-# lb.setCursor(Qt.ForbiddenCursor)
-lb.setCursor(Qt.CrossCursor)
+lb.setCursor(Qt.ForbiddenCursor)
+# lb.setCursor(Qt.CrossCursor)
 
 # 用图片自定义鼠标形状
 # 获取图片

@@ -1,0 +1,17 @@
+user:sgq523@163.com  pwd: Another333
+
+一 参数设置
+    1. 齿轮图标 User preferences 用户配置  
+        Emergency back up (0=off)   自动备份 即 自动存盘 （设置为0就不自动保存了）      默认 3 minutes 推荐 2
+        Transition Time             过渡时间          默认 1.0seconds    推荐 0.3
+        Pause Time                  暂停时间          默认 0.5seconds    推荐 0.0 
+        Max Draw Time               最大绘画时长      默认 30.0seconds    推荐 1.5
+        Image Quality               图像品质          默认 800px         推荐 1000
+
+       设好了，以后每个动画都按照这个配置去执行，个别动画要调整的就可以用右键选择进行更改，而不会改动到全局。
+
+
+二 操作流程
+
+   登录后 选 create a New Scribe  进入创作界面
+

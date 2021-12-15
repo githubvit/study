@@ -21,8 +21,8 @@ wd.resize(500,500)
 tb=QToolButton(wd)
 tb.setText("工具")
 tb.setIcon(QIcon(r'pyside2_pyqt\pys2\xxx.png'))
-# tb.setIconSize(QSize(60,60))#会影响箭头
-# tb.adjustSize()
+tb.setIconSize(QSize(60,60))#会影响箭头
+tb.adjustSize()
 # 设置工具按钮样式风格
 # tb.setToolButtonStyle(Qt.ToolButtonTextOnly)
     # Qt.ToolButtonIconOnly #默认
@@ -57,9 +57,9 @@ tb.setToolTip('这是一个新建按钮')
     	# Qt.RightArrow
     		# 向右箭头
 # tb.setArrowType(Qt.NoArrow) 
-tb.setArrowType(Qt.RightArrow) 
-tb.setToolButtonStyle(Qt.ToolButtonTextBesideIcon) #文字在图标的右边
-tb.adjustSize()
+# tb.setArrowType(Qt.RightArrow) 
+# tb.setToolButtonStyle(Qt.ToolButtonTextBesideIcon) #文字在图标的右边
+# tb.adjustSize()
 
 # 3 自动提升 就是QToolButton扁平化 setAutoRaise(bool) 
 tb.setAutoRaise(True) #和背景融为一体。

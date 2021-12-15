@@ -43,7 +43,7 @@ class Window(QWidget):
 		# 统一定义 位置和大小
         rb.setGeometry(10, 10, 60, 60)
         print(rb.isVisible()) # False 默认看不见
-        rb.show()
+        rb.show() #show出来才能看见
 if __name__ == "__main__":
     from PySide2.QtWidgets import *
     app=QApplication([])

@@ -59,11 +59,11 @@ class Window(QWidget):
         self.success_tip.setVisible(False)
 
         
-        # 监测输入框文本内容变化事件 textChanged
+        # 监测输入框文本内容变化事件 textChanged 设置登录按钮是否可用
         self.account.textChanged.connect(self.account_textchange)
         # self.pwd.textChanged.connect(self.pwd_change)
 
-        # 监测账号输入框文本编辑事件 textEdited
+        # 监测账号输入框文本编辑事件 textEdited 清除标签原有提示
         self.account.textEdited.connect(self.account_pwd_textedit)
 
         # 监测密码输入框文本编辑事件 textEdited 清除标签原有提示
@@ -120,7 +120,7 @@ class Window(QWidget):
         for lb in self.findChildren(QLabel):
             lb.setText('')
 
-    # 密码框 状态切换行为 的slot函数
+    # 密码框 状态切换 Action行为 的slot函数
     def pwdstate_change(self):
         if self.pwd.echoMode() == QLineEdit.Password:#密文
             # 切换输出模式
@@ -148,23 +148,25 @@ class Window(QWidget):
         if login_state == AccountTool.ACCOUNT_ERROR:
             # 展示提示
             self.account_tip.setText('用户名错误！')
-            # self.account_tip.adjustSize()
+            self.account_tip.adjustSize()
             # 清空账号和密码输入框
-            self.account.setText('')
-            self.pwd.setText('')
+            # self.account.setText('')
+            # self.pwd.setText('')
             # 账号输入框获取焦点
-            self.account.setFocus()
-            return None
+            # self.account.setFocus()
+            # return None
+            return
         # 密码错误
         if login_state == AccountTool.PWD_ERROR:
             # 展示提示
             self.pwd_tip.setText('密码错误！')
             self.pwd_tip.adjustSize()
             # 清空密码输入框
-            self.pwd.setText('')
+            # self.pwd.setText('')
             # 密码输入框获取焦点
-            self.pwd.setFocus()
-            return None
+            # self.pwd.setFocus()
+            # return None
+            return
         # 展示成功登录提示
         self.success_tip.setText('登录成功，即将跳转。。')
         self.success_tip.adjustSize()

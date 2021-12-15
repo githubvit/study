@@ -73,14 +73,14 @@ class CustomIntValidator(QValidator):
 
     # 3 实现修复方法
     def fixup(self,input_text):
-        print('调用了修复方法',input_text)
+        print('调用了修复方法1',input_text)
         if len(input_text) == 0 or int(input_text)<=self.min-1:
             return str(self.min) #返回修复后的字符串数据
 
 # 继承QIntValidator系统类 实现修复
 class MyIntValidator(QIntValidator):
     def fixup(self,input_text):
-        print('调用了修复方法',input_text,self.bottom())
+        print('调用了修复方法2',input_text,self.bottom())
         if len(input_text) == 0 or int(input_text)<=self.bottom()-1:
             return str(self.bottom()) #返回修复后的字符串数据
         return str(self.top())
